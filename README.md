@@ -1,2 +1,2 @@
-# Kernel
+# Fiesta Kernel
 The core of Fiesta
