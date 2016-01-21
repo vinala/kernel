@@ -77,7 +77,7 @@ class Connector
 	 */
 	public static function checkVendor()
 	{
-		if( ! file_exists('../vendor/autoload.php')) die("You should install fiesta dependencies by composer commande 'composer install' :)");
+		if( ! file_exists('../vendor/autoload.php')) die("You should install Fiesta dependencies by composer commande 'composer install' :)");
 	}
 
 	/**
