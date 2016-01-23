@@ -67,7 +67,7 @@ class Application
 
 		//session
 		require self::$root.'vendor/fiesta/kernel/Storage/Session.php';
-		if($session) Session::start(self::$root.'../app/storage/session');
+		if($session) Session::start(self::$root.'app/storage/session');
 
 		//Maintenance
 		require self::$root.'vendor/fiesta/kernel/Maintenance/Maintenance.php';
