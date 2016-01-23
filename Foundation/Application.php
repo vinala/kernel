@@ -6,7 +6,7 @@
 // Licensed under Open Source
 //----------------------------------------
 
-namespace Fiesta\Kernel\Fondation;
+namespace Fiesta\Kernel\Foundation;
 
 use Fiesta\Core\Storage\Session;
 use Fiesta\Core\Logging\Handler;

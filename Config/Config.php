@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Config;
 
-use Fiesta\Kernel\Fondation\Application;
+use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Core\Config\Exceptions\ConfigException;
 
 /**

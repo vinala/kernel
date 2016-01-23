@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Call;
 
-use Fiesta\Kernel\Fondation\Application;
+use Fiesta\Kernel\Foundation\Application;
 
 /**
 * Connector class to call framework core files

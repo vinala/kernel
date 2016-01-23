@@ -8,7 +8,7 @@ use Fiesta\Core\Objects\Table;
 use Fiesta\Core\Config\Config;
 use Fiesta\Core\Router\Exception\NotFoundHttpException;
 use Fiesta\Core\Http\Errors;
-use Fiesta\Kernel\Fondation\Application;
+use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Core\Access\Url;
 use Fiesta\Vendor\Panel\Seeds;
 use Fiesta\Vendor\Panel\Migrations;

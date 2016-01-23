@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Testing;
 
 use PHPUnit_Framework_TestCase;
-use Fiesta\Kernel\Fondation\Application;
+use Fiesta\Kernel\Foundation\Application;
 
 
 /**
