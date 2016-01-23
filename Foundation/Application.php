@@ -45,8 +45,6 @@ class Application
 		ob_start();
 		//
 		self::$root=$root."../";
-		
-		self::vendor();
 		//
 		require self::$root.'vendor/fiesta/kernel/Logging/Handler.php';
 		require self::$root.'vendor/fiesta/kernel/Logging/Log.php';
@@ -237,14 +235,6 @@ class Application
 		self::checkVendor();
 		$path = is_null(self::$root) ? 'vendor/autoload.php' : self::$root.'vendor/autoload.php';
 		include_once $path;
-	}
-
-	/**
-	 * check if vendor existe
-	 */
-	public static function checkVendor()
-	{
-		if( ! file_exists(self::$root.'vendor/autoload.php')) die("You should install fiesta dependencies by composer commande 'composer install' :)");
 	}
 
 	public static function before($fun)
