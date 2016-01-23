@@ -27,6 +27,7 @@ class TestCase
 	 */
 	public static function call()
 	{
+		die(var_dump(glob("./*")));
 		require_once __DIR__.'/../../vendor/fiesta/kernel/Foundation/Application.php';
 	}
 
