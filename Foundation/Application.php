@@ -63,7 +63,7 @@ class Application
 		Log::ini();
 
 		// Set Whoops error handler
-		Handler::ini(self::$root);
+		Handler::run();
 
 		//session
 		require self::$root.'vendor/fiesta/kernel/Storage/Session.php';
