@@ -44,7 +44,7 @@ class Application
 	{
 		ob_start();
 		//
-		self::$root=$root"../";
+		self::$root=$root."../";
 		
 		self::vendor();
 		//
