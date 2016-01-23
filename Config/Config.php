@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Config;
 
-use Fiesta\Core\Glob\App;
+use Fiesta\Kernel\Fondation\Application;
 use Fiesta\Core\Config\Exceptions\ConfigException;
 
 /**
@@ -21,7 +21,7 @@ class Config
 	 */
 	protected static function getPath($param)
 	{
-		return include (is_null(App::$root) ? "../app/config/$param.php" :  App::$root."../app/config/$param.php");
+		return include (is_null(Application::$root) ? "../app/config/$param.php" :  Application::$root."../app/config/$param.php");
 	}
 
 	/**

@@ -3,7 +3,6 @@
 namespace Fiesta\Core\Resources;
 
 use Faker\Factory;
-use Fiesta\Core\Glob\App;
 
 /**
 *  Faker class

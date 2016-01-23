@@ -3,7 +3,6 @@
 namespace Fiesta\Core\Logging;
 
 
-use Fiesta\Core\Glob\App;
 use Fiesta\Core\Config\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;

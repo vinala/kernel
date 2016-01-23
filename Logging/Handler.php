@@ -3,7 +3,6 @@
 namespace Fiesta\Core\Logging;
 
 use Fiesta\Core\Config\Config;
-use Fiesta\Core\Glob\App;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Handler\PlainTextHandler;

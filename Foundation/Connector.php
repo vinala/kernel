@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Call;
 
-use Fiesta\Core\Glob\App;
+use Fiesta\Kernel\Fondation\Application;
 
 /**
 * Connector class to call framework core files
@@ -26,7 +26,7 @@ class Connector
 	 **/
 	public static function http()
 	{
-		require App::$root.'../core/Http/Http.php';
+		require Application::$root.'../core/Http/Http.php';
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Connector
 	public static function logging()
 	{
 		$files = array('Handler', 'Log');
-		$filesPath = App::$root.'../core/Logging/';
+		$filesPath = Application::$root.'../core/Logging/';
 		self::call($files,$filesPath);
 	}
 
@@ -44,8 +44,8 @@ class Connector
 	 **/
 	public static function config()
 	{
-		require App::$root.'../core/Config/Config.php';
-		require App::$root.'../core/Config/Exceptions/ConfigException.php';
+		require Application::$root.'../core/Config/Config.php';
+		require Application::$root.'../core/Config/Exceptions/ConfigException.php';
 	}
 
 	/**
@@ -53,13 +53,13 @@ class Connector
 	 **/
 	public static function view()
 	{
-		require App::$root.'../core/MVC/View/View.php';
+		require Application::$root.'../core/MVC/View/View.php';
 		//
 		$files = array('Template', 'Views');
-		$filesPath = App::$root.'../core/MVC/View/Libs/';
+		$filesPath = Application::$root.'../core/MVC/View/Libs/';
 		self::call($files,$filesPath);
 		//
-		require App::$root.'../core/MVC/View/Exceptions/ViewNotFoundException.php';
+		require Application::$root.'../core/MVC/View/Exceptions/ViewNotFoundException.php';
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Connector
 	public static function vendor()
 	{
 		self::checkVendor();
-		$path = is_null(App::$root) ? '../vendor/autoload.php' : App::$root.'../vendor/autoload.php';
+		$path = is_null(Application::$root) ? '../vendor/autoload.php' : Application::$root.'../vendor/autoload.php';
 		include_once $path;
 	}
 
@@ -85,7 +85,7 @@ class Connector
 	 */
 	public static function time()
 	{
-		require App::$root.'../core/Objects/DateTime.php';
+		require Application::$root.'../core/Objects/DateTime.php';
 	}
 
 	/**
@@ -93,6 +93,6 @@ class Connector
 	 */
 	public static function session()
 	{
-		require App::$root.'../core/Storage/Session.php';
+		require Application::$root.'../core/Storage/Session.php';
 	}
 }

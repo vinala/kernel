@@ -8,7 +8,7 @@ use Fiesta\Core\Objects\Table;
 use Fiesta\Core\Config\Config;
 use Fiesta\Core\Router\Exception\NotFoundHttpException;
 use Fiesta\Core\Http\Errors;
-use Fiesta\Core\Glob\App;
+use Fiesta\Kernel\Fondation\Application;
 use Fiesta\Core\Access\Url;
 use Fiesta\Vendor\Panel\Seeds;
 use Fiesta\Vendor\Panel\Migrations;
@@ -328,12 +328,12 @@ class Routes
 
 	protected static function callBefore()
 	{
-		call_user_func(App::$Callbacks['before']);
+		call_user_func(Application::$Callbacks['before']);
 	}
 
 	protected static function callAfter()
 	{
-		call_user_func(App::$Callbacks['after']);
+		call_user_func(Application::$Callbacks['after']);
 	}
 
 	protected static function SplitSlash($link)

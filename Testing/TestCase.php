@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Testing;
 
 use PHPUnit_Framework_TestCase;
-use Fiesta\Core\Glob\App;
+use Fiesta\Kernel\Fondation\Application;
 
 
 /**
@@ -35,7 +35,7 @@ class TestCase
 	 */
 	public static function instance($path)
 	{
-		return App::run("test",$path,false,false);
+		return Application::run("test",$path,false,false);
 	}
 
 	/**
