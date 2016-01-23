@@ -6,7 +6,7 @@
 // Licensed under Open Source
 //----------------------------------------
 
-namespace Fiesta\Core\Fondation;
+namespace Fiesta\Kernel\Fondation;
 
 use Fiesta\Core\Storage\Session;
 use Fiesta\Core\Logging\Handler;
@@ -236,7 +236,7 @@ class Application
 	public static function vendor()
 	{
 		self::checkVendor();
-		$path = is_null(App::$root) ? '../vendor/autoload.php' : App::$root.'../vendor/autoload.php';
+		$path = is_null(self::$root) ? '../vendor/autoload.php' : self::$root.'../vendor/autoload.php';
 		include_once $path;
 	}
 
