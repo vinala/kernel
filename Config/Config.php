@@ -21,7 +21,7 @@ class Config
 	 */
 	protected static function getPath($param)
 	{
-		return include (is_null(Application::$root) ? "../app/config/$param.php" :  Application::$root."../app/config/$param.php");
+		return include (is_null(Application::$root) ? "app/config/$param.php" :  Application::$root."app/config/$param.php");
 	}
 
 	/**
