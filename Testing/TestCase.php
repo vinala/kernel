@@ -27,7 +27,7 @@ class TestCase
 	 */
 	public static function call()
 	{
-		require_once __DIR__.'/../../core/Ini.php';
+		require_once __DIR__.'/../../vendor/fiesta/kernel/Foundation/Application.php';
 	}
 
 	/**
