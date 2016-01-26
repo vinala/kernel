@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Http;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 
 /**
 * erreur class

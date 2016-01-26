@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Config;
+namespace Fiesta\Kernel\Config;
 
 /**
 * Alias Class for "lazy"

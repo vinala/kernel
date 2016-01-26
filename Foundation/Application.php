@@ -10,7 +10,7 @@ namespace Fiesta\Kernel\Foundation;
 
 use Fiesta\Core\Storage\Session;
 use Fiesta\Core\Logging\Handler;
-use Fiesta\Core\Config\Alias;
+use Fiesta\Kernel\Config\Alias;
 use Fiesta\Core\Objects\Sys;
 use Fiesta\Core\Access\Url;
 use Fiesta\Core\Access\Path;
@@ -23,7 +23,7 @@ use Fiesta\Core\Translator\Lang;
 use Fiesta\Core\Database\Database;
 use Fiesta\Core\Security\Auth;
 use Fiesta\Core\Router\Routes;
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Logging\Log;
 use Fiesta\Core\Objects\DateTime;
 use Fiesta\Vendor\Panel\Panel;

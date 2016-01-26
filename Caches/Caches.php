@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Caches;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Caches\Exception\DriverNotFoundException;
 
 /**

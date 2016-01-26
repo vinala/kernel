@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Maintenance;
 
 use Fiesta\Core\MVC\View\View;
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 
 /**
 * Maintenance class

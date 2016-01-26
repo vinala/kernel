@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\HyperText;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 
 /**
 * HTML class

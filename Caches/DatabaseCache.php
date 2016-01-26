@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Caches;
 
 use Fiesta\Core\Database\Database;
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Database\Schema;
 
 /**

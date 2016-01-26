@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Security;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 
 /**
 * licence class

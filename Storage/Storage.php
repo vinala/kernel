@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Storage;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Objects\Sys;
 use Whoops\Exception\ErrorException;
 /**

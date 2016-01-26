@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Logging;
 
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Fiesta\Core\Objects\DateTime;

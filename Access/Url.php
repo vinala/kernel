@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Access;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 
 /**
 * Url class

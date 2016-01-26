@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Translator;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Objects\Table;
 use Fiesta\Core\Access\Path;
 

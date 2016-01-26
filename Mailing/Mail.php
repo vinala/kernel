@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Mailing;
 
 use Fiesta\Core\MVC\View\View;
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 
 /**
 * Mail class

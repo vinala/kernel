@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Objects;
 
-use Fiesta\Core\Config\Config;	
+use Fiesta\Kernel\Config\Config;	
 
 /**
 * 	Data array

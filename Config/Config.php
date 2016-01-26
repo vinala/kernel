@@ -1,9 +1,9 @@
 <?php
 
-namespace Fiesta\Core\Config;
+namespace Fiesta\Kernel\Config;
 
 use Fiesta\Kernel\Foundation\Application;
-use Fiesta\Core\Config\Exceptions\ConfigException;
+use Fiesta\Kernel\Config\Exceptions\ConfigException;
 
 /**
 * Config Class

@@ -5,7 +5,7 @@ namespace Fiesta\Core\Router;
 use Fiesta\Core\HyperText\Res;
 use Fiesta\Core\Maintenance\Maintenance;
 use Fiesta\Core\Objects\Table;
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Router\Exception\NotFoundHttpException;
 use Fiesta\Core\Http\Errors;
 use Fiesta\Kernel\Foundation\Application;

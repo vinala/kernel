@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Database\Drivers;
 
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Database\Database;
 use Fiesta\Core\Database\Exception\DatabaseArgumentsException;
 use Fiesta\Core\Database\Exception\DatabaseConnectionException;

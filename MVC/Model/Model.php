@@ -8,7 +8,7 @@ use Fiesta\Core\MVC\Model\Exception\ManyPrimaryKeysException;
 use Fiesta\Core\MVC\Model\Exception\PrimaryKeyNotFoundException;
 use Fiesta\Core\MVC\Model\Exception\ManyRelationException;
 use Fiesta\Core\Database\Database;
-use Fiesta\Core\Config\Config;
+use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Objects\DateTime as Time;
 use InvalidArgumentException;
 use Fiesta\Core\Objects\String;
