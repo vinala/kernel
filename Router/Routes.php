@@ -357,12 +357,16 @@ class Routes
 		//return '/'.$url;
 	}
 
+	/**
+	 * Check and get $_GET['url'] and remove it
+	 **/
 	protected static function CheckUrl()
 	{
-		//$url=self::SplitSlash($_SERVER["REQUEST_URI"]);
 		$url=isset($_GET['url'])?'/'.$_GET['url']:"/";
+		//
+		unset($_GET['url']);
+		//
 		return $url;
-		//return '/'.$url;
 	}
 
 	protected static function CheckMaintenance($url)
