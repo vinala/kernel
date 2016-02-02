@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Storage;
 
-use Fiesta\Core\Security\Hash;
+use Fiesta\Kernel\Security\Hash;
 
 /**
 * Session class

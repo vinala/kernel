@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Security;
+namespace Fiesta\Kernel\Security;
 
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Objects\Table;
