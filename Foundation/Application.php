@@ -22,7 +22,7 @@ use Fiesta\Core\Security\License;
 use Fiesta\Core\Translator\Lang;
 use Fiesta\Core\Database\Database;
 use Fiesta\Core\Security\Auth;
-use Fiesta\Core\Router\Routes;
+use Fiesta\Kernel\Router\Routes;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Logging\Log;
 use Fiesta\Core\Objects\DateTime;

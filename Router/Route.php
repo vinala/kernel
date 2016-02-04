@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Router;
+namespace Fiesta\Kernel\Router;
 
 /**
 * Route class

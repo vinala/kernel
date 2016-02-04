@@ -1,12 +1,12 @@
 <?php 
 
-namespace Fiesta\Core\Router;
+namespace Fiesta\Kernel\Router;
 
 use Fiesta\Core\HyperText\Res;
 use Fiesta\Core\Maintenance\Maintenance;
 use Fiesta\Core\Objects\Table;
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Router\Exception\NotFoundHttpException;
+use Fiesta\Kernel\Router\Exception\NotFoundHttpException;
 use Fiesta\Core\Http\Errors;
 use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Core\Access\Url;

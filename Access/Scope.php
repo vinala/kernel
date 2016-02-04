@@ -6,7 +6,7 @@
  */
 
 use Fiesta\Core\MVC\View\View;
-use Fiesta\Core\Router\Route;
+use Fiesta\Kernel\Router\Route;
 use Fiesta\Core\Objects\DateTime;
 
 /**
