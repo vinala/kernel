@@ -12,6 +12,10 @@
 	"require": {
 		"php": ">=5.5.9"
 	},
+	"require-dev": {
+		"fiesta/whoops": "~1.2.1",
+		"fiesta/panel": "~2.1.24"
+	},
 	"autoload": {
 		"files": ["Foundation/Application.php"]
 	},
