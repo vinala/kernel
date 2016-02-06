@@ -166,8 +166,8 @@ class Application
 		Path::ini();
 		Template::run();
 		Faker::ini();
-		Links::ini($root);
-		Errors::ini($root);
+		Links::ini(self::$root);
+		Errors::ini(self::$root);
 		License::ini(self::$page);
 		Lang::ini();
 		Database::ini();
@@ -177,27 +177,27 @@ class Application
 
 		//
 
-		if($root!=null)
+		if(self::$root!=null)
 		{
 			// include models
-			foreach (glob($root."../app/models/*.php") as $file) { include_once $file; }
+			foreach (glob(self::$root."app/models/*.php") as $file) { include_once $file; }
 
 			//include the controllers files
-			foreach (glob($root."../app/controllers/*.php") as $file) { include_once $file; }
+			foreach (glob(self::$root."app/controllers/*.php") as $file) { include_once $file; }
 
 			//include the link files
-			foreach (glob($root."../app/paths/*.php") as $file) { include_once $file; }
+			foreach (glob(self::$root."app/paths/*.php") as $file) { include_once $file; }
 
 			//include the seeders files
-			foreach (glob($root."../app/seeds/*.php") as $file) { include_once $file; }
+			foreach (glob(self::$root."app/seeds/*.php") as $file) { include_once $file; }
 			//
 			//include filters
-			include_once $root."../app/http/Filters.php";
+			include_once self::$root."app/http/Filters.php";
 
 			//include for routes
 			if($routes)
 			{
-				include_once $root."../app/http/Routes.php";
+				include_once self::$root."app/http/Routes.php";
 				Routes::run();
 			}
 		}

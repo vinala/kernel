@@ -26,7 +26,7 @@ class Connector
 	 **/
 	public static function http()
 	{
-		require Application::$root.'../core/Http/Http.php';
+		require Application::$root.'core/Http/Http.php';
 	}
 
 	/**
@@ -35,7 +35,7 @@ class Connector
 	public static function logging()
 	{
 		$files = array('Handler', 'Log');
-		$filesPath = Application::$root.'../core/Logging/';
+		$filesPath = Application::$root.'core/Logging/';
 		self::call($files,$filesPath);
 	}
 
@@ -44,8 +44,8 @@ class Connector
 	 **/
 	public static function config()
 	{
-		require Application::$root.'../core/Config/Config.php';
-		require Application::$root.'../core/Config/Exceptions/ConfigException.php';
+		require Application::$root.'core/Config/Config.php';
+		require Application::$root.'core/Config/Exceptions/ConfigException.php';
 	}
 
 	/**
@@ -53,13 +53,13 @@ class Connector
 	 **/
 	public static function view()
 	{
-		require Application::$root.'../core/MVC/View/View.php';
+		require Application::$root.'core/MVC/View/View.php';
 		//
 		$files = array('Template', 'Views');
-		$filesPath = Application::$root.'../core/MVC/View/Libs/';
+		$filesPath = Application::$root.'core/MVC/View/Libs/';
 		self::call($files,$filesPath);
 		//
-		require Application::$root.'../core/MVC/View/Exceptions/ViewNotFoundException.php';
+		require Application::$root.'core/MVC/View/Exceptions/ViewNotFoundException.php';
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Connector
 	public static function vendor()
 	{
 		self::checkVendor();
-		$path = is_null(Application::$root) ? '../vendor/autoload.php' : Application::$root.'../vendor/autoload.php';
+		$path = is_null(Application::$root) ? '../vendor/autoload.php' : Application::$root.'vendor/autoload.php';
 		include_once $path;
 	}
 
@@ -85,7 +85,7 @@ class Connector
 	 */
 	public static function time()
 	{
-		require Application::$root.'../core/Objects/DateTime.php';
+		require Application::$root.'core/Objects/DateTime.php';
 	}
 
 	/**
@@ -93,6 +93,6 @@ class Connector
 	 */
 	public static function session()
 	{
-		require Application::$root.'../core/Storage/Session.php';
+		require Application::$root.'core/Storage/Session.php';
 	}
 }
