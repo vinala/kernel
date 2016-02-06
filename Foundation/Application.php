@@ -46,6 +46,7 @@ class Application
 		//
 		self::$root=$root."../";
 		//
+		die(self::$root.'vendor/fiesta/kernel/Logging/Handler.php');
 		require self::$root.'vendor/fiesta/kernel/Logging/Handler.php';
 		require self::$root.'vendor/fiesta/kernel/Logging/Log.php';
 
