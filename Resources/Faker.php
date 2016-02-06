@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Resources;
+namespace Fiesta\Kernel\Resources;
 
 use Faker\Factory;
 
