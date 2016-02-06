@@ -204,22 +204,22 @@ class Application
 		else
 		{
 			// include models
-			foreach (glob("../app/models/*.php") as $file) { include_once $file; }
+			foreach (glob("app/models/*.php") as $file) { include_once $file; }
 
 			//include the controllers files
-			foreach (glob("../app/controllers/*.php") as $file) { include_once $file; }
+			foreach (glob("app/controllers/*.php") as $file) { include_once $file; }
 
 			//include the seeders files
-			foreach (glob("../app/seeds/*.php") as $file) { include_once $file; }
+			foreach (glob("app/seeds/*.php") as $file) { include_once $file; }
 
 
 			//include filters
-			include_once "../app/http/Filters.php";
+			include_once "app/http/Filters.php";
 
 			//include for routes
 			if($routes)
 			{
-				include_once "../app/http/Routes.php";
+				include_once "app/http/Routes.php";
 				Routes::run();
 			}
 		}
