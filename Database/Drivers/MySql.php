@@ -1,11 +1,11 @@
 <?php 
 
-namespace Fiesta\Core\Database\Drivers;
+namespace Fiesta\Kernel\Database\Drivers;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Database\Database;
-use Fiesta\Core\Database\Exception\DatabaseArgumentsException;
-use Fiesta\Core\Database\Exception\DatabaseConnectionException;
+use Fiesta\Kernel\Database\Database;
+use Fiesta\Kernel\Database\Exception\DatabaseArgumentsException;
+use Fiesta\Kernel\Database\Exception\DatabaseConnectionException;
 
 
 /**

@@ -7,7 +7,7 @@ use Fiesta\Core\MVC\Model\Exception\ForeingKeyMethodException;
 use Fiesta\Core\MVC\Model\Exception\ManyPrimaryKeysException;
 use Fiesta\Core\MVC\Model\Exception\PrimaryKeyNotFoundException;
 use Fiesta\Core\MVC\Model\Exception\ManyRelationException;
-use Fiesta\Core\Database\Database;
+use Fiesta\Kernel\Database\Database;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Objects\DateTime as Time;
 use InvalidArgumentException;

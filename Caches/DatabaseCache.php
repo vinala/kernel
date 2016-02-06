@@ -2,9 +2,9 @@
 
 namespace Fiesta\Kernel\Caches;
 
-use Fiesta\Core\Database\Database;
+use Fiesta\Kernel\Database\Database;
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Database\Schema;
+use Fiesta\Kernel\Database\Schema;
 
 /**
 * FileCache class

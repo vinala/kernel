@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Database;
+namespace Fiesta\Kernel\Database;
 
 use Fiesta\Core\Filesystem\Filesystem;
 use Fiesta\Kernel\Objects\Table;

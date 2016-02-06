@@ -1,6 +1,6 @@
 <?php
 
-namespace Fiesta\Core\Database;
+namespace Fiesta\Kernel\Database;
 
 use Fiesta\Kernel\Config\Config;
 

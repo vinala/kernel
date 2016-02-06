@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Core\Database;
+namespace Fiesta\Kernel\Database;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Database\Drivers\MysqlDatabase;
+use Fiesta\Kernel\Database\Drivers\MysqlDatabase;
 
 /**
 * Database Class

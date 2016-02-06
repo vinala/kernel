@@ -20,7 +20,7 @@ use Fiesta\Core\Http\Links;
 use Fiesta\Core\Http\Errors;
 use Fiesta\Kernel\Security\License;
 use Fiesta\Core\Translator\Lang;
-use Fiesta\Core\Database\Database;
+use Fiesta\Kernel\Database\Database;
 use Fiesta\Kernel\Security\Auth;
 use Fiesta\Kernel\Router\Routes;
 use Fiesta\Kernel\Config\Config;

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Database\Exception;
+namespace Fiesta\Kernel\Database\Exception;
 
 /**
 * Directory not fount exception
