@@ -4,6 +4,7 @@ namespace Fiesta\Kernel\Caches;
 
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Filesystem\Filesystem;
+use Fiesta\Kernel\Foundation\Application;
 
 /**
 * FileCache class
@@ -87,8 +88,8 @@ class FileCache
 	{
 		$hash = $this->hash($key);
 		$parts=str_split($hash, 2);
-		return "app/".Config::get('cache.options')["file"]['location'].'/'.$hash;
-		//return "app/".Config::get('cache.location').'/'.$hash;
+		return Application::$root."app/".Config::get('cache.options')["file"]['location'].'/'.$hash;
+		//return Application::$root."app/".Config::get('cache.location').'/'.$hash;
 	}
 
 	protected function forget($key)
@@ -128,7 +129,7 @@ class FileCache
 
 	public function clearOld()
 	{
-		$all=(new Filesystem)->files("app/".Config::get('cache.options')["file"]['location']);
+		$all=(new Filesystem)->files(Application::$root."app/".Config::get('cache.options')["file"]['location']);
 		//
 		foreach ($all as $value) {
 			//

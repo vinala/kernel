@@ -3,6 +3,7 @@
 namespace Fiesta\Kernel\MVC\View;
 
 use Smarty;
+use Fiesta\Kernel\Foundation\Application;
 
 
 
@@ -29,8 +30,8 @@ class Template
 
 	protected static function setCache()
 	{
-		self::$smarty->setTemplateDir('app/storage/view/compile');
-		self::$smarty->setCompileDir('app/storage/view/template');
+		self::$smarty->setTemplateDir(Application::$root.'app/storage/view/compile');
+		self::$smarty->setCompileDir(Application::$root.'app/storage/view/template');
 	}
 
 	protected static function setParams()

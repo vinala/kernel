@@ -2,6 +2,8 @@
 
 namespace Fiesta\Kernel\Http;
 
+use Fiesta\Kernel\Foundation\Application;
+
 /**
 * Links class
 */
@@ -14,9 +16,9 @@ class Links
 	public static $js;
 	public static $gen;
 
-	public static function ini($root="")
+	public static function ini()
 	{ 
-		$files=glob($root."app/links/*.php");
+		$files=glob(Application::$root."app/links/*.php");
 		//
 		foreach ($files as $filename)
 		{
@@ -55,7 +57,7 @@ class Links
 			$k=$url[1];
 		}
 		
-		$files=include ("app/links/$link.php");
+		$files=include (Application::$root."app/links/$link.php");
 		//
 		return $files[$k];
 	}

@@ -166,7 +166,7 @@ class Application
 		Path::ini();
 		Template::run();
 		Faker::ini();
-		Links::ini(self::$root);
+		Links::ini();
 		Errors::ini(self::$root);
 		License::ini(self::$page);
 		Lang::ini();

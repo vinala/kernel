@@ -3,6 +3,7 @@
 namespace Fiesta\Kernel\Access;
 
 use Fiesta\Kernel\Config\Config;
+use Fiesta\Kernel\Foundation\Application;
 
 /**
 * Url class
@@ -31,12 +32,8 @@ class Url
 
 	public static function ini()
 	{
-		// self::$css=Config::get('app.url')."app/resources/css/";
-		// self::$js=Config::get('app.url')."app/resources/js/";
-		// self::$img=Config::get('app.url')."app/resources/images/";
-
-		self::$css="app/resources/css/";
-		self::$js="app/resources/js/";
-		self::$img="app/resources/images/";
+		self::$css=Application::$root."app/resources/css/";
+		self::$js=Application::$root."app/resources/js/";
+		self::$img=Application::$root."app/resources/images/";
 	}
 }

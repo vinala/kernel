@@ -2,6 +2,7 @@
 
 namespace Fiesta\Kernel\Objects;
 
+use Fiesta\Kernel\Foundation\Application;
 /**
 * Vars class
 */
@@ -30,7 +31,7 @@ class Vars
 			$k=$url[1];
 		}
 		
-		$files=include ("app/vars/$link.php");
+		$files=include (Application::$root."app/vars/$link.php");
 		//
 		return $files[$k];
 	}

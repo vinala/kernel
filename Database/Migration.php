@@ -4,6 +4,8 @@ namespace Fiesta\Kernel\Database;
 
 use Fiesta\Kernel\Filesystem\Filesystem;
 use Fiesta\Kernel\Objects\Table;
+use Fiesta\Kernel\Foundation\Application;
+
 /**
 * migaration class
 */
@@ -13,7 +15,7 @@ class Migration
 	protected static $schemas;
 	public static function getAll($name)
 	{
-		$r=glob("app/schemas/*.php");
+		$r=glob(Application::$root."app/schemas/*.php");
 		$r2=array();
 		foreach ($r as $value) {
 			

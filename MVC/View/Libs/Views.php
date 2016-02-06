@@ -3,6 +3,7 @@
 namespace Fiesta\Kernel\MVC\View;
 
 use Fiesta\Kernel\MVC\View\Exception\ViewNotFoundException;
+use Fiesta\Kernel\Foundation\Application;
 
 /**
 * View mother class
@@ -22,8 +23,8 @@ class Views
 		//getFile
 		$_name_=str_replace('.', '/', $_value_);
 		//
-		$_link1_='app/views/'.$_name_.'.php';
-		$_link2_='app/views/'.$_name_.'.tpl.php';
+		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
+		$_link2_=Application::$root.'app/views/'.$_name_.'.tpl.php';
 		//
 		$_tpl_=false;
 		//
@@ -60,8 +61,8 @@ class Views
 		//
 		$name_fgdfgdf=str_replace('.', '/', $value_DGFSrtfg5);
 		//
-		$link1='app/views/'.$name_fgdfgdf.'.php';
-		$link2='app/views/'.$name_fgdfgdf.'.tpl.php';
+		$link1=Application::$root.'app/views/'.$name_fgdfgdf.'.php';
+		$link2=Application::$root.'app/views/'.$name_fgdfgdf.'.tpl.php';
 		$link3='';
 		//
 		$tpl=false;

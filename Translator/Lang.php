@@ -8,6 +8,7 @@ use Fiesta\Kernel\Storage\Cookie;
 use Fiesta\Kernel\HyperText\Res;
 use Fiesta\Kernel\Objects\Base;
 use Fiesta\Kernel\Filesystem\Filesystem;
+use Fiesta\Kernel\Foundation\Application;
 
 /**
 * Language class
@@ -44,7 +45,7 @@ class Lang
 
 	private static function put()
 	{
-		foreach (glob("app/lang/".self::$lang."/*.php") as $filename)
+		foreach (glob(Application::$root."app/lang/".self::$lang."/*.php") as $filename)
 		{
 			$tbl=(include $filename);
 			foreach ($tbl as $key => $value) {
@@ -121,10 +122,10 @@ class Lang
 	private static function getSupported()
 	{
 		$supp=array();
-		$sup=(new Filesystem)->directories("app/lang");
+		$sup=(new Filesystem)->directories(Application::$root."app/lang");
 		//
 		foreach ($sup as $value) {
-			$r=explode("app/lang/", $value);
+			$r=explode(Application::$root."app/lang/", $value);
 			$supp[]=$r[1];
 		}
 		//
