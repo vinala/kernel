@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Logging;
+namespace Fiesta\Kernel\Logging;
 
 use Fiesta\Kernel\Config\Config;
 use Whoops\Run;
