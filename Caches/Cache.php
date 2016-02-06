@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Caches;
+namespace Fiesta\Kernel\Caches;
 
 /**
 * Cache class

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Caches;
+namespace Fiesta\Kernel\Caches;
 
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Filesystem\Filesystem;

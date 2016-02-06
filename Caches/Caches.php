@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Core\Caches;
+namespace Fiesta\Kernel\Caches;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Caches\Exception\DriverNotFoundException;
+use Fiesta\Kernel\Caches\Exception\DriverNotFoundException;
 
 /**
 * Cache class
