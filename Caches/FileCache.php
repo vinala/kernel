@@ -3,7 +3,7 @@
 namespace Fiesta\Kernel\Caches;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Filesystem\Filesystem;
+use Fiesta\Kernel\Filesystem\Filesystem;
 
 /**
 * FileCache class

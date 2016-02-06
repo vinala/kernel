@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Core\Filesystem;
+namespace Fiesta\Kernel\Filesystem;
 
-use Fiesta\Core\Filesystem\Exception\DirectoryNotFoundException;
-use Fiesta\Core\Filesystem\Exception\FileNotFoundException;
+use Fiesta\Kernel\Filesystem\Exception\DirectoryNotFoundException;
+use Fiesta\Kernel\Filesystem\Exception\FileNotFoundException;
 
 
 /**

@@ -7,7 +7,7 @@ use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Storage\Cookie;
 use Fiesta\Core\HyperText\Res;
 use Fiesta\Kernel\Objects\Base;
-use Fiesta\Core\Filesystem\Filesystem;
+use Fiesta\Kernel\Filesystem\Filesystem;
 
 /**
 * Language class

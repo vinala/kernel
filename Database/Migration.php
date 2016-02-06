@@ -2,7 +2,7 @@
 
 namespace Fiesta\Kernel\Database;
 
-use Fiesta\Core\Filesystem\Filesystem;
+use Fiesta\Kernel\Filesystem\Filesystem;
 use Fiesta\Kernel\Objects\Table;
 /**
 * migaration class

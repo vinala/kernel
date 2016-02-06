@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Filesystem\Exception;
+namespace Fiesta\Kernel\Filesystem\Exception;
 
 /**
 * File not fount exception

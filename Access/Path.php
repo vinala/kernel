@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\Access;
 
-use Fiesta\Core\Filesystem\Filesystem;
+use Fiesta\Kernel\Filesystem\Filesystem;
 
 /**
 * System Class
