@@ -2,7 +2,7 @@
 
 namespace Fiesta\Kernel\Resources;
 
-use Fiesta\Core\Access\Path;
+use Fiesta\Kernel\Access\Path;
 
 /**
 *

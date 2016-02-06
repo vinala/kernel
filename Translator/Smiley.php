@@ -4,7 +4,7 @@ namespace Fiesta\Core\Translator;
 
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Objects\Table;
-use Fiesta\Core\Access\Path;
+use Fiesta\Kernel\Access\Path;
 
 
 /**

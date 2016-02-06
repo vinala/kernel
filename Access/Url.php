@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Access;
+namespace Fiesta\Kernel\Access;
 
 use Fiesta\Kernel\Config\Config;
 

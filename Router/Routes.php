@@ -9,7 +9,7 @@ use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Router\Exception\NotFoundHttpException;
 use Fiesta\Kernel\Http\Errors;
 use Fiesta\Kernel\Foundation\Application;
-use Fiesta\Core\Access\Url;
+use Fiesta\Kernel\Access\Url;
 use Fiesta\Vendor\Panel\Seeds;
 use Fiesta\Vendor\Panel\Migrations;
 use Fiesta\Vendor\Panel\Controller;
