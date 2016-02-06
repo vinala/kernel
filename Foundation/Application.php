@@ -72,8 +72,8 @@ class Application
 
 		//Objects
 		require self::$root.'vendor/fiesta/kernel/Objects/Vars.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/String/String.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/String/Exceptions/StringOutIndexException.php';
+		require self::$root.'vendor/fiesta/kernel/Objects/Strings/Strings.php';
+		require self::$root.'vendor/fiesta/kernel/Objects/Strings/Exceptions/StringOutIndexException.php';
 
 		// Access
 		require self::$root.'vendor/fiesta/kernel/Access/Path.php';
