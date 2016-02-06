@@ -40,14 +40,12 @@ class Application
 		return "Fiesta v3 (3.0.0) PHP Framework";
 	}
 
-	public static function run($root=null,$routes=true,$session=true)
+	public static function run($root="../",$routes=true,$session=true)
 	{
 		ob_start();
 		//
-		self::$root=$root."../";
-		self::$root="";
+		self::$root=$root;
 		//
-		// die(self::$root.'vendor/fiesta/kernel/Logging/Handler.php');
 		require self::$root.'vendor/fiesta/kernel/Logging/Handler.php';
 		require self::$root.'vendor/fiesta/kernel/Logging/Log.php';
 
