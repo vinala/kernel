@@ -11,7 +11,7 @@ use Fiesta\Kernel\Database\Database;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Objects\DateTime as Time;
 use InvalidArgumentException;
-use Fiesta\Kernel\Objects\String;
+use Fiesta\Kernel\Objects\Strings;
 use Fiesta\Kernel\Objects\Table;
 use Fiesta\Kernel\MVC\Relations\OneToOne;
 use Fiesta\Kernel\MVC\Relations\OneToMany;

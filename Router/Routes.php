@@ -16,7 +16,7 @@ use Fiesta\Vendor\Panel\Controller;
 use Fiesta\Vendor\Panel\Lang;
 use Fiesta\Vendor\Panel\Link;
 use Fiesta\Vendor\Panel\Model;
-use Fiesta\Kernel\Objects\String as Strings;
+use Fiesta\Kernel\Objects\Strings;
 
 
 /**

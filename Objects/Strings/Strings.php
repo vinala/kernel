@@ -2,7 +2,7 @@
 
 namespace Fiesta\Kernel\Objects;
 
-use Fiesta\Kernel\Objects\String\Exception\StringOutIndexException;
+use Fiesta\Kernel\Objects\Strings\Exception\StringOutIndexException;
 use Fiesta\Kernel\Objects\Table;
 
 /**

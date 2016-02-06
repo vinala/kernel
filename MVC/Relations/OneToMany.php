@@ -3,7 +3,7 @@
 namespace Fiesta\Kernel\MVC\Relations;
 
 use Fiesta\Kernel\Objects\Table;
-use Fiesta\Kernel\Objects\String;
+use Fiesta\Kernel\Objects\Strings;
 use Fiesta\Kernel\MVC\Relations\Exception\ManyRelationException;
 use Fiesta\Kernel\MVC\Relations\Exception\ModelNotFindedException;
 
@@ -70,7 +70,7 @@ class OneToMany
 	 */
 	protected function idKey($table)
 	{
-		return String::toLower($table)."_id";
+		return Strings::toLower($table)."_id";
 	}
 
 

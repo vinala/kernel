@@ -1,6 +1,6 @@
 <?php
 
-namespace Fiesta\Kernel\Objects\Strings\Exception;
+namespace Fiesta\Kernel\Objects\Stringss\Exception;
 
 
 /**
