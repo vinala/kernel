@@ -45,6 +45,7 @@ class Application
 		ob_start();
 		//
 		self::$root=$root."../";
+		self::$root="";
 		//
 		die(self::$root.'vendor/fiesta/kernel/Logging/Handler.php');
 		require self::$root.'vendor/fiesta/kernel/Logging/Handler.php';
