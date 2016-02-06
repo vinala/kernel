@@ -7,7 +7,7 @@
 
 use Fiesta\Core\MVC\View\View;
 use Fiesta\Kernel\Router\Route;
-use Fiesta\Core\Objects\DateTime;
+use Fiesta\Kernel\Objects\DateTime;
 
 /**
  * Views

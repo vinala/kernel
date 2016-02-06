@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Storage;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Objects\Sys;
+use Fiesta\Kernel\Objects\Sys;
 use Whoops\Exception\ErrorException;
 /**
 * Storage class

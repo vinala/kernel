@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Translator;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\Table;
 use Fiesta\Core\Access\Path;
 
 

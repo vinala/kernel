@@ -3,7 +3,7 @@
 namespace Fiesta\Kernel\Security;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\Table;
 use Fiesta\Core\Database\Database;
 use Fiesta\Core\Storage\Session;
 use Fiesta\Core\Storage\Cookie;

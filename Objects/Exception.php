@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Core\Objects;
+namespace Fiesta\Kernel\Objects;
 
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\Table;
 
 /**
 * Exception Class

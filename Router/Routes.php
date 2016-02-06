@@ -4,7 +4,7 @@ namespace Fiesta\Kernel\Router;
 
 use Fiesta\Core\HyperText\Res;
 use Fiesta\Core\Maintenance\Maintenance;
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\Table;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Router\Exception\NotFoundHttpException;
 use Fiesta\Core\Http\Errors;
@@ -16,7 +16,7 @@ use Fiesta\Vendor\Panel\Controller;
 use Fiesta\Vendor\Panel\Lang;
 use Fiesta\Vendor\Panel\Link;
 use Fiesta\Vendor\Panel\Model;
-use Fiesta\Core\Objects\String as Strings;
+use Fiesta\Kernel\Objects\String as Strings;
 
 
 /**

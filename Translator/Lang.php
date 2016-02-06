@@ -6,7 +6,7 @@ use Fiesta\Core\Translator\Exception\LanguageKeyNotFoundException;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Storage\Cookie;
 use Fiesta\Core\HyperText\Res;
-use Fiesta\Core\Objects\Base;
+use Fiesta\Kernel\Objects\Base;
 use Fiesta\Core\Filesystem\Filesystem;
 
 /**

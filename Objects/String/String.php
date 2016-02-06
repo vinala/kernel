@@ -1,9 +1,9 @@
 <?php
 
-namespace Fiesta\Core\Objects;
+namespace Fiesta\Kernel\Objects;
 
-use Fiesta\Core\Objects\String\Exception\StringOutIndexException;
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\String\Exception\StringOutIndexException;
+use Fiesta\Kernel\Objects\Table;
 
 /**
 * String Trim Consts

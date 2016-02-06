@@ -6,10 +6,10 @@ namespace Fiesta\Core\Logging;
 use Fiesta\Kernel\Config\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Fiesta\Core\Objects\DateTime;
-use Fiesta\Core\Objects\DateTime as Time;
-use Fiesta\Core\Objects\String;
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\DateTime;
+use Fiesta\Kernel\Objects\DateTime as Time;
+use Fiesta\Kernel\Objects\String;
+use Fiesta\Kernel\Objects\Table;
 
 /**
 * 

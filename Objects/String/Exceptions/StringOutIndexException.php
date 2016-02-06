@@ -1,6 +1,6 @@
 <?php
 
-namespace Fiesta\Core\Objects\String\Exception;
+namespace Fiesta\Kernel\Objects\String\Exception;
 /**
 * String Out Index Exception
 */

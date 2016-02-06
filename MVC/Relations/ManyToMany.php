@@ -2,8 +2,8 @@
 
 namespace Fiesta\Core\MVC\Relations;
 
-use Fiesta\Core\Objects\Table;
-use Fiesta\Core\Objects\String;
+use Fiesta\Kernel\Objects\Table;
+use Fiesta\Kernel\Objects\String;
 use Fiesta\Core\MVC\Relations\Exception\ManyRelationException;
 use Fiesta\Core\MVC\Relations\Exception\ModelNotFindedException;
 

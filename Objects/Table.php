@@ -1,6 +1,6 @@
 <?php
 
-namespace Fiesta\Core\Objects;
+namespace Fiesta\Kernel\Objects;
 
 /**
 * List Class

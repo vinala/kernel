@@ -3,7 +3,7 @@
 namespace Fiesta\Core\Database;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\Table;
 use Fiesta\Core\HyperText\Res;
 
 class DBTable

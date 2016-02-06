@@ -11,7 +11,7 @@ namespace Fiesta\Kernel\Foundation;
 use Fiesta\Core\Storage\Session;
 use Fiesta\Core\Logging\Handler;
 use Fiesta\Kernel\Config\Alias;
-use Fiesta\Core\Objects\Sys;
+use Fiesta\Kernel\Objects\Sys;
 use Fiesta\Core\Access\Url;
 use Fiesta\Core\Access\Path;
 use Fiesta\Core\MVC\View\Template;
@@ -25,7 +25,7 @@ use Fiesta\Kernel\Security\Auth;
 use Fiesta\Kernel\Router\Routes;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Core\Logging\Log;
-use Fiesta\Core\Objects\DateTime;
+use Fiesta\Kernel\Objects\DateTime;
 use Fiesta\Vendor\Panel\Panel;
 
 

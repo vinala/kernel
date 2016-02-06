@@ -2,7 +2,7 @@
 
 namespace Fiesta\Core\MVC\Model;
 
-use Fiesta\Core\Objects\Table;
+use Fiesta\Kernel\Objects\Table;
 
 /**
 * Model array Class
