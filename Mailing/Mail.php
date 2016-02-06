@@ -2,7 +2,7 @@
 
 namespace Fiesta\Kernel\Mailing;
 
-use Fiesta\Core\MVC\View\View;
+use Fiesta\Kernel\MVC\View\View;
 use Fiesta\Kernel\Config\Config;
 
 /**

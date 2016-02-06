@@ -1,10 +1,10 @@
 <?php 
 
-namespace Fiesta\Core\MVC\Relations;
+namespace Fiesta\Kernel\MVC\Relations;
 
 use Fiesta\Kernel\Objects\Table;
 use Fiesta\Kernel\Objects\String;
-use Fiesta\Core\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
+use Fiesta\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
 
 define('OneToOneRelation', 'one');
 define('OneToManyRelation', 'many');

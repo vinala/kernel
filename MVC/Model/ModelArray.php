@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\MVC\Model;
+namespace Fiesta\Kernel\MVC\Model;
 
 use Fiesta\Kernel\Objects\Table;
 

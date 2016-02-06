@@ -1,8 +1,8 @@
 <?php
 
-namespace Fiesta\Core\MVC\View;
+namespace Fiesta\Kernel\MVC\View;
 
-use Fiesta\Core\MVC\View\Exception\ViewNotFoundException;
+use Fiesta\Kernel\MVC\View\Exception\ViewNotFoundException;
 
 /**
 * View mother class

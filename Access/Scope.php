@@ -5,7 +5,7 @@
  * access to somefrmaework functions
  */
 
-use Fiesta\Core\MVC\View\View;
+use Fiesta\Kernel\MVC\View\View;
 use Fiesta\Kernel\Router\Route;
 use Fiesta\Kernel\Objects\DateTime;
 

@@ -1,22 +1,22 @@
 <?php 
 
-namespace Fiesta\Core\MVC\Model;
+namespace Fiesta\Kernel\MVC\Model;
 
-use Fiesta\Core\MVC\Model\Exception\ColumnNotEmptyException;
-use Fiesta\Core\MVC\Model\Exception\ForeingKeyMethodException;
-use Fiesta\Core\MVC\Model\Exception\ManyPrimaryKeysException;
-use Fiesta\Core\MVC\Model\Exception\PrimaryKeyNotFoundException;
-use Fiesta\Core\MVC\Model\Exception\ManyRelationException;
+use Fiesta\Kernel\MVC\Model\Exception\ColumnNotEmptyException;
+use Fiesta\Kernel\MVC\Model\Exception\ForeingKeyMethodException;
+use Fiesta\Kernel\MVC\Model\Exception\ManyPrimaryKeysException;
+use Fiesta\Kernel\MVC\Model\Exception\PrimaryKeyNotFoundException;
+use Fiesta\Kernel\MVC\Model\Exception\ManyRelationException;
 use Fiesta\Kernel\Database\Database;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Objects\DateTime as Time;
 use InvalidArgumentException;
 use Fiesta\Kernel\Objects\String;
 use Fiesta\Kernel\Objects\Table;
-use Fiesta\Core\MVC\Relations\OneToOne;
-use Fiesta\Core\MVC\Relations\OneToMany;
-use Fiesta\Core\MVC\Relations\ManyToMany;
-use Fiesta\Core\MVC\Relations\BelongsTo;
+use Fiesta\Kernel\MVC\Relations\OneToOne;
+use Fiesta\Kernel\MVC\Relations\OneToMany;
+use Fiesta\Kernel\MVC\Relations\ManyToMany;
+use Fiesta\Kernel\MVC\Relations\BelongsTo;
 
 
 /**

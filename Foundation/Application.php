@@ -14,7 +14,7 @@ use Fiesta\Kernel\Config\Alias;
 use Fiesta\Kernel\Objects\Sys;
 use Fiesta\Core\Access\Url;
 use Fiesta\Core\Access\Path;
-use Fiesta\Core\MVC\View\Template;
+use Fiesta\Kernel\MVC\View\Template;
 use Fiesta\Kernel\Resources\Faker;
 use Fiesta\Kernel\Http\Links;
 use Fiesta\Kernel\Http\Errors;

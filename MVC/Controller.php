@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\MVC\Controller;
+namespace Fiesta\Kernel\MVC\Controller;
 
 /**
 * Controller class

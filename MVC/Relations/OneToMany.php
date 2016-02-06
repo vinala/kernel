@@ -1,11 +1,11 @@
 <?php 
 
-namespace Fiesta\Core\MVC\Relations;
+namespace Fiesta\Kernel\MVC\Relations;
 
 use Fiesta\Kernel\Objects\Table;
 use Fiesta\Kernel\Objects\String;
-use Fiesta\Core\MVC\Relations\Exception\ManyRelationException;
-use Fiesta\Core\MVC\Relations\Exception\ModelNotFindedException;
+use Fiesta\Kernel\MVC\Relations\Exception\ManyRelationException;
+use Fiesta\Kernel\MVC\Relations\Exception\ModelNotFindedException;
 
 
 /**
