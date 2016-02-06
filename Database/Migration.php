@@ -13,7 +13,7 @@ class Migration
 	protected static $schemas;
 	public static function getAll($name)
 	{
-		$r=glob("../app/schemas/*.php");
+		$r=glob("app/schemas/*.php");
 		$r2=array();
 		foreach ($r as $value) {
 			

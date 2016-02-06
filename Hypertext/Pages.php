@@ -34,7 +34,7 @@ class Page
 		//Sys::$libs=Sys::$app."lib";
 		//
 		$name=str_replace(".", "/", $name);
-		include "../app/pages/".$name.'.php';
+		include "app/pages/".$name.'.php';
 
 	}
 

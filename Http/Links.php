@@ -16,7 +16,7 @@ class Links
 
 	public static function ini($root="")
 	{ 
-		$files=glob($root."../app/links/*.php");
+		$files=glob($root."app/links/*.php");
 		//
 		foreach ($files as $filename)
 		{
@@ -55,7 +55,7 @@ class Links
 			$k=$url[1];
 		}
 		
-		$files=include ("../app/links/$link.php");
+		$files=include ("app/links/$link.php");
 		//
 		return $files[$k];
 	}

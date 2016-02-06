@@ -44,7 +44,7 @@ class Lang
 
 	private static function put()
 	{
-		foreach (glob("../app/lang/".self::$lang."/*.php") as $filename)
+		foreach (glob("app/lang/".self::$lang."/*.php") as $filename)
 		{
 			$tbl=(include $filename);
 			foreach ($tbl as $key => $value) {
@@ -121,10 +121,10 @@ class Lang
 	private static function getSupported()
 	{
 		$supp=array();
-		$sup=(new Filesystem)->directories("../app/lang");
+		$sup=(new Filesystem)->directories("app/lang");
 		//
 		foreach ($sup as $value) {
-			$r=explode("../app/lang/", $value);
+			$r=explode("app/lang/", $value);
 			$supp[]=$r[1];
 		}
 		//
