@@ -2,7 +2,7 @@
 
 namespace Fiesta\Kernel\Router;
 
-use Fiesta\Core\HyperText\Res;
+use Fiesta\Kernel\HyperText\Res;
 use Fiesta\Core\Maintenance\Maintenance;
 use Fiesta\Kernel\Objects\Table;
 use Fiesta\Kernel\Config\Config;

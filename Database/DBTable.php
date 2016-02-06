@@ -4,7 +4,7 @@ namespace Fiesta\Kernel\Database;
 
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Objects\Table;
-use Fiesta\Core\HyperText\Res;
+use Fiesta\Kernel\HyperText\Res;
 
 class DBTable
 {

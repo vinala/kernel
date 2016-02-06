@@ -5,7 +5,7 @@ namespace Fiesta\Core\Translator;
 use Fiesta\Core\Translator\Exception\LanguageKeyNotFoundException;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Storage\Cookie;
-use Fiesta\Core\HyperText\Res;
+use Fiesta\Kernel\HyperText\Res;
 use Fiesta\Kernel\Objects\Base;
 use Fiesta\Kernel\Filesystem\Filesystem;
 
