@@ -22,7 +22,6 @@ class Views
 		//getFile
 		$_name_=str_replace('.', '/', $_value_);
 		//
-		die(var_dump(glob('*')));
 		$_link1_='app/views/'.$_name_.'.php';
 		$_link2_='app/views/'.$_name_.'.tpl.php';
 		//
