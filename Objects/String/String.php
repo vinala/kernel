@@ -16,7 +16,7 @@ define('TRIM_START', 'start');
 /**
 * String cLass
 */
-class String
+class Strings
 {
 	public static function lenght($string)
 		{
