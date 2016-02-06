@@ -30,4 +30,4 @@ class Root
 /**
  * calling initial function of class
  */
-Root::ini()
+Root::ini();
