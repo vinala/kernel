@@ -3,7 +3,7 @@
 namespace Fiesta\Kernel\Router;
 
 use Fiesta\Kernel\HyperText\Res;
-use Fiesta\Core\Maintenance\Maintenance;
+use Fiesta\Kernel\Maintenance\Maintenance;
 use Fiesta\Kernel\Objects\Table;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Router\Exception\NotFoundHttpException;

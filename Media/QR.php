@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Media;
+namespace Fiesta\Kernel\Media;
 
 /**
 * Belongs To relation

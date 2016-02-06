@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Testing;
+namespace Fiesta\Kernel\Testing;
 
 use PHPUnit_Framework_TestCase;
 use Fiesta\Kernel\Foundation\Application;

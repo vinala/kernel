@@ -3,7 +3,7 @@
 namespace Fiesta\Kernel\Objects;
 
 use Fiesta\Kernel\Config\Config;
-use Fiesta\Core\Object\String;
+use Fiesta\Kernel\Object\String;
 use Carbon\Carbon;
 
 /**

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Call;
+namespace Fiesta\Kernel\Call;
 
 use Fiesta\Kernel\Foundation\Application;
 

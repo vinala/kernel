@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Maintenance;
+namespace Fiesta\Kernel\Maintenance;
 
 use Fiesta\Kernel\MVC\View\View;
 use Fiesta\Kernel\Config\Config;
