@@ -7,7 +7,7 @@ use Fiesta\Core\Maintenance\Maintenance;
 use Fiesta\Kernel\Objects\Table;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Router\Exception\NotFoundHttpException;
-use Fiesta\Core\Http\Errors;
+use Fiesta\Kernel\Http\Errors;
 use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Core\Access\Url;
 use Fiesta\Vendor\Panel\Seeds;

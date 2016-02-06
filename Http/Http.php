@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Http;
+namespace Fiesta\Kernel\Http;
 
 /**
 * HTTP Class
