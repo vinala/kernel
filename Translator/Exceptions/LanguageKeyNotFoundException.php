@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Translator\Exception;
+namespace Fiesta\Kernel\Translator\Exception;
 
 /**
 * Directory not fount exception

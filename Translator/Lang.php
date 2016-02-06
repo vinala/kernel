@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Core\Translator;
+namespace Fiesta\Kernel\Translator;
 
-use Fiesta\Core\Translator\Exception\LanguageKeyNotFoundException;
+use Fiesta\Kernel\Translator\Exception\LanguageKeyNotFoundException;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Storage\Cookie;
 use Fiesta\Kernel\HyperText\Res;

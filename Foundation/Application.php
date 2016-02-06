@@ -19,7 +19,7 @@ use Fiesta\Kernel\Resources\Faker;
 use Fiesta\Kernel\Http\Links;
 use Fiesta\Kernel\Http\Errors;
 use Fiesta\Kernel\Security\License;
-use Fiesta\Core\Translator\Lang;
+use Fiesta\Kernel\Translator\Lang;
 use Fiesta\Kernel\Database\Database;
 use Fiesta\Kernel\Security\Auth;
 use Fiesta\Kernel\Router\Routes;

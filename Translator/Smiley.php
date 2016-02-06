@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Translator;
+namespace Fiesta\Kernel\Translator;
 
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Objects\Table;
