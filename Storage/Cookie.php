@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Core\Storage;
+namespace Fiesta\Kernel\Storage;
 
 /**
 * cookies

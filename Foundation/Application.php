@@ -8,7 +8,7 @@
 
 namespace Fiesta\Kernel\Foundation;
 
-use Fiesta\Core\Storage\Session;
+use Fiesta\Kernel\Storage\Session;
 use Fiesta\Core\Logging\Handler;
 use Fiesta\Kernel\Config\Alias;
 use Fiesta\Kernel\Objects\Sys;
