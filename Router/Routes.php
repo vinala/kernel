@@ -175,7 +175,7 @@ class Routes
 		if($request["methode"]=="post" && Res::isPost())
 		{
 			$ok=self::exec($params,$request);
-			break;
+			// break;  Problem with PHP7
 		}
 		else if($request["methode"]=="post" && !Res::isPost())
 		{
@@ -184,18 +184,18 @@ class Routes
 		else if($request["methode"]=="get")
 		{
 			$ok=self::exec($params,$request);
-			break;
+			// break;  Problem with PHP7
 		}
 		else if($request["methode"]=="resource")
 		{
 			$ok=self::exec($params,$request);
-			break;
+			// break;  Problem with PHP7
 		}
 		else if($request["methode"]=="object")
 		{
 			$ok=self::exec($params,$request);
 			//var_dump($request);
-			break;
+			// break;  Problem with PHP7
 		}
 		return $ok;
 	}
