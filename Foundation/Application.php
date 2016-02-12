@@ -48,6 +48,7 @@ class Application
 		//
 		self::$root=$root;
 		//
+		require self::$root.'vendor/fiesta/kernel/Foundation/Connector.php';
 		require self::$root.'vendor/fiesta/kernel/Logging/Handler.php';
 		require self::$root.'vendor/fiesta/kernel/Logging/Log.php';
 
