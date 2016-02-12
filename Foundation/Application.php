@@ -281,12 +281,12 @@ class Application
 		// Files of relation
 		$files = array('OneToOne', 'OneToMany', 'ManyToMany', 'BelongsTo');
 		$filesPath = self::$root.'vendor/fiesta/kernel/MVC/Relations/';
-		self::call($files,$filesPath);
+		Connector::call($files,$filesPath);
 
 		// Exeptions of relation
 		$exceptions = array('ManyRelationException', 'ModelNotFindedException');
 		$exceptionsPath = self::$root.'vendor/fiesta/kernel/MVC/Relations/Exceptions/';
-		self::call($exceptions,$exceptionsPath);
+		Connector::call($exceptions,$exceptionsPath);
 	}
 
 	/**
@@ -297,12 +297,12 @@ class Application
 		// Files of models
 		$files = array('Model', 'ModelArray');
 		$filesPath = self::$root.'vendor/fiesta/kernel/MVC/Model/';
-		self::call($files,$filesPath);
+		Connector::call($files,$filesPath);
 
 		// Exeptions of models
 		$exceptions = array('ForeingKeyMethodException', 'ColumnNotEmptyException', 'ManyPrimaryKeysException', 'PrimaryKeyNotFoundException');
 		$exceptionsPath = self::$root.'vendor/fiesta/kernel/MVC/Model/Exceptions/';
-		self::call($exceptions,$exceptionsPath);
+		Connector::call($exceptions,$exceptionsPath);
 	}
 
 	/**
@@ -313,12 +313,12 @@ class Application
 		// Files of models
 		$files = array('Lang', 'Smiley');
 		$filesPath = self::$root.'vendor/fiesta/kernel/Translator/';
-		self::call($files,$filesPath);
+		Connector::call($files,$filesPath);
 
 		// Exeptions of models
 		$exceptions = array('LanguageKeyNotFoundException');
 		$exceptionsPath = self::$root.'vendor/fiesta/kernel/Translator/Exceptions/';
-		self::call($exceptions,$exceptionsPath);
+		Connector::call($exceptions,$exceptionsPath);
 	}
 
 	/**
@@ -329,7 +329,7 @@ class Application
 		// Files of models
 		$files = array('QR');
 		$filesPath = self::$root.'vendor/fiesta/kernel/Media/';
-		self::call($files,$filesPath);
+		Connector::call($files,$filesPath);
 	}
 
 	/**
@@ -339,7 +339,7 @@ class Application
 	{
 		$files = array('Scope');
 		$filesPath = self::$root.'vendor/fiesta/kernel/Access/';
-		self::call($files,$filesPath);
+		Connector::call($files,$filesPath);
 	}
 
 	/**
