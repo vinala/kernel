@@ -263,17 +263,6 @@ class Application
 	}
 
 	/**
-	 * Call files
-	 * @param $files array
-	 * @param $path string
-	 */
-	public static function call($files,$path)
-	{
-		foreach ($files as $file)
-			require $path.$file.".php";
-	}
-
-	/**
 	 * MVC Model relationships calls
 	 */
 	public static function relationsCalls()
