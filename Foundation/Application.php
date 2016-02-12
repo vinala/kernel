@@ -42,131 +42,57 @@ class Application
 
 	public static function kernelVersion()
 	{
-
-		return "Fiesta Kernel v3.1.1";
+		return "Fiesta Kernel v3.1.12";
 	}
 
-	public static function run($root="../",$routes=true,$session=true)
+	protected static function callConnector()
+	{
+		require self::$root.'vendor/fiesta/kernel/Foundation/Connector.php';
+	}
+
+
+	/**
+	 * Set the root of the framework for basic path
+	 * @param $root string
+	 */
+	protected static function setRoot($root)
+	{
+		self::$root=$root;
+		return $root;
+	}
+
+	/**
+	 * start recording the output to screen
+	 */
+	protected static function setScreen()
 	{
 		ob_start();
+	}
+
+	/**
+	 * Run the Framework
+	 */
+	public static function run($root="../",$routes=true,$session=true)
+	{
+		self::setScreen();
+		self::setRoot($root);
+
+		// call the connector and run it
+		self::callConnector();
+		Connector::run();
 		//
-		self::$root=$root;
+		self::ini();
 		//
-		require self::$root.'vendor/fiesta/kernel/Foundation/Connector.php';
-		require self::$root.'vendor/fiesta/kernel/Logging/Handler.php';
-		require self::$root.'vendor/fiesta/kernel/Logging/Log.php';
-
-		// Config
-		require self::$root.'vendor/fiesta/kernel/Config/Config.php';
-		require self::$root.'vendor/fiesta/kernel/Config/Exceptions/ConfigException.php';
-		Config::load();
-
-		// Set Timezone
-		self::timeCall();
-
-		// Set the error log
-		Log::ini();
-
-		// Set Whoops error handler
-		Handler::run();
-
-		//session
-		require self::$root.'vendor/fiesta/kernel/Storage/Session.php';
-		if($session) Session::start(self::$root.'app/storage/session');
-
-		//Maintenance
-		require self::$root.'vendor/fiesta/kernel/Maintenance/Maintenance.php';
-
-		//Objects
-		require self::$root.'vendor/fiesta/kernel/Objects/Vars.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/Strings/Strings.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/Strings/Exceptions/StringOutIndexException.php';
-
-		// Access
-		require self::$root.'vendor/fiesta/kernel/Access/Path.php';
-
-		//Alias
-		require self::$root.'vendor/fiesta/kernel/Config/Alias.php';
-
+		self::fetcher($routes);
 		//
-		//require self::$root.'vendor/fiesta/kernel/MVC/Templete.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/Exception.php';
-		require self::$root.'vendor/fiesta/kernel/Resources/Faker.php';
+		return true;
+	}
 
-		require self::$root.'vendor/fiesta/kernel/Storage/Cookie.php';
-
-		// Routes
-		require self::$root.'vendor/fiesta/kernel/Router/Routes.php';
-		require self::$root.'vendor/fiesta/kernel/Router/Route.php';
-		require self::$root.'vendor/fiesta/kernel/Router/Exceptions/NotFoundHttpException.php';
-
-		// Caches
-		require self::$root.'vendor/fiesta/kernel/Caches/Caches.php';
-		require self::$root.'vendor/fiesta/kernel/Caches/Cache.php';
-		require self::$root.'vendor/fiesta/kernel/Caches/FileCache.php';
-		require self::$root.'vendor/fiesta/kernel/Caches/DatabaseCache.php';
-		require self::$root.'vendor/fiesta/kernel/Caches/Exceptions/DriverNotFoundException.php';
-
-
-		require self::$root.'vendor/fiesta/kernel/Storage/Storage.php';
-		require self::$root.'vendor/fiesta/kernel/Security/Auth.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/Table.php';
-
-		// Database
-		require self::$root.'vendor/fiesta/kernel/Database/Schema.php';
-		require self::$root.'vendor/fiesta/kernel/Database/Migration.php';
-		require self::$root.'vendor/fiesta/kernel/Database/Seeder.php';
-		require self::$root.'vendor/fiesta/kernel/Database/Database.php';
-		require self::$root.'vendor/fiesta/kernel/Database/Drivers/MySql.php';
-		require self::$root.'vendor/fiesta/kernel/Database/Exceptions/DatabaseArgumentsException.php';
-		require self::$root.'vendor/fiesta/kernel/Database/Exceptions/DatabaseConnectionException.php';
-
-
-		require self::$root.'vendor/fiesta/kernel/Access/Url.php';
-		
-		require self::$root.'vendor/fiesta/kernel/Objects/Sys.php';
-		require self::$root.'vendor/fiesta/kernel/Http/Links.php';
-		require self::$root.'vendor/fiesta/kernel/Http/Http.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/Base.php';
-		require self::$root.'vendor/fiesta/kernel/Resources/Libs.php';
-		require self::$root.'vendor/fiesta/kernel/Hypertext/Res.php';
-		require self::$root.'vendor/fiesta/kernel/Hypertext/Input.php';
-		require self::$root.'vendor/fiesta/kernel/Security/License.php';
-
-		
-		self::translatorCalls();
-		self::modelsCalls();
-		self::relationsCalls();
-		self::mediaCalls();
-
-		// MVC - View
-
-		require self::$root.'vendor/fiesta/kernel/MVC/View/View.php';
-		require self::$root.'vendor/fiesta/kernel/MVC/View/Libs/Template.php';
-		require self::$root.'vendor/fiesta/kernel/MVC/View/Libs/Views.php';
-		require self::$root.'vendor/fiesta/kernel/MVC/View/Exceptions/ViewNotFoundException.php';
-
-		require self::$root.'vendor/fiesta/kernel/Hypertext/HTML.php';
-		require self::$root.'vendor/fiesta/kernel/Security/Encrypt.php';
-		require self::$root.'vendor/fiesta/kernel/Security/Security.php';
-		require self::$root.'vendor/fiesta/kernel/MVC/Controller.php';
-		require self::$root.'vendor/fiesta/kernel/Http/Error.php';
-		require self::$root.'vendor/fiesta/kernel/Http/Root.php';
-		require self::$root.'vendor/fiesta/kernel/Mailing/Mail.php';
-		require self::$root.'vendor/fiesta/kernel/Objects/DataCollection.php';
-		require self::$root.'vendor/fiesta/kernel/Maintenance/Debug.php';
-
-		// Filesystem
-		require self::$root.'vendor/fiesta/kernel/Filesystem/Exceptions/FileNotFoundException.php';
-		require self::$root.'vendor/fiesta/kernel/Filesystem/Exceptions/DirectoryNotFoundException.php';
-		require self::$root.'vendor/fiesta/kernel/Filesystem/Filesystem.php';
-
-		// Database files
-		require self::$root.'vendor/fiesta/kernel/Database/DBTable.php';
-
-		//
-
-
+	/**
+	 * Init Framework classes
+	 */
+	protected static function ini()
+	{
 		Alias::ini(self::$root);
 		Sys::ini();
 		Url::ini();
@@ -180,58 +106,15 @@ class Application
 		Database::ini();
 		Auth::ini();
 		Panel::run();
-		self::scoopCall();
+	}
 
-		//
-
-		if(self::$root!=null)
-		{
-			// include models
-			foreach (glob(self::$root."app/models/*.php") as $file) { include_once $file; }
-
-			//include the controllers files
-			foreach (glob(self::$root."app/controllers/*.php") as $file) { include_once $file; }
-
-			//include the link files
-			foreach (glob(self::$root."app/paths/*.php") as $file) { include_once $file; }
-
-			//include the seeders files
-			foreach (glob(self::$root."app/seeds/*.php") as $file) { include_once $file; }
-			//
-			//include filters
-			include_once self::$root."app/http/Filters.php";
-
-			//include for routes
-			if($routes)
-			{
-				include_once self::$root."app/http/Routes.php";
-				Routes::run();
-			}
-		}
-		else
-		{
-			// include models
-			foreach (glob("app/models/*.php") as $file) { include_once $file; }
-
-			//include the controllers files
-			foreach (glob("app/controllers/*.php") as $file) { include_once $file; }
-
-			//include the seeders files
-			foreach (glob("app/seeds/*.php") as $file) { include_once $file; }
-
-
-			//include filters
-			include_once "app/http/Filters.php";
-
-			//include for routes
-			if($routes)
-			{
-				include_once "app/http/Routes.php";
-				Routes::run();
-			}
-		}
-
-		return true;
+	/**
+	 * Calling the fetcher
+	 */
+	protected static function fetcher($routes)
+	{
+		Connector::need(self::$root.'vendor/fiesta/kernel/Foundation/Fetcher.php');
+		Fetcher::run($routes);
 	}
 
 	/**
@@ -260,83 +143,5 @@ class Application
 		$r=explode("App.php", $sub);
 		//
 		return "http://".$_SERVER["HTTP_HOST"].$r[0];
-	}
-
-	/**
-	 * MVC Model relationships calls
-	 */
-	public static function relationsCalls()
-	{
-		// Files of relation
-		$files = array('OneToOne', 'OneToMany', 'ManyToMany', 'BelongsTo');
-		$filesPath = self::$root.'vendor/fiesta/kernel/MVC/Relations/';
-		Connector::call($files,$filesPath);
-
-		// Exeptions of relation
-		$exceptions = array('ManyRelationException', 'ModelNotFindedException');
-		$exceptionsPath = self::$root.'vendor/fiesta/kernel/MVC/Relations/Exceptions/';
-		Connector::call($exceptions,$exceptionsPath);
-	}
-
-	/**
-	 * MVC Model calls
-	 */
-	public static function modelsCalls()
-	{
-		// Files of models
-		$files = array('Model', 'ModelArray');
-		$filesPath = self::$root.'vendor/fiesta/kernel/MVC/Model/';
-		Connector::call($files,$filesPath);
-
-		// Exeptions of models
-		$exceptions = array('ForeingKeyMethodException', 'ColumnNotEmptyException', 'ManyPrimaryKeysException', 'PrimaryKeyNotFoundException');
-		$exceptionsPath = self::$root.'vendor/fiesta/kernel/MVC/Model/Exceptions/';
-		Connector::call($exceptions,$exceptionsPath);
-	}
-
-	/**
-	 * Translator calls
-	 */
-	public static function translatorCalls()
-	{
-		// Files of models
-		$files = array('Lang', 'Smiley');
-		$filesPath = self::$root.'vendor/fiesta/kernel/Translator/';
-		Connector::call($files,$filesPath);
-
-		// Exeptions of models
-		$exceptions = array('LanguageKeyNotFoundException');
-		$exceptionsPath = self::$root.'vendor/fiesta/kernel/Translator/Exceptions/';
-		Connector::call($exceptions,$exceptionsPath);
-	}
-
-	/**
-	 * Media calls
-	 */
-	public static function mediaCalls()
-	{
-		// Files of models
-		$files = array('QR');
-		$filesPath = self::$root.'vendor/fiesta/kernel/Media/';
-		Connector::call($files,$filesPath);
-	}
-
-	/**
-	 * scoop call
-	 */
-	public static function scoopCall()
-	{
-		$files = array('Scope');
-		$filesPath = self::$root.'vendor/fiesta/kernel/Access/';
-		Connector::call($files,$filesPath);
-	}
-
-	/**
-	 * time call
-	 */
-	public static function timeCall()
-	{
-		require self::$root.'vendor/fiesta/kernel/Objects/DateTime.php';
-		DateTime::setTimezone();
 	}
 }
