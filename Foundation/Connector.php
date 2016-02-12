@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Call;
+namespace Fiesta\Kernel\Foundation;
 
 use Fiesta\Kernel\Foundation\Application;
 
@@ -11,14 +11,22 @@ class Connector
 {
 
 	/**
+	 * Require files
+	 * @param $path string
+	 */
+	public static function need($path)
+	{
+		if(file_exists($path)) require $path;
+	}
+
+	/**
 	 * Call files
 	 * @param $files array
 	 * @param $path string
 	 */
 	public static function call($files,$path)
 	{
-		foreach ($files as $file)
-			require $path.$file.".php";
+		foreach ($files as $file) self::need($path.$file.".php");
 	}
 
 	/**
