@@ -37,7 +37,9 @@ class Application
 
 	public static function version()
 	{
-		return "Fiesta v3.1 (3.1.1) PHP Framework";
+		$vrs = "Fiesta v3.1 (3.1) PHP Framework<br><br>";
+		$vrs .= "Fiesta Kernel v3.1.1";
+		return $vrs;
 	}
 
 	public static function run($root="../",$routes=true,$session=true)
