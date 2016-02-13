@@ -1,11 +1,5 @@
 <?php
 
-//----------------------------------------
-// Fiesta (http://ipixa.net)
-// Copyright 2014 - 2016 Youssef Had, Inc.
-// Licensed under Open Source
-//----------------------------------------
-
 namespace Fiesta\Kernel\Foundation;
 
 use Fiesta\Kernel\Storage\Session;
