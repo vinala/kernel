@@ -60,6 +60,7 @@ class Connector
 		Connector::mail();
 		Connector::dataCollection();
 		Connector::fileSystem();
+		Connector::scoop();
 	}
 
 	/**
@@ -490,5 +491,13 @@ class Connector
 				),
 			self::$path.'Filesystem/'
 			);
+	}
+
+	/**
+	 * scoop call
+	 */
+	public static function scoop()
+	{
+		self::need(self::$path.'Access/Scope.php');
 	}
 }
