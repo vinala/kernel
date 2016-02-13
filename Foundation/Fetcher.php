@@ -44,7 +44,7 @@ class Fetcher
 	 */
 	protected static function fetch($pattern)
 	{
-		return glob(self::$path.$pattern);
+		return glob(self::$path.$pattern.'/*.php');
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Fetcher
 	 */
 	protected static function model()
 	{
-		foreach (self::fetch("models/*.php") as $file) 
+		foreach (self::fetch("models") as $file) 
 			Connector::need($file);
 	}
 
@@ -61,7 +61,7 @@ class Fetcher
 	 */
 	protected static function controller()
 	{
-		foreach (self::fetch("controllers/*.php") as $file) 
+		foreach (self::fetch("controllers") as $file) 
 			Connector::need($file);
 	}
 
@@ -70,7 +70,7 @@ class Fetcher
 	 */
 	protected static function link()
 	{
-		foreach (self::fetch("links/*.php") as $file) 
+		foreach (self::fetch("links") as $file) 
 			Connector::need($file);
 	}
 
@@ -79,7 +79,7 @@ class Fetcher
 	 */
 	protected static function seed()
 	{
-		foreach (self::fetch("seeds/*.php") as $file) 
+		foreach (self::fetch("seeds") as $file) 
 			Connector::need($file);
 	}
 
