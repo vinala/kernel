@@ -2,7 +2,6 @@
 
 namespace Fiesta\Kernel\Foundation;
 
-use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Logging\Log;
 use Fiesta\Kernel\Logging\Handler;
