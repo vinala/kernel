@@ -34,4 +34,4 @@ function now() { return DateTime::now(); }
  * Http
  */
 function abort($arg) { return Http::abort($arg); }
-function error($error = 404,$data = null) { return App::error($error , $data); }
+// function error($error = 404,$data = null) { return App::error($error , $data); }
