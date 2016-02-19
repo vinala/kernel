@@ -21,6 +21,7 @@ use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Logging\Log;
 use Fiesta\Kernel\Objects\DateTime;
 use Fiesta\Vendor\Panel\Panel;
+use Fiesta\Kernel\Filesystem\Filesystem;
 
 
 class Application
