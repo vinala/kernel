@@ -31,12 +31,15 @@ class Application
 
 	public static function version()
 	{
-		return "Fiesta v3.1 (3.1) PHP Framework";
+		$version=(new Filesystem)->get(self::$root."version.md");
+		return "Fiesta v3.1 ($version) PHP Framework";
 	}
 
 	public static function kernelVersion()
 	{
-		return "Fiesta Kernel v3.1.12";
+		$kernel = "vendor/fiesta/kernel/";
+		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
+		return "Fiesta Kernel v".$version;
 	}
 
 	protected static function callConnector()
