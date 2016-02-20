@@ -60,6 +60,7 @@ class Connector
 		Connector::dataCollection();
 		Connector::fileSystem();
 		Connector::scoop();
+		Connector::intro();
 	}
 
 	/**
@@ -498,5 +499,13 @@ class Connector
 	public static function scoop()
 	{
 		self::need(self::$path.'Access/Scope.php');
+	}
+
+	/**
+	 * intro call
+	 */
+	public static function intro()
+	{
+		self::need(self::$path.'Access/Intro.php');
 	}
 }
