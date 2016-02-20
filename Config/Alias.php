@@ -17,15 +17,19 @@ class Alias
 			self::load($root);
 			//
 			foreach (self::$aliases as $key => $value) 
-				class_alias ( "$value" , $key);
+				self::set($value,$key);
 		}
 		
 	}
 
 	protected static function load($root)
 	{
-		// if(Config::get('alias.enable'))
 		self::$aliases = Config::get('alias.aliases');
 		return self::$aliases;
+	}
+
+	public static function set($value,$key)
+	{
+		class_alias ( "$value" , $key);
 	}
 }
