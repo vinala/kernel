@@ -5,6 +5,7 @@ namespace Fiesta\Kernel\Foundation;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Logging\Log;
 use Fiesta\Kernel\Logging\Handler;
+use Fiesta\Kernel\Intro\Intro;
 
 /**
 * Connector class to call framework core files
@@ -507,5 +508,6 @@ class Connector
 	public static function intro()
 	{
 		self::need(self::$path.'Access/Intro.php');
+		Intro::alias();
 	}
 }
