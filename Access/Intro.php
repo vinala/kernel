@@ -1,7 +1,10 @@
 <?php
 
+namespace Fiesta\Kernel\Intro;
+
 use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Kernel\MVC\View\View;
+
 
 /**
 * class de controller helloController
@@ -416,5 +419,7 @@ class Intro
 		//
 		echo "ok";
 	}
+
+
 
 }
