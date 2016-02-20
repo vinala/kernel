@@ -2,7 +2,6 @@
 
 use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Kernel\MVC\View\View;
-use Fiesta\Kernel\Config\Alias;
 
 /**
 * class de controller helloController
