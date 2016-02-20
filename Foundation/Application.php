@@ -36,6 +36,11 @@ class Application
 		return "Fiesta v3.1 ($version) PHP Framework";
 	}
 
+	public static function fullVersion()
+	{
+		return (new Filesystem)->get(self::$root."version.md");
+	}
+
 	public static function kernelVersion()
 	{
 		$kernel = "vendor/fiesta/kernel/";
