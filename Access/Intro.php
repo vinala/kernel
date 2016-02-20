@@ -418,9 +418,4 @@ class Intro
 		echo "ok";
 	}
 
-	public static function alias()
-	{
-		Alias::set( "Fiesta\Kernel\Intro\Intro" , "Intro");
-	}
-
 }
