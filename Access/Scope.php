@@ -2,7 +2,7 @@
 
 /**
  * Scope function to make easy for users to 
- * access to somefrmaework functions
+ * access to some framework functions
  */
 
 use Fiesta\Kernel\MVC\View\View;
@@ -33,9 +33,4 @@ function now() { return DateTime::now(); }
 /**
  * Http
  */
-function abort($arg) { return Http::abort($arg); }
-
-/**
- * Objects
- */
-function map($obj) { var_dump($obj); }
+function abort($arg = null) { return Http::abort($arg); }
