@@ -30,7 +30,7 @@ class Config
 	protected static function getFirstLevel()
 	{
 		return 
-			array('error','database','panel','app','license','maintenance','lang','security','auth','mail','view','loggin','storage','cache','alias','smiley',
+			array('error','security','database','panel','app','license','maintenance','lang','auth','mail','view','loggin','storage','cache','alias','smiley',
 				);
 	}
 
