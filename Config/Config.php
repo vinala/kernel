@@ -58,7 +58,7 @@ class Config
 	 * check if parameter exists
 	 * @param $param(string) primary and secondary parameter concatenated
 	 */
-	protected static function check($param)
+	public static function check($param)
 	{
 		$p = self::separate($param);
 		//
