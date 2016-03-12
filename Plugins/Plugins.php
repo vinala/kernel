@@ -6,6 +6,7 @@ use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Kernel\Filesystem\Filesystem;
 use Fiesta\Kernel\Plugins\Exception\AutoloadFileNotFound;
 use Fiesta\Kernel\Objects\Strings;
+use Fiesta\Kernel\Config\Alias;
 
 /**
 * 
@@ -17,33 +18,72 @@ class Plugins
 	 */
 	protected static $infos = array();
 
+	/**
+	 * All info about plugins
+	 */
+	protected static $config = array();
+
+	/**
+	 * Init Plug-in class
+	 */
 	public static function ini()
 	{
+		
 		// \Http::clear();
 		self::getInfo();
+		self::getConfig();
 		//
 		self::req();
-		// die();
+	}
+
+	/**
+	 * Check if the plugin is enbled by user
+	 */
+	protected static function isEnabled($alias)
+	{
+		if(self::$config[$alias]["enable"]) return true;
 	}
 
 	protected static function req()
 	{
 		foreach (self::$infos as $key => $value) {
-			// include $value["path"]."/".$value["autoload"]["file"];
-			self::call($value);
-			self::exec($value);
+			if(self::isEnabled($key))
+			{
+				self::call($value);
+				self::setAlias($key);
+				self::exec($value);
+			}
+			
 		}
 	}
 
+	/**
+	 * Get infos about plug-ins
+	 */
 	protected static function getInfo()
 	{
 		$files = self::getFiles();
 		//
 		foreach ($files as $path) {
 			$data = self::convert(self::readFile($path."/.info"));
+			$data = $data['system'];
 			$data['path']=$path;
 			self::$infos[$data["alias"]]=$data;
+		}
+		//
+		return self::$infos;
+	}
 
+	protected static function getConfig()
+	{
+		$files = self::getFiles();
+		//
+		foreach ($files as $path) {
+			$data = self::convert(self::readFile($path."/.info"));
+			$setting = $data['configuration'];
+			$system = $data['system'];
+			$setting['path']=$path;
+			self::$config[$system["alias"]]=$setting;
 		}
 		//
 		return self::$infos;
@@ -98,8 +138,33 @@ class Plugins
 			//
 			call_user_func($callback);
 		}
-		
-		
+	}
 
+	protected static function isConfigKeyExist()
+	{
+		$args = func_get_args();
+		//
+		$data = self::$config;
+		foreach ($args as $value) {
+			if(isset($data[$value])) { $data = $data[$value]; break;  }
+			else return false;
+		}
+		return true;
+	}
+
+	/**
+	 * 
+	 */
+	protected static function setAlias($alias)
+	{
+		if(self::isConfigKeyExist($alias,"shortcuts"))
+		{
+			$shortcuts = self::$config[$alias]["shortcuts"];
+			//
+			foreach ($shortcuts as $alias => $target) {
+				$target = Strings::replace($target,"/","\\");
+				Alias::set($target,$alias);
+			}
+		}
 	}
 }
