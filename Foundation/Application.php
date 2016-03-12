@@ -22,6 +22,7 @@ use Fiesta\Kernel\Logging\Log;
 use Fiesta\Kernel\Objects\DateTime;
 use Fiesta\Vendor\Panel\Panel;
 use Fiesta\Kernel\Filesystem\Filesystem;
+use Fiesta\Kernel\Plugins\Plugins;
 
 
 class Application
@@ -109,6 +110,7 @@ class Application
 		Database::ini();
 		Auth::ini();
 		Panel::run();
+		Plugins::ini();
 	}
 
 	/**

@@ -61,6 +61,7 @@ class Connector
 		Connector::fileSystem();
 		Connector::scoop();
 		Connector::intro();
+		Connector::plugins();
 	}
 
 	/**
@@ -507,5 +508,14 @@ class Connector
 	public static function intro()
 	{
 		self::need(self::$path.'Access/Intro.php');
+	}
+
+	/**
+	 * plugins call
+	 */
+	public static function plugins()
+	{
+		self::need(self::$path.'Plugins/Plugins.php');
+		self::need(self::$path.'Plugins/Exceptions/AutoloadFileNotFound.php');
 	}
 }
