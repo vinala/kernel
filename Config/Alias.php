@@ -28,8 +28,8 @@ class Alias
 		return self::$aliases;
 	}
 
-	public static function set($value,$key)
+	public static function set($target,$alias)
 	{
-		class_alias ( "$value" , $key);
+		class_alias ( "$target" , $alias);
 	}
 }
