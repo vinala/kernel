@@ -15,7 +15,7 @@
 		"fiesta/panel": "~2.1.35"
 	},
 	"autoload": {
-		"files": ["Foundation/Application.php"]
+		"files": ["src/Foundation/Application.php"]
 	},
 	"extra": {
         "branch-alias": {
