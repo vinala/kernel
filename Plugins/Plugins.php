@@ -152,8 +152,20 @@ class Plugins
 		return true;
 	}
 
+	protected static function isInfoKeyExist()
+	{
+		$args = func_get_args();
+		//
+		$data = self::$infos;
+		foreach ($args as $value) {
+			if(isset($data[$value])) { $data = $data[$value];  }
+			else return false;
+		}
+		return true;
+	}
+
 	/**
-	 * 
+	 * Set classes aliases
 	 */
 	protected static function setAlias($alias)
 	{
@@ -166,5 +178,27 @@ class Plugins
 				Alias::set($target,$alias);
 			}
 		}
+	}
+
+	/**
+	 * Get plugin path
+	 */
+	public static function getPath($alias)
+	{
+		return self::$infos[$alias]["path"];
+	}
+
+	/**
+	 * Get core
+	 */
+	public static function getCore($alias,$param)
+	{
+		// die(var_dump(array($alias,$param)));
+		// die(var_dump(self::$infos));
+		if(self::isInfoKeyExist($alias,"core",$param)) 
+		{
+			return self::$infos[$alias]["core"][$param];
+		}
+		else return null;
 	}
 }
