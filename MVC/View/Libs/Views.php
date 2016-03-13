@@ -4,6 +4,7 @@ namespace Fiesta\Kernel\MVC\View;
 
 use Fiesta\Kernel\MVC\View\Exception\ViewNotFoundException;
 use Fiesta\Kernel\Foundation\Application;
+use Fiesta\Kernel\Plugins\Plugins;
 
 /**
 * View mother class
@@ -89,6 +90,47 @@ class Views
 		ob_end_clean();
 		//
 		return $returned_value;
+	}
+
+	/**
+	 * View For Plugin
+	 */
+	public static function import($_plg,$_value_,$_data_=null)
+	{
+		if(!is_null($_data_))
+		{
+			foreach ($_data_ as $_key_ => $_value2_) {
+				$$_key_=$_value2_;
+			}
+		}
+		//getFile
+		$_name_=str_replace('.', '/', $_value_);
+		//
+		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
+		$_link2_=Application::$root.'app/views/'.$_name_.'.tpl.php';
+		//
+		$_link1_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.php';
+		$_link2_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.tpl.php';
+		// die($_link1_);
+		//
+		$_tpl_=false;
+		//
+		if(file_exists($_link1_)) { $_link3_=$_link1_; $_tpl_=false; }
+		else if(file_exists($_link2_)) { $_link3_=$_link2_; $_tpl_=true; }
+		else { throw new ViewNotFoundException($_name_); }
+
+		if($_tpl_)
+		{
+			self::$showed="tpl";
+			Template::show($_link3_,$_data_);
+		}
+		else
+		{
+			self::$showed="smpl";
+			include($_link3_);
+		}
+
+
 	}
 
 

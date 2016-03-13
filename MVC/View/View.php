@@ -19,5 +19,10 @@ class View
 		return Views::get($value,$data);
 	}
 
+	public static function import($plugin,$value,$data=null)
+	{
+		return Views::import($plugin,$value,$data);
+	}
+
 
 }
