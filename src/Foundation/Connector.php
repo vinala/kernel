@@ -69,7 +69,7 @@ class Connector
 	 */
 	public static function ini()
 	{
-		self::$path = Application::$root."vendor/fiesta/kernel/";
+		self::$path = Application::$root."vendor/fiesta/kernel/src/";
 		return self::$path;
 	}
 

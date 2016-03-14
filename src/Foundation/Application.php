@@ -51,7 +51,7 @@ class Application
 
 	protected static function callConnector()
 	{
-		require self::$root.'vendor/fiesta/kernel/Foundation/Connector.php';
+		require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
 	}
 
 
@@ -118,7 +118,7 @@ class Application
 	 */
 	protected static function fetcher($routes)
 	{
-		Connector::need(self::$root.'vendor/fiesta/kernel/Foundation/Fetcher.php');
+		Connector::need(self::$root.'vendor/fiesta/kernel/src/Foundation/Fetcher.php');
 		Fetcher::run($routes);
 	}
 
