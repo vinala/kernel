@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="../../autoload.php" color="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" stopOnFailures="false" syntaxCheck="false"
+	>
+    <testsuites>
+	    <testsuite name="Fiesta Kernel Unit Test">
+	    	<directory>./tests/</directory>
+	    </testsuite>
+	</testsuites>
+	<php>
+        <server name='HTTP_HOST' value='localhost' />
+        <server name='REQUEST_URI' value='/fiesta' />
+    </php>
+</phpunit>
