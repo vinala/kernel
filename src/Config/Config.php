@@ -42,6 +42,8 @@ class Config
 		$levels = self::getFirstLevel();
 		//
 		foreach ($levels as $level) { self::$params[$level] = self::getPath($level); }
+
+		return true;
 	}
 
 	/**
