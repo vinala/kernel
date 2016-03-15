@@ -149,4 +149,9 @@ class Application
 		//
 		return "http://".$_SERVER["HTTP_HOST"].$r[0];
 	}
+
+	public static function test()
+	{
+		self::run("../../../");
+	}
 }
