@@ -1,7 +1,7 @@
 <?php
 echo var_dump(glob("*"));
 
-require __DIR__."/vendor/autoload.php";
+require "vendor/autoload.php";
 // require __DIR__."/../../autoload.php";
 
 
