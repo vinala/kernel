@@ -152,6 +152,7 @@ class Application
 
 	public static function test()
 	{
-		self::run("../../../");
+		// self::run("../../../");
+		self::run("");
 	}
 }
