@@ -49,9 +49,15 @@ class Application
 		return "Fiesta Kernel v".$version;
 	}
 
-	protected static function callConnector()
+	protected static function callConnector($test = false)
 	{
-		require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
+		if(!$test) require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
+		else
+		{
+			echo "ttttt:";
+			echo var_dump(glob("*"));
+			require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
+		}
 	}
 
 
@@ -82,7 +88,7 @@ class Application
 		self::setRoot($root);
 
 		// call the connector and run it
-		self::callConnector();
+		self::callConnector(true);
 		Connector::run();
 		//
 		self::ini();
