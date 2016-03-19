@@ -31,6 +31,11 @@ class Application
 	public static $root;
 	public static $Callbacks = array('before'=>null,'after'=>null);
 
+	/**
+	 * True if the framework in test case
+	 */
+	public static $isTest;
+
 	public static function version()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
@@ -84,7 +89,8 @@ class Application
 	{
 		self::setScreen();
 		self::setRoot($root);
-
+		//
+		self::$isTest = false;
 		// call the connector and run it
 		self::callConnector();
 		Connector::run();
@@ -103,7 +109,8 @@ class Application
 	{
 		self::setScreen();
 		self::setRoot($root);
-
+		//
+		self::$isTest = true;
 		// call the connector and run it
 		self::callConnector(true);
 		Connector::runTest(true);
