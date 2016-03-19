@@ -51,13 +51,16 @@ class Application
 
 	protected static function callConnector($test = false)
 	{
-		if(!$test) require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
-		else
-		{
-			echo "ttttt:";
-			echo var_dump(glob("*"));
-			require 'src/Foundation/Connector.php';
-		}
+
+		require $test ? 'src/Foundation/Connector.php' : self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
+
+		// if(!$test) require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
+		// else
+		// {
+		// 	echo "ttttt:";
+		// 	echo var_dump(glob("*"));
+		// 	require 'src/Foundation/Connector.php';
+		// }
 	}
 
 
@@ -90,6 +93,25 @@ class Application
 		// call the connector and run it
 		self::callConnector(true);
 		Connector::run(true);
+		//
+		self::ini();
+		//
+		self::fetcher($routes);
+		//
+		return true;
+	}
+
+	/**
+	 * Run the Framework
+	 */
+	public static function runTest($root="../",$routes=true,$session=true)
+	{
+		self::setScreen();
+		self::setRoot($root);
+
+		// call the connector and run it
+		self::callConnector(true);
+		Connector::runTest(true);
 		//
 		self::ini();
 		//
@@ -158,7 +180,6 @@ class Application
 
 	public static function test()
 	{
-		// self::run("../../../");
-		self::run("");
+		self::runTest();
 	}
 }
