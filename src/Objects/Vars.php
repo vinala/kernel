@@ -31,7 +31,7 @@ class Vars
 			$k=$url[1];
 		}
 		
-		$files=include (Application::$root."app/vars/$link.php");
+		$files=\Connector::need (Application::$root."app/vars/$link.php");
 		//
 		return $files[$k];
 	}

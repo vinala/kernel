@@ -22,7 +22,7 @@ class Links
 		//
 		foreach ($files as $filename)
 		{
-			$tbl=(include $filename);
+			$tbl=(\Connector::need($filename));
 			foreach ($tbl as $key => $value)
 			{
 				self::$bigOne[$key]=$value;
@@ -57,7 +57,7 @@ class Links
 			$k=$url[1];
 		}
 		
-		$files=include (Application::$root."app/links/$link.php");
+		$files=\Connector::need(Application::$root."app/links/$link.php");
 		//
 		return $files[$k];
 	}

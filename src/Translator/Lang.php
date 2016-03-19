@@ -47,7 +47,7 @@ class Lang
 	{
 		foreach (glob(Application::$root."app/lang/".self::$lang."/*.php") as $filename)
 		{
-			$tbl=(include $filename);
+			$tbl=(\Connector::need($filename));
 			foreach ($tbl as $key => $value) {
 				self::$textes[$key]=$value;
 			}

@@ -123,7 +123,7 @@ class Plugins
 	{
 		$file = $info["path"]."/".$info["autoload"]["file"];
 		//
-		if((new Filesystem())->exists($file)) include $file;
+		if((new Filesystem())->exists($file)) \Connector::need($file);
 		else throw new AutoloadFileNotFound($file);
 		
 
