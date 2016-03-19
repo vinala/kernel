@@ -82,7 +82,16 @@ class Connector
 	{
 		if(file_exists($path)) return require $path;
 		else throw new CFNFE($path);
-		
+	}
+
+	/**
+	 * Require files once
+	 * @param $path string
+	 */
+	public static function needOnce($path)
+	{
+		if(file_exists($path)) return include_once $path;
+		else throw new CFNFE($path);
 	}
 
 	/**
