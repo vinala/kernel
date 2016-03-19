@@ -5,6 +5,7 @@ namespace Fiesta\Kernel\Foundation;
 use Fiesta\Kernel\Config\Config;
 use Fiesta\Kernel\Logging\Log;
 use Fiesta\Kernel\Logging\Handler;
+use Fiesta\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
 
 /**
 * Connector class to call framework core files
@@ -79,8 +80,9 @@ class Connector
 	 */
 	public static function need($path)
 	{
-		if(file_exists($path)) require $path;
-		else die($path." not found");
+		if(file_exists($path)) return require $path;
+		else throw new CFNFE($path);
+		
 	}
 
 	/**
