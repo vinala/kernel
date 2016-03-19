@@ -81,7 +81,6 @@ class Connector
 	 */
 	public static function need($path)
 	{
-		if(Application::$isTest) return true;
 		if(file_exists($path)) return require $path;
 		else throw new CFNFE($path);
 	}
@@ -92,7 +91,6 @@ class Connector
 	 */
 	public static function needOnce($path)
 	{
-		if(Application::$isTest) return true;
 		if(file_exists($path)) return include_once $path;
 		else throw new CFNFE($path);
 	}
