@@ -91,8 +91,8 @@ class Application
 		self::setRoot($root);
 
 		// call the connector and run it
-		self::callConnector(true);
-		Connector::run(true);
+		self::callConnector();
+		Connector::run();
 		//
 		self::ini();
 		//
