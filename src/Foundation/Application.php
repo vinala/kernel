@@ -54,13 +54,8 @@ class Application
 
 		require $test ? 'src/Foundation/Connector.php' : self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
 
-		// if(!$test) require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
-		// else
-		// {
-		// 	echo "ttttt:";
-		// 	echo var_dump(glob("*"));
-		// 	require 'src/Foundation/Connector.php';
-		// }
+		require $test ? 'src/Foundation/Exceptions/ConnectorFileNotFoundException.php' : self::$root.'vendor/fiesta/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
+
 	}
 
 
