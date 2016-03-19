@@ -20,9 +20,9 @@ class Connector
 	/**
 	 * Run the Connector class
 	 */
-	public static function run()
+	public static function run($test)
 	{
-		Connector::ini();
+		Connector::ini($test);
 		Connector::loggin();
 
 		// Config
@@ -67,9 +67,9 @@ class Connector
 	/**
 	 * Init Connector class
 	 */
-	public static function ini()
+	public static function ini($test = false)
 	{
-		self::$path = Application::$root."vendor/fiesta/kernel/src/";
+		self::$path = $test ? "src/" : Application::$root."vendor/fiesta/kernel/src/";
 		return self::$path;
 	}
 

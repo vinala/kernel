@@ -89,7 +89,7 @@ class Application
 
 		// call the connector and run it
 		self::callConnector(true);
-		Connector::run();
+		Connector::run(true);
 		//
 		self::ini();
 		//
