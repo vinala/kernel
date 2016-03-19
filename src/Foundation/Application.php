@@ -56,7 +56,7 @@ class Application
 		{
 			echo "ttttt:";
 			echo var_dump(glob("*"));
-			require self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
+			require 'src/Foundation/Connector.php';
 		}
 	}
 
