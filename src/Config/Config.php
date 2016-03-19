@@ -3,6 +3,7 @@
 namespace Fiesta\Kernel\Config;
 
 use Fiesta\Kernel\Foundation\Application;
+use Fiesta\Kernel\Foundation\Connector;
 use Fiesta\Kernel\Config\Exceptions\ConfigException;
 
 /**
@@ -21,7 +22,7 @@ class Config
 	 */
 	protected static function getPath($param)
 	{
-		return include (is_null(Application::$root) ? "config/$param.php" :  Application::$root."config/$param.php");
+		return Connector::need((is_null(Application::$root) ? "config/$param.php" :  Application::$root."config/$param.php"));
 	}
 
 	/**
