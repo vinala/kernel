@@ -20,9 +20,9 @@ class Connector
 	/**
 	 * Run the Connector class
 	 */
-	public static function run($test)
+	public static function run()
 	{
-		Connector::ini($test);
+		Connector::ini();
 		Connector::loggin();
 
 		// Config
@@ -517,5 +517,52 @@ class Connector
 	{
 		self::need(self::$path.'Plugins/Plugins.php');
 		self::need(self::$path.'Plugins/Exceptions/AutoloadFileNotFound.php');
+	}
+
+	/**
+	 * Run connector for test
+	 */
+	public static function runTest()
+	{
+		Connector::ini(true);
+		Connector::loggin();
+
+		// Config
+		Connector::config();
+		Config::load();
+		//
+		Connector::time();
+		//
+		Log::ini();
+		Handler::run();
+		//
+		Connector::storage();
+		Connector::maintenance();
+		Connector::string();
+		Connector::object();
+		Connector::access();
+		Connector::faker();
+		Connector::cookie();
+		Connector::router();
+		Connector::caches();
+		Connector::security();
+		Connector::table();
+		Connector::database();
+		Connector::object_scnd();
+		Connector::http();
+		Connector::libs();
+		Connector::hypertext();
+		Connector::translator();
+		Connector::model();
+		Connector::relations();
+		Connector::media();
+		Connector::view();
+		Connector::controller();
+		Connector::mail();
+		Connector::dataCollection();
+		Connector::fileSystem();
+		Connector::scoop();
+		Connector::intro();
+		Connector::plugins();
 	}
 }
