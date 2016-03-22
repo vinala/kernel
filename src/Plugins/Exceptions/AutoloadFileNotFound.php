@@ -5,7 +5,7 @@ namespace Fiesta\Kernel\Plugins\Exception;
 /**
 * Directory not fount exception
 */
-class AutoloadFileNotFound extends \Exception
+class AutoloadFileNotFoundException extends \Exception
 {
 	protected $message;
 	//
