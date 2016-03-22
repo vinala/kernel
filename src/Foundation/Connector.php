@@ -16,7 +16,7 @@ class Connector
 	/**
 	 * Root Kernel path
 	 */
-	private static $path;
+	public static $path;
 
 
 	/**
@@ -528,7 +528,9 @@ class Connector
 	public static function plugins()
 	{
 		self::need(self::$path.'Plugins/Plugins.php');
-		self::need(self::$path.'Plugins/Exceptions/AutoloadFileNotFound.php');
+		self::need(self::$path.'Plugins/Exceptions/AutoloadFileNotFound.php'
+			);
+		self::need(self::$path.'Plugins/Exceptions/InfoStructureException.php');
 	}
 
 	/**
