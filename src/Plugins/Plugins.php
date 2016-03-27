@@ -4,7 +4,8 @@ namespace Fiesta\Kernel\Plugins;
 
 use Fiesta\Kernel\Foundation\Application;
 use Fiesta\Kernel\Filesystem\Filesystem;
-use Fiesta\Kernel\Plugins\Exception\AutoloadFileNotFound;
+use Fiesta\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
+use Fiesta\Kernel\Plugins\Exception\InfoStructureException;
 use Fiesta\Kernel\Objects\Strings;
 use Fiesta\Kernel\Config\Alias;
 
@@ -65,10 +66,15 @@ class Plugins
 		$files = self::getFiles();
 		//
 		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/.info"));
+			$data = self::convert(self::readFile($path."/.info"),$path);
 			$data = $data['system'];
 			$data['path']=$path;
-			self::$infos[$data["alias"]]=$data;
+
+				if(array_key_exists("alias", $data)) self::$infos[$data["alias"]]=$data;
+				else 
+				{
+					// die($path."/.info");
+				}
 		}
 		//
 		return self::$infos;
@@ -79,7 +85,7 @@ class Plugins
 		$files = self::getFiles();
 		//
 		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/.info"));
+			$data = self::convert(self::readFile($path."/.info"),$path);
 			$setting = $data['configuration'];
 			$system = $data['system'];
 			$setting['path']=$path;
@@ -92,9 +98,16 @@ class Plugins
 	/**
 	 * Convert JSON to PHP array
 	 */
-	protected static function convert($string)
+	protected static function convert($string,$path)
 	{
-		return json_decode($string,true);
+		$data = json_decode($string,true);
+		//
+		if(json_last_error() == JSON_ERROR_SYNTAX)
+		{
+			throw new InfoStructureException($path);
+		} 
+		//
+		return $data;
 	}
 
 	/**
@@ -124,7 +137,7 @@ class Plugins
 		$file = $info["path"]."/".$info["autoload"]["file"];
 		//
 		if((new Filesystem())->exists($file)) \Connector::need($file);
-		else throw new AutoloadFileNotFound($file);
+		else throw new AutoloadFileNotFoundException($file);
 		
 
 	}
