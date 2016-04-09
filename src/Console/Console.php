@@ -2,12 +2,17 @@
 
 namespace Fiesta\Kernel\Console;
 
-use Fiesta\Kernel\Console\Command\GreetCommand;
-use Fiesta\Kernel\Console\Command\HelloCommand;
-use Fiesta\Kernel\Console\Command\Translator\NewDir as NTDir;
-use Fiesta\Kernel\Console\Command\Translator\NewFile as NTFile;
-use Fiesta\Kernel\Console\Command\Info;
 use Symfony\Component\Console\Application as Ap;
+use Fiesta\Kernel\Console\Command\Translator\NewLanguageDirectoryCommand;
+use Fiesta\Kernel\Console\Command\Translator\NewLanguageFileCommand;
+use Fiesta\Kernel\Console\Command\Schema\NewSchemaCommand;
+use Fiesta\Kernel\Console\Command\Schema\ExecSchemaCommand;
+use Fiesta\Kernel\Console\Command\Schema\RollbackSchemaCommand;
+use Fiesta\Kernel\Console\Command\Links\NewLinkFileCommand;
+use Fiesta\Kernel\Console\Command\Models\NewModelCommand;
+use Fiesta\Kernel\Console\Command\Views\NewViewCommand;
+use Fiesta\Kernel\Console\Command\Info;
+
 
 class Console
 {
@@ -50,8 +55,20 @@ class Console
 
 	protected static function addCommands($app)
 	{
-		$app->add(new NTDir());
-		$app->add(new NTFile());
+		// Translator
+		$app->add(new NewLanguageDirectoryCommand());
+		$app->add(new NewLanguageFileCommand());
+		//Schema
+		$app->add(new NewSchemaCommand());
+		$app->add(new ExecSchemaCommand());
+		$app->add(new RollbackSchemaCommand());
+		//Link
+		$app->add(new NewLinkFileCommand());
+		//Model
+		$app->add(new NewModelCommand());
+		//View
+		$app->add(new NewViewCommand());
+		//Info
 		$app->add(new Info());
 	}
 }
