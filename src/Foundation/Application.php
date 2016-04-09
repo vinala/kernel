@@ -36,6 +36,14 @@ class Application
 	 */
 	public static $isTest;
 
+	/**
+	 * True if the framework use console
+	 */
+	public static $isConsole = false;
+
+
+
+
 	public static function version()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
@@ -63,6 +71,15 @@ class Application
 
 	}
 
+	/**
+	 * Using Connector in console
+	*/
+	protected static function consoleConnector()
+	{
+		require 'vendor/fiesta/kernel/src/Foundation/Connector.php';
+		require 'vendor/fiesta/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
+	}
+
 
 	/**
 	 * Set the root of the framework for basic path
@@ -82,6 +99,11 @@ class Application
 		ob_start();
 	}
 
+	public static function setCaseVars($isConsole , $isTest)
+	{
+		self::$isConsole = $isConsole;
+		self::$isTest = $isTest;
+	}
 	/**
 	 * Run the Framework
 	 */
@@ -90,7 +112,8 @@ class Application
 		self::setScreen();
 		self::setRoot($root);
 		//
-		self::$isTest = false;
+		self::setCaseVars(false,false);
+
 		// call the connector and run it
 		self::callConnector();
 		Connector::run();
@@ -98,6 +121,37 @@ class Application
 		self::ini();
 		//
 		self::fetcher($routes);
+		//
+		return true;
+	}
+
+	public static function consoleServerVars()
+	{
+		$_SERVER["HTTP_HOST"] = "localhost";
+		$_SERVER['REQUEST_URI'] = "";
+	}
+
+	/**
+	 * Run the console
+	 */
+	public static function console($root="",$session=true)
+	{
+
+		self::setCaseVars(true,false);
+		//
+		self::consoleServerVars();
+		//
+		self::setScreen();
+		self::setRoot($root);
+		//
+	
+		// call the connector and run it
+		self::consoleConnector();
+		Connector::run(true); 
+		//
+		self::ini();
+		//
+		self::fetcher(false);
 		//
 		return true;
 	}
@@ -177,6 +231,7 @@ class Application
 		$sub=$_SERVER["PHP_SELF"];
 		$r=explode("App.php", $sub);
 		//
+		// $host = (isset($_SERVER["HTTP_HOST"]) && ! empty()) ? "localhost"
 		return "http://".$_SERVER["HTTP_HOST"].$r[0];
 	}
 
