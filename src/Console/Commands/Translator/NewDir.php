@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Fiesta\Kernel\Console\Console;
 use Fiesta\Kernel\Process\Translator as TR;
 
-class NewDir extends Command
+class NewLanguageDirectoryCommand extends Command
 {
     protected function configure()
     {
@@ -25,12 +25,18 @@ class NewDir extends Command
     {
         $name = $input->getArgument('name');
         //
-        $result = TR::createDir($name);
+        $process = TR::createDir($name);
         //
-        if($result) $ret = Console::setMessage("The translator directory is created" , Console::ok );
-        else $ret = Console::setMessage("The translator directory is already existe" , Console::err );
+        $msg = self::message($process);
         //
-        $output->writeln($ret);
+        $output->writeln($msg);
         
+    }
+
+    protected static function message($process)
+    {
+        if($process) return Console::setMessage("The translator directory is created" , Console::ok );
+        //
+        else return Console::setMessage("The translator directory is already existe" , Console::err );
     }
 }
