@@ -22,9 +22,11 @@ class Connector
 	/**
 	 * Run the Connector class
 	 */
-	public static function run()
+	public static function run($console = false)
 	{
-		Connector::ini();
+		if( ! $console) Connector::ini();
+		else Connector::iniConsole();
+		//**/
 		Connector::loggin();
 
 		// Config
@@ -64,6 +66,8 @@ class Connector
 		Connector::scoop();
 		Connector::intro();
 		Connector::plugins();
+		Connector::console();
+		Connector::process();
 	}
 
 	/**
@@ -73,6 +77,17 @@ class Connector
 	{
 		self::$path = $test ? "src/" : Application::$root."vendor/fiesta/kernel/src/";
 		return self::$path;
+	}
+
+	/**
+	 * Init Connector class
+	 */
+	public static function iniConsole()
+	{
+		// self::$path = $test ? "src/" : Application::$root."vendor/fiesta/kernel/src/";
+		self::$path = "vendor/fiesta/kernel/src/";
+		return self::$path;
+
 	}
 
 	/**
@@ -534,6 +549,43 @@ class Connector
 	}
 
 	/**
+	 * console call
+	 */
+	public static function console()
+	{
+		self::need(self::$path.'Console/Console.php');
+		//
+		//
+		self::need(self::$path.'Console/Commands/Translator/NewDir.php');
+		self::need(self::$path.'Console/Commands/Translator/NewFile.php');
+		//
+		self::need(self::$path.'Console/Commands/Schema/NewFile.php');
+		self::need(self::$path.'Console/Commands/Schema/Exec.php');
+		self::need(self::$path.'Console/Commands/Schema/RollbackSchemaCommand.php');
+		//
+		self::need(self::$path.'Console/Commands/Links/NewLinkFileCommand.php');
+		//
+		self::need(self::$path.'Console/Commands/Models/NewModelCommand.php');
+		//
+		self::need(self::$path.'Console/Commands/Views/NewViewCommand.php');
+		//
+		self::need(self::$path.'Console/Commands/Info.php');
+	}
+
+	/**
+	 * process call
+	 */
+	public static function process()
+	{
+		self::need(self::$path.'Processes/Process.php');
+		self::need(self::$path.'Processes/Translator.php');
+		self::need(self::$path.'Processes/Schema.php');
+		self::need(self::$path.'Processes/Links.php');
+		self::need(self::$path.'Processes/Model.php');
+		self::need(self::$path.'Processes/View.php');
+	}
+
+	/**
 	 * Run connector for test
 	 */
 	public static function runTest()
@@ -580,3 +632,4 @@ class Connector
 		Connector::plugins();
 	}
 }
+
