@@ -11,8 +11,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Fiesta\Kernel\Console\Console;
 use Fiesta\Kernel\Process\Translator;
 
-class NewFile extends Command
+class NewLanguageFileCommand extends Command
 {
+    /**
+     * Configure de command
+     */
     protected function configure()
     {
         $this
@@ -22,16 +25,28 @@ class NewFile extends Command
             ->addArgument( 'dirName', InputArgument::REQUIRED, 'which directory?');
     }
 
+    /**
+     * Execute de command
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $fileName = $input->getArgument('fileName');
         $dirName = $input->getArgument('dirName');
         //
-        $result = Translator::createFile($dirName,$fileName);
+        $process = Translator::createFile($dirName,$fileName);
         //
-        if($result) $ret = Console::setMessage("The translator file is created" , Console::ok );
-        else $ret = Console::setMessage("The file is already existe" , Console::err );
+        $msg = self::message($process);
         //
-        $output->writeln($ret);
+        $output->writeln($msg);
+    }
+
+    /**
+     * Format the message to show
+     */
+    protected static function message($process)
+    {
+        if($process) return Console::setMessage("The translator file is created" , Console::ok );
+        //
+        else return Console::setMessage("The translator file is already existe" , Console::err );
     }
 }
