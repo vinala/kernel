@@ -22,6 +22,8 @@ class Config
 	 */
 	protected static function getPath($param)
 	{
+		$path = (is_null(Application::$root) ? "config/$param.php" :  Application::$root."config/$param.php");
+		//
 		return Connector::need((is_null(Application::$root) ? "config/$param.php" :  Application::$root."config/$param.php"));
 	}
 
