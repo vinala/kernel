@@ -571,6 +571,9 @@ class Connector
 		//
 		self::need(self::$path.'Console/Commands/Controller/NewControllerCommand.php');
 		//
+		self::need(self::$path.'Console/Commands/Seeds/NewSeedCommand.php');
+		self::need(self::$path.'Console/Commands/Seeds/ExecSeedCommand.php');
+		//
 		self::need(self::$path.'Console/Commands/Info.php');
 		
 	}
@@ -587,6 +590,7 @@ class Connector
 		self::need(self::$path.'Processes/Model.php');
 		self::need(self::$path.'Processes/View.php');
 		self::need(self::$path.'Processes/Controller.php');
+		self::need(self::$path.'Processes/Seeds.php');
 	}
 
 	/**
