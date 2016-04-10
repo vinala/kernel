@@ -23,7 +23,7 @@ class ExecSeedCommand extends Command
     {
         $this
             ->setName('seed:exec')
-            ->setDescription('EXecute Seeder');
+            ->setDescription('Execute Seeder');
     }
 
 
