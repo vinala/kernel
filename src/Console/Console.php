@@ -11,6 +11,7 @@ use Fiesta\Kernel\Console\Command\Schema\RollbackSchemaCommand;
 use Fiesta\Kernel\Console\Command\Links\NewLinkFileCommand;
 use Fiesta\Kernel\Console\Command\Models\NewModelCommand;
 use Fiesta\Kernel\Console\Command\Views\NewViewCommand;
+use Fiesta\Kernel\Console\Command\Controller\NewControllerCommand;
 use Fiesta\Kernel\Console\Command\Info;
 
 
@@ -68,6 +69,8 @@ class Console
 		$app->add(new NewModelCommand());
 		//View
 		$app->add(new NewViewCommand());
+		//Controller
+		$app->add(new NewControllerCommand());
 		//Info
 		$app->add(new Info());
 	}
