@@ -12,6 +12,8 @@ use Fiesta\Kernel\Console\Command\Links\NewLinkFileCommand;
 use Fiesta\Kernel\Console\Command\Models\NewModelCommand;
 use Fiesta\Kernel\Console\Command\Views\NewViewCommand;
 use Fiesta\Kernel\Console\Command\Controller\NewControllerCommand;
+use Fiesta\Kernel\Console\Command\Seed\NewSeedCommand;
+use Fiesta\Kernel\Console\Command\Seed\ExecSeedCommand;
 use Fiesta\Kernel\Console\Command\Info;
 
 
@@ -71,7 +73,11 @@ class Console
 		$app->add(new NewViewCommand());
 		//Controller
 		$app->add(new NewControllerCommand());
+		//Seeds
+		$app->add(new NewSeedCommand());
+		$app->add(new ExecSeedCommand());
 		//Info
 		$app->add(new Info());
 	}
 }
+
