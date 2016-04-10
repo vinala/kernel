@@ -19,12 +19,12 @@ class Seeder
 			$tabs->clear();
 		}
 		//
-		$tab->run();
+		return $tab->run();
 	}
 
 	public static function ini()
 	{
-		\SeedsCaller::run();
+		return \SeedsCaller::run();
 	}
 
 }
