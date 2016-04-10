@@ -76,6 +76,8 @@ class AllCommand extends Command
         $process .=Console::setMessage("seed\n" , Console::lst );
         $process .=Console::setMessage(" :new............New Seeder\n" , Console::nn );
         $process .=Console::setMessage(" :exec...........Execute Seeder\n" , Console::nn );
+        $process .=Console::setMessage("routes\n" , Console::lst );
+        $process .=Console::setMessage(" :get............Add new get route to Routes file\n" , Console::nn );
         //
         return $process;
 
