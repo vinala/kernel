@@ -9,6 +9,7 @@ use Fiesta\Kernel\HyperText\Res;
 class DBTable
 {
 	public $name="null";
+	public $reelName = null;
 	public $columns=array();
 	public $data=array();
 
@@ -21,13 +22,20 @@ class DBTable
 
 	//
 	function __construct($name) {
-		$this->name = $name;
+		$this->reelName = $name;
+		$this->name = $this->setName($name);
 		//
-		$columns=Database::read("select COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '".Config::get('database.database')."' AND TABLE_NAME = '".$name."';");
+		$columns=Database::read("select COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '".Config::get('database.database')."' AND TABLE_NAME = '".$this->name."';");
 		//
 		foreach ($columns as $key => $value) {
 			Table::push($this->columns,$value['COLUMN_NAME']);
 		}
+	}
+
+	public function setName($name)
+	{
+		if(Config::get('database.prefixing')) return Config::get('database.prefixe').$name;
+		else return $name;
 	}
 
 	public function insert($array)
