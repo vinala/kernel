@@ -14,6 +14,7 @@ use Fiesta\Kernel\Console\Command\Views\NewViewCommand;
 use Fiesta\Kernel\Console\Command\Controller\NewControllerCommand;
 use Fiesta\Kernel\Console\Command\Seed\NewSeedCommand;
 use Fiesta\Kernel\Console\Command\Seed\ExecSeedCommand;
+use Fiesta\Kernel\Console\Command\Various\AllCommand;
 use Fiesta\Kernel\Console\Command\Info;
 
 
@@ -24,14 +25,18 @@ class Console
 	const err 	= "failure";
 	const war 	= "warning";
 	const rmq 		= "note";
+	const lst 		= "list";
+	const nn 		= "nn";
+	//
+	public static $application ;
 
 	public static function run() 
 	{
-		$application = new Ap();
+		self::$application = new Ap();
 		//
-		self::addCommands($application);
+		self::addCommands(self::$application);
 		//
-		$application->run();
+		self::$application->run();
 	}
 
 	public static function color($status , $text = null) 
@@ -46,6 +51,8 @@ class Console
 			case "failure": 	$out = "[1;31m"; break;  	//Red background
 			case "warning": 	$out = "[1;33m"; break;  	//Yellow background
 			case "note": 		$out = "[1;34m"; break;  	//Blue background
+			case "list": 		$out = "[1;36m"; break;  	//cyan background
+			case "nn": 		$out = "[1;30m"; break;  		//black background
 		}
 		//
 		return chr(27) . "$out" . "$text" . chr(27) . "[0m";
@@ -78,6 +85,9 @@ class Console
 		$app->add(new ExecSeedCommand());
 		//Info
 		$app->add(new Info());
+		//All
+		$app->add(new AllCommand());
 	}
 }
+
 
