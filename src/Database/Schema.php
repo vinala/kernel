@@ -249,9 +249,10 @@ class Schema
 
 	public static function table($name)
 	{
-		$name=self::tableName($name);
+		// $name=self::tableName($name);
 		//
 		$h=new DBTable($name);
+		//
 		return $h;
 	}
 
