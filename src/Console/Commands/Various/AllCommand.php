@@ -56,28 +56,28 @@ class AllCommand extends Command
     {
         $process = "\n";
         //
-        $process .=Console::setMessage("fiesta\n" , Console::lst );
-        $process .=Console::setMessage(" :info:owner.....Get info about the framework\n" , Console::nn );
+        $process .=Console::setMessage(" info............Get info about the framework\n" , Console::nn );
+        $process .=Console::setMessage(" all.............All Fiesta commands\n" , Console::nn );
         $process .=Console::setMessage("schema\n" , Console::lst );
-        $process .=Console::setMessage(" :new............make new schema file\n" , Console::nn );
+        $process .=Console::setMessage(" :new............make new schema file...............|".Console::setCyan("  <name>\n") , Console::nn );
         $process .=Console::setMessage(" :exec...........Execute the last schema created\n" , Console::nn );
         $process .=Console::setMessage(" :rollback.......Rollback the last schema created\n" , Console::nn );
         $process .=Console::setMessage("lang\n" , Console::lst );
-        $process .=Console::setMessage(" :new:dir........make new translator directory\n" , Console::nn );
-        $process .=Console::setMessage(" :new:file.......make new translator file\n" , Console::nn );
+        $process .=Console::setMessage(" :new:dir........make new translator directory......|".Console::setCyan("  <name>\n") , Console::nn );
+        $process .=Console::setMessage(" :new:file.......make new translator file...........|".Console::setCyan("  <fileName> <dirName>\n") , Console::nn );
         $process .=Console::setMessage("link\n" , Console::lst );
-        $process .=Console::setMessage(" :new............New file for links\n" , Console::nn );
+        $process .=Console::setMessage(" :new............New file for links.................|".Console::setCyan("  <fileName>\n") , Console::nn );
         $process .=Console::setMessage("model\n" , Console::lst );
-        $process .=Console::setMessage(" :new............New model\n" , Console::nn );
+        $process .=Console::setMessage(" :new............New model..........................|".Console::setCyan("  <fileName> <className> <tableName>\n") , Console::nn );
         $process .=Console::setMessage("view\n" , Console::lst );
-        $process .=Console::setMessage(" :new............New View\n" , Console::nn );
+        $process .=Console::setMessage(" :new............New View...........................|".Console::setCyan("  <fileName>  --smarty\n") , Console::nn );
         $process .=Console::setMessage("controller\n" , Console::lst );
-        $process .=Console::setMessage(" :new............New Controller\n" , Console::nn );
+        $process .=Console::setMessage(" :new............New Controller.....................|".Console::setCyan("  <fileName> <className>  --addRoute\n") , Console::nn );
         $process .=Console::setMessage("seed\n" , Console::lst );
-        $process .=Console::setMessage(" :new............New Seeder\n" , Console::nn );
+        $process .=Console::setMessage(" :new............New Seeder.........................|".Console::setCyan("  <name> <tableName>\n") , Console::nn );
         $process .=Console::setMessage(" :exec...........Execute Seeder\n" , Console::nn );
         $process .=Console::setMessage("routes\n" , Console::lst );
-        $process .=Console::setMessage(" :get............Add new get route to Routes file\n" , Console::nn );
+        $process .=Console::setMessage(" :get............Add new get route to Routes file...|".Console::setCyan("  <route>\n") , Console::nn );
         //
         return $process;
 
