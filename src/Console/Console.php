@@ -91,6 +91,11 @@ class Console
 		//All
 		$app->add(new AllCommand());
 	}
+
+	public static function setCyan($text)
+	{
+		return chr(27) . "[1;36m" . "$text" . chr(27) . "[0m";
+	}
 }
 
 
