@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Objects;
+namespace Pikia\Kernel\Objects;
 
 /**
 * System Class

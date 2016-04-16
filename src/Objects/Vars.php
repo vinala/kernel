@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Objects;
+namespace Pikia\Kernel\Objects;
 
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Foundation\Application;
 /**
 * Vars class
 */

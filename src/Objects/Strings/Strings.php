@@ -1,9 +1,9 @@
 <?php
 
-namespace Fiesta\Kernel\Objects;
+namespace Pikia\Kernel\Objects;
 
-use Fiesta\Kernel\Objects\Strings\Exception\StringOutIndexException;
-use Fiesta\Kernel\Objects\Table;
+use Pikia\Kernel\Objects\Strings\Exception\StringOutIndexException;
+use Pikia\Kernel\Objects\Table;
 
 /**
 * String Trim Consts

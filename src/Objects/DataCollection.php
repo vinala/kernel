@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Objects;
+namespace Pikia\Kernel\Objects;
 
-use Fiesta\Kernel\Config\Config;	
+use Pikia\Kernel\Config\Config;	
 
 /**
 * 	Data array
