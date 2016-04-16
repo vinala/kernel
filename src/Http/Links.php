@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Http;
+namespace Pikia\Kernel\Http;
 
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Links class

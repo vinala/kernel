@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Http;
+namespace Pikia\Kernel\Http;
 
 /**
 * HTTP Class

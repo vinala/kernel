@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Http;
+namespace Pikia\Kernel\Http;
 
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\Config\Config;
 
 /**
 * erreur class
