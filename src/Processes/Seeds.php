@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Process;
+namespace Pikia\Kernel\Process;
 
-use Fiesta\Kernel\Database\Seeder;
+use Pikia\Kernel\Database\Seeder;
 
 /**
 * Seeds class
@@ -35,7 +35,7 @@ class Seeds
 
 	public static function set($nom,$table)
 	{
-		$txt = "<?php\n\nuse Fiesta\Kernel\Database\Seeder;\n\n";
+		$txt = "<?php\n\nuse Pikia\Kernel\Database\Seeder;\n\n";
 		$txt.="/**\n* class de seeder $nom\n*/\n\nclass $nom extends Seeder\n{\n";
 
 		//datatable name

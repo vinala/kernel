@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Process;
+namespace Pikia\Kernel\Process;
 
-use Fiesta\Kernel\Process\Process;
+use Pikia\Kernel\Process\Process;
 
 /**
 * Model class
@@ -33,7 +33,7 @@ class Model
 
 	public static function set($class , $table)
 	{
-		$txt = "<?php\n\nuse Fiesta\Kernel\MVC\Model\Model;\n\n";
+		$txt = "<?php\n\nuse Pikia\Kernel\MVC\Model\Model;\n\n";
 		$txt.="class $class extends Model\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\tprotected static ".'$foreignKeys=array();'."\n\n}";
 		//
 		return $txt;

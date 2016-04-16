@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Process;
+namespace Pikia\Kernel\Process;
 
-use Fiesta\Kernel\Process\Process;
+use Pikia\Kernel\Process\Process;
 
 /**
 * Controller class
@@ -31,7 +31,7 @@ class Controller
 
 	public static function set($class)
 	{
-		$txt = "<?php\n\n use Fiesta\Kernel\MVC\Controller\Controller;\n\n";
+		$txt = "<?php\n\n use Pikia\Kernel\MVC\Controller\Controller;\n\n";
 		$txt.="/**\n* class de controller $class\n*/\n\nclass $class extends Controller\n{\n\t";
 
 		//view

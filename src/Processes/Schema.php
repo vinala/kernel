@@ -1,12 +1,12 @@
 <?php
 
-namespace Fiesta\Kernel\Process;
+namespace Pikia\Kernel\Process;
 
-use Fiesta\Kernel\Process\Process;
-use Fiesta\Kernel\Database\Migration;
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Database\Schema;
-use Fiesta\Kernel\Database\Database;
+use Pikia\Kernel\Process\Process;
+use Pikia\Kernel\Database\Migration;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Database\Schema;
+use Pikia\Kernel\Database\Database;
 use Exception;
 
 /**
