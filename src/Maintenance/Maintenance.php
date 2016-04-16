@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Kernel\Maintenance;
+namespace Pikia\Kernel\Maintenance;
 
-use Fiesta\Kernel\MVC\View\View;
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\MVC\View\View;
+use Pikia\Kernel\Config\Config;
 
 /**
 * Maintenance class

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Log;
+namespace Pikia\Kernel\Log;
 
 use Whoops\Handler\PrettyPageHandler;
 
