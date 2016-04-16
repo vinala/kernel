@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Access;
+namespace Pikia\Kernel\Access;
 
-use Fiesta\Kernel\Filesystem\Filesystem;
+use Pikia\Kernel\Filesystem\Filesystem;
 
 /**
 * System Class
