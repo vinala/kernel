@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Resources;
+namespace Pikia\Kernel\Resources;
 
 use Faker\Factory;
 

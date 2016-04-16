@@ -1,8 +1,8 @@
 <?php
 
-namespace Fiesta\Kernel\Resources;
+namespace Pikia\Kernel\Resources;
 
-use Fiesta\Kernel\Access\Path;
+use Pikia\Kernel\Access\Path;
 
 /**
 *
