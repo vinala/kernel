@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Logging;
+namespace Pikia\Kernel\Logging;
 
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\Config\Config;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Handler\PlainTextHandler;

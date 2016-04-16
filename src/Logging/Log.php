@@ -1,15 +1,15 @@
 <?php 
 
-namespace Fiesta\Kernel\Logging;
+namespace Pikia\Kernel\Logging;
 
 
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\Config\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Fiesta\Kernel\Objects\DateTime;
-use Fiesta\Kernel\Objects\DateTime as Time;
-use Fiesta\Kernel\Objects\Strings;
-use Fiesta\Kernel\Objects\Table;
+use Pikia\Kernel\Objects\DateTime;
+use Pikia\Kernel\Objects\DateTime as Time;
+use Pikia\Kernel\Objects\Strings;
+use Pikia\Kernel\Objects\Table;
 
 /**
 * 
