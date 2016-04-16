@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Kernel\Access;
+namespace Pikia\Kernel\Access;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Url class
