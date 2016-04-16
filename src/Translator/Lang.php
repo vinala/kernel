@@ -1,14 +1,14 @@
 <?php 
 
-namespace Fiesta\Kernel\Translator;
+namespace Pikia\Kernel\Translator;
 
-use Fiesta\Kernel\Translator\Exception\LanguageKeyNotFoundException;
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Storage\Cookie;
-use Fiesta\Kernel\HyperText\Res;
-use Fiesta\Kernel\Objects\Base;
-use Fiesta\Kernel\Filesystem\Filesystem;
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Translator\Exception\LanguageKeyNotFoundException;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Storage\Cookie;
+use Pikia\Kernel\HyperText\Res;
+use Pikia\Kernel\Objects\Base;
+use Pikia\Kernel\Filesystem\Filesystem;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Language class
@@ -40,7 +40,7 @@ class Lang
 	public static function set($lang)
 	{
 		Cookie::create(self::getName(),$lang,(60*24*7*30));
-		Res::stsession("Fiesta_lang",$lang);
+		Res::stsession("Pikia_lang",$lang);
 	}
 
 	private static function put()
@@ -57,26 +57,26 @@ class Lang
 	public static function detect()
 	{
 
-		if(isset($_SESSION["Fiesta_lang"]) && !empty($_SESSION["Fiesta_lang"]))
+		if(isset($_SESSION["Pikia_lang"]) && !empty($_SESSION["Pikia_lang"]))
 		{
-			if (in_array($_SESSION["Fiesta_lang"], self::$supportedLangs)) 
+			if (in_array($_SESSION["Pikia_lang"], self::$supportedLangs)) 
 			{
 
 			    if(Base::full(self::getCookie())) 
 			    {
-			    	if(self::getCookie() != $_SESSION["Fiesta_lang"])
+			    	if(self::getCookie() != $_SESSION["Pikia_lang"])
 			    	{
-			    		Cookie::create(self::getName(),$_SESSION["Fiesta_lang"],(60*24*7));
+			    		Cookie::create(self::getName(),$_SESSION["Pikia_lang"],(60*24*7));
 			    	}
 			    }
 			    else  
 			    {
-			    	Cookie::create(self::getName(),$_SESSION["Fiesta_lang"],(60*24*7));
+			    	Cookie::create(self::getName(),$_SESSION["Pikia_lang"],(60*24*7));
 			    }
 			}
 			else 
 			{			
-				Res::stsession("Fiesta_lang",Config::get('lang.default'));
+				Res::stsession("Pikia_lang",Config::get('lang.default'));
 				if(Base::full(self::getCookie())) 
 			    	if(self::getCookie() != Config::get('lang.default'))
 			    	{
@@ -88,20 +88,20 @@ class Lang
 		{
 			if(in_array(self::getCookie(), self::$supportedLangs))
 			{
-				Res::stsession("Fiesta_lang",self::getCookie());
+				Res::stsession("Pikia_lang",self::getCookie());
 			}
 			else
 			{
 				Cookie::create(self::getName(),Config::get('lang.default'),(60*24*7));
-				Res::stsession("Fiesta_lang",Config::get('lang.default'));
+				Res::stsession("Pikia_lang",Config::get('lang.default'));
 			}
 		}
 		else 
 		{
-			Res::stsession("Fiesta_lang",Config::get('lang.default'));
+			Res::stsession("Pikia_lang",Config::get('lang.default'));
 		}
 		//
-		return Res::session("Fiesta_lang");
+		return Res::session("Pikia_lang");
 	}
 
 	private static function hash($value)
@@ -135,7 +135,7 @@ class Lang
 	public static function setDefault()
 	{
 		Cookie::create(self::getName(),Config::get('lang.default'),(60*24*7));
-		Res::stsession("Fiesta_lang",Config::get('lang.default'));
+		Res::stsession("Pikia_lang",Config::get('lang.default'));
 	}
 	
 }

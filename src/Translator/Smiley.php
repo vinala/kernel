@@ -1,10 +1,10 @@
 <?php 
 
-namespace Fiesta\Kernel\Translator;
+namespace Pikia\Kernel\Translator;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Objects\Table;
-use Fiesta\Kernel\Access\Path;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Objects\Table;
+use Pikia\Kernel\Access\Path;
 
 
 /**
