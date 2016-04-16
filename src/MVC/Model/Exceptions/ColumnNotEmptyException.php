@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\MVC\Model\Exception;
+namespace Pikia\Kernel\MVC\Model\Exception;
 
 /**
 * Directory not fount exception

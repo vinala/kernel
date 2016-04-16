@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\MVC\Model;
+namespace Pikia\Kernel\MVC\Model;
 
-use Fiesta\Kernel\Objects\Table;
+use Pikia\Kernel\Objects\Table;
 
 /**
 * Model array Class
