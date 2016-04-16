@@ -2,12 +2,12 @@
 
 /**
  * Scope function to make easy for users to 
- * access to somefrmaework functions
+ * access to some frmaework functions
  */
 
-use Fiesta\Kernel\MVC\View\View;
-use Fiesta\Kernel\Router\Route;
-use Fiesta\Kernel\Objects\DateTime;
+use Pikia\Kernel\MVC\View\View;
+use Pikia\Kernel\Router\Route;
+use Pikia\Kernel\Objects\DateTime;
 
 /**
  * Views
