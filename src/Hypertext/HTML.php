@@ -1,8 +1,8 @@
 <?php
 
-namespace Fiesta\Kernel\HyperText;
+namespace Pikia\Kernel\HyperText;
 
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\Config\Config;
 
 /**
 * HTML class

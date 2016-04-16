@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\HyperText;
+namespace Pikia\Kernel\HyperText;
 
 /**
 * Input type
