@@ -1,8 +1,8 @@
 <?php
 
-namespace Fiesta\Kernel\Storage;
+namespace Pikia\Kernel\Storage;
 
-use Fiesta\Kernel\Security\Hash;
+use Pikia\Kernel\Security\Hash;
 
 /**
 * Session class

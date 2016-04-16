@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Kernel\Storage;
+namespace Pikia\Kernel\Storage;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Objects\Sys;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Objects\Sys;
 use Whoops\Exception\ErrorException;
 /**
 * Storage class

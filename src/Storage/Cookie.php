@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Storage;
+namespace Pikia\Kernel\Storage;
 
 /**
 * cookies
