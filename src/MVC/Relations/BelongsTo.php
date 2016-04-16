@@ -1,10 +1,10 @@
 <?php 
 
-namespace Fiesta\Kernel\MVC\Relations;
+namespace Pikia\Kernel\MVC\Relations;
 
-use Fiesta\Kernel\Objects\Table;
-use Fiesta\Kernel\Objects\Strings;
-use Fiesta\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
+use Pikia\Kernel\Objects\Table;
+use Pikia\Kernel\Objects\Strings;
+use Pikia\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
 
 define('OneToOneRelation', 'one');
 define('OneToManyRelation', 'many');

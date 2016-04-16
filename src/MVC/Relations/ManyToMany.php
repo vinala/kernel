@@ -1,11 +1,11 @@
 <?php 
 
-namespace Fiesta\Kernel\MVC\Relations;
+namespace Pikia\Kernel\MVC\Relations;
 
-use Fiesta\Kernel\Objects\Table;
-use Fiesta\Kernel\Objects\Strings;
-use Fiesta\Kernel\MVC\Relations\Exception\ManyRelationException;
-use Fiesta\Kernel\MVC\Relations\Exception\ModelNotFindedException;
+use Pikia\Kernel\Objects\Table;
+use Pikia\Kernel\Objects\Strings;
+use Pikia\Kernel\MVC\Relations\Exception\ManyRelationException;
+use Pikia\Kernel\MVC\Relations\Exception\ModelNotFindedException;
 
 /**
 * Many to many relation
