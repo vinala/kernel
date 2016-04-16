@@ -1,10 +1,10 @@
 <?php 
 
-namespace Fiesta\Kernel\Caches;
+namespace Pikia\Kernel\Caches;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Filesystem\Filesystem;
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Filesystem\Filesystem;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * FileCache class

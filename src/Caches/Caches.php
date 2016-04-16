@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Kernel\Caches;
+namespace Pikia\Kernel\Caches;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Caches\Exception\DriverNotFoundException;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Caches\Exception\DriverNotFoundException;
 
 /**
 * Cache class

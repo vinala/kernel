@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Caches;
+namespace Pikia\Kernel\Caches;
 
 /**
 * Cache class

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Caches\Exception;
+namespace Pikia\Kernel\Caches\Exception;
 
 /**
 * Directory not fount exception
