@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Router;
+namespace Pikia\Kernel\Router;
 
 /**
 * Route class

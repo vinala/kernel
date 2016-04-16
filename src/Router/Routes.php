@@ -1,22 +1,22 @@
 <?php 
 
-namespace Fiesta\Kernel\Router;
+namespace Pikia\Kernel\Router;
 
-use Fiesta\Kernel\HyperText\Res;
-use Fiesta\Kernel\Maintenance\Maintenance;
-use Fiesta\Kernel\Objects\Table;
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Router\Exception\NotFoundHttpException;
-use Fiesta\Kernel\Http\Errors;
-use Fiesta\Kernel\Foundation\Application;
-use Fiesta\Kernel\Access\Url;
-use Fiesta\Vendor\Panel\Seeds;
-use Fiesta\Vendor\Panel\Migrations;
-use Fiesta\Vendor\Panel\Controller;
-use Fiesta\Vendor\Panel\Lang;
-use Fiesta\Vendor\Panel\Link;
-use Fiesta\Vendor\Panel\Model;
-use Fiesta\Kernel\Objects\Strings;
+use Pikia\Kernel\HyperText\Res;
+use Pikia\Kernel\Maintenance\Maintenance;
+use Pikia\Kernel\Objects\Table;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Router\Exception\NotFoundHttpException;
+use Pikia\Kernel\Http\Errors;
+use Pikia\Kernel\Foundation\Application;
+use Pikia\Kernel\Access\Url;
+use Pikia\Vendor\Panel\Seeds;
+use Pikia\Vendor\Panel\Migrations;
+use Pikia\Vendor\Panel\Controller;
+use Pikia\Vendor\Panel\Lang;
+use Pikia\Vendor\Panel\Link;
+use Pikia\Vendor\Panel\Model;
+use Pikia\Kernel\Objects\Strings;
 
 
 /**
