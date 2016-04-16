@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Security;
+namespace Pikia\Kernel\Security;
 
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\Config\Config;
 
 /**
 * licence class

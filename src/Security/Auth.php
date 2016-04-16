@@ -1,12 +1,12 @@
 <?php 
 
-namespace Fiesta\Kernel\Security;
+namespace Pikia\Kernel\Security;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Objects\Table;
-use Fiesta\Kernel\Database\Database;
-use Fiesta\Kernel\Storage\Session;
-use Fiesta\Kernel\Storage\Cookie;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Objects\Table;
+use Pikia\Kernel\Database\Database;
+use Pikia\Kernel\Storage\Session;
+use Pikia\Kernel\Storage\Cookie;
 
 /**
 * Authentification class

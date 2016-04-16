@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Security;
+namespace Pikia\Kernel\Security;
 
 /**
 * Security class
