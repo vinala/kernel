@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\MVC\Controller;
+namespace Pikia\Kernel\MVC\Controller;
 
 /**
 * Controller class

@@ -1,6 +1,6 @@
 <?php
 
-namespace Fiesta\Kernel\MVC\View;
+namespace Pikia\Kernel\MVC\View;
 
 /**
 * View mother class
