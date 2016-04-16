@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Kernel\Testing;
+namespace Pikia\Kernel\Testing;
 
 use PHPUnit_Framework_TestCase;
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Foundation\Application;
 
 
 /**
@@ -23,7 +23,7 @@ class TestCase
 	}
 
 	/**
-	 * Call the Fiesta Framework
+	 * Call the Pikia Framework
 	 */
 	public static function call()
 	{
