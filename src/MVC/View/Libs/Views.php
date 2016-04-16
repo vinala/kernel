@@ -1,10 +1,10 @@
 <?php
 
-namespace Fiesta\Kernel\MVC\View;
+namespace Pikia\Kernel\MVC\View;
 
-use Fiesta\Kernel\MVC\View\Exception\ViewNotFoundException;
-use Fiesta\Kernel\Foundation\Application;
-use Fiesta\Kernel\Plugins\Plugins;
+use Pikia\Kernel\MVC\View\Exception\ViewNotFoundException;
+use Pikia\Kernel\Foundation\Application;
+use Pikia\Kernel\Plugins\Plugins;
 
 /**
 * View mother class

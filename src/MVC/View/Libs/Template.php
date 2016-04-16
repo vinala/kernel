@@ -1,9 +1,9 @@
 <?php
 
-namespace Fiesta\Kernel\MVC\View;
+namespace Pikia\Kernel\MVC\View;
 
 use Smarty;
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Foundation\Application;
 
 
 
