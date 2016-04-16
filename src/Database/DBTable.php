@@ -1,10 +1,10 @@
 <?php 
 
-namespace Fiesta\Kernel\Database;
+namespace Pikia\Kernel\Database;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Objects\Table;
-use Fiesta\Kernel\HyperText\Res;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Objects\Table;
+use Pikia\Kernel\HyperText\Res;
 
 class DBTable
 {

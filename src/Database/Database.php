@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Kernel\Database;
+namespace Pikia\Kernel\Database;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Database\Drivers\MysqlDatabase;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Database\Drivers\MysqlDatabase;
 
 /**
 * Database Class

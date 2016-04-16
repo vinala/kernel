@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Database;
+namespace Pikia\Kernel\Database;
 
 /**
 * Seeder class

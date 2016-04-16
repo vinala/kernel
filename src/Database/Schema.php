@@ -1,8 +1,8 @@
 <?php
 
-namespace Fiesta\Kernel\Database;
+namespace Pikia\Kernel\Database;
 
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\Config\Config;
 
 
 /**

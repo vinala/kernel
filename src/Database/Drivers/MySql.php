@@ -1,11 +1,11 @@
 <?php 
 
-namespace Fiesta\Kernel\Database\Drivers;
+namespace Pikia\Kernel\Database\Drivers;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Database\Database;
-use Fiesta\Kernel\Database\Exception\DatabaseArgumentsException;
-use Fiesta\Kernel\Database\Exception\DatabaseConnectionException;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Database\Database;
+use Pikia\Kernel\Database\Exception\DatabaseArgumentsException;
+use Pikia\Kernel\Database\Exception\DatabaseConnectionException;
 
 
 /**

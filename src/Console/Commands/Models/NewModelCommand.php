@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Console\Command\Models;
+namespace Pikia\Kernel\Console\Command\Models;
 
 
 use Symfony\Component\Console\Command\Command;
@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Fiesta\Kernel\Console\Console;
-use Fiesta\Kernel\Process\Model;
+use Pikia\Kernel\Console\Console;
+use Pikia\Kernel\Process\Model;
 
 class NewModelCommand extends Command
 {
