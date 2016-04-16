@@ -1,7 +1,7 @@
 <?php
 
-use Fiesta\Kernel\Foundation\Application;
-use Fiesta\Kernel\MVC\View\View;
+use Pikia\Kernel\Foundation\Application;
+use Pikia\Kernel\MVC\View\View;
 
 /**
 * class de controller helloController
@@ -37,7 +37,7 @@ class Intro
 			'owner_name' => "\n\t|  Your name", 
 			'project_url' => "\n\t|  Your website root link, you should put your \n\t| root link , by default we using Application::root \n\t| function to get the root link even if you \n\t| working on localhost", 
 			'html_title' => "\n\t|  Default HTML title",
-			'timezone' => "\n\t|  Here you should set your timezone after that \n\t| whenever you wanna get time, Fiesta will give\n\t| you exact time for the timezone.\n\t| To get all of timezones supported in php \n\t| visite here : http://php.net/manual/en/timezones.php",
+			'timezone' => "\n\t|  Here you should set your timezone after that \n\t| whenever you wanna get time, Pikia will give\n\t| you exact time for the timezone.\n\t| To get all of timezones supported in php \n\t| visite here : http://php.net/manual/en/timezones.php",
 			'routing_inexists' => "\n\t|  When HttpNotFoundException trown if unrouted \n\t| parameter was true it will be show to \n\t| exception else the framework will redirect\n\t| user to Error::r_404 route,",
 			'character_set' => "\n\t|  Default encodage when you using HTML::charset"
 			);
@@ -74,12 +74,12 @@ class Intro
 		$project_name = self::appRow("project_name","'project'=>'fiesta',");
 		$owner_name = self::appRow("owner_name","'owner'=>'".$name."',");
 		$project_url = self::appRow("project_url","'url'=>Application::root(),");
-		$html_title = self::appRow("html_title","'title'=> 'Fiesta PHP Framework',");
+		$html_title = self::appRow("html_title","'title'=> 'Pikia PHP Framework',");
 		$timezone = self::appRow("timezone","'timezone'=> 'UTC',");
 		$routing_inexists = self::appRow("routing_inexists","'unrouted'=> true,");
 		$character_set = self::appRow("character_set","'charset'=> 'utf-8', ");
 		//
-		return "<?php \nuse Fiesta\Kernel\Foundation\Application;\n\nreturn array(\n\t".$project_name.$owner_name.$project_url.$html_title.$timezone.$routing_inexists.$character_set."\n);";
+		return "<?php \nuse Pikia\Kernel\Foundation\Application;\n\nreturn array(\n\t".$project_name.$owner_name.$project_url.$html_title.$timezone.$routing_inexists.$character_set."\n);";
 	}
 
 	protected static function langDoc($index)
@@ -127,7 +127,7 @@ class Intro
 		$doc = array(
 			'debug' => "\n\t|  Here to make the framework shows errors and\n\t|  exceptions, false to show friendly messages\n\t|  and true to debug", 
 			'error_debug_message' => "\n\t|  If loggin.debug was false the framework will\n\t|  show this message",
-			'error_log' => "\n\t|  The path of log file where Fiesta store errors\n\t|  by default the framework use this path \n\t|  'app/storage/logs/fiesta.log'",
+			'error_log' => "\n\t|  The path of log file where Pikia store errors\n\t|  by default the framework use this path \n\t|  'app/storage/logs/fiesta.log'",
 			'background' => "\n\t|  The color background of simple page error"
 			);
 		//
@@ -209,7 +209,7 @@ class Intro
 		$background = self::MaintRow("background","'bg' => '#d6003e',");
 		$out = self::MaintRow("out","'outRoutes' => array(\n\t\tConfig::get('panel.route'),\n\t),");
 		//
-		return "<?php \nuse Fiesta\Kernel\Config\Config;\n\nreturn array(\n\t".$activate.$Message.$background.$out."\n);";
+		return "<?php \nuse Pikia\Kernel\Config\Config;\n\nreturn array(\n\t".$activate.$Message.$background.$out."\n);";
 	}
 
 	/**
@@ -309,10 +309,10 @@ class Intro
 	{
 		$doc = array(
 			'default' => "\n\t|  Default used database driver",
-			'connections' => "\n\t|  All drivers that Fiesta Work with",
+			'connections' => "\n\t|  All drivers that Pikia Work with",
 			'table' => "\n\t|  Database used to store migrations info",
-			'prefixing' => "\n\t|  If true, Fiesta will add prefixe for all \n\t|  Database tables created by the framework",
-			'prefixe' => "\n\t|  This string will be add to all tables names\n\t|  created by Fiesta if prefixing parameter was true",
+			'prefixing' => "\n\t|  If true, Pikia will add prefixe for all \n\t|  Database tables created by the framework",
+			'prefixe' => "\n\t|  This string will be add to all tables names\n\t|  created by Pikia if prefixing parameter was true",
 			);
 		//
 		return $doc[$index]."\n\t*/";
