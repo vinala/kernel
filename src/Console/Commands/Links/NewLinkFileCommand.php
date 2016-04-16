@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Console\Command\Links;
+namespace Pikia\Kernel\Console\Command\Links;
 
 
 use Symfony\Component\Console\Command\Command;
@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Fiesta\Kernel\Console\Console;
-use Fiesta\Kernel\Process\Links;
+use Pikia\Kernel\Console\Console;
+use Pikia\Kernel\Process\Links;
 
 class NewLinkFileCommand extends Command
 {

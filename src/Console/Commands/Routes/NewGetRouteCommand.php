@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Console\Command\Routes;
+namespace Pikia\Kernel\Console\Command\Routes;
 
 
 use Symfony\Component\Console\Command\Command;
@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Fiesta\Kernel\Console\Console;
-use Fiesta\Kernel\Process\Router;
+use Pikia\Kernel\Console\Console;
+use Pikia\Kernel\Process\Router;
 
 class NewGetRouteCommand extends Command
 {

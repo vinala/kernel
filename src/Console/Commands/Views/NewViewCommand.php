@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Console\Command\Views;
+namespace Pikia\Kernel\Console\Command\Views;
 
 
 use Symfony\Component\Console\Command\Command;
@@ -8,8 +8,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Fiesta\Kernel\Console\Console;
-use Fiesta\Kernel\Process\View;
+use Pikia\Kernel\Console\Console;
+use Pikia\Kernel\Process\View;
 
 
 
