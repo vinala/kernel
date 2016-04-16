@@ -1,13 +1,13 @@
 <?php 
 
-namespace Fiesta\Kernel\Plugins;
+namespace Pikia\Kernel\Plugins;
 
-use Fiesta\Kernel\Foundation\Application;
-use Fiesta\Kernel\Filesystem\Filesystem;
-use Fiesta\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
-use Fiesta\Kernel\Plugins\Exception\InfoStructureException;
-use Fiesta\Kernel\Objects\Strings;
-use Fiesta\Kernel\Config\Alias;
+use Pikia\Kernel\Foundation\Application;
+use Pikia\Kernel\Filesystem\Filesystem;
+use Pikia\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
+use Pikia\Kernel\Plugins\Exception\InfoStructureException;
+use Pikia\Kernel\Objects\Strings;
+use Pikia\Kernel\Config\Alias;
 
 /**
 * 
