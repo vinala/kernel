@@ -21,7 +21,7 @@ class AllCommand extends Command
     {
         $this
             ->setName('all')
-            ->setDescription('All Fiesta commands');
+            ->setDescription('All Pikia commands');
     }
 
 
@@ -57,7 +57,7 @@ class AllCommand extends Command
         $process = "\n";
         //
         $process .=Console::setMessage(" info............Get info about the framework\n" , Console::nn );
-        $process .=Console::setMessage(" all.............All Fiesta commands\n" , Console::nn );
+        $process .=Console::setMessage(" all.............All Pikia commands\n" , Console::nn );
         $process .=Console::setMessage("schema\n" , Console::lst );
         $process .=Console::setMessage(" :new............make new schema file...............|".Console::setCyan("  <name>\n") , Console::nn );
         $process .=Console::setMessage(" :exec...........Execute the last schema created\n" , Console::nn );
