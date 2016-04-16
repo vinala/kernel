@@ -1,6 +1,6 @@
 <?php 
 
-namespace Fiesta\Kernel\Config;
+namespace Pikia\Kernel\Config;
 
 /**
 * Alias Class for "lazy"
@@ -39,7 +39,7 @@ class Alias
 		return 
 			array
 			(
-				'Connector' => \Fiesta\Kernel\Foundation\Connector::class,
+				'Connector' => \Pikia\Kernel\Foundation\Connector::class,
 			);
 	}
 }

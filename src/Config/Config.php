@@ -1,10 +1,10 @@
 <?php
 
-namespace Fiesta\Kernel\Config;
+namespace Pikia\Kernel\Config;
 
-use Fiesta\Kernel\Foundation\Application;
-use Fiesta\Kernel\Foundation\Connector;
-use Fiesta\Kernel\Config\Exceptions\ConfigException;
+use Pikia\Kernel\Foundation\Application;
+use Pikia\Kernel\Foundation\Connector;
+use Pikia\Kernel\Config\Exceptions\ConfigException;
 
 /**
 * Config Class
