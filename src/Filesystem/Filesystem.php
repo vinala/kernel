@@ -1,9 +1,9 @@
 <?php 
 
-namespace Fiesta\Kernel\Filesystem;
+namespace Pikia\Kernel\Filesystem;
 
-use Fiesta\Kernel\Filesystem\Exception\DirectoryNotFoundException;
-use Fiesta\Kernel\Filesystem\Exception\FileNotFoundException;
+use Pikia\Kernel\Filesystem\Exception\DirectoryNotFoundException;
+use Pikia\Kernel\Filesystem\Exception\FileNotFoundException;
 
 
 /**
