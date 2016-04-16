@@ -1,12 +1,12 @@
 <?php 
 
-namespace Fiesta\Kernel\Foundation;
+namespace Pikia\Kernel\Foundation;
 
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Logging\Log;
-use Fiesta\Kernel\Logging\Handler;
-use Fiesta\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
-use Fiesta\Kernel\Foundation\Application;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Logging\Log;
+use Pikia\Kernel\Logging\Handler;
+use Pikia\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Connector class to call framework core files
@@ -84,7 +84,7 @@ class Connector
 	 */
 	public static function iniConsole()
 	{
-		// self::$path = $test ? "src/" : Application::$root."vendor/fiesta/kernel/src/";
+		// self::$path = $test ? "src/" : Application::$root."vendor/Pikia/kernel/src/";
 		self::$path = "vendor/fiesta/kernel/src/";
 		return self::$path;
 
@@ -161,7 +161,7 @@ class Connector
 	 */
 	public static function checkVendor()
 	{
-	// if( ! file_exists('../vendor/autoload.php')) die("You should install Fiesta dependencies by composer commande 'composer install' :)");
+	// if( ! file_exists('../vendor/autoload.php')) die("You should install Pikia dependencies by composer commande 'composer install' :)");
 	}
 
 	/**

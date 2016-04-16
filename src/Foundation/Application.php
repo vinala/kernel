@@ -1,28 +1,28 @@
 <?php
 
-namespace Fiesta\Kernel\Foundation;
+namespace Pikia\Kernel\Foundation;
 
-use Fiesta\Kernel\Storage\Session;
-use Fiesta\Kernel\Logging\Handler;
-use Fiesta\Kernel\Config\Alias;
-use Fiesta\Kernel\Objects\Sys;
-use Fiesta\Kernel\Access\Url;
-use Fiesta\Kernel\Access\Path;
-use Fiesta\Kernel\MVC\View\Template;
-use Fiesta\Kernel\Resources\Faker;
-use Fiesta\Kernel\Http\Links;
-use Fiesta\Kernel\Http\Errors;
-use Fiesta\Kernel\Security\License;
-use Fiesta\Kernel\Translator\Lang;
-use Fiesta\Kernel\Database\Database;
-use Fiesta\Kernel\Security\Auth;
-use Fiesta\Kernel\Router\Routes;
-use Fiesta\Kernel\Config\Config;
-use Fiesta\Kernel\Logging\Log;
-use Fiesta\Kernel\Objects\DateTime;
-use Fiesta\Vendor\Panel\Panel;
-use Fiesta\Kernel\Filesystem\Filesystem;
-use Fiesta\Kernel\Plugins\Plugins;
+use Pikia\Kernel\Storage\Session;
+use Pikia\Kernel\Logging\Handler;
+use Pikia\Kernel\Config\Alias;
+use Pikia\Kernel\Objects\Sys;
+use Pikia\Kernel\Access\Url;
+use Pikia\Kernel\Access\Path;
+use Pikia\Kernel\MVC\View\Template;
+use Pikia\Kernel\Resources\Faker;
+use Pikia\Kernel\Http\Links;
+use Pikia\Kernel\Http\Errors;
+use Pikia\Kernel\Security\License;
+use Pikia\Kernel\Translator\Lang;
+use Pikia\Kernel\Database\Database;
+use Pikia\Kernel\Security\Auth;
+use Pikia\Kernel\Router\Routes;
+use Pikia\Kernel\Config\Config;
+use Pikia\Kernel\Logging\Log;
+use Pikia\Kernel\Objects\DateTime;
+use Pikia\Vendor\Panel\Panel;
+use Pikia\Kernel\Filesystem\Filesystem;
+use Pikia\Kernel\Plugins\Plugins;
 
 
 class Application
@@ -47,13 +47,13 @@ class Application
 	public static function version()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Fiesta v3.2 ($version) PHP Framework";
+		return "Pikia v3.2 ($version) PHP Framework";
 	}
 
 	public static function consoleVersion()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Fiesta v3.2 ($version) PHP Framework";
+		return "Pikia v3.2 ($version) PHP Framework";
 	}
 
 	public static function fullVersion()
@@ -65,7 +65,7 @@ class Application
 	{
 		$kernel = "vendor/fiesta/kernel/";
 		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
-		return "Fiesta Kernel v".$version;
+		return "Pikia Kernel v".$version;
 	}
 
 	protected static function callConnector($test = false)

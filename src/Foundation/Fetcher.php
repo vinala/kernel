@@ -1,8 +1,8 @@
 <?php 
 
-namespace Fiesta\Kernel\Foundation;
+namespace Pikia\Kernel\Foundation;
 
-use Fiesta\Kernel\Router\Routes;
+use Pikia\Kernel\Router\Routes;
 
 /**
 * this class help the framework to get all
