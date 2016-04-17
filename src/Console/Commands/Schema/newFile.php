@@ -10,13 +10,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Migrations;
+use Pikia\Kernel\Config\Config;
 
 class NewSchemaCommand extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('schema:new')
+            ->setName(Config::get('console.new_schema'))
             ->setDescription('make new schema file')
             ->addArgument( 'name', InputArgument::REQUIRED, 'what\'s the name of the schema?');
     }

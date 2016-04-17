@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Translator;
+use Pikia\Kernel\Config\Config;
 
 class NewLanguageFileCommand extends Command
 {
@@ -19,7 +20,7 @@ class NewLanguageFileCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('lang:new:file')
+            ->setName(Config::get('console.file_lang'))
             ->setDescription('make new translator file')
             ->addArgument( 'fileName', InputArgument::REQUIRED, 'what\'s the name of the file?')
             ->addArgument( 'dirName', InputArgument::REQUIRED, 'which directory?');

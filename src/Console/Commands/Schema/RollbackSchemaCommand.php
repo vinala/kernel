@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Migrations;
 use Pikia\Kernel\Database\Database;
+use Pikia\Kernel\Config\Config;
 
 class RollbackSchemaCommand extends Command
 {
@@ -20,7 +21,7 @@ class RollbackSchemaCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('schema:rollback')
+            ->setName(Config::get('console.rollback_schema'))
             ->setDescription('Rollback the last schema created');
     }
 

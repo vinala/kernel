@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Router;
+use Pikia\Kernel\Config\Config;
 
 class NewGetRouteCommand extends Command
 {
@@ -19,7 +20,7 @@ class NewGetRouteCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('route:get')
+            ->setName(Config::get('console.get_routes'))
             ->setDescription('Add new get route to Routes file')
             ->addArgument( 'http', InputArgument::REQUIRED, 'what\'s the http of route?');
     }

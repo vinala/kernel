@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Seeds;
+use Pikia\Kernel\Config\Config;
 
 
 
@@ -21,7 +22,7 @@ class NewSeedCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('seed:new')
+            ->setName(Config::get('console.new_seed'))
             ->setDescription('New Seeder')
             ->addArgument( 'name', InputArgument::REQUIRED, 'what\'s the name of the seed?')
             ->addArgument( 'tableName', InputArgument::REQUIRED, 'what\'s the name of the datatable?')

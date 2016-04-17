@@ -10,13 +10,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Translator as TR;
+use Pikia\Kernel\Config\Config;
 
 class NewLanguageDirectoryCommand extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('lang:new:dir')
+            ->setName(Config::get('console.dir_lang'))
             ->setDescription('make new translator directory')
             ->addArgument('name', InputArgument::REQUIRED , 'what\'s the name of the directory?');
     }

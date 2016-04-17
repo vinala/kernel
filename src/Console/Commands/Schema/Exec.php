@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Migrations;
 use Pikia\Kernel\Database\Database;
+use Pikia\Kernel\Config\Config;
 
 class ExecSchemaCommand extends Command
 {
@@ -20,7 +21,7 @@ class ExecSchemaCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('schema:exec')
+            ->setName(Config::get('console.exec_schema'))
             ->setDescription('Execute the last schema created');
     }
 

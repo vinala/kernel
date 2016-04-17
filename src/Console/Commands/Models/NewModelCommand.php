@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Model;
+use Pikia\Kernel\Config\Config;
 
 class NewModelCommand extends Command
 {
@@ -19,7 +20,7 @@ class NewModelCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('model:new')
+            ->setName(Config::get('console.new_model'))
             ->setDescription('New model')
             ->addArgument( 'fileName', InputArgument::REQUIRED, 'what\'s the name of the file?')
             ->addArgument( 'classnNme', InputArgument::REQUIRED, 'what\'s the name of the class?')

@@ -10,7 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Seeds;
-use Pikia\Kernel\Database\Database;
+use Pikia\Kernel\Config\Config;
 
 
 
@@ -22,7 +22,7 @@ class ExecSeedCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('seed:exec')
+            ->setName(Config::get('console.exec_seed'))
             ->setDescription('Execute Seeder');
     }
 

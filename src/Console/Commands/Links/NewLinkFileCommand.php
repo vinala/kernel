@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Links;
+use Pikia\Kernel\Config\Config;
 
 class NewLinkFileCommand extends Command
 {
@@ -19,7 +20,7 @@ class NewLinkFileCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('link:new')
+            ->setName(Config::get('console.new_link'))
             ->setDescription('New file for links')
             ->addArgument( 'name', InputArgument::REQUIRED, 'what\'s the name of the file?');
     }

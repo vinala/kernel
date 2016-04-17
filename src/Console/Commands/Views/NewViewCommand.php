@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\View;
+use Pikia\Kernel\Config\Config;
 
 
 
@@ -21,7 +22,7 @@ class NewViewCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('view:new')
+            ->setName(Config::get('console.new_view'))
             ->setDescription('New View')
             ->addArgument( 'name', InputArgument::REQUIRED, 'what\'s the name of the view?')
             ->addOption(
