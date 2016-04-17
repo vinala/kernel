@@ -12,7 +12,6 @@
 	"require": {
 		"php": ">=5.5.9",
 		"fiesta/whoops": "~1.2.3",
-		"fiesta/panel": "~2.2.*",
 		"phpunit/phpunit": "~4.1"
 	},
 	"autoload": {
