@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Pikia\Kernel\Console\Console;
 use Pikia\Kernel\Process\Controller;
+use Pikia\Kernel\Config\Config;
 
 
 
@@ -21,7 +22,7 @@ class NewControllerCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('controller:new')
+            ->setName(Config::get('console.new_controller'))
             ->setDescription('New Controller')
             ->addArgument( 'fileName', InputArgument::REQUIRED, 'what\'s the name of the file?')
             ->addArgument( 'className', InputArgument::REQUIRED, 'what\'s the name of the controller class?')
