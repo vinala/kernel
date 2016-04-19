@@ -220,7 +220,7 @@ class AllCommand extends Command
         $process .= $this->row("exec_seed" , $maxCommand , $maxDocs);
         //
         $process .= $this->title("routes");
-        $process .= $this->row("get_routes" , $maxCommand , $maxDocs , "<route>");
+        $process .= $this->row("get_routes" , $maxCommand , $maxDocs , "<http>");
         //
         return $process;
     }
