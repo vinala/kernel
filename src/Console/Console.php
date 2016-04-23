@@ -31,6 +31,11 @@ class Console
 	//
 	public static $application ;
 
+	/**
+	 * User commands 
+	 */
+	protected static $userCommands;
+
 	public static function run() 
 	{
 		self::$application = new Ap();
@@ -90,11 +95,36 @@ class Console
 		$app->add(new Info());
 		//All
 		$app->add(new AllCommand());
+		//
+		self::AddUserCommands($app);
 	}
 
 	public static function setCyan($text)
 	{
 		return chr(27) . "[1;36m" . "$text" . chr(27) . "[0m";
+	}
+
+	/**
+	 * Add all command classes to console
+	 */
+	public static function AddUserCommands($app)
+	{
+		self::getUserClasses();
+		//
+		foreach (self::$userCommands as $value) 
+			$app->add(new $value());
+	}
+
+	/**
+	 * Search for commmand classes
+	 */
+	public static function getUserClasses()
+	{
+		$namespace = "App\Console\Commands";
+		//
+        foreach (get_declared_classes() as $value)
+            if(\Strings::contains($value,$namespace)) 
+            	self::$userCommands[] = $value;
 	}
 }
 
