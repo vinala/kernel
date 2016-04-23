@@ -206,10 +206,11 @@ class Commands extends Command
 	protected function advanceArg($key)
     {
     	$data = Strings::splite($key, " : ");
-    	$arg = $data[0];
-    	$disc = $data[1];
     	//
-    	$this->simpleArg($arg , $desc)
+    	$arg = $data[0];
+    	$desc = $data[1];
+    	//
+    	$this->simpleArg($arg , $desc);
     }
 
     /**
