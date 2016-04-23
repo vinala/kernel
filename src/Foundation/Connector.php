@@ -554,6 +554,7 @@ class Connector
 	public static function console()
 	{
 		self::need(self::$path.'Console/Console.php');
+		self::need(self::$path.'Console/Command.php');
 		//
 		//
 		self::need(self::$path.'Console/Commands/Translator/NewDir.php');
