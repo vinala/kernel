@@ -12,20 +12,50 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Commands extends Command
 {
 
-	// const NONE 	= "NONE";
 	const VALUE 	= "VALUE";
 	const OPTIONAL 	= "OPTIONAL";
 	const REQUIRED 	= "REQUIRED";
 	//
+	/**
+	 * User Key
+	 * @var string
+	 */
 	protected $key;
+
+	/**
+	 * command name
+	 * @var string
+	 */
 	protected $command;
 
+	/**
+	 * command description
+	 * @var string
+	 */
 	protected $description ;
 
+	/**
+	 * all separted strings in the key
+	 * @var string
+	 */
 	protected $members = array() ;
+
+	/**
+	 * all args and options in key
+	 * @var string
+	 */
 	protected $params = array() ;
 
+	/**
+	 * the console input
+	 * @var InputInterface
+	 */
 	protected $input;
+
+	/**
+	 * the console input
+	 * @var OutputInterface
+	 */
 	protected $output;
 
     /**
@@ -52,6 +82,9 @@ class Commands extends Command
         $this->handle();
     }
 
+    /**
+     * Init the command setting the name and description
+     */
     protected function Init()
     {
     	$this->setName($this->command);
@@ -81,6 +114,9 @@ class Commands extends Command
     	return $this->members;
     }
 
+    /**
+     * get the params from members
+     */
     protected function params()
     {
     	$params = array();
@@ -92,22 +128,28 @@ class Commands extends Command
     	return $params;
     }
 
+    /**
+     * remove brackets
+     */
     protected function strip($key)
     {
     	return substr($key, 1, -1);
     }
 
+    /**
+     * remove dashes from option key
+     */
     protected function stripOpt($opt)
     {
     	return substr($opt, 2);
     }
 
-    
-
+    /**
+     * set the args and options
+     */
     protected function setParams()
     {
     	$this->params();
-    	// die(var_dump($this->params));
     	//
     	foreach ($this->params as $key => $value) 
     	{
@@ -115,76 +157,81 @@ class Commands extends Command
     		//
     		if(Strings::lenght($cont) > 2)
     		{
-    			
     			if($cont[0] == "-" && $cont[1] == "-") $this->setOption($cont);
    				elseif($cont[0] != "-" && $cont[1] != "-") $this->setArgument($cont);
     		}
     		else 
     		{
-
     			$this->setArgument($cont);
     		} 
-    			
-    		
     	}
     }
 
+    /**
+     * set the args and check if ther is description
+     */
     protected function setArgument($arg)
     {
-    	if($this->checkDiscription($arg)) $this->advenceArg($arg);
+    	if($this->checkDiscription($arg)) $this->advanceArg($arg);
     	else $this->simpleArg($arg);
     }
 
+    /**
+     * check if arg is optional
+     */
     protected function isOption($arg)
     {
     	return (substr($arg, -1) == "?");
     }
 
-	protected function simpleArg($key)
+    /**
+     * set simple arg with optional description
+     */
+	protected function simpleArg($key , $desc = "")
     { 
-    	
     	if($this->isOption($key)) 
     	{
-    		// die($key."a");
     		$name = substr($key, 0, -1);
-    		$this->addArgument( $name, InputArgument::OPTIONAL);
+    		$this->addArgument( $name, InputArgument::OPTIONAL,$desc);
     	}
     	else 
     	{
-    		$this->addArgument( $key, InputArgument::REQUIRED,"");
+    		$this->addArgument( $key, InputArgument::REQUIRED,$desc);
     	}
     }
 
-	protected function advenceArg($key)
+    /**
+     * set advanced arg with required description
+     */
+	protected function advanceArg($key)
     {
     	$data = Strings::splite($key, " : ");
     	$arg = $data[0];
     	$disc = $data[1];
-
     	//
-    	if($this->isOption($arg)) 
-    	{
-    		$name = substr($arg, 0, -1);
-    		$this->addArgument( $name, InputArgument::OPTIONAL , $disc);
-    	}
-    	else 
-    	{
-    		$this->addArgument( $arg, InputArgument::REQUIRED , $disc);
-    	}
+    	$this->simpleArg($arg , $desc)
     }
 
+    /**
+     * check if their is description
+     */
     protected function checkDiscription($arg)
     {
     	return Strings::contains($arg," : ");
     }
 
-
+    /**
+     * check if ther is description
+     */
     protected function setOption($opt)
     {
-    	if($this->checkDiscription($opt)) $this->advenceOpt($opt);
+    	if($this->checkDiscription($opt)) $this->advanceOpt($opt);
     	else $this->simpleOpt($opt);
     }
 
+    /**
+     * set simple option with optional description
+     */
     protected function simpleOpt( $opt , $disc="" )
     {
 
@@ -210,66 +257,66 @@ class Commands extends Command
     	}
     }
 
-    protected function advenceOpt($opt)
+    /**
+     * set advanced option with optional description
+     */
+    protected function advanceOpt($opt)
     {
-
     	$data = Strings::splite($opt, " : ");
-
     	//
     	$opt = $data[0];
     	$disc = $data[1];
-    	
     	//
     	$this->simpleOpt( $opt , $disc );
     }
 
+    /**
+     * to write in the console
+     */
     public function write($key)
     {
     	 $this->output->writeln($key);
     }
 
+    /**
+     * to get argument
+     */
     public function arg($key)
     {
     	return $this->input->getArgument($key);
     }
 
+    /**
+     * to get option
+     */
     public function opt($key)
     {
     	return $this->input->getOption($key);
     }
 
+    /**
+     * check if value is required in option
+     */
     protected function isRequireValue($opt)
     {
     	return (substr($opt, -1) == "=");
     }
 
+    /**
+     * check if vlue is optional in option
+     */
     protected function isOptionValue($opt)
     {
     	return (substr($opt, -1) == "?");
     }
 
+    /**
+     * get the type of the option
+     */
     protected function getOptionType($opt)
     {
     	if(substr($opt, -1) == "=" ) return Commands::REQUIRED ;
     	else if(Strings::contains($opt , '=' )) return Commands::VALUE;
     	else return Commands::OPTIONAL;
     }
-
-    protected function getOptionalValue($opt)
-    {
-    	$data = Strings::splite($opt,"=");
-    	return $data[1];
-    }
-
-    protected function getOptionalKeyValue($opt)
-    {
-    	$data = Strings::splite($opt,"=");
-    	return $data[0];
-    }
-
-    
-
-
-
 }
-
