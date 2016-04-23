@@ -12,7 +12,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Commands extends Command
 {
 
-	protected $key ;
+	const VALUE 	= "VALUE";
+	const OPTIONAL 	= "OPTIONAL";
+	const REQUIRED 	= "REQUIRED";
+	//
+	protected $key;
+	protected $command;
 
 	protected $description ;
 
@@ -56,35 +61,31 @@ class Commands extends Command
     {
     	$this->input = $input;
     	$this->output = $output;
-        // $fileName = $input->getArgument('fileName');
-        // $className = $input->getArgument('className');
-        // $addRoute = $input->getOption('route');
-        // //
-        // $process = Controller::create($fileName , $className , $addRoute);
-        // //
-        // $msg = self::message($process);
-        // //
-        // $output->writeln($msg);
-
         //
         $this->handle();
     }
 
     protected function Init()
     {
-    	// die(var_dump($this));
-    	//
-    	$command = $this->members[0];
-    	// die(var_dump($this->members));
-    	//
-    	$this->setName($command);
+    	$this->setName($this->command);
     	$this->setDescription($this->description);
     }
 
     protected function anatomy()
     {
     	$this->members = Strings::splite($this->key," ");
-    	// die(var_dump($this->members));
+    	$this->command = $this->members[0];
+    	//
+    	$y = "";
+    	for ($i=1; $i < count($this->members) ; $i++) 
+    		$y .= $this->members[$i]." ";
+    	//
+    	$rest2 = array();
+    	$rest = Strings::splite($y,"} ");
+    	for ($i=0; $i < count($rest)-1 ; $i++)
+    		$rest2[] = $rest[$i]."}";
+    	//
+    	$this->members = $rest2;
     	return $this->members;
     }
 
@@ -92,7 +93,7 @@ class Commands extends Command
     {
     	$params = array();
     	//
-    	for ($i=1; $i < count($this->members); $i++)
+    	for ($i=0; $i < count($this->members); $i++)
     		$params[] = $this->members[$i];
     	//
     	$this->params = $params;
@@ -109,13 +110,26 @@ class Commands extends Command
     protected function setParams()
     {
     	$this->params();
+    	// die(var_dump($this->params));
     	//
     	foreach ($this->params as $key => $value) 
     	{
     		$cont = $this->strip($value);
+    		// die('jj');
     		//
-    		if($cont[0] == "-" && $cont[1] == "-") $this->setOption($cont);
-   			elseif($cont[0] != "-" && $cont[1] != "-") $this->setArgument($cont);
+    		if(Strings::lenght($cont) > 2)
+    		{
+    			
+    			if($cont[0] == "-" && $cont[1] == "-") $this->setOption($cont);
+   				elseif($cont[0] != "-" && $cont[1] != "-") $this->setArgument($cont);
+    		}
+    		else 
+    		{
+
+    			$this->setArgument($cont);
+    		} 
+    			
+    		
     	}
     }
 
@@ -127,19 +141,25 @@ class Commands extends Command
 
     protected function isOption($arg)
     {
+    	// if(substr($arg, -1) == "?") return Commands::OPTIONAL;
     	return (substr($arg, -1) == "?");
     }
 
 	protected function simpleArg($key)
-    {
+    { 
+    	
     	if($this->isOption($key)) 
     	{
+    		// die($key."a");
     		$name = substr($key, 0, -1);
     		$this->addArgument( $name, InputArgument::OPTIONAL);
     	}
     	else 
     	{
-    		$this->addArgument( $key, InputArgument::REQUIRED);
+    		// echo ($key."/1");
+    		// $this->addArgument( 'fileName', InputArgument::REQUIRED, 'what\'s the name of the file?');
+    		$this->addArgument( $key, InputArgument::REQUIRED,"");
+    		// die($key."/2");
     	}
     }
 
@@ -168,7 +188,7 @@ class Commands extends Command
 
     protected function setOption($opt)
     {
-    	# code...
+    	// die($opt);
     }
 
     public function write($key)
