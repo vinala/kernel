@@ -28,6 +28,7 @@ class Fetcher
 		self::seed();
 		self::filtes();
 		self::routes($routes);
+		self::commands();
 	}
 
 	/**
@@ -101,6 +102,15 @@ class Fetcher
 				Connector::need(self::$path.'http/Routes.php');
 				Routes::run();
 			}
+	}
+
+	/**
+	 * Require files of Console
+	 */
+	protected static function commands()
+	{
+		foreach (self::fetch("console/commands") as $file) 
+			Connector::need($file);
 	}
 	
 }
