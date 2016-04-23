@@ -63,33 +63,22 @@ class Commands extends Command
      *
      * @return array
      */
-    protected function setMembers()
+    protected function anatomy()
     {
     	$this->members = Strings::splite($this->key," ");
+    	$this->command = $this->members[0];
     	//
     	$y = "";
-    	$rest2 = array();
-    	//
     	for ($i=1; $i < count($this->members) ; $i++) 
     		$y .= $this->members[$i]." ";
     	//
+    	$rest2 = array();
     	$rest = Strings::splite($y,"} ");
     	for ($i=0; $i < count($rest)-1 ; $i++)
     		$rest2[] = $rest[$i]."}";
     	//
     	$this->members = $rest2;
-    	//
     	return $this->members;
-    }
-
-    /**
-     * Separate command for args and option
-     */
-    protected function anatomy()
-    {
-    	$this->setMembers();
-    	//
-    	$this->command = $this->members[0];
     }
 
     protected function params()
