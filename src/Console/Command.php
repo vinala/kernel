@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class Commands extends Command
 {
 
+	// const NONE 	= "NONE";
 	const VALUE 	= "VALUE";
 	const OPTIONAL 	= "OPTIONAL";
 	const REQUIRED 	= "REQUIRED";
@@ -32,25 +33,11 @@ class Commands extends Command
     */ 
     protected function configure()
     {
-
     	$this->anatomy();
     	//
     	$this->Init();
+    	//
     	$this->setParams();
-    	// $this->setParams();
-
-        // $this
-        //     ->setName($this->key))
-        //     ->setDescription($this->$description);
-
-        //     ->addArgument( 'fileName', InputArgument::REQUIRED, 'what\'s the name of the file?')
-        //     ->addArgument( 'className', InputArgument::REQUIRED, 'what\'s the name of the controller class?')
-        //     ->addOption(
-        //        'route',
-        //        null,
-        //        InputOption::VALUE_NONE,
-        //        'If set, a router for this controller will created in routes file'
-        //     );
     }
 
 
@@ -71,22 +58,38 @@ class Commands extends Command
     	$this->setDescription($this->description);
     }
 
-    protected function anatomy()
+    /**
+     * Set members including command and args and options
+     *
+     * @return array
+     */
+    protected function setMembers()
     {
     	$this->members = Strings::splite($this->key," ");
-    	$this->command = $this->members[0];
     	//
     	$y = "";
+    	$rest2 = array();
+    	//
     	for ($i=1; $i < count($this->members) ; $i++) 
     		$y .= $this->members[$i]." ";
     	//
-    	$rest2 = array();
     	$rest = Strings::splite($y,"} ");
     	for ($i=0; $i < count($rest)-1 ; $i++)
     		$rest2[] = $rest[$i]."}";
     	//
     	$this->members = $rest2;
+    	//
     	return $this->members;
+    }
+
+    /**
+     * Separate command for args and option
+     */
+    protected function anatomy()
+    {
+    	$this->setMembers();
+    	//
+    	$this->command = $this->members[0];
     }
 
     protected function params()
@@ -105,6 +108,11 @@ class Commands extends Command
     	return substr($key, 1, -1);
     }
 
+    protected function stripOpt($opt)
+    {
+    	return substr($opt, 2);
+    }
+
     
 
     protected function setParams()
@@ -115,7 +123,6 @@ class Commands extends Command
     	foreach ($this->params as $key => $value) 
     	{
     		$cont = $this->strip($value);
-    		// die('jj');
     		//
     		if(Strings::lenght($cont) > 2)
     		{
@@ -141,7 +148,6 @@ class Commands extends Command
 
     protected function isOption($arg)
     {
-    	// if(substr($arg, -1) == "?") return Commands::OPTIONAL;
     	return (substr($arg, -1) == "?");
     }
 
@@ -156,10 +162,7 @@ class Commands extends Command
     	}
     	else 
     	{
-    		// echo ($key."/1");
-    		// $this->addArgument( 'fileName', InputArgument::REQUIRED, 'what\'s the name of the file?');
     		$this->addArgument( $key, InputArgument::REQUIRED,"");
-    		// die($key."/2");
     	}
     }
 
@@ -168,6 +171,7 @@ class Commands extends Command
     	$data = Strings::splite($key, " : ");
     	$arg = $data[0];
     	$disc = $data[1];
+
     	//
     	if($this->isOption($arg)) 
     	{
@@ -182,13 +186,52 @@ class Commands extends Command
 
     protected function checkDiscription($arg)
     {
-    	return Strings::contains($arg,":");
+    	return Strings::contains($arg," : ");
     }
 
 
     protected function setOption($opt)
     {
-    	// die($opt);
+    	if($this->checkDiscription($opt)) $this->advenceOpt($opt);
+    	else $this->simpleOpt($opt);
+    }
+
+    protected function simpleOpt( $opt , $disc="" )
+    {
+
+    	$type = $this->getOptionType($opt);
+    	$key =$this->stripOpt($opt);
+    	//
+    	if($type == Commands::REQUIRED) 
+    	{
+    		$key = substr($key, 0, -1);
+    		$this->addOption( $key , null , InputOption::VALUE_REQUIRED , $disc);
+    	}
+    	else if($type == Commands::OPTIONAL) 
+    	{
+    		$this->addOption( $key , null , InputOption::VALUE_NONE , $disc);
+    	}
+    	else if($type == Commands::VALUE) 
+    	{
+    		$value = $this->getOptionalValue($key);
+    		//
+    		$key = $this->getOptionalKeyValue($key);
+    		//
+    		$this->addOption( $key , null , InputOption::VALUE_OPTIONAL , $disc , $value);
+    	}
+    }
+
+    protected function advenceOpt($opt)
+    {
+
+    	$data = Strings::splite($opt, " : ");
+
+    	//
+    	$opt = $data[0];
+    	$disc = $data[1];
+    	
+    	//
+    	$this->simpleOpt( $opt , $disc );
     }
 
     public function write($key)
@@ -199,6 +242,40 @@ class Commands extends Command
     public function arg($key)
     {
     	return $this->input->getArgument($key);
+    }
+
+    public function opt($key)
+    {
+    	return $this->input->getOption($key);
+    }
+
+    protected function isRequireValue($opt)
+    {
+    	return (substr($opt, -1) == "=");
+    }
+
+    protected function isOptionValue($opt)
+    {
+    	return (substr($opt, -1) == "?");
+    }
+
+    protected function getOptionType($opt)
+    {
+    	if(substr($opt, -1) == "=" ) return Commands::REQUIRED ;
+    	else if(Strings::contains($opt , '=' )) return Commands::VALUE;
+    	else return Commands::OPTIONAL;
+    }
+
+    protected function getOptionalValue($opt)
+    {
+    	$data = Strings::splite($opt,"=");
+    	return $data[1];
+    }
+
+    protected function getOptionalKeyValue($opt)
+    {
+    	$data = Strings::splite($opt,"=");
+    	return $data[0];
     }
 
     
