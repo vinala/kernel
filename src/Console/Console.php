@@ -123,7 +123,7 @@ class Console
 	 */
 	public static function getUserClasses()
 	{
-		$namespace = "App\Console\Commands";
+		$namespace = "Pikia\App\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
