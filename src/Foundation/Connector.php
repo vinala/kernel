@@ -553,6 +553,8 @@ class Connector
 	 */
 	public static function console()
 	{
+		self::need(self::$path.'Console/Commands/Command/NewCommand.php');
+		//
 		self::need(self::$path.'Console/Console.php');
 		self::need(self::$path.'Console/Command.php');
 		//
@@ -588,6 +590,7 @@ class Connector
 	 */
 	public static function process()
 	{
+		self::need(self::$path.'Processes/Command.php');
 		self::need(self::$path.'Processes/Process.php');
 		self::need(self::$path.'Processes/Translator.php');
 		self::need(self::$path.'Processes/Schema.php');
