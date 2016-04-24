@@ -3,6 +3,7 @@
 namespace Pikia\Kernel\Console;
 
 use Symfony\Component\Console\Application as Ap;
+use Pikia\Kernel\Console\Command\Command\NewCommand;
 use Pikia\Kernel\Console\Command\Translator\NewLanguageDirectoryCommand;
 use Pikia\Kernel\Console\Command\Translator\NewLanguageFileCommand;
 use Pikia\Kernel\Console\Command\Schema\NewSchemaCommand;
@@ -71,6 +72,8 @@ class Console
 
 	protected static function addCommands($app)
 	{
+		// Command
+		$app->add(new NewCommand());
 		// Translator
 		$app->add(new NewLanguageDirectoryCommand());
 		$app->add(new NewLanguageFileCommand());
