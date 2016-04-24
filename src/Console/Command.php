@@ -282,7 +282,7 @@ class Commands extends Command
     /**
      * to get argument
      */
-    public function arg($key)
+    public function argument($key)
     {
     	return $this->input->getArgument($key);
     }
@@ -290,7 +290,7 @@ class Commands extends Command
     /**
      * to get option
      */
-    public function opt($key)
+    public function option($key)
     {
     	return $this->input->getOption($key);
     }
