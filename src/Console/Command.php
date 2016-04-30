@@ -320,4 +320,22 @@ class Commands extends Command
     	else if(Strings::contains($opt , '=' )) return Commands::VALUE;
     	else return Commands::OPTIONAL;
     }
+
+    /**
+     * get the value of option
+     */
+    protected function getOptionalValue($opt)      
+    {     
+        $data = Strings::splite($opt,"=");      
+        return $data[1];        
+    }     
+      
+    /**
+     * get the name of option
+     */
+    protected function getOptionalKeyValue($opt)      
+    {     
+        $data = Strings::splite($opt,"=");      
+        return $data[0];        
+    }
 }
