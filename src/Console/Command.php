@@ -276,7 +276,7 @@ class Commands extends Command
      */
     public function write($key)
     {
-    	 $this->output->writeln($key);
+    	 $this->output->write($key);
     }
 
     /**
@@ -337,5 +337,45 @@ class Commands extends Command
     {     
         $data = Strings::splite($opt,"=");      
         return $data[0];        
+    }
+
+    /**
+     * to write in the console
+     */
+    public function line($text)
+    {
+        $this->output->writeln($text);
+    }
+
+    /**
+     * to write text in green color in the console
+     */
+    public function info($text)
+    {
+        $this->line("<info>".$text."</info>");
+    }
+
+    /**
+     * to write text in yellow color in the console
+     */
+    public function comment($text)
+    {
+        $this->line("<comment>".$text."</comment>");
+    }
+
+    /**
+     * to write text in cyan color in the console
+     */
+    public function question($text)
+    {
+        $this->line("<question>".$text."</question>");
+    }
+
+    /**
+     * to write text in red color in the console
+     */
+    public function error($text)
+    {
+        $this->line("<error>".$text."</error>");
     }
 }
