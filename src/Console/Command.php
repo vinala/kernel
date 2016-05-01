@@ -8,6 +8,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
+use Pikia\Kernel\Config\Config;
 
 class Commands extends Command
 {
@@ -59,6 +62,12 @@ class Commands extends Command
 	protected $output;
 
     /**
+     * the console type
+     * @var mixed
+     */
+    protected $console;
+
+    /**
      * Configure de command
     */ 
     protected function configure()
@@ -77,9 +86,24 @@ class Commands extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
     	$this->input = $input;
-    	$this->output = $output;
+    	$this->setOutput($output);
         //
         $this->handle();
+    }
+
+    /**
+     * Execute de command
+    */
+    protected function setOutput(OutputInterface $output)
+    {
+        switch (Config::get("console.terminal")) {
+            case 'bash': $op = new bashOutput($output); break;
+            case 'cmd': $op = new cmdOutput($output); break;
+            default: $op = new bashOutput($output); break;
+        }
+        //
+        $this->console = $op;
+        $this->output = $op->output;
     }
 
     /**
@@ -272,14 +296,6 @@ class Commands extends Command
     }
 
     /**
-     * to write in the console
-     */
-    public function write($key)
-    {
-    	 $this->output->write($key);
-    }
-
-    /**
      * to get argument
      */
     public function argument($key)
@@ -348,11 +364,19 @@ class Commands extends Command
     }
 
     /**
+     * to write in the console
+     */
+    public function write($key)
+    {
+         $this->output->write($key);
+    }
+
+    /**
      * to write text in green color in the console
      */
     public function info($text)
     {
-        $this->line("<info>".$text."</info>");
+        $this->console->info($text);
     }
 
     /**
@@ -360,7 +384,7 @@ class Commands extends Command
      */
     public function comment($text)
     {
-        $this->line("<comment>".$text."</comment>");
+        $this->console->comment($text);
     }
 
     /**
@@ -368,7 +392,7 @@ class Commands extends Command
      */
     public function question($text)
     {
-        $this->line("<question>".$text."</question>");
+        $this->console->question($text);
     }
 
     /**
@@ -376,6 +400,18 @@ class Commands extends Command
      */
     public function error($text)
     {
-        $this->line("<error>".$text."</error>");
+        $this->console->error($text);
+    }
+
+    /**
+     * ask user
+     */
+    public function ask($text,$response = "")
+    {
+        $helper = $this->getHelper('question');
+        //
+        $question = new Question($text." ", $response);
+        //
+        return $helper->ask($this->input, $this->output, $question);
     }
 }
