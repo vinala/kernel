@@ -11,6 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 use Pikia\Kernel\Config\Config;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Question\ChoiceQuestion;
 
 class Commands extends Command
 {
@@ -447,4 +449,19 @@ class Commands extends Command
         //
         return $helper->ask($this->input, $this->output, $question);
     }
+
+    /**
+     * ask user for some information
+     */
+    public function choice($text,$choices,$default = "")
+    {
+        $helper = $this->getHelper('question');
+        //
+        $question = new ChoiceQuestion($this->console->question($text." "),$choices,$default);
+        //
+        $question->setErrorMessage('Your choice %s is invalid.');
+        //
+        return $helper->ask($this->input, $this->output, $question);
+    }
+
 }
