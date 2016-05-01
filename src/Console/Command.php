@@ -453,13 +453,13 @@ class Commands extends Command
     /**
      * ask user for some information
      */
-    public function choice($text,$choices,$default = "")
+    public function choice($text,$choices)
     {
         $helper = $this->getHelper('question');
         //
-        $question = new ChoiceQuestion($this->console->question($text." "),$choices,$default);
+        $question = new ChoiceQuestion($this->console->question($text." "),$choices,false);
         //
-        $question->setErrorMessage('Your choice %s is invalid.');
+        $question->setErrorMessage("Your choice '%s' is invalid.");
         //
         return $helper->ask($this->input, $this->output, $question);
     }
