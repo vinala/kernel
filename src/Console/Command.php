@@ -430,4 +430,21 @@ class Commands extends Command
         //
         return $helper->ask($this->input, $this->output, $question);
     }
+
+
+    /**
+     * ask user for password
+     */
+    public function password($text)
+    {
+        $helper = $this->getHelper('question');
+        //
+        $question = new Question($this->console->question($text." "));
+        //
+        $question->setHidden(true);
+        //
+        $question->setHiddenFallback(true);
+        //
+        return $helper->ask($this->input, $this->output, $question);
+    }
 }
