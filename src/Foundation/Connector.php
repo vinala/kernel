@@ -555,6 +555,8 @@ class Connector
 	{
 		self::need(self::$path.'Console/Commands/Command/NewCommand.php');
 		//
+		self::need(self::$path.'Console/cmdOutput.php');
+		self::need(self::$path.'Console/bashOutput.php');
 		self::need(self::$path.'Console/Console.php');
 		self::need(self::$path.'Console/Command.php');
 		//
