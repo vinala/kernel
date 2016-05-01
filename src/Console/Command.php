@@ -437,7 +437,7 @@ class Commands extends Command
     /**
      * ask user for password
      */
-    public function password($text)
+    public function hidden($text)
     {
         $helper = $this->getHelper('question');
         //
