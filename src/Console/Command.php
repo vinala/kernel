@@ -408,13 +408,25 @@ class Commands extends Command
     }
 
     /**
-     * ask user
+     * ask user for some information
      */
     public function ask($text,$response = "")
     {
         $helper = $this->getHelper('question');
         //
         $question = new Question($this->console->question($text." "), $response);
+        //
+        return $helper->ask($this->input, $this->output, $question);
+    }
+
+    /**
+     * ask user for confirmation
+     */
+    public function confirm($text,$default = false)
+    {
+        $helper = $this->getHelper('question');
+        //
+        $question = new ConfirmationQuestion($this->console->question($text." "), $default);
         //
         return $helper->ask($this->input, $this->output, $question);
     }
