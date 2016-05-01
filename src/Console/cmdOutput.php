@@ -45,8 +45,7 @@ class cmdOutput
      */
     public function info($text)
     {
-        $text = chr(27) . "[1;32m" . "$text" . chr(27) . "[0m";
-        $this->line($text);
+        return chr(27) . "[1;32m" . "$text" . chr(27) . "[0m";
     }
 
     /**
@@ -54,8 +53,7 @@ class cmdOutput
      */
     public function comment($text)
     {
-        $text = chr(27) . "[1;33m" . "$text" . chr(27) . "[0m";
-        $this->line($text);
+        return chr(27) . "[1;33m" . "$text" . chr(27) . "[0m";
     }
 
     /**
@@ -63,8 +61,7 @@ class cmdOutput
      */
     public function question($text)
     {
-        $text = chr(27) . "[1;36m" . "$text" . chr(27) . "[0m";
-        $this->line($text);
+        return chr(27) . "[1;36m" . "$text" . chr(27) . "[0m";
     }
 
     /**
@@ -72,8 +69,7 @@ class cmdOutput
      */
     public function error($text)
     {
-        $text = chr(27) . "[1;31m" . "$text" . chr(27) . "[0m";
-        $this->line($text);
+        return chr(27) . "[1;31m" . "$text" . chr(27) . "[0m";
     }
 
 }

@@ -45,7 +45,7 @@ class bashOutput
      */
     public function info($text)
     {
-        $this->line("<info>".$text."</info>");
+        return "<info>".$text."</info>";
     }
 
     /**
@@ -53,7 +53,7 @@ class bashOutput
      */
     public function comment($text)
     {
-        $this->line("<comment>".$text."</comment>");
+        return "<comment>".$text."</comment>";
     }
 
     /**
@@ -61,7 +61,7 @@ class bashOutput
      */
     public function question($text)
     {
-        $this->line("<question>".$text."</question>");
+        return "<question>".$text."</question>";
     }
 
     /**
@@ -69,7 +69,7 @@ class bashOutput
      */
     public function error($text)
     {
-        $this->line("<error>".$text."</error>");
+        return "<error>".$text."</error>";
     }
 
 }

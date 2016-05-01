@@ -376,7 +376,8 @@ class Commands extends Command
      */
     public function info($text)
     {
-        $this->console->info($text);
+        $output = $this->console->info($text);
+        $this->console->line($output);
     }
 
     /**
@@ -384,7 +385,8 @@ class Commands extends Command
      */
     public function comment($text)
     {
-        $this->console->comment($text);
+        $output = $this->console->comment($text);
+        $this->console->line($output);
     }
 
     /**
@@ -392,7 +394,8 @@ class Commands extends Command
      */
     public function question($text)
     {
-        $this->console->question($text);
+        $output = $this->console->question($text);
+        $this->console->line($output);
     }
 
     /**
@@ -400,7 +403,8 @@ class Commands extends Command
      */
     public function error($text)
     {
-        $this->console->error($text);
+        $output = $this->console->error($text);
+        $this->console->line($output);
     }
 
     /**
@@ -410,7 +414,7 @@ class Commands extends Command
     {
         $helper = $this->getHelper('question');
         //
-        $question = new Question($text." ", $response);
+        $question = new Question($this->console->question($text." "), $response);
         //
         return $helper->ask($this->input, $this->output, $question);
     }
