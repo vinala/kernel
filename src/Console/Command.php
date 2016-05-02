@@ -13,6 +13,7 @@ use Symfony\Component\Console\Question\Question;
 use Pikia\Kernel\Config\Config;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Helper\Table;
 
 class Commands extends Command
 {
@@ -462,6 +463,18 @@ class Commands extends Command
         $question->setErrorMessage("Your choice '%s' is invalid.");
         //
         return $helper->ask($this->input, $this->output, $question);
+    }
+
+    /**
+     * display Table
+     */
+    public function table($header,$data)
+    {
+        $table = new Table($this->output);
+        //
+        $table->setHeaders($header)->setRows($data);
+        //
+        $table->render();
     }
 
 }
