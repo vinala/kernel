@@ -42,7 +42,7 @@ class Application
 
 	public static function kernelVersion()
 	{
-		return "Fiesta v3.1 (3.1.20) PHP Framework";
+		return "Fiesta Kernel v3.1.20";
 	}
 
 	public static function run($root="../",$routes=true,$session=true)
