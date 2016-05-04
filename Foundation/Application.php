@@ -34,10 +34,15 @@ class Application
 	static $page;
 	public static $root;
 	public static $Callbacks = array('before'=>null,'after'=>null);
-
+	
 	public static function version()
 	{
-		return "Fiesta v3.1 (3.1.1) PHP Framework";
+		return "Fiesta v3.1 (3.1.3) PHP Framework";
+	}
+
+	public static function kernelVersion()
+	{
+		return "Fiesta v3.1 (3.1.20) PHP Framework";
 	}
 
 	public static function run($root="../",$routes=true,$session=true)
