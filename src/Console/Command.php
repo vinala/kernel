@@ -75,6 +75,8 @@ class Commands extends Command
     */ 
     protected function configure()
     {
+        $this->checkSet();
+        //
     	$this->anatomy();
     	//
     	$this->Init();
@@ -82,6 +84,13 @@ class Commands extends Command
     	$this->setParams();
     }
 
+    /**
+     * Check if there is a set function to set key and description
+     */
+    protected function checkSet()
+    {
+        if(method_exists ($this,"set")) $this->set();
+    }
 
     /**
      * Execute de command
