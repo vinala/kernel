@@ -61,7 +61,7 @@ class NewSchemaCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The schema is executed");
-        else $this->error("Schema is not executed : ".Database::execErr());
+        if($process) $this->info("The schema is created");
+        else $this->error("The schema is already existe");
     }
 }
