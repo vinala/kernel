@@ -32,7 +32,7 @@ class NewLanguageDirectoryCommand extends Commands
     public function set()
     {
         $this->key = Config::get('console.dir_lang')." {name : what's the name of the directory?}";
-        $this->description = "make new translator directory";
+        $this->description = "Make new translator directory";
     }
 
     /**
