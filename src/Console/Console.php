@@ -78,33 +78,6 @@ class Console
 
 	protected static function addCommands($app)
 	{
-		// Command
-		// $app->add(new NewCommand());
-		// $app->add(new testCommand());
-		// Translator
-		// $app->add(new NewLanguageDirectoryCommand());
-		// $app->add(new NewLanguageFileCommand());
-		//Schema
-		// $app->add(new ExecSchemaCommand());
-		// $app->add(new RollbackSchemaCommand());
-		//Link
-		
-		//Model
-		// $app->add(new NewModelCommand());
-		//View
-		// $app->add(new NewViewCommand());
-		//Controller
-		// $app->add(new NewControllerCommand());
-		//Routes
-		// $app->add(new NewGetRouteCommand());
-		//Seeds
-		// $app->add(new NewSeedCommand());
-		// $app->add(new ExecSeedCommand());
-		//Info
-		// $app->add(new Info());
-		//All
-		// $app->add(new AllCommand());
-		//
 		self::AddUserCommands($app);
 		self::AddKernelCommands($app);
 	}
