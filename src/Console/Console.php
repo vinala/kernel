@@ -85,8 +85,8 @@ class Console
 		$app->add(new NewLanguageDirectoryCommand());
 		$app->add(new NewLanguageFileCommand());
 		//Schema
-		$app->add(new ExecSchemaCommand());
-		$app->add(new RollbackSchemaCommand());
+		// $app->add(new ExecSchemaCommand());
+		// $app->add(new RollbackSchemaCommand());
 		//Link
 		
 		//Model
