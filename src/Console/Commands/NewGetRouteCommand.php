@@ -6,8 +6,6 @@ namespace Pikia\Kernel\Console\Commands;
 use Pikia\Kernel\Config\Config;
 use Pikia\Kernel\Console\Command\Commands;
 use Pikia\Kernel\Process\Router;
-use Pikia\Kernel\Database\Database;
-
 
 
 class NewGetRouteCommand extends Commands
