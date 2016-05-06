@@ -604,7 +604,7 @@ class Connector
 		//
 		self::need(self::$path.'Console/Commands/Various/AllCommand.php');
 		//
-		self::need(self::$path.'Console/Commands/Routes/NewGetRouteCommand.php');
+		
 		//
 		// self::need(self::$path.'Console/Commands/Info.php');
 		
