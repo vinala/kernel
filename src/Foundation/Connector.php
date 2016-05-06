@@ -585,8 +585,8 @@ class Connector
 		//
 		//
 
-		self::need(self::$path.'Console/Commands/Translator/NewDir.php');
-		self::need(self::$path.'Console/Commands/Translator/NewFile.php');
+		// self::need(self::$path.'Console/Commands/Translator/NewDir.php');
+		// self::need(self::$path.'Console/Commands/Translator/NewFile.php');
 		//
 	
 		//
