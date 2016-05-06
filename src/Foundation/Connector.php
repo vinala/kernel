@@ -601,7 +601,7 @@ class Connector
 		// self::need(self::$path.'Console/Commands/Seeds/NewSeedCommand.php');
 		// self::need(self::$path.'Console/Commands/Seeds/ExecSeedCommand.php');
 		//
-		self::need(self::$path.'Console/Commands/Various/AllCommand.php');
+		// self::need(self::$path.'Console/Commands/Various/AllCommand.php');
 		//
 		
 		//

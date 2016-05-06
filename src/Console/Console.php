@@ -103,7 +103,7 @@ class Console
 		//Info
 		// $app->add(new Info());
 		//All
-		$app->add(new AllCommand());
+		// $app->add(new AllCommand());
 		//
 		self::AddUserCommands($app);
 		self::AddKernelCommands($app);
