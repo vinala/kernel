@@ -562,51 +562,18 @@ class Connector
 	 */
 	public static function console()
 	{
-		
-		//
-		// self::need(self::$path.'Console/Commands/Command/NewCommand.php');
-
-		//
-		self::need(self::$path.'Console/cmdOutput.php');
-		self::need(self::$path.'Console/bashOutput.php');
-		//
-		self::need(self::$path.'Console/Command.php');
-		//
-		
+		self::call(
+			array(
+				'cmdOutput', 
+				'bashOutput', 
+				'Command'
+				),
+			self::$path.'Console/'
+			);
 		//
 		self::commands();
-		// self::need(self::$path.'Console/Commands/testCommand.php');
-		//
+		// 
 		self::need(self::$path.'Console/Console.php');
-		
-		
-		
-
-		//
-		//
-
-		// self::need(self::$path.'Console/Commands/Translator/NewDir.php');
-		// self::need(self::$path.'Console/Commands/Translator/NewFile.php');
-		//
-	
-		//
-		
-		//
-		
-		//
-		// self::need(self::$path.'Console/Commands/Views/NewViewCommand.php');
-		//
-		// self::need(self::$path.'Console/Commands/Controller/NewControllerCommand.php');
-		//
-		// self::need(self::$path.'Console/Commands/Seeds/NewSeedCommand.php');
-		// self::need(self::$path.'Console/Commands/Seeds/ExecSeedCommand.php');
-		//
-		// self::need(self::$path.'Console/Commands/Various/AllCommand.php');
-		//
-		
-		//
-		// self::need(self::$path.'Console/Commands/Info.php');
-		
 	}
 
 	/**
