@@ -549,32 +549,55 @@ class Connector
 	}
 
 	/**
+	 * Require files of Console
+	 */
+	protected static function commands()
+	{
+		foreach (self::fetch(self::$path."Console/Commands") as $file) 
+			Connector::need($file);
+	}
+
+	/**
 	 * console call
 	 */
 	public static function console()
 	{
-		self::need(self::$path.'Console/Commands/Command/NewCommand.php');
+		
+		//
+		// self::need(self::$path.'Console/Commands/Command/NewCommand.php');
+
 		//
 		self::need(self::$path.'Console/cmdOutput.php');
 		self::need(self::$path.'Console/bashOutput.php');
-		self::need(self::$path.'Console/Console.php');
+		//
 		self::need(self::$path.'Console/Command.php');
 		//
+		
 		//
+		self::commands();
+		// self::need(self::$path.'Console/Commands/testCommand.php');
+		//
+		self::need(self::$path.'Console/Console.php');
+		
+		
+		
+
+		//
+		//
+
 		self::need(self::$path.'Console/Commands/Translator/NewDir.php');
 		self::need(self::$path.'Console/Commands/Translator/NewFile.php');
 		//
-		self::need(self::$path.'Console/Commands/Schema/newFile.php');
 		self::need(self::$path.'Console/Commands/Schema/Exec.php');
 		self::need(self::$path.'Console/Commands/Schema/RollbackSchemaCommand.php');
 		//
-		self::need(self::$path.'Console/Commands/Links/NewLinkFileCommand.php');
+		
 		//
 		self::need(self::$path.'Console/Commands/Models/NewModelCommand.php');
 		//
 		self::need(self::$path.'Console/Commands/Views/NewViewCommand.php');
 		//
-		self::need(self::$path.'Console/Commands/Controller/NewControllerCommand.php');
+		// self::need(self::$path.'Console/Commands/Controller/NewControllerCommand.php');
 		//
 		self::need(self::$path.'Console/Commands/Seeds/NewSeedCommand.php');
 		self::need(self::$path.'Console/Commands/Seeds/ExecSeedCommand.php');
@@ -583,7 +606,7 @@ class Connector
 		//
 		self::need(self::$path.'Console/Commands/Routes/NewGetRouteCommand.php');
 		//
-		self::need(self::$path.'Console/Commands/Info.php');
+		// self::need(self::$path.'Console/Commands/Info.php');
 		
 	}
 
@@ -649,6 +672,15 @@ class Connector
 		Connector::scoop();
 		Connector::intro();
 		Connector::plugins();
+	}
+
+	/**
+	 * Fetch files of folder
+	 */
+	protected static function fetch($pattern)
+	{
+		// die($pattern);
+		return glob($pattern.'/*.php');
 	}
 }
 

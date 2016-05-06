@@ -17,6 +17,7 @@ use Pikia\Kernel\Console\Command\Routes\NewGetRouteCommand;
 use Pikia\Kernel\Console\Command\Seed\NewSeedCommand;
 use Pikia\Kernel\Console\Command\Seed\ExecSeedCommand;
 use Pikia\Kernel\Console\Command\Various\AllCommand;
+use Pikia\Kernel\Console\Command\Command\testCommand;
 use Pikia\Kernel\Console\Command\Info;
 
 
@@ -36,6 +37,11 @@ class Console
 	 * User commands 
 	 */
 	protected static $userCommands;
+
+	/**
+	 * Kernel commands 
+	 */
+	protected static $kernelCommands;
 
 	public static function run() 
 	{
@@ -73,33 +79,34 @@ class Console
 	protected static function addCommands($app)
 	{
 		// Command
-		$app->add(new NewCommand());
+		// $app->add(new NewCommand());
+		// $app->add(new testCommand());
 		// Translator
 		$app->add(new NewLanguageDirectoryCommand());
 		$app->add(new NewLanguageFileCommand());
 		//Schema
-		$app->add(new NewSchemaCommand());
 		$app->add(new ExecSchemaCommand());
 		$app->add(new RollbackSchemaCommand());
 		//Link
-		$app->add(new NewLinkFileCommand());
+		
 		//Model
 		$app->add(new NewModelCommand());
 		//View
 		$app->add(new NewViewCommand());
 		//Controller
-		$app->add(new NewControllerCommand());
+		// $app->add(new NewControllerCommand());
 		//Routes
 		$app->add(new NewGetRouteCommand());
 		//Seeds
 		$app->add(new NewSeedCommand());
 		$app->add(new ExecSeedCommand());
 		//Info
-		$app->add(new Info());
+		// $app->add(new Info());
 		//All
 		$app->add(new AllCommand());
 		//
 		self::AddUserCommands($app);
+		self::AddKernelCommands($app);
 	}
 
 	public static function setCyan($text)
@@ -108,7 +115,18 @@ class Console
 	}
 
 	/**
-	 * Add all command classes to console
+	 * Add all kernel command classes to console
+	 */
+	public static function AddKernelCommands($app)
+	{
+		self::getKernelClasses();
+		//
+		foreach (self::$kernelCommands as $value) 
+			$app->add(new $value());
+	}
+
+	/**
+	 * Add all user command classes to console
 	 */
 	public static function AddUserCommands($app)
 	{
@@ -119,7 +137,7 @@ class Console
 	}
 
 	/**
-	 * Search for commmand classes
+	 * Search for commmand classes of user
 	 */
 	public static function getUserClasses()
 	{
@@ -128,6 +146,18 @@ class Console
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
             	self::$userCommands[] = $value;
+	}
+
+	/**
+	 * Search for commmand classes of kernel
+	 */
+	public static function getKernelClasses()
+	{
+		$namespace = "Pikia\Kernel\Console\Commands";
+		//
+        foreach (get_declared_classes() as $value)
+            if(\Strings::contains($value,$namespace)) 
+            	self::$kernelCommands[] = $value;
 	}
 }
 
