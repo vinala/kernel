@@ -82,8 +82,8 @@ class Console
 		// $app->add(new NewCommand());
 		// $app->add(new testCommand());
 		// Translator
-		$app->add(new NewLanguageDirectoryCommand());
-		$app->add(new NewLanguageFileCommand());
+		// $app->add(new NewLanguageDirectoryCommand());
+		// $app->add(new NewLanguageFileCommand());
 		//Schema
 		// $app->add(new ExecSchemaCommand());
 		// $app->add(new RollbackSchemaCommand());
