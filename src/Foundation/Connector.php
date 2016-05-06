@@ -594,7 +594,7 @@ class Connector
 		//
 		
 		//
-		self::need(self::$path.'Console/Commands/Views/NewViewCommand.php');
+		// self::need(self::$path.'Console/Commands/Views/NewViewCommand.php');
 		//
 		// self::need(self::$path.'Console/Commands/Controller/NewControllerCommand.php');
 		//
