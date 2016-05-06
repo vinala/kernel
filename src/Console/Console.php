@@ -98,7 +98,7 @@ class Console
 		//Routes
 		// $app->add(new NewGetRouteCommand());
 		//Seeds
-		$app->add(new NewSeedCommand());
+		// $app->add(new NewSeedCommand());
 		// $app->add(new ExecSeedCommand());
 		//Info
 		// $app->add(new Info());
