@@ -12,7 +12,7 @@ class View
 {
 	protected static function replace($name)
 	{
-		return str_replace(".", "/", $name);
+		return str_replace(":", "/", $name);
 	}
 	public static function create($name , $isSmarty)
 	{
@@ -21,6 +21,8 @@ class View
 		$Root	=	Process::root;
 		if($pos)
 		{
+			$structure 	=   $Root."app/views/".$file[0]."/";
+			//
 			if(mkdir($structure, 0777, true)) 
 			{
 				$file		= 	explode("/", $file);
