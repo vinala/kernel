@@ -92,7 +92,7 @@ class Console
 		//Model
 		// $app->add(new NewModelCommand());
 		//View
-		$app->add(new NewViewCommand());
+		// $app->add(new NewViewCommand());
 		//Controller
 		// $app->add(new NewControllerCommand());
 		//Routes
