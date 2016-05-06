@@ -90,7 +90,7 @@ class Console
 		//Link
 		
 		//Model
-		$app->add(new NewModelCommand());
+		// $app->add(new NewModelCommand());
 		//View
 		$app->add(new NewViewCommand());
 		//Controller
