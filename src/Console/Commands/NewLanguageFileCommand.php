@@ -31,8 +31,8 @@ class NewLanguageFileCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.file_lang')." {fileName : what's the name of the file?} {dirName : what's the name of the directory?}";
-        $this->description = "which directory?";
+        $this->key = Config::get('console.file_lang')." {fileName : what's the name of the file?} {dirName : which directory?}";
+        $this->description = "Make new translator file";
     }
 
     /**
