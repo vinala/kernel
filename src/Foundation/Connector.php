@@ -643,7 +643,7 @@ class Connector
 	/**
 	 * Fetch files of folder
 	 */
-	protected static function fetch($pattern)
+	public static function fetch($pattern)
 	{
 		// die($pattern);
 		return glob($pattern.'/*.php');
