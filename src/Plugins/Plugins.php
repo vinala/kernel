@@ -66,7 +66,7 @@ class Plugins
 		$files = self::getFiles();
 		//
 		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/.info"),$path);
+			$data = self::convert(self::readFile($path."/pikia.json"),$path);
 			$data = $data['system'];
 			$data['path']=$path;
 
@@ -85,7 +85,7 @@ class Plugins
 		$files = self::getFiles();
 		//
 		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/.info"),$path);
+			$data = self::convert(self::readFile($path."/pikia.json"),$path);
 			$setting = $data['configuration'];
 			$system = $data['system'];
 			$setting['path']=$path;
@@ -180,7 +180,7 @@ class Plugins
 	/**
 	 * Set classes aliases
 	 */
-	protected static function setAlias($alias)
+	public static function setAlias($alias)
 	{
 		if(self::isConfigKeyExist($alias,"shortcuts"))
 		{
@@ -206,12 +206,15 @@ class Plugins
 	 */
 	public static function getCore($alias,$param)
 	{
-		// die(var_dump(array($alias,$param)));
-		// die(var_dump(self::$infos));
 		if(self::isInfoKeyExist($alias,"core",$param)) 
 		{
 			return self::$infos[$alias]["core"][$param];
 		}
 		else return null;
+	}
+
+	public static function getCoreParams($alias,$param)
+	{
+		return self::getCore($alias,$param);
 	}
 }
