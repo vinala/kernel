@@ -121,6 +121,15 @@ class Connector
 	}
 
 	/**
+	 * Call many files
+	 * @param $files array
+	 */
+	public static function using($files)
+	{
+		foreach ($files as $file) self::need($file);
+	}
+
+	/**
 	 * Logging
 	 **/
 	public static function logging()
