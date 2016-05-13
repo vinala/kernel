@@ -92,7 +92,7 @@ class Console
 	 */
 	public static function AddKernelCommands($app)
 	{
-		self::getKernelClasses();
+		self::setKernelClasses();
 		//
 		foreach (self::$kernelCommands as $value) 
 			$app->add(new $value());
@@ -103,7 +103,7 @@ class Console
 	 */
 	public static function AddUserCommands($app)
 	{
-		self::getUserClasses();
+		self::setUserClasses();
 		//
 		foreach (self::$userCommands as $value) 
 			$app->add(new $value());
@@ -112,7 +112,7 @@ class Console
 	/**
 	 * Search for commmand classes of user
 	 */
-	public static function getUserClasses()
+	public static function setUserClasses()
 	{
 		$namespace = "Pikia\App\Console\Commands";
 		//
@@ -124,13 +124,45 @@ class Console
 	/**
 	 * Search for commmand classes of kernel
 	 */
-	public static function getKernelClasses()
+	public static function setKernelClasses()
 	{
 		$namespace = "Pikia\Kernel\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
             	self::$kernelCommands[] = $value;
+	}
+
+	/**
+	 * Search for commmand classes of user
+	 */
+	public static function getUserClasses()
+	{
+		$classes = array();
+		//
+		$namespace = "Pikia\App\Console\Commands";
+		//
+        foreach (get_declared_classes() as $value)
+            if(\Strings::contains($value,$namespace)) 
+            	$classes[] = $value;
+
+		return $classes;            
+	}
+
+	/**
+	 * Search for commmand classes of kernel
+	 */
+	public static function getKernelClasses()
+	{
+		$classes = array();
+		//
+		$namespace = "Pikia\Kernel\Console\Commands";
+		//
+        foreach (get_declared_classes() as $value)
+            if(\Strings::contains($value,$namespace)) 
+            	$classes[] = $value;
+
+		return $classes;
 	}
 }
 
