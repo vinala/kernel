@@ -22,10 +22,10 @@ class Connector
 	/**
 	 * Run the Connector class
 	 */
-	public static function run($console = false)
+	public static function run($lumos = false)
 	{
-		if( ! $console) Connector::ini();
-		else Connector::iniConsole();
+		if( ! $lumos) Connector::ini();
+		else Connector::inilumos();
 		//**/
 		Connector::loggin();
 
@@ -66,7 +66,7 @@ class Connector
 		Connector::scoop();
 		Connector::intro();
 		Connector::plugins();
-		Connector::console();
+		Connector::lumos();
 		Connector::process();
 	}
 
@@ -82,7 +82,7 @@ class Connector
 	/**
 	 * Init Connector class
 	 */
-	public static function iniConsole()
+	public static function inilumos()
 	{
 		// self::$path = $test ? "src/" : Application::$root."vendor/Pikia/kernel/src/";
 		self::$path = "vendor/fiesta/kernel/src/";
@@ -558,18 +558,18 @@ class Connector
 	}
 
 	/**
-	 * Require files of Console
+	 * Require files of Lumos
 	 */
 	protected static function commands()
 	{
-		foreach (self::fetch(self::$path."Console/Commands") as $file) 
+		foreach (self::fetch(self::$path."Lumos/Commands") as $file) 
 			Connector::need($file);
 	}
 
 	/**
-	 * console call
+	 * lumos call
 	 */
-	public static function console()
+	public static function lumos()
 	{
 		self::call(
 			array(
@@ -577,12 +577,12 @@ class Connector
 				'bashOutput', 
 				'Command'
 				),
-			self::$path.'Console/'
+			self::$path.'Lumos/'
 			);
 		//
 		self::commands();
 		// 
-		self::need(self::$path.'Console/Console.php');
+		self::need(self::$path.'Lumos/Console.php');
 	}
 
 	/**
