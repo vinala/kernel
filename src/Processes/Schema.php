@@ -2,6 +2,7 @@
 
 namespace Pikia\Kernel\Process;
 
+use Pikia\Kernel\Foundation\Application;
 use Pikia\Kernel\Process\Process;
 use Pikia\Kernel\Database\Migration;
 use Pikia\Kernel\Config\Config;
@@ -304,5 +305,15 @@ class Migrations
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
+	}
+
+	/** 
+	*	Listing all schemas
+	*/
+	public static function ListAll()
+	{
+		$schema = glob(Application::$root."app/schemas/*.php");
+		//
+		return $schema;
 	}
 }
