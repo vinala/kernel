@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=5.5.9",
-		"fiesta/whoops": "~1.2.3",
+		"fiesta/whoops": "1.2.4",
 		"fiesta/panel": "2.1.*"
 	},
 	"autoload": {
