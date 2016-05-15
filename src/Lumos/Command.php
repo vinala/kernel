@@ -14,6 +14,10 @@ use Pikia\Kernel\Config\Config;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Helper\Table;
+use Pikia\Kernel\Console\Argument;
+use Pikia\Kernel\Console\Option;
+
+
 
 class Commands extends Command
 {
@@ -51,6 +55,12 @@ class Commands extends Command
 	 * @var string
 	 */
 	protected $params = array() ;
+
+    /**
+     * all args and options in key
+     * @var array
+     */
+    public $inputs = array() ;
 
 	/**
 	 * the console input
@@ -229,10 +239,12 @@ class Commands extends Command
     	{
     		$name = substr($key, 0, -1);
     		$this->addArgument( $name, InputArgument::OPTIONAL,$desc);
+            $this->addArgumentInput( $name, InputArgument::OPTIONAL,$desc);
     	}
     	else 
     	{
     		$this->addArgument( $key, InputArgument::REQUIRED,$desc);
+            $this->addArgumentInput( $key, InputArgument::REQUIRED,$desc);
     	}
     }
 
@@ -247,6 +259,14 @@ class Commands extends Command
     	$desc = $data[1];
     	//
     	$this->simpleArg($arg , $desc);
+    }
+
+    /**
+     * add ARgument to inputs array
+     */
+    protected function addArgumentInput($name, $requirement , $description = "")
+    {
+        $this->inputs[] = new Argument($name, $requirement , $description);
     }
 
     /**
@@ -279,10 +299,12 @@ class Commands extends Command
     	{
     		$key = substr($key, 0, -1);
     		$this->addOption( $key , null , InputOption::VALUE_REQUIRED , $disc);
+            $this->addOptionInput($key, InputOption::VALUE_REQUIRED, $disc);
     	}
     	else if($type == Commands::OPTIONAL) 
     	{
     		$this->addOption( $key , null , InputOption::VALUE_NONE , $disc);
+            $this->addOptionInput($key, InputOption::VALUE_NONE, $disc);
     	}
     	else if($type == Commands::VALUE) 
     	{
@@ -291,6 +313,7 @@ class Commands extends Command
     		$key = $this->getOptionalKeyValue($key);
     		//
     		$this->addOption( $key , null , InputOption::VALUE_OPTIONAL , $disc , $value);
+            $this->addOptionInput($key, InputOption::VALUE_OPTIONAL, $disc, $value);
     	}
     }
 
@@ -305,6 +328,14 @@ class Commands extends Command
     	$disc = $data[1];
     	//
     	$this->simpleOpt( $opt , $disc );
+    }
+
+    /**
+     * add Option to inputs array
+     */
+    protected function addOptionInput($name, $requirement = null, $description = "", $value = null)
+    {
+        $this->inputs[] = new Option($name, $requirement, $description, $value);
     }
 
     /**
