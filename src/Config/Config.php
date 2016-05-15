@@ -5,6 +5,7 @@ namespace Pikia\Kernel\Config;
 use Pikia\Kernel\Foundation\Application;
 use Pikia\Kernel\Foundation\Connector;
 use Pikia\Kernel\Config\Exceptions\ConfigException;
+use Pikia\Kernel\Mocking\configMocking;
 
 /**
 * Config Class
@@ -40,13 +41,27 @@ class Config
 	/**
 	 * load all params from file to virtual array
 	 */
-	public static function load()
+	public static function mock()
 	{
-		$levels = self::getFirstLevel();
+		self::$params = configMocking::mock();
 		//
-		foreach ($levels as $level) { self::$params[$level] = self::getPath($level); }
-
 		return true;
+	}
+
+	/**
+	 * load all params from file to virtual array
+	 */
+	public static function load($kernelTest = false)
+	{
+		if($kernelTest) return self::mock();
+		else
+		{
+			$levels = self::getFirstLevel();
+			//
+			foreach ($levels as $level) { self::$params[$level] = self::getPath($level); }
+			//
+			return true;
+		}
 	}
 
 	/**
