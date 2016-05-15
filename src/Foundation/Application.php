@@ -243,6 +243,20 @@ class Application
 
 	public static function test()
 	{
-		self::runTest();
+		self::setScreen();
+		self::setRoot("../");
+		// //
+		self::$isTest = true;
+		// // call the connector and run it
+
+		self::callConnector(true);
+		Connector::runTest(true);
+		
+		// //
+		// self::ini();
+		// //
+		// self::fetcher($routes);
+		//
+		return true;
 	}
 }
