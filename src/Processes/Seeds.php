@@ -3,6 +3,7 @@
 namespace Pikia\Kernel\Process;
 
 use Pikia\Kernel\Database\Seeder;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Seeds class
@@ -45,5 +46,15 @@ class Seeds
 		$txt.="\t/*\n\t* Run the Database Seeder\n\t*/\n\tpublic function run()\n\t{\n\t\t".'$dataTable = array();'."\n\t\t//\n\t\t".'$dataTable[] = array(/* Data Fields */);'."\n\t\t//\n\t\t".'return Schema::table($this->table)->insert($dataTable);'."\n\t}\n}";
 
 		return $txt;
+	}
+
+	/** 
+	*	Listing all schemas
+	*/
+	public static function ListAll()
+	{
+		$seeds = glob(Application::$root."app/seeds/*.php");
+		//
+		return $seeds;
 	}
 }
