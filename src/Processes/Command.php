@@ -3,6 +3,7 @@
 namespace Pikia\Kernel\Process;
 
 use Pikia\Kernel\Process\Process;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Controller class
@@ -36,5 +37,15 @@ class Command
 		$txt.="\n\t/**\n\t * Execute the console command.\n\t *\n\t * @return mixed\n\t */\n\tpublic function handle()\n\t{\n\t\t ".'$this->write("What\'s up!"); '."\n\t}";
 		$txt.="\n}";
 		return $txt;
+	}
+
+	/** 
+	*	Listing all schemas
+	*/
+	public static function ListAll()
+	{
+		$commands = glob(Application::$root."app/console/commands/*.php");
+		//
+		return $commands;
 	}
 }
