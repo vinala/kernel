@@ -3,6 +3,7 @@
 namespace Pikia\Kernel\Process;
 
 use Pikia\Kernel\Process\Process;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Controller class
@@ -79,5 +80,15 @@ class Controller
 			//
 			file_put_contents($RouterFile, $RouterContent, FILE_APPEND | LOCK_EX);
 		}
+	}
+
+	/** 
+	*	Listing all schemas
+	*/
+	public static function ListAll()
+	{
+		$controllers = glob(Application::$root."app/controllers/*.php");
+		//
+		return $controllers;
 	}
 }
