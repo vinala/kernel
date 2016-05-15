@@ -4,6 +4,7 @@ namespace Pikia\Kernel\Process;
 
 use Pikia\Kernel\Process\Process;
 use Pikia\Kernel\Objects\DateTime as Time;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Link class
@@ -36,5 +37,15 @@ class Links
 		$txt .= "\n\n?>";
 
 		return $txt;
+	}
+
+	/** 
+	*	Listing all schemas
+	*/
+	public static function ListAll()
+	{
+		$links = glob(Application::$root."app/links/*.php");
+		//
+		return $links;
 	}
 }
