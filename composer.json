@@ -12,7 +12,8 @@
 	"require": {
 		"php": ">=5.5.9",
 		"fiesta/whoops": "~1.2.3",
-		"phpunit/phpunit": "~4.1"
+		"fiesta/whoops": "~1.2.3",
+		"mockery/mockery": "0.9.*"
 	},
 	"autoload": {
 		"files": ["src/Foundation/Application.php"]
