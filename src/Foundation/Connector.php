@@ -575,6 +575,8 @@ class Connector
 			array(
 				'cmdOutput', 
 				'bashOutput', 
+				'Argument', 
+				'Option', 
 				'Command'
 				),
 			self::$path.'Lumos/'
