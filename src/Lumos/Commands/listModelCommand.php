@@ -5,11 +5,11 @@ namespace Pikia\Kernel\Console\Commands;
 
 use Pikia\Kernel\Config\Config;
 use Pikia\Kernel\Console\Command\Commands;
-use Pikia\Kernel\Process\Controller;
+use Pikia\Kernel\Process\Model;
 
 
 
-class listControllersCommand extends Commands
+class listModelCommand extends Commands
 {
 
     /**
@@ -31,9 +31,9 @@ class listControllersCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = "list:controller";
+        $this->key = "list:model";
         //
-        $this->description = 'List all controller';
+        $this->description = 'List all models';
     }
 
     /**
@@ -51,7 +51,7 @@ class listControllersCommand extends Commands
     {
         $schema = true;
         //
-        $data = $this->splite(Controller::ListAll());
+        $data = $this->splite(Model::ListAll());
         //
         $this->show($data);
     }

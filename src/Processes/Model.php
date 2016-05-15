@@ -3,6 +3,7 @@
 namespace Pikia\Kernel\Process;
 
 use Pikia\Kernel\Process\Process;
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Model class
@@ -37,5 +38,15 @@ class Model
 		$txt.="class $class extends Model\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\tprotected static ".'$foreignKeys=array();'."\n\n}";
 		//
 		return $txt;
+	}
+
+	/** 
+	*	Listing all schemas
+	*/
+	public static function ListAll()
+	{
+		$models = glob(Application::$root."app/models/*.php");
+		//
+		return $models;
 	}
 }
