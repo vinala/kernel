@@ -547,6 +547,19 @@ class Connector
 	}
 
 	/**
+	 * Mocking call
+	 */
+	public static function mock()
+	{
+		self::call(
+			array(
+				'configMocking'
+				),
+			self::$path.'Mocking/'
+			);
+	}
+
+	/**
 	 * plugins call
 	 */
 	public static function plugins()
@@ -607,14 +620,15 @@ class Connector
 	/**
 	 * Run connector for test
 	 */
-	public static function runTest()
+	public static function runTest($kernelTest = false)
 	{
 		Connector::ini(true);
 		Connector::loggin();
 
+		Connector::mock();
 		// Config
 		Connector::config();
-		Config::load();
+		Config::load($kernelTest);
 		//
 		Connector::time();
 		//
