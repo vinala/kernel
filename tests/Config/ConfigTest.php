@@ -1,6 +1,6 @@
 <?php 
 
-use Fiesta\Kernel\Config\Config;
+use Pikia\Kernel\Config\Config;
 
 /**
 * ConfigTest for testing
@@ -11,10 +11,12 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	/**
 	 * Test on load Config params
 	 */
-	public function testLoadConfig()
+	public function testConfigParams()
 	{
-		$ret = Config::load();
+		// Loggin
+		$this->assertEquals('app/storage/logs/pikia.log', Config::get("loggin.log"));
+		$this->assertTrue( ! Config::get("loggin.debug"));
 		//
-		return $this->assertTrue( $ret );
+		return true;
 	}
 }
