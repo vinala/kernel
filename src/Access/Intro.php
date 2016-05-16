@@ -23,6 +23,8 @@ class Intro
 			case 3: self::thirdStep(); break;
 			case 4: self::fourthStep(); break;
 		}
+		//
+		return true;
 	}
 
 	public static function hello()
