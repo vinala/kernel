@@ -1,13 +1,11 @@
 <?php
 
-
-// die(var_dump(glob(__DIR__.'/../../../*')));
+// Travis CI
 require __DIR__."/../vendor/autoload.php";
 
-// require "vendor/autoload.php";
-// require __DIR__."/../../autoload.php";
-// require_once __DIR__.'/../vendor/fiesta/kernel/src/Testing/TestCase.php';
-// die(var_dump(glob(__DIR__."/../vendor/autoload.php")));
+// Local PHPUnit
+// require __DIR__."/../../../autoload.php";
+
 
 
 // Fiesta\Kernel\Foundation\Application::run("../",true,true,"Connector.php");
