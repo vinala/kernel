@@ -7,7 +7,7 @@ php:
 
 env:
   global:
-    - setup=basic
+    - setup=stable
 
 matrix:
   include:
