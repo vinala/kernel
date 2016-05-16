@@ -59,7 +59,7 @@ class configMocking
 	protected static function mockLoggin()
 	{
 		return array(
-			'debug' => ! false,
+			'debug' => false,
 			'msg' => "Ohlala! il semble que quelque chose s'ait mal passé",
 			'log' => 'app/storage/logs/pikia.log',
 			'bg' => '#a4003a',);
