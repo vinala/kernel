@@ -13,6 +13,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testConfigParams()
 	{
+		die(Config::get("loggin.log"));
 		// Loggin
 		$this->assertEquals('app/storage/logs/pikia.log', Config::get("loggin.log"));
 		$this->assertTrue( ! Config::get("loggin.debug"));
