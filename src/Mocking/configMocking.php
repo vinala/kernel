@@ -2,6 +2,8 @@
 
 namespace Pikia\Kernel\Mocking;
 
+use Pikia\Kernel\Foundation\Application
+
 /**
 * Mocking class
 */
@@ -65,12 +67,26 @@ class configMocking
 			'bg' => '#a4003a',);
 	}
 
+	protected static function mockApp()
+	{
+		return array(
+					'project'=>'Pikia Kernel', 
+					'owner'=>'Youssef', 
+					'url'=>Application::root(), 
+					'title'=> 'Pikia PHP Framework',
+					'timezone'=> 'UTC',  
+					'unrouted'=> true, 
+					'charset'=> 'utf-8', 
+				);
+	}
+
 	public static function mock()
 	{
 		return 
 			[ 
 				"alias" => self::mockAlias(),
-				"loggin" => self::mockLoggin()
+				"loggin" => self::mockLoggin(),
+				"app" => self::mockApp(),
 			];
 	}
 }

@@ -9,15 +9,22 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 {
 
 	/**
-	 * Test on load Config params
+	 * Test on App Config Params
 	 */
-	public function testConfigParams()
+	public function testAppConfigParams()
 	{
-		die(Config::get("loggin.log"));
-		// Loggin
+		$this->assertEquals(Config::get("app.project"),"Pikia Kernel");
+		$this->assertEquals(Config::get("app.timezone"),"UTC");
+	}
+
+	/**
+	 * Test on Loggin Config Params
+	 */
+	public function testLogginConfigParams()
+	{
 		$this->assertEquals('app/storage/logs/pikia.log', Config::get("loggin.log"));
 		$this->assertTrue( ! Config::get("loggin.debug"));
-		//
-		return true;
 	}
+
+
 }
