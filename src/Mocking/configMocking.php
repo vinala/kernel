@@ -2,7 +2,7 @@
 
 namespace Pikia\Kernel\Mocking;
 
-use Pikia\Kernel\Foundation\Application
+use Pikia\Kernel\Foundation\Application;
 
 /**
 * Mocking class
