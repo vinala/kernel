@@ -27,6 +27,9 @@ class IntroTest extends \PHPUnit_Framework_TestCase
 			'langue' => "fr",
 			'ckeck_loggin' => "false",
 			'ckeck_maintenance' => "false",
+			'db_prefix' => "fst",
+			"sec_1" => "abcdefghijklmnopqrstuvwxyz",
+			"sec_2" => "abcdefghijklmnopqrstuvwxyz",
 			 );
 	}
 
