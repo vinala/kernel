@@ -10,12 +10,12 @@ use Lighty\Kernel\Router\Exception\NotFoundHttpException;
 use Lighty\Kernel\Http\Errors;
 use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Access\Url;
-use Pikia\Vendor\Panel\Seeds;
-use Pikia\Vendor\Panel\Migrations;
-use Pikia\Vendor\Panel\Controller;
-use Pikia\Vendor\Panel\Lang;
-use Pikia\Vendor\Panel\Link;
-use Pikia\Vendor\Panel\Model;
+use Lighty\Panel\Seeds;
+use Lighty\Panel\Migrations;
+use Lighty\Panel\Controller;
+use Lighty\Panel\Lang;
+use Lighty\Panel\Link;
+use Lighty\Panel\Model;
 use Lighty\Kernel\Objects\Strings;
 
 

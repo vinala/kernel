@@ -20,7 +20,7 @@ use Lighty\Kernel\Router\Routes;
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Logging\Log;
 use Lighty\Kernel\Objects\DateTime;
-use Pikia\Vendor\Panel\Panel;
+use Lighty\Panel;
 use Lighty\Kernel\Filesystem\Filesystem;
 use Lighty\Kernel\Plugins\Plugins;
 
