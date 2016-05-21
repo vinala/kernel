@@ -23,7 +23,7 @@ class TestCase
 	}
 
 	/**
-	 * Call the Pikia Framework
+	 * Call the Lighty Framework
 	 */
 	public static function call()
 	{

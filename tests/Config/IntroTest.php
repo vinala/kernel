@@ -1,6 +1,6 @@
 <?php 
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 
 /**
 * ConfigTest for testing

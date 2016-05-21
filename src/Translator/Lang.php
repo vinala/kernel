@@ -40,7 +40,7 @@ class Lang
 	public static function set($lang)
 	{
 		Cookie::create(self::getName(),$lang,(60*24*7*30));
-		Res::stsession("Pikia_lang",$lang);
+		Res::stsession("Lighty_lang",$lang);
 	}
 
 	private static function put()
@@ -57,26 +57,26 @@ class Lang
 	public static function detect()
 	{
 
-		if(isset($_SESSION["Pikia_lang"]) && !empty($_SESSION["Pikia_lang"]))
+		if(isset($_SESSION["Lighty_lang"]) && !empty($_SESSION["Lighty_lang"]))
 		{
-			if (in_array($_SESSION["Pikia_lang"], self::$supportedLangs)) 
+			if (in_array($_SESSION["Lighty_lang"], self::$supportedLangs)) 
 			{
 
 			    if(Base::full(self::getCookie())) 
 			    {
-			    	if(self::getCookie() != $_SESSION["Pikia_lang"])
+			    	if(self::getCookie() != $_SESSION["Lighty_lang"])
 			    	{
-			    		Cookie::create(self::getName(),$_SESSION["Pikia_lang"],(60*24*7));
+			    		Cookie::create(self::getName(),$_SESSION["Lighty_lang"],(60*24*7));
 			    	}
 			    }
 			    else  
 			    {
-			    	Cookie::create(self::getName(),$_SESSION["Pikia_lang"],(60*24*7));
+			    	Cookie::create(self::getName(),$_SESSION["Lighty_lang"],(60*24*7));
 			    }
 			}
 			else 
 			{			
-				Res::stsession("Pikia_lang",Config::get('lang.default'));
+				Res::stsession("Lighty_lang",Config::get('lang.default'));
 				if(Base::full(self::getCookie())) 
 			    	if(self::getCookie() != Config::get('lang.default'))
 			    	{
@@ -88,20 +88,20 @@ class Lang
 		{
 			if(in_array(self::getCookie(), self::$supportedLangs))
 			{
-				Res::stsession("Pikia_lang",self::getCookie());
+				Res::stsession("Lighty_lang",self::getCookie());
 			}
 			else
 			{
 				Cookie::create(self::getName(),Config::get('lang.default'),(60*24*7));
-				Res::stsession("Pikia_lang",Config::get('lang.default'));
+				Res::stsession("Lighty_lang",Config::get('lang.default'));
 			}
 		}
 		else 
 		{
-			Res::stsession("Pikia_lang",Config::get('lang.default'));
+			Res::stsession("Lighty_lang",Config::get('lang.default'));
 		}
 		//
-		return Res::session("Pikia_lang");
+		return Res::session("Lighty_lang");
 	}
 
 	private static function hash($value)
@@ -135,7 +135,7 @@ class Lang
 	public static function setDefault()
 	{
 		Cookie::create(self::getName(),Config::get('lang.default'),(60*24*7));
-		Res::stsession("Pikia_lang",Config::get('lang.default'));
+		Res::stsession("Lighty_lang",Config::get('lang.default'));
 	}
 	
 }

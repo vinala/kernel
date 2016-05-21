@@ -14,7 +14,7 @@ class Hash
 		$salt1=Config::get('security.key1');
 		$salt2=Config::get('security.key2');
 		//
-		$v=sha1(md5($value."Ysfhad".$salt1)).md5(sha1($value."Pikia".$salt2).md5(sha1($value."ipixa".$salt2.$salt1)));
+		$v=sha1(md5($value."Ysfhad".$salt1)).md5(sha1($value."Lighty".$salt2).md5(sha1($value."ipixa".$salt2.$salt1)));
 		//
 		return $v;
 	}
@@ -35,7 +35,7 @@ class Hash
 			$str=$key.$value;
 		}
 		else if(is_string($array) || is_numeric($array)) $str=str_shuffle("Youssef Had".$array.time()."token".Config::get('security.key1'));
-		else if(is_null($array) || empty($array)) {$str="Youssef Had".$array.time()."token".Config::get('security.key1')."Pikia".Config::get('security.key2').time().self::random();$str=str_shuffle($str);}
+		else if(is_null($array) || empty($array)) {$str="Youssef Had".$array.time()."token".Config::get('security.key1')."Lighty".Config::get('security.key2').time().self::random();$str=str_shuffle($str);}
 		//
 		$token=self::make($str);
 		return $token;
