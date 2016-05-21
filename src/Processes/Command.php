@@ -28,7 +28,7 @@ class Command
 
 	public static function set($file, $command)
 	{
-		$txt = "<?php\n\nnamespace Pikia\App\Console\Commands;\n\n";
+		$txt = "<?php\n\nnamespace Lighty\App\Console\Commands;\n\n";
 		$txt .= "use Lighty\Kernel\Console\Command\Commands;\n\n";
 		$txt.="\n\nclass $file extends Commands\n{\n\t";
 

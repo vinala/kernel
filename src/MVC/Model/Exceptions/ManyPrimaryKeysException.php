@@ -7,6 +7,6 @@ namespace Lighty\Kernel\MVC\Model\Exception;
 */
 class ManyPrimaryKeysException extends \Exception{
 
-	protected $message = "Pikia Framework doesn't support many primary keys in ine DataTable";   // exception message
+	protected $message = "Lighty Framework doesn't support many primary keys in ine DataTable";   // exception message
 	
 }
