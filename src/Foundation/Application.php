@@ -63,7 +63,7 @@ class Application
 
 	public static function kernelVersion()
 	{
-		$kernel = "vendor/fiesta/kernel/";
+		$kernel = "vendor/lighty/kernel/";
 		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
 		return "Pikia Kernel v".$version;
 	}
@@ -71,9 +71,9 @@ class Application
 	protected static function callConnector($test = false)
 	{
 
-		require $test ? 'src/Foundation/Connector.php' : self::$root.'vendor/fiesta/kernel/src/Foundation/Connector.php';
+		require $test ? 'src/Foundation/Connector.php' : self::$root.'vendor/lighty/kernel/src/Foundation/Connector.php';
 
-		require $test ? 'src/Foundation/Exceptions/ConnectorFileNotFoundException.php' : self::$root.'vendor/fiesta/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
+		require $test ? 'src/Foundation/Exceptions/ConnectorFileNotFoundException.php' : self::$root.'vendor/lighty/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
 
 	}
 
@@ -82,8 +82,8 @@ class Application
 	*/
 	protected static function consoleConnector()
 	{
-		require 'vendor/fiesta/kernel/src/Foundation/Connector.php';
-		require 'vendor/fiesta/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
+		require 'vendor/lighty/kernel/src/Foundation/Connector.php';
+		require 'vendor/lighty/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
 	}
 
 
@@ -208,7 +208,7 @@ class Application
 	 */
 	protected static function fetcher($routes)
 	{
-		Connector::need(self::$root.'vendor/fiesta/kernel/src/Foundation/Fetcher.php');
+		Connector::need(self::$root.'vendor/lighty/kernel/src/Foundation/Fetcher.php');
 		Fetcher::run($routes);
 	}
 
