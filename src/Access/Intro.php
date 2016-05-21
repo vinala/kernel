@@ -296,7 +296,7 @@ class Intro
 	{
 		$activation = self::panelRow("activation","'enable'=> $state,");
 		$route = self::panelRow("route","'route'=>'$route',");
-		$path = self::panelRow("path","'path'=>'vendor/fiesta/panel/index.php',");
+		$path = self::panelRow("path","'path'=>'vendor/lighty/panel/index.php',");
 		$passwords = self::panelRow("passwords","'password1'=>'$pass_1',\n\t'password2'=>'$pass_2',");
 		$configuration = self::panelRow("configuration","'configured' => true,");
 		$ajax = self::panelRow("ajax","'ajax' => array(\n\n\t\t// for new seeds\n\t\t\t'new_seed' => 'new_seed',\n\n\t\t// to exec migrations\n\t\t\t'exec_migration' => 'exec_migration',\n\n\t\t// to rollback migrations\n\t\t\t'rollback_migration' => 'rollback_migration', \n\n\t\t// for new migrations\n\t\t\t'new_migration' => 'new_migration',\n\n\t\t// for new controllers\n\t\t\t'new_controller' => 'new_controller',\n\n\t\t// for new language folder\n\t\t\t'new_dir_lang' => 'new_dir_lang',\n\n\t\t// for new language file\n\t\t\t'new_file_lang' => 'new_file_lang',\n\n\t\t// for new links file\n\t\t\t'new_link' => 'new_link',\n\n\t\t// for new models\n\t\t\t'new_model' => 'new_model',\n\n\t\t// for new views\n\t\t\t'new_view' => 'new_view',\n\n\t\t// to exec costume migrations\n\t\t\t'exec_cos_migration' => 'exec_cos_migration',\n\n\t\t// to rollback costume migrations\n\t\t\t'rollback_cos_migration' => 'rollback_cos_migration',\n\t),");
