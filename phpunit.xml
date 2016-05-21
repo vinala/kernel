@@ -2,12 +2,12 @@
 <phpunit bootstrap="tests/bootstrap.php" color="true" convertErrorsToExceptions="true" convertNoticesToExceptions="true" convertWarningsToExceptions="true" stopOnFailures="false" syntaxCheck="false"
 	>
     <testsuites>
-	    <testsuite name="Fiesta Kernel Unit Test">
+	    <testsuite name="Lighty Kernel Unit Test">
 	    	<directory>./tests/</directory>
 	    </testsuite>
 	</testsuites>
 	<php>
         <server name='HTTP_HOST' value='localhost' />
-        <server name='REQUEST_URI' value='/fiesta' />
+        <server name='REQUEST_URI' value='/lighty' />
     </php>
 </phpunit>
