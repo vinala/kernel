@@ -84,7 +84,7 @@ class Connector
 	 */
 	public static function inilumos()
 	{
-		// self::$path = $test ? "src/" : Application::$root."vendor/Pikia/kernel/src/";
+		// self::$path = $test ? "src/" : Application::$root."vendor/Lighty/kernel/src/";
 		self::$path = "vendor/lighty/kernel/src/";
 		return self::$path;
 
@@ -170,7 +170,7 @@ class Connector
 	 */
 	public static function checkVendor()
 	{
-	// if( ! file_exists('../vendor/autoload.php')) die("You should install Pikia dependencies by composer commande 'composer install' :)");
+	// if( ! file_exists('../vendor/autoload.php')) die("You should install Lighty dependencies by composer commande 'composer install' :)");
 	}
 
 	/**

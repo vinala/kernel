@@ -114,7 +114,7 @@ class Console
 	 */
 	public static function setUserClasses()
 	{
-		$namespace = "Pikia\App\Console\Commands";
+		$namespace = "Lighty\App\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
@@ -140,7 +140,7 @@ class Console
 	{
 		$classes = array();
 		//
-		$namespace = "Pikia\App\Console\Commands";
+		$namespace = "Lighty\App\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
