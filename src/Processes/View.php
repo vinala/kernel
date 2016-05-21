@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Process;
+namespace Lighty\Kernel\Process;
 
-use Pikia\Kernel\Process\Process;
-use Pikia\Kernel\Objects\DateTime as Time;
+use Lighty\Kernel\Process\Process;
+use Lighty\Kernel\Objects\DateTime as Time;
 
 /**
 * View class

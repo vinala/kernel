@@ -1,24 +1,24 @@
 <?php 
 
-namespace Pikia\Kernel\Console;
+namespace Lighty\Kernel\Console;
 
 use Symfony\Component\Console\Application as Ap;
-use Pikia\Kernel\Console\Command\Command\NewCommand;
-use Pikia\Kernel\Console\Command\Translator\NewLanguageDirectoryCommand;
-use Pikia\Kernel\Console\Command\Translator\NewLanguageFileCommand;
-use Pikia\Kernel\Console\Command\Schema\NewSchemaCommand;
-use Pikia\Kernel\Console\Command\Schema\ExecSchemaCommand;
-use Pikia\Kernel\Console\Command\Schema\RollbackSchemaCommand;
-use Pikia\Kernel\Console\Command\Links\NewLinkFileCommand;
-use Pikia\Kernel\Console\Command\Models\NewModelCommand;
-use Pikia\Kernel\Console\Command\Views\NewViewCommand;
-use Pikia\Kernel\Console\Command\Controller\NewControllerCommand;
-use Pikia\Kernel\Console\Command\Routes\NewGetRouteCommand;
-use Pikia\Kernel\Console\Command\Seed\NewSeedCommand;
-use Pikia\Kernel\Console\Command\Seed\ExecSeedCommand;
-use Pikia\Kernel\Console\Command\Various\AllCommand;
-use Pikia\Kernel\Console\Command\Command\testCommand;
-use Pikia\Kernel\Console\Command\Info;
+use Lighty\Kernel\Console\Command\Command\NewCommand;
+use Lighty\Kernel\Console\Command\Translator\NewLanguageDirectoryCommand;
+use Lighty\Kernel\Console\Command\Translator\NewLanguageFileCommand;
+use Lighty\Kernel\Console\Command\Schema\NewSchemaCommand;
+use Lighty\Kernel\Console\Command\Schema\ExecSchemaCommand;
+use Lighty\Kernel\Console\Command\Schema\RollbackSchemaCommand;
+use Lighty\Kernel\Console\Command\Links\NewLinkFileCommand;
+use Lighty\Kernel\Console\Command\Models\NewModelCommand;
+use Lighty\Kernel\Console\Command\Views\NewViewCommand;
+use Lighty\Kernel\Console\Command\Controller\NewControllerCommand;
+use Lighty\Kernel\Console\Command\Routes\NewGetRouteCommand;
+use Lighty\Kernel\Console\Command\Seed\NewSeedCommand;
+use Lighty\Kernel\Console\Command\Seed\ExecSeedCommand;
+use Lighty\Kernel\Console\Command\Various\AllCommand;
+use Lighty\Kernel\Console\Command\Command\testCommand;
+use Lighty\Kernel\Console\Command\Info;
 
 
 class Console
@@ -126,7 +126,7 @@ class Console
 	 */
 	public static function setKernelClasses()
 	{
-		$namespace = "Pikia\Kernel\Console\Commands";
+		$namespace = "Lighty\Kernel\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
@@ -156,7 +156,7 @@ class Console
 	{
 		$classes = array();
 		//
-		$namespace = "Pikia\Kernel\Console\Commands";
+		$namespace = "Lighty\Kernel\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 

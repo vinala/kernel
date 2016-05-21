@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\Http;
+namespace Lighty\Kernel\Http;
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 
 /**
 * erreur class

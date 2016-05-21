@@ -1,11 +1,11 @@
 <?php 
 
-namespace Pikia\Kernel\MVC\Relations;
+namespace Lighty\Kernel\MVC\Relations;
 
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\Objects\Strings;
-use Pikia\Kernel\MVC\Relations\Exception\ManyRelationException;
-use Pikia\Kernel\MVC\Relations\Exception\ModelNotFindedException;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\Strings;
+use Lighty\Kernel\MVC\Relations\Exception\ManyRelationException;
+use Lighty\Kernel\MVC\Relations\Exception\ModelNotFindedException;
 
 
 /**

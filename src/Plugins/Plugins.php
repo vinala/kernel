@@ -1,13 +1,13 @@
 <?php 
 
-namespace Pikia\Kernel\Plugins;
+namespace Lighty\Kernel\Plugins;
 
-use Pikia\Kernel\Foundation\Application;
-use Pikia\Kernel\Filesystem\Filesystem;
-use Pikia\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
-use Pikia\Kernel\Plugins\Exception\InfoStructureException;
-use Pikia\Kernel\Objects\Strings;
-use Pikia\Kernel\Config\Alias;
+use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Filesystem\Filesystem;
+use Lighty\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
+use Lighty\Kernel\Plugins\Exception\InfoStructureException;
+use Lighty\Kernel\Objects\Strings;
+use Lighty\Kernel\Config\Alias;
 
 /**
 * 

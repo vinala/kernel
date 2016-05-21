@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Mailing;
+namespace Lighty\Kernel\Mailing;
 
-use Pikia\Kernel\MVC\View\View;
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\MVC\View\View;
+use Lighty\Kernel\Config\Config;
 
 /**
 * Mail class

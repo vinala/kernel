@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\MVC\Model;
+namespace Lighty\Kernel\MVC\Model;
 
-use Pikia\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\Table;
 
 /**
 * Model array Class

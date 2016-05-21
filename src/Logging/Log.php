@@ -1,15 +1,15 @@
 <?php 
 
-namespace Pikia\Kernel\Logging;
+namespace Lighty\Kernel\Logging;
 
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Pikia\Kernel\Objects\DateTime;
-use Pikia\Kernel\Objects\DateTime as Time;
-use Pikia\Kernel\Objects\Strings;
-use Pikia\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\DateTime;
+use Lighty\Kernel\Objects\DateTime as Time;
+use Lighty\Kernel\Objects\Strings;
+use Lighty\Kernel\Objects\Table;
 
 /**
 * 

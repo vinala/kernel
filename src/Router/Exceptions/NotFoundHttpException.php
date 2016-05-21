@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Router\Exception;
+namespace Lighty\Kernel\Router\Exception;
 
 /**
 * Route Exception

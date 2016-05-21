@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\Logging;
+namespace Lighty\Kernel\Logging;
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Handler\PlainTextHandler;

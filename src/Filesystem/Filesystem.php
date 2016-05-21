@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Filesystem;
+namespace Lighty\Kernel\Filesystem;
 
-use Pikia\Kernel\Filesystem\Exception\DirectoryNotFoundException;
-use Pikia\Kernel\Filesystem\Exception\FileNotFoundException;
+use Lighty\Kernel\Filesystem\Exception\DirectoryNotFoundException;
+use Lighty\Kernel\Filesystem\Exception\FileNotFoundException;
 
 
 /**

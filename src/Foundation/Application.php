@@ -1,28 +1,28 @@
 <?php
 
-namespace Pikia\Kernel\Foundation;
+namespace Lighty\Kernel\Foundation;
 
-use Pikia\Kernel\Storage\Session;
-use Pikia\Kernel\Logging\Handler;
-use Pikia\Kernel\Config\Alias;
-use Pikia\Kernel\Objects\Sys;
-use Pikia\Kernel\Access\Url;
-use Pikia\Kernel\Access\Path;
-use Pikia\Kernel\MVC\View\Template;
-use Pikia\Kernel\Resources\Faker;
-use Pikia\Kernel\Http\Links;
-use Pikia\Kernel\Http\Errors;
-use Pikia\Kernel\Security\License;
-use Pikia\Kernel\Translator\Lang;
-use Pikia\Kernel\Database\Database;
-use Pikia\Kernel\Security\Auth;
-use Pikia\Kernel\Router\Routes;
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Logging\Log;
-use Pikia\Kernel\Objects\DateTime;
+use Lighty\Kernel\Storage\Session;
+use Lighty\Kernel\Logging\Handler;
+use Lighty\Kernel\Config\Alias;
+use Lighty\Kernel\Objects\Sys;
+use Lighty\Kernel\Access\Url;
+use Lighty\Kernel\Access\Path;
+use Lighty\Kernel\MVC\View\Template;
+use Lighty\Kernel\Resources\Faker;
+use Lighty\Kernel\Http\Links;
+use Lighty\Kernel\Http\Errors;
+use Lighty\Kernel\Security\License;
+use Lighty\Kernel\Translator\Lang;
+use Lighty\Kernel\Database\Database;
+use Lighty\Kernel\Security\Auth;
+use Lighty\Kernel\Router\Routes;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Logging\Log;
+use Lighty\Kernel\Objects\DateTime;
 use Pikia\Vendor\Panel\Panel;
-use Pikia\Kernel\Filesystem\Filesystem;
-use Pikia\Kernel\Plugins\Plugins;
+use Lighty\Kernel\Filesystem\Filesystem;
+use Lighty\Kernel\Plugins\Plugins;
 
 
 class Application

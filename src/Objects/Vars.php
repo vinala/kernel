@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\Objects;
+namespace Lighty\Kernel\Objects;
 
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Foundation\Application;
 /**
 * Vars class
 */

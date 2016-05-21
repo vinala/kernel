@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Security;
+namespace Lighty\Kernel\Security;
 
 /**
 * Security class

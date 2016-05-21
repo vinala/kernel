@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\HyperText;
+namespace Lighty\Kernel\HyperText;
 
 /**
 * Input type

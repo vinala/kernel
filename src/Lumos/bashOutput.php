@@ -1,8 +1,8 @@
 <?php
 
-namespace Pikia\Kernel\Console\Command;
+namespace Lighty\Kernel\Console\Command;
 
-use Pikia\Kernel\Objects\Strings;
+use Lighty\Kernel\Objects\Strings;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;

@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\Http;
+namespace Lighty\Kernel\Http;
 
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Foundation\Application;
 /**
 * 
 */

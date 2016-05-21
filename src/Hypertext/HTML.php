@@ -1,8 +1,8 @@
 <?php
 
-namespace Pikia\Kernel\HyperText;
+namespace Lighty\Kernel\HyperText;
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 
 /**
 * HTML class

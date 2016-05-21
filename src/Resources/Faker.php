@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Resources;
+namespace Lighty\Kernel\Resources;
 
 use Faker\Factory;
 

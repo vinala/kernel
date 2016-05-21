@@ -1,12 +1,12 @@
 <?php 
 
-namespace Pikia\Kernel\Foundation;
+namespace Lighty\Kernel\Foundation;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Logging\Log;
-use Pikia\Kernel\Logging\Handler;
-use Pikia\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Logging\Log;
+use Lighty\Kernel\Logging\Handler;
+use Lighty\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * Connector class to call framework core files

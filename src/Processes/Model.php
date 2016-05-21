@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Process;
+namespace Lighty\Kernel\Process;
 
-use Pikia\Kernel\Process\Process;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Process\Process;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * Model class
@@ -34,7 +34,7 @@ class Model
 
 	public static function set($class , $table)
 	{
-		$txt = "<?php\n\nuse Pikia\Kernel\MVC\Model\Model;\n\n";
+		$txt = "<?php\n\nuse Lighty\Kernel\MVC\Model\Model;\n\n";
 		$txt.="class $class extends Model\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\tprotected static ".'$foreignKeys=array();'."\n\n}";
 		//
 		return $txt;

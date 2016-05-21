@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\Objects;
+namespace Lighty\Kernel\Objects;
 
-use Pikia\Kernel\Config\Config;	
+use Lighty\Kernel\Config\Config;	
 
 /**
 * 	Data array

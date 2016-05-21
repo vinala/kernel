@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Process;
+namespace Lighty\Kernel\Process;
 
-use Pikia\Kernel\Database\Seeder;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Database\Seeder;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * Seeds class
@@ -36,7 +36,7 @@ class Seeds
 
 	public static function set($nom,$table)
 	{
-		$txt = "<?php\n\nuse Pikia\Kernel\Database\Seeder;\n\n";
+		$txt = "<?php\n\nuse Lighty\Kernel\Database\Seeder;\n\n";
 		$txt.="/**\n* class de seeder $nom\n*/\n\nclass $nom extends Seeder\n{\n";
 
 		//datatable name

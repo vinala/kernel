@@ -1,11 +1,11 @@
 <?php 
 
-namespace Pikia\Kernel\Console\Commands;
+namespace Lighty\Kernel\Console\Commands;
 
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Console\Command\Commands;
-use Pikia\Kernel\Process\Migrations;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Console\Command\Commands;
+use Lighty\Kernel\Process\Migrations;
 
 
 

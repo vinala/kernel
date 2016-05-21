@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Process;
+namespace Lighty\Kernel\Process;
 
-use Pikia\Kernel\Process\Process;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Process\Process;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * Language class

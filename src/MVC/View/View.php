@@ -1,6 +1,6 @@
 <?php
 
-namespace Pikia\Kernel\MVC\View;
+namespace Lighty\Kernel\MVC\View;
 
 /**
 * View mother class

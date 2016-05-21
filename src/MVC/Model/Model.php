@@ -1,22 +1,22 @@
 <?php 
 
-namespace Pikia\Kernel\MVC\Model;
+namespace Lighty\Kernel\MVC\Model;
 
-use Pikia\Kernel\MVC\Model\Exception\ColumnNotEmptyException;
-use Pikia\Kernel\MVC\Model\Exception\ForeingKeyMethodException;
-use Pikia\Kernel\MVC\Model\Exception\ManyPrimaryKeysException;
-use Pikia\Kernel\MVC\Model\Exception\PrimaryKeyNotFoundException;
-use Pikia\Kernel\MVC\Model\Exception\ManyRelationException;
-use Pikia\Kernel\Database\Database;
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Objects\DateTime as Time;
+use Lighty\Kernel\MVC\Model\Exception\ColumnNotEmptyException;
+use Lighty\Kernel\MVC\Model\Exception\ForeingKeyMethodException;
+use Lighty\Kernel\MVC\Model\Exception\ManyPrimaryKeysException;
+use Lighty\Kernel\MVC\Model\Exception\PrimaryKeyNotFoundException;
+use Lighty\Kernel\MVC\Model\Exception\ManyRelationException;
+use Lighty\Kernel\Database\Database;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\DateTime as Time;
 use InvalidArgumentException;
-use Pikia\Kernel\Objects\Strings;
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\MVC\Relations\OneToOne;
-use Pikia\Kernel\MVC\Relations\OneToMany;
-use Pikia\Kernel\MVC\Relations\ManyToMany;
-use Pikia\Kernel\MVC\Relations\BelongsTo;
+use Lighty\Kernel\Objects\Strings;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\MVC\Relations\OneToOne;
+use Lighty\Kernel\MVC\Relations\OneToMany;
+use Lighty\Kernel\MVC\Relations\ManyToMany;
+use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 
 /**

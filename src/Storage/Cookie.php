@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Storage;
+namespace Lighty\Kernel\Storage;
 
 /**
 * cookies

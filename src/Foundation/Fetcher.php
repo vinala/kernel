@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\Foundation;
+namespace Lighty\Kernel\Foundation;
 
-use Pikia\Kernel\Router\Routes;
+use Lighty\Kernel\Router\Routes;
 
 /**
 * this class help the framework to get all

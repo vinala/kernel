@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Process;
+namespace Lighty\Kernel\Process;
 
-use Pikia\Kernel\Process\Process;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Process\Process;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * Controller class
@@ -32,7 +32,7 @@ class Controller
 
 	public static function set($class)
 	{
-		$txt = "<?php\n\n use Pikia\Kernel\MVC\Controller\Controller;\n\n";
+		$txt = "<?php\n\n use Lighty\Kernel\MVC\Controller\Controller;\n\n";
 		$txt.="/**\n* class de controller $class\n*/\n\nclass $class extends Controller\n{\n\t";
 
 		//view

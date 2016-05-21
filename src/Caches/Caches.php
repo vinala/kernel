@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Caches;
+namespace Lighty\Kernel\Caches;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Caches\Exception\DriverNotFoundException;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Caches\Exception\DriverNotFoundException;
 
 /**
 * Cache class

@@ -1,8 +1,8 @@
 <?php
 
-namespace Pikia\Kernel\Security;
+namespace Lighty\Kernel\Security;
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 
 /**
 *

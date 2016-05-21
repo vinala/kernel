@@ -1,6 +1,6 @@
 <?php
 
-namespace Pikia\Kernel\MVC\View\Exception;
+namespace Lighty\Kernel\MVC\View\Exception;
 
 /**
 * Directory not fount exception

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\MVC\Controller;
+namespace Lighty\Kernel\MVC\Controller;
 
 /**
 * Controller class

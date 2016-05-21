@@ -1,8 +1,8 @@
 <?php
 
-namespace Pikia\Kernel\Database;
+namespace Lighty\Kernel\Database;
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 
 
 /**

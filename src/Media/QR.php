@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Media;
+namespace Lighty\Kernel\Media;
 
 /**
 * Belongs To relation

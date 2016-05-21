@@ -1,10 +1,10 @@
 <?php 
 
-namespace Pikia\Kernel\Database;
+namespace Lighty\Kernel\Database;
 
-use Pikia\Kernel\Filesystem\Filesystem;
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Filesystem\Filesystem;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * migaration class

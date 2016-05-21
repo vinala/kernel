@@ -1,9 +1,9 @@
 <?php
 
-namespace Pikia\Kernel\MVC\View;
+namespace Lighty\Kernel\MVC\View;
 
 use Smarty;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Foundation\Application;
 
 
 

@@ -1,8 +1,8 @@
 <?php 
 
-namespace Pikia\Kernel\Access;
+namespace Lighty\Kernel\Access;
 
-use Pikia\Kernel\Filesystem\Filesystem;
+use Lighty\Kernel\Filesystem\Filesystem;
 
 /**
 * System Class

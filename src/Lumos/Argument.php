@@ -1,6 +1,6 @@
 <?php
 
-namespace Pikia\Kernel\Console;
+namespace Lighty\Kernel\Console;
 
 /**
 *  Argument

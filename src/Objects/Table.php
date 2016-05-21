@@ -1,6 +1,6 @@
 <?php
 
-namespace Pikia\Kernel\Objects;
+namespace Lighty\Kernel\Objects;
 
 /**
 * List Class

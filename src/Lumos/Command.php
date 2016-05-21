@@ -1,8 +1,8 @@
 <?php
 
-namespace Pikia\Kernel\Console\Command;
+namespace Lighty\Kernel\Console\Command;
 
-use Pikia\Kernel\Objects\Strings;
+use Lighty\Kernel\Objects\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -10,12 +10,12 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Helper\Table;
-use Pikia\Kernel\Console\Argument;
-use Pikia\Kernel\Console\Option;
+use Lighty\Kernel\Console\Argument;
+use Lighty\Kernel\Console\Option;
 
 
 

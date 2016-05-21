@@ -1,9 +1,9 @@
 <?php
 
-namespace Pikia\Kernel\Objects;
+namespace Lighty\Kernel\Objects;
 
-use Pikia\Kernel\Objects\Strings\Exception\StringOutIndexException;
-use Pikia\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\Strings\Exception\StringOutIndexException;
+use Lighty\Kernel\Objects\Table;
 
 /**
 * String Trim Consts

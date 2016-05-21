@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Http;
+namespace Lighty\Kernel\Http;
 
 /**
 * HTTP Class

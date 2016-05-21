@@ -1,10 +1,10 @@
 <?php 
 
-namespace Pikia\Kernel\Caches;
+namespace Lighty\Kernel\Caches;
 
-use Pikia\Kernel\Database\Database;
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Database\Schema;
+use Lighty\Kernel\Database\Database;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Database\Schema;
 
 /**
 * FileCache class

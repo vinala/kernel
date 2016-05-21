@@ -1,8 +1,8 @@
 <?php
 
-namespace Pikia\Kernel\Storage;
+namespace Lighty\Kernel\Storage;
 
-use Pikia\Kernel\Security\Hash;
+use Lighty\Kernel\Security\Hash;
 
 /**
 * Session class

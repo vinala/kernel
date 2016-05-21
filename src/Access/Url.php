@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Access;
+namespace Lighty\Kernel\Access;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * Url class

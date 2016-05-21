@@ -1,10 +1,10 @@
 <?php 
 
-namespace Pikia\Kernel\Translator;
+namespace Lighty\Kernel\Translator;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\Access\Path;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Access\Path;
 
 
 /**

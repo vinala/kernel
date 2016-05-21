@@ -1,14 +1,14 @@
 <?php 
 
-namespace Pikia\Kernel\Translator;
+namespace Lighty\Kernel\Translator;
 
-use Pikia\Kernel\Translator\Exception\LanguageKeyNotFoundException;
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Storage\Cookie;
-use Pikia\Kernel\HyperText\Res;
-use Pikia\Kernel\Objects\Base;
-use Pikia\Kernel\Filesystem\Filesystem;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Translator\Exception\LanguageKeyNotFoundException;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Storage\Cookie;
+use Lighty\Kernel\HyperText\Res;
+use Lighty\Kernel\Objects\Base;
+use Lighty\Kernel\Filesystem\Filesystem;
+use Lighty\Kernel\Foundation\Application;
 
 /**
 * Language class

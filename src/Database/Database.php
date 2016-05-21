@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Database;
+namespace Lighty\Kernel\Database;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Database\Drivers\MysqlDatabase;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Database\Drivers\MysqlDatabase;
 
 /**
 * Database Class

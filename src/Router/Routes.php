@@ -1,22 +1,22 @@
 <?php 
 
-namespace Pikia\Kernel\Router;
+namespace Lighty\Kernel\Router;
 
-use Pikia\Kernel\HyperText\Res;
-use Pikia\Kernel\Maintenance\Maintenance;
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Router\Exception\NotFoundHttpException;
-use Pikia\Kernel\Http\Errors;
-use Pikia\Kernel\Foundation\Application;
-use Pikia\Kernel\Access\Url;
+use Lighty\Kernel\HyperText\Res;
+use Lighty\Kernel\Maintenance\Maintenance;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Router\Exception\NotFoundHttpException;
+use Lighty\Kernel\Http\Errors;
+use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Access\Url;
 use Pikia\Vendor\Panel\Seeds;
 use Pikia\Vendor\Panel\Migrations;
 use Pikia\Vendor\Panel\Controller;
 use Pikia\Vendor\Panel\Lang;
 use Pikia\Vendor\Panel\Link;
 use Pikia\Vendor\Panel\Model;
-use Pikia\Kernel\Objects\Strings;
+use Lighty\Kernel\Objects\Strings;
 
 
 /**

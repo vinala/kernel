@@ -1,10 +1,10 @@
 <?php
 
-namespace Pikia\Kernel\MVC\View;
+namespace Lighty\Kernel\MVC\View;
 
-use Pikia\Kernel\MVC\View\Exception\ViewNotFoundException;
-use Pikia\Kernel\Foundation\Application;
-use Pikia\Kernel\Plugins\Plugins;
+use Lighty\Kernel\MVC\View\Exception\ViewNotFoundException;
+use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Plugins\Plugins;
 
 /**
 * View mother class

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Router;
+namespace Lighty\Kernel\Router;
 
 /**
 * Route class

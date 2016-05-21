@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Caches;
+namespace Lighty\Kernel\Caches;
 
 /**
 * Cache class

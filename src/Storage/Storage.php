@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Storage;
+namespace Lighty\Kernel\Storage;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Objects\Sys;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\Sys;
 use Whoops\Exception\ErrorException;
 /**
 * Storage class

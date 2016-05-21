@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Config;
+namespace Lighty\Kernel\Config;
 
 /**
 * Alias Class for "lazy"
@@ -39,7 +39,7 @@ class Alias
 		return 
 			array
 			(
-				'Connector' => \Pikia\Kernel\Foundation\Connector::class,
+				'Connector' => \Lighty\Kernel\Foundation\Connector::class,
 			);
 	}
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace Pikia\Kernel\Config;
+namespace Lighty\Kernel\Config;
 
-use Pikia\Kernel\Foundation\Application;
-use Pikia\Kernel\Foundation\Connector;
-use Pikia\Kernel\Config\Exceptions\ConfigException;
-use Pikia\Kernel\Mocking\configMocking;
+use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Foundation\Connector;
+use Lighty\Kernel\Config\Exceptions\ConfigException;
+use Lighty\Kernel\Mocking\configMocking;
 
 /**
 * Config Class

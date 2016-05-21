@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Process;
+namespace Lighty\Kernel\Process;
 
 /**
 * Language class

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Translator\Exception;
+namespace Lighty\Kernel\Translator\Exception;
 
 /**
 * Directory not fount exception

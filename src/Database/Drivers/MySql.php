@@ -1,11 +1,11 @@
 <?php 
 
-namespace Pikia\Kernel\Database\Drivers;
+namespace Lighty\Kernel\Database\Drivers;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Database\Database;
-use Pikia\Kernel\Database\Exception\DatabaseArgumentsException;
-use Pikia\Kernel\Database\Exception\DatabaseConnectionException;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Database\Database;
+use Lighty\Kernel\Database\Exception\DatabaseArgumentsException;
+use Lighty\Kernel\Database\Exception\DatabaseConnectionException;
 
 
 /**

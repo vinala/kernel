@@ -1,6 +1,6 @@
 <?php
 
-namespace Pikia\Kernel\Objects\Stringss\Exception;
+namespace Lighty\Kernel\Objects\Stringss\Exception;
 
 
 /**

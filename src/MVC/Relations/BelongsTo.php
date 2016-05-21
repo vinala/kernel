@@ -1,10 +1,10 @@
 <?php 
 
-namespace Pikia\Kernel\MVC\Relations;
+namespace Lighty\Kernel\MVC\Relations;
 
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\Objects\Strings;
-use Pikia\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\Strings;
+use Lighty\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
 
 define('OneToOneRelation', 'one');
 define('OneToManyRelation', 'many');

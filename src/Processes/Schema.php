@@ -1,13 +1,13 @@
 <?php
 
-namespace Pikia\Kernel\Process;
+namespace Lighty\Kernel\Process;
 
-use Pikia\Kernel\Foundation\Application;
-use Pikia\Kernel\Process\Process;
-use Pikia\Kernel\Database\Migration;
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Database\Schema;
-use Pikia\Kernel\Database\Database;
+use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Process\Process;
+use Lighty\Kernel\Database\Migration;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Database\Schema;
+use Lighty\Kernel\Database\Database;
 use Exception;
 
 /**

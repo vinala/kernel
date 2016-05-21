@@ -1,12 +1,12 @@
 <?php 
 
-namespace Pikia\Kernel\Security;
+namespace Lighty\Kernel\Security;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\Database\Database;
-use Pikia\Kernel\Storage\Session;
-use Pikia\Kernel\Storage\Cookie;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Database\Database;
+use Lighty\Kernel\Storage\Session;
+use Lighty\Kernel\Storage\Cookie;
 
 /**
 * Authentification class

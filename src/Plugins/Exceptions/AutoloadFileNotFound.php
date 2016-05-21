@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Plugins\Exception;
+namespace Lighty\Kernel\Plugins\Exception;
 
 /**
 * Directory not fount exception

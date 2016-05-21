@@ -5,9 +5,9 @@
  * access to some frmaework functions
  */
 
-use Pikia\Kernel\MVC\View\View;
-use Pikia\Kernel\Router\Route;
-use Pikia\Kernel\Objects\DateTime;
+use Lighty\Kernel\MVC\View\View;
+use Lighty\Kernel\Router\Route;
+use Lighty\Kernel\Objects\DateTime;
 
 /**
  * Views

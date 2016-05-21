@@ -1,8 +1,8 @@
 <?php
 
-namespace Pikia\Kernel\Resources;
+namespace Lighty\Kernel\Resources;
 
-use Pikia\Kernel\Access\Path;
+use Lighty\Kernel\Access\Path;
 
 /**
 *

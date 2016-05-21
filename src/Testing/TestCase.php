@@ -1,9 +1,9 @@
 <?php 
 
-namespace Pikia\Kernel\Testing;
+namespace Lighty\Kernel\Testing;
 
 use PHPUnit_Framework_TestCase;
-use Pikia\Kernel\Foundation\Application;
+use Lighty\Kernel\Foundation\Application;
 
 
 /**

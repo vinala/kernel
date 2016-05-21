@@ -1,10 +1,10 @@
 <?php 
 
-namespace Pikia\Kernel\Database;
+namespace Lighty\Kernel\Database;
 
-use Pikia\Kernel\Config\Config;
-use Pikia\Kernel\Objects\Table;
-use Pikia\Kernel\HyperText\Res;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\HyperText\Res;
 
 class DBTable
 {

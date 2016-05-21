@@ -1,6 +1,6 @@
 <?php 
 
-namespace Pikia\Kernel\Log;
+namespace Lighty\Kernel\Log;
 
 use Whoops\Handler\PrettyPageHandler;
 
