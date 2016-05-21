@@ -47,13 +47,13 @@ class Application
 	public static function version()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Pikia v3.2 ($version) PHP Framework";
+		return "Lighty v3.2 ($version) PHP Framework";
 	}
 
 	public static function consoleVersion()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Pikia v3.2 ($version) PHP Framework";
+		return "Lighty v3.2 ($version) PHP Framework";
 	}
 
 	public static function fullVersion()
@@ -65,7 +65,7 @@ class Application
 	{
 		$kernel = "vendor/lighty/kernel/";
 		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
-		return "Pikia Kernel v".$version;
+		return "Lighty Kernel v".$version;
 	}
 
 	protected static function callConnector($test = false)
