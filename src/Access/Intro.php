@@ -39,7 +39,7 @@ class Intro
 			'owner_name' => "\n\t|  Your name", 
 			'project_url' => "\n\t|  Your website root link, you should put your \n\t| root link , by default we using Application::root \n\t| function to get the root link even if you \n\t| working on localhost", 
 			'html_title' => "\n\t|  Default HTML title",
-			'timezone' => "\n\t|  Here you should set your timezone after that \n\t| whenever you wanna get time, Pikia will give\n\t| you exact time for the timezone.\n\t| To get all of timezones supported in php \n\t| visite here : http://php.net/manual/en/timezones.php",
+			'timezone' => "\n\t|  Here you should set your timezone after that \n\t| whenever you wanna get time, Lighty will give\n\t| you exact time for the timezone.\n\t| To get all of timezones supported in php \n\t| visite here : http://php.net/manual/en/timezones.php",
 			'routing_inexists' => "\n\t|  When HttpNotFoundException trown if unrouted \n\t| parameter was true it will be show to \n\t| exception else the framework will redirect\n\t| user to Error::r_404 route,",
 			'character_set' => "\n\t|  Default encodage when you using HTML::charset"
 			);
@@ -73,10 +73,10 @@ class Intro
 
 	protected static function appCont($name)
 	{
-		$project_name = self::appRow("project_name","'project'=>'fiesta',");
+		$project_name = self::appRow("project_name","'project'=>'lighty',");
 		$owner_name = self::appRow("owner_name","'owner'=>'".$name."',");
 		$project_url = self::appRow("project_url","'url'=>Application::root(),");
-		$html_title = self::appRow("html_title","'title'=> 'Pikia PHP Framework',");
+		$html_title = self::appRow("html_title","'title'=> 'Lighty PHP Framework',");
 		$timezone = self::appRow("timezone","'timezone'=> 'UTC',");
 		$routing_inexists = self::appRow("routing_inexists","'unrouted'=> true,");
 		$character_set = self::appRow("character_set","'charset'=> 'utf-8', ");
@@ -116,7 +116,7 @@ class Intro
 	protected static function langCont($langue)
 	{
 		$default_lang = self::langRow("default_lang","'default'=>'$langue',");
-		$lang_cookie = self::langRow("lang_cookie","'cookie'=>'fiesta_lang',");
+		$lang_cookie = self::langRow("lang_cookie","'cookie'=>'lighty_lang',");
 		//
 		return "<?php \n\nreturn array(\n\t".$default_lang.$lang_cookie."\n);";
 	}
@@ -129,7 +129,7 @@ class Intro
 		$doc = array(
 			'debug' => "\n\t|  Here to make the framework shows errors and\n\t|  exceptions, false to show friendly messages\n\t|  and true to debug", 
 			'error_debug_message' => "\n\t|  If loggin.debug was false the framework will\n\t|  show this message",
-			'error_log' => "\n\t|  The path of log file where Pikia store errors\n\t|  by default the framework use this path \n\t|  'app/storage/logs/fiesta.log'",
+			'error_log' => "\n\t|  The path of log file where Lighty store errors\n\t|  by default the framework use this path \n\t|  'app/storage/logs/lighty.log'",
 			'background' => "\n\t|  The color background of simple page error"
 			);
 		//
@@ -161,7 +161,7 @@ class Intro
 	{
 		$debug = self::logginRow("debug","'debug'=>$loggin,");
 		$error_debug_message = self::logginRow("error_debug_message","'msg' => \"Ohlala! il semble que quelque chose s'ait mal passé\",");
-		$error_log = self::logginRow("error_log","'log' => 'app/storage/logs/fiesta.log',");
+		$error_log = self::logginRow("error_log","'log' => 'app/storage/logs/lighty.log',");
 		$background = self::logginRow("background","'bg' => '#a4003a',");
 		//
 		return "<?php \n\nreturn array(\n\t".$debug.$error_debug_message.$error_log.$background."\n);";
@@ -311,10 +311,10 @@ class Intro
 	{
 		$doc = array(
 			'default' => "\n\t|  Default used database driver",
-			'connections' => "\n\t|  All drivers that Pikia Work with",
+			'connections' => "\n\t|  All drivers that Lighty Work with",
 			'table' => "\n\t|  Database used to store migrations info",
-			'prefixing' => "\n\t|  If true, Pikia will add prefixe for all \n\t|  Database tables created by the framework",
-			'prefixe' => "\n\t|  This string will be add to all tables names\n\t|  created by Pikia if prefixing parameter was true",
+			'prefixing' => "\n\t|  If true, Lighty will add prefixe for all \n\t|  Database tables created by the framework",
+			'prefixe' => "\n\t|  This string will be add to all tables names\n\t|  created by Lighty if prefixing parameter was true",
 			);
 		//
 		return $doc[$index]."\n\t*/";
@@ -351,7 +351,7 @@ class Intro
 	{
 		$default = self::dbRow("default","'default' => 'mysql', ");
 		$connections = self::dbRow("connections",self::dbConnections($host,$name,$usr,$pass));
-		$table = self::dbRow("table","'migration' => 'fiesta_migrations',");
+		$table = self::dbRow("table","'migration' => 'lighty_migrations',");
 		$prefixing = self::dbRow("prefixing","'prefixing' => $prefixing ,");
 		$prefixe = self::dbRow("prefixe","'prefixe' => '".$prefix."_',");
 		
@@ -420,7 +420,7 @@ class Intro
 		if(isset($_POST['stat'])) $state="true";
 		else $state="false";
 		//
-		$route=empty($_POST['route']) ? "fiesta" : $_POST['route'];
+		$route=empty($_POST['route']) ? "lighty" : $_POST['route'];
 		$pass_1=empty($_POST['pass_1']) ? "1234" : $_POST['pass_1'];
 		$pass_2=empty($_POST['pass_2']) ? "5678" : $_POST['pass_2'];
 		//
