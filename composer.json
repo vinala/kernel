@@ -1,7 +1,7 @@
 {
-	"name": "fiesta/kernel",
-	"description": "The core of Fiesta.",
-	"keywords": ["framework", "fiesta", "kernel"],
+	"name": "lighty/kernel",
+	"description": "The core of Lighty Framework.",
+	"keywords": ["framework", "lighty", "kernel"],
 	"license": "MIT",
 	"authors": [
 		{
@@ -11,7 +11,7 @@
 	],
 	"require": {
 		"php": ">=5.5.9",
-		"fiesta/whoops": "~1.2.3",
+		"lighty/whoops": "~1.2.3",
 		"mockery/mockery": "0.9.*"
 	},
 	"autoload": {
