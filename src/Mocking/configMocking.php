@@ -70,10 +70,10 @@ class configMocking
 	protected static function mockApp()
 	{
 		return array(
-					'project'=>'Pikia Kernel', 
+					'project'=>'Lighty Kernel', 
 					'owner'=>'Youssef', 
 					'url'=>Application::root(), 
-					'title'=> 'Pikia PHP Framework',
+					'title'=> 'Lighty PHP Framework',
 					'timezone'=> 'UTC',  
 					'unrouted'=> true, 
 					'charset'=> 'utf-8', 
