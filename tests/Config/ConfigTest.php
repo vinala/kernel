@@ -1,6 +1,6 @@
 <?php 
 
-use Pikia\Kernel\Config\Config;
+use Lighty\Kernel\Config\Config;
 
 /**
 * ConfigTest for testing
@@ -13,7 +13,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testAppConfigParams()
 	{
-		$this->assertEquals(Config::get("app.project"),"Pikia Kernel");
+		$this->assertEquals(Config::get("app.project"),"Lighty Kernel");
 		$this->assertEquals(Config::get("app.timezone"),"UTC");
 	}
 
@@ -22,7 +22,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testLogginConfigParams()
 	{
-		$this->assertEquals('app/storage/logs/pikia.log', Config::get("loggin.log"));
+		$this->assertEquals('app/storage/logs/lighty.log', Config::get("loggin.log"));
 		$this->assertTrue( ! Config::get("loggin.debug"));
 	}
 

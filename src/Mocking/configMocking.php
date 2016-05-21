@@ -63,7 +63,7 @@ class configMocking
 		return array(
 			'debug' => false,
 			'msg' => "Ohlala! il semble que quelque chose s'ait mal passé",
-			'log' => 'app/storage/logs/pikia.log',
+			'log' => 'app/storage/logs/lighty.log',
 			'bg' => '#a4003a',);
 	}
 
