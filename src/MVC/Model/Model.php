@@ -395,6 +395,22 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		return $data[0]['cnt'];
 	}
 
+	/**
+	 * Check if element in where existe
+	 *
+	 * @param $where (string) : the where clause
+	 */
+	public static function exist($where)
+	{
+		$self=self::instance();
+		$rows = new ModelArray;
+		//
+		$sql="select count(*) as cnt from ".$self->DBtable." where $where ";
+		$data = Database::read($sql,1);
+		//
+		return ($data[0]['cnt'] > 0) ;
+	}
+
 
 	/**
 	 * The has one relation for one to one
