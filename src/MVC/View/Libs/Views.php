@@ -41,7 +41,7 @@ class Views
 		else
 		{
 			self::$showed="smpl";
-			\Connector::need($_link3_);
+			include($_link3_);
 		}
 
 
@@ -82,7 +82,7 @@ class Views
 		else
 		{
 			self::$showed="smpl";
-			\Connector::need($link3);
+			include($link3);
 		}
 
 		//
@@ -127,7 +127,7 @@ class Views
 		else
 		{
 			self::$showed="smpl";
-			\Connector::need($_link3_);
+			include($_link3_);
 		}
 
 
