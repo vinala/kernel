@@ -118,7 +118,7 @@ class Commands extends Command
     */
     protected function setOutput(OutputInterface $output)
     {
-        switch (Config::get("console.terminal")) {
+        switch (Config::get("lumos.terminal")) {
             case 'bash': $op = new bashOutput($output); break;
             case 'cmd': $op = new cmdOutput($output); break;
             default: $op = new bashOutput($output); break;
