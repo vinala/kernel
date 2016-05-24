@@ -31,7 +31,7 @@ class NewSchemaCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.new_schema').' {name : what\'s the name of the schema?}';
+        $this->key = Config::get('lumos.new_schema').' {name : what\'s the name of the schema?}';
         $this->description = 'Make new schema file';
     }
 

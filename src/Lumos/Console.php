@@ -45,6 +45,7 @@ class Console
 
 	public static function run() 
 	{
+
 		self::$application = new Ap();
 		//
 		self::addCommands(self::$application);
@@ -78,6 +79,7 @@ class Console
 
 	protected static function addCommands($app)
 	{
+
 		self::AddUserCommands($app);
 		self::AddKernelCommands($app);
 	}
@@ -93,9 +95,13 @@ class Console
 	public static function AddKernelCommands($app)
 	{
 		self::setKernelClasses();
+		// die(var_dump(self::$kernelCommands));
 		//
 		foreach (self::$kernelCommands as $value) 
+		{
 			$app->add(new $value());
+
+		}
 	}
 
 	/**

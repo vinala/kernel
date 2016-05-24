@@ -30,7 +30,7 @@ class NewModelCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.new_model').' {fileName : what\'s the name of the file?} {className : what\'s the name of the model class?} {tableName : what\'s the name of the datatable?}';
+        $this->key = Config::get('lumos.new_model').' {fileName : what\'s the name of the file?} {className : what\'s the name of the model class?} {tableName : what\'s the name of the datatable?}';
         $this->description = 'New model';
     }
 

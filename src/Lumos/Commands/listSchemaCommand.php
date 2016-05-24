@@ -34,7 +34,7 @@ class listSchemaCommand extends Commands
 
 
         $this->key = "list:schema";
-       // $this->key = Config::get('console.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?}';
+       // $this->key = Config::get('lumos.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?}';
         $this->description = 'List all schema';
 
     }

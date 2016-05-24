@@ -32,7 +32,7 @@ class NewSeedCommand extends Commands
     public function set()
     {
 
-        $this->key = Config::get('console.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?}';
+        $this->key = Config::get('lumos.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?}';
         $this->description = 'New Seeder';
 
     }

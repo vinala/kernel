@@ -30,7 +30,7 @@ class NewLinkFileCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.new_link').' {name : what\'s the name of the file?}';
+        $this->key = Config::get('lumos.new_link').' {name : what\'s the name of the file?}';
         $this->description = 'New file for links';
     }
 

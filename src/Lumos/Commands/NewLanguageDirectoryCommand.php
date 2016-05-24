@@ -31,7 +31,7 @@ class NewLanguageDirectoryCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.dir_lang')." {name : what's the name of the directory?}";
+        $this->key = Config::get('lumos.dir_lang')." {name : what's the name of the directory?}";
         $this->description = "Make new translator directory";
     }
 

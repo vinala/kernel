@@ -32,7 +32,7 @@ class RollbackSchemaCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.rollback_schema');
+        $this->key = Config::get('lumos.rollback_schema');
         $this->description = 'Rollback the last schema created';
     }
 

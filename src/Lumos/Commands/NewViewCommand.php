@@ -31,7 +31,7 @@ class NewViewCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.new_view')." {name : what's the name of the view?} {--smarty : If set, the view will be in Smarty}";
+        $this->key = Config::get('lumos.new_view')." {name : what's the name of the view?} {--smarty : If set, the view will be in Smarty}";
         $this->description = "New View";
     }
 

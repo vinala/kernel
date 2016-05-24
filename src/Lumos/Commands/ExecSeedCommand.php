@@ -32,7 +32,7 @@ class ExecSeedCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('console.exec_seed');
+        $this->key = Config::get('lumos.exec_seed');
         $this->description = 'Execute Seeder';
     }
 
