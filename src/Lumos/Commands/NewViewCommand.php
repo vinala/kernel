@@ -61,8 +61,8 @@ class NewViewCommand extends Commands
     */
     public function show($process)
     {
-        if($process == 1) $this->info("The translator file is created");
-        else if($process == 2) $this->error("The translator file is already existe");
+        if($process == 1) $this->info("The view is created");
+        else if($process == 2) $this->error("The view is already existe");
         else if($process == 3) $this->error("Failed to create directories ...");
     }
 }
