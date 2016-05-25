@@ -33,7 +33,7 @@ class ExportDatabaseCommand extends Commands
     {
 
         $this->key = Config::get('lumos.export_database');
-        $this->description = 'Export database in current time';
+        $this->description = 'Save database in current time';
 
     }
 
@@ -60,7 +60,7 @@ class ExportDatabaseCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The database exported");
-        else $this->error("The database wasn't exported");
+        if($process) $this->info("The database saved");
+        else $this->error("The database wasn't saved");
     }
 }
