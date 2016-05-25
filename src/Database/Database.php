@@ -4,6 +4,7 @@ namespace Lighty\Kernel\Database;
 
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Database\Drivers\MysqlDatabase;
+use Lighty\Kernel\Objects\DateTime as Time;
 
 /**
 * Database Class
@@ -95,6 +96,22 @@ class Database
 	public static function res($sql)
 	{
 		return self::$driver->res($sql);
+	}
+
+	public static function export()
+	{
+
+	}
+
+	/**
+	 * Get the time of generation of the database
+	 */
+	protected static function exportTime()
+	{
+		$now = Time::now();
+		$current = Time::current();
+		//
+		return "-- Generated in $current ($now)";
 	}
 
 }
