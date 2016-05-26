@@ -44,6 +44,14 @@ class ExecSchemaCommand extends Commands
     public function handle()
     {
         $this->exec();
+        //
+        $this->line("");
+        //
+        $ok = $this->confirm("Wanna make backup for database ? [yes/no]" , false);
+        //
+        if($ok) 
+            if(Database::export()) $this->info("The database saved");
+            else $this->error("The database wasn't saved");
     }
 
     /**
@@ -61,7 +69,7 @@ class ExecSchemaCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The schema is executed");
-        else $this->error("Schema is not executed : ".Database::execErr());
+        if($process) $this->info("The schema executed");
+        else $this->error("Schema not executed : ".Database::execErr());
     }
 }
