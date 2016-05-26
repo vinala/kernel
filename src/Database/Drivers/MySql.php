@@ -9,6 +9,7 @@ use Lighty\Kernel\Database\Exception\DatabaseConnectionException;
 use mysqli as Sql;
 use Lighty\Kernel\Objects\DateTime as Time;
 use Lighty\Kernel\Filesystem\Filesystem;
+use Lighty\Kernel\Foundation\Application;
 
 
 /**
@@ -241,7 +242,7 @@ class MysqlDatabase
 		$database 	= Config::get("database.database");
 		//
 		$name = $database."_".$time.".sql";
-		$path = "app/database/$name";
+		$path = Application::$root."database/backup/$name";
 		//
 		return (new Filesystem)->put($path,$content); 
 	}
