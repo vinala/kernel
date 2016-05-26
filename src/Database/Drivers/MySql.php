@@ -252,7 +252,7 @@ class MysqlDatabase
 	protected static function makeDatabase()
 	{
 		$database = Config::get("database.database");
-		return "\n\n-- CREATE DATABASE $database;\n--USE $database;";
+		return "\n\n-- CREATE DATABASE $database;\n-- USE $database;";
 	}
 
 	/**
