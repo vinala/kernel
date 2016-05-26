@@ -42,6 +42,14 @@ class ExecSeedCommand extends Commands
     public function handle()
     {
         $this->exec();
+        //
+        $this->line("");
+        //
+        $ok = $this->confirm("Wanna make backup for database ? [yes/no]" , false);
+        //
+        if($ok) 
+            if(Database::export()) $this->info("The database saved");
+            else $this->error("The database wasn't saved");
     }
 
     /**
@@ -59,7 +67,7 @@ class ExecSeedCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The seeder is executed");
+        if($process) $this->info("The seeder executed");
         else $this->error("There is an error".Database::execErr());
     }
 }
