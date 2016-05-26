@@ -18,7 +18,7 @@ class Migrations
 	public static function exec()
 	{
 		$root = Process::root;
-		$r=glob($root."app/schemas/*.php");
+		$r=glob($root."database/schema/*.php");
 		//
 		$pieces=array();
 		$pieces1=array();
@@ -29,7 +29,7 @@ class Migrations
 		//
 		$f = array();
 		foreach ($r as $key) {
-			$pieces = explode("app/schemas/", $key);
+			$pieces = explode("database/schema/", $key);
 			$pieces1 = explode("_", $pieces[1]);
 			$time=$pieces1[0];
 			$p=explode(".", $pieces1[1]);
@@ -102,7 +102,8 @@ class Migrations
 		//
 		$root=Process::root;
 		//
-		$myfile = fopen($root."app/schemas/".$Unixtime."_".$name.".php", "w");
+		$myfile = fopen($root."database/schema/".$Unixtime."_".$name.".php", "w");
+		// $myfile = fopen($root."database/schema/".$Unixtime."_".$name.".php", "w");
 		//
 		fwrite($myfile, self::set($name,$Unixtime,$Datetime));
 		fclose($myfile);
@@ -119,7 +120,7 @@ class Migrations
 	public static function rollback()
 	{
 		$Root=Process::root;
-		$r=glob($Root."app/schemas/*.php");
+		$r=glob($Root."database/schema/*.php");
 		//
 		$pieces=array();
 		$pieces1=array();
@@ -131,7 +132,7 @@ class Migrations
 		//
 		$f = array();
 		foreach ($r as $key) {
-			$pieces = explode("app/schemas/", $key);
+			$pieces = explode("database/schema/", $key);
 			$pieces1 = explode("_", $pieces[1]);
 			$time=$pieces1[0];
 			$p=explode(".", $pieces1[1]);
@@ -201,7 +202,7 @@ class Migrations
 	public static function rollback_cos() /* Beta */
 	{
 		$Root = "../";
-		$r=glob("../app/schemas/*.php");
+		$r=glob("../database/schema/*.php");
 
 		$r2=array();
 		$r2=array();
@@ -228,14 +229,14 @@ class Migrations
 				error_log($r3[$i].'*/*'.$r3[$i-1]);
 				if($r3[$i]>=$r3[$i-1])
 				{
-					$v="../app/schemas/".$r3[$i]."_".$r2[$i].".php";
+					$v="../database/schema/".$r3[$i]."_".$r2[$i].".php";
 					$full_name=$r3[$i]."_".$r2[$i];
 				}
 			}
 		}
 		else
 		{
-			$v="../app/schemas/".$r3[0]."_".$r2[0].".php";
+			$v="../database/schema/".$r3[0]."_".$r2[0].".php";
 			$full_name=$r3[0]."_".$r2[0];
 		}
 
@@ -256,7 +257,7 @@ class Migrations
 	public static function exec_cos() /* Beta */
 	{
 		$Root = "../";
-		$r=glob("../app/schemas/*.php");
+		$r=glob("../database/schema/*.php");
 
 		$r2=array();
 		$r2=array();
@@ -282,14 +283,14 @@ class Migrations
 				error_log($r3[$i].'*/*'.$r3[$i-1]);
 				if($r3[$i]>=$r3[$i-1])
 				{
-					$v="../app/schemas/".$r3[$i]."_".$r2[$i].".php";
+					$v="../database/schema/".$r3[$i]."_".$r2[$i].".php";
 					$full_name=$r3[$i]."_".$r2[$i];
 				}
 			}
 		}
 		else
 		{
-			$v="../app/schemas/".$r3[0]."_".$r2[0].".php";
+			$v="../database/schema/".$r3[0]."_".$r2[0].".php";
 			$full_name=$r3[0]."_".$r2[0];
 		}
 
@@ -312,7 +313,7 @@ class Migrations
 	*/
 	public static function ListAll()
 	{
-		$schema = glob(Application::$root."app/schemas/*.php");
+		$schema = glob(Application::$root."database/schema/*.php");
 		//
 		return $schema;
 	}
