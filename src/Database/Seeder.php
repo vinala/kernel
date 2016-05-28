@@ -2,6 +2,9 @@
 
 namespace Lighty\Kernel\Database;
 
+use SeedsCaller as Caller;
+use Lighty\Kernel\Database\Exception\SeedersEmptyException;
+
 /**
 * Seeder class
 */
@@ -24,7 +27,23 @@ class Seeder
 
 	public static function ini()
 	{
-		return \SeedsCaller::run();
+		$seeders = self::getSeeders();
+		//
+		$result = array();
+		//
+		foreach ($seeders as $value) 
+			$result[$value] = self::call($value);
+		//
+		return $result;
+	}
+
+	protected static function getSeeders()
+	{
+		$seeders = Caller::refernces();
+		//
+		if(empty($seeders)) throw new SeedersEmptyException();
+		//
+		return $seeders;
 	}
 
 }
