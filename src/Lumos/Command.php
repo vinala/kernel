@@ -417,37 +417,67 @@ class Commands extends Command
     /**
      * to write text in green color in the console
      */
-    public function info($text)
+    public function info($text , $sameLine = false)
     {
         $output = $this->console->info($text);
-        $this->console->line($output);
+        //
+        if($sameLine) $this->console->write($output);
+        else $this->console->line($output);
     }
 
     /**
      * to write text in yellow color in the console
      */
-    public function comment($text)
+    public function comment($text , $sameLine = false)
     {
         $output = $this->console->comment($text);
-        $this->console->line($output);
+        //
+        if($sameLine) $this->console->write($output);
+        else $this->console->line($output);
     }
 
     /**
      * to write text in cyan color in the console
      */
-    public function question($text)
+    public function question($text , $sameLine = false)
     {
         $output = $this->console->question($text);
-        $this->console->line($output);
+        //
+        if($sameLine) $this->console->write($output);
+        else $this->console->line($output);
     }
 
     /**
      * to write text in red color in the console
      */
-    public function error($text)
+    public function error($text , $sameLine = false)
     {
         $output = $this->console->error($text);
-        $this->console->line($output);
+        //
+        if($sameLine) $this->console->write($output);
+        else $this->console->line($output);
+    }
+
+    /**
+     * to write text in red color in the console
+     */
+    public function red($text , $sameLine = false)
+    {
+        $output = $this->console->red($text);
+        //
+        if($sameLine) $this->console->write($output);
+        else $this->console->line($output);
+    }
+
+    /**
+     * to write text in green color in the console
+     */
+    public function green($text , $sameLine = false)
+    {
+        $output = $this->console->green($text);
+        //
+        if($sameLine) $this->console->write($output);
+        else $this->console->line($output);
     }
 
     /**
