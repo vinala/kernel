@@ -61,7 +61,7 @@ class ExecSeedCommand extends Commands
     public function show($process)
     {
         if($process) $this->info("The seeder executed");
-        else $this->error("There is an error".Database::execErr());
+        else $this->error("There is an error ".Database::execErr());
     }
 
     /**
