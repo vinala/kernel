@@ -43,8 +43,7 @@ class DBTable
 		$ok=false;
 		
 		if(count($array)>0)
-		{
-			foreach ($array as $subarray) {
+			foreach ($array as $subarray) 
 				if(count($subarray)>0)
 				{
 					$sql="insert into ".$this->name." ";
@@ -66,8 +65,6 @@ class DBTable
 					//
 					$ok = Database::exec($sql);
 				}
-			}
-		}
 		//
 		return $ok;
 	}
@@ -77,8 +74,7 @@ class DBTable
 		$ok=false;
 		
 		if(count($array)>0)
-		{
-			foreach ($array as $subarray) {
+			foreach ($array as $subarray) 
 				if(count($subarray)>0)
 				{
 					$sql="update ".$this->name." set ";
@@ -93,23 +89,16 @@ class DBTable
 					//
 					$sql.=$val." where ".$cond.";";
 					//
-					Database::exec($sql);
-					//
-					$ok=true;
+					$ok = Database::exec($sql);
 				}
-			}
-		}
 		//
 		return $ok;
 	}
 
 	public function delete($cond)
 	{
-		$ok=false;
 		$sql="delete from ".$this->name." where ".$cond;
-		Database::exec($sql);
-		$ok=true;
-		return $ok;
+		return Database::exec($sql);
 	}
 
 
