@@ -21,9 +21,9 @@ class Seeds
 		$nom=$name;
 		$Root = Process::root;
 		//
-		if(!file_exists($Root."app/seeds/$nom.php"))
+		if(!file_exists($Root."database/seeds/$nom.php"))
 		{
-		 	$myfile = fopen($Root."app/seeds/$nom.php", "w");
+		 	$myfile = fopen($Root."database/seeds/$nom.php", "w");
 			$txt = self::set($nom,$table);
 			//
 			fwrite($myfile, $txt);
@@ -53,7 +53,7 @@ class Seeds
 	*/
 	public static function ListAll()
 	{
-		$seeds = glob(Application::$root."app/seeds/*.php");
+		$seeds = glob(Application::$root."database/seeds*.php");
 		//
 		return $seeds;
 	}
