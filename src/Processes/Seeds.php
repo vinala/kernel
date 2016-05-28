@@ -57,7 +57,7 @@ class Seeds
 		$str = "";
 		//
 		foreach ($colmuns as $value) 
-			$str .= "\n\t\t\t\t".'"'.$value.'" => ,';
+			$str .= "\n\t\t\t\t".'"'.$value.'" => null,';
 		//
 		return $str;
 	}
