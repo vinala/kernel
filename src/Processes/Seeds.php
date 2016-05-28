@@ -17,7 +17,7 @@ class Seeds
 		return Seeder::ini();
 	}
 
-	public static function add($name,$table)
+	public static function add($name,$table,$count)
 	{
 		$nom=$name;
 		$Root = Process::root;
@@ -25,7 +25,7 @@ class Seeds
 		if(!file_exists($Root."database/seeds/$nom.php"))
 		{
 		 	$myfile = fopen($Root."database/seeds/$nom.php", "w");
-			$txt = self::set($nom,$table);
+			$txt = self::set($nom,$table,$count);
 			//
 			fwrite($myfile, $txt);
 			fclose($myfile);
@@ -35,7 +35,7 @@ class Seeds
 		else return false;
 	}
 
-	public static function set($nom,$table)
+	public static function set($nom,$table,$count)
 	{
 		$colmuns = self::colmuns($table);
 		//
@@ -46,7 +46,7 @@ class Seeds
 		$txt.="\t/*\n\t* Name of DataTable\n\t*/\n\tpublic ".'$table="'.$table.'";'."\n\n";
 
 			//run
-		$txt.="\t/*\n\t* Run the Database Seeder\n\t*/\n\tpublic function run()\n\t{\n\t\t".'$data = array();'."\n\t\t//"."\n\t\t".'for ($i=0; $i < 50; $i++)'."\n\t\t\t".'Table::push($data , array('.$colmuns."\n\t\t\t".'));'."\n\t\t//\n\t\t".'return Schema::table($this->table)->insert($data);'."\n\t}\n}";
+		$txt.="\t/*\n\t* Run the Database Seeder\n\t*/\n\tpublic function run()\n\t{\n\t\t".'$data = array();'."\n\t\t//"."\n\t\t".'for ($i=0; $i < '.$count.'; $i++)'."\n\t\t\t".'Table::push($data , array('.$colmuns."\n\t\t\t".'));'."\n\t\t//\n\t\t".'return Schema::table($this->table)->insert($data);'."\n\t}\n}";
 
 		return $txt;
 	}

@@ -32,7 +32,7 @@ class NewSeedCommand extends Commands
     public function set()
     {
 
-        $this->key = Config::get('lumos.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?}';
+        $this->key = Config::get('lumos.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?} {count? : who much of rows ?}';
         $this->description = 'New Seeder';
 
     }
@@ -54,9 +54,11 @@ class NewSeedCommand extends Commands
 
         $name = $this->argument('name');
         $tableName = $this->argument('tableName');
+        $count = $this->argument('count');
+        $count = is_null($count) ? 10 : $count ;
 
         //
-        $process = Seeds::add($name,$tableName);
+        $process = Seeds::add($name,$tableName,$count);
         //
         $this->show($process, $name);
     }
