@@ -72,4 +72,20 @@ class bashOutput
         return "<error>".$text."</error>";
     }
 
+    /**
+     * to write text in red color in the console
+     */
+    public function red($text)
+    {
+        return chr(27) . "[1;31m" . "$text" . chr(27) . "[0m";
+    }
+
+    /**
+     * to write text in green color in the console
+     */
+    public function green($text)
+    {
+        return chr(27) . "[1;32m" . "$text" . chr(27) . "[0m";
+    }
+
 }
