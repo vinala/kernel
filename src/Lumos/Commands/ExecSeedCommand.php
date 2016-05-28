@@ -55,13 +55,27 @@ class ExecSeedCommand extends Commands
         $this->backup($process);
     }
 
+    public function onoff($key, $stat)
+    {
+        if($stat)
+        {
+            $this->write("$key -> ");
+            $this->green("succeed");
+        }
+        else
+        {
+            $this->write("$key -> ");
+            $this->red("failed");
+        }
+    }
+
     /**
      * Format the message to show
     */
     public function show($process)
     {
-        if($process) $this->info("The seeder executed");
-        else $this->error("There is an error ".Database::execErr());
+        foreach ($process as $key => $value) 
+            self::onoff($key, $value);
     }
 
     /**
