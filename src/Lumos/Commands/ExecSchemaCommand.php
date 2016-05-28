@@ -44,14 +44,6 @@ class ExecSchemaCommand extends Commands
     public function handle()
     {
         $this->exec();
-        //
-        $this->line("");
-        //
-        $ok = $this->confirm("Wanna make backup for database ? [yes/no]" , false);
-        //
-        if($ok) 
-            if(Database::export()) $this->info("The database saved");
-            else $this->error("The database wasn't saved");
     }
 
     /**
@@ -62,6 +54,7 @@ class ExecSchemaCommand extends Commands
         $process = Migrations::exec();
         //
         $this->show($process);
+        $this->backup($process);
     }
 
     /**
@@ -71,5 +64,22 @@ class ExecSchemaCommand extends Commands
     {
         if($process) $this->info("The schema executed");
         else $this->error("Schema not executed : ".Database::execErr());
+    }
+
+    /**
+     * Make backup for database
+     */
+    protected function backup($process)
+    {
+        if($process)
+        {
+            $this->line("");
+            //
+            $ok = $this->confirm("Wanna make backup for database ? [yes/no]" , false);
+            //
+            if($ok) 
+                if(Database::export()) $this->info("The database saved");
+                else $this->error("The database wasn't saved");
+        }
     }
 }
