@@ -13,14 +13,20 @@ class Fetcher
 	/**
 	 * Path to app folder
 	 */
-	protected static $path;
+	protected static $appPath;
+
+	/**
+	 * Path to framework folder
+	 */
+	protected static $frameworkPath;
 
 	/**
 	 * Get all required App files
 	 */
 	public static function run($routes)
 	{
-		self::setPath();
+		self::setAppPath();
+		self::setFrameworkPath();
 		//
 		self::model();
 		self::controller();
@@ -34,18 +40,28 @@ class Fetcher
 	/**
 	 * Set path to app folder
 	 */
-	protected static function setPath()
+	protected static function setAppPath()
 	{
-		self::$path = Application::$root."app/";
-		return self::$path ; 
+		self::$appPath = Application::$root."app/";
+		return self::$appPath ; 
+	}
+
+	/**
+	 * Set path to app folder
+	 */
+	protected static function setFrameworkPath()
+	{
+		self::$frameworkPath = Application::$root;
+		return self::$frameworkPath ; 
 	}
 
 	/**
 	 * Fetch files of folder
 	 */
-	protected static function fetch($pattern)
+	protected static function fetch($pattern,$app = true)
 	{
-		return glob(self::$path.$pattern.'/*.php');
+		if($app) return glob(self::$appPath.$pattern.'/*.php');
+		else return glob(self::$frameworkPath.$pattern.'/*.php');
 	}
 
 	/**
@@ -80,7 +96,7 @@ class Fetcher
 	 */
 	protected static function seed()
 	{
-		foreach (self::fetch("seeds") as $file) 
+		foreach (self::fetch("database/seeds" , false) as $file) 
 			Connector::need($file);
 	}
 
@@ -89,7 +105,7 @@ class Fetcher
 	 */
 	protected static function filtes()
 	{
-		Connector::need(self::$path.'http/Filters.php');
+		Connector::need(self::$appPath.'http/Filters.php');
 	}
 
 	/**
@@ -99,7 +115,7 @@ class Fetcher
 	{
 		if($routes)
 			{
-				Connector::need(self::$path.'http/Routes.php');
+				Connector::need(self::$appPath.'http/Routes.php');
 				Routes::run();
 			}
 	}
