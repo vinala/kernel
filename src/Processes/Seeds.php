@@ -43,7 +43,7 @@ class Seeds
 		$txt.="\t/*\n\t* Name of DataTable\n\t*/\n\tpublic ".'$table="'.$table.'";'."\n\n";
 
 			//run
-		$txt.="\t/*\n\t* Run the Database Seeder\n\t*/\n\tpublic function run()\n\t{\n\t\t".'$data = array();'."\n\t\t//"."\n\t\t".'for ($i=0; $i < 50; $i++)'."\n\t\t\t".'Table::push($data , array(/* Data Fields */);'."\n\t\t//\n\t\t".'return Schema::table($this->table)->insert($data);'."\n\t}\n}";
+		$txt.="\t/*\n\t* Run the Database Seeder\n\t*/\n\tpublic function run()\n\t{\n\t\t".'$data = array();'."\n\t\t//"."\n\t\t".'for ($i=0; $i < 50; $i++)'."\n\t\t\t".'Table::push($data , array(/* Data Fields */));'."\n\t\t//\n\t\t".'return Schema::table($this->table)->insert($data);'."\n\t}\n}";
 
 		return $txt;
 	}
