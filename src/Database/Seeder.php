@@ -39,7 +39,7 @@ class Seeder
 
 	protected static function getSeeders()
 	{
-		$seeders = Caller::refernces();
+		$seeders = Caller::references();
 		//
 		if(empty($seeders)) throw new SeedersEmptyException();
 		//
