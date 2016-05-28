@@ -106,6 +106,30 @@ class Database
 		return self::$driver->export();
 	}
 
+	/**
+	 *  Get all columns
+	 */
+	public static function colmuns($table)
+	{
+		return self::$driver->getColmuns($table);
+	}
+
+	/**
+	 * get increment columns
+	 */
+	public static function incrementColumns($table)
+	{
+		return self::$driver->getIncrement($table);
+	}
+
+	/**
+	 * get normal columns without increments
+	 */
+	public static function normalColumns($table)
+	{
+		return self::$driver->getNormalColumn($table);
+	}
+
 
 
 }
