@@ -10,6 +10,7 @@ use mysqli as Sql;
 use Lighty\Kernel\Objects\DateTime as Time;
 use Lighty\Kernel\Filesystem\Filesystem;
 use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Objects\Table;
 
 
 /**
@@ -331,5 +332,57 @@ class MysqlDatabase
         self::saveExport($now, $content);
         //
         return true;
+	}
+
+	/**
+	 * Get columns of data table
+	 */
+	public function getColmuns($table)
+	{
+		$table = self::table($table);
+		$columns = array();
+		//
+		$data = Database::read("select COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '".Config::get('database.database')."' AND TABLE_NAME = '$table';");
+		//
+		foreach ($data as $key => $value) 
+			$columns[] = $value["COLUMN_NAME"];
+		//
+		return $columns;
+	}
+
+	/**
+	 * Get columns of data table
+	 */
+	public function getIncrement($table)
+	{
+		$table = self::table($table);
+		$columns = array();
+		//
+		$data = Database::read("select COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '".Config::get('database.database')."' AND TABLE_NAME = '$table' AND EXTRA like '%auto_increment%';");
+		//
+		foreach ($data as $key => $value) 
+			$columns[] = $value["COLUMN_NAME"];
+		//
+		return $columns; 
+	}
+
+	/**
+	 * Get columns of data table without auto increment columns
+	 */
+	public function getNormalColumn($table)
+	{
+		$all = self::getColmuns($table);
+		$incs = self::getIncrement($table);
+		//
+		return Table::except($incs,$all);
+	}
+
+	/**
+	 * Get the real name of table with prefix
+	 */
+	public function table($table)
+	{
+		if(Config::get('database.prefixing')) return Config::get('database.prefixe') . $table;
+		return $table;
 	}
 }
