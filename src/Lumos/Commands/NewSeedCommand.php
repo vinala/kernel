@@ -58,15 +58,15 @@ class NewSeedCommand extends Commands
         //
         $process = Seeds::add($name,$tableName);
         //
-        $this->show($process);
+        $this->show($process, $name);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process, $name)
     {
-        if($process) $this->info("The seeder is created");
+        if($process) $this->info("$name created");
         else $this->error("The seeder is already existe");
     }
 }
