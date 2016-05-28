@@ -64,11 +64,7 @@ class DBTable
 					//
 					$sql.=$col." values".$vals.";";
 					//
-					Database::exec($sql);
-					//
-					$ok=true;
-					//
-					
+					$ok = Database::exec($sql);
 				}
 			}
 		}
