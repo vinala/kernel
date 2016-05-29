@@ -69,16 +69,14 @@ class Migrations
 	public static function set($name,$Unixtime,$Datetime)
 	{
 		$txt = "<?php\n\n";
-		$txt.="/* Schema info\n* @date : ".$Datetime."(".$Unixtime.")\n* @name : ".$name."\n\n\n\n";
-		$txt .= "\t/**\n\t * Run the schemas.\n\t*/\n";
-		$txt .= "\tfunction up()\n\t{\n\t\treturn true;\n\n";
-		$txt .= "\t\t/* Ex.\treturn Schema::create('$name',function(".'$tab'.")\n\t\t\t{\n\t\t\t\t".'$tab->string("name");'."\n\t\t\t});\n\t\t\t*/";
-		$txt .= "\n\t}\n\n";
-		$txt .= "\t/**\n\t * Reverse the schemas.\n\t*/\n";
-		$txt .= "\tfunction down()\n\t{\n\t\treturn true;\n\n";
-		$txt .= "\t\t// Ex.\t return Schema::drop('$name');\n\n";
-		$txt .= "\t}\n\n";
-		$txt .= "?>\n";
+		$txt.="/*\n* @date : ".$Datetime."(".$Unixtime.")\n* @name : ".$name."\n*/\n\n\n";
+		$txt .= "/**\n* Run the schemas.\n*/\n";
+		$txt .= "function up()\n{\n\t/* \n\t\treturn Schema::create('$name',function(".'$tab'.")\n\t\t{\n\t\t".'$tab->string("name");'."\n\t\t});\n\t*/";
+		$txt .= "\n}\n\n";
+		$txt .= "/**\n* Reverse the schemas.\n*/\n";
+		$txt .= "function down()\n{\n\t// return Schema::drop('$name');\n";
+		$txt .= "}\n\n";
+		//
 		return $txt;
 	}
 
