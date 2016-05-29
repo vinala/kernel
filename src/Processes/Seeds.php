@@ -40,7 +40,7 @@ class Seeds
 		$colmuns = self::colmuns($table);
 		//
 		$txt = "<?php\n\nuse Lighty\Kernel\Database\Seeder;\n\n";
-		$txt.="/**\n* class de seeder $nom\n*/\nclass $nom extends Seeder\n{\n";
+		$txt.="/**\n* class of seeder $nom\n*/\nclass $nom extends Seeder\n{\n";
 
 		//datatable name
 		$txt.="\t/*\n\t* Name of DataTable\n\t*/\n\tpublic ".'$table = "'.$table.'" ;'."\n\n";
