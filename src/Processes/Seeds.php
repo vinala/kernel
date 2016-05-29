@@ -43,10 +43,13 @@ class Seeds
 		$txt.="/**\n* class de seeder $nom\n*/\nclass $nom extends Seeder\n{\n";
 
 		//datatable name
-		$txt.="\t/*\n\t* Name of DataTable\n\t*/\n\tpublic ".'$table="'.$table.'";'."\n\n";
+		$txt.="\t/*\n\t* Name of DataTable\n\t*/\n\tpublic ".'$table = "'.$table.'" ;'."\n\n";
+
+		//datatable name
+		$txt.="\t/*\n\t* Number of rows to insert\n\t*/\n\tpublic ".'$count = '.$count.' ;'."\n\n";
 
 			//run
-		$txt.="\t/*\n\t* Run the Database Seeder\n\t*/\n\tpublic function run()\n\t{\n\t\t".'$data = array();'."\n\t\t//"."\n\t\t".'for ($i=0; $i < '.$count.'; $i++)'."\n\t\t\t".'Table::push($data , array('.$colmuns."\n\t\t\t".'));'."\n\t\t//\n\t\t".'return Schema::table($this->table)->insert($data);'."\n\t}\n}";
+		$txt.="\t/*\n\t* Set the data here to insert\n\t*/\n\tpublic function data()\n\t{\n\t\t".'return array('.$colmuns."\n\t\t\t".');'."\n\t}\n}";
 
 		return $txt;
 	}
@@ -57,7 +60,7 @@ class Seeds
 		$str = "";
 		//
 		foreach ($colmuns as $value) 
-			$str .= "\n\t\t\t\t".'"'.$value.'" => null,';
+			$str .= "\n\t\t\t\t".'"'.$value.'" => null ,';
 		//
 		return $str;
 	}
