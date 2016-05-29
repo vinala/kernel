@@ -37,7 +37,7 @@ class Seeds
 
 	public static function set($nom,$table,$count)
 	{
-		$colmuns = self::colmuns($table);
+		$colmuns = self::colmuns($table , ($count > 0));
 		//
 		$txt = "<?php\n\nuse Lighty\Kernel\Database\Seeder;\n\n";
 		$txt.="/**\n* class of seeder $nom\n*/\nclass $nom extends Seeder\n{\n";
@@ -48,19 +48,22 @@ class Seeds
 		//datatable name
 		$txt.="\t/*\n\t* Number of rows to insert\n\t*/\n\tpublic ".'$count = '.$count.' ;'."\n\n";
 
-			//run
-		$txt.="\t/*\n\t* Set the data here to insert\n\t*/\n\tpublic function data()\n\t{\n\t\t".'return array('.$colmuns."\n\t\t\t".');'."\n\t}\n}";
+		//run
+		if($count > 0)
+			$txt.="\t/*\n\t* Set the data here to insert\n\t*/\n\tpublic function data()\n\t{\n\t\t".'return array('.$colmuns."\n\t\t\t".');'."\n\t}\n}";
+		else $txt.="\t/*\n\t* Set the data here to insert\n\t*/\n\tpublic function data()\n\t{\n\t\t"."return array(\n\t\t\tarray($colmuns\n\t\t\t),\n\t\t\tarray($colmuns\n\t\t\t),\n\t\t);\n\t}\n}";
 
 		return $txt;
 	}
 
-	public static function colmuns($table)
+	public static function colmuns($table , $loop)
 	{
 		$colmuns = Database::normalColumns($table);
 		$str = "";
 		//
 		foreach ($colmuns as $value) 
-			$str .= "\n\t\t\t\t".'"'.$value.'" => null ,';
+			if($loop) $str .= "\n\t\t\t\t".'"'.$value.'" => null ,';
+			else  $str .= "\n\t\t\t\t".'"'.$value.'" => null ,';
 		//
 		return $str;
 	}
