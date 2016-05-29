@@ -73,7 +73,7 @@ class Seeds
 	*/
 	public static function ListAll()
 	{
-		$seeds = glob(Application::$root."database/seeds*.php");
+		$seeds = glob(Application::$root."database/seeds/*.php");
 		//
 		return $seeds;
 	}
