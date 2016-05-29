@@ -118,7 +118,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	{
 		// if( ! $this->isKept) 
 			$sql = "select * from ".$this->DBtable." where ".$this->primaryKey."='".$pk."' ";
-		// else $sql = "select * from ".$this->DBtable." where ".$this->primaryKey."='".$pk."' where deleted_at<'".Time::now()."'";
+		// else $sql = "select * from ".$this->DBtable." where ".$this->primaryKey."='".$pk."' where deleted_at<'".Time::current()."'";
 		//
 		$data=Database::read($sql,1);
 		//
@@ -166,7 +166,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	{
 		if(is_null($data[0]["deleted_at"])) return false;
 		else
-		return $data[0]["deleted_at"] < Time::now();
+		return $data[0]["deleted_at"] < Time::current();
 	}
 
 	protected static function instance()
@@ -239,8 +239,8 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		}
 		if( $this->isMaj ) 
 		{
-			if($i==0) { $colmn_string.="created_at"; $value_string.="'".Time::now()."'"; }
-			else { $colmn_string.=",created_at"; $value_string.=",'".Time::now()."'"; }
+			if($i==0) { $colmn_string.="created_at"; $value_string.="'".Time::current()."'"; }
+			else { $colmn_string.=",created_at"; $value_string.=",'".Time::current()."'"; }
 		}
 		//
 		$colmn_string.=")";
@@ -273,7 +273,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 	protected function lightDelete()
 	{
-		$now = Time::now();
+		$now = Time::current();
 		$key=$this->getPKvalue();
 		//
 		$sql="update ".$this->DBtable." set deleted_at='".$now."' where ".$this->primaryKey." = '".$key."' ";
@@ -323,8 +323,8 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 		if( $this->isMaj ) 
 		{
-			if($i==0) { $sql.="edited_at='".Time::now()."'"; }
-			else { $sql.=",edited_at='".Time::now()."'"; }
+			if($i==0) { $sql.="edited_at='".Time::current()."'"; }
+			else { $sql.=",edited_at='".Time::current()."'"; }
 		}
 		//
 		$key=$this->getPKvalue();
