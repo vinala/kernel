@@ -4,6 +4,8 @@ namespace Lighty\Kernel\Database;
 
 use SeedsCaller as Caller;
 use Lighty\Kernel\Database\Exception\SeedersEmptyException;
+use Lighty\Kernel\Database\Schema;
+use Lighty\Kernel\Objects\Table;
 
 /**
 * Seeder class
@@ -22,7 +24,7 @@ class Seeder
 			$tabs->clear();
 		}
 		//
-		return $tab->run();
+		return self::execute($tab);
 	}
 
 	public static function ini()
@@ -44,6 +46,17 @@ class Seeder
 		if(empty($seeders)) throw new SeedersEmptyException();
 		//
 		return $seeders;
+	}
+
+
+	protected static function execute($seeder)
+	{
+		$data = array();
+		//
+		for ($i=0; $i < $seeder->count; $i++)
+			Table::push($data , $seeder->data());
+		//
+		return Schema::table($seeder->table)->insert($data);
 	}
 
 }
