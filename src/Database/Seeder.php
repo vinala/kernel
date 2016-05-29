@@ -48,15 +48,30 @@ class Seeder
 		return $seeders;
 	}
 
-
+	/**
+	 * Execute thh seeder
+	 */
 	protected static function execute($seeder)
+	{
+		$data = self::fill($seeder);
+		//
+		return Schema::table($seeder->table)->insert($data);
+	}
+
+	/**
+	 * Fill data
+	 */
+	public static function fill($seeder)
 	{
 		$data = array();
 		//
-		for ($i=0; $i < $seeder->count; $i++)
+		if($seeder->count <= 0)
+			foreach ($seeder->data() as $value)
+				Table::push($data , $value);
+		else for ($i=0; $i < $seeder->count; $i++)
 			Table::push($data , $seeder->data());
 		//
-		return Schema::table($seeder->table)->insert($data);
+		return $data;
 	}
 
 }
