@@ -25,9 +25,9 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
  class Model
 {
 	/**
-	* primary key for the model
+	* the name primary key for the model
 	*/
-    protected $primaryKey;
+    protected $keyName;
 
 	/**
 	 * Unixtime when this resource was kept deleted 
@@ -126,7 +126,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		else if(count($rows) == 0 ) throw new PrimaryKeyNotFoundException($this->DBtable);
 		//
 		$this->key=$rows[0]['Column_name'];
-		$this->primaryKey=$rows[0]['Column_name'];
+		$this->keyName=$rows[0]['Column_name'];
 	}
 
 	protected function setTable($table)
@@ -140,8 +140,8 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	protected function setData($pk)
 	{
 		// if( ! $this->isKept) 
-			$sql = "select * from ".$this->DBtable." where ".$this->primaryKey."='".$pk."' ";
-		// else $sql = "select * from ".$this->DBtable." where ".$this->primaryKey."='".$pk."' where deleted_at<'".Time::current()."'";
+			$sql = "select * from ".$this->DBtable." where ".$this->keyName."='".$pk."' ";
+		// else $sql = "select * from ".$this->DBtable." where ".$this->keyName."='".$pk."' where deleted_at<'".Time::current()."'";
 		//
 		$data=Database::read($sql,1);
 		//
@@ -240,7 +240,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 	public function emptyPK()
 	{
-		$key=$this->primaryKey;
+		$key=$this->keyName;
 		$this->$key=null;
 	}
 
@@ -277,12 +277,12 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	protected function getPKvalue()
 	{
 		$data = $this->getData();
-		return $data[$this->primaryKey];
+		return $data[$this->keyName];
 	}
 
 	public function delete()
 	{
-		die(var_dump($this));
+		// die(var_dump($this));
 		if( $this->isKept ) $this->lightDelete();
 		else $this->forceDelete();
 	}
@@ -290,7 +290,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	public function forceDelete()
 	{
 		$key=$this->getPKvalue();
-		$sql="delete from ".$this->DBtable." where ".$this->primaryKey." = '".$key."' ";
+		$sql="delete from ".$this->DBtable." where ".$this->keyName." = '".$key."' ";
 		//
 		return Database::exec($sql);
 	}
@@ -300,7 +300,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		$now = Time::current();
 		$key=$this->getPKvalue();
 		//
-		$sql="update ".$this->DBtable." set deleted_at='".$now."' where ".$this->primaryKey." = '".$key."' ";
+		$sql="update ".$this->DBtable." set deleted_at='".$now."' where ".$this->keyName." = '".$key."' ";
 		if(Database::exec($sql)) { $this->clean(); $this->deleted_at = $now; }
 	}
 
@@ -352,7 +352,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		}
 		//
 		$key=$this->getPKvalue();
-		$sql.=" where ".$this->primaryKey."='".$key."'";
+		$sql.=" where ".$this->keyName."='".$key."'";
 		//
 		return Database::exec($sql);
 	}
