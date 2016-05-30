@@ -24,11 +24,15 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 */
  class Model
 {
-
 	/**
 	* primary key for the model
 	*/
     protected $primaryKey;
+
+	/**
+	 * Unixtime when this resource was kept deleted 
+	 */
+	protected $kept_at = null;
 
 	protected static $table;
 	protected $DBtable;
@@ -38,6 +42,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	protected $isKept = false;
 	protected $isMaj = false;
 	protected $areMaj = 0;
+
 
 	public function __construct($pk=null,$table=null) 
 	{
