@@ -93,7 +93,22 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	protected function setVars($key,$value = null,$kept=false)
 	{
 		if( ! $kept ) $this->$key = $value ;
-		else if( $kept && $key == "deleted_at") $this->$key = $value ;
+		// else if( $kept && $key == "deleted_at") $this->$key = $value ;
+		else if( $kept ) $this->setKept($key, $value);
+	}
+
+	/**
+	 * Set kept data
+	 */
+	protected function setKept($key, $value)
+	{
+		if($key == "deleted_at") 
+		{
+			$this->kept_at = $value;
+			$this->kept_data[$key] = $value;
+		}
+		//
+		$this->kept_data[$key] = $value;
 	}
 
 	protected function getPrimaryKey()
