@@ -340,7 +340,10 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 			$key=$this->getPKvalue();
 			$sql="update ".$this->DBtable." set deleted_at=null where ".$this->keyName." = '".$key."' ";
 			// die($sql);
-			if(Database::exec($sql)) { self($key); }
+			if(Database::exec($sql)) 
+			{ 
+				// Code to execute the init the model
+			}
 		}
 	}
 
