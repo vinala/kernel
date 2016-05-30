@@ -112,6 +112,10 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 			$this->kept_at = $value;
 			$this->kept_data[$key] = $value;
 		}
+		else if($key == $this->keyName) 
+		{
+			$this->keyValue = $value;
+		}
 		//
 		$this->kept_data[$key] = $value;
 	}
@@ -281,8 +285,9 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 	protected function getPKvalue()
 	{
-		$data = $this->getData();
-		return $data[$this->keyName];
+		return $this->keyValue;
+		// $data = $this->getData();
+		// return $data[$this->keyName];
 	}
 
 	public function delete()
@@ -296,6 +301,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	{
 		$key=$this->getPKvalue();
 		$sql="delete from ".$this->DBtable." where ".$this->keyName." = '".$key."' ";
+		die($sql);
 		//
 		return Database::exec($sql);
 	}
