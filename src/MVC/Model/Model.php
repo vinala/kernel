@@ -34,6 +34,11 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 	 */
 	protected $kept_at = null;
 
+	/**
+	 * kept deleted data
+	 */
+	protected $kept_data = array();
+
 	protected static $table;
 	protected $DBtable;
 	protected $columns= array();
