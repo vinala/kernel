@@ -25,9 +25,14 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
  class Model
 {
 	/**
-	* the name primary key for the model
+	* the name of primary key for the model
 	*/
     protected $keyName;
+
+    /**
+	* the value of primary key for the model
+	*/
+    protected $keyValue;
 
 	/**
 	 * Unixtime when this resource was kept deleted 
