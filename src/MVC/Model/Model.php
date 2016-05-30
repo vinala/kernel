@@ -27,10 +27,8 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 	/**
 	* primary key for the model
-	*
-	* @var string
 	*/
-    protected $primaryKey = 'id';
+    protected $primaryKey;
 
 	protected static $table;
 	protected $DBtable;
@@ -259,6 +257,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 	public function delete()
 	{
+		die(var_dump($this));
 		if( $this->isKept ) $this->lightDelete();
 		else $this->forceDelete();
 	}
