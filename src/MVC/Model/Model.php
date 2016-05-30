@@ -97,9 +97,19 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 	protected function setVars($key,$value = null,$kept=false)
 	{
-		if( ! $kept ) $this->$key = $value ;
+		if( ! $kept )  $this->$key = $value ;
 		// else if( $kept && $key == "deleted_at") $this->$key = $value ;
 		else if( $kept ) $this->setKept($key, $value);
+		//
+		self::setKeyValue($key, $value);
+	}
+
+	/**
+	 * Set primary key value
+	 */
+	protected function setKeyValue($key, $value)
+	{
+		if($key == $this->keyName) $this->keyValue = $value;
 	}
 
 	/**
@@ -111,10 +121,6 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		{
 			$this->kept_at = $value;
 			$this->kept_data[$key] = $value;
-		}
-		else if($key == $this->keyName) 
-		{
-			$this->keyValue = $value;
 		}
 		//
 		$this->kept_data[$key] = $value;
@@ -290,22 +296,29 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		// return $data[$this->keyName];
 	}
 
+	/**
+	 * delete the resource
+	 */
 	public function delete()
 	{
-		// die(var_dump($this));
 		if( $this->isKept ) $this->lightDelete();
 		else $this->forceDelete();
 	}
 
+	/**
+	 * force delete if the resource is kept delete
+	 */
 	public function forceDelete()
 	{
 		$key=$this->getPKvalue();
 		$sql="delete from ".$this->DBtable." where ".$this->keyName." = '".$key."' ";
-		die($sql);
 		//
 		return Database::exec($sql);
 	}
 
+	/**
+	 * light delete if the resource is kept delete
+	 */
 	protected function lightDelete()
 	{
 		$now = Time::current();
@@ -315,6 +328,21 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 		if(Database::exec($sql)) { $this->clean(); $this->deleted_at = $now; }
 	}
 
+	/**
+	 * restore if kept deleted 
+	 */
+	public function restore()
+	{
+
+		if( $this->isKept )
+		{
+
+			$key=$this->getPKvalue();
+			$sql="update ".$this->DBtable." set deleted_at=null where ".$this->keyName." = '".$key."' ";
+			// die($sql);
+			if(Database::exec($sql)) { self($key); }
+		}
+	}
 
 	/**
 	 * Dynamic Property
