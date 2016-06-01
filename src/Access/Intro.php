@@ -18,6 +18,7 @@ class Intro
 	public static function steps($step)
 	{
 		switch ($step) {
+			case "db_check": self::checkDb_step(); break;
 			case 1: self::firstStep(); break;
 			case 2: self::secondStep(); break;
 			case 3: self::thirdStep(); break;
@@ -360,6 +361,20 @@ class Intro
 	}
 
 
+	public static function checkDb_step()
+	{
+		$host = $_POST['db_host'] ;
+		$name = $_POST['db_name'];
+		$usr = $_POST['db_usr'];
+		$pass = $_POST['db_pass'];
+		$prefix = $_POST['db_prefix'];
+		//
+		try {
+			if(mysqli_connect($host,$usr,$pass,$name)) echo "true";
+		} catch (Exception $e) {
+			echo "false";
+		}
+	}
 
 	public static function firstStep()
 	{
