@@ -84,8 +84,8 @@
 				<div class="fst-config-input-desc db-input-input-desc">To secure your database and mark all tables of that project .</div>
 			</div>
 
-			<div class="control_c_row" id="fst-db-config-error">
-				<div class="fst-config-error">
+			<div class="control_c_row">
+				<div class="fst-config-error" id="fst_db_config_error">
 					<div class="fst-config-error-title">Error connecting to the database</div>
 					This means that either the username or the password you filled is incorrect or we can not contact the database server at localhost. This may mean that your database server is down.
 				</div>
