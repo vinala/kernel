@@ -110,6 +110,7 @@ body
 	background-color: transparent;
 	color: white;
 	transition: all 150ms ease-in;
+	outline: none;
 
 }
 
@@ -117,12 +118,14 @@ body
 {
 	background-color: #058cbc;
 	color:white;
+	outline: none;
 }
 
 .hello_button_hover
 {
 	background-color: #058cbc;
 	color:white;
+	outline: none;
 }
 
 .hello_button_left
