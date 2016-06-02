@@ -1,0 +1,364 @@
+@font-face {
+  font-family: 'segoe';
+  src: url('../fonts/segoeuil.ttf') format('truetype');
+}
+
+body
+{
+	padding:0px;
+	margin:0px;
+	/*background:#5b1d79;*/
+	font-family: "segoe";
+	background-color: #0a2f5c;
+	
+}
+
+
+.bg
+{
+	background-image: url('../images/bg.jpg');
+    background-size: cover;
+    background-position: 50% 50%;
+    background-size: cover;
+	display: block;
+	filter: blur(0px);
+	-webkit-filter: blur(0px);
+	height: 800px;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top:-40px;
+	z-index: 1;
+}
+
+.content
+{
+	/*rgba(10, 50, 94, 0.85)*/
+	background: rgba(0, 0, 0, 0.85);
+	border-radius: 3px;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+	left: 0;
+	position: fixed;
+	right: 0;
+	z-index: 2;
+	padding: 0 10px;
+	height:100%;
+	opacity:0;
+}
+
+.img
+{
+	/*width:260px;*/
+	margin:0pt auto;
+	display:block;
+	margin-top: 40px;
+}
+
+.img2
+{
+	/*width:260px;*/
+	margin:0pt auto;
+	display:block;
+	margin-top: 150px;
+}
+
+.config_logo
+{
+	margin: 12px auto;
+	opacity: 0;
+}
+
+#welcom
+{
+	opacity:0;
+	color:white;
+	text-align: center;
+	/*font-family: 'Lato', sans-serif;*/
+	width:600px;
+	margin: 30px auto;
+}
+.text
+{
+	/*background: #5b1d79;*/
+	display: inline-block;
+	z-index: 3;
+	/*width: 145px;*/
+	font-size: 32px;
+}
+
+.bottom_panel
+{
+	opacity: 0;
+	height: 75px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	padding: 20px;
+	text-align: right;
+}
+
+.bottom_panel_2
+{
+    color: white;
+    opacity: 0;
+    padding: 27px;
+    padding-right: 131px;
+}
+
+.hello_button
+{
+	background-color: transparent;
+	color: white;
+	transition: all 150ms ease-in;
+
+}
+
+.hello_button:hover
+{
+	background-color: #058cbc;
+	color:white;
+}
+
+.hello_button_hover
+{
+	background-color: #058cbc;
+	color:white;
+}
+
+.hello_button_left
+{
+	float:left;
+}
+
+/* ii */
+.config_form
+{
+	color: white;
+    text-align: center;
+    width: 500px;
+    margin: 0px auto;
+}
+
+.config_input
+{
+	background-color: rgba(255,255,255,.8);
+}
+
+.control_c_row
+{
+	margin: 7px 0px;
+}
+
+.conf_lab
+{
+	display: inline-block;
+    width: 33%;
+    vertical-align: middle;
+	text-align: right;
+	margin-top: 5px;
+}
+
+.conf_input
+{
+	display: inline-block;
+	margin: 0px 10px;
+	width: 60%;
+	vertical-align: top;
+}
+
+
+.bottonn
+{
+	/*opacity: 0;*/
+	height: 75px;
+	width: 100%;
+	padding: 20px;
+	text-align: right;
+}
+
+.conf_input_note
+{
+	text-align: left;
+	font-size: 12px;
+}
+
+.conf_title
+{
+	text-align: center;
+	color: white;
+	margin: 0 0 13px 0;
+}
+
+.progres
+{
+	background-color: rgba(255,255,255,.5);
+	height:2px;
+	width: 100px;
+	margin: 0pt Auto 18px auto;
+}
+
+.progres_1
+{
+	background-color: white;
+	height:2px;
+	width: 25px;
+	margin-left: 0%
+}
+
+.progres_2
+{
+	background-color: white;
+	height:2px;
+	width: 25px;
+	margin-left: 25%
+}
+
+.progres_3
+{
+	background-color: white;
+	height:2px;
+	width: 25px;
+	margin-left: 50%
+}
+
+.progres_4
+{
+	background-color: white;
+	height:2px;
+	width: 25px;
+	margin-left: 75%
+}
+
+.switch {
+    position: relative; width: 31px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+	margin-top: 9px;
+}
+.switch-checkbox {
+    display: none;
+}
+.switch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 16px; padding: 0; line-height: 16px;
+    border: 2px solid #CCCCCC; border-radius: 16px;
+    background-color: #CCCCCC;
+    transition: background-color 0.3s ease-in;
+}
+.switch-label:before {
+    content: "";
+    display: block; width: 16px; margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 17px;
+    border: 2px solid #CCCCCC; border-radius: 16px;
+    transition: all 0.3s ease-in 0s; 
+}
+.switch-checkbox:checked + .switch-label-blue {
+    background-color: #058cbc;
+}
+.switch-checkbox:checked + .switch-label-blue, .switch-checkbox:checked + .switch-label-blue:before {
+   border-color: #058cbc;
+}
+
+.switch-checkbox:checked + .switch-label-violet {
+    background-color: #058cbc;
+}
+.switch-checkbox:checked + .switch-label-violet, .switch-checkbox:checked + .switch-label-violet:before {
+   border-color: #058cbc;
+}
+
+.switch-checkbox:checked + .switch-label-deeppink {
+    background-color: #bf0346;
+}
+.switch-checkbox:checked + .switch-label-deeppink, .switch-checkbox:checked + .switch-label-deeppink:before {
+   border-color: #bf0346;
+}
+
+.switch-checkbox:checked + .switch-label:before {
+    right: 0px; 
+}
+
+.fst-config-cont
+{
+	width : 800px;
+	margin: 0pt auto;
+}
+
+.fst-config-text
+{
+	width : 600px;
+	margin: 0pt auto;
+}
+
+.fst-config-pargraph
+{
+	color: white;
+	margin-bottom: 10px;
+}
+
+.fst_config_icon
+{
+	width:100px;
+	margin:0pt auto;
+	display: block;
+	margin-bottom: 25px;
+	height: 100px;
+	background : url(https://gitlab.com/uploads/project/avatar/1202141/hey_race_icon2.png);
+	background-size: cover;
+}
+
+.fst-config-lang-combo
+{
+	width : 200px;
+	margin: 0px auto;
+	margin-top: 80px;
+}
+
+.fst-config-form
+{
+	color: white;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.fst-config-db-form
+{
+	margin-top: 30px;
+}
+
+.fst-config-label
+{
+	display: inline-block;
+    vertical-align: top;
+	text-align: right;
+	margin-top: 5px;
+}
+
+.fst-config-input
+{
+	display: inline-block;
+	margin: 0px 10px;
+	vertical-align: top;
+}
+
+.fst-config-input-desc
+{
+	display: inline-block;
+    vertical-align: top;
+	text-align: left;
+}
+
+.db-input-label
+{
+	width: 20%;
+}
+
+.db-input-input
+{
+	width: 30%;
+}
+
+.db-input-input-desc
+{
+	width: 30%;
+}

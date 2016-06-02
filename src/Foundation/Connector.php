@@ -68,6 +68,7 @@ class Connector
 		Connector::plugins();
 		Connector::lumos();
 		Connector::process();
+		Connector::setup();
 	}
 
 	/**
@@ -578,6 +579,21 @@ class Connector
 	{
 		foreach (self::fetch(self::$path."Lumos/Commands") as $file) 
 			Connector::need($file);
+	}
+
+	/**
+	 * Setup call
+	 */
+	public static function setup()
+	{
+		self::call(
+			array(
+				'Routes', 
+				'Setup', 
+				'Response', 
+				),
+			self::$path.'Setup/'
+			);
 	}
 
 	/**
