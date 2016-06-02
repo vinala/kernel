@@ -58,14 +58,12 @@ $( document ).ready(function() {
 	$('#fst-config-db-form').submit(function () {
         $.post('hello/db_check',$('#fst-config-db-form').serialize(),function(data)
             {
-                alert(data);
-                // if(data=="ok")
-                // {
-                //     document.getElementById('dev_nom').innerHTML=document.getElementById('dev_name').value;
-
-                //     $( "#etap_1" ).fadeOut( 300, function(){ $( "#etap_2" ).fadeIn( 300 ); } );
-                // }
-                // else alert('Un erreur est survenue');
+                if(data=="true")
+                {
+                    document.getElementById('dev_nom').innerHTML=document.getElementById('dev_name').value;
+                    $( "#etap_1" ).fadeOut( 300, function(){ $( "#etap_2" ).fadeIn( 300 ); } );
+                }
+                else $( "#fst_db_config_error" ).slideDown();
             });
         //
         return false;
