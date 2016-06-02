@@ -83,6 +83,13 @@
 				</div>
 				<div class="fst-config-input-desc db-input-input-desc">To secure your database and mark all tables of that project .</div>
 			</div>
+
+			<div class="control_c_row" id="fst-db-config-error">
+				<div class="fst-config-error">
+					<div class="fst-config-error-title">Error connecting to the database</div>
+					This means that either the username or the password you filled is incorrect or we can not contact the database server at localhost. This may mean that your database server is down.
+				</div>
+			</div>
 			
 			<div style="margin-top:20px">
 				<input type="submit" class="btn hello_button" value="Validate" name="nxt" id="nxt"   />
