@@ -362,3 +362,18 @@ body
 {
 	width: 30%;
 }
+
+.fst-config-error
+{
+	border-left: 3px solid red;
+	text-align: left;
+	padding-left: 10px;
+	width:500px;
+	margin: 0pt auto;
+	display: none;
+}
+
+.fst-config-error-title
+{
+	color : red;
+}

@@ -371,11 +371,8 @@ class Response
 		$pass = $_POST['db_pass'];
 		$prefix = $_POST['db_prefix'];
 		//
-		try {
-			if(mysqli_connect($host,$usr,$pass,$name)) echo "true";
-		} catch (Exception $e) {
-			echo "false";
-		}
+		if(@mysqli_connect($host,$usr,$pass,$name)) echo "true";
+		else echo "false";
 	}
 
 	public static function firstStep()
