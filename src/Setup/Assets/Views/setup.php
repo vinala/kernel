@@ -106,14 +106,8 @@
 				Perfect ! You spent the first part of the installation. Lighty can now communicate with your database. If you are ready, it is now time to ...
 			</div>
 		</div>
-
-			
-			<div class="fst-lonly-left-buttun-cont">
-				<input type="submit" class="btn hello_button lonely_button hello_button_hover" value="Continue" name="nxt" id="nxt"   />
-			</div>
-		
-			
-		</form>
+		<div class="fst-lonly-left-buttun-cont">
+			<input type="submit" class="btn hello_button lonely_button hello_button_hover" value="Continue" name="nxt" id="nxt"   />
 		</div>
 	</div>
 
