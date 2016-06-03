@@ -30,6 +30,55 @@ class Response
 	// 	return true;
 	// }
 
+	/**
+	 * get Database post data
+	 */
+	public static function setDb_step()
+	{
+		$host = $_POST['db_host'] ;
+		$name = $_POST['db_name'];
+		$usr = $_POST['db_usr'];
+		$pass = $_POST['db_pass'];
+		$prefix = $_POST['db_prefix'];
+		//
+		if( ! self::checkDb_step($host,$name,$usr,$pass,$prefix)) 
+		{
+			echo "false";
+			die();
+		}
+		else
+		{
+			self::makeDb_step($host,$name,$usr,$pass,$prefix);
+		}
+	}
+
+	/**
+	 * Check if database existe
+	 */
+	protected static function checkDb_step($host,$name,$usr,$pass,$prefix)
+	{
+		if(@mysqli_connect($host,$usr,$pass,$name)) return true;
+		else return false;
+	}
+
+	/**
+	 * set data in database file
+	 */
+	protected static function makeDb_step($host,$name,$usr,$pass,$prefix)
+	{
+		if(empty($prefix)) { $prefixing="false"; $prefix="ysf"; }
+		else  { $prefixing="true";  }
+		//
+		if( ! Application::$isTest) 
+		{
+			file_put_contents(Application::$root."config/database.php", self::dbCont($host,$name,$usr,$pass,$prefixing,$prefix), 0);
+			//
+			echo "true";
+		}
+	}
+
+//******************************
+
 	public static function hello()
 	{
 		return View::make('hello.hello');
@@ -360,19 +409,6 @@ class Response
 		
 		//
 		return "<?php \n\nreturn array(\n\t".$default.$connections.$table.$prefixing.$prefixe."\n);";
-	}
-
-
-	public static function checkDb_step()
-	{
-		$host = $_POST['db_host'] ;
-		$name = $_POST['db_name'];
-		$usr = $_POST['db_usr'];
-		$pass = $_POST['db_pass'];
-		$prefix = $_POST['db_prefix'];
-		//
-		if(@mysqli_connect($host,$usr,$pass,$name)) echo "true";
-		else echo "false";
 	}
 
 	public static function firstStep()
