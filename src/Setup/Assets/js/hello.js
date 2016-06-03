@@ -60,8 +60,7 @@ $( document ).ready(function() {
             {
                 if(data=="true")
                 {
-                    document.getElementById('dev_nom').innerHTML=document.getElementById('dev_name').value;
-                    $( "#etap_1" ).fadeOut( 300, function(){ $( "#etap_2" ).fadeIn( 300 ); } );
+                    $( "#fst_db_conf_step" ).fadeOut( 300, function(){ $( "#fst_pass_msg_step" ).fadeIn( 300 ); } );
                 }
                 else $( "#fst_db_config_error" ).slideDown();
             });
