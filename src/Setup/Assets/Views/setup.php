@@ -100,6 +100,23 @@
 		</div>
 	</div>
 
+	<div id="fst_pass_msg_step" style="display:none">
+		<div class="fst-config-text">
+			<div class="fst-config-pargraph">
+				Perfect ! You spent the first part of the installation. Lighty can now communicate with your database. If you are ready, it is now time to ...
+			</div>
+		</div>
+
+			
+			<div class="fst-lonly-left-buttun-cont">
+				<input type="submit" class="btn hello_button lonely_button hello_button_hover" value="Continue" name="nxt" id="nxt"   />
+			</div>
+		
+			
+		</form>
+		</div>
+	</div>
+
 	<div id="etap_1"  style="display:none">
 		<h1 class="conf_title">General</h1>
 		<div class="progres"><div class="progres_1"></div></div>
