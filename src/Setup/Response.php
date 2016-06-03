@@ -77,6 +77,32 @@ class Response
 		}
 	}
 
+	/**
+	 * set global setup
+	 */
+	public static function setGlob_step()
+	{
+		$name=$_POST['dev_name'];
+		$langue=$_POST['langue'];
+		//
+		if(isset($_POST['ckeck_loggin'])) $loggin="true";
+		else $loggin="false";
+		//
+		if(isset($_POST['ckeck_maintenance'])) $maintenance="true";
+		else $maintenance="false";
+		//
+		if( ! Application::$isTest)
+		{
+			file_put_contents(Application::$root."config/app.php", self::appCont($name) , 0);
+			file_put_contents(Application::$root."config/lang.php", self::langCont($langue), 0);
+			file_put_contents(Application::$root."config/loggin.php", self::logginCont($loggin), 0);
+			file_put_contents(Application::$root."config/maintenance.php", self::MaintCont($maintenance), 0);
+			//
+			echo "true";
+		}
+	}
+
+
 //******************************
 
 	public static function hello()

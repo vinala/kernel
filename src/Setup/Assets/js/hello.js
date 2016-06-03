@@ -68,6 +68,32 @@ $( document ).ready(function() {
         return false;
     });
 
+    $('#nxt_to_glob').click(function () {
+        $( "#fst_pass_msg_step" ).fadeOut( 300, function(){ $( "#fst_glob_conf_step" ).fadeIn( 300 ); } );
+        //
+        return false;
+    });
+
+    $('#fst-glob-db-form').submit(function () {
+        $.post('hello/set_glob',$('#fst-glob-db-form').serialize(),function(data)
+            {
+                alert(data);
+                // if(data=="ok")
+                // {
+                //     document.getElementById('dev_nom').innerHTML=document.getElementById('dev_name').value;
+
+                //     $( "#etap_1" ).fadeOut( 300, function(){ $( "#etap_2" ).fadeIn( 300 ); } );
+                // }
+                // else alert('Un erreur est survenue');
+            });
+        //
+        return false;
+    });
+
+
+
+    
+
     $('#form_1').submit(function () {
         $.post('hello/1',$('#form_1').serialize(),function(data)
             {

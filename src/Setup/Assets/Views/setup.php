@@ -107,9 +107,76 @@
 			</div>
 		</div>
 		<div class="fst-lonly-left-buttun-cont">
-			<input type="submit" class="btn hello_button lonely_button hello_button_hover" value="Continue" name="nxt" id="nxt"   />
+			<input type="submit" class="btn hello_button lonely_button hello_button_hover" value="Continue" name="nxt" id="nxt_to_glob"   />
 		</div>
 	</div>
+
+	<div id="fst_glob_conf_step" style="display:none">
+		<div class="fst-config-text">
+			<div class="fst-config-pargraph">
+				Please provide the following information. Do not worry, you can change it later.
+			</div>
+		</div>
+
+		<div class="fst-config-cont">
+
+		<form class="fst-config-form fst-config-db-form" id="fst-glob-db-form">
+
+			<div class="control_c_row">
+				<div class="fst-config-label db-input-label">Developer Name</div>
+				<div class="fst-config-input db-input-input">
+					<input type="text" class="form-control" id="dev_name" name="dev_name" placeholder="Your name" value="">
+				</div>
+				<div class="fst-config-input-desc db-input-input-desc">What's your name ;)</div>
+			</div>
+
+			<div class="control_c_row">
+				<div class="fst-config-label db-input-label">Language</div>
+				<div class="fst-config-input db-input-input">
+					<select class="form-control" id="sel1" name="langue">
+					    <option value="fr">Français</option>
+						<option value="ar">العربية</option>
+						<option value="en" selected>English</option>
+			        </select>
+				</div>
+				<div class="fst-config-input-desc db-input-input-desc">What's your application default language</div>
+			</div>
+
+			<div class="control_c_row">
+				<div class="fst-config-label db-input-label">Debugging</div>
+				<div class="fst-config-input db-input-input">
+					<div class="switch">
+					    <input type="checkbox" name="ckeck_loggin" class="switch-checkbox" id="chechBox1" >
+					    <label class="switch-label switch-label-violet" for="chechBox1"></label>
+					</div>
+				</div>
+				<div class="fst-config-input-desc db-input-input-desc">Do you want to enable debugging</div>
+			</div>
+
+			<div class="control_c_row">
+				<div class="fst-config-label db-input-label">Maintenance</div>
+				<div class="fst-config-input db-input-input">
+					<div class="switch">
+					    <input type="checkbox" name="ckeck_maintenance" class="switch-checkbox" id="chechBox2" >
+					    <label class="switch-label switch-label-violet" for="chechBox2"></label>
+					</div>
+				</div>
+				<div class="fst-config-input-desc db-input-input-desc">You can change the error message and maintenance later in the configuration files</div>
+			</div>
+
+			<!-- <div class="bottom" id="bottom_panel">
+				<a href="<?php echo Config::get("panel.route") ?>"><div class="btn hello_button" id="login">Lighty Panel</div></a>
+			</div> -->
+			<div style="margin-top:20px">
+				<input type="submit" class="btn hello_button" value="Next" name="nxt" id="nxt"   />
+			</div>
+		</form>
+
+		</div>
+	</div>
+
+
+
 
 	<div id="etap_1"  style="display:none">
 		<h1 class="conf_title">General</h1>
@@ -168,8 +235,6 @@
 			<div style="margin-top:20px">
 				<input type="submit" class="btn hello_button" value="Next" name="nxt" id="nxt"   />
 			</div>
-		
-			
 		</form>
 	</div>
 
