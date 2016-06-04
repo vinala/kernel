@@ -7,6 +7,7 @@ use Lighty\Kernel\Logging\Log;
 use Lighty\Kernel\Logging\Handler;
 use Lighty\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
 use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Storage\Session;
 
 /**
 * Connector class to call framework core files
@@ -38,7 +39,7 @@ class Connector
 		Log::ini();
 		Handler::run();
 		//
-		Connector::storage();
+		Connector::storage(true);
 		Connector::maintenance();
 		Connector::string();
 		Connector::object();
@@ -188,7 +189,7 @@ class Connector
 	public static function session($session)
 	{
 		self::need(self::$path.'Storage/Session.php');
-		// if($session) Session::start(self::$root.'app/storage/session');
+		if($session) Session::start();
 	}
 
 	/**
@@ -659,7 +660,7 @@ class Connector
 		Log::ini();
 		Handler::run();
 		//
-		Connector::storage();
+		Connector::storage(true);
 		Connector::maintenance();
 		Connector::string();
 		Connector::object();
