@@ -591,6 +591,13 @@ class Connector
 				'Routes', 
 				'Setup', 
 				'Response', 
+				'Documentations/Database', 
+				'Documentations/Panel', 
+				'Documentations/Security', 
+				'Documentations/Maintenance', 
+				'Documentations/Loggin', 
+				'Documentations/Translator', 
+				'Documentations/App', 
 				),
 			self::$path.'Setup/'
 			);
