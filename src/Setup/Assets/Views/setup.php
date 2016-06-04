@@ -6,7 +6,7 @@
 <div class="content" id="content">
 
 	<div style="height:60px"></div>
-	<div class="fst_config_icon"></div>
+	<div class="fst_config_icon" id="fst_config_icon"></div>
 	
 	<div id="fst_db_msg_step">
 		<div class="fst-config-text">
@@ -164,14 +164,101 @@
 				<div class="fst-config-input-desc db-input-input-desc">You can change the error message and maintenance later in the configuration files</div>
 			</div>
 
-			<!-- <div class="bottom" id="bottom_panel">
-				<a href="<?php echo Config::get("panel.route") ?>"><div class="btn hello_button" id="login">Lighty Panel</div></a>
-			</div> -->
 			<div style="margin-top:20px">
 				<input type="submit" class="btn hello_button" value="Next" name="nxt" id="nxt"   />
 			</div>
 		</form>
 
+		</div>
+	</div>
+
+	<div id="fst_sec_conf_step" style="display:none">
+
+		<div class="fst-config-text">
+			<div class="fst-config-pargraph">
+			These are the secret keys of your application, they provide the security for your secret data like saved password..., Lighty generate them automatically.
+			</div>
+		</div>
+
+		<div class="fst-config-cont">
+			<form class="fst-config-form fst-config-db-form" id="fst-sec-db-form">
+				<div class="control_c_row">
+					<div class="fst-config-label db-input-label">First security key</div>
+					<div class="fst-config-input db-input-input">
+						<input type="text" class="form-control" name="sec_1" value="<?php echo md5(uniqid(rand(), TRUE)) ?>" readonly>
+					</div>
+					<div class="fst-config-input-desc db-input-input-desc">The first token</div>
+				</div>
+
+				<div class="control_c_row">
+					<div class="fst-config-label db-input-label">Second security key</div>
+					<div class="fst-config-input db-input-input">
+						<input type="text" class="form-control" name="sec_2" value="<?php echo md5(uniqid(rand(), TRUE)) ?>" readonly>
+					</div>
+					<div class="fst-config-input-desc db-input-input-desc">The second token</div>
+				</div>
+
+				<div style="margin-top:20px">
+					<input type="submit" class="btn hello_button" value="Next" name="nxt" id="nxt"   />
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="fst_pnl_conf_step" style="display:none">
+
+		<div class="fst-config-text">
+			<div class="fst-config-pargraph">
+			Almost completed, Lighty uses a quite simple panel to create the necessary ingredients and execute most important operations, you need to configure this panel
+			</div>
+		</div>
+
+		<div class="fst-config-cont">
+			<form class="fst-config-form fst-config-db-form" id="fst-pnl-db-form">
+
+				<div class="control_c_row">
+					<div class="fst-config-label db-input-label">Activation</div>
+					<div class="fst-config-input db-input-input">
+						<div class="switch">
+						    <input type="checkbox" name="stat" class="switch-checkbox" id="myswitch-violet" checked>
+						    <label class="switch-label switch-label-violet" for="myswitch-violet"></label>
+						</div>
+					</div>
+					<div class="fst-config-input-desc db-input-input-desc">Do you want activate panel ?</div>
+				</div>
+
+				<div class="control_c_row">
+					<div class="fst-config-label db-input-label">Route</div>
+					<div class="fst-config-input db-input-input">
+						    <input type="text" class="form-control" id="pnl_route" name="route" placeholder="HTTP" value="" >
+							<p class="conf_input_note">By default : Lighty</p>
+					</div>
+					<div class="fst-config-input-desc db-input-input-desc">what's HTTP access for panel ?</div>
+				</div>
+
+				<div class="control_c_row">
+					<div class="fst-config-label db-input-label">First password</div>
+					<div class="fst-config-input db-input-input">
+						<input type="text" class="form-control" name="pass_1" placeholder="Password 1" value="">
+						<p class="conf_input_note">By default : 1234</p>
+					</div>
+					<div class="fst-config-input-desc db-input-input-desc">the first password to access to panel</div>
+				</div>
+
+				<div class="control_c_row">
+					<div class="fst-config-label db-input-label">Second password</div>
+					<div class="fst-config-input db-input-input">
+						<input type="text" class="form-control" name="pass_2" placeholder="Password 2" value="">
+						<p class="conf_input_note">By default : 1234</p>
+					</div>
+					<div class="fst-config-input-desc db-input-input-desc">the second password to access to panel</div>
+				</div>
+
+				<div style="margin-top:20px">
+					<input type="submit" class="btn hello_button" value="Finish" name="nxt" id="nxt"   />
+				</div>
+
+			</form>
 		</div>
 	</div>
 
@@ -237,10 +324,6 @@
 			</div>
 		</form>
 	</div>
-
-	
-
-	
 
 	<div id="etap_3" style="display:none">
 		<h1 class="conf_title">Security</h1>
