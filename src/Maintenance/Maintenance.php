@@ -13,7 +13,7 @@ class Maintenance
 	public static function check()
 	{
 		
-		if(Config::get("panel.configured"))
+		if(Config::get("panel.setup"))
 		{
 			if(Config::get("maintenance.activate") && !in_array(self::thisUrl(), Config::get("maintenance.outRoutes"))) return true;
 			else if(Config::get("maintenance.activate") && in_array(self::thisUrl(), Config::get("maintenance.outRoutes"))) return false;
