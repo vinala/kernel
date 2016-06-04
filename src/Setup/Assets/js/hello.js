@@ -77,18 +77,54 @@ $( document ).ready(function() {
     $('#fst-glob-db-form').submit(function () {
         $.post('hello/set_glob',$('#fst-glob-db-form').serialize(),function(data)
             {
-                alert(data);
-                // if(data=="ok")
-                // {
-                //     document.getElementById('dev_nom').innerHTML=document.getElementById('dev_name').value;
+                if(data=="true")
+                {
+                    document.getElementById('dev_nom').innerHTML=document.getElementById('dev_name').value;
 
-                //     $( "#etap_1" ).fadeOut( 300, function(){ $( "#etap_2" ).fadeIn( 300 ); } );
-                // }
-                // else alert('Un erreur est survenue');
+                    $( "#fst_glob_conf_step" ).fadeOut( 300, function(){ $( "#fst_sec_conf_step" ).fadeIn( 300 ); } );
+                }
+                else alert('Un erreur est survenue');
             });
         //
         return false;
     });
+
+    $('#fst-sec-db-form').submit(function () {
+        $.post('hello/set_secur',$('#fst-sec-db-form').serialize(),function(data)
+            {
+                if(data=="true")
+                {
+                    $( "#fst_sec_conf_step" ).fadeOut( 300, function(){ $( "#fst_pnl_conf_step" ).fadeIn( 300 ); } );
+                }
+                else alert('Un erreur est survenue');
+            });
+        //
+        return false;
+    });
+
+    $('#fst-pnl-db-form').submit(function () {
+        $.post('hello/set_panel',$('#fst-pnl-db-form').serialize(),function(data)
+            {
+                if(data=="true")
+                {
+                    if(document.getElementById('pnl_route').value!="")
+                       document.getElementById('fst_panel').href=document.getElementById('pnl_route').value;
+                    else  document.getElementById('fst_panel').href="fiesta";
+                    //
+                    $( "#fst_config_icon" ).fadeOut( 300);
+                    $( "#fst_pnl_conf_step" ).fadeOut( 300, function(){ 
+                        Timer3 = setInterval(function(){ fade3() }, 200);
+                        Timer4 = setInterval(function(){ fade4() }, 400);
+                        Timer2 = setInterval(function(){ fade2() }, 800);
+                     } );
+                }
+                else alert('Un erreur est survenue');
+            });
+        //
+        return false;
+    });
+
+
 
 
 
