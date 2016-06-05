@@ -122,7 +122,7 @@ class Application
 
 		// call the connector and run it
 		self::callConnector();
-		Connector::run();
+		Connector::run(false,$session);
 		//
 		self::ini();
 		//
