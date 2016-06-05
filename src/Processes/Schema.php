@@ -118,7 +118,7 @@ class Migrations
 
 	public static function rollback($rt = null)
 	{
-		$root = is_null($rt) ? Process::root : $rt ;
+		$Root = is_null($rt) ? Process::root : $rt ;
 		//
 		$r=glob($Root."database/schema/*.php");
 		//
