@@ -11,6 +11,7 @@ use Lighty\Kernel\Setup\Documentations\Maintenance;
 use Lighty\Kernel\Setup\Documentations\Loggin;
 use Lighty\Kernel\Setup\Documentations\Translator;
 use Lighty\Kernel\Setup\Documentations\App;
+use Lighty\Kernel\Setup\Documentations\Robots;
 
 /**
 * class de controller helloController
@@ -81,12 +82,16 @@ class Response
 		if(isset($_POST['ckeck_maintenance'])) $maintenance="true";
 		else $maintenance="false";
 		//
+		if(isset($_POST['ckeck_search'])) $robot = true ;
+		else $robot = false ;
+		//
 		if( ! Application::$isTest)
 		{
 			$appCont = App::set($name);
 			$translatorCont = Translator::set($langue);
 			$logginCont = Loggin::set($loggin);
 			$maintenanceCont = Maintenance::set($maintenance);
+			Robots::set($robot);
 			//
 			file_put_contents(Application::$root."config/app.php", $appCont , 0);
 			file_put_contents(Application::$root."config/lang.php", $translatorCont, 0);
