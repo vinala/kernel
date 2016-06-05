@@ -53,7 +53,7 @@ class Connector
 		Connector::database();
 		Connector::object_scnd();
 		Connector::http();
-		Connector::libs();
+		Connector::assets();
 		Connector::hypertext();
 		Connector::translator();
 		Connector::model();
@@ -392,11 +392,11 @@ class Connector
 	}
 
 	/**
-	 * libs calls
+	 * assets calls
 	 */
-	public static function libs()
+	public static function assets()
 	{
-		self::need(self::$path.'Resources/Libs.php');
+		self::need(self::$path.'Resources/Assets.php');
 	}
 
 	/**
@@ -674,7 +674,7 @@ class Connector
 		Connector::database();
 		Connector::object_scnd();
 		Connector::http();
-		Connector::libs();
+		Connector::assets();
 		Connector::hypertext();
 		Connector::translator();
 		Connector::model();
