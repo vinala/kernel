@@ -11,12 +11,12 @@ use Lighty\Kernel\Foundation\Application;
 */
 class Links
 {
-	public static function create($name)
+	public static function create($name, $rt = null)
 	{
 		$time = Time::now();
 		if(empty($name)) $name=$time;
 		//
-		$Root = Process::root;
+		$Root = is_null($rt) ? Process::root : $rt ;
 		if(!file_exists($Root."app/links/".$name.".php"))
 		{
 			$myfile = fopen($Root."app/links/".$name.".php", "w");

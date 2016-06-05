@@ -10,13 +10,13 @@ use Lighty\Kernel\Foundation\Application;
 */
 class Model
 {
-	public static function create($fileName , $className , $tableName)
+	public static function create($fileName , $className , $tableName, $rt= null)
 	{
 		
 		$class= $className;
 		$file = $fileName;
 		$table= $tableName;
-		$root = Process::root;
+		$root = is_null($rt) ? Process::root : $rt ;
 
 		
 		if( ! file_exists($root."app/models/$file.php"))

@@ -14,11 +14,11 @@ class View
 	{
 		return str_replace(":", "/", $name);
 	}
-	public static function create($name , $isSmarty)
+	public static function create($name , $isSmarty, $rt= null)
 	{
 		$file	=	self::replace($name);
 		$pos 	= 	strpos($file, "/");
-		$Root	=	Process::root;
+		$Root = is_null($rt) ? Process::root : $rt ;
 		if($pos)
 		{
 			$structure 	=   $Root."app/views/".$file[0]."/";
