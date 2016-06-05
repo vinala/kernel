@@ -10,9 +10,9 @@ use Lighty\Kernel\Foundation\Application;
 */
 class Translator
 {
-	public static function createDir($name)
+	public static function createDir($name, $rt = null)
 	{
-		$root = Process::root;
+		$root = is_null($rt) ? Process::root : $rt ;
 		//
 		if( ! file_exists($root."app/lang/".$name))
 		{
@@ -22,9 +22,9 @@ class Translator
 		else return false;
 	}
 
-	public static function createFile($dirName , $fileName)
+	public static function createFile($dirName , $fileName, $rt = null)
 	{
-		$root = Process::root;
+		$root = is_null($rt) ? Process::root : $rt ;
 		//
 		if(!file_exists($root."app/lang/$dirName/$fileName.php"))
 			{

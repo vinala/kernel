@@ -15,9 +15,10 @@ use Exception;
 */
 class Migrations
 {
-	public static function exec()
+	public static function exec($rt = null)
 	{
-		$root = Process::root;
+		$root = is_null($rt) ? Process::root : $rt ;
+		//
 		$r=glob($root."database/schema/*.php");
 		//
 		$pieces=array();
@@ -93,15 +94,15 @@ class Migrations
 	}
 
 
-	public static function add($name)
+	public static function add($name, $rt = null)
 	{
+
 		$Datetime=date("Y/m/d H:i:s",time());
 		$Unixtime=time();
 		//
-		$root=Process::root;
+		$root = is_null($rt) ? Process::root : $rt ;
 		//
 		$myfile = fopen($root."database/schema/".$Unixtime."_".$name.".php", "w");
-		// $myfile = fopen($root."database/schema/".$Unixtime."_".$name.".php", "w");
 		//
 		fwrite($myfile, self::set($name,$Unixtime,$Datetime));
 		fclose($myfile);
@@ -111,13 +112,14 @@ class Migrations
 		self::addRow($name,$Unixtime);
 		//
 		Migration::updateRegister($Unixtime."_".$name,"init",$root);
-
+		//
 		return true;
 	}
 
-	public static function rollback()
+	public static function rollback($rt = null)
 	{
-		$Root=Process::root;
+		$root = is_null($rt) ? Process::root : $rt ;
+		//
 		$r=glob($Root."database/schema/*.php");
 		//
 		$pieces=array();

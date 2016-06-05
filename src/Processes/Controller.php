@@ -10,12 +10,12 @@ use Lighty\Kernel\Foundation\Application;
 */
 class Controller
 {
-	public static function create($fileName,$className,$Route)
+	public static function create($fileName,$className,$Route,$rt = null)
 	{
 		$addRoute = $Route;
 		$class = $className;
 		$file = $fileName;
-		$Root = Process::root;
+		$Root = is_null($rt) ? Process::root : $rt ;
 		//
 		if(!file_exists($Root."app/controllers/$file.php")){
 			$myfile = fopen($Root."app/controllers/$file.php", "w");

@@ -17,10 +17,10 @@ class Seeds
 		return Seeder::ini();
 	}
 
-	public static function add($name,$table,$count)
+	public static function add($name,$table,$count ,$rt = null)
 	{
 		$nom=$name;
-		$Root = Process::root;
+		$Root = is_null($rt) ? Process::root : $rt ;
 		//
 		if(!file_exists($Root."database/seeds/$nom.php"))
 		{
