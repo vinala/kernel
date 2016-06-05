@@ -23,7 +23,7 @@ class Connector
 	/**
 	 * Run the Connector class
 	 */
-	public static function run($lumos = false)
+	public static function run($lumos = false, $session = true)
 	{
 		if( ! $lumos) Connector::ini();
 		else Connector::inilumos();
@@ -39,7 +39,7 @@ class Connector
 		Log::ini();
 		Handler::run();
 		//
-		Connector::storage(true);
+		Connector::storage($session);
 		Connector::maintenance();
 		Connector::string();
 		Connector::object();
@@ -660,7 +660,7 @@ class Connector
 		Log::ini();
 		Handler::run();
 		//
-		Connector::storage(true);
+		Connector::storage(false);
 		Connector::maintenance();
 		Connector::string();
 		Connector::object();
