@@ -599,6 +599,7 @@ class Connector
 				'Documentations/Loggin', 
 				'Documentations/Translator', 
 				'Documentations/App', 
+				'Documentations/Robots', 
 				),
 			self::$path.'Setup/'
 			);
