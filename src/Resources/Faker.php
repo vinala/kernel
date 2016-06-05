@@ -157,7 +157,7 @@ class Faker
 
 	public static function domain()
 	{
-		return self::$Mainfaker->domainNmae;
+		return self::$Mainfaker->domainName;
 	}
 
 	public static function url()
