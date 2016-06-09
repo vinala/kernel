@@ -5,6 +5,7 @@ namespace Lighty\Kernel\MVC\View;
 use Lighty\Kernel\MVC\View\Exception\ViewNotFoundException;
 use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Plugins\Plugins;
+use Lighty\Kernel\Atomium\Atomium;
 
 /**
 * View mother class
@@ -25,23 +26,31 @@ class Views
 		$_name_=str_replace('.', '/', $_value_);
 		//
 		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
-		$_link2_=Application::$root.'app/views/'.$_name_.'.tpl.php';
+		$_link2_=Application::$root.'app/views/'.$_name_.'.atom.php';
+		$_link3_=Application::$root.'app/views/'.$_name_.'.tpl.php';
 		//
 		$_tpl_=false;
+		$_tpl_ = 0;
 		//
-		if(file_exists($_link1_)) { $_link3_=$_link1_; $_tpl_=false; }
-		else if(file_exists($_link2_)) { $_link3_=$_link2_; $_tpl_=true; }
+		if(file_exists($_link1_)) { $_link4_=$_link1_; $_tpl_=0; }
+		else if(file_exists($_link2_)) { $_link4_=$_link2_; $_tpl_=1; }
+		else if(file_exists($_link3_)) { $_link4_=$_link3_; $_tpl_=2; }
 		else { throw new ViewNotFoundException($_name_); }
 
-		if($_tpl_)
+		if($_tpl_ == 1)
 		{
-			self::$showed="tpl";
-			Template::show($_link3_,$_data_);
+			self::$showed="atomium";
+			self::atomium($_link4_,$_data_);
+		}
+		elseif($_tpl_ == 2)
+		{
+			self::$showed="smarty";
+			Template::show($_link4_,$_data_);
 		}
 		else
 		{
 			self::$showed="smpl";
-			include($_link3_);
+			include($_link4_);
 		}
 
 
@@ -63,22 +72,29 @@ class Views
 		$name_fgdfgdf=str_replace('.', '/', $value_DGFSrtfg5);
 		//
 		$link1=Application::$root.'app/views/'.$name_fgdfgdf.'.php';
-		$link2=Application::$root.'app/views/'.$name_fgdfgdf.'.tpl.php';
-		$link3='';
+		$link2=Application::$root.'app/views/'.$name_fgdfgdf.'.atom.php';
+		$link3=Application::$root.'app/views/'.$name_fgdfgdf.'.tpl.php';
+		$link4='';
 		//
 		$tpl=false;
 		//
-		if(file_exists($link1)) { $link3=$link1; $tpl=false; }
-		else if(file_exists($link2)) { $link3=$link2; $tpl=true; }
-		else { $link3=$name_fgdfgdf; $tpl=false; }
+		if(file_exists($link1)) { $link4=$link1; $tpl=0; }
+		else if(file_exists($link2)) { $link4=$link2; $tpl=1; }
+		else if(file_exists($link3)) { $link4=$link3; $tpl=2; }
+		else { throw new ViewNotFoundException($name_fgdfgdf); }
 		//
 		//Show the output
-		if($tpl)
-		{
-			self::$showed="tpl";
-			Template::show($link3,$data_kGdfgdf);
-		}
 
+		if($_tpl_ == 1)
+		{
+			self::$showed="atomium";
+			self::atomium($link4,$data_kGdfgdf);
+		}
+		elseif($_tpl_ == 2)
+		{
+			self::$showed="smarty";
+			Template::show($link4,$data_kGdfgdf);
+		}
 		else
 		{
 			self::$showed="smpl";
@@ -107,30 +123,41 @@ class Views
 		$_name_=str_replace('.', '/', $_value_);
 		//
 		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
-		$_link2_=Application::$root.'app/views/'.$_name_.'.tpl.php';
+		$_link2_=Application::$root.'app/views/'.$_name_.'.atom.php';
+		$_link3_=Application::$root.'app/views/'.$_name_.'.tpl.php';
 		//
 		$_link1_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.php';
-		$_link2_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.tpl.php';
-		// die($_link1_);
+		$_link2_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.atom.php';
+		$_link3_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.tpl.php';
 		//
-		$_tpl_=false;
+		$_tpl_=0;
 		//
-		if(file_exists($_link1_)) { $_link3_=$_link1_; $_tpl_=false; }
-		else if(file_exists($_link2_)) { $_link3_=$_link2_; $_tpl_=true; }
+		if(file_exists($_link1_)) { $_link4_=$_link1_; $_tpl_= 0 ; }
+		else if(file_exists($_link2_)) { $_link4_=$_link2_; $_tpl_= 1 ; }
+		else if(file_exists($_link3_)) { $_link4_=$_link3_; $_tpl_= 2 ; }
 		else { throw new ViewNotFoundException($_name_); }
 
-		if($_tpl_)
+		if($_tpl_ = 1)
 		{
-			self::$showed="tpl";
-			Template::show($_link3_,$_data_);
+			self::$showed="atomium";
+			self::atomium($_link4_,$_data_);
+		}
+		else if($_tpl_ = 2)
+		{
+			self::$showed="smarty";
+			Template::show($_link4_,$_data_);
 		}
 		else
 		{
 			self::$showed="smpl";
-			include($_link3_);
+			include($_link4_);
 		}
+	}
 
-
+	protected static function atomium($file, $_data_)
+	{
+		$atomium = new Atomium;
+		return $atomium->show($file, $_data_);
 	}
 
 
