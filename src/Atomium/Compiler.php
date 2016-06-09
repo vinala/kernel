@@ -56,6 +56,7 @@ class Compiler
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilIf();
+	  	self::compilFor();
 
 
 	        
@@ -117,6 +118,16 @@ class Compiler
 		self::replace('):', ') : ?>');
 		self::replace('@endif', '<?php endif; ?>');
 		self::replace('@else', '<?php else: ?>');
+	}
+
+	/**
+	 * Compile FOR
+	 */
+	protected static function compilFor()
+	{
+		self::replace('@for', '<?php for ');
+		self::replace('):', ') : ?>');
+		self::replace('@endfor', '<?php endfor; ?>');
 	}
 
 	/**
