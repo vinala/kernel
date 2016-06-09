@@ -113,8 +113,10 @@ class Compiler
 	protected static function compilIf()
 	{
 		self::replace('@if', '<?php if ');
+		self::replace('@elseif', '<?php elseif ');
 		self::replace('):', ') : ?>');
 		self::replace('@endif', '<?php endif; ?>');
+		self::replace('@else', '<?php else: ?>');
 	}
 
 	/**
