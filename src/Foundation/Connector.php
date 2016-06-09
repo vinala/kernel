@@ -68,6 +68,7 @@ class Connector
 		Connector::intro();
 		Connector::plugins();
 		Connector::lumos();
+		Connector::atomium();
 		Connector::process();
 		Connector::setup();
 	}
@@ -624,6 +625,20 @@ class Connector
 		self::commands();
 		// 
 		self::need(self::$path.'Lumos/Console.php');
+	}
+
+	/**
+	 * atomium call
+	 */
+	public static function atomium()
+	{
+		self::call(
+			array(
+				'Atomium', 
+				'Compiler'
+				),
+			self::$path.'Atomium/'
+			);
 	}
 
 	/**
