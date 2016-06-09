@@ -5,6 +5,11 @@ namespace Lighty\Kernel\Atomium;
 class Compiler 
 {
 
+	/**
+	 * The code that Atomium will compile
+	 */
+	protected static $output;
+
 	public static function run($file, $values)
 	{
 		return self::getContent($file);
@@ -12,9 +17,11 @@ class Compiler
 
 	protected  static function getContent($file)
 	{
-		$output = file_get_contents($file);
+		self::$output = file_get_contents($file);
 		//
-		return self::output($output);
+		self::output();
+		//
+		return self::$output;
 	}
 
 	public function setVar($content)
@@ -42,33 +49,14 @@ class Compiler
 		return $str;
 	}
 
-	public static function output($output) {
-	    // if (!file_exists($this->file)) {
-	    //     return "Error loading template file ($this->file).";
-	    // }
-	    // $output = file_get_contents($this->file);
-	  	
-	  		$tagToReplace = '{{';
-	        $output = str_replace($tagToReplace, "<?php", $output);
+	protected static function output() 
+	{
+		self::compilEcho();
+	  	self::compilTag();
+	  	self::compilEchoApostrophe();
+	  	self::compilEchoQuota();
 
-	        $tagToReplace = '}}';
-	        $output = str_replace($tagToReplace, "?>", $output);
-
-	        $tagToReplace = '"}';
-	        $output = str_replace($tagToReplace, '"; ?>', $output);
-	        $tagToReplace = '{"';
-	        $output = str_replace($tagToReplace, '<?php echo "', $output);
-
-	        $tagToReplace = "'}";
-	        $output = str_replace($tagToReplace, "'; ?>", $output);
-	        $tagToReplace = "{'";
-	        $output = str_replace($tagToReplace, "<?php echo '", $output);
-
-	        $tagToReplace = '{';
-	        $output = str_replace($tagToReplace, "<?php echo ", $output);
-
-	        $tagToReplace = '}';
-	        $output = str_replace($tagToReplace, "?>", $output);
+	        
 
 	   //  foreach ($this->values as $key => $value) 
 	   //  {
@@ -78,6 +66,52 @@ class Compiler
 	    //
 	    // $output = $this->setVar($output);
 	  
-	    return $output;
+	    // return $output;
+	}
+
+	/**
+	 * Replace PHP Tag
+	 */
+	protected static function compilTag()
+	{
+		self::replace("{?", "<?php");
+		self::replace("?}", "?>");
+	}
+
+	/**
+	 * Replace Echos
+	 */
+	protected static function compilEcho()
+	{
+		self::replace("{{", "<?php echo ");
+		self::replace("}}", "; ?>");
+	}
+
+	/**
+	 * Replace Echos
+	 */
+	protected static function compilEchoApostrophe()
+	{
+		self::replace("{'", "<?php echo '");
+		self::replace("'}", "'; ?>");
+	}
+
+	/**
+	 * Replace Echos
+	 */
+	protected static function compilEchoQuota()
+	{
+		self::replace('{"', '<?php echo "');
+		self::replace('"}', '"; ?>');
+	}
+
+
+
+	/**
+	 * Replace strings
+	 */
+	protected static function replace($old, $new)
+	{
+		self::$output = str_replace($old, $new, self::$output);
 	}
 }
