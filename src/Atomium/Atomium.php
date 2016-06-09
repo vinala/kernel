@@ -6,7 +6,7 @@ use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Security\Hash;
 use Lighty\Kernel\Objects\Strings;
 
-class Atomic
+class Atomium
 {
 
 	/**
