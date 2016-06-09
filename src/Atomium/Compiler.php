@@ -55,6 +55,8 @@ class Compiler
 	  	self::compilTag();
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
+	  	self::compilIf();
+
 
 	        
 
@@ -105,7 +107,15 @@ class Compiler
 		self::replace('"}', '"; ?>');
 	}
 
-
+	/**
+	 * Compile IF
+	 */
+	protected static function compilIf()
+	{
+		self::replace('@if', '<?php if ');
+		self::replace('):', ') : ?>');
+		self::replace('@endif', '<?php endif; ?>');
+	}
 
 	/**
 	 * Replace strings
