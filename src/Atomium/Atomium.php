@@ -6,7 +6,7 @@ use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Security\Hash;
 use Lighty\Kernel\Objects\Strings;
 
-class Atomium 
+class Atomic
 {
 
 	/**
@@ -135,6 +135,11 @@ class Atomium
 	 */
 	protected function display()
 	{
-		include_once $this->TemplateDir.'/'.$this->templateFile;
+		try {
+			require_once  $this->TemplateDir.'/'.$this->templateFile;
+		} catch (Exception $e) {
+			die( "rrrr");
+		}
+		
 	}
 }
