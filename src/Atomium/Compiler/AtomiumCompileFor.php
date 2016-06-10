@@ -14,21 +14,23 @@ class AtomiumCompileFor
 	protected static function openTag($script)
 	{
 		$output = "";
-		$opened = true;
+		$opened = false;
 		//
 		$data = Strings::splite($script , '@for' );
 		//
-		for ($i=0; $i < Table::count($data); $i++) { 
-			if($i % 2 != 0)
+		for ($i=0; $i < Table::count($data); $i++) 
+		{ 
+			if(Strings::contains($data[$i],"@endfor"))
 			{
 				$output .= "<?php for";
-				//
 				$next = Strings::splite( $data[$i], "\n");
-				//
 				$output .= $next[0] ." : ?>";
 				//
 				for ($j=1; $j < Table::count($next) ; $j++)
 					$output .= $next[$j];
+				//
+				$opened = true;
+				//
 			}
 			else $output .= $data[$i];
 		}
