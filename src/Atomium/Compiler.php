@@ -3,6 +3,7 @@
 namespace Lighty\Kernel\Atomium;
 
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
 
 class Compiler 
 {
@@ -54,6 +55,7 @@ class Compiler
 	protected static function output() 
 	{
 		self::compilTag();
+		self::compilComment();
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilIf();
@@ -129,6 +131,14 @@ class Compiler
 	protected static function compilFor()
 	{
 		self::$output = AtomiumCompileFor::run(self::$output);
+	}
+
+	/**
+	 * Compile Comments
+	 */
+	protected static function compilComment()
+	{
+		self::$output = AtomiumCompileComment::run(self::$output);
 	}
 
 	/**
