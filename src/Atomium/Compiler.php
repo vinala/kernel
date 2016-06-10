@@ -2,6 +2,8 @@
 
 namespace Lighty\Kernel\Atomium;
 
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
+
 class Compiler 
 {
 
@@ -51,12 +53,13 @@ class Compiler
 
 	protected static function output() 
 	{
-		self::compilEcho();
-	  	self::compilTag();
+		self::compilTag();
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilIf();
 	  	self::compilFor();
+	  	self::compilEcho();
+
 
 
 	        
@@ -77,8 +80,8 @@ class Compiler
 	 */
 	protected static function compilTag()
 	{
-		self::replace("{?", "<?php");
-		self::replace("?}", "?>");
+		self::replace("{{?", "<?php");
+		self::replace("?}}", "?>");
 	}
 
 	/**
@@ -95,8 +98,8 @@ class Compiler
 	 */
 	protected static function compilEchoApostrophe()
 	{
-		self::replace("{'", "<?php echo htmlentities('");
-		self::replace("'}", "'); ?>");
+		self::replace("{{ '", "<?php echo htmlentities('");
+		self::replace("' }}", "'); ?>");
 	}
 
 	/**
@@ -104,8 +107,8 @@ class Compiler
 	 */
 	protected static function compilEchoQuota()
 	{
-		self::replace('{"', '<?php echo htmlentities("');
-		self::replace('"}', '"); ?>');
+		self::replace('{{ "', '<?php echo htmlentities("');
+		self::replace('" }}', '"); ?>');
 	}
 
 	/**
@@ -125,9 +128,7 @@ class Compiler
 	 */
 	protected static function compilFor()
 	{
-		self::replace('@for', '<?php for ');
-		self::replace('):', ') : ?>');
-		self::replace('@endfor', '<?php endfor; ?>');
+		self::$output = AtomiumCompileFor::run(self::$output);
 	}
 
 	/**
