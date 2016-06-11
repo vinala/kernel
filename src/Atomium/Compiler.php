@@ -13,9 +13,8 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
-
-
-
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileTake;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
 
 
 
@@ -66,14 +65,17 @@ class Compiler
 		return $str;
 	}
 
-	protected static function output() 
+	public static function output( $content = null) 
 	{
-		
+		if( ! is_null($content)) self::$output = $content;
+		//
 		self::compilComment();
 		self::compilOneLineComment();
 		self::compilTag();
 		self::compilSub();
 		self::compilExec();
+		//
+
 		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
@@ -84,23 +86,17 @@ class Compiler
 	  	self::compilFor();
 	  	self::compilWhile();
 	  	//
+
+	  	//
+	  	self::compilTake();
+	  	self::compilCapture();
+	  	//
 	  	self::compilHtmlDiv();
+
 	  	//
 	  	self::compilEcho();
-
-
-
-	        
-
-	   //  foreach ($this->values as $key => $value) 
-	   //  {
-	 		// $tagToReplace = '{$'.$key.'}';
-	   //      $output = str_replace($tagToReplace, $value, $output);
-	   //  }
-	    //
-	    // $output = $this->setVar($output);
-	  
-	    // return $output;
+	  	//
+	  	if( ! is_null($content)) return self::$output ;
 	}
 
 	/**
@@ -229,6 +225,26 @@ class Compiler
 	protected static function compilHtmlDiv()
 	{
 		self::$output = AtomiumCompileHtmlDiv::run(self::$output);
+	}
+
+	/**
+	 * Atomium Functions
+	 */
+
+	/**
+	 * Compile for HTML Div
+	 */
+	protected static function compilTake()
+	{
+		self::$output = AtomiumCompileTake::run(self::$output);
+	}
+
+	/**
+	 * Compile for HTML Div
+	 */
+	public static function compilCapture()
+	{
+		self::$output = AtomiumCompileCapture::run(self::$output);
 	}
 
 	/**

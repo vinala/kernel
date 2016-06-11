@@ -95,12 +95,12 @@ class Views
 		//
 		//Show the output
 
-		if($_tpl_ == 1)
+		if($tpl == 1)
 		{
 			self::$showed="atomium";
 			self::atomium($link4,$data_kGdfgdf);
 		}
-		elseif($_tpl_ == 2)
+		elseif($tpl == 2)
 		{
 			self::$showed="smarty";
 			Template::show($link4,$data_kGdfgdf);

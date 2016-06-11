@@ -5,6 +5,8 @@ namespace Lighty\Kernel\Atomium;
 use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Security\Hash;
 use Lighty\Kernel\Objects\Strings;
+use Lighty\Kernel\MVC\View\Views;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
 
 class Atomium
 {
@@ -83,13 +85,15 @@ class Atomium
 	/**
 	 * store compiled template file
 	 */
-	protected function store($content)
+	protected function store($content,$name = null)
 	{
-		$name = $this->name();
+		$name = (is_null($name)) ? $this->name() : $name;
 		$file = fopen($this->TemplateDir."/".$name, "w");
 		//
 		fwrite($file, $content);
 		fclose($file);
+		//
+		return $this->TemplateDir."/".$name;
 	}
 
 	/**
@@ -103,9 +107,9 @@ class Atomium
 	/**
 	 * template file name
 	 */
-	protected function name()
+	protected function name($name = null)
 	{
-		$filename = $this->filename();
+		$filename = is_null($name) ? $this->filename() : $name;
 		$hash = Hash::make($filename);
 		$name = $hash."_".$filename;
 		//
@@ -140,5 +144,45 @@ class Atomium
 		foreach ($this->values as $key => $value) $$key = $value;
 		//
 		require_once  $this->TemplateDir.'/'.$this->templateFile;
+	}
+
+	/**
+	 * get a capture
+	 */
+	public function call($view, $capture, $data = null)
+	{
+		$name = $this->name($view."_capture_".$capture);
+		$view = self::get($view);
+
+		//
+		$capture = "@capture('$capture')";
+		//
+		$view = AtomiumCompileCapture::call($view, $capture);
+		//
+		if( ! is_null($data))
+			foreach ($data as $key => $value) 
+				$$key = $value;
+		//
+		$content = Compiler::output($view);		
+		//
+		include $this->store($content,$name);
+	}
+
+	/**
+	 * get a atomium viewview
+	 */
+	public function get($view)
+	{
+		$file=str_replace('.', '/', $view);
+		//
+		$link1=Application::$root.'app/views/'.$file.'.atom.php';
+		$link2=Application::$root.'app/views/'.$file.'.atom';
+		//
+		if(file_exists($link1)) { $link3 = $link1;  }
+		else if(file_exists($link2)) { $link3 = $link2;  }
+		//
+		$content = file_get_contents($link3);
+		//
+		return $content;
 	}
 }
