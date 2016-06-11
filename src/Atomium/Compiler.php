@@ -7,6 +7,7 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElse;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
 
 
 
@@ -66,6 +67,7 @@ class Compiler
 	  	self::compilIf();
 	  	self::compilElseIf();
 	  	self::compilElse();
+	  	self::compilForeach();
 	  	self::compilFor();
 
 	  	
@@ -152,6 +154,14 @@ class Compiler
 	protected static function compilFor()
 	{
 		self::$output = AtomiumCompileFor::run(self::$output);
+	}
+
+	/**
+	 * Compile Foreach
+	 */
+	protected static function compilForeach()
+	{
+		self::$output = AtomiumCompileForeach::run(self::$output);
 	}
 
 	/**
