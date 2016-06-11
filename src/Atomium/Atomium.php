@@ -135,11 +135,8 @@ class Atomium
 	 */
 	protected function display()
 	{
-		try {
-			require_once  $this->TemplateDir.'/'.$this->templateFile;
-		} catch (Exception $e) {
-			die( "rrrr");
-		}
-		
+		foreach ($this->values as $key => $value) $$key = $value;
+		//
+		require_once  $this->TemplateDir.'/'.$this->templateFile;
 	}
 }
