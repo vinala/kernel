@@ -31,7 +31,7 @@ class NewViewCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_view')." {name : what's the name of the view?} {--smarty : If set, the view will be in Smarty}";
+        $this->key = Config::get('lumos.new_view')." {name : what's the name of the view?} {--smarty : If set, the view will be in Smarty} {--atom : If set, the view will be in Atomium}";
         $this->description = "New View";
     }
 
@@ -44,14 +44,25 @@ class NewViewCommand extends Commands
     }
 
     /**
+     * Check template
+     */
+    public function template()
+    {
+        if($this->option("smarty")) return "smarty";
+        elseif($this->option("atom")) return "atom";
+        else return null;
+    }
+
+    /**
      * Execute the command
      */
     public function exec()
     {
         $name = $this->argument("name");
-        $isSmarty = $this->option("smarty");
         //
-        $process = View::create($name , $isSmarty);
+        $temp = $this->template();
+        //
+        $process = View::create($name , $temp);
         //
         $this->show($process);
     }

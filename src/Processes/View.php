@@ -14,8 +14,14 @@ class View
 	{
 		return str_replace(":", "/", $name);
 	}
-	public static function create($name , $isSmarty, $rt= null)
+	public static function create($name , $template, $rt= null)
 	{
+		switch ($template) {
+			case 'smarty': $extention = ".tpl.php"; break;
+			case 'atom': $extention = ".atom.php"; break;
+			default: $extention = ".php"; break;
+		}
+		//
 		$file	=	self::replace($name);
 		$pos 	= 	strpos($file, "/");
 		$Root = is_null($rt) ? Process::root : $rt ;
@@ -26,16 +32,12 @@ class View
 			if(mkdir($structure, 0777, true)) 
 			{
 				$file		= 	explode("/", $file);
-				$extention = $isSmarty ? ".tpl.php" : ".php";
-				//
 				return self::CreatView($file[1], $Root."app/views/".$file[0]."/", $extention);
 			}
 			else return 3;
 		}
 		else
 		{
-			$extention = $isSmarty ? ".tpl.php" : ".php";
-			//
 			return self::CreatView($file, $Root."app/views/", $extention);
 		}
 
@@ -59,9 +61,8 @@ class View
 
 	protected static function set($ext , $file)
 	{
-		return 
-			($ext == '.tpl.php') ? 
-				"{* View file  : $file *} \n"
-			: "<?php\n\n/**\n* View file  : $file\n*/\n\n";
+		if($ext == '.atom.php') return "{// View file  : $file //} \n";
+		elseif($ext == '.tpl.php') return "{* View file  : $file *} \n";
+		else return "<?php\n\n/**\n* View file  : $file\n*/\n\n";
 	}
 }
