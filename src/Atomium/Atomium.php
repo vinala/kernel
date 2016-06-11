@@ -67,6 +67,7 @@ class Atomium
 	 */
     protected function assign($data) 
     {
+    	if( ! is_null($data))
     	foreach ($data as $key => $value) 
     		$this->set($key, $value);
 	}
@@ -135,6 +136,7 @@ class Atomium
 	 */
 	protected function display()
 	{
+		// if( ! is_null($data))
 		foreach ($this->values as $key => $value) $$key = $value;
 		//
 		require_once  $this->TemplateDir.'/'.$this->templateFile;
