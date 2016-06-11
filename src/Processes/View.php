@@ -18,7 +18,7 @@ class View
 	{
 		switch ($template) {
 			case 'smarty': $extention = ".tpl.php"; break;
-			case 'atom': $extention = ".atom.php"; break;
+			case 'atom': $extention = ".atom"; break;
 			default: $extention = ".php"; break;
 		}
 		//
@@ -61,7 +61,7 @@ class View
 
 	protected static function set($ext , $file)
 	{
-		if($ext == '.atom.php') return "{// View file  : $file //} \n";
+		if($ext == '.atom') return "{// View file  : $file //} \n";
 		elseif($ext == '.tpl.php') return "{* View file  : $file *} \n";
 		else return "<?php\n\n/**\n* View file  : $file\n*/\n\n";
 	}

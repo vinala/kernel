@@ -26,15 +26,20 @@ class Views
 		$_name_=str_replace('.', '/', $_value_);
 		//
 		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
-		$_link2_=Application::$root.'app/views/'.$_name_.'.atom.php';
+		$_link2_=Application::$root.'app/views/'.$_name_.'.atom';
+		$_link21_=Application::$root.'app/views/'.$_name_.'.atom.php';
 		$_link3_=Application::$root.'app/views/'.$_name_.'.tpl.php';
 		//
 		$_tpl_=false;
 		$_tpl_ = 0;
 		//
 		if(file_exists($_link1_)) { $_link4_=$_link1_; $_tpl_=0; }
+		//
 		else if(file_exists($_link2_)) { $_link4_=$_link2_; $_tpl_=1; }
+		else if(file_exists($_link21_)) { $_link4_=$_link21_; $_tpl_=1; }
+		//
 		else if(file_exists($_link3_)) { $_link4_=$_link3_; $_tpl_=2; }
+		//
 		else { throw new ViewNotFoundException($_name_); }
 
 		if($_tpl_ == 1)
@@ -73,14 +78,19 @@ class Views
 		//
 		$link1=Application::$root.'app/views/'.$name_fgdfgdf.'.php';
 		$link2=Application::$root.'app/views/'.$name_fgdfgdf.'.atom.php';
+		$link21=Application::$root.'app/views/'.$name_fgdfgdf.'.atom';
 		$link3=Application::$root.'app/views/'.$name_fgdfgdf.'.tpl.php';
 		$link4='';
 		//
 		$tpl=false;
 		//
 		if(file_exists($link1)) { $link4=$link1; $tpl=0; }
+		//
 		else if(file_exists($link2)) { $link4=$link2; $tpl=1; }
+		else if(file_exists($link21)) { $link4=$link21; $tpl=1; }
+		//
 		else if(file_exists($link3)) { $link4=$link3; $tpl=2; }
+		//
 		else { throw new ViewNotFoundException($name_fgdfgdf); }
 		//
 		//Show the output
@@ -124,16 +134,21 @@ class Views
 		//
 		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
 		$_link2_=Application::$root.'app/views/'.$_name_.'.atom.php';
+		$_link21_=Application::$root.'app/views/'.$_name_.'.atom';
 		$_link3_=Application::$root.'app/views/'.$_name_.'.tpl.php';
 		//
 		$_link1_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.php';
 		$_link2_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.atom.php';
+		$_link21_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.atom';
 		$_link3_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.tpl.php';
 		//
 		$_tpl_=0;
 		//
 		if(file_exists($_link1_)) { $_link4_=$_link1_; $_tpl_= 0 ; }
+		//
 		else if(file_exists($_link2_)) { $_link4_=$_link2_; $_tpl_= 1 ; }
+		else if(file_exists($_link21_)) { $_link4_=$_link21_; $_tpl_= 1 ; }
+		//
 		else if(file_exists($_link3_)) { $_link4_=$_link3_; $_tpl_= 2 ; }
 		else { throw new ViewNotFoundException($_name_); }
 
