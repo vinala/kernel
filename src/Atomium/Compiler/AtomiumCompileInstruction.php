@@ -16,7 +16,7 @@ class AtomiumCompileInstruction
 	 *
 	 * @var string
 	 */
-	public static function openTag($script, $openTag, $closeTag, $phpOpenTag, $endOpenTag, $phpEndOpenTag)
+	public static function openTag($script, $openTag, $phpOpenTag, $endOpenTag, $phpEndOpenTag)
 	{
 		$data = Strings::splite($script , $openTag );
 		//

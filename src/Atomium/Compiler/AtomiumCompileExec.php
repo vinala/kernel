@@ -50,7 +50,7 @@ class AtomiumCompileExec
 	 */
 	protected static function openTag($script)
 	{
-		return AtomiumCompileInstruction::openTag($script, self::$openTag, self::$closeTag, self::$phpOpenTag, self::$endOpenTag, self::$phpEndOpenTag);
+		return AtomiumCompileInstruction::openTag($script, self::$openTag, self::$phpOpenTag, self::$endOpenTag, self::$phpEndOpenTag);
 	}
 
 
