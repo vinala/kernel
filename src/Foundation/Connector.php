@@ -636,8 +636,11 @@ class Connector
 			array(
 				'Atomium', 
 				'Compiler',
+				'Compiler/AtomiumCompileInstruction',
+				'Compiler/AtomiumCompileIf',
 				'Compiler/AtomiumCompileFor',
 				'Compiler/AtomiumCompileComment',
+				'Compiler/AtomiumCompileElse',
 				),
 			self::$path.'Atomium/'
 			);
