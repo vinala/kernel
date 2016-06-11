@@ -2,8 +2,11 @@
 
 namespace Lighty\Kernel\Atomium;
 
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileIf;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElse;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
+
 
 class Compiler 
 {
@@ -59,7 +62,10 @@ class Compiler
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilIf();
+	  	self::compilElse();
 	  	self::compilFor();
+
+	  	
 	  	self::compilEcho();
 
 
@@ -118,11 +124,15 @@ class Compiler
 	 */
 	protected static function compilIf()
 	{
-		self::replace('@if', '<?php if ');
-		self::replace('@elseif', '<?php elseif ');
-		self::replace('):', ') : ?>');
-		self::replace('@endif', '<?php endif; ?>');
-		self::replace('@else', '<?php else: ?>');
+		self::$output = AtomiumCompileIf::run(self::$output);
+	}
+
+	/**
+	 * Compile ELSE
+	 */
+	protected static function compilElse()
+	{
+		self::$output = AtomiumCompileElse::run(self::$output);	
 	}
 
 	/**
