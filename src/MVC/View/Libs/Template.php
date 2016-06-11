@@ -31,7 +31,7 @@ class Template
 	protected static function setCache()
 	{
 		self::$smarty->setTemplateDir(Application::$root.'app/storage/framework/view/compile');
-		self::$smarty->setCompileDir(Application::$root.'app/storage/framework/view/template');
+		self::$smarty->setCompileDir(Application::$root.'app/storage/framework/view/template/smarty');
 	}
 
 	protected static function setParams()
