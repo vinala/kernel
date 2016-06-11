@@ -16,7 +16,7 @@ class AtomiumCompileForeach
 	 *
 	 * @var string
 	 */
-	protected static $openTag = "@foreach(";
+	protected static $openTag = "@foreach";
 
 
 	/**
@@ -24,7 +24,7 @@ class AtomiumCompileForeach
 	 *
 	 * @var string
 	 */
-	protected static $endOpenTag = ")\n";
+	protected static $endOpenTag = "\n";
 
 
 	/**
@@ -40,7 +40,7 @@ class AtomiumCompileForeach
 	 *
 	 * @var string
 	 */
-	protected static $phpOpenTag = "<?php foreach(";
+	protected static $phpOpenTag = "<?php foreach";
 
 
 	/**
@@ -48,7 +48,7 @@ class AtomiumCompileForeach
 	 *
 	 * @var string
 	 */
-	protected static $phpEndOpenTag = "): ?>";
+	protected static $phpEndOpenTag = ": ?>";
 
 
 	/**
