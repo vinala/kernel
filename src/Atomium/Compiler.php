@@ -10,6 +10,7 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
 
 
 
@@ -65,6 +66,7 @@ class Compiler
 		self::compilTag();
 		self::compilComment();
 		self::compilSub();
+		self::compilExec();
 		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
@@ -191,6 +193,14 @@ class Compiler
 	protected static function compilComment()
 	{
 		self::$output = AtomiumCompileComment::run(self::$output);
+	}
+
+	/**
+	 * Compile Exec
+	 */
+	protected static function compilExec()
+	{
+		self::$output = AtomiumCompileExec::run(self::$output);
 	}
 
 	/**
