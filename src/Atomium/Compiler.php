@@ -6,6 +6,8 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElse;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
+
 
 
 class Compiler 
@@ -62,6 +64,7 @@ class Compiler
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilIf();
+	  	self::compilElseIf();
 	  	self::compilElse();
 	  	self::compilFor();
 
@@ -133,6 +136,14 @@ class Compiler
 	protected static function compilElse()
 	{
 		self::$output = AtomiumCompileElse::run(self::$output);	
+	}
+
+	/**
+	 * Compile ELSE
+	 */
+	protected static function compilElseIf()
+	{
+		self::$output = AtomiumCompileElseIf::run(self::$output);	
 	}
 
 	/**

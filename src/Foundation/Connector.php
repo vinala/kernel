@@ -641,6 +641,7 @@ class Connector
 				'Compiler/AtomiumCompileFor',
 				'Compiler/AtomiumCompileComment',
 				'Compiler/AtomiumCompileElse',
+				'Compiler/AtomiumCompileElseIf',
 				),
 			self::$path.'Atomium/'
 			);
