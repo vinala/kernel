@@ -6,12 +6,15 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElse;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineComment;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
+
+
 
 
 
@@ -65,6 +68,7 @@ class Compiler
 
 	protected static function output() 
 	{
+		self::compilOneLineComment();
 		self::compilComment();
 		self::compilTag();
 		self::compilSub();
@@ -180,6 +184,14 @@ class Compiler
 	protected static function compilWhile()
 	{
 		self::$output = AtomiumCompileWhile::run(self::$output);
+	}
+
+	/**
+	 * Compile One Line Comments
+	 */
+	protected static function compilOneLineComment()
+	{
+		self::$output = AtomiumCompileOneLineComment::run(self::$output);
 	}
 
 	/**

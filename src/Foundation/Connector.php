@@ -640,6 +640,7 @@ class Connector
 				'Compiler/AtomiumCompileIf',
 				'Compiler/AtomiumCompileFor',
 				'Compiler/AtomiumCompileComment',
+				'Compiler/AtomiumCompileOneLineComment',
 				'Compiler/AtomiumCompileElse',
 				'Compiler/AtomiumCompileElseIf',
 				'Compiler/AtomiumCompileForeach',
