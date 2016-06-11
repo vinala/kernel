@@ -11,38 +11,81 @@ use Lighty\Kernel\Objects\Table;
 class AtomiumCompileFor
 {
 
+	/**
+	 * The tag that open the instruction 
+	 *
+	 * @var string
+	 */
+	protected static $openTag = "@for";
+
+
+	/**
+	 * The key where open tag end's
+	 *
+	 * @var string
+	 */
+	protected static $endOpenTag = "\n";
+
+
+	/**
+	 * The tag that close the instruction 
+	 *
+	 * @var string
+	 */
+	protected static $closeTag = "@endfor";
+
+
+	/**
+	 * The PHP Open tag that should Lighty replace with
+	 *
+	 * @var string
+	 */
+	protected static $phpOpenTag = "<?php for ";
+
+
+	/**
+	 * The key where PHP Open tag end's
+	 *
+	 * @var string
+	 */
+	protected static $phpEndOpenTag = ": ?>";
+
+
+	/**
+	 * The PHP Close tag that should Lighty replace with
+	 *
+	 * @var string
+	 */
+	protected static $phpCloseTag = "<?php endfor; ?>";
+
+
+	/**
+	 * Complie the opening tag
+	 *
+	 * @var string
+	 */
 	protected static function openTag($script)
 	{
-		$output = "";
-		$opened = false;
-		//
-		$data = Strings::splite($script , '@for' );
-		//
-		for ($i=0; $i < Table::count($data); $i++) 
-		{ 
-			if(Strings::contains($data[$i],"@endfor"))
-			{
-				$output .= "<?php for";
-				$next = Strings::splite( $data[$i], "\n");
-				$output .= $next[0] ." : ?>";
-				//
-				for ($j=1; $j < Table::count($next) ; $j++)
-					$output .= $next[$j];
-				//
-				$opened = true;
-				//
-			}
-			else $output .= $data[$i];
-		}
-		//
-		return $output;
+		return AtomiumCompileInstruction::openTag($script, self::$openTag, self::$closeTag, self::$phpOpenTag, self::$endOpenTag, self::$phpEndOpenTag);
 	}
 
+
+	/**
+	 * Complie the closing tag
+	 *
+	 * @var string
+	 */
 	protected static function closeTag($script)
 	{
-		return str_replace('@endfor', '<?php endfor; ?>', $script);
+		return AtomiumCompileInstruction::closeTag($script, self::$closeTag, self::$phpCloseTag);
 	}
 
+
+	/**
+	 * run the compiler
+	 *
+	 * @var string
+	 */
 	public static function run($script)
 	{
 		$script = self::openTag($script);
