@@ -8,6 +8,8 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
 
 
 
@@ -26,7 +28,7 @@ class Compiler
 
 	protected  static function getContent($file)
 	{
-		self::$output = file_get_contents($file);
+		self::$output = file_get_contents($file)."\n";
 		//
 		self::output();
 		//
@@ -62,6 +64,8 @@ class Compiler
 	{
 		self::compilTag();
 		self::compilComment();
+		self::compilSub();
+		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilIf();
@@ -69,6 +73,7 @@ class Compiler
 	  	self::compilElse();
 	  	self::compilForeach();
 	  	self::compilFor();
+	  	self::compilWhile();
 
 	  	
 	  	self::compilEcho();
@@ -162,6 +167,22 @@ class Compiler
 	protected static function compilForeach()
 	{
 		self::$output = AtomiumCompileForeach::run(self::$output);
+	}
+
+	/**
+	 * Compile While
+	 */
+	protected static function compilWhile()
+	{
+		self::$output = AtomiumCompileWhile::run(self::$output);
+	}
+
+	/**
+	 * Compile Call
+	 */
+	protected static function compilSub()
+	{
+		self::$output = AtomiumCompileSub::run(self::$output);
 	}
 
 	/**
