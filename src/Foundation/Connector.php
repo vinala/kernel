@@ -646,6 +646,8 @@ class Connector
 				'Compiler/AtomiumCompileWhile',
 				'Compiler/AtomiumCompileSub',
 				'Compiler/AtomiumCompileExec',
+				//
+				'Compiler/AtomiumCompileHtmlDiv',
 
 				),
 			self::$path.'Atomium/'

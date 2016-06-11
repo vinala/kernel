@@ -11,6 +11,8 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
+
 
 
 
@@ -63,8 +65,8 @@ class Compiler
 
 	protected static function output() 
 	{
-		self::compilTag();
 		self::compilComment();
+		self::compilTag();
 		self::compilSub();
 		self::compilExec();
 		//
@@ -76,8 +78,9 @@ class Compiler
 	  	self::compilForeach();
 	  	self::compilFor();
 	  	self::compilWhile();
-
-	  	
+	  	//
+	  	self::compilHtmlDiv();
+	  	//
 	  	self::compilEcho();
 
 
@@ -180,14 +183,6 @@ class Compiler
 	}
 
 	/**
-	 * Compile Call
-	 */
-	protected static function compilSub()
-	{
-		self::$output = AtomiumCompileSub::run(self::$output);
-	}
-
-	/**
 	 * Compile Comments
 	 */
 	protected static function compilComment()
@@ -196,11 +191,31 @@ class Compiler
 	}
 
 	/**
+	 * Compile Call
+	 */
+	protected static function compilSub()
+	{
+		self::$output = AtomiumCompileSub::run(self::$output);
+	}
+
+	/**
 	 * Compile Exec
 	 */
 	protected static function compilExec()
 	{
 		self::$output = AtomiumCompileExec::run(self::$output);
+	}
+
+	/**
+	 * HTML Compiles
+	 */
+
+	/**
+	 * Compile for HTML Div
+	 */
+	protected static function compilHtmlDiv()
+	{
+		self::$output = AtomiumCompileHtmlDiv::run(self::$output);
 	}
 
 	/**
