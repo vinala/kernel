@@ -68,8 +68,9 @@ class Compiler
 
 	protected static function output() 
 	{
-		self::compilOneLineComment();
+		
 		self::compilComment();
+		self::compilOneLineComment();
 		self::compilTag();
 		self::compilSub();
 		self::compilExec();

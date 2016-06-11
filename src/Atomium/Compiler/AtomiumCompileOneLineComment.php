@@ -16,31 +16,15 @@ class AtomiumCompileOneLineComment
 	 *
 	 * @var string
 	 */
-	protected static $openTag = "///";
+	protected static $openTag = "//";
 
 
 	/**
-	 * The key where open tag end's
+	 * The tag that close the instruction 
 	 *
 	 * @var string
 	 */
-	protected static $endOpenTag = "\n";
-
-
-	/**
-	 * The PHP Open tag that should Lighty replace with
-	 *
-	 * @var string
-	 */
-	protected static $phpOpenTag = "{//\n" ;
-
-
-	/**
-	 * The key where PHP Open tag end's
-	 *
-	 * @var string
-	 */
-	protected static $phpEndOpenTag = "\n//}" ;
+	protected static $closeTag = "\n";
 
 
 	/**
@@ -48,11 +32,10 @@ class AtomiumCompileOneLineComment
 	 *
 	 * @var string
 	 */
-	protected static function openTag($script)
+	protected static function hide($script)
 	{
-		return AtomiumCompileInstruction::openTag($script, self::$openTag, self::$phpOpenTag, self::$endOpenTag, self::$phpEndOpenTag);
+		return AtomiumCompileComments::hide($script, self::$openTag, self::$closeTag);
 	}
-
 
 	/**
 	 * run the compiler
@@ -61,7 +44,7 @@ class AtomiumCompileOneLineComment
 	 */
 	public static function run($script)
 	{
-		$script = self::openTag($script);
+		$script = self::hide($script);
 		return $script;
 	}
 }

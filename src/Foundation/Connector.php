@@ -636,10 +636,13 @@ class Connector
 			array(
 				'Atomium', 
 				'Compiler',
+				//
+				'Compiler/AtomiumCompileComments',
+				'Compiler/AtomiumCompileComment',
+				//
 				'Compiler/AtomiumCompileInstruction',
 				'Compiler/AtomiumCompileIf',
 				'Compiler/AtomiumCompileFor',
-				'Compiler/AtomiumCompileComment',
 				'Compiler/AtomiumCompileOneLineComment',
 				'Compiler/AtomiumCompileElse',
 				'Compiler/AtomiumCompileElseIf',

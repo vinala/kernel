@@ -6,60 +6,45 @@ use Lighty\Kernel\Objects\Strings;
 use Lighty\Kernel\Objects\Table;
 
 /**
- * Class to hundle with Atomium comments
- * 
- * @package    Lighty Kernel
- * @subpackage Atomium
- * @author     Youssef Had
- */
+* 
+*/
 class AtomiumCompileComment
 {
+
 	/**
-	 * The tag that open the comment
+	 * The tag that open the instruction 
 	 *
 	 * @var string
 	 */
-	protected static $openTag = "{//" ;
+	protected static $openTag = "{//";
+
 
 	/**
-	 * The tag that close the comment
+	 * The tag that close the instruction 
 	 *
 	 * @var string
 	 */
-	protected static $closeTag = "//}" ;
+	protected static $closeTag = "//}";
 
 
 	/**
-	 * To hide de comment that user write
+	 * Complie the opening tag
 	 *
-	 * @return string
+	 * @var string
 	 */
 	protected static function hide($script)
 	{
-		$output = "";
-		//
-		$data = Strings::splite($script , self::$openTag );
-		//
-		for ($i=0; $i < Table::count($data); $i++) 
-			if(Strings::contains($data[$i],self::$closeTag))
-			{
-				$next = Strings::splite( $data[$i], self::$closeTag);
-				//
-				for ($j=1; $j < Table::count($next) ; $j++)
-					$output .= $next[$j];
-			}
-			else $output .= $data[$i];
-		//
-		return $output;
+		return AtomiumCompileComments::hide($script, self::$openTag, self::$closeTag);
 	}
 
 	/**
-	 * Run the compiler
+	 * run the compiler
 	 *
-	 * @return string
+	 * @var string
 	 */
 	public static function run($script)
 	{
-		return self::hide($script);
+		$script = self::hide($script);
+		return $script;
 	}
 }
