@@ -15,6 +15,8 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileTake;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileLang;
+
 
 
 
@@ -75,8 +77,6 @@ class Compiler
 		self::compilSub();
 		self::compilExec();
 		//
-
-		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilIf();
@@ -86,7 +86,7 @@ class Compiler
 	  	self::compilFor();
 	  	self::compilWhile();
 	  	//
-
+	  	self::compilLang();
 	  	//
 	  	self::compilTake();
 	  	self::compilCapture();
@@ -213,6 +213,14 @@ class Compiler
 	protected static function compilExec()
 	{
 		self::$output = AtomiumCompileExec::run(self::$output);
+	}
+
+	/**
+	 * Compile Lang
+	 */
+	protected static function compilLang()
+	{
+		self::$output = AtomiumCompileLang::run(self::$output);
 	}
 
 	/**

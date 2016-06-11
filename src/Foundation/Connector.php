@@ -651,6 +651,8 @@ class Connector
 				'Compiler/AtomiumCompileSub',
 				'Compiler/AtomiumCompileExec',
 				//
+				'Compiler/AtomiumCompileLang',
+				//
 				'Compiler/AtomiumCompileHtmlDiv',
 				//
 				'Compiler/AtomiumCompileTake',
