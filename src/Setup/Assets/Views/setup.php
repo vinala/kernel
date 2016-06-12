@@ -260,7 +260,7 @@
 					<div class="fst-config-label db-input-label">Second password</div>
 					<div class="fst-config-input db-input-input">
 						<input type="text" class="form-control" name="pass_2" placeholder="Password 2" value="">
-						<p class="conf_input_note">By default : 1234</p>
+						<p class="conf_input_note">By default : 5678</p>
 					</div>
 					<div class="fst-config-input-desc db-input-input-desc">the second password to access to panel</div>
 				</div>
@@ -288,6 +288,10 @@
 		</div>
 	</div>
 	
+	<div class="bottom_panel bottom_panel_2 bottom_owner" id="bottom_owner" style="display:none">
+		By Youssef Had
+	</div>
+
 	<div class="bottom_panel bottom_panel_2" id="bottom_panel_2" style="display:none">
 		<?php echo "v ".App::fullVersion(); ?>
 	</div>
