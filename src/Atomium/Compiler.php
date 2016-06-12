@@ -16,6 +16,7 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileTake;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileLang;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileBreak;
 
 
 
@@ -165,6 +166,14 @@ class Compiler
 	protected static function compilFor()
 	{
 		self::$output = AtomiumCompileFor::run(self::$output);
+	}
+
+	/**
+	 * Compile Break
+	 */
+	protected static function compilBreak()
+	{
+		self::$output = AtomiumCompileBreak::run(self::$output);
 	}
 
 	/**
