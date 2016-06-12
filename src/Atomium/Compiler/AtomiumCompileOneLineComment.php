@@ -16,7 +16,7 @@ class AtomiumCompileOneLineComment
 	 *
 	 * @var string
 	 */
-	protected static $openTag = "//";
+	protected static $openTag = "///";
 
 
 	/**
