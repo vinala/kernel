@@ -288,14 +288,30 @@
 		</div>
 	</div>
 	
-	<div class="bottom_panel bottom_panel_2 bottom_owner" id="bottom_owner" style="display:none">
-		By Youssef Had
-	</div>
+	<div class="final_link">
+		<div class="final_link_owner" id="bottom_owner" style="display:none">
+			<a id="fst_panel" class="final_link_owner_a" href="https://www.facebook.com/yussef.had">
+				By Youssef Had
+			</a>	
+		</div>
 
-	<div class="bottom_panel bottom_panel_2" id="bottom_panel_2" style="display:none">
-		<?php echo "v ".App::fullVersion(); ?>
-	</div>
-	<div class="bottom_panel" id="bottom_panel" style="display:none">
-		<a id="fst_panel" href="<?php echo Config::get("panel.route") ?>"><div class="btn hello_button" id="login">Lighty Panel</div></a>
+		<div class="final_link_docs" id="bottom_docs" style="display:none">
+			<a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/Docs">
+				Docs
+			</a>
+		</div>
+		
+		<div class="final_link_version" id="bottom_panel_2" style="display:none">
+			<a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/framework/blob/dev/changes.md">
+				<?php echo "v ".App::fullVersion();  ?>
+			</a>
+		</div>
+		<div class="final_link_panel" id="bottom_panel" style="display:none">
+			<a id="fst_panel" href="{{ Config::get("panel.route") }}">
+				<div class="btn hello_button" id="login">
+					Lighty Panel
+				</div>
+			</a>
+		</div>
 	</div>
 </div>
