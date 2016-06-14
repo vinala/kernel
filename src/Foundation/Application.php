@@ -23,6 +23,7 @@ use Lighty\Kernel\Objects\DateTime;
 use Lighty\Panel;
 use Lighty\Kernel\Filesystem\Filesystem;
 use Lighty\Kernel\Plugins\Plugins;
+use Lighty\Kernel\Storage\Cookie;
 
 
 class Application
@@ -66,6 +67,12 @@ class Application
 		$kernel = "vendor/lighty/kernel/";
 		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
 		return "Lighty Kernel v".$version;
+	}
+
+	public static function setVersionCookie()
+	{
+		$version = (new Filesystem)->get(self::$root."version.md");
+		Cookie::create("lighty_version", $version,3);
 	}
 
 	protected static function callConnector($test = false)
@@ -123,6 +130,8 @@ class Application
 		// call the connector and run it
 		self::callConnector();
 		Connector::run(false,$session);
+		// set version cookie for Wappalyzer
+		self::setVersionCookie();
 		//
 		self::ini();
 		//
@@ -174,6 +183,8 @@ class Application
 		// call the connector and run it
 		self::callConnector(true);
 		Connector::runTest(true);
+		// set version cookie for Wappalyzer
+		self::setVersionCookie();
 		//
 		self::ini();
 		//
