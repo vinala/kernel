@@ -68,6 +68,7 @@ class Connector
 		Connector::intro();
 		Connector::plugins();
 		Connector::lumos();
+		Connector::bridge();
 		Connector::atomium();
 		Connector::process();
 		Connector::setup();
@@ -628,6 +629,20 @@ class Connector
 	}
 
 	/**
+	 * Bridge call
+	 */
+	public static function bridge()
+	{
+		self::call(
+			array(
+				'route',
+				'Controllers/Response',
+				),
+			self::$path.'Bridge/'
+			);
+	}
+
+	/**
 	 * atomium call
 	 */
 	public static function atomium()
@@ -669,17 +684,25 @@ class Connector
 	 * process call
 	 */
 	public static function process()
-	{
-		self::need(self::$path.'Processes/Command.php');
-		self::need(self::$path.'Processes/Process.php');
-		self::need(self::$path.'Processes/Translator.php');
-		self::need(self::$path.'Processes/Schema.php');
-		self::need(self::$path.'Processes/Links.php');
-		self::need(self::$path.'Processes/Model.php');
-		self::need(self::$path.'Processes/View.php');
-		self::need(self::$path.'Processes/Controller.php');
-		self::need(self::$path.'Processes/Seeds.php');
-		self::need(self::$path.'Processes/Routes.php');
+	{	
+		self::call(
+			array(
+				'Command',
+				'Process',
+				'Translator',
+				'Schema',
+				'Links',
+				'Model',
+				'View',
+				'Controller',
+				'Seeds',
+				'Routes',
+				),
+			self::$path.'Processes/'
+			);
+		//
+		self::need(self::$path.'Processes/Exceptions/TranslatorFolderNeededException.php');
+		self::need(self::$path.'Processes/Exceptions/TranslatorManyFolderException.php');
 	}
 
 	/**
