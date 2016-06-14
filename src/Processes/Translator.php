@@ -4,39 +4,72 @@ namespace Lighty\Kernel\Process;
 
 use Lighty\Kernel\Process\Process;
 use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Objects\Strings;
+use Lighty\Kernel\Process\Exception\TranslatorFolderNeededException;
+use Lighty\Kernel\Process\Exception\TranslatorManyFolderException;
 
 /**
 * Language class
 */
 class Translator
 {
-	public static function createDir($name, $rt = null)
+
+	public static function create($name, $rt = null)
 	{
 		$root = is_null($rt) ? Process::root : $rt ;
 		//
-		if( ! file_exists($root."app/lang/".$name))
+		$file	=	self::replace($name);
+		$folders = Strings::splite($file,"/");
+		//
+		$file = self::createFolders($folders, $root);
+		//
+		return self::createFile($file["file"], $file["path"]);
+	}
+
+	public static function replace($name)
+	{
+		return str_replace(".", "/", $name);
+	}
+
+	protected static function createFolders($folders, $root)
+	{
+		$initPath = $path = $root."app/lang/";
+		//
+		if(count($folders) > 2) throw new TranslatorManyFolderException();
+		//
+		for ($i=0; $i < count($folders)-1 ; $i++)
 		{
-			mkdir ($root."app/lang/".$name);
+			$value = $folders[$i];
+			//
+			if(is_dir($path.$value))
+				$path .= $value."/";
+			else
+			{
+				$path .= $value."/";
+				mkdir($path, 0777, true);
+			}
+		}
+		$file = $folders[count($folders)-1];
+		//
+		if($path == $initPath) throw new TranslatorFolderNeededException($file);
+		//
+		return array("path" => $path, "file" => $file );
+	}
+
+	public static function createFile($file, $path)
+	{
+
+		if(!file_exists("$path$file.php"))
+		{
+			$myfile = fopen("$path/$file.php" , "w");
+			$txt = self::set();
+			//
+			fwrite($myfile, $txt);
+			fclose($myfile);
+			//
 			return true;
 		}
 		else return false;
-	}
-
-	public static function createFile($dirName , $fileName, $rt = null)
-	{
-		$root = is_null($rt) ? Process::root : $rt ;
-		//
-		if(!file_exists($root."app/lang/$dirName/$fileName.php"))
-			{
-				$myfile = fopen($root."app/lang/$dirName/$fileName.php", "w");
-				$txt = self::set();
-				//
-				fwrite($myfile, $txt);
-				fclose($myfile);
-				//
-				return true;
-			}
-			else return false;
 	}
 
 	public static function set()
