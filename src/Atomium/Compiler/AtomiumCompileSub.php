@@ -24,7 +24,7 @@ class AtomiumCompileSub
 	 *
 	 * @var string
 	 */
-	protected static $endOpenTag = ")\n";
+	protected static $endOpenTag = ")";
 
 
 	/**
