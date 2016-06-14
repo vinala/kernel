@@ -31,7 +31,7 @@ class NewLanguageFileCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.file_lang')." {fileName : what's the name of the file?} {dirName : which directory?}";
+        $this->key = Config::get('lumos.new_lang')." {file : what's the name of the file?} ";
         $this->description = "Make new translator file";
     }
 
@@ -48,10 +48,9 @@ class NewLanguageFileCommand extends Commands
      */
     public function exec()
     {
-        $fileName = $this->argument("fileName");
-        $dirName = $this->argument("dirName");
+        $file = $this->argument("file");
         //
-        $process = Translator::createFile($dirName,$fileName);
+        $process = Translator::create($file);
         //
         $this->show($process);
     }
