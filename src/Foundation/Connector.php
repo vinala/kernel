@@ -656,11 +656,13 @@ class Connector
 				'Compiler/AtomiumCompileComment',
 				//
 				'Compiler/AtomiumCompileInstruction',
+				'Compiler/AtomiumCompileOneLineInstruction',
 				'Compiler/AtomiumCompileIf',
 				'Compiler/AtomiumCompileFor',
 				'Compiler/AtomiumCompileBreak',
 				'Compiler/AtomiumCompileOneLineComment',
 				'Compiler/AtomiumCompileElse',
+				'Compiler/AtomiumCompileEndIf',
 				'Compiler/AtomiumCompileElseIf',
 				'Compiler/AtomiumCompileForeach',
 				'Compiler/AtomiumCompileWhile',
