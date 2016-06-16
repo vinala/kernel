@@ -24,7 +24,7 @@ class AtomiumCompileLang
 	 *
 	 * @var string
 	 */
-	protected static $endOpenTag = ")";
+	protected static $endOpenTag = ";";
 
 
 	/**
@@ -32,7 +32,7 @@ class AtomiumCompileLang
 	 *
 	 * @var string
 	 */
-	protected static $phpOpenTag = "<?php echo Translator::get" ;
+	protected static $phpOpenTag = "<?php echo Translator::get(" ;
 
 
 	/**
@@ -50,7 +50,7 @@ class AtomiumCompileLang
 	 */
 	protected static function openTag($script)
 	{
-		return AtomiumCompileInstruction::openTag($script, self::$openTag, self::$phpOpenTag, self::$endOpenTag, self::$phpEndOpenTag);
+		return AtomiumCompileOneLineInstruction::run($script, self::$openTag, self::$phpOpenTag, self::$endOpenTag, self::$phpEndOpenTag);
 	}
 
 
