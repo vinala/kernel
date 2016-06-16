@@ -46,11 +46,6 @@ class AtomiumCompileOneLineInstruction
 	 */
 	protected static function open($script, $openTag, $closeChar, $phpFunc, $phpClose)
 	{
-		// if($openTag == "@endif") die("lorem ipsum");
-		// $openTag = "@test";
-		// $closeChar = ";";
-		// $phpFunc = "<?php echo Config::get(";
-		// $phpClose = "); ? >";
 		//
 		$data = Strings::splite($script , $openTag );
 		//
@@ -59,16 +54,11 @@ class AtomiumCompileOneLineInstruction
 		//
 		for ($i=1; $i < Table::count($data); $i++) 
 		{
-			
-			//
 			$items = self::getParmas($data[$i], $closeChar);
-			// if($openTag != "@test") die(print_r($items));
-			// if($openTag != "@test") die(var_dump($data[$i]));
 			//
 			$params = $items['params'];
 			$rest = $items['rest'];
 			//
-			// if($openTag != "@test") die(($params));
 			$output .= self::compile($params, $phpFunc, $phpClose);
 			$output .= $rest;
 		}
@@ -89,7 +79,6 @@ class AtomiumCompileOneLineInstruction
 		$rest = "";
 		$taken = false;
 		$string = false; // 1 "" - 2 ''
-		// die($row);
 		//
 		for ($j=0; $j < strlen($row); $j++) { 
 			if($row[$j] == "'" && !$string) $string = 2;
