@@ -97,6 +97,7 @@ class Compiler
 	  	self::compilEndFor();
 	  	self::compilBreak();
 	  	self::compilWhile();
+	  	self::compilEndWhile();
 	  	//
 	  	self::compilLang();
 	  	//
