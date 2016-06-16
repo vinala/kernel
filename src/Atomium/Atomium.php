@@ -155,7 +155,8 @@ class Atomium
 		$view = self::get($view);
 
 		//
-		$capture = "@capture('$capture')";
+		// $capture = "@capture('$capture'):";
+		$capture = '@capture("'.$capture.'"):';
 		//
 		$view = AtomiumCompileCapture::call($view, $capture);
 		//
@@ -163,8 +164,7 @@ class Atomium
 			foreach ($data as $key => $value) 
 				$$key = $value;
 		//
-		$content = Compiler::output($view);		
-		//
+		$content = Compiler::output($view);
 		include $this->store($content,$name);
 	}
 

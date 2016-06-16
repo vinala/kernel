@@ -24,7 +24,7 @@ class AtomiumCompileCapture
 	 *
 	 * @var string
 	 */
-	protected static $endOpenTag = "\n";
+	protected static $endOpenTag = ":";
 
 
 	/**
@@ -32,7 +32,7 @@ class AtomiumCompileCapture
 	 *
 	 * @var string
 	 */
-	protected static $closeTag = "@endcapture";
+	protected static $closeTag = "@endcapture;";
 
 
 	/**
@@ -61,7 +61,6 @@ class AtomiumCompileCapture
 	 */
 	protected static function get($script, $openTag)
 	{
-		//
 		$data = Strings::splite($script , $openTag );
 		//
 		$output = "";
@@ -71,13 +70,14 @@ class AtomiumCompileCapture
 			$next = Strings::splite( $data[$i], self::$endOpenTag);
 			$rest = "";
 			//
-			for ($j=1; $j < Table::count($next) ; $j++)
+			for ($j=0; $j < Table::count($next) ; $j++)
 				$rest .= $next[$j]."\n";
 			//
 			$next = Strings::splite( $rest , self::$closeTag);
 			//
 			$output = $next[0];
 		}
+		//
 		return $output;
 	}
 
