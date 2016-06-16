@@ -659,6 +659,7 @@ class Connector
 				'Compiler/AtomiumCompileOneLineInstruction',
 				'Compiler/AtomiumCompileIf',
 				'Compiler/AtomiumCompileFor',
+				'Compiler/AtomiumCompileEndFor',
 				'Compiler/AtomiumCompileBreak',
 				'Compiler/AtomiumCompileOneLineComment',
 				'Compiler/AtomiumCompileElse',
