@@ -668,6 +668,7 @@ class Connector
 				'Compiler/AtomiumCompileForeach',
 				'Compiler/AtomiumCompileEndForeach',
 				'Compiler/AtomiumCompileWhile',
+				'Compiler/AtomiumCompileEndWhile',
 				'Compiler/AtomiumCompileSub',
 				'Compiler/AtomiumCompileExec',
 				//

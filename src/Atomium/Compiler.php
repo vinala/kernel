@@ -13,6 +13,7 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndForeach;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndWhile;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
@@ -224,6 +225,14 @@ class Compiler
 	protected static function compilWhile()
 	{
 		self::$output = AtomiumCompileWhile::run(self::$output);
+	}
+
+	/**
+	 * Compile While
+	 */
+	protected static function compilEndWhile()
+	{
+		self::$output = AtomiumCompileEndWhile::run(self::$output);
 	}
 
 	/**
