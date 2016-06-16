@@ -11,6 +11,7 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineComment;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndForeach;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
@@ -90,6 +91,7 @@ class Compiler
 	  	self::compilElseIf();
 	  	self::compilElse();
 	  	self::compilForeach();
+	  	self::compilEndForeach();
 	  	self::compilFor();
 	  	self::compilEndFor();
 	  	self::compilBreak();
@@ -206,6 +208,14 @@ class Compiler
 	protected static function compilForeach()
 	{
 		self::$output = AtomiumCompileForeach::run(self::$output);
+	}
+
+	/**
+	 * Compile end Foreach
+	 */
+	protected static function compilEndForeach()
+	{
+		self::$output = AtomiumCompileEndForeach::run(self::$output);
 	}
 
 	/**
