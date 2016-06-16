@@ -14,6 +14,6 @@ class AtomiumCompileEndForeach
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@foreach", ";", "<?php foreach" ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@endforeach", ";", "<?php endforeach " ,"; ?>");
 	}
 }

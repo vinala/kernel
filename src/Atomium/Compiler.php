@@ -87,7 +87,7 @@ class Compiler
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
 	  	self::compilEndIF();
-	  	// self::compilIf();
+	  	self::compilIf();
 
 	  	self::compilElseIf();
 	  	self::compilElse();
@@ -184,7 +184,7 @@ class Compiler
 	 */
 	protected static function compilFor()
 	{
-		// self::$output = AtomiumCompileFor::run(self::$output);
+		self::$output = AtomiumCompileFor::run(self::$output);
 	}
 
 	/**

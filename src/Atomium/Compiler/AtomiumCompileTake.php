@@ -14,6 +14,6 @@ class AtomiumCompileTake
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@call", ";", "<?php \Lighty\Kernel\Atomium\Atomium::call(" ,"); ?>");
+		return AtomiumCompileInstructions::run($script, "@call", ";", "<?php \Lighty\Kernel\Atomium\Atomium::call(" ,"); ?>");
 	}
 }

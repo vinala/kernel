@@ -14,6 +14,6 @@ class AtomiumCompileElse
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@else", ":", "<?php else " ,": ?>");
+		return AtomiumCompileInstructions::run($script, "@else", ":", "<?php else " ,": ?>");
 	}
 }

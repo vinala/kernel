@@ -14,6 +14,6 @@ class AtomiumCompileEndIf
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@endif", ";", "<?php endif " ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@endif", ";", "<?php endif " ,"; ?>");
 	}
 }

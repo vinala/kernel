@@ -14,6 +14,6 @@ class AtomiumCompileBreak
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@break", ";", "<?php break" ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@break", ";", "<?php break" ,"; ?>");
 	}
 }

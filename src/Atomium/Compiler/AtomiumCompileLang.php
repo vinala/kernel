@@ -14,6 +14,6 @@ class AtomiumCompileLang
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@lang", ";", "<?php echo Translator::get(" ,"); ?>");
+		return AtomiumCompileInstructions::run($script, "@lang", ";", "<?php echo Translator::get(" ,"); ?>");
 	}
 }

@@ -14,6 +14,6 @@ class AtomiumCompileEndFor
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@endfor", ";", "<?php endfor " ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@endfor", ";", "<?php endfor " ,"; ?>");
 	}
 }

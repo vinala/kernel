@@ -14,6 +14,6 @@ class AtomiumCompileEndWhile
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileOneLineInstruction::run($script, "@endwhile", ";", "<?php endwhile" ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@endwhile", ";", "<?php endwhile" ,"; ?>");
 	}
 }
