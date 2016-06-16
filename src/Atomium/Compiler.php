@@ -5,8 +5,10 @@ namespace Lighty\Kernel\Atomium;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElse;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndFor;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineComment;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
@@ -17,6 +19,7 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileTake;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileLang;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileBreak;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineInstruction;
 
 
 
@@ -77,14 +80,19 @@ class Compiler
 		self::compilTag();
 		self::compilSub();
 		self::compilExec();
+		self::compiltest();
 		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
-	  	self::compilIf();
+	  	self::compilEndIF();
+	  	// self::compilIf();
+
 	  	self::compilElseIf();
 	  	self::compilElse();
 	  	self::compilForeach();
 	  	self::compilFor();
+	  	self::compilEndFor();
+	  	self::compilBreak();
 	  	self::compilWhile();
 	  	//
 	  	self::compilLang();
@@ -153,6 +161,14 @@ class Compiler
 	}
 
 	/**
+	 * Compile EndIF
+	 */
+	protected static function compilEndIF()
+	{
+		self::$output = AtomiumCompileEndIf::run(self::$output);	
+	}
+
+	/**
 	 * Compile ELSE
 	 */
 	protected static function compilElseIf()
@@ -165,7 +181,15 @@ class Compiler
 	 */
 	protected static function compilFor()
 	{
-		self::$output = AtomiumCompileFor::run(self::$output);
+		// self::$output = AtomiumCompileFor::run(self::$output);
+	}
+
+	/**
+	 * Compile FOR
+	 */
+	protected static function compilEndFor()
+	{
+		self::$output = AtomiumCompileEndFor::run(self::$output);
 	}
 
 	/**
@@ -262,6 +286,14 @@ class Compiler
 	public static function compilCapture()
 	{
 		self::$output = AtomiumCompileCapture::run(self::$output);
+	}
+
+	/**
+	 * Compile for HTML Div
+	 */
+	public static function compiltest()
+	{
+		self::$output = AtomiumCompileOneLineInstruction::run(self::$output,"@test", ";", "<?php echo Config::get(" ,"); ?>");
 	}
 
 	/**
