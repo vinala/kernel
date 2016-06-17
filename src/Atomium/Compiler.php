@@ -23,6 +23,9 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileLang;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileBreak;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineInstruction;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCSS;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileJS;
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileAssign;
+
 
 
 
@@ -77,11 +80,13 @@ class Compiler
 	{
 		if( ! is_null($content)) self::$output = $content;
 		//
+
 		self::compilComment();
 		self::compilOneLineComment();
 		self::compilTag();
 		self::compilSub();
 		self::compilExec();
+		self::compilAssign();
 		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
@@ -104,6 +109,7 @@ class Compiler
 	  	self::compilCapture();
 	  	//
 	  	self::compilCSS();
+	  	self::compilJS();
 
 	  	//
 	  	self::compilEcho();
@@ -306,6 +312,22 @@ class Compiler
 	public static function compilCSS()
 	{
 		self::$output = AtomiumCompileCSS::run(self::$output);
+	}
+
+	/**
+	 * Compile for JS
+	 */
+	public static function compilJS()
+	{
+		self::$output = AtomiumCompileJS::run(self::$output);
+	}
+
+	/**
+	 * Compile for Assign
+	 */
+	public static function compilAssign()
+	{
+		self::$output = AtomiumCompileAssign::run(self::$output);
 	}
 
 	/**

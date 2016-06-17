@@ -653,6 +653,8 @@ class Connector
 				'Compiler',
 				//
 				'Compiler/AtomiumCompileCSS',
+				'Compiler/AtomiumCompileJS',
+				'Compiler/AtomiumCompileAssign',
 				//
 				'Compiler/AtomiumCompileComments',
 				'Compiler/AtomiumCompileComment',
