@@ -7,6 +7,7 @@ use Lighty\Kernel\Security\Hash;
 use Lighty\Kernel\Objects\Strings;
 use Lighty\Kernel\MVC\View\Views;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
+use Lighty\Kernel\Atomium\Exception\AromiumCaptureNotFoundException;
 
 class Atomium
 {
@@ -140,10 +141,19 @@ class Atomium
 	 */
 	protected function display()
 	{
-		// if( ! is_null($data))
 		foreach ($this->values as $key => $value) $$key = $value;
 		//
 		require_once  $this->TemplateDir.'/'.$this->templateFile;
+	}
+
+	/**
+	 * get a the full open tag of capture
+	 */
+	protected function switcher($view, $capture, $viewName)
+	{
+		if(Strings::contains($view, "@capture('$capture')")) return "@capture('$capture'):";
+		elseif(Strings::contains($view, '@capture("'.$capture.'")')) return '@capture("'.$capture.'"):';
+		else throw new AromiumCaptureNotFoundException($capture, $viewName);
 	}
 
 	/**
@@ -151,12 +161,12 @@ class Atomium
 	 */
 	public function call($view, $capture, $data = null)
 	{
+		$viewName = $view;
 		$name = $this->name($view."_capture_".$capture);
 		$view = self::get($view);
 
 		//
-		// $capture = "@capture('$capture'):";
-		$capture = '@capture("'.$capture.'"):';
+		$capture = self::switcher($view, $capture, $viewName);
 		//
 		$view = AtomiumCompileCapture::call($view, $capture);
 		//

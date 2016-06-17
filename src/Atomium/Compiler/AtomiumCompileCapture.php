@@ -106,10 +106,8 @@ class AtomiumCompileCapture
 		//
 		for ($i=1; $i < Table::count($data); $i++) 
 		{
-			// $output .= self::$phpOpenTag;
 			//
 			$next = Strings::splite( $data[$i], self::$endOpenTag);
-			// $output .= $next[0] .$phpEndOpenTag;
 			//
 			for ($j=1; $j < Table::count($next) ; $j++)
 			{

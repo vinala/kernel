@@ -679,6 +679,8 @@ class Connector
 				//
 				'Compiler/AtomiumCompileTake',
 				'Compiler/AtomiumCompileCapture',
+				//
+				'Exception/AromiumCaptureNotFoundException',
 				
 
 				),
