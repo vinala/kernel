@@ -22,7 +22,7 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileLang;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileBreak;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineInstruction;
-
+use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCSS;
 
 
 
@@ -82,7 +82,6 @@ class Compiler
 		self::compilTag();
 		self::compilSub();
 		self::compilExec();
-		self::compiltest();
 		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
@@ -104,7 +103,7 @@ class Compiler
 	  	self::compilTake();
 	  	self::compilCapture();
 	  	//
-	  	self::compilHtmlDiv();
+	  	self::compilCSS();
 
 	  	//
 	  	self::compilEcho();
@@ -280,13 +279,6 @@ class Compiler
 	 * HTML Compiles
 	 */
 
-	/**
-	 * Compile for HTML Div
-	 */
-	protected static function compilHtmlDiv()
-	{
-		self::$output = AtomiumCompileHtmlDiv::run(self::$output);
-	}
 
 	/**
 	 * Atomium Functions
@@ -309,11 +301,11 @@ class Compiler
 	}
 
 	/**
-	 * Compile for HTML Div
+	 * Compile for CSS
 	 */
-	public static function compiltest()
+	public static function compilCSS()
 	{
-		self::$output = AtomiumCompileOneLineInstruction::run(self::$output,"@test", ";", "<?php echo Config::get(" ,"); ?>");
+		self::$output = AtomiumCompileCSS::run(self::$output);
 	}
 
 	/**

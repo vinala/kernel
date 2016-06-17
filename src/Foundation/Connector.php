@@ -652,6 +652,8 @@ class Connector
 				'Atomium', 
 				'Compiler',
 				//
+				'Compiler/AtomiumCompileCSS',
+				//
 				'Compiler/AtomiumCompileComments',
 				'Compiler/AtomiumCompileComment',
 				//
@@ -674,8 +676,6 @@ class Connector
 				'Compiler/AtomiumCompileExec',
 				//
 				'Compiler/AtomiumCompileLang',
-				//
-				'Compiler/AtomiumCompileHtmlDiv',
 				//
 				'Compiler/AtomiumCompileTake',
 				'Compiler/AtomiumCompileCapture',
