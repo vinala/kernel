@@ -15,6 +15,5 @@ class AtomiumCompileCSS
 	public static function run($script)
 	{
 		return AtomiumCompileInstructions::run($script, "@css", ";", "<?php Libs::css" ,"; ?>");
-		// Libs::css("app/resources/library/bootstrap-3.3.1.min.css",false);
 	}
 }
