@@ -15,7 +15,7 @@
 
     
 
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md">
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-sidebar-closed page-content-white page-md">
         <!-- BEGIN HEADER -->
         <?php include_once Dashboard::$root.'views/parts/header.php'; ?>
         
