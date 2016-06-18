@@ -4157,7 +4157,7 @@
         </div>
         <!-- END FOOTER -->
         
-        <?php include_once $dashboardRoot.'views/parts/plugins.php'; ?>
+        <?php include_once Dashboard::$root.'views/parts/plugins.php'; ?>
 </body>
 
 
