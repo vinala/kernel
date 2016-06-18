@@ -3,7 +3,9 @@
 <script src="../assets/global/plugins/excanvas.min.js"></script> 
 <![endif]-->
 
-<?php $assetsRoot = "vendor/lighty/kernel/src/Dashboard/"; ?>
+<?php 
+    $assetsRoot = "vendor/lighty/kernel/src/Dashboard/"; 
+?>
 
 <!-- BEGIN CORE PLUGINS -->
 <script src="<?php echo $assetsRoot ?>assets/global/plugins/jquery.min.js" type="text/javascript"></script>
