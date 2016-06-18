@@ -1,0 +1,12 @@
+{
+	"name": "lighty/dashboard",
+	"description": "The Lighty Dashboard.",
+	"keywords": ["framework", "lighty","Dashboard"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Youssef Had",
+			"email": "youssefhad2@gmail.com"
+		}
+	]
+}
