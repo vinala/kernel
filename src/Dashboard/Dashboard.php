@@ -4,6 +4,7 @@ namespace Lighty\Kernel\Dashboard;
 
 use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Config\Alias;
+use Lighty\Kernel\Config\Config;
 
 /**
 * Controller class
@@ -20,4 +21,11 @@ class Dashboard
 		//
 		Alias::set(\Lighty\Kernel\Dashboard\Dashboard::class, 'Dashboard');
 	}
+
+	public static function getOwner()
+	{
+		return Config::get("app.owner");
+	}
+
+
 }
