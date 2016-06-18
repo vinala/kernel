@@ -8,6 +8,7 @@ use Lighty\Kernel\Logging\Handler;
 use Lighty\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
 use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Storage\Session;
+use Lighty\Kernel\Dashboard\Dashboard;
 
 /**
 * Connector class to call framework core files
@@ -72,6 +73,7 @@ class Connector
 		Connector::atomium();
 		Connector::process();
 		Connector::setup();
+		Connector::dashboard();
 	}
 
 	/**
@@ -606,6 +608,23 @@ class Connector
 			self::$path.'Setup/'
 			);
 	}
+
+
+	/**
+	 * Dashboard call
+	 */
+	public static function dashboard()
+	{
+		self::call(
+			array(
+				'Dashboard', 
+				),
+			self::$path.'Dashboard/'
+			);
+		//
+		Dashboard::ini();
+	}
+
 
 	/**
 	 * lumos call
