@@ -27,37 +27,38 @@
                 <div class="portlet-body">
 
                     
-                    <div class="note note-success">
+                    <div class="note note-success" id="new_models_alert_succes" style="display:none">
                         <h4 class="block"><strong>Success!</strong> The model has been added.</h4>
                         <p> The model files created and stored in app/models </p>
                     </div>
-                    <div class="alert alert-danger">
-                        <strong>Error!</strong> You model creation has failed. </div
+                    <div class="alert alert-danger" id="new_models_alert_failed" style="display:none">
+                        <strong>Error!</strong> model creation has failed. </div
 
                     <h4 class="block">Model Informations</h4>
-                    <div class="form-group form-md-line-input form-md-floating-label">
-                        <input type="text" class="form-control" id="form_control_1">
-                        <label for="form_control_1">Model name</label>
-                        <span class="help-block">The name of model class will be used</span>
-                    </div>
+                    <form method="post" id="new_model_form">
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" name="new_models_class_name" id="new_models_class_name">
+                            <label for="form_control_1">Model name</label>
+                            <span class="help-block">The name of model class will be used</span>
+                        </div>
 
-                    <div class="form-group form-md-line-input form-md-floating-label">
-                        <input type="text" class="form-control" id="form_control_1">
-                        <label for="form_control_1">Database table</label>
-                        <span class="help-block">The data table where data stored(without prefix)</span>
-                    </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" name="new_models_table_name" id="new_models_table_name">
+                            <label for="form_control_1">Database table</label>
+                            <span class="help-block">The data table where data stored(without prefix)</span>
+                        </div>
 
-                    <div class="form-group form-md-line-input form-md-floating-label">
-                        <input type="text" class="form-control" id="form_control_1">
-                        <label for="form_control_1">File</label>
-                        <span class="help-block">The name of the file to store in models folder</span>
-                    </div>
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                            <input type="text" class="form-control" name="new_models_file_name" id="new_models_file_name">
+                            <label for="form_control_1">File</label>
+                            <span class="help-block">The name of the file to store in models folder</span>
+                        </div>
 
-                    <div style="text-direction:leftyy">
-                        <button type="button" class="btn red">Clear</button>
-                        <button type="button" class="btn blue">Add</button>
-                    </div>
-
+                        <div style="text-direction:leftyy">
+                            <button type="button" class="btn red">Clear</button>
+                            <button type="submit" class="btn blue">Add</button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <!-- END PORTLET-->
