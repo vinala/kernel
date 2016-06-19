@@ -29,7 +29,7 @@
             <?php include_once Dashboard::$root.'views/bars/sidebar.php'; ?>
 
             <!-- BEGIN CONTENT -->
-            <?php include_once Dashboard::$root.'views/contents/model.php'; ?>
+            <?php Dashboard::switcher($page); ?>
             <!-- END CONTENT -->
             <!-- BEGIN QUICK SIDEBAR -->
             <a href="javascript:;" class="page-quick-sidebar-toggler">
