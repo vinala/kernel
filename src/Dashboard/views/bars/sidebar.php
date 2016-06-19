@@ -1,3 +1,6 @@
+<?php 
+    use Lighty\Kernel\Dashboard\Controlles;
+?>
 <div class="page-sidebar-wrapper">
     <!-- BEGIN SIDEBAR -->
     <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
@@ -39,19 +42,19 @@
                 </form>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
             </li>
-            <li class="nav-item start active open">
+            <li class="nav-item start  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-home"></i>
                     <span class="title">Dashboard</span>
-                    <span class="selected"></span>
+                    
                     <span class="arrow open"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item start active open">
+                    <li class="nav-item start">
                         <a href="index-2.html" class="nav-link ">
                             <i class="icon-bar-chart"></i>
                             <span class="title">Dashboard 1</span>
-                            <span class="selected"></span>
+
                         </a>
                     </li>
                     <li class="nav-item start ">
@@ -73,15 +76,16 @@
             <li class="heading">
                 <h3 class="uppercase">Framework</h3>
             </li>
-            <li class="nav-item  ">
+            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["model", "view", "controller"]) ?> ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-puzzle"></i>
                     <span class="title">MVC</span>
                     <span class="arrow"></span>
+                    <?php Controlles::sideBarSelected($page, ["model", "view", "controller"]) ?>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item  ">
-                        <a href="ui_colors.html" class="nav-link ">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["model"]) ?> ">
+                        <a href="<?php echo Config::get("dashboard.route") ?>/models" class="nav-link ">
                             <i class="fa fa-cloud"></i>
                             <span class="title">Models</span>
                         </a>
