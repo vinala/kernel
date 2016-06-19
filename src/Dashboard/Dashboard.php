@@ -39,13 +39,19 @@ class Dashboard
 	public static function route()
 	{
 		Route::get(Config::get('dashboard.route')."/model",function(){ self::callHome("model"); });
+		Route::get(Config::get('dashboard.route')."/view",function(){ self::callHome("view"); });
 		//
+		self::ajaxRoute();
+	}
+
+	public static function ajaxRoute()
+	{
 		Route::get(Config::get('dashboard.token')."_/{op}",function($op){
 			switch ($op) {
 				case 'new_model': Response::createModel();  break;
+				case 'new_view': Response::createView();  break;
 			}
 		});
-
 	}
 
 	public static function view($path, $data = null)
@@ -57,5 +63,11 @@ class Dashboard
 		include(Dashboard::$root.'views/'.$path.'.php');
 	}
 
-
+	public static function switcher($page)
+	{
+		switch ($page) {
+			case 'model': include_once Dashboard::$root.'views/contents/model.php'; break;
+			case 'view': include_once Dashboard::$root.'views/contents/view.php'; break;
+		}
+	}
 }
