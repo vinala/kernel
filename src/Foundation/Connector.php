@@ -618,6 +618,10 @@ class Connector
 		self::call(
 			array(
 				'Dashboard', 
+				//
+				'core/Response', 
+				'core/Models', 
+				'core/Controlles', 
 				),
 			self::$path.'Dashboard/'
 			);
