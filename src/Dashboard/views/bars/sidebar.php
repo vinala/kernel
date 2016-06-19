@@ -85,13 +85,13 @@
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item <?php Controlles::sideBarHighLight($page, ["model"]) ?> ">
-                        <a href="<?php echo Config::get("dashboard.route") ?>/models" class="nav-link ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/model" class="nav-link ">
                             <i class="fa fa-cloud"></i>
                             <span class="title">Models</span>
                         </a>
                     </li>
-                    <li class="nav-item  ">
-                        <a href="ui_general.html" class="nav-link ">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["view"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/view"" class="nav-link ">
                         <i class="fa fa-sticky-note"></i>
                             <span class="title">Views</span>
                         </a>
