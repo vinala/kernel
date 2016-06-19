@@ -109,11 +109,16 @@ class Response
 	public static function createView()
 	{
 		$name=$_POST['new_view_file_name'];
-		$isSmarty=isset($_POST['new_controller_add_route']);
+		$temp = "nan";
 		//
-		if(View::create($name , $isSmarty, "../"))
-			echo "View created";
-		else echo "There was a problem";
+		switch ($_POST['new_view_template']) 
+		{
+			case 'atom': $temp = "atom"; break;
+			case 'smart': $temp = "smarty"; break;
+		}
+		//
+		if(View::create($name , $temp, "../")) echo "true";
+		else echo "false";
 	}
 
 	/**
