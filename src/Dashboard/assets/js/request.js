@@ -36,4 +36,22 @@ $(document).ready(function (){
         //
         return false;
     });
+
+
+    /*
+     * NEW CONTROLLER
+     */
+    $('#new_controller_form').submit(function () {
+        $.post("../"+token+"_/new_controller",$('#new_controller_form').serialize(),function(data)
+            {
+                if(data == "true")
+                {
+                    $( "#new_controller_alert_succes" ).slideToggle( "slow" );
+                    setTimeout(function(){ $( "#new_controller_alert_succes" ).slideToggle( "slow" ); }, 3000);
+                }
+                else $( "#new_controller_alert_failed" ).slideToggle( "slow" );
+            });
+        //
+        return false;
+    });
 });
