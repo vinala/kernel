@@ -53,6 +53,7 @@ class Dashboard
 				case 'new_model': Response::createModel();  break;
 				case 'new_view': Response::createView();  break;
 				case 'new_controller': Response::createController();  break;
+				case 'new_schema': Response::createSchema();  break;
 			}
 		});
 	}

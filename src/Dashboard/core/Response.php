@@ -33,8 +33,8 @@ class Response
 		$name = $_POST['migname'];
 		//
 		if(Migrations::add($name, "../"))
-			echo "Schema created";
-		else echo "There was a problem";
+			echo "true";
+		else echo "false";
 	}
 
 	/**

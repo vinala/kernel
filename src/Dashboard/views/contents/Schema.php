@@ -25,16 +25,16 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div class="note note-success" id="new_models_alert_succes" style="display:none">
+                    <div class="note note-success" id="new_schema_alert_succes" style="display:none">
                         <h4 class="block"><strong>Success!</strong> The schema has been added.</h4>
                         <p> The schema created and stored in database/schema </p>
                     </div>
 
-                    <div class="alert alert-danger" id="new_models_alert_failed" style="display:none">
+                    <div class="alert alert-danger" id="new_schema_alert_failed" style="display:none">
                         <strong>Error!</strong> schema creation has failed. </div>
 
                     <h4 class="block">Schema Informations</h4>
-                    <form method="post" id="new_model_form">
+                    <form method="post" id="new_schema_form">
                         <div class="form-group form-md-line-input form-md-floating-label">
                             <input type="text" class="form-control" name="migname" id="migname">
                             <label for="form_control_1">Schema name</label>
