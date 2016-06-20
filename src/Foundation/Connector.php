@@ -621,6 +621,8 @@ class Connector
 				//
 				'core/Response', 
 				'core/Models', 
+				'core/Views', 
+				'core/Controllers', 
 				'core/Controlles', 
 				),
 			self::$path.'Dashboard/'
