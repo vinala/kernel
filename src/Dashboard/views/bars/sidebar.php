@@ -91,13 +91,13 @@
                         </a>
                     </li>
                     <li class="nav-item <?php Controlles::sideBarHighLight($page, ["view"]) ?> ">
-                        <a href="../<?php echo Config::get('dashboard.route') ?>/view"" class="nav-link ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/view" class="nav-link ">
                         <i class="fa fa-sticky-note"></i>
                             <span class="title">Views</span>
                         </a>
                     </li>
-                    <li class="nav-item  ">
-                        <a href="ui_buttons.html" class="nav-link ">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["controller"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/controller" class="nav-link ">
                             <i class="fa fa-random"></i>
                             <span class="title">Controllers</span>
                         </a>
