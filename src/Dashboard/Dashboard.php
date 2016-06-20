@@ -41,6 +41,7 @@ class Dashboard
 		Route::get(Config::get('dashboard.route')."/model",function(){ self::callHome("model"); });
 		Route::get(Config::get('dashboard.route')."/view",function(){ self::callHome("view"); });
 		Route::get(Config::get('dashboard.route')."/controller",function(){ self::callHome("controller"); });
+		Route::get(Config::get('dashboard.route')."/schema",function(){ self::callHome("schema"); });
 		//
 		self::ajaxRoute();
 	}
@@ -71,6 +72,7 @@ class Dashboard
 			case 'model': include_once Dashboard::$root.'views/contents/model.php'; break;
 			case 'view': include_once Dashboard::$root.'views/contents/view.php'; break;
 			case 'controller': include_once Dashboard::$root.'views/contents/controller.php'; break;
+			case 'schema': include_once Dashboard::$root.'views/contents/schema.php'; break;
 		}
 	}
 }
