@@ -14,6 +14,8 @@ class Models
 		{
 		  	$r=explode('models/',$value);
 		  	echo "<tr><td>$i</td><td>".$r[1]."</td><td></td><td>".date("Y/m/d H:i:s",filemtime($value))."</td></tr>";
+		  	//
+		  	$i++;
 		 } 
 	}
 }
