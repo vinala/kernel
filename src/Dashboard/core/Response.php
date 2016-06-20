@@ -19,11 +19,10 @@ class Response
 	{
 		$file = $_POST['new_controller_file_name'];
 		$class = $_POST['new_controller_class_name'];
-		$route = isset($_POST['new_controller_add_route']);
+		$route = isset($_POST['new_controller_route']);
 		//
-		if(controller::create($file, $class, $route,"../"))
-			echo "Controller created";
-		else echo "There was a problem";
+		if(controller::create($file, $class, $route,"../")) echo "true";
+		else echo "false";
 	}
 
 	/**
