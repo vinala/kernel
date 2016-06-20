@@ -7,19 +7,40 @@ body
 {
 	background-color:#21252b;
 	font-family: "code";
+	color: white;
+    font-size: 13px;
 }
 
 .input_container
 {
 	width: 100%;
+	position: fixed;
+	top: 0px;
+	padding: 10px 0px;
+	background-color: #21252b;
+	z-index: 9;
+	box-shadow: 6px 4px 11px #21252b;
 }
 
 .input
 {
 	font-family: "code";
-	background-color: transparent;
-	border:none;
-	width:100%;
+	border: none;
+	width: 100%;
 	outline: none;
-	color:white;
+	color: white;
+	background-color: #21252b;
+	box-shadow: 
+}
+
+.output_container
+{
+	margin-top: 26px;
+	position: absolute;
+}
+
+.output
+{
+	display: block;
+	margin: 10px;
 }
