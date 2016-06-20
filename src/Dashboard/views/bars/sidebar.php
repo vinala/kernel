@@ -104,6 +104,36 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["backup", "schema", "seeders"]) ?> ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-database"></i>
+                    <span class="title">Database</span>
+                    <span class="arrow"></span>
+                    <?php Controlles::sideBarSelected($page, ["backup", "schema", "seeders"]) ?>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["backup"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/backup" class="nav-link ">
+                            <i class="fa fa-history"></i>
+                            <span class="title">Backup</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["schema"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/schema" class="nav-link ">
+                        <i class="fa fa-map-signs"></i>
+                            <span class="title">Schema</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["seeders"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/seeders" class="nav-link ">
+                            <i class="fa fa-leaf"></i>
+                            <span class="title">Seeders</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>
