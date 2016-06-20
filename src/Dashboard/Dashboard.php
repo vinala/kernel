@@ -40,6 +40,7 @@ class Dashboard
 	{
 		Route::get(Config::get('dashboard.route')."/model",function(){ self::callHome("model"); });
 		Route::get(Config::get('dashboard.route')."/view",function(){ self::callHome("view"); });
+		Route::get(Config::get('dashboard.route')."/controller",function(){ self::callHome("controller"); });
 		//
 		self::ajaxRoute();
 	}
@@ -50,6 +51,7 @@ class Dashboard
 			switch ($op) {
 				case 'new_model': Response::createModel();  break;
 				case 'new_view': Response::createView();  break;
+				case 'new_controller': Response::createController();  break;
 			}
 		});
 	}
@@ -68,6 +70,7 @@ class Dashboard
 		switch ($page) {
 			case 'model': include_once Dashboard::$root.'views/contents/model.php'; break;
 			case 'view': include_once Dashboard::$root.'views/contents/view.php'; break;
+			case 'controller': include_once Dashboard::$root.'views/contents/controller.php'; break;
 		}
 	}
 }
