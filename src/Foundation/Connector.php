@@ -623,6 +623,8 @@ class Connector
 				'core/Models', 
 				'core/Views', 
 				'core/Controllers', 
+				'core/Schema', 
+				//
 				'core/Controlles', 
 				),
 			self::$path.'Dashboard/'
