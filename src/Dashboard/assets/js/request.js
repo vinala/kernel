@@ -72,4 +72,21 @@ $(document).ready(function (){
         //
         return false;
     });
+
+    /*
+     * EXEC SCHEMA
+     */
+    $('#exec_schema_form').submit(function () {
+        $.post("../"+token+"_/exec_schema",$('#exec_schema_form').serialize(),function(data)
+            {
+                if(data == "true")
+                {
+                    $( "#exec_schema_alert_succes" ).slideToggle( "slow" );
+                    setTimeout(function(){ $( "#exec_schema_alert_succes" ).slideToggle( "slow" ); }, 3000);
+                }
+                else $( "#exec_schema_alert_failed" ).slideToggle( "slow" );
+            });
+        //
+        return false;
+    });
 });
