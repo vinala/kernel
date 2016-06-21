@@ -9,6 +9,7 @@ use Lighty\Kernel\Process\Translator;
 use Lighty\Kernel\Process\Links;
 use Lighty\Kernel\Process\Model;
 use Lighty\Kernel\Process\View;
+use Lighty\Kernel\Database\Database;
 
 class Response
 {
@@ -136,8 +137,8 @@ class Response
 	public static function execSchema()
 	{
 		if(Migrations::exec("../"))
-			echo "Schema executed";
-		else echo "There was a problem";
+			echo "true";
+		else echo "false";
 	}
 
 	/**
