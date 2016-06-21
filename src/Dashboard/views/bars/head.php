@@ -28,6 +28,7 @@
 	<link href="<?php echo Dashboard::$assets ?>assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo Dashboard::$assets ?>assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 	<link href="<?php echo Dashboard::$assets ?>assets/layouts/layout/css/custom.min.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo Dashboard::$assets ?>assets/css/glob.css" rel="stylesheet" type="text/css" />
 	<!-- END THEME LAYOUT STYLES -->
 	<link rel="shortcut icon" href="favicon.ico" />
 </head>
