@@ -48,6 +48,30 @@
                     </form>
                 </div>
             </div>
+
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-plug font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">Schema Execution</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="alert alert-success" id="exec_schema_alert_succes" style="display:none">
+                        <strong>Success!</strong> The schema has been executed. </div>
+
+                    <div class="alert alert-danger" id="exec_schema_alert_failed" style="display:none">
+                        <strong>Error!</strong> schema creation has failed, maybe the table is aleardy existe. </div>
+
+                    <!-- <h4 class="block">Schema Informations</h4> -->
+                    <form method="post" id="exec_schema_form">
+                        <div >
+                            <button type="submit" class="btn blue" name="Rollback">Rollback</button>
+                            <button type="submit" class="btn blue" name="Execute">Execute</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
             
         </div>
         <div class="col-md-6">
