@@ -167,7 +167,7 @@ class Migrations
 				return true;
 				
 			}
-			else false;
+			else return false;
 		
 	}
 
