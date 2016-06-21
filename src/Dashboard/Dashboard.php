@@ -55,6 +55,7 @@ class Dashboard
 				case 'new_controller': Response::createController();  break;
 				case 'new_schema': Response::createSchema();  break;
 				case 'exec_schema': Response::execSchema();  break;
+				case 'rollback_schema': Response::rollbackSchema();  break;
 			}
 		});
 	}
