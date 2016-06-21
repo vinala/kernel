@@ -57,17 +57,27 @@
                     </div>
                 </div>
                 <div class="portlet-body">
-                    <div class="alert alert-success" id="exec_schema_alert_succes" style="display:none">
+                    <div class="alert alert-success hidden-alert" id="exec_schema_alert_succes">
                         <strong>Success!</strong> The schema has been executed. </div>
 
-                    <div class="alert alert-danger" id="exec_schema_alert_failed" style="display:none">
+                    <div class="alert alert-danger hidden-alert" id="exec_schema_alert_failed">
                         <strong>Error!</strong> schema creation has failed, maybe the table is aleardy existe. </div>
 
+                    <div class="alert alert-success hidden-alert" id="rollback_schema_alert_succes">
+                        <strong>Success!</strong> The schema has been rollback. </div>
+
+                    <div class="alert alert-danger hidden-alert" id="rollback_schema_alert_failed">
+                        <strong>Error!</strong> schema rollback has failed, maybe the schema is aleardy rollback. </div>
+
                     <!-- <h4 class="block">Schema Informations</h4> -->
-                    <form method="post" id="exec_schema_form">
+                    <form method="post" id="exec_schema_form" class="inlined-forms">
+                        <div >
+                            <button type="submit" class="btn blue" name="Execute">Execute</button>
+                        </div>
+                    </form>
+                    <form method="post" id="rollback_schema_form" class="inlined-forms">
                         <div >
                             <button type="submit" class="btn blue" name="Rollback">Rollback</button>
-                            <button type="submit" class="btn blue" name="Execute">Execute</button>
                         </div>
                     </form>
                 </div>
