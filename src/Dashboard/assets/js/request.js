@@ -89,4 +89,21 @@ $(document).ready(function (){
         //
         return false;
     });
+
+    /*
+     * ROLLBACK SCHEMA
+     */
+    $('#rollback_schema_form').submit(function () {
+        $.post("../"+token+"_/rollback_schema",$('#rollback_schema_form').serialize(),function(data)
+            {
+                if(data == "true")
+                {
+                    $( "#rollback_schema_alert_succes" ).slideToggle( "slow" );
+                    setTimeout(function(){ $( "#rollback_schema_alert_succes" ).slideToggle( "slow" ); }, 3000);
+                }
+                else $( "#rollback_schema_alert_failed" ).slideToggle( "slow" );
+            });
+        //
+        return false;
+    });
 });

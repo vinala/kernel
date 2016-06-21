@@ -147,7 +147,7 @@ class Response
 	public static function rollbackSchema()
 	{
 		if(Migrations::rollback("../"))
-			echo "Schema rollbacked";
-		else echo "There was a problem";
+			echo "true";
+		else echo "false";
 	}
 }
