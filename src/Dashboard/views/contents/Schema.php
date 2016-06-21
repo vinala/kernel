@@ -56,7 +56,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="icon-edit font-dark"></i>
-                        <span class="caption-subject font-dark bold uppercase">Models</span>
+                        <span class="caption-subject font-dark bold uppercase">Schema</span>
                     </div>
                 </div>
                 <div class="portlet-body">
@@ -65,13 +65,14 @@
                             <thead>
                                 <tr>
                                     <th> # </th>
-                                    <th> Model Name </th>
+                                    <th> Schema Name </th>
                                     <th> Creation time </th>
                                     <th> Data Table </th>
+                                    <th> State </th>
                                 </tr>
                             </thead>
                             <tbody id="models_list">
-                                <?php \Lighty\Kernel\Dashboard\Models::sort() ?>
+                                <?php \Lighty\Kernel\Dashboard\Schema::sort() ?>
                             </tbody>
                         </table>
                     </div>
