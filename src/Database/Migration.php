@@ -47,19 +47,21 @@ class Migration
 	{
 		self::createRegister($root);
 		//
-		$s = serialize($array);
+		// $s = serialize($array);
+		$s = json_encode ($array);
 		//
 		file_put_contents($root.'database/schema/.register', $s);
 		//
 		
 	}
 
-	protected static function getRegister($root)
+	public static function getRegister($root)
 	{
 		self::createRegister($root);
 		//
 		$f=file_get_contents($root.'database/schema/.register');
-		$data = strlen($f) > 2 ? unserialize($f) : "";
+		$data = strlen($f) > 2 ? json_decode($f, true) : "";
+		// $data = strlen($f) > 2 ? unserialize($f) : "";
 		$data = !($data) ? array() : $data ;
 		//
 		return $data;
