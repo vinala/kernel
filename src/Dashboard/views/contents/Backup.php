@@ -55,14 +55,12 @@
                             <thead>
                                 <tr>
                                     <th> # </th>
-                                    <th> Schema Name </th>
+                                    <th> BackUp File </th>
                                     <th> Creation time </th>
-                                    <th> Data Table </th>
-                                    <th> State </th>
                                 </tr>
                             </thead>
                             <tbody id="models_list">
-                                <?php \Lighty\Kernel\Dashboard\Schema::sort() ?>
+                                <?php \Lighty\Kernel\Dashboard\Backup::sort() ?>
                             </tbody>
                         </table>
                     </div>
