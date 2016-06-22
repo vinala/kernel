@@ -175,6 +175,7 @@ class MysqlDatabase
 	 */
 	public static function databaseTables(Sql $sql)
 	{
+		$target_tables = array();
 		$tables=false;
 		//
 		$Tables = $sql->query('SHOW TABLES'); 
@@ -262,6 +263,8 @@ class MysqlDatabase
 	 */
 	protected static function fetchTables($tables, Sql $mysqli)
 	{
+		$content = "";
+		//
 		foreach($tables as $table)
         {
             $result         =   $mysqli->query('SELECT * FROM '.$table);  
