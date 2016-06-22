@@ -106,4 +106,21 @@ $(document).ready(function (){
         //
         return false;
     });
+
+    /*
+     * MAKE BACKUP
+     */
+    $('#make_backup_form').submit(function () {
+        $.post("../"+token+"_/make_backup",$('#make_backup_form').serialize(),function(data)
+            {
+                if(data == "true")
+                {
+                    $( "#make_backup_alert_succes" ).slideToggle( "slow" );
+                    setTimeout(function(){ $( "#make_backup_alert_succes" ).slideToggle( "slow" ); }, 3000);
+                }
+                else $( "#make_backup_alert_failed" ).slideToggle( "slow" );
+            });
+        //
+        return false;
+    });
 });

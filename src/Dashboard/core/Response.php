@@ -150,4 +150,13 @@ class Response
 			echo "true";
 		else echo "false";
 	}
+
+	/**
+	 * Export Database
+	 */
+	public static function exportDatabase()
+	{
+		if(Database::export()) echo "true";
+		else echo "false";
+	}
 }
