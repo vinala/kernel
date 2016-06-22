@@ -623,7 +623,8 @@ class Connector
 				'core/Models', 
 				'core/Views', 
 				'core/Controllers', 
-				'core/Schema', 
+				'core/Schema',
+				'core/Backup',
 				//
 				'core/Controlles', 
 				),
