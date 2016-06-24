@@ -48,8 +48,8 @@ class Response
 		$count = $_POST['seed_count'];
 		//
 		if(Seeds::add($name,$table,$count,"../"))
-			echo "Seeder created";
-		else echo "There was a problem";
+			echo "true";
+		else echo "false";
 	}
 
 	/**
