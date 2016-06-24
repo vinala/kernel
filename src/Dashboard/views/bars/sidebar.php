@@ -105,12 +105,12 @@
                 </ul>
             </li>
 
-            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["backup", "schema", "seeders"]) ?> ">
+            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["backup", "schema", "seeder"]) ?> ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-database"></i>
                     <span class="title">Database</span>
                     <span class="arrow"></span>
-                    <?php Controlles::sideBarSelected($page, ["backup", "schema", "seeders"]) ?>
+                    <?php Controlles::sideBarSelected($page, ["backup", "schema", "seeder"]) ?>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item <?php Controlles::sideBarHighLight($page, ["backup"]) ?> ">
@@ -125,10 +125,33 @@
                             <span class="title">Schema</span>
                         </a>
                     </li>
-                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["seeders"]) ?> ">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["seeder"]) ?> ">
                         <a href="../<?php echo Config::get('dashboard.route') ?>/seeders" class="nav-link ">
                             <i class="fa fa-leaf"></i>
                             <span class="title">Seeders</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["links", "translator"]) ?> ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-cubes"></i>
+                    <span class="title">Locales</span>
+                    <span class="arrow"></span>
+                    <?php Controlles::sideBarSelected($page, ["links", "translator"]) ?>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["links"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/links" class="nav-link ">
+                            <i class="icon-link"></i>
+                            <span class="title">Links</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["translator"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/translator" class="nav-link ">
+                        <i class="icon-flag"></i>
+                            <span class="title">Translator</span>
                         </a>
                     </li>
                 </ul>
