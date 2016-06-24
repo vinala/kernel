@@ -123,4 +123,21 @@ $(document).ready(function (){
         //
         return false;
     });
+
+    /*
+     * MAKE SEEDER
+     */
+    $('#new_seeder_form').submit(function () {
+        $.post("../"+token+"_/make_seeder",$('#new_seeder_form').serialize(),function(data)
+            {
+                if(data == "true")
+                {
+                    $( "#make_seeder_alert_succes" ).slideToggle( "slow" );
+                    setTimeout(function(){ $( "#make_seeder_alert_succes" ).slideToggle( "slow" ); }, 3000);
+                }
+                else $( "#make_seeder_alert_failed" ).slideToggle( "slow" );
+            });
+        //
+        return false;
+    });
 });
