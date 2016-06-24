@@ -43,6 +43,7 @@ class Dashboard
 		Route::get(Config::get('dashboard.route')."/controller",function(){ self::callHome("controller"); });
 		Route::get(Config::get('dashboard.route')."/schema",function(){ self::callHome("schema"); });
 		Route::get(Config::get('dashboard.route')."/backup",function(){ self::callHome("backup"); });
+		Route::get(Config::get('dashboard.route')."/seeder",function(){ self::callHome("seeder"); });
 		//
 		self::ajaxRoute();
 	}
@@ -58,6 +59,7 @@ class Dashboard
 				case 'exec_schema': Response::execSchema();  break;
 				case 'rollback_schema': Response::rollbackSchema();  break;
 				case 'make_backup': Response::exportDatabase();  break;
+				case 'make_seeder': Response::createSeeder();  break;
 			}
 		});
 	}
@@ -79,6 +81,7 @@ class Dashboard
 			case 'controller': include_once Dashboard::$root.'views/contents/controller.php'; break;
 			case 'schema': include_once Dashboard::$root.'views/contents/schema.php'; break;
 			case 'backup': include_once Dashboard::$root.'views/contents/backup.php'; break;
+			case 'seeder': include_once Dashboard::$root.'views/contents/Seeder.php'; break;
 		}
 	}
 }
