@@ -1,12 +1,12 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\Model;
+namespace Lighty\Kernel\MVC;
 
-use Lighty\Kernel\MVC\Model\Exception\ColumnNotEmptyException;
-use Lighty\Kernel\MVC\Model\Exception\ForeingKeyMethodException;
-use Lighty\Kernel\MVC\Model\Exception\ManyPrimaryKeysException;
-use Lighty\Kernel\MVC\Model\Exception\PrimaryKeyNotFoundException;
-use Lighty\Kernel\MVC\Model\Exception\ManyRelationException;
+use Lighty\Kernel\MVC\ORM\Exception\ColumnNotEmptyException;
+use Lighty\Kernel\MVC\ORM\Exception\ForeingKeyMethodException;
+use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
+use Lighty\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
+use Lighty\Kernel\MVC\ORM\Exception\ManyRelationException;
 use Lighty\Kernel\Database\Database;
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\DateTime as Time;
@@ -20,9 +20,9 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 
 /**
-* Model class
+* ORM class
 */
- class Model
+ class ORM
 {
 	/**
 	* the name of primary key for the model
