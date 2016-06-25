@@ -34,8 +34,9 @@ class Model
 
 	public static function set($class , $table)
 	{
-		$txt = "<?php\n\nuse Lighty\Kernel\MVC\Model\Model;\n\n";
-		$txt.="class $class extends Model\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\tprotected static ".'$foreignKeys=array();'."\n\n}";
+		$txt = "<?php\n\nuse Lighty\Kernel\MVC\ORM;\n\n";
+		$txt.="class $class extends ORM\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\n}";
+		// $txt.="class $class extends ORM\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\tprotected static ".'$foreignKeys=array();'."\n\n}";
 		//
 		return $txt;
 	}
