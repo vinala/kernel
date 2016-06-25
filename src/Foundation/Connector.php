@@ -441,7 +441,7 @@ class Connector
 	{
 		self::call(
 			array(
-				'Model',
+				'ORM',
 				'ModelArray'
 				),
 			self::$path.'MVC/Model/'
