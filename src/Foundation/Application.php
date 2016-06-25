@@ -131,7 +131,7 @@ class Application
 		self::callConnector();
 		Connector::run(false,$session);
 		// set version cookie for Wappalyzer
-		if(self::$isTest) self::setVersionCookie();
+		self::setVersionCookie();
 		//
 		self::ini();
 		//
@@ -180,11 +180,11 @@ class Application
 		self::setRoot($root);
 		//
 		self::$isTest = true;
+
 		// call the connector and run it
-		self::callConnector(true);
-		Connector::runTest(true);
+		self::callConnector();
+		Connector::run(false,$session);
 		// set version cookie for Wappalyzer
-		self::setVersionCookie();
 		//
 		self::ini();
 		//
