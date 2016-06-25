@@ -17,6 +17,7 @@ use Lighty\Kernel\MVC\Relations\OneToOne;
 use Lighty\Kernel\MVC\Relations\OneToMany;
 use Lighty\Kernel\MVC\Relations\ManyToMany;
 use Lighty\Kernel\MVC\Relations\BelongsTo;
+use Lighty\Kernel\MVC\Model\ModelArray;
 
 
 /**
@@ -248,7 +249,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 	protected function getDefaultVars()
 	{
-		return array('table','DBtable','columns','key','isKept','isMaj','areMaj',"pk","");
+		return array('table','DBtable','columns','key','isKept','isMaj','areMaj',"pk","keyName","keyValue","kept_at","kept_data");
 	}
 
 	
@@ -339,7 +340,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 
 			$key=$this->getPKvalue();
 			$sql="update ".$this->DBtable." set deleted_at=null where ".$this->keyName." = '".$key."' ";
-			// die($sql);
+			//
 			if(Database::exec($sql)) 
 			{ 
 				// Code to execute the init the model
@@ -413,6 +414,7 @@ use Lighty\Kernel\MVC\Relations\BelongsTo;
 			foreach ($value as $key2 => $value2)
 			{
 				$row->$key2 = $value2;
+				$row->setKeyValue($key2, $value2);
 			}
 			//
 			$rows->add( $row );
