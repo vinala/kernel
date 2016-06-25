@@ -182,11 +182,11 @@ class Application
 		self::setRoot($root);
 		//
 		self::$isTest = true;
+
 		// call the connector and run it
-		self::callConnector(true);
-		Connector::runTest(true);
+		self::callConnector();
+		Connector::run(false,$session);
 		// set version cookie for Wappalyzer
-		self::setVersionCookie();
 		//
 		self::ini();
 		//

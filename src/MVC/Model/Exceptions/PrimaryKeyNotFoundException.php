@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\Model\Exception;
+namespace Lighty\Kernel\MVC\ORM\Exception;
 
 /**
 * Directory not fount exception

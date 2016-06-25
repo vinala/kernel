@@ -69,7 +69,7 @@ class Connector
 		Connector::intro();
 		Connector::plugins();
 		Connector::lumos();
-		// Connector::bridge();
+		Connector::bridge();
 		Connector::atomium();
 		Connector::process();
 		Connector::setup();

@@ -35,7 +35,7 @@ class TestCase
 	 */
 	public static function instance($path)
 	{
-		return Application::run("",$path,false,false);
+		return Application::runTest("",$path,false,false,true);
 	}
 
 	/**
