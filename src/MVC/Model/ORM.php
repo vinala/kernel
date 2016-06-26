@@ -438,6 +438,7 @@ use Lighty\Kernel\MVC\Model\ModelArray;
 			foreach ($value as $key2 => $value2)
 			{
 				$row->$key2 = $value2;
+				$row->setKeyValue($key2, $value2);
 			}
 			//
 			$rows->add( $row );
