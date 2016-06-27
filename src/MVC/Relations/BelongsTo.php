@@ -47,8 +47,8 @@ class BelongsTo
 		$this->setCurrent($model);
 		$this->checkModels($related);
 		//
-		if($this->isOneToOne($related,$model, $local, $remote)) return $this->prepare($this->OneToOne($related,$model,$local));
-		elseif($this->isOneToMany($related,$model, $local, $remote)) return $this->prepare($this->OneToMany($related,$model,$remote));
+		if($this->isOneToOne($related,$model, $local, $remote)) return $this->prepare($this->OneToOne($related,$model,$local, $remote));
+		elseif($this->isOneToMany($related,$model, $local, $remote)) return $this->prepare($this->OneToMany($related,$model,$local, $remote));
 	}
 
 	/**
@@ -77,10 +77,10 @@ class BelongsTo
 	 * @param $related string
 	 * @param $local string
 	 */
-	protected function OneToOne($related,$model,$local)
+	protected function OneToOne($related,$model,$local,$remote)
 	{
 		$relationVal  = $this->oneRelationValue($related , $model , $local);
-		$relationColumn  = $this->oneRelationColumn($related , $model , $local);
+		$relationColumn  = $this->oneRelationColumn($related , $model , $remote);
 		//
 		return $this->all($related , $relationColumn , $relationVal);
 	}
@@ -92,10 +92,10 @@ class BelongsTo
 	 * @param $related string
 	 * @param $local string
 	 */
-	protected function OneToMany($related,$model,$local)
+	protected function OneToMany($related,$model,$local,$remote)
 	{
 		$relationVal  = $this->manyRelationValue($related , $model , $local);
-		$relationColumn  = $this->manyRelationColumn($related , $model , $local);
+		$relationColumn  = $this->manyRelationColumn($related , $model , $remote);
 		//
 		return $this->all($related , $relationColumn , $relationVal);
 	}
@@ -249,25 +249,23 @@ class BelongsTo
 	 * get the type of relation
 	 * @param $model string
 	 */
-	protected function getType($model ,$remote, $local , $related)
+	protected function getType($model ,$related , $local, $remote)
 	{
 		$modelObject = new $model;
-		$remoteObject = new $remote;
+		$remoteObject = new $related;
 		//
 		$tablemodel=$model::$table;
-		$tableremote=$remote::$table;
+		$tableremote=$related::$table;
 		//
-		if(is_null($local) && is_null($related))
+		if(is_null($local) && is_null($remote))
 		{
-			if(array_key_exists ($tablemodel."_id", get_object_vars($remoteObject) )) $this->relation = OneToOneRelation; 
-			if(array_key_exists ($tableremote."_id", get_object_vars($modelObject) )) $this->relation = OneToManyRelation; 	
+			$model = $tablemodel."_id";
+			$remote = $tableremote."_id";
 		}
-		else
-		{
-			if(array_key_exists ($related, get_object_vars($remoteObject) )) $this->relation = OneToOneRelation; 
-			if(array_key_exists ($local, get_object_vars($modelObject) )) $this->relation = OneToManyRelation; 
-		}
-		
+		else $model = $remote;
+		//
+		if(array_key_exists ($model, get_object_vars($remoteObject) )) $this->relation = OneToOneRelation; 
+		if(array_key_exists ($remote, get_object_vars($modelObject) )) $this->relation = OneToManyRelation; 	
 		//
 		return $this->relation;
 	}
