@@ -213,7 +213,7 @@ use Lighty\Kernel\MVC\Model\ModelArray;
 		$class=get_class();
 		return new $class(null,static::$table);
 	}
-
+	
 	protected function getData()
 	{
 		$vars = array();
@@ -236,15 +236,16 @@ use Lighty\Kernel\MVC\Model\ModelArray;
 				$this->$key = null; 
 	}
 
+	/**
+	 * To Find element by primary key
+	 * @param int : primary key value
+	 * @return object
+	 */
 	public static function find($id)
 	{
-		$self=self::instance();
+		$class = get_called_class();
 		//
-		$data=Database::read("select * from ".$self->DBtable." where ".$self->key."='".$id."' ",1);
-		//
-		foreach ($data[0] as $key => $value) $self->$key = $value;
-		//
-		return $self;
+		return new $class($id);
 	}
 
 	protected function getDefaultVars()
