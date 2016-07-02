@@ -5,19 +5,30 @@ namespace Lighty\Kernel\Atomium\UserCompiler;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileInstructions;
 
 /**
-* 
+* Mother class of user Atomium Tags
 */
-class Tag
+class AtomiumUserTags
 {
+	/**
+	 * The function that Atomium should replace it
+	 */
+	protected static $target;
 
-	public static $target;
-	public static $tag;
-	public static $write = false;
+	/**
+	 * The tag that Atomium should replace it by the function
+	 */
+	protected static $tag;
+
+	/**
+	 * if set true Atomium will echo the returned value from the function
+	 */
+	protected static $write = false;
 
 	/**
 	 * run the compiler
 	 *
 	 * @var string
+	 * @return string
 	 */
 	public static function run($script)
 	{

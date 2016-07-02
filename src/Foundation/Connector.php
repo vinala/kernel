@@ -652,7 +652,7 @@ class Connector
 				'Atomium', 
 				'Compiler',
 				//
-				'Compiler/Tag',
+				'Compiler/AtomiumUserTags',
 				//
 				'Compiler/AtomiumCompileCSS',
 				'Compiler/AtomiumCompileJS',
