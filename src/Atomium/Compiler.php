@@ -374,7 +374,7 @@ class Compiler
 	 */
 	protected static function fetchUserTags()
 	{
-		foreach (Connector::fetch( "atomium",true) as $file) 
+		foreach (Connector::fetch( "tags",true) as $file) 
 			Connector::need($file);
 	}
 
