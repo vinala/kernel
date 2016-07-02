@@ -26,12 +26,18 @@ use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCSS;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileJS;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileAssign;
 use Lighty\Kernel\Atomium\Compiler\AtomiumCompileRun;
+use Lighty\Kernel\Foundation\Connector;
 
 
 
 
 class Compiler 
 {
+
+	/**
+	 * User Tags
+	 */
+	protected static $userTags;
 
 	/**
 	 * The code that Atomium will compile
@@ -81,7 +87,8 @@ class Compiler
 	{
 		if( ! is_null($content)) self::$output = $content;
 		//
-
+		self::compileUserTags();
+		//
 		self::compilComment();
 		self::compilOneLineComment();
 		self::compilTag();
@@ -346,5 +353,37 @@ class Compiler
 	protected static function replace($old, $new)
 	{
 		self::$output = str_replace($old, $new, self::$output);
+	}
+
+	/**
+	 * Set User Tags
+	 */
+	public static function setUserTags()
+	{
+		self::fetchUserTags();
+		//
+		$namespace = "Lighty\Kernel\Atomium\User\\";
+		//
+        foreach (get_declared_classes() as $value)
+            if(strpos($value,$namespace) !== false) 
+            	self::$userTags[] = $value;
+	}
+
+	/**
+	 * Fetch User Tags
+	 */
+	protected static function fetchUserTags()
+	{
+		foreach (Connector::fetch( "atomium",true) as $file) 
+			Connector::need($file);
+	}
+
+	/**
+	 * Compile User Tags
+	 */
+	protected static function compileUserTags()
+	{
+		foreach (self::$userTags as $compiler) 
+			self::$output = $compiler::run(self::$output);
 	}
 }
