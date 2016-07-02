@@ -62,7 +62,7 @@ class NewControllerCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The controller is created");
+        if($process) $this->info("The controller was created");
         else $this->error("The controller is already existe");
     }
 }

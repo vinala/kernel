@@ -59,7 +59,7 @@ class NewGetRouteCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The route is create");
+        if($process) $this->info("The route was created");
         else $this->error("The route doesn't created");
     }
 }
