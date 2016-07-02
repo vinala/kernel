@@ -705,6 +705,7 @@ class Connector
 				'Translator',
 				'Schema',
 				'Links',
+				'Tag',
 				'Model',
 				'View',
 				'Controller',
