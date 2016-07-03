@@ -307,7 +307,7 @@
 			</a>
 		</div>
 		<div class="final_link_panel" id="bottom_panel" style="display:none">
-			<a id="fst_panel" href="{{ Config::get("panel.route") }}">
+			<a id="fst_panel" href="<?php echo Config::get("panel.route"); ?>">
 				<div class="btn hello_button" id="login">
 					Lighty Panel
 				</div>
