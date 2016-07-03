@@ -374,8 +374,11 @@ class Compiler
 	 */
 	protected static function fetchUserTags()
 	{
-		foreach (Connector::fetch( "tags",true) as $file) 
-			Connector::need($file);
+		$files = Connector::fetch( "tags",true);
+		//
+		if( ! is_null($files))
+			foreach (Connector::fetch( "tags",true) as $file) 
+				Connector::need($file);
 	}
 
 	/**
@@ -383,7 +386,8 @@ class Compiler
 	 */
 	protected static function compileUserTags()
 	{
-		foreach (self::$userTags as $compiler) 
-			self::$output = $compiler::run(self::$output);
+		if( ! is_null(self::$userTags))
+			foreach (self::$userTags as $compiler) 
+				self::$output = $compiler::run(self::$output);
 	}
 }
