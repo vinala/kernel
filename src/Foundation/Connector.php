@@ -359,7 +359,8 @@ class Connector
 				'Schema', 
 				'Migration', 
 				'Seeder', 
-				'DBTable', 
+				'DBTable',
+				'Query', 
 				'Database'
 				),
 			self::$path.'Database/'
