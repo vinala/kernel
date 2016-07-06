@@ -45,7 +45,7 @@ class Query
 	 */
 	public function get()
 	{
-		$data = self::query();
+		return self::query();
 	}
 
 	/**
@@ -55,7 +55,31 @@ class Query
 	 */
 	public function query()
 	{
-		return Database::read("select ".$this->columns." from ".$this->table);
+		$data = Database::read("select ".$this->columns." from ".$this->table);
+		return self::fetch($data);
+	}
+
+	/**
+	 * Fetch data
+	 * @param array
+	 * @return array
+	 */
+	public function fetch($array)
+	{
+		$data = array();
+		// return Database::read("select ".$this->columns." from ".$this->table);
+		//
+		foreach ($array as $row) {
+			//
+			$rw = new Row;
+			//
+			foreach ($row as $index => $column) 
+				if( ! is_int($index)) $rw->$index = $column;
+			//
+			$data[] = $rw ; 
+		}
+		//
+		return $data;
 	}
 
 	/**
