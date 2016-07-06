@@ -361,6 +361,7 @@ class Connector
 				'Seeder', 
 				'DBTable',
 				'Query', 
+				'Row', 
 				'Database'
 				),
 			self::$path.'Database/'
