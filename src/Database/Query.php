@@ -18,7 +18,7 @@ class Query
 	/**
 	 * columns query
 	 */
-	protected $column = "*";
+	protected $columns = "*";
 
 	/**
 	 * Set the query table
@@ -45,7 +45,28 @@ class Query
 	 */
 	public function get()
 	{
-		$query="select ".$this->column." from ".$this->table; 
+		$query="select ".$this->columns." from ".$this->table; 
 		return Database::read($query);
+	}
+
+	/**
+	 * Set columns of query
+	 * @return Array
+	 */
+	public function select()
+	{
+		$columns = func_get_args();
+		$target = "";
+		//
+		$i = false;
+		foreach ($columns as $column) {
+			if( ! $i) $target .= $column;
+			else $target .= ",".$column;
+			$i = true;
+		}
+		//
+		$this->columns = $target;
+		//
+		return $this;
 	}
 }
