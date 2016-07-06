@@ -45,8 +45,17 @@ class Query
 	 */
 	public function get()
 	{
-		$query="select ".$this->columns." from ".$this->table; 
-		return Database::read($query);
+		$data = self::query();
+	}
+
+	/**
+	 * get arraay of data
+	 * @param string
+	 * @return array
+	 */
+	public function query()
+	{
+		return Database::read("select ".$this->columns." from ".$this->table);
 	}
 
 	/**
