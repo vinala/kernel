@@ -23,9 +23,14 @@ class Query
 	protected $columns = "*";
 
 	/**
-	 * columns query
+	 * where clause
 	 */
 	protected $where = "";
+
+	/**
+	 * order of data
+	 */
+	protected $order = "";
 
 	/**
 	 * Set the query table
@@ -62,7 +67,7 @@ class Query
 	public function first()
 	{
 		$data = self::query();
-		if(Table::count($data) > 0) return $data[1];
+		if(Table::count($data) > 0) return $data[0];
 	}
 
 	/**
@@ -72,7 +77,7 @@ class Query
 	 */
 	public function query()
 	{
-		$sql = "select ".$this->columns." from ".$this->table." ".$this->where;
+		$sql = "select ".$this->columns." from ".$this->table." ".$this->where." ".$this->order;
 		// //
 		if($data = Database::read($sql)) return self::fetch($data);
 		elseif(Database::execerr()) throw new QueryException();
@@ -151,6 +156,28 @@ class Query
 	public function andWhere($column, $relation, $value)
 	{
 		$this->where .= " and ( $column $relation '$value' )";
+		//
+		return $this;
+	}
+
+	/**
+	 * Set the order of data
+	 * @return Array
+	 */
+	public function order()
+	{
+		$columns = func_get_args();
+		$order = "" ;
+		$i = 0;
+		//
+		if($columns) 
+			foreach ($columns as $value) {
+				if( ! $i) $order .= " order by ".$value;
+				else $order .= ",".$value;
+				$i = 1;
+			}
+		//
+		$this->order = $order;
 		//
 		return $this;
 	}
