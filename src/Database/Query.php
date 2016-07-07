@@ -25,7 +25,7 @@ class Query
 	/**
 	 * columns query
 	 */
-	protected $where;
+	protected $where = "";
 
 	/**
 	 * Set the query table
@@ -72,10 +72,8 @@ class Query
 	 */
 	public function query()
 	{
-		$where = ! is_null($this->where) ? " where ".$this->where : "";
-		$sql = "select ".$this->columns." from ".$this->table." ".$where;
+		$sql = "select ".$this->columns." from ".$this->table." ".$this->where;
 		// //
-		// die($sql);
 		if($data = Database::read($sql)) return self::fetch($data);
 		elseif(Database::execerr()) throw new QueryException();
 		
@@ -89,7 +87,6 @@ class Query
 	public function fetch($array)
 	{
 		$data = array();
-		// return Database::read("select ".$this->columns." from ".$this->table);
 		//
 		foreach ($array as $row) {
 			//
@@ -131,7 +128,29 @@ class Query
 	 */
 	public function where($column, $relation, $value)
 	{
-		$this->where = "$column $relation '$value' ";
+		$this->where = " where $column $relation '$value' ";
+		//
+		return $this;
+	}
+
+	/**
+	 * Set new OR condition in where clause
+	 * @return Array
+	 */
+	public function orWhere($column, $relation, $value)
+	{
+		$this->where .= " or ( $column $relation '$value' )";
+		//
+		return $this;
+	}
+
+	/**
+	 * Set new AND condition in where clause
+	 * @return Array
+	 */
+	public function andWhere($column, $relation, $value)
+	{
+		$this->where .= " and ( $column $relation '$value' )";
 		//
 		return $this;
 	}
