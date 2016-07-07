@@ -3,6 +3,7 @@
 namespace Lighty\Kernel\Database;
 
 use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\Table;
 
 /**
 * Query Class
@@ -46,6 +47,16 @@ class Query
 	public function get()
 	{
 		return self::query();
+	}
+
+	/**
+	 * Get first Data returned from query
+	 * @return Array
+	 */
+	public function first()
+	{
+		$data = self::query();
+		if(Table::count($data) > 0) return $data[1];
 	}
 
 	/**
