@@ -371,6 +371,7 @@ class Connector
 		//
 		self::call(
 			array(
+				'QueryException',
 				'SeedersEmptyException',
 				'DatabaseArgumentsException', 
 				'DatabaseConnectionException'
