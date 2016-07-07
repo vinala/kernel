@@ -4,6 +4,7 @@ namespace Lighty\Kernel\Database;
 
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Database\Exceptions\QueryException;
 
 /**
 * Query Class
@@ -20,6 +21,11 @@ class Query
 	 * columns query
 	 */
 	protected $columns = "*";
+
+	/**
+	 * columns query
+	 */
+	protected $where;
 
 	/**
 	 * Set the query table
@@ -66,8 +72,13 @@ class Query
 	 */
 	public function query()
 	{
-		$data = Database::read("select ".$this->columns." from ".$this->table);
-		return self::fetch($data);
+		$where = ! is_null($this->where) ? " where ".$this->where : "";
+		$sql = "select ".$this->columns." from ".$this->table." ".$where;
+		// //
+		// die($sql);
+		if($data = Database::read($sql)) return self::fetch($data);
+		elseif(Database::execerr()) throw new QueryException();
+		
 	}
 
 	/**
@@ -110,6 +121,17 @@ class Query
 		}
 		//
 		$this->columns = $target;
+		//
+		return $this;
+	}
+
+	/**
+	 * Set where clause
+	 * @return Array
+	 */
+	public function where($column, $relation, $value)
+	{
+		$this->where = "$column $relation '$value' ";
 		//
 		return $this;
 	}
