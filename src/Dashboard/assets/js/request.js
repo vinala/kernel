@@ -140,4 +140,21 @@ $(document).ready(function (){
         //
         return false;
     });
+
+    /*
+     * MAKE LINKS
+     */
+    $('#new_link_form').submit(function () {
+        $.post("../"+token+"_/make_link",$('#new_link_form').serialize(),function(data)
+            {
+                if(data == "true")
+                {
+                    $( "#new_link_alert_succes" ).slideToggle( "slow" );
+                    setTimeout(function(){ $( "#make_link_alert_succes" ).slideToggle( "slow" ); }, 3000);
+                }
+                else $( "#new_link_alert_failed" ).slideToggle( "slow" );
+            });
+        //
+        return false;
+    });
 });

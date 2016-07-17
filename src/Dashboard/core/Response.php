@@ -85,8 +85,8 @@ class Response
 		$name=$_POST['link_name'];
 		//
 		if(Links::create($name, "../"))
-			echo "Link file created";
-		else echo "There was a problem";
+			echo "true";
+		else echo "false";
 	}
 
 	/**
