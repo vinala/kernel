@@ -67,14 +67,13 @@ class Response
 	/**
 	 * create Lang File
 	 */
-	public static function createLangFile()
+	public static function createTranslator()
 	{
-		$dir=$_POST['lang_dir_name_2'];
-		$file=$_POST['lang_file_name'];
+		$name=$_POST['lang_name'];
 		//
-		if(Translator::createFile($dir , $file, "../"))
-			echo "File created";
-		else echo "There was a problem";
+		if(Translator::create($name , "../"))
+			echo "true";
+		else echo "false";
 	}
 
 	/**

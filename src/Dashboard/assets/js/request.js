@@ -157,4 +157,23 @@ $(document).ready(function (){
         //
         return false;
     });
+
+    /*
+     * MAKE LINKS
+     */
+    $('#new_lang_form').submit(function () {
+        $.post("../"+token+"_/make_translator",$('#new_lang_form').serialize(),function(data)
+            {
+                if(data == "true")
+                {
+                    $( "#new_lang_alert_succes" ).slideToggle( "slow" );
+                    setTimeout(function(){ $( "#make_lang_alert_succes" ).slideToggle( "slow" ); }, 3000);
+                }
+                else $( "#new_lang_alert_failed" ).slideToggle( "slow" );
+            });
+        //
+        return false;
+    });
+
+    
 });

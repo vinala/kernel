@@ -134,12 +134,12 @@
                 </ul>
             </li>
 
-            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["link", "translator"]) ?> ">
+            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["link", "translate"]) ?> ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-cubes"></i>
                     <span class="title">Locales</span>
                     <span class="arrow"></span>
-                    <?php Controlles::sideBarSelected($page, ["link", "translator"]) ?>
+                    <?php Controlles::sideBarSelected($page, ["link", "translate"]) ?>
                 </a>
                 <ul class="sub-menu">
                     <li class="nav-item <?php Controlles::sideBarHighLight($page, ["link"]) ?> ">
@@ -148,7 +148,7 @@
                             <span class="title">Links</span>
                         </a>
                     </li>
-                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["translator"]) ?> ">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["translate"]) ?> ">
                         <a href="../<?php echo Config::get('dashboard.route') ?>/translator" class="nav-link ">
                         <i class="icon-flag"></i>
                             <span class="title">Translator</span>

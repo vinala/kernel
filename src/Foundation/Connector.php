@@ -627,6 +627,7 @@ class Connector
 				'core/Backup',
 				'core/Seeder',
 				'core/Links',
+				'core/Translator',
 				//
 				'core/Controlles', 
 				),
