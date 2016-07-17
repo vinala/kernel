@@ -7,6 +7,7 @@ use Lighty\Kernel\Config\Alias;
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Router\Route;
 use Lighty\Kernel\Dashboard\Response;
+use Lighty\Kernel\Objects\Strings;
 
 /**
 * Controller class
@@ -35,6 +36,19 @@ class Dashboard
 	{
 		include_once '../vendor/lighty/kernel/src/Dashboard/views/home.php';  
 	}
+
+	/**
+	* get the path of project home
+	* @return string
+	*/
+	public static function home()
+	{
+		$url = Config::get('app.url');
+		//
+		$main = Strings::split($url , "/public/index.php");
+		return $main[0];
+	}
+	
 
 	public static function route()
 	{

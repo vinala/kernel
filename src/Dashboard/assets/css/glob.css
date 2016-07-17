@@ -1,2 +1,17 @@
 .inlined-forms { display: inline-block; }
 .hidden-alert { display:none; }
+.header-link
+{
+	padding-top: 16px !important;
+    padding-bottom: 14px !important;
+    padding-right: 10px !important;
+}
+
+.header-label
+{
+	color: #c6cfda;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 20px;
+}

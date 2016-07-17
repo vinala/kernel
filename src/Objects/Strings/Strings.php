@@ -28,6 +28,17 @@ class Strings
 			return explode($limit, $string);
 		}
 
+	/**
+	* Split string
+	* @param string,string
+	* @return array
+	*/
+	public static function split($string,$limit)
+	{
+		return self::splite($string,$limit);
+	}
+	
+
 	public static function concat()
 		{
 			$args=func_get_args();

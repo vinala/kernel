@@ -19,6 +19,13 @@
         <div class="top-menu">
             <ul class="nav navbar-nav pull-right">
                 
+                <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+                    <a href="<?php echo Dashboard::home(); ?>" target="_blank" class="dropdown-toggle header-link">
+                        <i class="icon-home"></i>
+                        <span class="header-label"><?php echo Config::get("app.project"); ?></span>
+                    </a>
+                </li>
+
                 <!-- BEGIN USER LOGIN DROPDOWN -->
                 <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                 <li class="dropdown dropdown-user">
