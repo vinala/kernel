@@ -4,7 +4,7 @@
     <!-- BEGIN PAGE HEADER-->
 
     <!-- BEGIN PAGE BAR -->
-    <?php echo Dashboard::view("parts/pageBar" , array("main" => "Lighty","title" => "Link")) ?>
+    <?php echo Dashboard::view("parts/pageBar" , array("main" => "Lighty","title" => "Links")) ?>
     <!-- END PAGE BAR -->
     <!-- BEGIN PAGE TITLE-->
     <h3 class="page-title"> 

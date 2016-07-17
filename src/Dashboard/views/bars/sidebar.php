@@ -134,15 +134,15 @@
                 </ul>
             </li>
 
-            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["links", "translator"]) ?> ">
+            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["link", "translator"]) ?> ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="fa fa-cubes"></i>
                     <span class="title">Locales</span>
                     <span class="arrow"></span>
-                    <?php Controlles::sideBarSelected($page, ["links", "translator"]) ?>
+                    <?php Controlles::sideBarSelected($page, ["link", "translator"]) ?>
                 </a>
                 <ul class="sub-menu">
-                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["links"]) ?> ">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["link"]) ?> ">
                         <a href="../<?php echo Config::get('dashboard.route') ?>/links" class="nav-link ">
                             <i class="icon-link"></i>
                             <span class="title">Links</span>
