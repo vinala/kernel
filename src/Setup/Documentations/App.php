@@ -43,9 +43,9 @@ class App
 		return $title.$doc."\n\n\t$param\n";
 	}
 
-	public static function set($name)
+	public static function set($name, $project)
 	{
-		$project_name = self::appRow("project_name","'project'=>'lighty',");
+		$project_name = self::appRow("project_name","'project'=>'$project',");
 		$owner_name = self::appRow("owner_name","'owner'=>'".$name."',");
 		$project_url = self::appRow("project_url","'url'=>Application::root(),");
 		$html_title = self::appRow("html_title","'title'=> 'Lighty PHP Framework',");

@@ -73,6 +73,7 @@ class Response
 	 */
 	public static function setGlob_step()
 	{
+		$project=$_POST['project_name'];
 		$name=$_POST['dev_name'];
 		$langue=$_POST['langue'];
 		//
@@ -87,7 +88,7 @@ class Response
 		//
 		if( ! Application::$isTest)
 		{
-			$appCont = App::set($name);
+			$appCont = App::set($name, $project);
 			$translatorCont = Translator::set($langue);
 			$logginCont = Loggin::set($loggin);
 			$maintenanceCont = Maintenance::set($maintenance);

@@ -123,6 +123,14 @@
 		<form class="fst-config-form fst-config-db-form" id="fst-glob-db-form">
 
 			<div class="control_c_row">
+				<div class="fst-config-label db-input-label">Project Name</div>
+				<div class="fst-config-input db-input-input">
+					<input type="text" class="form-control" id="project_name" name="project_name" placeholder="Your project" value="">
+				</div>
+				<div class="fst-config-input-desc db-input-input-desc">What's your project name ;)</div>
+			</div>
+
+			<div class="control_c_row">
 				<div class="fst-config-label db-input-label">Developer Name</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="dev_name" name="dev_name" placeholder="Your name" value="">
