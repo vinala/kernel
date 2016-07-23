@@ -60,7 +60,7 @@ class NewSchemaCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The schema is created");
+        if($process) $this->info("The schema was created");
         else $this->error("The schema is already existe");
     }
 }

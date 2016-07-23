@@ -58,7 +58,7 @@ class NewLinkFileCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The link file is created");
+        if($process) $this->info("The link file was created");
         else $this->error("The link file is already existe");
     }
 }

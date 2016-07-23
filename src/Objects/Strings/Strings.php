@@ -14,7 +14,7 @@ define('TRIM_START', 'start');
 
 
 /**
-* String cLass
+* Strings Class
 */
 class Strings
 {
@@ -106,7 +106,7 @@ class Strings
 					$str1.=$string[$i];
 				}
 				//
-				for ($i=($index); $i < String::lenght($string) ; $i++) {
+				for ($i=($index); $i < Strings::lenght($string) ; $i++) {
 					$str2.=$string[$i];
 				}
 				//
@@ -135,7 +135,7 @@ class Strings
 
 	static function isIndexIN($string,$index)
 		{
-			if(String::lenght($string)>($index+1)) return true;
+			if(Strings::lenght($string)>($index+1)) return true;
 			else return false;
 		}
 

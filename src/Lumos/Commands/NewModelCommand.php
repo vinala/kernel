@@ -61,7 +61,7 @@ class NewModelCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The model is created");
+        if($process) $this->info("The model was created");
         else $this->error("The model is already existe");
     }
 }

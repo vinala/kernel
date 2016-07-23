@@ -30,7 +30,7 @@ class OneToMany
 		$this->checkModels($related,$model);
 		//
 		$relationVal  = $this->relationValue($related , $model , $local);
-		$relationColumn  = $this->relationColumn($related , $model , $local);
+		$relationColumn  = $this->relationColumn($related , $model , $remote);
 		//
 		$mod=$this->all($related , $relationColumn , $relationVal);
 		//

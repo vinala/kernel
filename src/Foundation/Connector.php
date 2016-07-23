@@ -9,6 +9,7 @@ use Lighty\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
 use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Storage\Session;
 use Lighty\Kernel\Dashboard\Dashboard;
+use Lighty\Kernel\Atomium\Compiler;
 
 /**
 * Connector class to call framework core files
@@ -683,6 +684,8 @@ class Connector
 				'Atomium', 
 				'Compiler',
 				//
+				'Compiler/AtomiumUserTags',
+				//
 				'Compiler/AtomiumCompileCSS',
 				'Compiler/AtomiumCompileJS',
 				'Compiler/AtomiumCompileAssign',
@@ -719,6 +722,7 @@ class Connector
 				),
 			self::$path.'Atomium/'
 			);
+		Compiler::setUserTags();
 	}
 
 	/**
@@ -733,6 +737,7 @@ class Connector
 				'Translator',
 				'Schema',
 				'Links',
+				'Tag',
 				'Model',
 				'View',
 				'Controller',
@@ -797,10 +802,10 @@ class Connector
 	/**
 	 * Fetch files of folder
 	 */
-	public static function fetch($pattern)
+	public static function fetch($pattern,$app = false)
 	{
-		// die($pattern);
-		return glob($pattern.'/*.php');
+		if($app) return glob( Application::$root . "app/" . $pattern . '/*.php' );
+		else return glob( Application::$root . $pattern . '/*.php' );
 	}
 }
 

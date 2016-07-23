@@ -60,7 +60,7 @@ class NewLanguageFileCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The translator file is created");
+        if($process) $this->info("The translator file was created");
         else $this->error("The translator file is already existe");
     }
 }

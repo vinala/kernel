@@ -60,7 +60,7 @@ class View
 		{
 			$myfile = fopen($path."$file$ext", "w");
 			//
-			$txt = self::set($ext , $file);
+			$txt = self::set($ext , $file , $path);
 			//
 			fwrite($myfile, $txt);
 			fclose($myfile);
@@ -70,10 +70,19 @@ class View
 		else return 2;
 	}
 
-	protected static function set($ext , $file)
+	protected static function set($ext , $file , $path)
 	{
-		if($ext == '.atom') return "{// View file  : $file //} \n";
-		elseif($ext == '.tpl.php') return "{* View file  : $file *} \n";
-		else return "<?php\n\n/**\n* View file  : $file\n*/\n\n";
+		$path = Strings::replace($path,"/",".");
+		$strings = Strings::splite($path , "app.views.");
+		$path = $strings[1].$file;
+		//
+		if($ext == '.atom') 
+			return "/// View file  : $file \n/// Path : $path";
+		
+		elseif($ext == '.tpl.php') 
+			return "{* View file  : $file *} \n {* Path : $path *}";
+
+		else 
+			return "<?php\n\n/**\n* View file  : $file\n*/\n\n// Path : $path";
 	}
 }

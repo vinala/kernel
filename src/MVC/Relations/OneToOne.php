@@ -30,7 +30,7 @@ class OneToOne
 		$this->checkModels($related,$model);
 		//
 		$relationVal  = $this->relationValue($related , $model , $local);
-		$relationColumn  = $this->relationColumn($related , $model , $local);
+		$relationColumn  = $this->relationColumn($related , $model , $remote);
 		//
 		$mod=$this->first($related , $relationColumn , $relationVal);
 		//
@@ -82,7 +82,7 @@ class OneToOne
 	 */
 	protected function prepare($model , $remote)
 	{
-		return !empty($model) ? isset($model->data) ? Table::count($model->data) == 1 ? $model->data[0] : $this->ManyRelationException($remote) : null : null;
+		return !empty($model) ? isset($model->data) ? Table::count($model->data) == 1 ? $model->data[0] : $this->ManyRelationException($remote, $model) : null : null;
 	}
 
 		/**
@@ -93,7 +93,7 @@ class OneToOne
 	protected function ManyRelationException($related , $model)
 	{
 		$model = get_class($model);
-		$related = get_class($related);
+		// $related = get_class($related);
 		//
 		throw new ManyRelationException( $model , $related );
 	}

@@ -47,8 +47,8 @@ class BelongsTo
 		$this->setCurrent($model);
 		$this->checkModels($related);
 		//
-		if($this->isOneToOne($related,$model)) return $this->prepare($this->OneToOne($related,$model,$local));
-		elseif($this->isOneToMany($related,$model)) return $this->prepare($this->OneToMany($related,$model,$local));
+		if($this->isOneToOne($related,$model, $local, $remote)) return $this->prepare($this->OneToOne($related,$model,$local, $remote));
+		elseif($this->isOneToMany($related,$model, $local, $remote)) return $this->prepare($this->OneToMany($related,$model,$local, $remote));
 	}
 
 	/**
@@ -56,9 +56,9 @@ class BelongsTo
 	 * @param $model object
 	 * @param $related string
 	 */
-	protected function isOneToOne($related,$model)
+	protected function isOneToOne($related,$model, $local, $remote)
 	{
-		return ($this->getType(get_class($model) ,$related) == OneToOneRelation);
+		return ($this->getType(get_class($model) ,$related, $local, $remote) == OneToOneRelation);
 	}
 
 	/**
@@ -66,9 +66,9 @@ class BelongsTo
 	 * @param $model object
 	 * @param $related string
 	 */
-	protected function isOneToMany($related,$model)
+	protected function isOneToMany($related,$model, $local, $remote)
 	{
-		return ($this->getType(get_class($model) ,$related) == OneToManyRelation);
+		return ($this->getType(get_class($model) ,$related, $local, $remote) == OneToManyRelation);
 	}
 
 	/**
@@ -77,10 +77,10 @@ class BelongsTo
 	 * @param $related string
 	 * @param $local string
 	 */
-	protected function OneToOne($related,$model,$local)
+	protected function OneToOne($related,$model,$local,$remote)
 	{
 		$relationVal  = $this->oneRelationValue($related , $model , $local);
-		$relationColumn  = $this->oneRelationColumn($related , $model , $local);
+		$relationColumn  = $this->oneRelationColumn($related , $model , $remote);
 		//
 		return $this->all($related , $relationColumn , $relationVal);
 	}
@@ -92,10 +92,10 @@ class BelongsTo
 	 * @param $related string
 	 * @param $local string
 	 */
-	protected function OneToMany($related,$model,$local)
+	protected function OneToMany($related,$model,$local,$remote)
 	{
 		$relationVal  = $this->manyRelationValue($related , $model , $local);
-		$relationColumn  = $this->manyRelationColumn($related , $model , $local);
+		$relationColumn  = $this->manyRelationColumn($related , $model , $remote);
 		//
 		return $this->all($related , $relationColumn , $relationVal);
 	}
@@ -215,7 +215,15 @@ class BelongsTo
 	 */
 	protected function prepare($models)
 	{
-		return ! is_null($models->data) ? ((Table::count($models->data) > 0) ? ((Table::count($models->data) == 1) ? $models->data[0] : $models->data) : null ) : null ;
+		return ! is_null($models->data) ? 
+					((Table::count($models->data) > 0) 
+						? ((Table::count($models->data) == 1) 
+							? $models->data[0] 
+							: $models->data
+						) 
+						: null 
+					) 
+					: null ;
 	}
 
 	/**
@@ -241,16 +249,23 @@ class BelongsTo
 	 * get the type of relation
 	 * @param $model string
 	 */
-	protected function getType($model ,$remote)
+	protected function getType($model ,$related , $local, $remote)
 	{
 		$modelObject = new $model;
-		$remoteObject = new $remote;
+		$remoteObject = new $related;
 		//
 		$tablemodel=$model::$table;
-		$tableremote=$remote::$table;
+		$tableremote=$related::$table;
 		//
-		if(array_key_exists ($tablemodel."_id", get_object_vars($remoteObject) )) $this->relation = OneToOneRelation; 
-		if(array_key_exists ($tableremote."_id", get_object_vars($modelObject) )) $this->relation = OneToManyRelation; 
+		if(is_null($local) && is_null($remote))
+		{
+			$model = $tablemodel."_id";
+			$remote = $tableremote."_id";
+		}
+		else $model = $remote;
+		//
+		if(array_key_exists ($model, get_object_vars($remoteObject) )) $this->relation = OneToOneRelation; 
+		if(array_key_exists ($remote, get_object_vars($modelObject) )) $this->relation = OneToManyRelation; 	
 		//
 		return $this->relation;
 	}
