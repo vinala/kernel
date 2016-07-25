@@ -69,6 +69,17 @@ class Application
 		return "Lighty Kernel v".$version;
 	}
 
+	/**
+	* Get current number version of kernel
+	* @return string
+	*/
+	public static function numKernelVersion()
+	{
+		$kernel = "vendor/lighty/kernel/";
+		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
+		return $version;
+	}	
+
 	public static function setVersionCookie()
 	{
 		$version = (new Filesystem)->get(self::$root."version.md");
