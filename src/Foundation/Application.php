@@ -78,7 +78,20 @@ class Application
 		$kernel = "vendor/lighty/kernel/";
 		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
 		return $version;
-	}	
+	}
+
+	/**
+	* Get last number version of kernel
+	* @return string
+	*/
+	public static function numLastKernelVersion()
+	{
+		$link = "https://gitlab.com/lighty/Kernel/raw/master/version.md";
+		$version = file_get_contents($link);
+		//
+		return $version;
+	}
+	
 
 	public static function setVersionCookie()
 	{
