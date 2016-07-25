@@ -629,6 +629,7 @@ class Connector
 				'core/Seeder',
 				'core/Links',
 				'core/Translator',
+				'core/Update',
 				//
 				'core/Controlles', 
 				),
