@@ -80,7 +80,7 @@ class View
 			return "/// View file  : $file \n/// Path : $path";
 		
 		elseif($ext == '.tpl.php') 
-			return "{* View file  : $file *} \n {* Path : $path *}";
+			return "{// View file  : $file //} \n {// Path : $path //}";
 
 		else 
 			return "<?php\n\n/**\n* View file  : $file\n*/\n\n// Path : $path";
