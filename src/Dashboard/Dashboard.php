@@ -104,4 +104,16 @@ class Dashboard
 			case 'translate': include_once Dashboard::$root.'views/contents/translate.php'; break;
 		}
 	}
+
+	/**
+	 * To show the update of kernel
+	 */
+	public static function updater()
+	{
+		if(Update::check())
+		{
+			$version = Application::numLastKernelVersion();
+			include Dashboard::$root.'views/bars/update.php';
+		}
+	}
 }

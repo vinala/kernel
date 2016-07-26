@@ -1,5 +1,6 @@
 <?php 
     use Lighty\Kernel\Dashboard\Controlles;
+    use Lighty\Kernel\Dashboard\Update;
 ?>
 <div class="page-sidebar-wrapper">
     <!-- BEGIN SIDEBAR -->
@@ -73,6 +74,7 @@
                     </li>
                 </ul>
             </li>
+
             <li class="heading">
                 <h3 class="uppercase">Framework</h3>
             </li>

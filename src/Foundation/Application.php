@@ -88,7 +88,7 @@ class Application
 	{
 		// $link = "https://gitlab.com/lighty/Kernel/raw/master/version.md";
 		// $version = file_get_contents($link);
-		$version = "3.2.19";
+		$version = "3.2.20";
 		//
 		return $version;
 	}

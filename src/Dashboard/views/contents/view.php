@@ -3,6 +3,10 @@
 <div class="page-content">
     <!-- BEGIN PAGE HEADER-->
 
+    <!-- BEGIN UPDATE BAR -->
+    <?php  Dashboard::updater();  ?>
+    <!-- END UPDATE BAR -->
+    
     <!-- BEGIN PAGE BAR -->
     <?php echo Dashboard::view("parts/pageBar" , array("main" => "Lighty","title" => "View")) ?>
     <!-- END PAGE BAR -->

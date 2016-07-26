@@ -1,0 +1,1 @@
+<div class="update_bar">The new release of kernel <a href="https://gitlab.com/lighty/Kernel/tags/<?php echo $version ?>"><?php echo $version ?></a> is here, execute "composer update" command to update the framework</div>
