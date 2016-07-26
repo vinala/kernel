@@ -303,7 +303,7 @@
 		
 		<div class="final_link_version" id="bottom_panel_2" style="display:none">
 			<a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/framework/blob/dev/changes.md">
-				<?php echo "Macaron (v".App::fullVersion().")"; ?>
+				<?php echo "v".App::fullVersion(); ?>
 			</a>
 		</div>
 		<div class="final_link_panel" id="bottom_panel" style="display:none">
