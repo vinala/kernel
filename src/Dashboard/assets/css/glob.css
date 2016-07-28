@@ -45,3 +45,8 @@
     color: white;
     text-decoration: underline;
 }
+
+.plugin_link
+{
+    color: inherit;
+}
