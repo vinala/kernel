@@ -630,6 +630,7 @@ class Connector
 				'core/Links',
 				'core/Translator',
 				'core/Update',
+				'core/Plugins',
 				//
 				'core/Controlles', 
 				),
