@@ -159,6 +159,37 @@
                 </ul>
             </li>
 
+            <li class="heading">
+                <h3 class="uppercase">Extra</h3>
+            </li>
+
+            <li class="nav-item <?php Controlles::sideBarHighLight($page, ["store", "plugin_manager"]) ?> ">
+                <a href="javascript:;" class="nav-link nav-toggle">
+                    <i class="fa fa-cogs"></i>
+                    <span class="title">Plugins</span>
+                    <span class="arrow"></span>
+                    <?php Controlles::sideBarSelected($page, ["store", "plugin_manager"]) ?>
+                </a>
+                <ul class="sub-menu">
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["store"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/store" class="nav-link ">
+                            <i class="icon-handbag"></i>
+                            <span class="title">Store</span>
+                        </a>
+                    </li>
+                    <li class="nav-item <?php Controlles::sideBarHighLight($page, ["plugin_manager"]) ?> ">
+                        <a href="../<?php echo Config::get('dashboard.route') ?>/translator" class="nav-link ">
+                        <i class="icon-equalizer"></i>
+                            <span class="title">Manager</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="heading">
+                <h3 class="uppercase">Others</h3>
+            </li>
+
             <li class="nav-item  ">
                 <a href="javascript:;" class="nav-link nav-toggle">
                     <i class="icon-diamond"></i>
