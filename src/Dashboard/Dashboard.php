@@ -60,6 +60,8 @@ class Dashboard
 		Route::get(Config::get('dashboard.route')."/seeders",function(){ self::callHome("seeder"); });
 		Route::get(Config::get('dashboard.route')."/links",function(){ self::callHome("link"); });
 		Route::get(Config::get('dashboard.route')."/translator",function(){ self::callHome("translate"); });
+		Route::get(Config::get('dashboard.route')."/store",function(){ self::callHome("store"); });
+		Route::get(Config::get('dashboard.route')."/plugin/{alias}",function($alias){ self::callHome("plugin"); });
 		//
 		self::ajaxRoute();
 	}
@@ -102,6 +104,8 @@ class Dashboard
 			case 'seeder': include_once Dashboard::$root.'views/contents/Seeder.php'; break;
 			case 'link': include_once Dashboard::$root.'views/contents/link.php'; break;
 			case 'translate': include_once Dashboard::$root.'views/contents/translate.php'; break;
+			case 'store': include_once Dashboard::$root.'views/contents/store.php'; break;
+			case 'plugin': include_once Dashboard::$root.'views/contents/plugin.php'; break;
 		}
 	}
 
