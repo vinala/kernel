@@ -9,6 +9,9 @@
 	<?php $assetsRoot = "vendor/lighty/kernel/src/Dashboard/"; ?>
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
 
+	<!-- To add sub path like plugin path -->
+	<?php if($page=="plugin") Dashboard::$assets = "../".Dashboard::$assets; ?>
+
 	<link href="<?php echo Dashboard::$assets ?>assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo Dashboard::$assets ?>assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
 	<link href="<?php echo Dashboard::$assets ?>assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
