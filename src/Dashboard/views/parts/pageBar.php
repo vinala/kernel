@@ -8,7 +8,8 @@
                 <span><?php echo $title ?></span>
             </li>
         </ul>
-        <div class="page-toolbar">
+        
+        <!-- <div class="page-toolbar">
             <div class="btn-group pull-right">
                 <button type="button" class="btn green btn-sm btn-outline dropdown-toggle" data-toggle="dropdown"> Actions
                     <i class="fa fa-angle-down"></i>
@@ -33,5 +34,5 @@
                     </li>
                 </ul>
             </div>
-        </div>
+        </div> -->
     </div>
