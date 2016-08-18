@@ -52,9 +52,14 @@ class ClearControllersCommand extends Commands
      */
     public function exec()
     {
-        $process = Controller::clear();
+        $ok = $this->confirm("Are you sure ? [y/n]" , false);
         //
-        $this->show($process);
+        if($ok)
+        {
+            $process = Controller::clear();
+            //
+            $this->show($process);
+        }
     }
 
     /**
