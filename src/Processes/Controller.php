@@ -4,6 +4,7 @@ namespace Lighty\Kernel\Process;
 
 use Lighty\Kernel\Process\Process;
 use Lighty\Kernel\Foundation\Application;
+use Lighty\Kernel\Filesystem\Filesystem as File;
 
 /**
 * Controller class
@@ -91,4 +92,19 @@ class Controller
 		//
 		return $controllers;
 	}
+
+	/**
+	* clear all controllers created
+	* @return bool
+	*/
+	public static function clear()
+	{
+		$files = File::glob(Application::$root."app/controllers/*");
+		//
+		foreach ($files as $file) 
+			File::delete($file);
+		//
+		return true;
+	}
+	
 }
