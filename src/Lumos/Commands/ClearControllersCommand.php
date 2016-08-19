@@ -32,10 +32,8 @@ class ClearControllersCommand extends Commands
      */ 
     public function set()
     {
-        // $this->key = "clear:controller";
         $this->key = Config::get('lumos.clear_controller');
         $this->description = 'Clear all controllers created';
-
     }
 
     /**
