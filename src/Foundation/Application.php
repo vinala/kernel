@@ -48,13 +48,12 @@ class Application
 	public static function version()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Lighty Macaron ($version) PHP Framework";
+		return "Lighty v$version PHP Framework";
 	}
 
 	public static function consoleVersion()
 	{
-		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Lighty Macaron ($version) PHP Framework";
+		return (new Filesystem)->get(self::$root."version.md");
 	}
 
 	public static function fullVersion()
