@@ -68,6 +68,9 @@ class Application
 		return "Lighty Kernel v".$version;
 	}
 
+	/**
+	 * Set Lighty version cookie
+	 */
 	public static function setVersionCookie()
 	{
 		$version = (new Filesystem)->get(self::$root."version.md");
@@ -131,6 +134,8 @@ class Application
 		Connector::run(false,$session);
 		// set version cookie for Wappalyzer
 		self::setVersionCookie();
+		//
+		self::setSHA();
 		//
 		self::ini();
 		//
@@ -268,5 +273,14 @@ class Application
 		// self::fetcher($routes);
 		//
 		return true;
+	}
+
+	/**
+	* Set SHA Code
+	*/
+	public static function setSHA()
+	{
+		$SHA = "97e88f56e4dd302eeac7a7cb0367f966f1adaa815ba77be2b410132d4768bfbd";
+		Cookie::create("sha256", $SHA ,3);
 	}
 }
