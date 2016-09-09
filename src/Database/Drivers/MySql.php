@@ -226,16 +226,7 @@ class MysqlDatabase
 	 */
 	protected static function exportDatabase()
 	{
-		$database 	= Config::get("database.database");
-		$host 		= Config::get("database.host");
-		$username 	= Config::get("database.username");
-		$password 	= Config::get("database.password");
-		//
-		$mysqli = new \mysqli($host,$username,$password,$database); 
-        $mysqli->select_db($database); 
-        $mysqli->query("SET NAMES 'utf8'");
-        //
-        return $mysqli;
+        return Database::$default;
 	}
 
 	/**
