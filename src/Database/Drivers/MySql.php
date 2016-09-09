@@ -32,7 +32,10 @@ class MysqlDatabase
 			
 		else
 		{
-			Database::$default=@mysqli_connect(Config::get("database.host"), Config::get("database.username"), Config::get("database.password"), Config::get("database.database"));
+			//to put localhost IP
+			$host = Config::get("database.host")=="localhost" ? "127.0.0.1" : Config::get("database.host");
+			//
+			Database::$default=@mysqli_connect($host, Config::get("database.username"), Config::get("database.password"), Config::get("database.database"));
 			//
 		  	if(!Database::$default)
 		  	{
