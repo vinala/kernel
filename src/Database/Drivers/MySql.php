@@ -32,7 +32,10 @@ class MysqlDatabase
 			
 		else
 		{
-			Database::$default=@mysqli_connect(Config::get("database.host"), Config::get("database.username"), Config::get("database.password"), Config::get("database.database"));
+			//to put localhost IP
+			$host = Config::get("database.host")=="localhost" ? "127.0.0.1" : Config::get("database.host");
+			//
+			Database::$default=@mysqli_connect($host, Config::get("database.username"), Config::get("database.password"), Config::get("database.database"));
 			//
 		  	if(!Database::$default)
 		  	{
@@ -223,16 +226,7 @@ class MysqlDatabase
 	 */
 	protected static function exportDatabase()
 	{
-		$database 	= Config::get("database.database");
-		$host 		= Config::get("database.host");
-		$username 	= Config::get("database.username");
-		$password 	= Config::get("database.password");
-		//
-		$mysqli = new \mysqli($host,$username,$password,$database); 
-        $mysqli->select_db($database); 
-        $mysqli->query("SET NAMES 'utf8'");
-        //
-        return $mysqli;
+        return Database::$default;
 	}
 
 	/**

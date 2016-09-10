@@ -40,8 +40,16 @@ class InfoCommand extends Commands
     public function show()
     {
         $this->line("");
-        $this->line(Application::consoleVersion());
+        $version = Application::consoleVersion();
+        $this->question("Lighty ",true);
+        $this->line("v$version PHP Framework");
         $this->line(Application::kernelVersion());
-        $this->line("created by Youssef Had (youssefhad2@gmail.com - www.facebook.com/yussef.had )");
+        $this->write("created by Youssef Had (");
+        $this->question("youssefhad2@gmail.com - www.facebook.com/yussef.had",true);
+        $this->line(")");
+        $this->write("Website ");
+        $this->question("www.gitlab.com/lighty/framework");
+        $this->line("");
     }
 }
+

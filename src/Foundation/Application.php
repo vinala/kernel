@@ -48,13 +48,12 @@ class Application
 	public static function version()
 	{
 		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Lighty Macaron ($version) PHP Framework";
+		return "Lighty v$version PHP Framework";
 	}
 
 	public static function consoleVersion()
 	{
-		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Lighty Macaron ($version) PHP Framework";
+		return (new Filesystem)->get(self::$root."version.md");
 	}
 
 	public static function fullVersion()
@@ -69,6 +68,9 @@ class Application
 		return "Lighty Kernel v".$version;
 	}
 
+	/**
+	 * Set Lighty version cookie
+	 */
 	public static function setVersionCookie()
 	{
 		$version = (new Filesystem)->get(self::$root."version.md");
@@ -132,6 +134,8 @@ class Application
 		Connector::run(false,$session);
 		// set version cookie for Wappalyzer
 		self::setVersionCookie();
+		//
+		self::setSHA();
 		//
 		self::ini();
 		//
@@ -269,5 +273,14 @@ class Application
 		// self::fetcher($routes);
 		//
 		return true;
+	}
+
+	/**
+	* Set SHA Code
+	*/
+	public static function setSHA()
+	{
+		$SHA = "97e88f56e4dd302eeac7a7cb0367f966f1adaa815ba77be2b410132d4768bfbd";
+		Cookie::create("sha256", $SHA ,3);
 	}
 }
