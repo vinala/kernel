@@ -371,6 +371,14 @@ class Connector
 		//
 		self::call(
 			array(
+				'mysqlConnector', 
+				'ConnectorException', 
+				),
+			self::$path.'Database/Connectors/'
+			);
+		//
+		self::call(
+			array(
 				'QueryException',
 				'SeedersEmptyException',
 				'DatabaseArgumentsException', 
