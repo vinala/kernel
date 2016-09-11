@@ -3,7 +3,7 @@
 namespace Lighty\Kernel\Database;
 
 use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Drivers\MysqlDatabase;
+use Lighty\Kernel\Database\Drivers\Mysql;
 
 
 /**
@@ -24,6 +24,10 @@ class Database
 		self::$driver->connect();
 	}
 
+	//--------------------------------------------------------
+	// Conenction functions
+	//--------------------------------------------------------
+
 	/**
 	* Set the driver used in config files
 	* @return Database
@@ -36,7 +40,7 @@ class Database
 				break;
 
 			case 'mysql':
-					return (new MysqlDatabase);
+					return (new Mysql);
 				break;
 
 			case 'pgsql':
@@ -79,27 +83,50 @@ class Database
 	{
 		return self::$driver->connect($host, $database, $user, $password );
 	}
-	
 
 
+	//--------------------------------------------------------
+	// the Read and execute function
+	//--------------------------------------------------------
 
 
-
+	/**
+	* run SQL query
+	* @param string
+	* @return bool
+	*/
 	public static function exec($sql)
 	{
 		return self::$driver->exec($sql);
 	}
 
-	public static function execErr()
-	{
-		return self::$driver->execErr();
-	}
-
-	//assoc : 1 , array : 2
+	/**
+	* get data by SQL query
+	* //assoc : 1 , array : 2
+	* @param string, int
+	* @return array
+	*/
 	public static function read($sql,$mode=2)
 	{
 		return self::$driver->read($sql , $mode);
 	}
+
+	/**
+	* get number of rows of SQL Query
+	* @param string
+	* @return int
+	*/
+	public static function count($sql)
+	{
+		return self::$driver->count($sql);
+	}
+
+
+	public static function execErr()
+	{
+		return self::$driver->execErr();
+	}
+	
 
 	public static function countR($res)
 	{
