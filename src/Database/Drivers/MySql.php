@@ -11,6 +11,7 @@ use Lighty\Kernel\Objects\DateTime as Time;
 use Lighty\Kernel\Filesystem\Filesystem;
 use Lighty\Kernel\Foundation\Application;
 use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Database\Connector\MysqlConnector;
 
 
 /**
@@ -22,102 +23,59 @@ class MysqlDatabase
 	const URL_FAILD_MODE_EXCEPTION = '1';
 	const EXCEPTION_FAILD_MODE = '2';
 	//
+
+	/**
+	 * the PDO to Mysql database server
+	 * @param PDO
+	 */
 	public $server;
-	public $default;
 
-	public function setDefault($faild=self::EXCEPTION_FAILD_MODE)
+
+	/**
+	 * the connection to Mysql database server
+	 * @param MysqlConnector
+	 */
+	protected $connection;
+
+	/**
+	* Connect to Mysql database server
+	* @param string, string, string, string
+	* @return PDO
+	*/
+	public function connect($host = null, $database = null, $user = null, $password = null)
 	{
-		if(Config::get("database.host")=="" and Config::get("database.username")=="" and Config::get("database.password")=="" and Config::get("database.database")=="")
-			throw new DatabaseArgumentsException();
-			
-		else
+		if(Config::get('panel.setup')) 
 		{
-			//to put localhost IP
-			$host = Config::get("database.host")=="localhost" ? "127.0.0.1" : Config::get("database.host");
-			//
-			Database::$default=@mysqli_connect($host, Config::get("database.username"), Config::get("database.password"), Config::get("database.database"));
-			//
-		  	if(!Database::$default)
-		  	{
-	  			if($faild==2 && Config::get('panel.setup')) throw new DatabaseConnectionException();
-	  			else if($faild==1) \Errors::r_db();
-
-	  		}
-	  		else
-	  		{
-			  	mysqli_query(Database::$default,"SET NAMES ".Config::get("database.charset"));
-			  	//
-			  	Database::$server=Database::$default;
-			  	//
-			  	Database::$serverData=[
-			  	'host' => Config::get("database.host") , 
-			  	"username" => Config::get("database.username") , 
-			  	"password" => Config::get("database.password") , 
-			  	"database" => Config::get("database.database")];
-			  	//
-			  	Database::$defaultData=[
-			  	'host' => Config::get("database.host") , 
-			  	"username" => Config::get("database.username") , 
-			  	"password" => Config::get("database.password") , 
-			  	"database" => Config::get("database.database")];
-	  		}
-		  	
-		  	return Database::$default;
+			$this->connection = new MysqlConnector($host, $database, $user, $password);
+			$this->server = $this->connection->connector;
 		}
+		return $this->server;
 	}
 
-	public function setNewServer($host,$user,$password,$database,$faild=self::EXCEPTION_FAILD_MODE)
+
+	/**
+	* Connect to default Mysql database server
+	* @return PDO
+	*/
+	public function defaultConnection()
 	{
-		//$this->server=null;
-		//
-		if($host=="" and $user=="" and $database=="")
-			throw new DatabaseArgumentsException();
-			
-		else
-		{
-			Database::$server=mysqli_connect($host,$user,$password,$database);
-		  	//
-		  	if (!Database::$server)
-	  		{ 
-	  			if($faild==2 && Config::get('panel.setup')) throw new DatabaseConnectionException();
-	  			else if($faild==1) \Errors::r_db();
-	  		}
-		  	//
-		  	mysqli_query(Database::$server,"SET NAMES ".Config::get("database.charset"));
-		  	//
-		  	Database::$serverData=[
-			  	'host' => $host , 
-			  	"username" => $user , 
-			  	"password" => $password , 
-			  	"database" => $database];
-			  	//
-		  	//
-		  	return Database::$server;
-		}
+		return $this->connect();
 	}
 
-	public function setDefaultDB()
+	/**
+	* Connect to another Mysql database server
+	* @param string, string, string, string
+	* @return PDO
+	*/
+	public function newConnection($host, $database, $user, $password )
 	{
-		$server=$this->setDefault();
+		return $this->connect($host, $database, $user, $password );
 	}
 
-	public function ChangeDB($database,$server=null)
-	{
-		if(is_null($server)) 
-		{
-			mysqli_select_db(Database::$server,$database);
-			Database::$serverData["database"]=$database;
-		}
-		else 
-		{
-			mysqli_select_db($server,$database);
-			Database::$serverData["database"]=$database;
-		}
-	}
 
-	public function exec($sql,$server=null)
+	public function exec($sql)
 	{
-		return mysqli_query(Database::$server,$sql);
+		return $this->server->exec($sql);
 	}
 
 	public function execErr()
