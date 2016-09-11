@@ -89,11 +89,9 @@ class MysqlDatabase
 	public function read($sql,$mode)
 	{
 		$vals = array();
-		$res=@mysqli_query(Database::$server,$sql);
-		if($mode == 1)
-		while ($row=@mysqli_fetch_assoc($res))  $vals[]=$row;
-		else if($mode == 2)
-		while ($row=@mysqli_fetch_array($res)) $vals[]=$row;
+		$result = $this->server->query($sql);
+		while ($row = $result->fetch())
+			$vals[]=$row;
 		//
 		return $vals;
 	}
