@@ -18,7 +18,7 @@ class MysqlConnector
 	 * Mysql Connector
 	 * @param PDO
 	 */
-	private $connector; 
+	public $connector; 
 
 	/**
 	 * Constructor
