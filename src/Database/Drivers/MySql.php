@@ -17,25 +17,11 @@ use Lighty\Kernel\Database\Connector\MysqlConnector;
 /**
 * Mysql Database Class
 */
-class MysqlDatabase
+class Mysql extends Driver
 {
 
 	const URL_FAILD_MODE_EXCEPTION = '1';
 	const EXCEPTION_FAILD_MODE = '2';
-	//
-
-	/**
-	 * the PDO to Mysql database server
-	 * @param PDO
-	 */
-	public $server;
-
-
-	/**
-	 * the connection to Mysql database server
-	 * @param MysqlConnector
-	 */
-	protected $connection;
 
 	/**
 	* Connect to Mysql database server
@@ -53,31 +39,6 @@ class MysqlDatabase
 	}
 
 
-	/**
-	* Connect to default Mysql database server
-	* @return PDO
-	*/
-	public function defaultConnection()
-	{
-		return $this->connect();
-	}
-
-	/**
-	* Connect to another Mysql database server
-	* @param string, string, string, string
-	* @return PDO
-	*/
-	public function newConnection($host, $database, $user, $password )
-	{
-		return $this->connect($host, $database, $user, $password );
-	}
-
-
-	public function exec($sql)
-	{
-		return $this->server->exec($sql);
-	}
-
 	public function execErr()
 	{
 		$msg="";
@@ -86,35 +47,6 @@ class MysqlDatabase
 		return $msg;
 	}
 
-	public function read($sql,$mode)
-	{
-		$vals = array();
-		$result = $this->server->query($sql);
-		while ($row = $result->fetch())
-			$vals[]=$row;
-		//
-		return $vals;
-	}
-
-	public function countR($res)
-	{
-		return @mysqli_num_rows($res);
-	}
-
-	public function countS($sql)
-	{
-		$cnt=0;
-		//
-		if($res=mysqli_query(Database::$server,$sql))$cnt=@mysqli_num_rows($res);
-		else $cnt=-1;
-		//
-		return $cnt;
-	}
-
-	public static function res($sql)
-	{
-		return @mysqli_query(Database::$server,$sql);
-	}
 
 	/**
 	 * get Table create
