@@ -4,8 +4,10 @@ namespace Lighty\Kernel\Database\Connector;
 
 use Lighty\Kernel\Objects\Strings;
 use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Database\Connector\Exception\ConnectorException;
 use PDO;
 use PDOException;
+
 
 /**
 * Mysql Connector
