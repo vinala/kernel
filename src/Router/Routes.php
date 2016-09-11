@@ -24,7 +24,7 @@ use Lighty\Kernel\Objects\Strings;
 */
 class Routes
 {
-	private static $requests=array();
+	public static $requests=array();
 	private static $filters=array();
 	private static $current=null;
 
