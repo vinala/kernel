@@ -111,31 +111,43 @@ class Database
 		return self::$driver->read($sql , $mode);
 	}
 
+	//--------------------------------------------------------
+	// What's the title
+	//--------------------------------------------------------
+
+
 	/**
 	* get number of rows of SQL Query
-	* @param string
+	* @param $sql string
 	* @return int
+	* @since 3.3.0
 	*/
 	public static function count($sql)
 	{
 		return self::$driver->count($sql);
 	}
 
-
+	/**
+	* return Mysqli error string
+	* @return string
+	* @deprecated 3.3.0
+	* @since 1.1.0
+	*/
 	public static function execErr()
 	{
 		return self::$driver->execErr();
 	}
 	
 
-	public static function countR($res)
-	{
-		return self::$driver->countR($res);
-	}
-
+	/**
+	* get number of rows of SQL Query (deprecated)
+	* @return string
+	* @deprecated 3.3.0
+	* @since 1.1.0
+	*/
 	public static function countS($sql)
 	{
-		return self::$driver->countS($sql);
+		return self::count($sql);
 	}
 
 	public static function res($sql)

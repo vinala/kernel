@@ -23,78 +23,89 @@ class Driver
 {
 	/**
 	 * the PDO to database server
-	 * @param PDO
+	 * @var PDO
 	 */
-	public $server;
+	public static $server;
 
 	/**
 	 * the connection to Mysql database server
-	 * @param MysqlConnector
+	 * @var MysqlConnector
 	 */
-	protected $connection;
+	protected static $connection;
 
 	/**
 	* Connect to default Mysql database server
+	*
 	* @return PDO
 	*/
-	public function defaultConnection()
+	public static function defaultConnection()
 	{
-		return $this->connect();
+		return self::connect();
 	}
 
 	/**
 	* Connect to another Mysql database server
-	* @param string, string, string, string
+	*
+	* @param string $host
+	* @param string $database
+	* @param string $user
+	* @param string $password
 	* @return PDO
 	*/
-	public function newConnection($host, $database, $user, $password )
+	public static function newConnection($host, $database, $user, $password )
 	{
-		return $this->connect($host, $database, $user, $password );
+		return self::connect($host, $database, $user, $password );
 	}
 
 	/**
 	* run SQL query
+	*
 	* @param string
 	* @return bool
 	*/
 	public static function exec($sql)
 	{
-		return $this->server->exec($sql);
+		return self::$server->exec($sql);
 	}
 
 	/**
 	* get data by SQL query
+	*
 	* @param string
 	* @return array
 	*/
-	public function read($sql)
+	public static function read($sql)
 	{
 		$vals = array();
-		$result = $this->server->query($sql);
+		$result = self::query($sql);
 		while ($row = $result->fetch(PDO::FETCH_ASSOC))
 			$vals[]=$row;
 		//
 		return $vals;
 	}
 
+
 	/**
 	* execute SQL query
-	* @param string
+	*
+	* @param string 
 	* @return mixed
 	*/
-	public function query($sql)
+	public static function query($sql)
 	{
-		return $this->server->query($sql);
+		return $this::$server->query($sql);
 	}
+	
 	
 	/**
 	* get number of rows of SQL query
+	*
 	* @param string
 	* @return int
 	*/
-	public function count($sql)
+	public static function count($sql)
 	{
-		$data = $this->query($sql);
+		$data = self::query($sql);
 		$result = $data->fetchAll(PDO::FETCH_ASSOC);
 		//
 		return  $result ? count($result) : -1;

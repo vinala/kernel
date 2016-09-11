@@ -25,20 +25,25 @@ class Mysql extends Driver
 
 	/**
 	* Connect to Mysql database server
+	*
 	* @param string, string, string, string
 	* @return PDO
 	*/
-	public function connect($host = null, $database = null, $user = null, $password = null)
+	public static function connect($host = null, $database = null, $user = null, $password = null)
 	{
 		if(Config::get('panel.setup')) 
 		{
-			$this->connection = new MysqlConnector($host, $database, $user, $password);
-			$this->server = $this->connection->connector;
+			self::$connection = new MysqlConnector($host, $database, $user, $password);
+			self::$server = self::$connection->connector;
 		}
-		return $this->server;
+		return self::$server;
 	}
 
-
+	/**
+	* return Mysqli error string
+	* @return string
+	* @deprecated 3.3.0
+	*/
 	public function execErr()
 	{
 		$msg="";
