@@ -33,6 +33,11 @@ class Query
 	protected $order = "";
 
 	/**
+	 * group of data
+	 */
+	protected $group = "";
+
+	/**
 	 * Set the query table
 	 * @param string 
 	 * @return object
@@ -77,7 +82,7 @@ class Query
 	 */
 	public function query()
 	{
-		$sql = "select ".$this->columns." from ".$this->table." ".$this->where." ".$this->order;
+		$sql = "select ".$this->columns." from ".$this->table." ".$this->where." ".$this->order." ".$this->group;
 		// //
 		if($data = Database::read($sql)) return self::fetch($data);
 		elseif(Database::execerr()) throw new QueryException();
@@ -178,6 +183,28 @@ class Query
 			}
 		//
 		$this->order = $order;
+		//
+		return $this;
+	}
+
+	/**
+	 * Set the group of data
+	 * @return Array
+	 */
+	public function group()
+	{
+		$columns = func_get_args();
+		$group = "" ;
+		$i = 0;
+		//
+		if($columns) 
+			foreach ($columns as $value) {
+				if( ! $i) $order .= " group by ".$value;
+				else $order .= ",".$value;
+				$i = 1;
+			}
+		//
+		$this->group = $group;
 		//
 		return $this;
 	}
