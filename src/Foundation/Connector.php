@@ -367,10 +367,13 @@ class Connector
 			self::$path.'Database/'
 			);
 		//
-		self::need(self::$path.'Database/Drivers/MySql.php');
+		self::need(self::$path.'Database/Drivers/Driver.php');
+		self::need(self::$path.'Database/Drivers/Mysql.php');
+
 		//
 		self::call(
 			array(
+
 				'mysqlConnector', 
 				'ConnectorException', 
 				),
