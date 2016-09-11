@@ -20,11 +20,15 @@ class Database
 
 	public static function ini()
 	{
-		self::$driver=self::getDriver();
-		self::$driver->setDefault();
+		self::$driver=self::driver();
+		self::$driver->connect();
 	}
 
-	public static function getDriver()
+	/**
+	* Set the driver used in config files
+	* @return Database
+	*/
+	public static function driver()
 	{
 		switch (Config::get('database.default')) {
 			case 'sqlite':
@@ -44,26 +48,40 @@ class Database
 				break;
 		}
 	}
+
 	
-	public static function setDefault($red=false,$url=null)
+	/**
+	* Connect to driver database server
+	* @return PDO
+	*/
+	public static function connect()
 	{
-		self::$driver->setDefault();
+		return self::$driver->connect();
 	}
 
-	public static function setNewServer($host,$user,$password,$database)
+
+	/**
+	* Connect to default driver database server
+	* @return PDO
+	*/
+	public static function defaultConnection()
 	{
-		self::$driver->setNewServer($host,$user,$password,$database);
+		return self::connect();
 	}
 
-	public static function setDefaultDB()
-	{
-		self::$driver->setDefaultDB();
-	}
 
-	public static function ChangeDB($database,$server=null)
+	/**
+	* Connect to another driver database server
+	* @param string, string, string, string
+	* @return PDO
+	*/
+	public function newConnection($host, $database, $user, $password )
 	{
-		self::$driver->ChangeDB($database,$server);
+		return self::$driver->connect($host, $database, $user, $password );
 	}
+	
+
+
 
 
 
