@@ -93,7 +93,7 @@ class Driver
 	*/
 	public static function query($sql)
 	{
-		return $this::$server->query($sql);
+		return self::$server->query($sql);
 	}
 	
 	
