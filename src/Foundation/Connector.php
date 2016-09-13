@@ -354,6 +354,55 @@ class Connector
 	 */
 	public static function database()
 	{
+
+		//--------------------------------------------------------
+		// Calling drivers
+		//--------------------------------------------------------
+		self::call(
+			array(
+				'Driver', 
+				'MysqlDriver', 
+				),
+			self::$path.'Database/Drivers/'
+			);
+
+		//--------------------------------------------------------
+		// Calling exporters
+		//--------------------------------------------------------
+		self::call(
+			array(
+				'MysqlExporter', 
+				),
+			self::$path.'Database/Exporters/'
+			);
+
+		//--------------------------------------------------------
+		// Calling connectors
+		//--------------------------------------------------------
+		self::call(
+			array(
+				'MysqlConnector', 
+				),
+			self::$path.'Database/Connectors/'
+			);
+		
+		//--------------------------------------------------------
+		// Calling Exceptions
+		//--------------------------------------------------------
+		self::call(
+			array(
+				'ConnectorException',
+				'QueryException',
+				'SeedersEmptyException',
+				'DatabaseArgumentsException', 
+				'DatabaseConnectionException'
+				),
+			self::$path.'Database/Exceptions/'
+			);
+
+		//--------------------------------------------------------
+		// Calling Database parts
+		//--------------------------------------------------------
 		self::call(
 			array(
 				'Schema', 
@@ -365,29 +414,6 @@ class Connector
 				'Database'
 				),
 			self::$path.'Database/'
-			);
-		//
-		self::need(self::$path.'Database/Drivers/Driver.php');
-		self::need(self::$path.'Database/Drivers/Mysql.php');
-
-		//
-		self::call(
-			array(
-
-				'mysqlConnector', 
-				'ConnectorException', 
-				),
-			self::$path.'Database/Connectors/'
-			);
-		//
-		self::call(
-			array(
-				'QueryException',
-				'SeedersEmptyException',
-				'DatabaseArgumentsException', 
-				'DatabaseConnectionException'
-				),
-			self::$path.'Database/Exceptions/'
 			);
 	}
 
