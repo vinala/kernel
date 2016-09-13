@@ -3,7 +3,8 @@
 namespace Lighty\Kernel\Database;
 
 use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Drivers\Mysql;
+use Lighty\Kernel\Database\Drivers\Driver;
+use Lighty\Kernel\Database\Drivers\MysqlDriver;
 
 
 /**
@@ -40,7 +41,7 @@ class Database
 				break;
 
 			case 'mysql':
-					return (new Mysql);
+					return (new MysqlDriver);
 				break;
 
 			case 'pgsql':
@@ -106,7 +107,7 @@ class Database
 	* @param string, int
 	* @return array
 	*/
-	public static function read($sql,$mode=2)
+	public static function read($sql,$mode = Driver::INDEX)
 	{
 		return self::$driver->read($sql , $mode);
 	}
