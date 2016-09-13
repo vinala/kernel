@@ -21,6 +21,9 @@ use Lighty\Kernel\Database\Connector\MysqlConnector;
 */
 class Driver
 {
+
+	const KEY= PDO::FETCH_ASSOC;
+	const INDEX= PDO::FETCH_BOTH;
 	/**
 	 * the PDO to database server
 	 * @var PDO
@@ -74,11 +77,11 @@ class Driver
 	* @param string
 	* @return array
 	*/
-	public static function read($sql)
+	public static function read($sql,$mode = Driver::KEY)
 	{
 		$vals = array();
 		$result = self::query($sql);
-		while ($row = $result->fetch(PDO::FETCH_ASSOC))
+		while ($row = $result->fetch($mode))
 			$vals[]=$row;
 		//
 		return $vals;
