@@ -79,7 +79,7 @@ class Schema
 	*/
 	public function string($name, $length=255, $default=null)
 	{
-		return return self::$driver->string($name, $length, $default);
+		return self::$driver->string($name, $length, $default);
 	}
 
 	/**
@@ -92,7 +92,187 @@ class Schema
 	*/
 	public function int($name, $length=255, $default=null)
 	{
-		return return self::$driver->int($name, $length, $default);
+		return self::$driver->int($name, $length, $default);
 	}
+
+	/**
+	* function to add long column
+	*
+	* @param string name
+	* @param int length
+	* @param string $default
+	* @return schema
+	*/
+	public function long($name, $length=255, $default=null)
+	{
+		return self::$driver->long($name, $length, $default);
+	}
+
+	/**
+	* function to add float column
+	*
+	* @param string name
+	* @param int length
+	* @param string $default
+	* @return schema
+	*/
+	public function float($name, $length=255, $default=null)
+	{
+		return self::$driver->float($name, $length, $default);
+	}
+
+	/**
+	* function to add text column
+	*
+	* @param string name
+	* @return schema
+	*/
+	public function text($name)
+	{
+		return self::$driver->text($name);
+	}
+
+	/**
+	* function to add bool column
+	*
+	* @param string name
+	* @param bool default
+	* @return schema
+	*/
+	public function bool($name, $default = null)
+	{
+		return self::$driver->bool($name, $default);
+	}
+
+	/**
+	* function to add datetime column
+	*
+	* @param string name
+	* @return schema
+	*/
+	public function datetime($name)
+	{
+		return self::$driver->datetime($name);
+	}
+	
+	/**
+	* function to add date column
+	*
+	* @param string name
+	* @return schema
+	*/
+	public function date($name)
+	{
+		return self::$driver->date($name);
+	}
+	
+	/**
+	* function to add time column
+	*
+	* @param string name
+	* @return schema
+	*/
+	public function time($name)
+	{
+		return self::$driver->time($name);
+	}
+
+	/**
+	* function to add time column
+	*
+	* @param string name
+	* @param string default
+	* @return schema
+	*/
+	public function timestamp($name ,$timestamp)
+	{
+		return self::$driver->timestamp($name ,$timestamp);
+	}
+
+	//--------------------------------------------------------
+	// The framework data columns
+	//--------------------------------------------------------
+
+	/**
+	* function to add update columns created_at and edited_at
+	*
+	* @return schema
+	*/
+	public function update()
+	{
+		return self::$driver->update();
+	}
+
+	/**
+	* function to add stach data columns deleted_at
+	*
+	* @return schema
+	*/
+	public function stash()
+	{
+		return self::$driver->stash();
+	}
+
+	/**
+	* function to add remembreToken column
+	*
+	* @return schema
+	*/
+	public function remembreToken()
+	{
+		return self::$driver->remembreToken();
+	}
+
+	//--------------------------------------------------------
+	// Constraint
+	//--------------------------------------------------------
+
+	/**
+	* function to add default constraint
+	*
+	* @param string $value
+	* @return schema
+	*/
+	public function default($value)
+	{
+		return self::$driver->default($value);
+	}
+
+	/**
+	* function to add notnull constraint
+	*
+	* @param string $value
+	* @return schema
+	*/
+	public function notnull()
+	{
+		return self::$driver->notnull();
+	}
+
+	/**
+	* function to add foreign key constraint
+	*
+	* @param string $table
+	* @param string $colmun
+	* @return schema
+	*/
+	public function foreignkey($table, $colmun=null)
+	{
+		return self::$driver->foreignkey($table, $colmun);
+	}
+
+	/**
+	* function to add unique constraint
+	*
+	* @param string $table
+	* @param array $colmuns
+	* @return schema
+	*/
+	public function unique($name, array $colmuns)
+	{
+		return self::$driver->unique($name, $colmuns);
+	}
+
+
 	
 }
