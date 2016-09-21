@@ -3,6 +3,7 @@
 namespace Lighty\Kernel\Database;
 
 use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Config\Config;
 
 /**
 * Schema builder class
@@ -296,18 +297,143 @@ class MysqlSchema extends Schema
 	{
 		if( is_array($colmuns))
 		{
-			$sql="CONSTRAINT $name UNIQUE (";
+			$query = "CONSTRAINT $name UNIQUE (";
 			//
-			for ($i=0; $i < count($colmuns); $i++) {
-				if($i==count($colmuns)-1) $sql .= $colmuns[$i];
-				else $sql .= $colmuns[$i].",";
+			for ($i=0; $i < Table::count($colmuns); $i++) {
+				if($i==Table::count($colmuns)-1) $query .= $colmuns[$i];
+				else $query .= $colmuns[$i].",";
 			}
-			$sql .= ")";
+			$query .= ")";
 			//
-			self::$colmuns[] = $sql;
+			self::$colmuns[] = $query;
 		}
 		//
 		return $this;
+	}
+
+
+	//--------------------------------------------------------
+	// Schema building
+	//--------------------------------------------------------
+
+
+	/**
+	* function to get name of table in case of table prefix
+	*
+	* @param string $name
+	* @return string
+	*/
+	protected static function table($name)
+	{
+		if(Config::get('database.prefixing')) $name=Config::get('database.prefixe').$name;
+		//
+		return $name;
+	}
+
+	/**
+	* function to build query of table creation
+	*
+	* @param string $name
+	* @param callable $script
+	* @return bool
+	*/
+	public static function create($name,$script)
+	{
+		$name = self::table($name);
+		//
+		self::$query = "create table ".$name."(";
+		//
+		$object = new self();
+		$script($object);
+		//
+		$query = "";
+		//
+		for ($i=0; $i < Table::count(self::$colmuns); $i++)
+			$query = ($i == (Table::count(self::$colmuns)-1)) ? self::$colmuns[$i] : self::$colmuns[$i]."," ;
+		//
+		self::$query .= $query.") DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+		//
+		return Database::exec(self::$query);
+	}
+
+	/**
+	* function to build query of table erasing
+	*
+	* @param string $name
+	* @return bool
+	*/
+	public static function drop($name)
+	{
+		$name = self::table($name);
+		//
+		return Database::exec("DROP TABLE ".$name);
+	}
+
+	/**
+	* function to build query for rename table
+	*
+	* @param string $from
+	* @param string $to
+	* @return bool
+	*/
+	public static function rename($from, $to)
+	{
+		$from=self::table($from);
+		$to=self::table($to);
+		//
+		return Database::exec("RENAME TABLE ".$from." TO ".$to);
+	}
+
+
+	//--------------------------------------------------------
+	// Schema updating
+	//--------------------------------------------------------
+
+
+	/**
+	* function to build query for adding column to table
+	*
+	* @param string $name
+	* @param callable $script
+	* @return bool
+	*/
+	public static function add($name,$script)
+	{
+		$name = self::table($name);
+		//
+		self::$query = "alter table ".$name." ";
+		//
+		$object = new self();
+		$script($object);
+		//
+		$query = "";
+		for ($i=0; $i < Table::count(self::$sql_rows); $i++)
+			$query = " add " . self::$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
+		//
+		self::$query .= $query
+		//
+		return Database::exec(self::$query);
+	}
+
+	/**
+	* function to build query for removing column to table
+	*
+	* @param string $name
+	* @param callable $script
+	* @return bool
+	*/
+	public static function remove($name,$colmuns)
+	{
+		$name = self::tableName($name);
+		//
+		self::$query = "alter table ".$name." ";
+		//
+		if(is_array($colmuns))
+			for ($i=0; $i < Table::count($colmuns); $i++)
+				self::$query = " drop ".$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
+		else self::$query .= " drop ".$colmuns;
+		//
+		return Database::exec(self::$query);
 	}
 
 }

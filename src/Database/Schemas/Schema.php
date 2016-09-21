@@ -274,5 +274,63 @@ class Schema
 	}
 
 
+	//--------------------------------------------------------
+	// Schema building
+	//--------------------------------------------------------
+
+
+	/**
+	* function to build query of table creation
+	*
+	* @param string $name
+	* @return schema
+	*/
+	public static function create($name, $script)
+	{
+		return self::$driver->create($name, $script);
+	}
+
+	/**
+	* function to build query of table erasing
+	*
+	* @param string $name
+	* @return schema
+	*/
+	public static function drop($name)
+	{
+		return self::$driver->drop($name);
+	}
+
+
+	//--------------------------------------------------------
+	// Schema updating
+	//--------------------------------------------------------
+
+
+	/**
+	* function to build query for adding column to table
+	*
+	* @param string $name
+	* @param callable $script
+	* @return bool
+	*/
+	public static function add($name,$script)
+	{
+		return self::$driver->add($name,$script);
+	}
+
+	/**
+	* function to build query for removing column from table
+	*
+	* @param string $name
+	* @param callable $script
+	* @return bool
+	*/
+	public static function remove($name,$script)
+	{
+		return self::$driver->remove($name,$script);
+	}
+
+
 	
 }
