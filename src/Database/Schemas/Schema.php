@@ -70,6 +70,18 @@ class Schema
 	}
 
 	/**
+	* function to add incremented primary key column
+	*
+	* @param string name
+	* @return schema
+	* @deprecated 3.3.0
+	*/
+	public function inc($name)
+	{
+		return self::$driver->id($name);
+	}
+
+	/**
 	* function to add varchar column
 	*
 	* @param string name
