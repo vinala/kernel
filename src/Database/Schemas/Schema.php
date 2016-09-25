@@ -358,6 +358,19 @@ class Schema
 		return $object::existe($name,$table);
 	}
 
+	/**
+	* function to build query for rename table
+	*
+	* @param string $from
+	* @param string $to
+	* @return bool
+	*/
+	public static function rename($from, $to)
+	{
+		$object = get_class(self::$driver);
+		return $object::rename($from, $to);
+	}
+
 
 	
 }
