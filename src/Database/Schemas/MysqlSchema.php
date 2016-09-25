@@ -439,7 +439,7 @@ class MysqlSchema extends Schema
 			$script($object);
 			//
 			$query = "";
-			for ($i=0; $i < Table::count(self::$sql_rows); $i++)
+			for ($i=0; $i < Table::count(self::$colmuns); $i++)
 				$query .= " add " . self::$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
 			//
 			self::$query .= $query;
@@ -460,13 +460,15 @@ class MysqlSchema extends Schema
 	{
 		if( self::existe($name))
 		{
-			$name = self::tableName($name);
+			$name = self::table($name);
 			//
 			self::$query = "alter table ".$name." ";
 			//
 			if(is_array($colmuns))
 				for ($i=0; $i < Table::count($colmuns); $i++)
-					self::$query = " drop ".$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
+				{
+					self::$query .= " drop ".$colmuns[$i] . (($i == (Table::count($colmuns)-1)) ? "" : ",");
+				}
 			else self::$query .= " drop ".$colmuns;
 			//
 			return Database::exec(self::$query);
