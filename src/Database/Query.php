@@ -14,11 +14,15 @@ class Query
 
 	/**
 	 * Table of data
+	 *
+	 * @var string
 	 */
 	protected $table;
 
 	/**
 	 * columns query
+	 *
+	 * @var array
 	 */
 	protected $columns = "*";
 
@@ -38,7 +42,19 @@ class Query
 	protected $group = "";
 
 	/**
+	 * Constructor for class
+	 * 
+	 * @param string
+	 */
+	function __construct($table)
+	{
+		if(Config::get("database.prefixing")) $this->table = Config::get("database.prefixe").$table;
+		else $this->table = $table;
+	}
+
+	/**
 	 * Set the query table
+	 *
 	 * @param string 
 	 * @return object
 	 */
@@ -48,16 +64,8 @@ class Query
 	}
 
 	/**
-	 * Constructor for class
-	 */
-	function __construct($table)
-	{
-		if(Config::get("database.prefixing")) $this->table = Config::get("database.prefixe").$table;
-		else $this->table = $table;
-	}
-
-	/**
 	 * Get all Data returned from query
+	 *
 	 * @return Array
 	 */
 	public function get()
@@ -67,6 +75,7 @@ class Query
 
 	/**
 	 * Get first Data returned from query
+	 *
 	 * @return Array
 	 */
 	public function first()
@@ -77,6 +86,7 @@ class Query
 
 	/**
 	 * get arraay of data
+	 *
 	 * @param string
 	 * @return array
 	 */
@@ -91,6 +101,7 @@ class Query
 
 	/**
 	 * Fetch data
+	 *
 	 * @param array
 	 * @return array
 	 */
@@ -113,6 +124,7 @@ class Query
 
 	/**
 	 * Set columns of query
+	 *
 	 * @return Array
 	 */
 	public function select()
@@ -134,6 +146,7 @@ class Query
 
 	/**
 	 * Set where clause
+	 *
 	 * @return Array
 	 */
 	public function where($column, $relation, $value)
@@ -145,6 +158,7 @@ class Query
 
 	/**
 	 * Set new OR condition in where clause
+	 *
 	 * @return Array
 	 */
 	public function orWhere($column, $relation, $value)
@@ -156,6 +170,7 @@ class Query
 
 	/**
 	 * Set new AND condition in where clause
+	 *
 	 * @return Array
 	 */
 	public function andWhere($column, $relation, $value)
@@ -167,6 +182,7 @@ class Query
 
 	/**
 	 * Set the order of data
+	 *
 	 * @return Array
 	 */
 	public function order()
@@ -189,6 +205,7 @@ class Query
 
 	/**
 	 * Set the group of data
+	 *
 	 * @return Array
 	 */
 	public function group()
