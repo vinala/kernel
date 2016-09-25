@@ -1,9 +1,14 @@
 <?php
 
-namespace Lighty\Kernel\Database;
+namespace Lighty\Kernel\Database\Schema;
 
 use Lighty\Kernel\Objects\Table;
 use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Database\Schema;
+use Lighty\Kernel\Database\Database;
+use Lighty\Kernel\Database\Schema\Exception\SchemaTableExistsException;
+use Lighty\Kernel\Database\Schema\Exception\SchemaTableNotExistException;
+
 
 /**
 * Schema builder class
@@ -18,7 +23,7 @@ class MysqlSchema extends Schema
 	*/
 	public function id($name)
 	{
-		self::$colmuns[]=$nom.' int primary key AUTO_INCREMENT';
+		self::$colmuns[]=$name.' int primary key AUTO_INCREMENT';
 		return $this;
 	}
 
@@ -34,7 +39,7 @@ class MysqlSchema extends Schema
 	{
 		$cmnd = $name.' varchar('.$length.')';
 		//
-		if(!empty($default)) cmnd.=" DEFAULT '$default' ";
+		if(!empty($default)) $cmnd.=" DEFAULT '$default' ";
 		//
 		self::$colmuns[]=$cmnd;
 		return $this;
@@ -216,17 +221,6 @@ class MysqlSchema extends Schema
 	}
 
 	/**
-	* function to add deleted column for stashed data
-	*
-	* @return schema
-	*/
-	public function stash()
-	{
-		self::$colmuns[]='deleted_at int(15)';
-		return $this;
-	}
-
-	/**
 	* function to add remembreToken column
 	*
 	* @return schema
@@ -248,7 +242,7 @@ class MysqlSchema extends Schema
 	* @param string $value
 	* @return schema
 	*/
-	public function default($value)
+	public function affect($value)
 	{
 		$i=Table::count(self::$colmuns)-1;
 		self::$colmuns[$i].=" default '".$value."'";
@@ -339,21 +333,25 @@ class MysqlSchema extends Schema
 	*/
 	public static function create($name,$script)
 	{
-		$name = self::table($name);
-		//
-		self::$query = "create table ".$name."(";
-		//
-		$object = new self();
-		$script($object);
-		//
-		$query = "";
-		//
-		for ($i=0; $i < Table::count(self::$colmuns); $i++)
-			$query = ($i == (Table::count(self::$colmuns)-1)) ? self::$colmuns[$i] : self::$colmuns[$i]."," ;
-		//
-		self::$query .= $query.") DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
-		//
-		return Database::exec(self::$query);
+		if( ! self::existe($name))
+		{
+			$name = self::table($name);
+			//
+			self::$query = "create table ".$name."(";
+			//
+			$object = new self();
+			$script($object);
+			//
+			$query = "";
+			//
+			for ($i=0; $i < Table::count(self::$colmuns); $i++)
+				$query = ($i == (Table::count(self::$colmuns)-1)) ? self::$colmuns[$i] : self::$colmuns[$i]."," ;
+			//
+			self::$query .= $query.") DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
+			//
+			return Database::exec(self::$query);
+		}
+		else throw new SchemaTableExistsException($name);
 	}
 
 	/**
@@ -364,9 +362,14 @@ class MysqlSchema extends Schema
 	*/
 	public static function drop($name)
 	{
-		$name = self::table($name);
-		//
-		return Database::exec("DROP TABLE ".$name);
+		if( self::existe($name))
+		{
+			$name = self::table($name);
+			//
+			return Database::exec("DROP TABLE ".$name);
+		}
+		else throw new SchemaTableNotExistException($name);
+		
 	}
 
 	/**
@@ -378,10 +381,37 @@ class MysqlSchema extends Schema
 	*/
 	public static function rename($from, $to)
 	{
-		$from=self::table($from);
-		$to=self::table($to);
+		if( ! self::existe($from)) throw new SchemaTableNotExistException($from);
+		else if( self::existe($to)) throw new SchemaTableExistsException($to);
+		else
+		{
+			$from=self::table($from);
+			$to=self::table($to);
+			//
+			return Database::exec("RENAME TABLE ".$from." TO ".$to);
+		}
+	}
+
+	/**
+	* check if the table is existe in database
+	*
+	* @param string $name table name
+	* @param string $table
+	* @return bool
+	*/
+	public static function existe($name, $table = null)
+	{
+		$name=self::table($name);
 		//
-		return Database::exec("RENAME TABLE ".$from." TO ".$to);
+		// > I don't know why i put this
+		$table = is_null($table) ? Config::get('database.database') : $table;
+		//
+		$i = Database::count
+			(
+				"select * FROM information_schema.tables WHERE table_schema ='".$table."' AND table_name = '".$name."' LIMIT 1;"
+			);
+		//
+		return ($i>0) ? true : false ;
 	}
 
 
@@ -399,20 +429,24 @@ class MysqlSchema extends Schema
 	*/
 	public static function add($name,$script)
 	{
-		$name = self::table($name);
-		//
-		self::$query = "alter table ".$name." ";
-		//
-		$object = new self();
-		$script($object);
-		//
-		$query = "";
-		for ($i=0; $i < Table::count(self::$sql_rows); $i++)
-			$query = " add " . self::$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
-		//
-		self::$query .= $query
-		//
-		return Database::exec(self::$query);
+		if( self::existe($name))
+		{
+			$name = self::table($name);
+			//
+			self::$query = "alter table ".$name." ";
+			//
+			$object = new self();
+			$script($object);
+			//
+			$query = "";
+			for ($i=0; $i < Table::count(self::$sql_rows); $i++)
+				$query = " add " . self::$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
+			//
+			self::$query .= $query;
+			//
+			return Database::exec(self::$query);
+		}
+		else throw new SchemaTableNotExistException($name);
 	}
 
 	/**
@@ -424,16 +458,20 @@ class MysqlSchema extends Schema
 	*/
 	public static function remove($name,$colmuns)
 	{
-		$name = self::tableName($name);
-		//
-		self::$query = "alter table ".$name." ";
-		//
-		if(is_array($colmuns))
-			for ($i=0; $i < Table::count($colmuns); $i++)
-				self::$query = " drop ".$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
-		else self::$query .= " drop ".$colmuns;
-		//
-		return Database::exec(self::$query);
+		if( self::existe($name))
+		{
+			$name = self::tableName($name);
+			//
+			self::$query = "alter table ".$name." ";
+			//
+			if(is_array($colmuns))
+				for ($i=0; $i < Table::count($colmuns); $i++)
+					self::$query = " drop ".$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
+			else self::$query .= " drop ".$colmuns;
+			//
+			return Database::exec(self::$query);
+		}
+		else throw new SchemaTableNotExistException($name);
 	}
 
 }
