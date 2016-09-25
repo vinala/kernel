@@ -17,6 +17,8 @@ class Migrations
 {
 	public static function exec($rt = null)
 	{
+		Schema::ini();
+		//
 		$root = is_null($rt) ? Process::root : $rt ;
 		//
 		$r=glob($root."database/schema/*.php");
@@ -85,7 +87,7 @@ class Migrations
 	{
 		Schema::create(Config::get('database.migration'),function($tab)
 		{
-			$tab->inc("pk_schema");
+			$tab->id("pk_schema");
 			$tab->string("name_schema");
 			$tab->timestamp("date_schema");
 			$tab->string("status_schema");
@@ -118,6 +120,8 @@ class Migrations
 
 	public static function rollback($rt = null)
 	{
+		Schema::ini();
+		//
 		$Root = is_null($rt) ? Process::root : $rt ;
 		//
 		$r=glob($Root."database/schema/*.php");
