@@ -98,7 +98,8 @@ class Migrations
 
 	public static function add($name, $rt = null)
 	{
-
+		Schema::ini();
+		//
 		$Datetime=date("Y/m/d H:i:s",time());
 		$Unixtime=time();
 		//
