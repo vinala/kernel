@@ -345,7 +345,7 @@ class MysqlSchema extends Schema
 			$query = "";
 			//
 			for ($i=0; $i < Table::count(self::$colmuns); $i++)
-				$query = ($i == (Table::count(self::$colmuns)-1)) ? self::$colmuns[$i] : self::$colmuns[$i]."," ;
+				$query .= ($i == (Table::count(self::$colmuns)-1)) ? self::$colmuns[$i] : self::$colmuns[$i]."," ;
 			//
 			self::$query .= $query.") DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 			//
