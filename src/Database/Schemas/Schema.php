@@ -48,7 +48,7 @@ class Schema
 		switch (Config::get("database.driver"))
 		{
 			case 'mysql':
-				self::$driver = new MysqlSchema ;
+				self::$driver = new Schema\MysqlSchema ;
 				break;
 		}
 	}
@@ -233,9 +233,9 @@ class Schema
 	* @param string $value
 	* @return schema
 	*/
-	public function default($value)
+	public function affect($value)
 	{
-		return self::$driver->default($value);
+		return self::$driver->affect($value);
 	}
 
 	/**
@@ -287,7 +287,9 @@ class Schema
 	*/
 	public static function create($name, $script)
 	{
-		return self::$driver->create($name, $script);
+		$object = get_class(self::$driver);
+		//
+		return $object::create($name, $script);
 	}
 
 	/**
@@ -329,6 +331,19 @@ class Schema
 	public static function remove($name,$script)
 	{
 		return self::$driver->remove($name,$script);
+	}
+
+	/**
+	* check if the table is existe in database
+	*
+	* @param string $name table name
+	* @param string $table
+	* @return bool
+	*/
+	public static function existe($name,$table=null)
+	{
+		$object = get_class(self::$driver);
+		return $object::existe($name,$table);
 	}
 
 
