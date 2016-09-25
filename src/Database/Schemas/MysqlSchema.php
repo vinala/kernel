@@ -440,7 +440,7 @@ class MysqlSchema extends Schema
 			//
 			$query = "";
 			for ($i=0; $i < Table::count(self::$sql_rows); $i++)
-				$query = " add " . self::$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
+				$query .= " add " . self::$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
 			//
 			self::$query .= $query;
 			//
