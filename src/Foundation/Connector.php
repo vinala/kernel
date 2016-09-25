@@ -395,9 +395,23 @@ class Connector
 				'QueryException',
 				'SeedersEmptyException',
 				'DatabaseArgumentsException', 
-				'DatabaseConnectionException'
+				'DatabaseConnectionException', 
+				'SchemaTableExistsException',
+				'SchemaTableNotExistException'
 				),
 			self::$path.'Database/Exceptions/'
+			);
+
+		//--------------------------------------------------------
+		// Calling Schemas
+		//--------------------------------------------------------
+		self::call(
+			array(
+				'Schema',
+				'MysqlSchema',
+				
+				),
+			self::$path.'Database/Schemas/'
 			);
 
 		//--------------------------------------------------------
@@ -405,7 +419,6 @@ class Connector
 		//--------------------------------------------------------
 		self::call(
 			array(
-				'Schema', 
 				'Migration', 
 				'Seeder', 
 				'DBTable',
