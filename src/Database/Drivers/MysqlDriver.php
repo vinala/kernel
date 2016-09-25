@@ -51,10 +51,7 @@ class MysqlDriver extends Driver
 	*/
 	public function execErr()
 	{
-		$msg="";
-		if(mysqli_error(Database::$server)!="")
-		$msg="mysql error : ".mysqli_error(Database::$server);
-		return $msg;
+		return self::error();
 	}
 
 
