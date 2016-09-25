@@ -48,7 +48,7 @@ class Schema
 		switch (Config::get("database.driver"))
 		{
 			case 'mysql':
-				self::$driver = new Schema\MysqlSchema ;
+				self::$driver = new Schema\MysqlSchema;
 				break;
 		}
 	}
