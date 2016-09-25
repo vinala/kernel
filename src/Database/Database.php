@@ -136,7 +136,17 @@ class Database
 	*/
 	public static function execErr()
 	{
-		return self::$driver->execErr();
+		return self::$driver->execErr()[2];
+	}
+
+	/**
+	* return PDO Error Info
+	* @return string
+	* @since 3.3.0
+	*/
+	public static function error()
+	{
+		return self::$driver->error();
 	}
 	
 
