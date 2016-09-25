@@ -68,7 +68,8 @@ class Driver
 	*/
 	public static function exec($sql)
 	{
-		return self::$server->exec($sql);
+		self::$server->exec($sql);
+		return true;
 	}
 
 	/**
@@ -112,6 +113,16 @@ class Driver
 		$result = $data->fetchAll(PDO::FETCH_ASSOC);
 		//
 		return  $result ? count($result) : -1;
+	}
+
+	/**
+	* get last error
+	*
+	* @return string
+	*/
+	public static function error()
+	{
+		return self::$server->errorInfo();
 	}
 	
 }
