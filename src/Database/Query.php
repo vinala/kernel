@@ -12,6 +12,9 @@ use Lighty\Kernel\Database\Exceptions\QueryException;
 class Query
 {
 
+	const GET_ARRAY = "array";
+	const GET_OBJECT = "object";
+
 	/**
 	 * Table of data
 	 *
@@ -41,15 +44,37 @@ class Query
 	 */
 	protected $group = "";
 
+
+	//--------------------------------------------------------
+	// Constructor
+	//--------------------------------------------------------
+
 	/**
 	 * Constructor for class
 	 * 
 	 * @param string
 	 */
-	function __construct($table)
+	function __construct($table, $prefix = true)
 	{
-		if(Config::get("database.prefixing")) $this->table = Config::get("database.prefixe").$table;
+		if($prefix && Config::get("database.prefixing"))
+			$this->table = Config::get("database.prefixe").$table;
 		else $this->table = $table;
+	}
+
+
+	//--------------------------------------------------------
+	// Functions
+	//--------------------------------------------------------
+
+	/**
+	 * Set the query table
+	 *
+	 * @param string 
+	 * @return object
+	 */
+	public static function table($table, $prefix = true)
+	{
+		return new self($table , $prefix);
 	}
 
 	/**
@@ -58,9 +83,9 @@ class Query
 	 * @param string 
 	 * @return object
 	 */
-	public static function table($table)
+	public static function from($table, $prefix = true)
 	{
-		return new self($table);
+		return new self($table , $prefix);
 	}
 
 	/**
@@ -68,9 +93,9 @@ class Query
 	 *
 	 * @return Array
 	 */
-	public function get()
+	public function get($type = "object")
 	{
-		return self::query();
+		return self::query($type);
 	}
 
 	/**
@@ -90,11 +115,11 @@ class Query
 	 * @param string
 	 * @return array
 	 */
-	public function query()
+	public function query($type = "object")
 	{
 		$sql = "select ".$this->columns." from ".$this->table." ".$this->where." ".$this->order." ".$this->group;
-		// //
-		if($data = Database::read($sql)) return self::fetch($data);
+		//
+		if($data = Database::read($sql)) return self::fetch($data , $type);
 		elseif(Database::execerr()) throw new QueryException();
 		
 	}
@@ -105,16 +130,27 @@ class Query
 	 * @param array
 	 * @return array
 	 */
-	public function fetch($array)
+	public function fetch($array , $type = "object")
 	{
 		$data = array();
 		//
 		foreach ($array as $row) {
 			//
-			$rw = new Row;
-			//
-			foreach ($row as $index => $column) 
-				if( ! is_int($index)) $rw->$index = $column;
+			if($type == "object")
+			{
+				$rw = new Row;
+				//
+				foreach ($row as $index => $column) 
+					if( ! is_int($index)) $rw->$index = $column;
+			}
+			elseif($type == "array")
+			{
+				$rw = array();
+				//
+				foreach ($row as $index => $column) 
+					if( ! is_int($index)) $rw[$index] = $column;
+			}
+			
 			//
 			$data[] = $rw ; 
 		}
