@@ -504,6 +504,7 @@ class Connector
 				'ForeingKeyMethodException', 
 				'ColumnNotEmptyException', 
 				'ManyPrimaryKeysException', 
+				'TableNotFoundException',
 				'PrimaryKeyNotFoundException'
 				),
 			self::$path.'MVC/Model/Exceptions/'
