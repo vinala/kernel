@@ -2,6 +2,9 @@
 
 use Lighty\Kernel\Database\Query;
 use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\Table;
+//
+use Lighty\Kernel\MVC\ORM\Exception\TableNotFoundException;
 
 /**
 * The Mapping Objet-Relationnel (ORM) class
@@ -53,20 +56,29 @@ class Model
     public $columns = array();
 
     /**
-	* if data table could have reserved data
+	* if data table could have stashed data
 	* with the columns deleted_at
 	*
 	* @var bool
 	*/
-    public $reserved = false;
+    protected $canStashed = false;
 
     /**
-	* if data table could have tracked data
+	* if this data row is stashed
+	*
+	* @var bool
+	*/
+    protected $stashed ;
+
+    /**
+	* if data table is tracked data
 	* with the columns created_at and edited_at
 	*
 	* @var bool
 	*/
-    public $tracked = false;
+    protected $tracked ;
+
+    
 
 
 
@@ -100,8 +112,28 @@ class Model
 	{
 		$this->table = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
 		//
+		if( ! $this->checkTable() ) throw new TableNotFoundException($this->table);
+		//
 		return $this->table;
 	}
+
+	/**
+	* Check if table exists in database
+	*
+	* @param $table string
+	* @return bool
+	*/
+	protected function checkTable()
+	{
+		$data = Query::from("information_schema.tables" , false)
+			->select("*")
+			->where("TABLE_SCHEMA","=",Config::get('database.database'))
+			->andwhere("TABLE_NAME","=",$this->table)
+			->get(Query::GET_ARRAY);
+		//
+		return (Table::count($data) > 0 ) ? true : false;
+	}
+	
 
 	/**
 	* to get and set all columns of data table
@@ -111,7 +143,7 @@ class Model
 	protected function columns()
 	{
 		$this->columns = $this->extruct(
-			Query::table("INFORMATION_SCHEMA.COLUMNS" , false)
+			Query::from("INFORMATION_SCHEMA.COLUMNS" , false)
 			->select("COLUMN_NAME")
 			->where("TABLE_SCHEMA","=",Config::get('database.database'))
 			->andwhere("TABLE_NAME","=",$this->table)
@@ -137,25 +169,25 @@ class Model
 			{
 				$data[] = $subValue;
 				//
-				// Check if reserved
-				if( ! $this->reserved ) this->isReserved($subValue);
+				// Check if stashed
+				if( ! $this->canStashed ) $this->isStashed($subValue);
 				//
-				//
-				if( ! $this->tracked ) this->isTracked($subValue);
+				// Check if tracked
+				if( ! $this->tracked ) $this->isTracked($subValue);
 			}
 		//
 		return $data;
 	}
 
 	/**
-	* check if data table could have reserved data
+	* check if data table could have stashed data
 	*
 	* @param $column string
 	* @return bool
 	*/
-	protected function isReserved($column)
+	protected function isStashed($column)
 	{
-		if($column == "deleted_at") $this->reserved = true;
+		if($column == "deleted_at") $this->canStashed = true;
 	}
 
 	/**
