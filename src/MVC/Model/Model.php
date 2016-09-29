@@ -3,8 +3,11 @@
 use Lighty\Kernel\Database\Query;
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\DateTime as Time;
 //
 use Lighty\Kernel\MVC\ORM\Exception\TableNotFoundException;
+use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
+use Lighty\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
 
 /**
 * The Mapping Objet-Relationnel (ORM) class
@@ -18,13 +21,19 @@ class Model
 	// Properties
 	//--------------------------------------------------------
 
+	/**
+	* the name of the model table with prifix
+	*
+	* @var array
+	*/
+    public $prifixTable = array();
 
 	/**
 	* the name and value of primary key of the model
 	*
 	* @var array
 	*/
-    protected $key = array();
+    public $key = array();
 
 
     /**
@@ -32,14 +41,14 @@ class Model
 	*
 	* @var string
 	*/
-    protected $KeyName;
+    protected $keyName;
 
     /**
 	* the value of primary key of the model
 	*
 	* @var string
 	*/
-    protected $KeyValue;
+    protected $keyValue;
 
     /**
 	* the value of the model table name
@@ -78,6 +87,14 @@ class Model
 	*/
     protected $tracked ;
 
+    /**
+	* if this data row is stashed all data 
+	* will be stored in this array
+	*
+	* @var array
+	*/
+    protected $stashedData ;
+
     
 
 
@@ -92,10 +109,12 @@ class Model
 	* The constructor
 	*
 	*/
-	function __construct()
+	function __construct($key = null)
 	{
 		$this->getTable();
 		$this->columns();
+		$this->key();
+		if( ! is_null($key)) $this->struct($key);
 	}
 
 	//--------------------------------------------------------
@@ -110,11 +129,11 @@ class Model
 	*/
 	public function getTable()
 	{
-		$this->table = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
+		$this->prifixTable = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
 		//
 		if( ! $this->checkTable() ) throw new TableNotFoundException($this->table);
 		//
-		return $this->table;
+		return $this->prifixTable;
 	}
 
 	/**
@@ -128,7 +147,7 @@ class Model
 		$data = Query::from("information_schema.tables" , false)
 			->select("*")
 			->where("TABLE_SCHEMA","=",Config::get('database.database'))
-			->andwhere("TABLE_NAME","=",$this->table)
+			->andwhere("TABLE_NAME","=",$this->prifixTable)
 			->get(Query::GET_ARRAY);
 		//
 		return (Table::count($data) > 0 ) ? true : false;
@@ -146,7 +165,7 @@ class Model
 			Query::from("INFORMATION_SCHEMA.COLUMNS" , false)
 			->select("COLUMN_NAME")
 			->where("TABLE_SCHEMA","=",Config::get('database.database'))
-			->andwhere("TABLE_NAME","=",$this->table)
+			->andwhere("TABLE_NAME","=",$this->prifixTable)
 			->get(Query::GET_ARRAY)
 			);
 		//
@@ -201,6 +220,93 @@ class Model
 		if($column == "deleted_at" || $column == "edited_at") 
 			$this->tracked = true;
 	}
+
+	/**
+	* function execute SQL query to get Primary keys
+	*
+	* @return array
+	*/
+	protected function getPK()
+	{
+		switch (Config::get('database.default')) 
+		{
+			case 'sqlite': break;
+			case 'mysql':
+					return Database::read("SHOW INDEX FROM ".$this->prifixTable." WHERE `Key_name` = 'PRIMARY'");
+				break;
+
+			case 'pgsql': break;
+			case 'sqlsrv': break;
+		}
+	}
+
+	/**
+	* set primary key
+	* the framework doesn't support more the column to be 
+	* the primary key otherwise exception will be thrown
+	*
+	* @return null
+	*/
+	protected function key()
+	{
+		$data = $this->getPK();
+		//
+		if(Table::count($data) > 1) throw new ManyPrimaryKeysException();
+		else if(Table::count($data) == 0 ) throw new PrimaryKeyNotFoundException($this->table);
+		//
+		$this->keyName = $data[0]['Column_name'];
+		$this->key["name"] = $data[0]['Column_name'];
+	}
+
+	/**
+	* get data from data table according to primary key value
+	*
+	* @param int $key
+	* @return null
+	*/
+	protected function struct($key)
+	{
+		$data = $this->dig($key);
+		//
+		if(Table::count($data) == 1)
+		{
+			if( $this->canStashed && $this->stashedAt($data) ) $this->stashed = true ;
+			//
+		}
+	}
+
+	/**
+	* search for data by Query Class according to primary key
+	*
+	* @param int $key
+	* @return array
+	*/
+	protected function dig($key)
+	{
+		return Query::from($this->table)
+			->select("*")
+			->where( $this->keyName , "=" , $key)
+			->get(Query::GET_ARRAY);
+	}
+
+	/**
+	* check if this data is already stashed
+	*
+	* @param array $data
+	* @return bool
+	*/
+	protected function stashedAt($data)
+	{
+		if(is_null($data[0]["deleted_at"])) return false;
+		else return $data[0]["deleted_at"] < Time::current();
+	}
+
+	
+	
+	
+	
+	
+	
 	
 	
 	
