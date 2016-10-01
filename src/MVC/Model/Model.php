@@ -4,6 +4,7 @@ use Lighty\Kernel\Database\Query;
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\Table;
 use Lighty\Kernel\Objects\DateTime as Time;
+use Lighty\Kernel\MVC\ORM\CRUD;
 //
 use Lighty\Kernel\MVC\ORM\Exception\TableNotFoundException;
 use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
@@ -116,7 +117,14 @@ class Model
 	*
 	* @var bool
 	*/
-    public $tracked ;
+    public $tracked  = false ;
+
+    /**
+	* the state of the ORM
+	*
+	* @var string
+	*/
+    protected $state ;
 
     
 
@@ -137,7 +145,12 @@ class Model
 		$this->getTable();
 		$this->columns();
 		$this->key();
-		if( ! is_null($key)) $this->struct($key);
+		if( ! is_null($key)) 
+		{
+			$this->struct($key);
+			$this->state = CRUD::UPDATE_STAT;
+		}
+		else $this->state = CRUD::CREATE_STAT;
 	}
 
 	//--------------------------------------------------------
@@ -254,7 +267,7 @@ class Model
 	*/
 	protected function isTracked($column)
 	{
-		if($column == "deleted_at" || $column == "edited_at") 
+		if($column == "created_at" || $column == "edited_at") 
 			$this->tracked = true;
 	}
 
@@ -405,6 +418,68 @@ class Model
 		$class = get_called_class();
 		return new $class($key);
 	}
+
+	public function __set($name, $value) {
+
+        echo "Set:$name to $value";
+        $this->$name = $value;
+    }
+
+
+	//--------------------------------------------------------
+	// CRUD Functions
+	//--------------------------------------------------------
+
+	/**
+	* Save the opertaion makes by user either creation or editing
+	*
+	* @return bool
+	*/
+	public function save()
+	{
+		if($this->state == CRUD::CREATE_STAT) $this->add();
+		// elseif ($this->state == CRUD::UPDATE_STAT)
+	}
+
+	/**
+	* functio to add data in data table
+	*
+	* @return bool
+	*/
+	private function add()
+	{
+		$columns = array();
+		$values = array();
+		//
+		if($this->tracked) $this->created_at = Time::current();
+		//
+		foreach ($this->columns as $value)
+			if($value != $this->keyName && isset($this->$value) && !empty($this->$value) )
+			{
+				$columns[] = $value;
+				$values [] = $this->$value;
+			}
+		//
+		return $this->insert($columns , $values);
+	}
+
+	/**
+	* function to exexute insert data
+	*
+	* @param array $columns
+	* @param array $values
+	* @return bool
+	*/
+	private function insert($columns , $values)
+	{
+		return Query::into($this->table)
+		->column($columns)
+		->value($values)
+		->insert();
+	}
+	
+	
+	
 
 
 
