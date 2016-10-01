@@ -216,13 +216,23 @@ class Schema
 	}
 
 	/**
-	* function to add stach data columns deleted_at
+	* function to add appeared column for stashed data
 	*
 	* @return schema
 	*/
 	public function stash()
 	{
 		return self::$driver->stash();
+	}
+
+	/**
+	* function to add deleted column for kept data
+	*
+	* @return schema
+	*/
+	public function keep()
+	{
+		return self::$driver->keep();
 	}
 
 	/**
