@@ -24,9 +24,9 @@ class Model
 	/**
 	* the name of the model table with prifix
 	*
-	* @var array
+	* @var string
 	*/
-    public $prifixTable = array();
+    protected $prifixTable;
 
 	/**
 	* the name and value of primary key of the model
@@ -272,6 +272,7 @@ class Model
 		{
 			if( $this->canStashed && $this->stashedAt($data) ) $this->stashed = true ;
 			//
+			$this->convert($data);
 		}
 	}
 
@@ -300,6 +301,49 @@ class Model
 		if(is_null($data[0]["deleted_at"])) return false;
 		else return $data[0]["deleted_at"] < Time::current();
 	}
+
+	/**
+	* make data array colmuns as property
+	* in case of hidden data property was true
+	* data will be stored in hidden data 
+	* instead ofas property
+	*
+	* @param array $data
+	* @return null
+	*/
+	protected function convert($data)
+	{
+		foreach ($data[0] as $key => $value) 
+			if( ! $this->stashed ) 
+			{
+				$this->$key = $value ;
+				$this->setKey($key , $value);
+			}
+			else $this->stashedData[$key] = $value ;
+	}
+
+	/**
+	* set the primary key value by verifying
+	* the name of the key in data array and
+	* the name of $keyName property
+	*
+	* @param string $key
+	* @param string $value
+	* @return null
+	*/
+	protected function setKey($key , $value)
+	{
+		if($key == $this->keyName)
+		{
+			$this->keyValue = $value;
+			$this->key["value"] = $value;
+		}
+	}
+
+	
+	
+
+
 
 	
 	
