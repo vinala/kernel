@@ -210,9 +210,9 @@ class Schema
 	*
 	* @return schema
 	*/
-	public function update()
+	public function track()
 	{
-		return self::$driver->update();
+		return self::$driver->track();
 	}
 
 	/**

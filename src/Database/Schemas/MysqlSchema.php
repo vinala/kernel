@@ -199,13 +199,14 @@ class MysqlSchema extends Schema
 	//--------------------------------------------------------
 
 	/**
-	* function to add update columns created_at and edited_at
+	* function to add track columns created_at and edited_at
 	*
 	* @return schema
 	*/
-	public function update()
+	public function track()
 	{
-		self::$colmuns[]='created_at int(15),edited_at int(15)';
+		self::$colmuns[]='edited_at int(15)';
+		self::$colmuns[]='created_at int(15)';
 		return $this;
 	}
 
