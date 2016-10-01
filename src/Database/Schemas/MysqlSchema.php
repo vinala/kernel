@@ -210,13 +210,24 @@ class MysqlSchema extends Schema
 	}
 
 	/**
-	* function to add deleted column for stashed data
+	* function to add deleted column for kept data
 	*
 	* @return schema
 	*/
-	public function stash()
+	public function kept()
 	{
 		self::$colmuns[]='deleted_at int(15)';
+		return $this;
+	}
+
+	/**
+	* function to add appeared column for stashed data
+	*
+	* @return schema
+	*/
+	public function stashed()
+	{
+		self::$colmuns[]='appeared_at int(15)';
 		return $this;
 	}
 
