@@ -394,6 +394,21 @@ class Model
 		}
 	}
 
+	/**
+	* function to get instance of the table by primary key
+	*
+	* @param int $key
+	* @return ORM
+	*/
+	public static function get($key)
+	{
+		$class = get_called_class();
+		return new $class($key);
+	}
+
+
+
+
 	
 	
 
