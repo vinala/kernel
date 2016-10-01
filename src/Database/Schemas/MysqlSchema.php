@@ -214,7 +214,7 @@ class MysqlSchema extends Schema
 	*
 	* @return schema
 	*/
-	public function kept()
+	public function keep()
 	{
 		self::$colmuns[]='deleted_at int(15)';
 		return $this;
@@ -225,7 +225,7 @@ class MysqlSchema extends Schema
 	*
 	* @return schema
 	*/
-	public function stashed()
+	public function stash()
 	{
 		self::$colmuns[]='appeared_at int(15)';
 		return $this;
