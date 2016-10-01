@@ -80,20 +80,43 @@ class Model
     public $kept ;
 
     /**
-	* if data table is tracked data
-	* with the columns created_at and edited_at
-	*
-	* @var bool
-	*/
-    public $tracked ;
-
-    /**
 	* if this data row is kept all data 
 	* will be stored in this array
 	*
 	* @var array
 	*/
     public $keptData ;
+
+    /**
+	* if data table could have stashed data
+	* with the columns appeared_at
+	*
+	* @var bool
+	*/
+    public $canStashed = false;
+
+    /**
+	* if this data row is stashed
+	*
+	* @var bool
+	*/
+    public $stashed ;
+
+    /**
+	* if this data row is stashed all data 
+	* will be stored in this array
+	*
+	* @var array
+	*/
+    public $stashedData ;
+
+	/**
+	* if data table is tracked data
+	* with the columns created_at and edited_at
+	*
+	* @var bool
+	*/
+    public $tracked ;
 
     
 
