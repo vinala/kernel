@@ -30,6 +30,13 @@ class Query
 	protected $columns = "*";
 
 	/**
+	 * columns query
+	 *
+	 * @var array
+	 */
+	protected $values = "*";
+
+	/**
 	 * where clause
 	 */
 	protected $where = "";
@@ -261,4 +268,89 @@ class Query
 		//
 		return $this;
 	}
+
+	//--------------------------------------------------------
+	// Insert functions
+	//--------------------------------------------------------
+
+	/**
+	* set the table where to put data into
+	*
+	* @param string $name
+	* @return Query
+	*/
+	public static function into($table, $prefix = true)
+	{
+		return new self($table , $prefix);
+	}
+
+	/**
+	* set array of columns
+	*
+	* @return Query
+	*/
+	public function column()
+	{
+		$columns = func_get_args();
+		//
+		if( Table::count($columns)==1 && is_array($columns[0]) ) $columns = $columns[0] ;
+		//
+		$target = "";
+		//
+		$i = false;
+		foreach ($columns as $column) {
+			if( ! $i) $target .= "$column";
+			else $target .= ",$column";
+			$i = true;
+		}
+		//
+		$this->columns = $target;
+		//
+		return $this;
+	}
+
+	/**
+	* set array of values
+	*
+	* @return Query
+	*/
+	public function value()
+	{
+		$values = func_get_args();
+		//
+		if( Table::count($values)==1 && is_array($values[0]) ) $values = $values[0] ;
+		//
+		$target = "";
+		//
+		$i = false;
+		foreach ($values as $value) {
+			if( ! $i) $target .= "'$value'";
+			else $target .= ",'$value'";
+			$i = true;
+		}
+		//
+		$this->values = $target;
+		//
+		return $this;
+	}
+
+	/**
+	 * execute insert query
+	 *
+	 * @return bool
+	 */
+	public function insert()
+	{
+		$query = "insert into ".$this->table." (".$this->columns.") values (".$this->values.")";
+		//
+		// die($query);
+		return Database::exec($query);
+		//
+		// if(Database::exec($sql)) return true;
+		// elseif(Database::execerr()) throw new QueryException();
+		
+	}
+
+
+	
 }
