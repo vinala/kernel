@@ -70,14 +70,14 @@ class Model
 	*
 	* @var bool
 	*/
-    public $canKept = false;
+    protected $canKept = false;
 
     /**
 	* if this data row is kept
 	*
 	* @var bool
 	*/
-    public $kept ;
+    public $kept = false ;
 
     /**
 	* if this data row is kept all data 
@@ -93,14 +93,14 @@ class Model
 	*
 	* @var bool
 	*/
-    public $canStashed = false;
+    protected $canStashed = false;
 
     /**
 	* if this data row is stashed
 	*
 	* @var bool
 	*/
-    public $stashed ;
+    public $stashed = false ;
 
     /**
 	* if this data row is stashed all data 
@@ -212,7 +212,10 @@ class Model
 				$data[] = $subValue;
 				//
 				// Check if kept
-				if( ! $this->canKept ) $this->isStashed($subValue);
+				if( ! $this->canKept ) $this->isKept($subValue);
+				//
+				// Check if stashed
+				if( ! $this->canStashed ) $this->isStashed($subValue);
 				//
 				// Check if tracked
 				if( ! $this->tracked ) $this->isTracked($subValue);
@@ -227,9 +230,20 @@ class Model
 	* @param $column string
 	* @return bool
 	*/
-	protected function isStashed($column)
+	protected function isKept($column)
 	{
 		if($column == "deleted_at") $this->canKept = true;
+	}
+
+	/**
+	* check if data table could have stashed data
+	*
+	* @param $column string
+	* @return bool
+	*/
+	protected function isStashed($column)
+	{
+		if($column == "appeared_at") $this->canStashed = true;
 	}
 
 	/**
@@ -294,6 +308,7 @@ class Model
 		if(Table::count($data) == 1)
 		{
 			if( $this->canKept && $this->keptAt($data) ) $this->kept = true ;
+			if( $this->canStashed && $this->stashedAt($data) ) $this->stashed = true ;
 			//
 			$this->convert($data);
 		}
@@ -326,6 +341,18 @@ class Model
 	}
 
 	/**
+	* check if this data is already hidden
+	*
+	* @param array $data
+	* @return bool
+	*/
+	protected function stashedAt($data)
+	{
+		if(is_null($data[0]["appeared_at"])) return false;
+		else return $data[0]["appeared_at"] > Time::current();
+	}
+
+	/**
 	* make data array colmuns as property
 	* in case of hidden data property was true
 	* data will be stored in hidden data 
@@ -337,12 +364,16 @@ class Model
 	protected function convert($data)
 	{
 		foreach ($data[0] as $key => $value) 
-			if( ! $this->kept ) 
+			if( ! $this->kept && ! $this->stashed ) 
 			{
 				$this->$key = $value ;
 				$this->setKey($key , $value);
 			}
-			else $this->keptData[$key] = $value ;
+			else
+			{
+				if($this->kept) $this->keptData[$key] = $value ;
+				if($this->stashed) $this->stashedData[$key] = $value ;
+			}
 	}
 
 	/**
