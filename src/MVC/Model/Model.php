@@ -65,19 +65,19 @@ class Model
     public $columns = array();
 
     /**
-	* if data table could have stashed data
+	* if data table could have kept data
 	* with the columns deleted_at
 	*
 	* @var bool
 	*/
-    protected $canStashed = false;
+    public $canKept = false;
 
     /**
-	* if this data row is stashed
+	* if this data row is kept
 	*
 	* @var bool
 	*/
-    protected $stashed ;
+    public $kept ;
 
     /**
 	* if data table is tracked data
@@ -85,15 +85,15 @@ class Model
 	*
 	* @var bool
 	*/
-    protected $tracked ;
+    public $tracked ;
 
     /**
-	* if this data row is stashed all data 
+	* if this data row is kept all data 
 	* will be stored in this array
 	*
 	* @var array
 	*/
-    protected $stashedData ;
+    public $keptData ;
 
     
 
@@ -188,8 +188,8 @@ class Model
 			{
 				$data[] = $subValue;
 				//
-				// Check if stashed
-				if( ! $this->canStashed ) $this->isStashed($subValue);
+				// Check if kept
+				if( ! $this->canKept ) $this->isStashed($subValue);
 				//
 				// Check if tracked
 				if( ! $this->tracked ) $this->isTracked($subValue);
@@ -199,14 +199,14 @@ class Model
 	}
 
 	/**
-	* check if data table could have stashed data
+	* check if data table could have kept data
 	*
 	* @param $column string
 	* @return bool
 	*/
 	protected function isStashed($column)
 	{
-		if($column == "deleted_at") $this->canStashed = true;
+		if($column == "deleted_at") $this->canKept = true;
 	}
 
 	/**
@@ -270,7 +270,7 @@ class Model
 		//
 		if(Table::count($data) == 1)
 		{
-			if( $this->canStashed && $this->stashedAt($data) ) $this->stashed = true ;
+			if( $this->canKept && $this->keptAt($data) ) $this->kept = true ;
 			//
 			$this->convert($data);
 		}
@@ -291,12 +291,12 @@ class Model
 	}
 
 	/**
-	* check if this data is already stashed
+	* check if this data is already kept
 	*
 	* @param array $data
 	* @return bool
 	*/
-	protected function stashedAt($data)
+	protected function keptAt($data)
 	{
 		if(is_null($data[0]["deleted_at"])) return false;
 		else return $data[0]["deleted_at"] < Time::current();
@@ -314,12 +314,12 @@ class Model
 	protected function convert($data)
 	{
 		foreach ($data[0] as $key => $value) 
-			if( ! $this->stashed ) 
+			if( ! $this->kept ) 
 			{
 				$this->$key = $value ;
 				$this->setKey($key , $value);
 			}
-			else $this->stashedData[$key] = $value ;
+			else $this->keptData[$key] = $value ;
 	}
 
 	/**
