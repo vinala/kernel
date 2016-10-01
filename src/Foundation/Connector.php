@@ -493,6 +493,7 @@ class Connector
 		self::call(
 			array(
 				'Model',
+				'CRUD',
 				'ORM',
 				'ModelArray'
 				),
