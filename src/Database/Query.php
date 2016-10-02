@@ -386,9 +386,9 @@ class Query
 	* @param string $value
 	* @return Query
 	*/
-	public function set($column , $value)
+	public function set($column , $value , $quote = true)
 	{
-		$this->sets[] = " $column = '$value'";
+		$this->sets[] = $quote ? " $column = '$value'" : " $column = $value";
 		return $this;
 	}
 	
