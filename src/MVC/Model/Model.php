@@ -426,9 +426,8 @@ class ORM
 		return new $class($key);
 	}
 
-	public function __set($name, $value) {
-
-        echo "Set:$name to $value";
+	public function __set($name, $value) 
+	{
         $this->$name = $value;
     }
 
@@ -526,6 +525,58 @@ class ORM
 		//
 		return $query;
 	}
+
+	/**
+	* to delete the model from database
+	* in case of Kept deleted just hide it
+	*
+	* @return bool
+	*/
+	public function delete()
+	{
+		if( ! $this->canKept)
+			$this->forceDelete();
+
+		else 
+			Query::table($this->table)
+			->set("deleted_at" , Time::current())
+			->where($this->keyName , "=" , $this->keyValue)
+			->update();	
+	}
+
+
+	/**
+	* to force delete the model from database even if the model is Kept deleted
+	*
+	* @return bool
+	*/
+	public function forceDelete()
+	{
+		$key = $this->kept ? $this->keptData[$this->keyName] : $this->keyValue ;
+		//
+		Query::table($this->table)
+			->where($this->keyName , "=" , $key)
+			->delete();
+		//
+		$this->reset();
+	}
+
+	/**
+	* reset the current model if it's deleted
+	*
+	* @return null
+	*/
+	private function reset()
+	{
+		$vars = get_object_vars($this);
+		//
+		foreach ($vars as $key => $value)
+			unset($this->$key);
+	}
+
+	
+	
+	
 	
 	
 	
