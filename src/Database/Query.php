@@ -30,11 +30,18 @@ class Query
 	protected $columns = "*";
 
 	/**
-	 * columns query
+	 * values query
 	 *
 	 * @var array
 	 */
-	protected $values = "*";
+	protected $values = array();
+
+	/**
+	 * edits array for update query
+	 *
+	 * @var array
+	 */
+	protected $sets = array();
 
 	/**
 	 * where clause
@@ -72,6 +79,24 @@ class Query
 	//--------------------------------------------------------
 	// Functions
 	//--------------------------------------------------------
+
+	/**
+	 * function to clear all properties for the next use
+	 *
+	 * @return null
+	 */
+	private function reset()
+	{
+		$this->table = 
+		$this->columns = null ;
+		//
+		$this->values = 
+		$this->sets = array() ;
+		//
+		$this->where = 
+		$this->order = 
+		$this->group = "";
+	}
 
 	/**
 	 * Set the query table
@@ -343,14 +368,47 @@ class Query
 	{
 		$query = "insert into ".$this->table." (".$this->columns.") values (".$this->values.")";
 		//
-		// die($query);
-		return Database::exec($query);
+		$this->reset();
 		//
-		// if(Database::exec($sql)) return true;
-		// elseif(Database::execerr()) throw new QueryException();
-		
+		return Database::exec($query);		
 	}
 
 
+	//--------------------------------------------------------
+	// Update Functions
+	//--------------------------------------------------------
+
+
+	/**
+	* function to set elemets to update
+	*
+	* @param string $column
+	* @param string $value
+	* @return Query
+	*/
+	public function set($column , $value)
+	{
+		$this->sets[] = " $column = '$value'";
+		return $this;
+	}
+	
+
+	/**
+	 * execute update query
+	 *
+	 * @return bool
+	 */
+	public function update()
+	{
+		$query = "update ".$this->table." set ";
+		//
+		for ($i=0; $i < Table::count($this->sets); $i++) 
+			if($i < Table::count($this->sets)-1) $query.=$this->sets[$i].",";
+			else $query.=$this->sets[$i];
+		//
+		$query .= " ".$this->where;
+		//
+		return Database::exec($query);		
+	}
 	
 }
