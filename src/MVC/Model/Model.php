@@ -574,6 +574,40 @@ class ORM
 			unset($this->$key);
 	}
 
+	/**
+	* restore the model if it's kept deleted
+	*
+	* @return bool
+	*/
+	public function restore()
+	{
+		if( $this->kept )
+		{
+			$this->bring();
+			//
+			Query::table($this->table)
+			->set("deleted_at" , "NULL" , false)
+			->where($this->keyName , "=" , $this->keyValue)
+			->update();	
+		}
+	}
+
+	/**
+	* to extruct data from keptdata array to become properties
+	*
+	* @return null
+	*/
+	private function bring()
+	{
+		foreach ($this->keptData as $key => $value)
+			$this->$key = $value;
+		//
+		$this->keyValue = $this->keptData[$this->keyName];
+		//
+		$this->keptData = null;
+		$this->kept = false;
+	}
+	
 	
 	
 	
