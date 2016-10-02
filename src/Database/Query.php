@@ -408,7 +408,30 @@ class Query
 		//
 		$query .= " ".$this->where;
 		//
+		$this->reset();
+		//
 		return Database::exec($query);		
 	}
+
+	//--------------------------------------------------------
+	// Remove functions
+	//--------------------------------------------------------
+
+	/**
+	* delete row from data table
+	*
+	* @return bool
+	*/
+	public function delete()
+	{
+		$query = "delete from ".$this->table." ";
+		//
+		$query .= " ".$this->where;
+		//
+		$this->reset();
+		//
+		return Database::exec($query);	
+	}
+	
 	
 }
