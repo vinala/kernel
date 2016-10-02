@@ -438,11 +438,11 @@ class Model
 	public function save()
 	{
 		if($this->state == CRUD::CREATE_STAT) $this->add();
-		// elseif ($this->state == CRUD::UPDATE_STAT)
+		elseif ($this->state == CRUD::UPDATE_STAT) $this->edit();
 	}
 
 	/**
-	* functio to add data in data table
+	* function to add data in data table
 	*
 	* @return bool
 	*/
@@ -472,10 +472,52 @@ class Model
 	*/
 	private function insert($columns , $values)
 	{
-		return Query::into($this->table)
+		return Query::table($this->table)
 		->column($columns)
 		->value($values)
 		->insert();
+	}
+
+	/**
+	* function to edit data in data table
+	*
+	* @return bool
+	*/
+	private function edit()
+	{
+		$columns = array();
+		$values = array();
+		//
+		if($this->tracked) $this->edited_at = Time::current();
+		//
+		foreach ($this->columns as $value)
+			if($value != $this->keyName && isset($this->$value) && !empty($this->$value) )
+			{
+				$columns[] = $value;
+				$values [] = $this->$value;
+			}
+		//
+		return $this->update($columns , $values);
+	}
+
+	/**
+	* function to exexute update data
+	*
+	* @param array $columns
+	* @param array $values
+	* @return bool
+	*/
+	private function update($columns , $values)
+	{
+		$query = Query::table($this->table);
+		//
+		for ($i=0; $i < Table::count($columns) ; $i++) 
+			$query = $query->set($columns[$i] , $values[$i]);
+		//
+		$query->where($this->keyName , "=" , $this->keyValue)
+		->update();
+		//
+		return $query;
 	}
 	
 	
