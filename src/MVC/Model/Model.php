@@ -1,5 +1,8 @@
 <?php 
 
+namespace Lighty\Kernel\MVC ;
+
+use Lighty\Kernel\Database\Database;
 use Lighty\Kernel\Database\Query;
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\Table;
@@ -14,8 +17,12 @@ use Lighty\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
 * The Mapping Objet-Relationnel (ORM) class
 * 
 * Beta (Source code name : model)
+*
+* @version 2.0
+* @author Youssef Had
+* @package Lighty\Kernel\MVC
 */
-class Model
+class ORM
 {
 
 	//--------------------------------------------------------

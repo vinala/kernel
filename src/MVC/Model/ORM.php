@@ -23,7 +23,7 @@ use Lighty\Kernel\MVC\Model\ModelArray;
 /**
 * ORM class
 */
- class ORM
+ class _ORM
 {
 	/**
 	* the name of primary key for the model
