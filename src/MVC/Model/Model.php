@@ -160,6 +160,24 @@ class ORM
 		else $this->state = CRUD::CREATE_STAT;
 	}
 
+
+	//--------------------------------------------------------
+	// Getter and Setter
+	//--------------------------------------------------------
+
+
+	public function __set($name, $value) 
+	{
+        $this->$name = $value;
+    }
+
+    public function __get($name, $value) 
+	{
+        if(method_exists($this, $name)) return call_user_func(array($this,$name));
+		else throw new InvalidArgumentException("Undefined property: ".get_class($this)."::$name");
+    }
+
+
 	//--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
@@ -424,12 +442,7 @@ class ORM
 	{
 		$class = get_called_class();
 		return new $class($key);
-	}
-
-	public function __set($name, $value) 
-	{
-        $this->$name = $value;
-    }
+	}  
 
 
 	//--------------------------------------------------------
@@ -608,6 +621,62 @@ class ORM
 		$this->kept = false;
 	}
 	
+
+	//--------------------------------------------------------
+	// Relations
+	//--------------------------------------------------------
+
+
+	/**
+	 * The has one relation for one to one
+	 *
+	 * @param $model : the model wanted to be related to the current model
+	 * @param $local : if not null would be the local column of the relation
+	 * @param $remote : if not null would be the $remote column of the relation
+	 */
+	public function hasOne($model , $local = null , $remote=null)
+	{
+		return (new OneToOne)->ini($model , $this , $local , $remote);
+	}
+
+		/**
+	 * The one to many relation
+	 *
+	 * @param $model : the model wanted to be related to the 
+	 *			current model
+	 * @param $local : if not null would be the local column
+	 *			of the relation
+	 * @param $remote : if not null would be the $remote column
+	 *			of the relation
+	 */
+	public function hasMany($model , $local = null , $remote = null)
+	{
+		return (new OneToMany)->ini($model , $this , $local , $remote);
+	}
+
+	/**
+	 * The many to many relation
+	 *
+	 * @param $model : the model wanted to be related to the 
+	 *			current model
+	 * @param $local : if not null would be the local column
+	 *			of the relation
+	 * @param $remote : if not null would be the $remote column
+	 *			of the relation
+	 */
+	public function belongsToMany($model , $intermediate = null , $local = null , $remote = null)
+	{
+		return (new ManyToMany)->ini($model , $this , $intermediate , $local , $remote);
+	}
+
+	public function belongsTo($model , $local = null , $remote=null)
+	{
+		return (new BelongsTo)->ini($model , $this , $local , $remote);
+		// $val=$this->$local;
+		// $mod=new $model;
+		// $data=$mod->get($remote, '=' , $val);
+		// return $data->get();
+	}
 	
 	
 	
