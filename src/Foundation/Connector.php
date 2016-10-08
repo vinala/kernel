@@ -495,7 +495,7 @@ class Connector
 				'Model',
 				'CRUD',
 				'ORM',
-				'ROA',
+				'Collection',
 				'ModelArray'
 				),
 			self::$path.'MVC/Model/'

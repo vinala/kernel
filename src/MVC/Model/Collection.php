@@ -3,9 +3,9 @@
 namespace Lighty\Kernel\MVC\ORM;
 
 /**
-* Relational Objects Array (ROA)
+* The class Collection of ORM
 */
-class ROA
+class Collection
 {
 
 	//--------------------------------------------------------
@@ -17,7 +17,7 @@ class ROA
 	*
 	* @var array
 	*/
-    public $list = array();
+    private $list = array();
 
 
     //--------------------------------------------------------
@@ -27,7 +27,7 @@ class ROA
 
     function __construct($data = null)
     {
-    	$this->list = $data;
+    	$this->list = is_null($data) ? array() : $data ;
     }
 
 
@@ -35,6 +35,16 @@ class ROA
     // Functions
     //--------------------------------------------------------
 
+    /**
+    * get list of rows of ORM
+    *
+    * @return array
+    */
+    public function get()
+    {
+    	return $this->list;
+    }
+    
 
     /**
     * add ORM to ROA
