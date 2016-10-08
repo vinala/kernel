@@ -8,6 +8,7 @@ use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\Table;
 use Lighty\Kernel\Objects\DateTime as Time;
 use Lighty\Kernel\MVC\ORM\CRUD;
+use Lighty\Kernel\MVC\ORM\ROA;
 //
 use Lighty\Kernel\MVC\ORM\Exception\TableNotFoundException;
 use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
@@ -678,6 +679,35 @@ class ORM
 	{
 		return (new BelongsTo)->ini($model , $this , $local , $remote);
 	}
+
+
+	//--------------------------------------------------------
+	// ROA functions
+	//--------------------------------------------------------
+
+
+	/**
+	* get all data of the model from data table
+	*
+	* @return Array
+	*/
+	public static function all()
+	{
+		$class = get_called_class();
+		$object = new $class ;
+		$array = array();
+		//
+		$table = $object->table;
+		$key = $object->keyName;
+		//
+		$data = Query::table($table)->select($key)->get();
+		//
+		foreach ($data as $row) 
+			$array[] = new $class ( $row->$key ) ;
+		//
+		return $array;
+	}
+	
 	
 	
 	
