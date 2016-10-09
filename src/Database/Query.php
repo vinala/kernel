@@ -4,6 +4,8 @@ namespace Lighty\Kernel\Database;
 
 use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\Strings;
+//
 use Lighty\Kernel\Database\Exceptions\QueryException;
 
 /**
@@ -153,7 +155,6 @@ class Query
 		//
 		if($data = Database::read($sql)) return self::fetch($data , $type);
 		elseif(Database::execerr()) throw new QueryException();
-		
 	}
 
 	/**
@@ -215,6 +216,9 @@ class Query
 	/**
 	 * Set where clause
 	 *
+	 * @param string $column
+	 * @param string $relation
+	 * @param string $value
 	 * @return Array
 	 */
 	public function where($column, $relation, $value)
@@ -227,6 +231,9 @@ class Query
 	/**
 	 * Set new OR condition in where clause
 	 *
+	 * @param string $column
+	 * @param string $relation
+	 * @param string $value
 	 * @return Array
 	 */
 	public function orWhere($column, $relation, $value)
@@ -239,6 +246,9 @@ class Query
 	/**
 	 * Set new AND condition in where clause
 	 *
+	 * @param string $column
+	 * @param string $relation
+	 * @param string $value
 	 * @return Array
 	 */
 	public function andWhere($column, $relation, $value)
@@ -247,6 +257,73 @@ class Query
 		//
 		return $this;
 	}
+
+	/**
+	 * Set new multi condition in where clause
+	 *
+	 * @param string $begin
+	 * @param string $between
+	 * @param array $conditions
+	 * @return Query
+	 */
+	private function groupWhere($begin , $between , $conditions)
+	{
+		$query = (Strings::trim($begin) == "or") ? " or ( " : (Strings::trim($begin) == "and") ? " and ( " : " ( " ;
+		//
+		for ($i=1; $i < Table::count($conditions); $i++) 
+		{
+			$query .= $conditions[$i];
+			$query .= ($i < Table::count($conditions)-1) ? " $between " : " " ;
+		}
+		//
+		$query .= " ) ";
+		//
+		$this->where .= $query;
+		//
+		return $this;
+	}
+
+	/**
+	 * Set new OR for multi condition in where clause
+	 *
+	 * @return Query
+	 */
+	public function orGroup()
+	{
+		$conditions = func_get_args();;
+		if( Table::count($conditions) == 0 ) throw new ErrorException("Missing arguments for orGroup() ");
+		//
+		return $this->groupWhere($conditions[0] , "or" , $conditions);
+	}
+
+	/**
+	 * Set new AND for multi condition in where clause
+	 *
+	 * @return Query
+	 */
+	public function andGroup()
+	{
+		$conditions = func_get_args();;
+		if( Table::count($conditions) == 0 ) throw new ErrorException("Missing arguments for andGroup() ");
+		//
+		return $this->groupWhere($conditions[0] , "and" , $conditions);
+	}	
+
+	/**
+	* to create condition for or()/and() function
+	*
+	* @param string $column
+	* @param string $relation
+	* @param string $value
+	* @return string
+	*/
+	public static function condition($column, $relation, $value , $quote = true)
+	{
+		$query = " ( $column $relation ";
+		$query .= $quote ? "'$value' ) " : " $value ) ";
+		return $query;
+	}
+	
 
 	/**
 	 * Set the order of data
