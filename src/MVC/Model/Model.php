@@ -8,11 +8,12 @@ use Lighty\Kernel\Config\Config;
 use Lighty\Kernel\Objects\Table;
 use Lighty\Kernel\Objects\DateTime as Time;
 use Lighty\Kernel\MVC\ORM\CRUD;
-use Lighty\Kernel\MVC\ORM\ROA;
+use Lighty\Kernel\MVC\ORM\Collection;
 //
 use Lighty\Kernel\MVC\ORM\Exception\TableNotFoundException;
 use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
 use Lighty\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
+use Lighty\Kernel\MVC\ORM\Exception\ModelNotFoundException;
 
 /**
 * The Mapping Objet-Relationnel (ORM) class
@@ -31,11 +32,12 @@ class ORM
 	//--------------------------------------------------------
 
 	/**
-	* the name of the model table with prifix
+	* the name of the called model
 	*
 	* @var string
 	*/
-    protected $prifixTable;
+    protected $model;
+
 
 	/**
 	* the name and value of primary key of the model
@@ -43,7 +45,6 @@ class ORM
 	* @var array
 	*/
     public $key = array();
-
 
     /**
 	* the name of primary key of the model
@@ -65,6 +66,13 @@ class ORM
 	* @var string
 	*/
     protected $table;
+
+    /**
+	* the name of the model table with prifix
+	*
+	* @var string
+	*/
+    protected $prifixTable;
 
     /**
 	* array contains all columns of data table
@@ -148,14 +156,15 @@ class ORM
 	* The constructor
 	*
 	*/
-	function __construct($key = null)
+	function __construct($key = null , $fail = false)
 	{
+		$this->getModel();
 		$this->getTable();
 		$this->columns();
 		$this->key();
 		if( ! is_null($key)) 
 		{
-			$this->struct($key);
+			$this->struct($key , $fail);
 			$this->state = CRUD::UPDATE_STAT;
 		}
 		else $this->state = CRUD::CREATE_STAT;
@@ -183,13 +192,23 @@ class ORM
     // Functions
     //--------------------------------------------------------
 
+    /**
+	* get the model name
+	*
+	* @return string
+	*/
+	protected function getModel()
+	{
+		$this->model = get_called_class();
+	}
+
 	/**
 	* get the model table name
 	*
 	* @param $table
 	* @return null
 	*/
-	public function getTable()
+	protected function getTable()
 	{
 		$this->prifixTable = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
 		//
@@ -340,7 +359,7 @@ class ORM
 	* @param int $key
 	* @return null
 	*/
-	protected function struct($key)
+	protected function struct($key , $fail)
 	{
 		$data = $this->dig($key);
 		//
@@ -351,6 +370,9 @@ class ORM
 			//
 			$this->convert($data);
 		}
+		elseif($fail && Table::count($data) == 0)
+			throw new ModelNotFoundException($key , $this->model);
+			
 	}
 
 	/**
@@ -443,6 +465,18 @@ class ORM
 	{
 		$class = get_called_class();
 		return new $class($key);
+	}  
+
+	/**
+	* function to get instance of the table by primary key else throw an exception
+	*
+	* @param int $key
+	* @return ORM
+	*/
+	public static function getOrFail($key)
+	{
+		$class = get_called_class();
+		return new $class($key , true);
 	}  
 
 
@@ -682,12 +716,12 @@ class ORM
 
 
 	//--------------------------------------------------------
-	// ROA functions
+	// Collection functions
 	//--------------------------------------------------------
 
 
 	/**
-	* get all data of the model from data table
+	* get collection of all data of the model from data table
 	*
 	* @return Array
 	*/
@@ -695,19 +729,33 @@ class ORM
 	{
 		$class = get_called_class();
 		$object = new $class ;
-		$array = array();
+		$roa = new Collection;
 		//
 		$table = $object->table;
 		$key = $object->keyName;
 		//
-		$data = Query::table($table)->select($key)->get();
+		$data = Query::table($table)->select($key)->where("'true'", "=" , "true");
 		//
-		foreach ($data as $row) 
-			$array[] = new $class ( $row->$key ) ;
+		if($object->canKept) 
+		$data = $data->orGroup(
+			"and" , 
+			Query::condition("deleted_at" , ">" , Time::current()) , 
+			Query::condition("deleted_at" , "is" , "NULL" , false));
+
+		if($object->canStashed) 
+		$data = $data->orGroup(
+			"and" , 
+			Query::condition("appeared_at" , "<=" , Time::current()) , 
+			Query::condition("appeared_at" , "is" , "NULL" , false));
 		//
-		return $array;
+		$data = $data->get();
+		//
+		if(Table::count($data) > 0)
+			foreach ($data as $row) 
+				$roa->add(new $class ( $row->$key ));
+		//
+		return $roa;
 	}
-	
 	
 	
 	
