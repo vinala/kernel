@@ -153,10 +153,38 @@ class ORM
 
 
     /**
-	* The constructor
+	* The constructors
 	*
 	*/
-	function __construct($key = null , $fail = false)
+	function __construct()
+	{
+		$params = func_get_args();
+		//
+		if(Table::count($params) == 1 && is_array($params[0])) $this->secondConstruct($params[0]);
+		elseif(Table::count($params) > 0 && is_int($params[0])) $this->secondConstruct($params[0] , ( ! isset($params[1]) ? $params[1] : null ) );
+		else $this->emptyConstruct();
+		
+	}
+
+	/**
+	* the empty constructor
+	*/
+	private function emptyConstruct()
+	{
+		$this->getModel();
+		$this->getTable();
+		$this->columns();
+		$this->key();
+		$this->state = CRUD::CREATE_STAT;
+	}
+
+	/**
+	* the main constructor to search that from database
+	*
+	* @param int $key
+	* @param bool $fail
+	*/
+	private function mainConstruct($key = null , $fail = false)
 	{
 		$this->getModel();
 		$this->getTable();
@@ -169,6 +197,26 @@ class ORM
 		}
 		else $this->state = CRUD::CREATE_STAT;
 	}
+
+	/**
+	* the second Construct to fil data from array
+	*
+	* @param array $data
+	*/
+	private function secondConstruct($data)
+	{
+		// $this->getModel();
+		// $this->getTable();
+		// $this->columns();
+		// $this->key();
+		// if( ! is_null($key)) 
+		// {
+		// 	$this->struct($key , $fail);
+		// 	$this->state = CRUD::UPDATE_STAT;
+		// }
+		// else $this->state = CRUD::CREATE_STAT;
+	}
+	
 
 
 	//--------------------------------------------------------
@@ -723,13 +771,13 @@ class ORM
 	/**
 	* get collection of all data of the model from data table
 	*
-	* @return Array
+	* @return Collection
 	*/
 	public static function all()
 	{
 		$class = get_called_class();
 		$object = new $class ;
-		$roa = new Collection;
+		$collection = new Collection;
 		//
 		$table = $object->table;
 		$key = $object->keyName;
@@ -752,10 +800,36 @@ class ORM
 		//
 		if(Table::count($data) > 0)
 			foreach ($data as $row) 
-				$roa->add(new $class ( $row->$key ));
+				$collection->add(new $class ( $row->$key ));
 		//
-		return $roa;
+		return $collection;
 	}
+
+	/**
+	* get collection of all data of the model from data table with the kept data
+	*
+	* @return Collection
+	*/
+	public static function withTrash()
+	{
+		$class = get_called_class();
+		$object = new $class ;
+		$collection = new Collection;
+		//
+		$table = $object->table;
+		$key = $object->keyName;
+		//
+		$data = Query::table($table)->select($key);
+		$data = $data->get();
+		//
+		if(Table::count($data) > 0)
+			foreach ($data as $row) 
+				$collection->add(new $class ( $row->$key ));
+		//
+		return $collection;
+	}
+	
+	
 	
 	
 	
