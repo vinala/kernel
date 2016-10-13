@@ -205,10 +205,12 @@ class ORM
 	*/
 	private function secondConstruct($data)
 	{
-		// $this->getModel();
-		// $this->getTable();
-		// $this->columns();
-		// $this->key();
+		$this->getModel($data);
+		$this->getTable($data);
+		$this->columns($data);
+		$this->key($data);
+		$this->fill($data);
+		$this->state = CRUD::UPDATE_STAT;
 		// if( ! is_null($key)) 
 		// {
 		// 	$this->struct($key , $fail);
@@ -245,9 +247,9 @@ class ORM
 	*
 	* @return string
 	*/
-	protected function getModel()
+	protected function getModel($data = null)
 	{
-		$this->model = get_called_class();
+		$this->model = is_null($data) ? get_called_class() : $data["name"];
 	}
 
 	/**
@@ -256,13 +258,18 @@ class ORM
 	* @param $table
 	* @return null
 	*/
-	protected function getTable()
+	protected function getTable($data = null)
 	{
-		$this->prifixTable = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
-		//
-		if( ! $this->checkTable() ) throw new TableNotFoundException($this->table);
-		//
-		return $this->prifixTable;
+		if(is_null($data))
+		{
+			$this->prifixTable = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
+			//
+			if( ! $this->checkTable() ) throw new TableNotFoundException($this->table);
+			//
+			return $this->prifixTable;
+		}
+		else $this->prifixTable = $data["prifixTable"];
+		
 	}
 
 	/**
@@ -288,17 +295,21 @@ class ORM
 	*
 	* @return array
 	*/
-	protected function columns()
+	protected function columns($data = null)
 	{
-		$this->columns = $this->extruct(
-			Query::from("INFORMATION_SCHEMA.COLUMNS" , false)
-			->select("COLUMN_NAME")
-			->where("TABLE_SCHEMA","=",Config::get('database.database'))
-			->andwhere("TABLE_NAME","=",$this->prifixTable)
-			->get(Query::GET_ARRAY)
-			);
-		//
-		return $this->columns;
+		if(is_null($data))
+		{
+			$this->columns = $this->extruct(
+				Query::from("INFORMATION_SCHEMA.COLUMNS" , false)
+				->select("COLUMN_NAME")
+				->where("TABLE_SCHEMA","=",Config::get('database.database'))
+				->andwhere("TABLE_NAME","=",$this->prifixTable)
+				->get(Query::GET_ARRAY)
+				);
+			//
+			return $this->columns;
+		}
+		else $this->columns = $data["columns"];
 	}
 
 	/**
@@ -390,15 +401,23 @@ class ORM
 	*
 	* @return null
 	*/
-	protected function key()
+	protected function key($data = null)
 	{
-		$data = $this->getPK();
-		//
-		if(Table::count($data) > 1) throw new ManyPrimaryKeysException();
-		else if(Table::count($data) == 0 ) throw new PrimaryKeyNotFoundException($this->table);
-		//
-		$this->keyName = $data[0]['Column_name'];
-		$this->key["name"] = $data[0]['Column_name'];
+		if(is_null($data))
+		{
+			$data = $this->getPK();
+			//
+			if(Table::count($data) > 1) throw new ManyPrimaryKeysException();
+			else if(Table::count($data) == 0 ) throw new PrimaryKeyNotFoundException($this->table);
+			//
+			$this->keyName = $data[0]['Column_name'];
+			$this->key["name"] = $data[0]['Column_name'];
+		}
+		else
+		{
+			$this->keyName = $data['key'];
+			$this->key["name"] = $data['key'];
+		}
 	}
 
 	/**
@@ -421,6 +440,20 @@ class ORM
 		elseif($fail && Table::count($data) == 0)
 			throw new ModelNotFoundException($key , $this->model);
 			
+	}
+
+	/**
+	* fill data from array
+	*
+	* @param array $data
+	* @return null
+	*/
+	protected function fill($data)
+	{
+		if( $this->canKept && $this->keptAt($data["values"]) ) $this->kept = true ;
+		if( $this->canStashed && $this->stashedAt($data["values"]) ) $this->stashed = true ;
+		//
+		$this->convert($data["values"]);
 	}
 
 	/**
@@ -782,7 +815,7 @@ class ORM
 		$table = $object->table;
 		$key = $object->keyName;
 		//
-		$data = Query::table($table)->select($key)->where("'true'", "=" , "true");
+		$data = Query::table($table)->select("*")->where("'true'", "=" , "true");
 		//
 		if($object->canKept) 
 		$data = $data->orGroup(
@@ -796,11 +829,24 @@ class ORM
 			Query::condition("appeared_at" , "<=" , Time::current()) , 
 			Query::condition("appeared_at" , "is" , "NULL" , false));
 		//
-		$data = $data->get();
+		$data = $data->get(Query::GET_ARRAY);
 		//
 		if(Table::count($data) > 0)
 			foreach ($data as $row) 
-				$collection->add(new $class ( $row->$key ));
+			{
+				$rows[0] = $row ;
+				//
+				$value = 
+				[
+					"name" => $object->model , 
+					"prifixTable" => $object->prifixTable , 
+					"columns" => $object->columns , 
+					"key" => $object->keyName , 
+					"values" => $rows 
+				];
+				//
+				$collection->add(new $class ( $value ));
+			}
 		//
 		return $collection;
 	}
