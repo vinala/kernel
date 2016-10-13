@@ -1,539 +1,905 @@
 <?php 
 
-namespace Lighty\Kernel\MVC;
+namespace Lighty\Kernel\MVC ;
 
-use Lighty\Kernel\MVC\ORM\Exception\ColumnNotEmptyException;
-use Lighty\Kernel\MVC\ORM\Exception\ForeingKeyMethodException;
+use Lighty\Kernel\Database\Database;
+use Lighty\Kernel\Database\Query;
+use Lighty\Kernel\Config\Config;
+use Lighty\Kernel\Objects\Table;
+use Lighty\Kernel\Objects\DateTime as Time;
+use Lighty\Kernel\MVC\ORM\CRUD;
+use Lighty\Kernel\MVC\ORM\Collection;
+//
+use Lighty\Kernel\MVC\ORM\Exception\TableNotFoundException;
 use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
 use Lighty\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
-use Lighty\Kernel\MVC\ORM\Exception\ManyRelationException;
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\DateTime as Time;
-use InvalidArgumentException;
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\MVC\Relations\OneToOne;
-use Lighty\Kernel\MVC\Relations\OneToMany;
-use Lighty\Kernel\MVC\Relations\ManyToMany;
-use Lighty\Kernel\MVC\Relations\BelongsTo;
-use Lighty\Kernel\MVC\Model\ModelArray;
-
+use Lighty\Kernel\MVC\ORM\Exception\ModelNotFoundException;
 
 /**
-* ORM class
+* The Mapping Objet-Relationnel (ORM) class
+* 
+* Beta (Source code name : model)
+*
+* @version 2.0
+* @author Youssef Had
+* @package Lighty\Kernel\MVC
 */
- class _ORM
+class ORM
 {
+
+	//--------------------------------------------------------
+	// Properties
+	//--------------------------------------------------------
+
 	/**
-	* the name of primary key for the model
+	* the name of the called model
+	*
+	* @var string
+	*/
+    protected $model;
+
+
+	/**
+	* the name and value of primary key of the model
+	*
+	* @var array
+	*/
+    public $key = array();
+
+    /**
+	* the name of primary key of the model
+	*
+	* @var string
 	*/
     protected $keyName;
 
     /**
-	* the value of primary key for the model
+	* the value of primary key of the model
+	*
+	* @var string
 	*/
     protected $keyValue;
 
-	/**
-	 * Unixtime when this resource was kept deleted 
-	 */
-	protected $kept_at = null;
+    /**
+	* the value of the model table name
+	*
+	* @var string
+	*/
+    protected $table;
+
+    /**
+	* the name of the model table with prifix
+	*
+	* @var string
+	*/
+    protected $prifixTable;
+
+    /**
+	* array contains all columns of data table
+	*
+	* @var array
+	*/
+    public $columns = array();
+
+    /**
+	* if data table could have kept data
+	* with the columns deleted_at
+	*
+	* @var bool
+	*/
+    protected $canKept = false;
+
+    /**
+	* if this data row is kept
+	*
+	* @var bool
+	*/
+    public $kept = false ;
+
+    /**
+	* if this data row is kept all data 
+	* will be stored in this array
+	*
+	* @var array
+	*/
+    public $keptData ;
+
+    /**
+	* if data table could have stashed data
+	* with the columns appeared_at
+	*
+	* @var bool
+	*/
+    protected $canStashed = false;
+
+    /**
+	* if this data row is stashed
+	*
+	* @var bool
+	*/
+    public $stashed = false ;
+
+    /**
+	* if this data row is stashed all data 
+	* will be stored in this array
+	*
+	* @var array
+	*/
+    public $stashedData ;
 
 	/**
-	 * kept deleted data
-	 */
-	protected $kept_data = array();
+	* if data table is tracked data
+	* with the columns created_at and edited_at
+	*
+	* @var bool
+	*/
+    public $tracked  = false ;
 
-	protected static $table;
-	protected $DBtable;
-	protected $columns= array();
-	protected $key;
-	//
-	protected $isKept = false;
-	protected $isMaj = false;
-	protected $areMaj = 0;
+    /**
+	* the state of the ORM
+	*
+	* @var string
+	*/
+    protected $state ;
+
+    
 
 
-	public function __construct($pk=null,$table=null) 
+
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
+
+
+
+    /**
+	* The constructors
+	*
+	*/
+	function __construct()
 	{
-		$this->setTable($table);
-		$this->setColmuns();
-		$this->setPrimaryKey();
-		if( ! is_null($pk)) $this->setData($pk);
-	}
-
-	public function __get($name)
-	{
-		return $this->getCallable($name);
-	}
-
-	protected function getColmuns()
-	{
-		return Database::read("select COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '".Config::get('database.database')."' AND TABLE_NAME = '".$this->DBtable."';");
-	}
-
-	protected function setColmuns()
-	{
-		$data=array();
+		$params = func_get_args();
 		//
-		$rows = $this->getColmuns();
-		//
-		foreach($rows as $key => $value)
-			foreach($value as $key2 => $value2)
-    			if(is_numeric($key2)) 
-    			{
-    				$data[]=$value2;
-    				$this->setVars($value2);
-    				if($value2 == "deleted_at") $this->isKept = true;
-    				if($value2 == "created_at" ) $this->areMaj++;
-    				else if($value2 == "edited_at" ) $this->areMaj++;
-    				//
-    				if($this->areMaj == 2) $this->isMaj = true;
-    			}
-    	//
-    	$this->columns=$data;
-    	$this->setForeign();
-	}
-
-	protected function setVars($key,$value = null,$kept=false)
-	{
-		if( ! $kept )  $this->$key = $value ;
-		// else if( $kept && $key == "deleted_at") $this->$key = $value ;
-		else if( $kept ) $this->setKept($key, $value);
-		//
-		self::setKeyValue($key, $value);
+		if(Table::count($params) == 1 && is_array($params[0])) $this->secondConstruct($params[0]);
+		elseif(Table::count($params) > 0 && is_int($params[0])) $this->secondConstruct($params[0] , ( ! isset($params[1]) ? $params[1] : null ) );
+		else $this->emptyConstruct();
+		
 	}
 
 	/**
-	 * Set primary key value
-	 */
-	protected function setKeyValue($key, $value)
+	* the empty constructor
+	*/
+	private function emptyConstruct()
 	{
-		if($key == $this->keyName) $this->keyValue = $value;
+		$this->getModel();
+		$this->getTable();
+		$this->columns();
+		$this->key();
+		$this->state = CRUD::CREATE_STAT;
 	}
 
 	/**
-	 * Set kept data
-	 */
-	protected function setKept($key, $value)
+	* the main constructor to search that from database
+	*
+	* @param int $key
+	* @param bool $fail
+	*/
+	private function mainConstruct($key = null , $fail = false)
 	{
-		if($key == "deleted_at") 
+		$this->getModel();
+		$this->getTable();
+		$this->columns();
+		$this->key();
+		if( ! is_null($key)) 
 		{
-			$this->kept_at = $value;
-			$this->kept_data[$key] = $value;
+			$this->struct($key , $fail);
+			$this->state = CRUD::UPDATE_STAT;
 		}
-		//
-		$this->kept_data[$key] = $value;
+		else $this->state = CRUD::CREATE_STAT;
 	}
 
-	protected function getPrimaryKey()
+	/**
+	* the second Construct to fil data from array
+	*
+	* @param array $data
+	*/
+	private function secondConstruct($data)
 	{
-		return Database::read("SHOW INDEX FROM ".$this->DBtable." WHERE `Key_name` = 'PRIMARY'");;
+		$this->getModel($data);
+		$this->getTable($data);
+		$this->columns($data);
+		$this->key($data);
+		$this->fill($data);
+		$this->state = CRUD::UPDATE_STAT;
+		// if( ! is_null($key)) 
+		// {
+		// 	$this->struct($key , $fail);
+		// 	$this->state = CRUD::UPDATE_STAT;
+		// }
+		// else $this->state = CRUD::CREATE_STAT;
+	}
+	
+
+
+	//--------------------------------------------------------
+	// Getter and Setter
+	//--------------------------------------------------------
+
+
+	public function __set($name, $value) 
+	{
+        $this->$name = $value;
+    }
+
+    public function __get($name) 
+	{
+        if(method_exists($this, $name)) return call_user_func(array($this,$name));
+		else throw new InvalidArgumentException("Undefined property: ".get_class($this)."::$name");
+    }
+
+
+	//--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
+
+    /**
+	* get the model name
+	*
+	* @return string
+	*/
+	protected function getModel($data = null)
+	{
+		$this->model = is_null($data) ? get_called_class() : $data["name"];
 	}
 
-	protected function setPrimaryKey()
+	/**
+	* get the model table name
+	*
+	* @param $table
+	* @return null
+	*/
+	protected function getTable($data = null)
+	{
+		if(is_null($data))
+		{
+			$this->prifixTable = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
+			//
+			if( ! $this->checkTable() ) throw new TableNotFoundException($this->table);
+			//
+			return $this->prifixTable;
+		}
+		else $this->prifixTable = $data["prifixTable"];
+		
+	}
+
+	/**
+	* Check if table exists in database
+	*
+	* @param $table string
+	* @return bool
+	*/
+	protected function checkTable()
+	{
+		$data = Query::from("information_schema.tables" , false)
+			->select("*")
+			->where("TABLE_SCHEMA","=",Config::get('database.database'))
+			->andwhere("TABLE_NAME","=",$this->prifixTable)
+			->get(Query::GET_ARRAY);
+		//
+		return (Table::count($data) > 0 ) ? true : false;
+	}
+	
+
+	/**
+	* to get and set all columns of data table
+	*
+	* @return array
+	*/
+	protected function columns($data = null)
+	{
+		if(is_null($data))
+		{
+			$this->columns = $this->extruct(
+				Query::from("INFORMATION_SCHEMA.COLUMNS" , false)
+				->select("COLUMN_NAME")
+				->where("TABLE_SCHEMA","=",Config::get('database.database'))
+				->andwhere("TABLE_NAME","=",$this->prifixTable)
+				->get(Query::GET_ARRAY)
+				);
+			//
+			return $this->columns;
+		}
+		else $this->columns = $data["columns"];
+	}
+
+	/**
+	* convert array rows from array to string
+	* this function is used columns() function
+	*
+	* @param $columns array
+	* @return array
+	*/
+	protected function extruct($columns)
 	{
 		$data = array();
 		//
-		$rows = $this->getPrimaryKey();
-		//
-		if(count($rows) > 1) throw new ManyPrimaryKeysException();
-		else if(count($rows) == 0 ) throw new PrimaryKeyNotFoundException($this->DBtable);
-		//
-		$this->key=$rows[0]['Column_name'];
-		$this->keyName=$rows[0]['Column_name'];
-	}
-
-	protected function setTable($table)
-	{
-		$table = is_null($table) ? ! isset(static::$table) ? get_class($this) : static::$table : $table;
-		//
-		if(Config::get('database.prefixing')) $this->DBtable = Config::get('database.prefixe') . $table;
-		else $this->DBtable=$table;
-	}
-
-	protected function setData($pk)
-	{
-		// if( ! $this->isKept) 
-			$sql = "select * from ".$this->DBtable." where ".$this->keyName."='".$pk."' ";
-		// else $sql = "select * from ".$this->DBtable." where ".$this->keyName."='".$pk."' where deleted_at<'".Time::current()."'";
-		//
-		$data=Database::read($sql,1);
-		//
-		if(count($data)==1)
-		{
-			$kept = false;
-			// for Smooth delete
-			if($this->isKept) if( $this->isSmoothDeleted($data) ) $kept = true;
-
-			foreach ($data[0] as $key => $value) $this->setVars($key,$value,$kept);
-			$this->putForeign();
-		}
-	}
-
-	protected function putForeign()
-	{
-		if(isset(static::$foreignKeys))
-		if( ! is_null(static::$foreignKeys)) 
-		{
-			$foreigns=static::$foreignKeys;
-			//
-			foreach ($foreigns as $key => $value) 
+		foreach ($columns as $value)
+			foreach ($value as $subValue)
 			{
-				if(method_exists($this, $value)) $this->$value = $this->$value();
-				else throw new ForeingKeyMethodException($value,get_class($this));
+				$data[] = $subValue;
+				//
+				// Check if kept
+				if( ! $this->canKept ) $this->isKept($subValue);
+				//
+				// Check if stashed
+				if( ! $this->canStashed ) $this->isStashed($subValue);
+				//
+				// Check if tracked
+				if( ! $this->tracked ) $this->isTracked($subValue);
 			}
-		}
+		//
+		return $data;
 	}
-	protected function setForeign()
+
+	/**
+	* check if data table could have kept data
+	*
+	* @param $column string
+	* @return bool
+	*/
+	protected function isKept($column)
 	{
-		if(isset(static::$foreignKeys))
-		if( ! is_null(static::$foreignKeys)) 
+		if($column == "deleted_at") $this->canKept = true;
+	}
+
+	/**
+	* check if data table could have stashed data
+	*
+	* @param $column string
+	* @return bool
+	*/
+	protected function isStashed($column)
+	{
+		if($column == "appeared_at") $this->canStashed = true;
+	}
+
+	/**
+	* check if data table could have tracked data
+	*
+	* @param $column string
+	* @return bool
+	*/
+	protected function isTracked($column)
+	{
+		if($column == "created_at" || $column == "edited_at") 
+			$this->tracked = true;
+	}
+
+	/**
+	* function execute SQL query to get Primary keys
+	*
+	* @return array
+	*/
+	protected function getPK()
+	{
+		switch (Config::get('database.default')) 
 		{
-			$foreigns=static::$foreignKeys;
-			//
-			foreach ($foreigns as $key => $value) 
-			{
-				if(method_exists($this, $value)) $this->$value =  null;
-				else throw new ForeingKeyMethodException($value,get_class($this));
-			}
+			case 'sqlite': break;
+			case 'mysql':
+					return Database::read("SHOW INDEX FROM ".$this->prifixTable." WHERE `Key_name` = 'PRIMARY'");
+				break;
+
+			case 'pgsql': break;
+			case 'sqlsrv': break;
 		}
 	}
 
-	protected function isSmoothDeleted($data)
+	/**
+	* set primary key
+	* the framework doesn't support more the column to be 
+	* the primary key otherwise exception will be thrown
+	*
+	* @return null
+	*/
+	protected function key($data = null)
+	{
+		if(is_null($data))
+		{
+			$data = $this->getPK();
+			//
+			if(Table::count($data) > 1) throw new ManyPrimaryKeysException();
+			else if(Table::count($data) == 0 ) throw new PrimaryKeyNotFoundException($this->table);
+			//
+			$this->keyName = $data[0]['Column_name'];
+			$this->key["name"] = $data[0]['Column_name'];
+		}
+		else
+		{
+			$this->keyName = $data['key'];
+			$this->key["name"] = $data['key'];
+		}
+	}
+
+	/**
+	* get data from data table according to primary key value
+	*
+	* @param int $key
+	* @return null
+	*/
+	protected function struct($key , $fail)
+	{
+		$data = $this->dig($key);
+		//
+		if(Table::count($data) == 1)
+		{
+			if( $this->canKept && $this->keptAt($data) ) $this->kept = true ;
+			if( $this->canStashed && $this->stashedAt($data) ) $this->stashed = true ;
+			//
+			$this->convert($data);
+		}
+		elseif($fail && Table::count($data) == 0)
+			throw new ModelNotFoundException($key , $this->model);
+			
+	}
+
+	/**
+	* fill data from array
+	*
+	* @param array $data
+	* @return null
+	*/
+	protected function fill($data)
+	{
+		if( $this->canKept && $this->keptAt($data["values"]) ) $this->kept = true ;
+		if( $this->canStashed && $this->stashedAt($data["values"]) ) $this->stashed = true ;
+		//
+		$this->convert($data["values"]);
+	}
+
+	/**
+	* search for data by Query Class according to primary key
+	*
+	* @param int $key
+	* @return array
+	*/
+	protected function dig($key)
+	{
+		return Query::from($this->table)
+			->select("*")
+			->where( $this->keyName , "=" , $key)
+			->get(Query::GET_ARRAY);
+	}
+
+	/**
+	* check if this data is already kept
+	*
+	* @param array $data
+	* @return bool
+	*/
+	protected function keptAt($data)
 	{
 		if(is_null($data[0]["deleted_at"])) return false;
-		else
-		return $data[0]["deleted_at"] < Time::current();
-	}
-
-	protected static function instance()
-	{
-		$class=get_class();
-		return new $class(null,static::$table);
-	}
-	
-	protected function getData()
-	{
-		$vars = array();
-		$defaultVars = $this->getDefaultVars();
-		//
-		foreach (get_object_vars($this) as $key => $value) 
-			if(!in_array($key,$defaultVars))
-				$vars[$key]=$value; 
-		//
-		return $vars;
-	}
-
-	protected function clean()
-	{
-		$vars = array();
-		$defaultVars = $this->getDefaultVars();
-		//
-		foreach (get_object_vars($this) as $key => $value) 
-			if(!in_array($key,$defaultVars))
-				$this->$key = null; 
+		else return $data[0]["deleted_at"] < Time::current();
 	}
 
 	/**
-	 * To Find element by primary key
-	 * @param int : primary key value
-	 * @return object
-	 */
-	public static function find($id)
+	* check if this data is already hidden
+	*
+	* @param array $data
+	* @return bool
+	*/
+	protected function stashedAt($data)
+	{
+		if(is_null($data[0]["appeared_at"])) return false;
+		else return $data[0]["appeared_at"] > Time::current();
+	}
+
+	/**
+	* make data array colmuns as property
+	* in case of hidden data property was true
+	* data will be stored in hidden data 
+	* instead ofas property
+	*
+	* @param array $data
+	* @return null
+	*/
+	protected function convert($data)
+	{
+		foreach ($data[0] as $key => $value) 
+			if( ! $this->kept && ! $this->stashed ) 
+			{
+				$this->$key = $value ;
+				$this->setKey($key , $value);
+			}
+			else
+			{
+				if($this->kept) $this->keptData[$key] = $value ;
+				if($this->stashed) $this->stashedData[$key] = $value ;
+			}
+	}
+
+	/**
+	* set the primary key value by verifying
+	* the name of the key in data array and
+	* the name of $keyName property
+	*
+	* @param string $key
+	* @param string $value
+	* @return null
+	*/
+	protected function setKey($key , $value)
+	{
+		if($key == $this->keyName)
+		{
+			$this->keyValue = $value;
+			$this->key["value"] = $value;
+		}
+	}
+
+	/**
+	* function to get instance of the table by primary key
+	*
+	* @param int $key
+	* @return ORM
+	*/
+	public static function get($key)
 	{
 		$class = get_called_class();
-		//
-		return new $class($id);
-	}
+		return new $class($key);
+	}  
 
-	protected function getDefaultVars()
+	/**
+	* function to get instance of the table by primary key else throw an exception
+	*
+	* @param int $key
+	* @return ORM
+	*/
+	public static function getOrFail($key)
 	{
-		return array('table','DBtable','columns','key','isKept','isMaj','areMaj',"pk","keyName","keyValue","kept_at","kept_data");
-	}
+		$class = get_called_class();
+		return new $class($key , true);
+	}  
 
-	
 
-	public function emptyPK()
+	//--------------------------------------------------------
+	// CRUD Functions
+	//--------------------------------------------------------
+
+	/**
+	* Save the opertaion makes by user either creation or editing
+	*
+	* @return bool
+	*/
+	public function save()
 	{
-		$key=$this->keyName;
-		$this->$key=null;
-	}
-
-	public function add()
-	{
-		$sql="insert into ".$this->DBtable." ";
-		$colmn_string="(";
-		$value_string=" values(";
-		//
-		$this->emptyPK();
-		$data=$this->getData();
-		//
-		$i=0;
-		foreach ($data as $key => $value) {
-			if($i==0) { $colmn_string.="".$key; $value_string.="'".$value."'"; }
-			else { $colmn_string.=",".$key; $value_string.=",'".$value."'"; }
-			//
-			$i++;
-		}
-		if( $this->isMaj ) 
-		{
-			if($i==0) { $colmn_string.="created_at"; $value_string.="'".Time::current()."'"; }
-			else { $colmn_string.=",created_at"; $value_string.=",'".Time::current()."'"; }
-		}
-		//
-		$colmn_string.=")";
-		$value_string.=")";
-		//
-		$sql.=$colmn_string.$value_string;
-		//
-		return Database::exec($sql);
-	}
-
-	protected function getPKvalue()
-	{
-		return $this->keyValue;
-		// $data = $this->getData();
-		// return $data[$this->keyName];
+		if($this->state == CRUD::CREATE_STAT) $this->add();
+		elseif ($this->state == CRUD::UPDATE_STAT) $this->edit();
 	}
 
 	/**
-	 * delete the resource
-	 */
+	* function to add data in data table
+	*
+	* @return bool
+	*/
+	private function add()
+	{
+		$columns = array();
+		$values = array();
+		//
+		if($this->tracked) $this->created_at = Time::current();
+		//
+		foreach ($this->columns as $value)
+			if($value != $this->keyName && isset($this->$value) && !empty($this->$value) )
+			{
+				$columns[] = $value;
+				$values [] = $this->$value;
+			}
+		//
+		return $this->insert($columns , $values);
+	}
+
+	/**
+	* function to exexute insert data
+	*
+	* @param array $columns
+	* @param array $values
+	* @return bool
+	*/
+	private function insert($columns , $values)
+	{
+		return Query::table($this->table)
+		->column($columns)
+		->value($values)
+		->insert();
+	}
+
+	/**
+	* function to edit data in data table
+	*
+	* @return bool
+	*/
+	private function edit()
+	{
+		$columns = array();
+		$values = array();
+		//
+		if($this->tracked) $this->edited_at = Time::current();
+		//
+		foreach ($this->columns as $value)
+			if($value != $this->keyName && isset($this->$value) && !empty($this->$value) )
+			{
+				$columns[] = $value;
+				$values [] = $this->$value;
+			}
+		//
+		return $this->update($columns , $values);
+	}
+
+	/**
+	* function to exexute update data
+	*
+	* @param array $columns
+	* @param array $values
+	* @return bool
+	*/
+	private function update($columns , $values)
+	{
+		$query = Query::table($this->table);
+		//
+		for ($i=0; $i < Table::count($columns) ; $i++) 
+			$query = $query->set($columns[$i] , $values[$i]);
+		//
+		$query->where($this->keyName , "=" , $this->keyValue)
+		->update();
+		//
+		return $query;
+	}
+
+	/**
+	* to delete the model from database
+	* in case of Kept deleted just hide it
+	*
+	* @return bool
+	*/
 	public function delete()
 	{
-		if( $this->isKept ) $this->lightDelete();
-		else $this->forceDelete();
+		if( ! $this->canKept)
+			$this->forceDelete();
+
+		else 
+			Query::table($this->table)
+			->set("deleted_at" , Time::current())
+			->where($this->keyName , "=" , $this->keyValue)
+			->update();	
 	}
 
+
 	/**
-	 * force delete if the resource is kept delete
-	 */
+	* to force delete the model from database even if the model is Kept deleted
+	*
+	* @return bool
+	*/
 	public function forceDelete()
 	{
-		$key=$this->getPKvalue();
-		$sql="delete from ".$this->DBtable." where ".$this->keyName." = '".$key."' ";
+		$key = $this->kept ? $this->keptData[$this->keyName] : $this->keyValue ;
 		//
-		return Database::exec($sql);
+		Query::table($this->table)
+			->where($this->keyName , "=" , $key)
+			->delete();
+		//
+		$this->reset();
 	}
 
 	/**
-	 * light delete if the resource is kept delete
-	 */
-	protected function lightDelete()
+	* reset the current model if it's deleted
+	*
+	* @return null
+	*/
+	private function reset()
 	{
-		$now = Time::current();
-		$key=$this->getPKvalue();
+		$vars = get_object_vars($this);
 		//
-		$sql="update ".$this->DBtable." set deleted_at='".$now."' where ".$this->keyName." = '".$key."' ";
-		if(Database::exec($sql)) { $this->clean(); $this->deleted_at = $now; }
+		foreach ($vars as $key => $value)
+			unset($this->$key);
 	}
 
 	/**
-	 * restore if kept deleted 
-	 */
+	* restore the model if it's kept deleted
+	*
+	* @return bool
+	*/
 	public function restore()
 	{
-
-		if( $this->isKept )
+		if( $this->kept )
 		{
-
-			$key=$this->getPKvalue();
-			$sql="update ".$this->DBtable." set deleted_at=null where ".$this->keyName." = '".$key."' ";
+			$this->bring();
 			//
-			if(Database::exec($sql)) 
-			{ 
-				// Code to execute the init the model
-			}
+			Query::table($this->table)
+			->set("deleted_at" , "NULL" , false)
+			->where($this->keyName , "=" , $this->keyValue)
+			->update();	
 		}
 	}
 
 	/**
-	 * Dynamic Property
-	 *
-	 * @param $name : name of the function
-	 */
-	public function getCallable($name)
+	* to extruct data from keptdata array to become properties
+	*
+	* @return null
+	*/
+	private function bring()
 	{
-		if(method_exists($this, $name)) return call_user_func(array($this,$name));
-		else throw new InvalidArgumentException("Undefined property: ".get_class($this)."::$name");
+		foreach ($this->keptData as $key => $value)
+			$this->$key = $value;
+		//
+		$this->keyValue = $this->keptData[$this->keyName];
+		//
+		$this->keptData = null;
+		$this->kept = false;
 	}
+	
 
+	//--------------------------------------------------------
+	// Relations
+	//--------------------------------------------------------
 
 	/**
-	 * Get all rows of Data Table
-	 */
-	public static function all()
-	{
-		$self=self::instance();
-		//
-		// Pagination
-		//
-		$sql="select * from ".$self->DBtable;
-		return Database::read($sql,1);
-	}
-
-	public function edit()
-	{
-		$sql="update ".$this->DBtable." set ";
-		//
-		$data=$this->getData();
-		//
-		$i=0;
-		//
-		foreach ($data as $key => $value) 
-		{
-			if($i==0) { $sql.="$key='$value'"; }
-			else { $sql.=",$key='$value'"; }
-			$i++;
-		}
-
-		if( $this->isMaj ) 
-		{
-			if($i==0) { $sql.="edited_at='".Time::current()."'"; }
-			else { $sql.=",edited_at='".Time::current()."'"; }
-		}
-		//
-		$key=$this->getPKvalue();
-		$sql.=" where ".$this->keyName."='".$key."'";
-		//
-		return Database::exec($sql);
-	}
-
-	public static function get($colmn,$condution,$value)
-	{
-		$self=self::instance();
-		$rows = new ModelArray;
-		$sql="select * from ".$self->DBtable." where $colmn $condution '$value'";
-		$data = Database::read($sql,1);
-		//
-		foreach ($data as $key => $value) 
-		{
-			$row = self::instance();
-			//
-			foreach ($value as $key2 => $value2)
-			{
-				$row->$key2 = $value2;
-				$row->setKeyValue($key2, $value2);
-			}
-			//
-			$rows->add( $row );
-		}
-		//
-		return $rows;
-	}
-
-	public static function where($where)
-	{
-		$self=self::instance();
-		$rows = new ModelArray;
-		//
-		$sql="select * from ".$self->DBtable." where $where ";
-		$data = Database::read($sql,1);
-		//
-		foreach ($data as $key => $value) 
-		{
-			$row = self::instance();
-			//
-			foreach ($value as $key2 => $value2)
-			{
-				$row->$key2 = $value2;
-				$row->setKeyValue($key2, $value2);
-			}
-			//
-			$rows->add( $row );
-		}
-		//
-		return $rows;
-	}
-
-
-	/**
-	 * To count rows by where clause
-	 *
-	 * @param $where (string) : the where clause
-	 **/
-	public static function count($where)
-	{
-		$self=self::instance();
-		$rows = new ModelArray;
-		//
-		$sql="select count(*) as cnt from ".$self->DBtable." where $where ";
-		$data = Database::read($sql,1);
-		//
-		return $data[0]['cnt'];
-	}
-
-	/**
-	 * Check if element in where existe
-	 *
-	 * @param $where (string) : the where clause
-	 */
-	public static function exist($where)
-	{
-		$self=self::instance();
-		$rows = new ModelArray;
-		//
-		$sql="select count(*) as cnt from ".$self->DBtable." where $where ";
-		$data = Database::read($sql,1);
-		//
-		return ($data[0]['cnt'] > 0) ;
-	}
-
-
-	/**
-	 * The has one relation for one to one
-	 *
-	 * @param $model : the model wanted to be related to the 
-	 *			current model
-	 * @param $local : if not null would be the local column
-	 *			of the relation
-	 * @param $remote : if not null would be the $remote column
-	 *			of the relation
-	 */
+	* The has one relation for one to one
+	*
+	* @param string $model : the model wanted to be related to the current model
+	* @param string $local : if not null would be the local column of the relation
+	* @param string $remote : if not null would be the $remote column of the relation
+	* @return 
+	*/
 	public function hasOne($model , $local = null , $remote=null)
 	{
 		return (new OneToOne)->ini($model , $this , $local , $remote);
 	}
+	
 
 	/**
-	 * The one to many relation
-	 *
-	 * @param $model : the model wanted to be related to the 
-	 *			current model
-	 * @param $local : if not null would be the local column
-	 *			of the relation
-	 * @param $remote : if not null would be the $remote column
-	 *			of the relation
-	 */
+	* The one to many relation
+	*
+	* @param string $model : the model wanted to be related to the current model
+	* @param string $local : if not null would be the local column of the relation
+	* @param string $remote : if not null would be the $remote column of the relation
+	* @return 
+	*/
 	public function hasMany($model , $local = null , $remote = null)
 	{
 		return (new OneToMany)->ini($model , $this , $local , $remote);
 	}
 
 	/**
-	 * The many to many relation
-	 *
-	 * @param $model : the model wanted to be related to the 
-	 *			current model
-	 * @param $local : if not null would be the local column
-	 *			of the relation
-	 * @param $remote : if not null would be the $remote column
-	 *			of the relation
-	 */
+	* The many to many relation
+	*
+	* @param string $model : the model wanted to be related to the  current model
+	* @param string $local : if not null would be the local column of the relation
+	* @param string $remote : if not null would be the $remote column of the relation
+	* @return 
+	*/
 	public function belongsToMany($model , $intermediate = null , $local = null , $remote = null)
 	{
 		return (new ManyToMany)->ini($model , $this , $intermediate , $local , $remote);
 	}
 
+	/**
+	* The many to many relation
+	*
+	* @param string $model : the model wanted to be related to the  current model
+	* @param string $local : if not null would be the local column of the relation
+	* @param string $remote : if not null would be the $remote column of the relation
+	* @return 
+	*/
 	public function belongsTo($model , $local = null , $remote=null)
 	{
 		return (new BelongsTo)->ini($model , $this , $local , $remote);
-		// $val=$this->$local;
-		// $mod=new $model;
-		// $data=$mod->get($remote, '=' , $val);
-		// return $data->get();
 	}
 
+
+	//--------------------------------------------------------
+	// Collection functions
+	//--------------------------------------------------------
+
+
+	/**
+	* get collection of all data of the model from data table
+	*
+	* @return Collection
+	*/
+	public static function all()
+	{
+		$class = get_called_class();
+		$object = new $class ;
+		$collection = new Collection;
+		//
+		$table = $object->table;
+		$key = $object->keyName;
+		//
+		$data = Query::table($table)->select("*")->where("'true'", "=" , "true");
+		//
+		if($object->canKept) 
+		$data = $data->orGroup(
+			"and" , 
+			Query::condition("deleted_at" , ">" , Time::current()) , 
+			Query::condition("deleted_at" , "is" , "NULL" , false));
+
+		if($object->canStashed) 
+		$data = $data->orGroup(
+			"and" , 
+			Query::condition("appeared_at" , "<=" , Time::current()) , 
+			Query::condition("appeared_at" , "is" , "NULL" , false));
+		//
+		$data = $data->get(Query::GET_ARRAY);
+		//
+		if(Table::count($data) > 0)
+			foreach ($data as $row) 
+			{
+				$rows[0] = $row ;
+				//
+				$value = 
+				[
+					"name" => $object->model , 
+					"prifixTable" => $object->prifixTable , 
+					"columns" => $object->columns , 
+					"key" => $object->keyName , 
+					"values" => $rows 
+				];
+				//
+				$collection->add(new $class ( $value ));
+			}
+		//
+		return $collection;
+	}
+
+	/**
+	* get collection of all data of the model from data table with the kept data
+	*
+	* @return Collection
+	*/
+	public static function withTrash()
+	{
+		$class = get_called_class();
+		$object = new $class ;
+		$collection = new Collection;
+		//
+		$table = $object->table;
+		$key = $object->keyName;
+		//
+		$data = Query::table($table)->select($key);
+		$data = $data->get();
+		//
+		if(Table::count($data) > 0)
+			foreach ($data as $row) 
+				$collection->add(new $class ( $row->$key ));
+		//
+		return $collection;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+	
+	
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
