@@ -939,8 +939,91 @@ class ORM
 		//
 		return $collection;
 	}
+
+	/**
+	* get collection of all data of the model from data table with the stashed data
+	*
+	* @return Collection
+	*/
+	public static function withStashed()
+	{
+		$class = get_called_class();
+		$object = new $class ;
+		$collection = new Collection;
+		//
+		$table = $object->table;
+		$key = $object->keyName;
+		//
+		$data = Query::table($table)->select("*")->where("'true'", "=" , "true");
+		//
+		if($object->canKept) 
+		$data = $data->orGroup(
+			"and" , 
+			Query::condition("deleted_at" , ">" , Time::current()) , 
+			Query::condition("deleted_at" , "is" , "NULL" , false));
+		//
+		$data = $data->get(Query::GET_ARRAY);
+		//
+		if(Table::count($data) > 0)
+			foreach ($data as $row) 
+			{
+				$rows[0] = $row ;
+				//
+				$value = 
+				[
+					"name" => $object->model , 
+					"prifixTable" => $object->prifixTable , 
+					"columns" => $object->columns , 
+					"key" => $object->keyName , 
+					"values" => $rows 
+				];
+				//
+				$collection->add(new $class ( $value ));
+			}
+		//
+		return $collection;
+	}
 	
-	
+	/**
+	* get collection of all kept data of the model from data table
+	*
+	* @return Collection
+	*/
+	public static function onlyStashed()
+	{
+		$class = get_called_class();
+		$object = new $class ;
+		$collection = new Collection;
+		//
+		$table = $object->table;
+		$key = $object->keyName;
+		//
+		$data = Query::table($table)->select("*");
+		//
+		if($object->canKept) 
+		$data = $data->where("appeared_at" , ">" , Time::current());
+		//
+		$data = $data->get(Query::GET_ARRAY);
+		//
+		if(Table::count($data) > 0)
+			foreach ($data as $row) 
+			{
+				$rows[0] = $row ;
+				//
+				$value = 
+				[
+					"name" => $object->model , 
+					"prifixTable" => $object->prifixTable , 
+					"columns" => $object->columns , 
+					"key" => $object->keyName , 
+					"values" => $rows 
+				];
+				//
+				$collection->add(new $class ( $value ));
+			}
+		//
+		return $collection;
+	}
 	
 	
 	
