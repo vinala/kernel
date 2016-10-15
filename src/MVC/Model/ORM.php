@@ -869,7 +869,14 @@ class ORM
 		$table = $object->table;
 		$key = $object->keyName;
 		//
-		$data = Query::table($table)->select("*");
+		$data = Query::table($table)->select("*")->where("'true'", "=" , "true");
+		//
+		if($object->canStashed) 
+		$data = $data->orGroup(
+			"and" , 
+			Query::condition("appeared_at" , "<=" , Time::current()) , 
+			Query::condition("appeared_at" , "is" , "NULL" , false));
+		//
 		$data = $data->get(Query::GET_ARRAY);
 		//
 		if(Table::count($data) > 0)
