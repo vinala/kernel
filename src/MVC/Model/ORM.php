@@ -160,8 +160,12 @@ class ORM
 	{
 		$params = func_get_args();
 		//
-		if(Table::count($params) == 1 && is_array($params[0])) $this->secondConstruct($params[0]);
-		elseif(Table::count($params) > 0 && is_int($params[0])) $this->secondConstruct($params[0] , ( ! isset($params[1]) ? $params[1] : null ) );
+		if(Table::count($params) == 1 && is_array($params[0])) 
+			$this->secondConstruct($params[0]);
+
+		elseif(Table::count($params) > 0 && is_numeric($params[0])) 
+			$this->mainConstruct($params[0] , ( isset($params[1]) ? $params[1] : null ) );
+
 		else $this->emptyConstruct();
 		
 	}
@@ -866,11 +870,24 @@ class ORM
 		$key = $object->keyName;
 		//
 		$data = Query::table($table)->select($key);
-		$data = $data->get();
+		$data = $data->get(Query::GET_ARRAY);
 		//
 		if(Table::count($data) > 0)
 			foreach ($data as $row) 
-				$collection->add(new $class ( $row->$key ));
+			{
+				$rows[0] = $row ;
+				//
+				$value = 
+				[
+					"name" => $object->model , 
+					"prifixTable" => $object->prifixTable , 
+					"columns" => $object->columns , 
+					"key" => $object->keyName , 
+					"values" => $rows 
+				];
+				//
+				$collection->add(new $class ( $value ));
+			}
 		//
 		return $collection;
 	}
