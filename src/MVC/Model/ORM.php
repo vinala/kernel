@@ -869,7 +869,48 @@ class ORM
 		$table = $object->table;
 		$key = $object->keyName;
 		//
-		$data = Query::table($table)->select($key);
+		$data = Query::table($table)->select("*");
+		$data = $data->get(Query::GET_ARRAY);
+		//
+		if(Table::count($data) > 0)
+			foreach ($data as $row) 
+			{
+				$rows[0] = $row ;
+				//
+				$value = 
+				[
+					"name" => $object->model , 
+					"prifixTable" => $object->prifixTable , 
+					"columns" => $object->columns , 
+					"key" => $object->keyName , 
+					"values" => $rows 
+				];
+				//
+				$collection->add(new $class ( $value ));
+			}
+		//
+		return $collection;
+	}
+
+	/**
+	* get collection of all kept data of the model from data table
+	*
+	* @return Collection
+	*/
+	public static function onlyTrash()
+	{
+		$class = get_called_class();
+		$object = new $class ;
+		$collection = new Collection;
+		//
+		$table = $object->table;
+		$key = $object->keyName;
+		//
+		$data = Query::table($table)->select("*");
+		//
+		if($object->canKept) 
+		$data = $data->where("deleted_at" , "<=" , Time::current());
+		//
 		$data = $data->get(Query::GET_ARRAY);
 		//
 		if(Table::count($data) > 0)
