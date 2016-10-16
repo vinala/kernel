@@ -2,6 +2,8 @@
 
 namespace Lighty\Kernel\MVC\ORM;
 
+use Lighty\Kernel\Objects\Table;
+
 /**
 * The class Collection of ORM
 */
@@ -47,7 +49,7 @@ class Collection
     
 
     /**
-    * add ORM to ROA
+    * add ORM to Collection
     *
     * @param ORM $object
     * @return null
@@ -55,6 +57,16 @@ class Collection
     public function add($object)
     {
     	$this->list[] = $object;
+    }
+
+    /**
+    * count Collection list
+    *
+    * @return int
+    */
+    public function count()
+    {
+        return Table::count($this->list);
     }
 
 }
