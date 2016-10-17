@@ -40,6 +40,10 @@ class InfoCommand extends Commands
     public function show()
     {
         $this->line("");
+        $this->line(Config::get("app.project"));
+        $this->line("by ".Config::get("app.owner"));
+        $this->line("***********");
+        $this->line("Based on : ");
         $version = Application::consoleVersion();
         $this->question("Lighty ",true);
         $this->line("v$version PHP Framework");
