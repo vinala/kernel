@@ -17,11 +17,6 @@
 	"autoload": {
 		"files": ["src/Foundation/Application.php"]
 	},
-	 "scripts": {
-        "post-create-project-cmd": [
-            "php artisan setup"
-        ]
-    },
 	"extra": {
         "branch-alias": {
         	"dev-next": "3.2.*-dev",
