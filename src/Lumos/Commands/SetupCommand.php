@@ -31,8 +31,7 @@ class SetupCommand extends Commands
      */
     public function handle()
     {
-        // $this->show();
-        echo "rrrr";
+        $this->show();
     }
 
     /**
@@ -41,20 +40,12 @@ class SetupCommand extends Commands
     public function show()
     {
         $this->line("");
-        $this->line(Config::get("app.project"));
-        $this->line("by ".Config::get("app.owner"));
-        $this->line("***********");
-        $this->line("Based on : ");
-        $version = Application::consoleVersion();
-        $this->question("Lighty ",true);
-        $this->line("v$version PHP Framework");
-        $this->line(Application::kernelVersion());
-        $this->write("created by Youssef Had (");
-        $this->question("youssefhad2@gmail.com - www.facebook.com/yussef.had",true);
-        $this->line(")");
-        $this->write("Website ");
-        $this->question("www.gitlab.com/lighty/framework");
+        $this->line("Welcome to Vinala Framework");
+        $this->line("by Youssef Had (www.facebook.com/yussef.had)");
         $this->line("");
+        $name = $this->question("what's your name ?");
+        $this->line("Hello ".$name);
+
     }
 }
 
