@@ -1,5 +1,31 @@
 {
-	"name": "lighty/kernel",
-	"description": "The core of Lighty Framework.",
-
+	"name": "venala/kernel",
+	"description": "The core of Venala Framework.",
+	"keywords": ["framework", "venala", "kernel"],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Youssef Had",
+			"email": "youssefhad2@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.5.9",
+		"lighty/whoops": "~1.2.3",
+		"mockery/mockery": "0.9.*"
+	},
+	"autoload": {
+		"files": ["src/Foundation/Application.php"]
+	},
+	 "scripts": {
+		"post-create-project-cmd": [
+			"php artisan setup"
+		]
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-next": "3.2.*-dev",
+			"dev-master": "3.1.*-dev"
+		}
+	}
 }
