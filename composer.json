@@ -1,7 +1,7 @@
 {
-	"name": "venala/kernel",
-	"description": "The core of Venala Framework.",
-	"keywords": ["framework", "venala", "kernel"],
+	"name": "vinala/kernel",
+	"description": "The core of Vinala Framework.",
+	"keywords": ["framework", "vinala", "kernel"],
 	"license": "MIT",
 	"authors": [
 		{
