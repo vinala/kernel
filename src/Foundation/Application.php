@@ -63,7 +63,7 @@ class Application
 
 	public static function kernelVersion()
 	{
-		$kernel = "vendor/lighty/kernel/";
+		$kernel = "vendor/vinala/kernel/";
 		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
 		return "Lighty Kernel v".$version;
 	}
@@ -80,9 +80,9 @@ class Application
 	protected static function callConnector($test = false)
 	{
 
-		require $test ? 'src/Foundation/Connector.php' : self::$root.'vendor/lighty/kernel/src/Foundation/Connector.php';
+		require $test ? 'src/Foundation/Connector.php' : self::$root.'vendor/vinala/kernel/src/Foundation/Connector.php';
 
-		require $test ? 'src/Foundation/Exceptions/ConnectorFileNotFoundException.php' : self::$root.'vendor/lighty/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
+		require $test ? 'src/Foundation/Exceptions/ConnectorFileNotFoundException.php' : self::$root.'vendor/vinala/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
 
 	}
 
@@ -91,8 +91,8 @@ class Application
 	*/
 	protected static function consoleConnector()
 	{
-		require 'vendor/lighty/kernel/src/Foundation/Connector.php';
-		require 'vendor/lighty/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
+		require 'vendor/vinala/kernel/src/Foundation/Connector.php';
+		require 'vendor/vinala/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
 	}
 
 
@@ -223,7 +223,7 @@ class Application
 	 */
 	protected static function fetcher($routes)
 	{
-		Connector::need(self::$root.'vendor/lighty/kernel/src/Foundation/Fetcher.php');
+		Connector::need(self::$root.'vendor/vinala/kernel/src/Foundation/Fetcher.php');
 		Fetcher::run($routes);
 	}
 

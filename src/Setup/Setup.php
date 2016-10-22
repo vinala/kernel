@@ -9,6 +9,6 @@ class Setup
 {
 	public static function launch()
 	{
-		Connector::need(Application::$root."vendor/lighty/kernel/src/Setup/Assets/Views/main.php");
+		Connector::need(Application::$root."vendor/vinala/kernel/src/Setup/Assets/Views/main.php");
 	}
 }

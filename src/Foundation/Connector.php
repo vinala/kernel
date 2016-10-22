@@ -79,7 +79,7 @@ class Connector
 	 */
 	public static function ini($test = false)
 	{
-		self::$path = $test ? "src/" : Application::$root."vendor/lighty/kernel/src/";
+		self::$path = $test ? "src/" : Application::$root."vendor/vinala/kernel/src/";
 		return self::$path;
 	}
 
@@ -88,8 +88,8 @@ class Connector
 	 */
 	public static function inilumos()
 	{
-		// self::$path = $test ? "src/" : Application::$root."vendor/Lighty/kernel/src/";
-		self::$path = "vendor/lighty/kernel/src/";
+		// self::$path = $test ? "src/" : Application::$root."vendor/vinala/kernel/src/";
+		self::$path = "vendor/vinala/kernel/src/";
 		return self::$path;
 
 	}
