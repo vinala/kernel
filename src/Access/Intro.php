@@ -361,7 +361,7 @@ class Intro
 	}
 
 
-	public static function checkDb_step()
+	public static function checkDb_step($host,$name,$usr,$pass,$prefix)
 	{
 		$host = $_POST['db_host'] ;
 		$name = $_POST['db_name'];

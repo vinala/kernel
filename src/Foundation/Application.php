@@ -155,7 +155,6 @@ class Application
 	 */
 	public static function console($root="",$session=true)
 	{
-
 		self::setCaseVars(true,false);
 		//
 		self::consoleServerVars();

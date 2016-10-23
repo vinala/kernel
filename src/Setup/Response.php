@@ -71,75 +71,51 @@ class Response
 	/**
 	 * set global setup
 	 */
-	public static function setGlob_step()
+	public static function setGlob_step($project , $name , $langue , $loggin , $robot)
 	{
-		$project=$_POST['project_name'];
-		$name=$_POST['dev_name'];
-		$langue=$_POST['langue'];
-		//
-		if(isset($_POST['ckeck_loggin'])) $loggin="true";
-		else $loggin="false";
-		//
-		if(isset($_POST['ckeck_maintenance'])) $maintenance="true";
-		else $maintenance="false";
-		//
-		if(isset($_POST['ckeck_search'])) $robot = true ;
-		else $robot = false ;
-		//
 		if( ! Application::$isTest)
 		{
 			$appCont = App::set($name, $project);
 			$translatorCont = Translator::set($langue);
 			$logginCont = Loggin::set($loggin);
-			$maintenanceCont = Maintenance::set($maintenance);
 			Robots::set($robot);
 			//
 			file_put_contents(Application::$root."config/app.php", $appCont , 0);
 			file_put_contents(Application::$root."config/lang.php", $translatorCont, 0);
 			file_put_contents(Application::$root."config/loggin.php", $logginCont, 0);
-			file_put_contents(Application::$root."config/maintenance.php", $maintenanceCont, 0);
 			//
-			echo "true";
+			return true;
 		}
 	}
 
 	/**
 	 * set security setup
 	 */
-	public static function setSecur_step()
+	public static function setSecur_step($sec_1 , $sec_2)
 	{
-		$sec_1=$_POST['sec_1'];
-		$sec_2=$_POST['sec_2'];
-		//
 		if( ! Application::$isTest) 
 		{
 			$content = Security::set($sec_1,$sec_2);
 			//
 			file_put_contents(Application::$root."config/security.php", $content , 0);
 			//
-			echo "true";
+			return true;
 		}
 	}
 
 	/**
 	 * set panel setup
 	 */
-	public static function setPanel_step()
+	public static function setPanel_step($state = false , $route , $pass_1 , $pass_2)
 	{
-		if(isset($_POST['stat'])) $state="true";
-		else $state="false";
-		//
-		$route=empty($_POST['route']) ? "lighty" : $_POST['route'];
-		$pass_1=empty($_POST['pass_1']) ? "1234" : $_POST['pass_1'];
-		$pass_2=empty($_POST['pass_2']) ? "5678" : $_POST['pass_2'];
-		//
 		if( ! Application::$isTest) 
 		{
+			$state = $state ? "true" : "false" ;
 			$content = Panel::set($state,$route,$pass_1,$pass_2);
 			//
 			file_put_contents(Application::$root."config/panel.php", $content, 0);
 			//
-			echo "true";
+			return true;
 		}
 	}
 }
