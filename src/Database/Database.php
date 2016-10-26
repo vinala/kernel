@@ -21,8 +21,11 @@ class Database
 
 	public static function ini()
 	{
-		self::$driver=self::driver();
-		self::$driver->connect();
+		if(Config::get('database.default') != "none")
+		{
+			self::$driver=self::driver();
+			self::$driver->connect();
+		}
 	}
 
 	//--------------------------------------------------------
