@@ -35,7 +35,6 @@ class SetupCommand extends Commands
         $this->line("\nWelcome to Vinala Framework");
         $this->line("by Youssef Had (www.facebook.com/yussef.had)");
         //
-        Response::setGlob_step($project , $name , $lang , $debugging , $hide);
         $key1 = md5(uniqid(rand(), TRUE));
         $key2 = md5(uniqid(rand(), TRUE));
         Response::setSecur_step($key1 , $key2);
