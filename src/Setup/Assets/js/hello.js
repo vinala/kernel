@@ -53,7 +53,7 @@ $(document).ready(function() {
     }), $("#fst-glob-db-form").submit(function() {
         return $.post("hello/set_glob", $("#fst-glob-db-form").serialize(), function(e) {
             "true" == e ? (document.getElementById("dev_nom").innerHTML = document.getElementById("dev_name").value, $("#fst_glob_conf_step").fadeOut(300, function() {
-                $("#fst_sec_conf_step").fadeIn(300)
+                $("#fst_pnl_conf_step").fadeIn(300)
             })) : alert("Un erreur est survenue")
         }), !1
     }), $("#fst-sec-db-form").submit(function() {

@@ -71,8 +71,21 @@ class Response
 	/**
 	 * set global setup
 	 */
-	public static function setGlob_step($project , $name , $langue , $loggin , $robot)
+	public static function setGlob_step()
 	{
+		$project=$_POST['project_name'];		
+		$name=$_POST['dev_name'];		
+		$langue=$_POST['langue'];		
+		//		
+		if(isset($_POST['ckeck_loggin'])) $loggin="true";		
+		else $loggin="false";		
+		//		
+		if(isset($_POST['ckeck_maintenance'])) $maintenance="true";		
+		else $maintenance="false";		
+		//		
+		if(isset($_POST['ckeck_search'])) $robot = true ;		
+		else $robot = false ;		
+		//
 		if( ! Application::$isTest)
 		{
 			$appCont = App::set($name, $project);
@@ -84,7 +97,7 @@ class Response
 			file_put_contents(Application::$root."config/lang.php", $translatorCont, 0);
 			file_put_contents(Application::$root."config/loggin.php", $logginCont, 0);
 			//
-			return true;
+			echo "true";
 		}
 	}
 
@@ -106,8 +119,15 @@ class Response
 	/**
 	 * set panel setup
 	 */
-	public static function setPanel_step($state = false , $route , $pass_1 , $pass_2)
+	public static function setPanel_step()
 	{
+		if(isset($_POST['stat'])) $state="true";		
+		else $state="false";		
+		//		
+		$route=empty($_POST['route']) ? "lighty" : $_POST['route'];		
+		$pass_1=empty($_POST['pass_1']) ? "1234" : $_POST['pass_1'];		
+		$pass_2=empty($_POST['pass_2']) ? "5678" : $_POST['pass_2'];		
+		//
 		if( ! Application::$isTest) 
 		{
 			$state = $state ? "true" : "false" ;
@@ -115,7 +135,7 @@ class Response
 			//
 			file_put_contents(Application::$root."config/panel.php", $content, 0);
 			//
-			return true;
+			echo "true";
 		}
 	}
 }
