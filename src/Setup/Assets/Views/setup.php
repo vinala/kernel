@@ -11,17 +11,7 @@
 	<div id="fst_db_msg_step">
 		<div class="fst-config-text">
 			<div class="fst-config-pargraph">
-				Welcome to Lighty. Before we launch, we need some information about your database. You'll have to fill the following information to proceed.
-			</div>
-			<div class="fst-config-pargraph">
-				<li>Name of the database</li>
-				<li>User name</li>
-				<li>User password</li>
-				<li>Server of the database</li>
-				<li>Table Prefix</li>
-			</div>
-			<div class="fst-config-pargraph">
-				You would normally have received these information from your host. If you do not, you should contact your hosting provider to continue. If you are ready...
+				Welcome to Lighty. Before we launch, we need some information about your application. You'll have to fill the following information forms to proceed.
 			</div>
 			<form class="fst-config-form" id="fst-config-msg-form">
 				<div style="margin-top:20px">
