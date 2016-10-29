@@ -27,7 +27,7 @@ class bashOutput
 	/**
      * to write in the console
      */
-    public function line($text = "")
+    public function line($text)
     {
         $this->output->writeln($text);
     }
