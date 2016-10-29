@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Process\Process;
-use Lighty\Kernel\Objects\DateTime as Time;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Process\Process;
+use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Link class

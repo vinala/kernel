@@ -1,15 +1,15 @@
 <?php 
 
-namespace Lighty\Kernel\Logging;
+namespace Vinala\Kernel\Logging;
 
 
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\Config\Config;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-use Lighty\Kernel\Objects\DateTime;
-use Lighty\Kernel\Objects\DateTime as Time;
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\DateTime;
+use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Objects\Table;
 
 /**
 * 

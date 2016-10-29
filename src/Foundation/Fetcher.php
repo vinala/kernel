@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Foundation;
+namespace Vinala\Kernel\Foundation;
 
-use Lighty\Kernel\Router\Routes;
+use Vinala\Kernel\Router\Routes;
 
 /**
 * this class help the framework to get all

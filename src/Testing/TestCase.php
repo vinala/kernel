@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Testing;
+namespace Vinala\Kernel\Testing;
 
 use PHPUnit_Framework_TestCase;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Application;
 
 
 /**

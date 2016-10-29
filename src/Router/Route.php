@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Router;
+namespace Vinala\Kernel\Router;
 
 /**
 * Route class

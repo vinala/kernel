@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Log;
+namespace Vinala\Kernel\Log;
 
 use Whoops\Handler\PrettyPageHandler;
 

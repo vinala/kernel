@@ -1,12 +1,12 @@
 <?php 
 
-namespace Lighty\Kernel\Console\Commands;
+namespace Vinala\Kernel\Console\Commands;
 
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Console\Command\Commands;
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Setup\Response;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Console\Command\Commands;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Setup\Response;
 
 
 

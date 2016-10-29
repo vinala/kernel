@@ -1,8 +1,8 @@
 <?php
 
-namespace Lighty\Kernel\Console\Command;
+namespace Vinala\Kernel\Console\Command;
 
-use Lighty\Kernel\Objects\Strings;
+use Vinala\Kernel\Objects\Strings;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;

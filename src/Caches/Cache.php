@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Caches;
+namespace Vinala\Kernel\Caches;
 
 /**
 * Cache class

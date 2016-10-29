@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Atomium\Compiler;
+namespace Vinala\Kernel\Atomium\Compiler;
 
 /**
 * 
@@ -14,6 +14,6 @@ class AtomiumCompileTake
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileInstructions::run($script, "@call", ";", "<?php echo \Lighty\Kernel\Atomium\Atomium::call" ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@call", ";", "<?php echo \Vinala\Kernel\Atomium\Atomium::call" ,"; ?>");
 	}
 }

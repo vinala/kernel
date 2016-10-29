@@ -1,6 +1,6 @@
 <?php
 
-namespace Lighty\Kernel\MVC\View;
+namespace Vinala\Kernel\MVC\View;
 
 /**
 * View mother class

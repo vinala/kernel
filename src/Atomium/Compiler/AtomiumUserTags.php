@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Atomium\UserCompiler;
+namespace Vinala\Kernel\Atomium\UserCompiler;
 
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileInstructions;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileInstructions;
 
 /**
 * Mother class of user Atomium Tags

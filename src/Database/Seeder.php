@@ -1,11 +1,11 @@
 <?php 
 
-namespace Lighty\Kernel\Database;
+namespace Vinala\Kernel\Database;
 
 use SeedsCaller as Caller;
-use Lighty\Kernel\Database\Exception\SeedersEmptyException;
-use Lighty\Kernel\Database\Schema;
-use Lighty\Kernel\Objects\Table;
+use Vinala\Kernel\Database\Exception\SeedersEmptyException;
+use Vinala\Kernel\Database\Schema;
+use Vinala\Kernel\Objects\Table;
 
 /**
 * Seeder class

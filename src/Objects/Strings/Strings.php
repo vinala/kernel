@@ -1,9 +1,9 @@
 <?php
 
-namespace Lighty\Kernel\Objects;
+namespace Vinala\Kernel\Objects;
 
-use Lighty\Kernel\Objects\Strings\Exception\StringOutIndexException;
-use Lighty\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\Strings\Exception\StringOutIndexException;
+use Vinala\Kernel\Objects\Table;
 
 /**
 * String Trim Consts

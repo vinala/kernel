@@ -1,11 +1,11 @@
 <?php 
 
-namespace Lighty\Kernel\Console\Commands;
+namespace Vinala\Kernel\Console\Commands;
 
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Console\Command\Commands;
-use Lighty\Kernel\Process\Seeds;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Console\Command\Commands;
+use Vinala\Kernel\Process\Seeds;
 
 
 
@@ -49,7 +49,7 @@ class listRoutesCommand extends Commands
      */
     public function exec()
     {
-        var_dump(\Lighty\Kernel\Router\Routes::$requests);
+        var_dump(\Vinala\Kernel\Router\Routes::$requests);
         // $schema = true;
         // //
         // $data = $this->splite(Seeds::ListAll());

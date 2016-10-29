@@ -1,5 +1,5 @@
 <?php 
-	use Lighty\Kernel\Translator\Lang;
+	use Vinala\Kernel\Translator\Lang;
 ?>
 
 <div class="bg" id="bg"></div>

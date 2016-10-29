@@ -1,13 +1,13 @@
 <?php
 
-namespace Lighty\Kernel\Database\Schema;
+namespace Vinala\Kernel\Database\Schema;
 
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Schema;
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Database\Schema\Exception\SchemaTableExistsException;
-use Lighty\Kernel\Database\Schema\Exception\SchemaTableNotExistException;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Database\Schema;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Database\Schema\Exception\SchemaTableExistsException;
+use Vinala\Kernel\Database\Schema\Exception\SchemaTableNotExistException;
 
 
 /**

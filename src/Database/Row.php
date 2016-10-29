@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Database;
+namespace Vinala\Kernel\Database;
 
 /**
 * Row class for query Builder

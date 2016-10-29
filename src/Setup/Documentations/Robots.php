@@ -1,7 +1,7 @@
 <?php 
-namespace Lighty\Kernel\Setup\Documentations;
+namespace Vinala\Kernel\Setup\Documentations;
 
-use Lighty\kernel\Foundation\Application;
+use Vinala\kernel\Foundation\Application;
 
 class Robots
 {

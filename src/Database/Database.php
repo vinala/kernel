@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Database;
+namespace Vinala\Kernel\Database;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Drivers\Driver;
-use Lighty\Kernel\Database\Drivers\MysqlDriver;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Database\Drivers\Driver;
+use Vinala\Kernel\Database\Drivers\MysqlDriver;
 
 
 /**

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\Controller;
+namespace Vinala\Kernel\MVC\Controller;
 
 /**
 * Controller class

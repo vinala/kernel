@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Http;
+namespace Vinala\Kernel\Http;
 
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\Config\Config;
 
 /**
 * erreur class

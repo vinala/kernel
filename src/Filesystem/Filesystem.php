@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Filesystem;
+namespace Vinala\Kernel\Filesystem;
 
-use Lighty\Kernel\Filesystem\Exception\DirectoryNotFoundException;
-use Lighty\Kernel\Filesystem\Exception\FileNotFoundException;
+use Vinala\Kernel\Filesystem\Exception\DirectoryNotFoundException;
+use Vinala\Kernel\Filesystem\Exception\FileNotFoundException;
 
 
 /**

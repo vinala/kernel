@@ -1,8 +1,8 @@
 <?php
 
-namespace Lighty\Kernel\HyperText;
+namespace Vinala\Kernel\HyperText;
 
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\Config\Config;
 
 /**
 * HTML class

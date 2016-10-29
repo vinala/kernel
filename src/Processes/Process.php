@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
 /**
 * Language class

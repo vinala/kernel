@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Database\Connector;
+namespace Vinala\Kernel\Database\Connector;
 
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Connector\Exception\ConnectorException;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Database\Connector\Exception\ConnectorException;
 use PDO;
 use PDOException;
 

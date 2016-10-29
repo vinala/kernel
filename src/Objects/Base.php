@@ -1,6 +1,6 @@
 <?php
 
-namespace Lighty\Kernel\Objects;
+namespace Vinala\Kernel\Objects;
 
 /**
 *

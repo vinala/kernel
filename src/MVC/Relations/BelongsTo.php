@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\Relations;
+namespace Vinala\Kernel\MVC\Relations;
 
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
 
 define('OneToOneRelation', 'one');
 define('OneToManyRelation', 'many');

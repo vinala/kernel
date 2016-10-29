@@ -1,8 +1,8 @@
 <?php
 
-namespace Lighty\Kernel\Resources;
+namespace Vinala\Kernel\Resources;
 
-use Lighty\Kernel\Access\Path;
+use Vinala\Kernel\Access\Path;
 
 /**
 *

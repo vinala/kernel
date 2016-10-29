@@ -1,24 +1,24 @@
 <?php 
 
-namespace Lighty\Kernel\Console;
+namespace Vinala\Kernel\Console;
 
 use Symfony\Component\Console\Application as Ap;
-use Lighty\Kernel\Console\Command\Command\NewCommand;
-use Lighty\Kernel\Console\Command\Translator\NewLanguageDirectoryCommand;
-use Lighty\Kernel\Console\Command\Translator\NewLanguageFileCommand;
-use Lighty\Kernel\Console\Command\Schema\NewSchemaCommand;
-use Lighty\Kernel\Console\Command\Schema\ExecSchemaCommand;
-use Lighty\Kernel\Console\Command\Schema\RollbackSchemaCommand;
-use Lighty\Kernel\Console\Command\Links\NewLinkFileCommand;
-use Lighty\Kernel\Console\Command\Models\NewModelCommand;
-use Lighty\Kernel\Console\Command\Views\NewViewCommand;
-use Lighty\Kernel\Console\Command\Controller\NewControllerCommand;
-use Lighty\Kernel\Console\Command\Routes\NewGetRouteCommand;
-use Lighty\Kernel\Console\Command\Seed\NewSeedCommand;
-use Lighty\Kernel\Console\Command\Seed\ExecSeedCommand;
-use Lighty\Kernel\Console\Command\Various\AllCommand;
-use Lighty\Kernel\Console\Command\Command\testCommand;
-use Lighty\Kernel\Console\Command\Info;
+use Vinala\Kernel\Console\Command\Command\NewCommand;
+use Vinala\Kernel\Console\Command\Translator\NewLanguageDirectoryCommand;
+use Vinala\Kernel\Console\Command\Translator\NewLanguageFileCommand;
+use Vinala\Kernel\Console\Command\Schema\NewSchemaCommand;
+use Vinala\Kernel\Console\Command\Schema\ExecSchemaCommand;
+use Vinala\Kernel\Console\Command\Schema\RollbackSchemaCommand;
+use Vinala\Kernel\Console\Command\Links\NewLinkFileCommand;
+use Vinala\Kernel\Console\Command\Models\NewModelCommand;
+use Vinala\Kernel\Console\Command\Views\NewViewCommand;
+use Vinala\Kernel\Console\Command\Controller\NewControllerCommand;
+use Vinala\Kernel\Console\Command\Routes\NewGetRouteCommand;
+use Vinala\Kernel\Console\Command\Seed\NewSeedCommand;
+use Vinala\Kernel\Console\Command\Seed\ExecSeedCommand;
+use Vinala\Kernel\Console\Command\Various\AllCommand;
+use Vinala\Kernel\Console\Command\Command\testCommand;
+use Vinala\Kernel\Console\Command\Info;
 
 
 class Console
@@ -120,7 +120,7 @@ class Console
 	 */
 	public static function setUserClasses()
 	{
-		$namespace = "Lighty\App\Console\Commands";
+		$namespace = "Vinala\App\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
@@ -132,7 +132,7 @@ class Console
 	 */
 	public static function setKernelClasses()
 	{
-		$namespace = "Lighty\Kernel\Console\Commands";
+		$namespace = "Vinala\Kernel\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
@@ -146,7 +146,7 @@ class Console
 	{
 		$classes = array();
 		//
-		$namespace = "Lighty\App\Console\Commands";
+		$namespace = "Vinala\App\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
@@ -162,7 +162,7 @@ class Console
 	{
 		$classes = array();
 		//
-		$namespace = "Lighty\Kernel\Console\Commands";
+		$namespace = "Vinala\Kernel\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 

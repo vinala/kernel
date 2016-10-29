@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Database;
+namespace Vinala\Kernel\Database;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\HyperText\Res;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\HyperText\Res;
 
 class DBTable
 {

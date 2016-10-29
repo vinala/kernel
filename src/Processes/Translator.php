@@ -1,12 +1,12 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Process\Process;
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\Process\Exception\TranslatorFolderNeededException;
-use Lighty\Kernel\Process\Exception\TranslatorManyFolderException;
+use Vinala\Kernel\Process\Process;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Process\Exception\TranslatorFolderNeededException;
+use Vinala\Kernel\Process\Exception\TranslatorManyFolderException;
 
 /**
 * Language class

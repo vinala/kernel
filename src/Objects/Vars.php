@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Objects;
+namespace Vinala\Kernel\Objects;
 
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Application;
 /**
 * Vars class
 */

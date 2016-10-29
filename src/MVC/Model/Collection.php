@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\ORM;
+namespace Vinala\Kernel\MVC\ORM;
 
-use Lighty\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\Table;
 
 /**
 * The class Collection of ORM

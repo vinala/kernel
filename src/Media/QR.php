@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Media;
+namespace Vinala\Kernel\Media;
 
 /**
 * Belongs To relation

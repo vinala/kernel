@@ -1,11 +1,11 @@
 <?php 
 
-namespace Lighty\Kernel\Console\Commands;
+namespace Vinala\Kernel\Console\Commands;
 
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Console\Command\Commands;
-use Lighty\Kernel\Database\Database;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Console\Command\Commands;
+use Vinala\Kernel\Database\Database;
 
 
 

@@ -1,29 +1,29 @@
 <?php
 
-namespace Lighty\Kernel\Foundation;
+namespace Vinala\Kernel\Foundation;
 
-use Lighty\Kernel\Storage\Session;
-use Lighty\Kernel\Logging\Handler;
-use Lighty\Kernel\Config\Alias;
-use Lighty\Kernel\Objects\Sys;
-use Lighty\Kernel\Access\Url;
-use Lighty\Kernel\Access\Path;
-use Lighty\Kernel\MVC\View\Template;
-use Lighty\Kernel\Resources\Faker;
-use Lighty\Kernel\Http\Links;
-use Lighty\Kernel\Http\Errors;
-use Lighty\Kernel\Security\License;
-use Lighty\Kernel\Translator\Lang;
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Security\Auth;
-use Lighty\Kernel\Router\Routes;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Logging\Log;
-use Lighty\Kernel\Objects\DateTime;
-use Lighty\Panel;
-use Lighty\Kernel\Filesystem\Filesystem;
-use Lighty\Kernel\Plugins\Plugins;
-use Lighty\Kernel\Storage\Cookie;
+use Vinala\Kernel\Storage\Session;
+use Vinala\Kernel\Logging\Handler;
+use Vinala\Kernel\Config\Alias;
+use Vinala\Kernel\Objects\Sys;
+use Vinala\Kernel\Access\Url;
+use Vinala\Kernel\Access\Path;
+use Vinala\Kernel\MVC\View\Template;
+use Vinala\Kernel\Resources\Faker;
+use Vinala\Kernel\Http\Links;
+use Vinala\Kernel\Http\Errors;
+use Vinala\Kernel\Security\License;
+use Vinala\Kernel\Translator\Lang;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Security\Auth;
+use Vinala\Kernel\Router\Routes;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Logging\Log;
+use Vinala\Kernel\Objects\DateTime;
+use Vinala\Panel;
+use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Plugins\Plugins;
+use Vinala\Kernel\Storage\Cookie;
 
 
 class Application

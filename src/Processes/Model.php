@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Process\Process;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Process\Process;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Model class
@@ -34,7 +34,7 @@ class Model
 
 	public static function set($class , $table)
 	{
-		$txt = "<?php\n\nuse Lighty\Kernel\MVC\ORM;\n\n";
+		$txt = "<?php\n\nuse Vinala\Kernel\MVC\ORM;\n\n";
 		$txt.="class $class extends ORM\n{\n\t/**\n\t* Name of the DataTable\n\t*/\n\tpublic static ".'$table'."='$table';\n\n}";
 		// $txt.="class $class extends ORM\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\tprotected static ".'$foreignKeys=array();'."\n\n}";
 		//

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Setup\Documentations;
+namespace Vinala\Kernel\Setup\Documentations;
 
 class Loggin
 {

@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Access;
+namespace Vinala\Kernel\Access;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Url class

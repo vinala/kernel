@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Resources;
+namespace Vinala\Kernel\Resources;
 
 use Faker\Factory;
 

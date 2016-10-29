@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Process\Process;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Process\Process;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Controller class
@@ -28,8 +28,8 @@ class Command
 
 	public static function set($file, $command)
 	{
-		$txt = "<?php\n\nnamespace Lighty\App\Console\Commands;\n\n";
-		$txt .= "use Lighty\Kernel\Console\Command\Commands;\n\n";
+		$txt = "<?php\n\nnamespace Vinala\App\Console\Commands;\n\n";
+		$txt .= "use Vinala\Kernel\Console\Command\Commands;\n\n";
 		$txt.="\n\nclass $file extends Commands\n{\n\t";
 
 		$txt.="\n\t/**\n\t * The key of the console command.\n\t *\n\t * @var string\n\t */\n\tprotected ".'$key = '."'$command';\n\n";

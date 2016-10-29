@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Database;
+namespace Vinala\Kernel\Database;
 
-use Lighty\Kernel\Filesystem\Filesystem;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * migaration class

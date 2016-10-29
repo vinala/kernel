@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\HyperText;
+namespace Vinala\Kernel\HyperText;
 
 /**
 * Ressources Clas

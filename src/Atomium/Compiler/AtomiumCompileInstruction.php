@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Atomium\Compiler;
+namespace Vinala\Kernel\Atomium\Compiler;
 
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Objects\Table;
 
 /**
 * 

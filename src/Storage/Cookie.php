@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Storage;
+namespace Vinala\Kernel\Storage;
 
 /**
 * cookies

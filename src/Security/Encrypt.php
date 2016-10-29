@@ -1,8 +1,8 @@
 <?php
 
-namespace Lighty\Kernel\Security;
+namespace Vinala\Kernel\Security;
 
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\Config\Config;
 
 /**
 *

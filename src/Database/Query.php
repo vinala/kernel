@@ -1,12 +1,12 @@
 <?php 
 
-namespace Lighty\Kernel\Database;
+namespace Vinala\Kernel\Database;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Objects\Strings;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\Strings;
 //
-use Lighty\Kernel\Database\Exceptions\QueryException;
+use Vinala\Kernel\Database\Exceptions\QueryException;
 
 /**
 * Query Class

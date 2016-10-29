@@ -1,23 +1,23 @@
 <?php 
 
-namespace Lighty\Kernel\MVC;
+namespace Vinala\Kernel\MVC;
 
-use Lighty\Kernel\MVC\ORM\Exception\ColumnNotEmptyException;
-use Lighty\Kernel\MVC\ORM\Exception\ForeingKeyMethodException;
-use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
-use Lighty\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
-use Lighty\Kernel\MVC\ORM\Exception\ManyRelationException;
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\MVC\ORM\Exception\ColumnNotEmptyException;
+use Vinala\Kernel\MVC\ORM\Exception\ForeingKeyMethodException;
+use Vinala\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
+use Vinala\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
+use Vinala\Kernel\MVC\ORM\Exception\ManyRelationException;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Objects\DateTime as Time;
 use InvalidArgumentException;
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\MVC\Relations\OneToOne;
-use Lighty\Kernel\MVC\Relations\OneToMany;
-use Lighty\Kernel\MVC\Relations\ManyToMany;
-use Lighty\Kernel\MVC\Relations\BelongsTo;
-use Lighty\Kernel\MVC\Model\ModelArray;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\MVC\Relations\OneToOne;
+use Vinala\Kernel\MVC\Relations\OneToMany;
+use Vinala\Kernel\MVC\Relations\ManyToMany;
+use Vinala\Kernel\MVC\Relations\BelongsTo;
+use Vinala\Kernel\MVC\Model\ModelArray;
 
 
 /**

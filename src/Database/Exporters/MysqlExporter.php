@@ -1,12 +1,12 @@
 <?php 
 
-namespace Lighty\Kernel\Database\Exporters;
+namespace Vinala\Kernel\Database\Exporters;
 
-use Lighty\Kernel\Database\Drivers\MysqlDriver as Driver;
-use Lighty\Kernel\Objects\DateTime as Time;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Filesystem\Filesystem;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Database\Drivers\MysqlDriver as Driver;
+use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * database export class

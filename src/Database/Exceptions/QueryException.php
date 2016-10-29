@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Database\Exceptions;
+namespace Vinala\Kernel\Database\Exceptions;
 
-use Lighty\Kernel\Database\Database;
+use Vinala\Kernel\Database\Database;
 
 /**
 * Directory not fount exception

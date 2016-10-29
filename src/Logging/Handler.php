@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Logging;
+namespace Vinala\Kernel\Logging;
 
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\Config\Config;
 use Whoops\Run;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Handler\PlainTextHandler;

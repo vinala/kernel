@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Database\Seeder;
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Database\Seeder;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Seeds class
@@ -39,7 +39,7 @@ class Seeds
 	{
 		$colmuns = self::colmuns($table , ($count > 0));
 		//
-		$txt = "<?php\n\nuse Lighty\Kernel\Database\Seeder;\n\n";
+		$txt = "<?php\n\nuse Vinala\Kernel\Database\Seeder;\n\n";
 		$txt.="/**\n* class of seeder $nom\n*/\nclass $nom extends Seeder\n{\n";
 
 		//datatable name

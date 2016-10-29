@@ -9,4 +9,4 @@ require __DIR__."/../vendor/autoload.php";
 
 
 // Fiesta\Kernel\Foundation\Application::run("../",true,true,"Connector.php");
-Lighty\Kernel\Foundation\Application::test();
+Vinala\Kernel\Foundation\Application::test();

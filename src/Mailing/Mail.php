@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Mailing;
+namespace Vinala\Kernel\Mailing;
 
-use Lighty\Kernel\MVC\View\View;
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\MVC\View\View;
+use Vinala\Kernel\Config\Config;
 
 /**
 * Mail class

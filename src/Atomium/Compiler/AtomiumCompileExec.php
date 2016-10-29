@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Atomium\Compiler;
+namespace Vinala\Kernel\Atomium\Compiler;
 
 
 class AtomiumCompileExec

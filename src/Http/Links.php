@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Http;
+namespace Vinala\Kernel\Http;
 
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Links class

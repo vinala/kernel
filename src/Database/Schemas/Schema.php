@@ -1,8 +1,8 @@
 <?php
 
-namespace Lighty\Kernel\Database;
+namespace Vinala\Kernel\Database;
 
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\Config\Config;
 
 /**
 * Schema builder class

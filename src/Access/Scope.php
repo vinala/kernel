@@ -5,9 +5,9 @@
  * access to some frmaework functions
  */
 
-use Lighty\Kernel\MVC\View\View;
-use Lighty\Kernel\Router\Route;
-use Lighty\Kernel\Objects\DateTime;
+use Vinala\Kernel\MVC\View\View;
+use Vinala\Kernel\Router\Route;
+use Vinala\Kernel\Objects\DateTime;
 
 /**
  * Views

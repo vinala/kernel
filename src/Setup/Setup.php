@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Setup;
+namespace Vinala\Kernel\Setup;
 
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Foundation\Connector;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Connector;
 
 class Setup
 {

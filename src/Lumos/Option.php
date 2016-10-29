@@ -1,6 +1,6 @@
 <?php
 
-namespace Lighty\Kernel\Console;
+namespace Vinala\Kernel\Console;
 
 /**
 *  Argument

@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Access;
+namespace Vinala\Kernel\Access;
 
-use Lighty\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Filesystem\Filesystem;
 
 /**
 * System Class

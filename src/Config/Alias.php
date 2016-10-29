@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Config;
+namespace Vinala\Kernel\Config;
 
 /**
 * Alias Class for "lazy"
@@ -39,7 +39,7 @@ class Alias
 		return 
 			array
 			(
-				'Connector' => \Lighty\Kernel\Foundation\Connector::class,
+				'Connector' => \Vinala\Kernel\Foundation\Connector::class,
 			);
 	}
 }

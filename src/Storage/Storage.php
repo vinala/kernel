@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Storage;
+namespace Vinala\Kernel\Storage;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\Sys;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Objects\Sys;
 use Whoops\Exception\ErrorException;
 /**
 * Storage class

@@ -2,12 +2,12 @@
 <html>
 	<head>
 	<?php 
-		use Lighty\Kernel\Resources\Libs;
-		use Lighty\Kernel\HyperText\Html;
-		use Lighty\Kernel\Access\Path;
-		use Lighty\Kernel\Config\Config;
-		use Lighty\Kernel\Translator\Lang;
-		use Lighty\Kernel\Foundation\Application;
+		use Vinala\Kernel\Resources\Libs;
+		use Vinala\Kernel\HyperText\Html;
+		use Vinala\Kernel\Access\Path;
+		use Vinala\Kernel\Config\Config;
+		use Vinala\Kernel\Translator\Lang;
+		use Vinala\Kernel\Foundation\Application;
 		//
 		Libs::css("app/resources/library/bootstrap-3.3.1.min.css",false);
 		Libs::css("app/resources/library/bootstrap-theme-3.3.1.min.css",false);

@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Atomium\Exception;
+namespace Vinala\Kernel\Atomium\Exception;
 
 /**
 * Directory not fount exception

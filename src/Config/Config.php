@@ -1,11 +1,11 @@
 <?php
 
-namespace Lighty\Kernel\Config;
+namespace Vinala\Kernel\Config;
 
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Foundation\Connector;
-use Lighty\Kernel\Config\Exceptions\ConfigException;
-use Lighty\Kernel\Mocking\configMocking;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Connector;
+use Vinala\Kernel\Config\Exceptions\ConfigException;
+use Vinala\Kernel\Mocking\configMocking;
 
 /**
 * Config Class

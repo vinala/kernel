@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Setup\Documentations;
+namespace Vinala\Kernel\Setup\Documentations;
 
 class Maintenance
 {
@@ -44,6 +44,6 @@ class Maintenance
 		$background = self::MaintRow("background","'bg' => '#d6003e',");
 		$out = self::MaintRow("out","'outRoutes' => array(\n\t\tConfig::get('panel.route'),\n\t),");
 		//
-		return "<?php \nuse Lighty\Kernel\Config\Config;\n\nreturn array(\n\t".$activate.$Message.$background.$out."\n);";
+		return "<?php \nuse Vinala\Kernel\Config\Config;\n\nreturn array(\n\t".$activate.$Message.$background.$out."\n);";
 	}
 }

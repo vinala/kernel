@@ -1,32 +1,32 @@
 <?php 
 
-namespace Lighty\Kernel\Atomium;
+namespace Vinala\Kernel\Atomium;
 
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileIf;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElse;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileFor;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndFor;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileComment;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineComment;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndIf;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileForeach;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndForeach;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileWhile;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileEndWhile;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileSub;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileExec;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileTake;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileLang;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileBreak;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileOneLineInstruction;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCSS;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileJS;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileAssign;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileRun;
-use Lighty\Kernel\Foundation\Connector;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileIf;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileElse;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileFor;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileEndFor;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileComment;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileOneLineComment;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileEndIf;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileElseIf;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileForeach;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileEndForeach;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileWhile;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileEndWhile;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileSub;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileExec;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileTake;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileCapture;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileLang;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileBreak;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileOneLineInstruction;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileCSS;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileJS;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileAssign;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileRun;
+use Vinala\Kernel\Foundation\Connector;
 
 
 
@@ -362,7 +362,7 @@ class Compiler
 	{
 		self::fetchUserTags();
 		//
-		$namespace = "Lighty\Kernel\Atomium\User\\";
+		$namespace = "Vinala\Kernel\Atomium\User\\";
 		//
         foreach (get_declared_classes() as $value)
             if(strpos($value,$namespace) !== false) 

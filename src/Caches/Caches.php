@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Caches;
+namespace Vinala\Kernel\Caches;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Caches\Exception\DriverNotFoundException;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Caches\Exception\DriverNotFoundException;
 
 /**
 * Cache class

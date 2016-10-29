@@ -1,13 +1,13 @@
 <?php 
 
-namespace Lighty\Kernel\Plugins;
+namespace Vinala\Kernel\Plugins;
 
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Filesystem\Filesystem;
-use Lighty\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
-use Lighty\Kernel\Plugins\Exception\InfoStructureException;
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\Config\Alias;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
+use Vinala\Kernel\Plugins\Exception\InfoStructureException;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Config\Alias;
 
 /**
 * 

@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Maintenance;
+namespace Vinala\Kernel\Maintenance;
 
-use Lighty\Kernel\MVC\View\View;
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\MVC\View\View;
+use Vinala\Kernel\Config\Config;
 
 /**
 * Maintenance class

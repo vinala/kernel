@@ -1,13 +1,13 @@
 <?php
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Process\Process;
-use Lighty\Kernel\Database\Migration;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Schema;
-use Lighty\Kernel\Database\Database;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Process\Process;
+use Vinala\Kernel\Database\Migration;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Database\Schema;
+use Vinala\Kernel\Database\Database;
 use Exception;
 
 /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lighty\Kernel\MVC\View;
+namespace Vinala\Kernel\MVC\View;
 
 use Smarty;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Application;
 
 
 

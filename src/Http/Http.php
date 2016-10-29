@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Http;
+namespace Vinala\Kernel\Http;
 
 /**
 * HTTP Class

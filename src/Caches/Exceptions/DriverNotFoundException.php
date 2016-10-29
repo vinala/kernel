@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Caches\Exception;
+namespace Vinala\Kernel\Caches\Exception;
 
 /**
 * Directory not fount exception

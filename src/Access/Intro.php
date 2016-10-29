@@ -1,7 +1,7 @@
 <?php
 
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\MVC\View\View;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\MVC\View\View;
 
 /**
 * class de controller helloController
@@ -82,7 +82,7 @@ class Intro
 		$routing_inexists = self::appRow("routing_inexists","'unrouted'=> true,");
 		$character_set = self::appRow("character_set","'charset'=> 'utf-8', ");
 		//
-		return "<?php \nuse Lighty\Kernel\Foundation\Application;\n\nreturn array(\n\t".$project_name.$owner_name.$project_url.$html_title.$timezone.$routing_inexists.$character_set."\n);";
+		return "<?php \nuse Vinala\Kernel\Foundation\Application;\n\nreturn array(\n\t".$project_name.$owner_name.$project_url.$html_title.$timezone.$routing_inexists.$character_set."\n);";
 	}
 
 	protected static function langDoc($index)
@@ -212,7 +212,7 @@ class Intro
 		$background = self::MaintRow("background","'bg' => '#d6003e',");
 		$out = self::MaintRow("out","'outRoutes' => array(\n\t\tConfig::get('panel.route'),\n\t),");
 		//
-		return "<?php \nuse Lighty\Kernel\Config\Config;\n\nreturn array(\n\t".$activate.$Message.$background.$out."\n);";
+		return "<?php \nuse Vinala\Kernel\Config\Config;\n\nreturn array(\n\t".$activate.$Message.$background.$out."\n);";
 	}
 
 	/**

@@ -1,17 +1,17 @@
 <?php
 
-namespace Lighty\Kernel\Setup;
+namespace Vinala\Kernel\Setup;
 
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\MVC\View\View;
-use Lighty\Kernel\Setup\Documentations\Database;
-use Lighty\Kernel\Setup\Documentations\Panel;
-use Lighty\Kernel\Setup\Documentations\Security;
-use Lighty\Kernel\Setup\Documentations\Maintenance;
-use Lighty\Kernel\Setup\Documentations\Loggin;
-use Lighty\Kernel\Setup\Documentations\Translator;
-use Lighty\Kernel\Setup\Documentations\App;
-use Lighty\Kernel\Setup\Documentations\Robots;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\MVC\View\View;
+use Vinala\Kernel\Setup\Documentations\Database;
+use Vinala\Kernel\Setup\Documentations\Panel;
+use Vinala\Kernel\Setup\Documentations\Security;
+use Vinala\Kernel\Setup\Documentations\Maintenance;
+use Vinala\Kernel\Setup\Documentations\Loggin;
+use Vinala\Kernel\Setup\Documentations\Translator;
+use Vinala\Kernel\Setup\Documentations\App;
+use Vinala\Kernel\Setup\Documentations\Robots;
 
 /**
 * class de controller helloController

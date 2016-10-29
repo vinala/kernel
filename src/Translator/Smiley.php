@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Translator;
+namespace Vinala\Kernel\Translator;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Access\Path;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Access\Path;
 
 
 /**

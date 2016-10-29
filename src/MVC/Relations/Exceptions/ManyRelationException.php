@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\Relations\Exception;
+namespace Vinala\Kernel\MVC\Relations\Exception;
 
 /**
 * Directory not fount exception

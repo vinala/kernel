@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Security;
+namespace Vinala\Kernel\Security;
 
 /**
 * Security class

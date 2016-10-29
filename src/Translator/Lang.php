@@ -1,14 +1,14 @@
 <?php 
 
-namespace Lighty\Kernel\Translator;
+namespace Vinala\Kernel\Translator;
 
-use Lighty\Kernel\Translator\Exception\LanguageKeyNotFoundException;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Storage\Cookie;
-use Lighty\Kernel\HyperText\Res;
-use Lighty\Kernel\Objects\Base;
-use Lighty\Kernel\Filesystem\Filesystem;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Translator\Exception\LanguageKeyNotFoundException;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Storage\Cookie;
+use Vinala\Kernel\HyperText\Res;
+use Vinala\Kernel\Objects\Base;
+use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Language class

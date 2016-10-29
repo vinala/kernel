@@ -1,11 +1,11 @@
 <?php
 
-namespace Lighty\Kernel\MVC\View;
+namespace Vinala\Kernel\MVC\View;
 
-use Lighty\Kernel\MVC\View\Exception\ViewNotFoundException;
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Plugins\Plugins;
-use Lighty\Kernel\Atomium\Atomium;
+use Vinala\Kernel\MVC\View\Exception\ViewNotFoundException;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Plugins\Plugins;
+use Vinala\Kernel\Atomium\Atomium;
 
 /**
 * View mother class

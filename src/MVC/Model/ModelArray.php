@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\Model;
+namespace Vinala\Kernel\MVC\Model;
 
-use Lighty\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\Table;
 
 /**
 * Model array Class

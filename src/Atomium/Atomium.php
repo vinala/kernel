@@ -1,13 +1,13 @@
 <?php 
 
-namespace Lighty\Kernel\Atomium;
+namespace Vinala\Kernel\Atomium;
 
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Security\Hash;
-use Lighty\Kernel\Objects\Strings;
-use Lighty\Kernel\MVC\View\Views;
-use Lighty\Kernel\Atomium\Compiler\AtomiumCompileCapture;
-use Lighty\Kernel\Atomium\Exception\AromiumCaptureNotFoundException;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Security\Hash;
+use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\MVC\View\Views;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileCapture;
+use Vinala\Kernel\Atomium\Exception\AromiumCaptureNotFoundException;
 
 class Atomium
 {

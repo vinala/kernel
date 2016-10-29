@@ -1,8 +1,8 @@
 <?php
 
-namespace Lighty\Kernel\Storage;
+namespace Vinala\Kernel\Storage;
 
-use Lighty\Kernel\Security\Hash;
+use Vinala\Kernel\Security\Hash;
 
 /**
 * Session class

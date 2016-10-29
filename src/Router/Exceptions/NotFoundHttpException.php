@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Router\Exception;
+namespace Vinala\Kernel\Router\Exception;
 
 /**
 * Route Exception

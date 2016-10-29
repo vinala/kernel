@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\MVC\ORM ;
+namespace Vinala\Kernel\MVC\ORM ;
 
 
 /**

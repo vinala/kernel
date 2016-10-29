@@ -1,6 +1,6 @@
 <?php 
 
-namespace Lighty\Kernel\Filesystem\Exception;
+namespace Vinala\Kernel\Filesystem\Exception;
 
 /**
 * File not fount exception

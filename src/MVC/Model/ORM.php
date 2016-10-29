@@ -1,19 +1,19 @@
 <?php 
 
-namespace Lighty\Kernel\MVC ;
+namespace Vinala\Kernel\MVC ;
 
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Database\Query;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Objects\DateTime as Time;
-use Lighty\Kernel\MVC\ORM\CRUD;
-use Lighty\Kernel\MVC\ORM\Collection;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Database\Query;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\MVC\ORM\CRUD;
+use Vinala\Kernel\MVC\ORM\Collection;
 //
-use Lighty\Kernel\MVC\ORM\Exception\TableNotFoundException;
-use Lighty\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
-use Lighty\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
-use Lighty\Kernel\MVC\ORM\Exception\ModelNotFoundException;
+use Vinala\Kernel\MVC\ORM\Exception\TableNotFoundException;
+use Vinala\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
+use Vinala\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
+use Vinala\Kernel\MVC\ORM\Exception\ModelNotFoundException;
 
 /**
 * The Mapping Objet-Relationnel (ORM) class
@@ -22,7 +22,7 @@ use Lighty\Kernel\MVC\ORM\Exception\ModelNotFoundException;
 *
 * @version 2.0
 * @author Youssef Had
-* @package Lighty\Kernel\MVC
+* @package Vinala\Kernel\MVC
 */
 class ORM
 {

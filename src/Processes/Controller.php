@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Process\Process;
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Filesystem\Filesystem as File;
+use Vinala\Kernel\Process\Process;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Filesystem\Filesystem as File;
 
 /**
 * Controller class
@@ -33,7 +33,7 @@ class Controller
 
 	public static function set($class)
 	{
-		$txt = "<?php\n\n use Lighty\Kernel\MVC\Controller\Controller;\n\n";
+		$txt = "<?php\n\n use Vinala\Kernel\MVC\Controller\Controller;\n\n";
 		$txt.="/**\n* class de controller $class\n*/\n\nclass $class extends Controller\n{\n\t";
 
 		//view

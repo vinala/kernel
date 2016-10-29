@@ -1,12 +1,12 @@
 <?php 
 
-namespace Lighty\Kernel\Security;
+namespace Vinala\Kernel\Security;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Storage\Session;
-use Lighty\Kernel\Storage\Cookie;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Storage\Session;
+use Vinala\Kernel\Storage\Cookie;
 
 /**
 * Authentification class

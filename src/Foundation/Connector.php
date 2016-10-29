@@ -1,14 +1,14 @@
 <?php 
 
-namespace Lighty\Kernel\Foundation;
+namespace Vinala\Kernel\Foundation;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Logging\Log;
-use Lighty\Kernel\Logging\Handler;
-use Lighty\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Storage\Session;
-use Lighty\Kernel\Atomium\Compiler;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Logging\Log;
+use Vinala\Kernel\Logging\Handler;
+use Vinala\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Storage\Session;
+use Vinala\Kernel\Atomium\Compiler;
 
 /**
 * Connector class to call framework core files

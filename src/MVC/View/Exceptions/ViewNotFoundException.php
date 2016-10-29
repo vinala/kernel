@@ -1,6 +1,6 @@
 <?php
 
-namespace Lighty\Kernel\MVC\View\Exception;
+namespace Vinala\Kernel\MVC\View\Exception;
 
 /**
 * Directory not fount exception

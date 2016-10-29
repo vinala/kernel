@@ -1,8 +1,8 @@
 <?php 
 
-namespace Lighty\Kernel\Objects;
+namespace Vinala\Kernel\Objects;
 
-use Lighty\Kernel\Config\Config;
+use Vinala\Kernel\Config\Config;
 use Carbon\Carbon;
 
 /**

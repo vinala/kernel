@@ -1,9 +1,9 @@
 <?php 
 
-namespace Lighty\Kernel\Process;
+namespace Vinala\Kernel\Process;
 
-use Lighty\Kernel\Process\Process;
-use Lighty\Kernel\Foundation\Application;
+use Vinala\Kernel\Process\Process;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * Controller class
@@ -28,8 +28,8 @@ class Tag
 
 	protected static function set($class, $target, $tag, $write =false)
 	{
-		$txt = "<?php\n\nnamespace Lighty\Kernel\Atomium\User;\n\n";
-		$txt .= "use Lighty\Kernel\Atomium\UserCompiler\AtomiumUserTags;\n\n";
+		$txt = "<?php\n\nnamespace Vinala\Kernel\Atomium\User;\n\n";
+		$txt .= "use Vinala\Kernel\Atomium\UserCompiler\AtomiumUserTags;\n\n";
 		$txt.="\n\nclass $class extends AtomiumUserTags\n{\n\t";
 
 		$txt.="\n\t/**\n\t * The function that Atomium should replace it.\n\t *\n\t * @var string\n\t */\n\tprotected static ".'$target = '.'"'.$target.'"'.";\n\n";

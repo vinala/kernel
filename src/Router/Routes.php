@@ -1,22 +1,22 @@
 <?php 
 
-namespace Lighty\Kernel\Router;
+namespace Vinala\Kernel\Router;
 
-use Lighty\Kernel\HyperText\Res;
-use Lighty\Kernel\Maintenance\Maintenance;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Router\Exception\NotFoundHttpException;
-use Lighty\Kernel\Http\Errors;
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Access\Url;
-use Lighty\Panel\Seeds;
-use Lighty\Panel\Migrations;
-use Lighty\Panel\Controller;
-use Lighty\Panel\Lang;
-use Lighty\Panel\Link;
-use Lighty\Panel\Model;
-use Lighty\Kernel\Objects\Strings;
+use Vinala\Kernel\HyperText\Res;
+use Vinala\Kernel\Maintenance\Maintenance;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Router\Exception\NotFoundHttpException;
+use Vinala\Kernel\Http\Errors;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Access\Url;
+use Vinala\Panel\Seeds;
+use Vinala\Panel\Migrations;
+use Vinala\Panel\Controller;
+use Vinala\Panel\Lang;
+use Vinala\Panel\Link;
+use Vinala\Panel\Model;
+use Vinala\Kernel\Objects\Strings;
 
 
 /**

@@ -1,19 +1,19 @@
 <?php 
 
-namespace Lighty\Kernel\Database\Drivers;
+namespace Vinala\Kernel\Database\Drivers;
 
 use PDO;
 
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Database\Exception\DatabaseArgumentsException;
-use Lighty\Kernel\Database\Exception\DatabaseConnectionException;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Database\Exception\DatabaseArgumentsException;
+use Vinala\Kernel\Database\Exception\DatabaseConnectionException;
 use mysqli as Sql;
-use Lighty\Kernel\Objects\DateTime as Time;
-use Lighty\Kernel\Filesystem\Filesystem;
-use Lighty\Kernel\Foundation\Application;
-use Lighty\Kernel\Objects\Table;
-use Lighty\Kernel\Database\Connector\MysqlConnector;
+use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Database\Connector\MysqlConnector;
 
 
 /**

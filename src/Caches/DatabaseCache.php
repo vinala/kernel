@@ -1,10 +1,10 @@
 <?php 
 
-namespace Lighty\Kernel\Caches;
+namespace Vinala\Kernel\Caches;
 
-use Lighty\Kernel\Database\Database;
-use Lighty\Kernel\Config\Config;
-use Lighty\Kernel\Database\Schema;
+use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Database\Schema;
 
 /**
 * FileCache class
