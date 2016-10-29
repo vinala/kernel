@@ -684,6 +684,7 @@ class Connector
 		self::commands();
 		// 
 		self::need(self::$path.'Lumos/Console.php');
+		self::need(self::$path.'Lumos/Response/ConfigSetting.php');
 	}
 
 	/**
