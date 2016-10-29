@@ -11,7 +11,7 @@
 	<div id="fst_db_msg_step">
 		<div class="fst-config-text">
 			<div class="fst-config-pargraph">
-				Welcome to Lighty. Before we launch, we need some information about your application. You'll have to fill the following information forms to proceed.
+				Welcome to Vinala. Before we launch, we need some information about your application. You'll have to fill the following information forms to proceed.
 			</div>
 			<form class="fst-config-form" id="fst-config-msg-form">
 				<div style="margin-top:20px">
@@ -46,7 +46,7 @@
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="migname" name="db_name" placeholder="Database" value="">
 				</div>
-				<div class="fst-config-input-desc db-input-input-desc">The name of the database that you want to use Lighty.</div>
+				<div class="fst-config-input-desc db-input-input-desc">The name of the database that you want to use Vinala.</div>
 			</div>
 
 			<div class="control_c_row">
@@ -93,7 +93,7 @@
 	<div id="fst_pass_msg_step" style="display:none">
 		<div class="fst-config-text">
 			<div class="fst-config-pargraph">
-				Perfect ! You spent the first part of the installation. Lighty can now communicate with your database. If you are ready, it is now time to ...
+				Perfect ! You spent the first part of the installation. Vinala can now communicate with your database. If you are ready, it is now time to ...
 			</div>
 		</div>
 		<div class="fst-lonly-left-buttun-cont">
@@ -185,7 +185,7 @@
 
 		<div class="fst-config-text">
 			<div class="fst-config-pargraph">
-			These are the secret keys of your application, they provide the security for your secret data like saved password..., Lighty generate them automatically.
+			These are the secret keys of your application, they provide the security for your secret data like saved password..., Vinala generate them automatically.
 			</div>
 		</div>
 
@@ -218,7 +218,7 @@
 
 		<div class="fst-config-text">
 			<div class="fst-config-pargraph">
-			Almost completed, Lighty uses a quite simple panel to create the necessary ingredients and execute most important operations, you need to configure this panel
+			Almost completed, Vinala uses a quite simple panel to create the necessary ingredients and execute most important operations, you need to configure this panel
 			</div>
 		</div>
 
@@ -307,7 +307,7 @@
 		<div class="final_link_panel" id="bottom_panel" style="display:none">
 			<a id="fst_panel" href="<?php echo Config::get("panel.route"); ?>">
 				<div class="btn hello_button" id="login">
-					Lighty Panel
+					Vinala Panel
 				</div>
 			</a>
 		</div>
