@@ -211,7 +211,7 @@ class Application
 		Errors::ini(self::$root);
 		License::ini(self::$page);
 		Lang::ini();
-		if($database) Database::ini();
+		if($database && Component::isOn("database")) Database::ini();
 		Auth::ini();
 		Panel::run();
 		Plugins::ini();
