@@ -7,6 +7,7 @@ use Vinala\Kernel\Logging\Log;
 use Vinala\Kernel\Logging\Handler;
 use Vinala\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Component;
 use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Atomium\Compiler;
 
@@ -40,12 +41,14 @@ class Connector
 		Log::ini();
 		Handler::run();
 		//
+		Connector::component();
+		//
 		Connector::storage($session);
 		Connector::maintenance();
 		Connector::string();
 		Connector::object();
 		Connector::access();
-		Connector::faker();
+		if(Component::isOn("faker")) Connector::faker();
 		Connector::cookie();
 		Connector::router();
 		Connector::caches();
@@ -175,6 +178,14 @@ class Connector
 	public static function checkVendor()
 	{
 	// if( ! file_exists('../vendor/autoload.php')) die("You should install Lighty dependencies by composer commande 'composer install' :)");
+	}
+
+	/**
+	 * Component call
+	 */
+	public static function component()
+	{
+		self::need(self::$path.'Foundation/Component.php');
 	}
 
 	/**
@@ -801,7 +812,7 @@ class Connector
 		Connector::string();
 		Connector::object();
 		Connector::access();
-		Connector::faker();
+		if(Component::isOn("faker"))  Connector::faker();
 		Connector::cookie();
 		Connector::router();
 		Connector::caches();
