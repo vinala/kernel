@@ -2,6 +2,8 @@
 
 namespace Vinala\Kernel\Config;
 
+use Vinala\Kernel\Foundation\Component;
+
 /**
 * Alias Class for "lazy"
 */
@@ -31,7 +33,13 @@ class Alias
 
 	public static function set($target,$alias)
 	{
-		class_alias ( "$target" , $alias);
+		switch ($target) 
+		{
+			case "Vinala\Kernel\Resources\Faker" : self::setIfOn($target , $alias); break;
+			
+			default: class_alias ( "$target" , $alias); break;
+		}
+		
 	}
 
 	protected static function frameworkAliases()
@@ -42,4 +50,17 @@ class Alias
 				'Connector' => \Vinala\Kernel\Foundation\Connector::class,
 			);
 	}
+
+	/**
+	* ckeck if component class is on by user
+	*
+	* @param string $component
+	* @return bool
+	*/
+	protected static function setIfOn($target , $alias)
+	{
+		if(Component::isOn($alias)) class_alias ( "$target" , $alias);
+
+	}
+	
 }
