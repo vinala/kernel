@@ -206,7 +206,7 @@ class Application
 		Url::ini();
 		Path::ini();
 		Template::run();
-		Faker::ini();
+		if(Component::isOn("faker")) Faker::ini();
 		Links::ini();
 		Errors::ini(self::$root);
 		License::ini(self::$page);
