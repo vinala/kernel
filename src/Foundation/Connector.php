@@ -54,7 +54,7 @@ class Connector
 		Connector::caches();
 		Connector::security();
 		Connector::table();
-		Connector::database();
+		if(Component::isOn("database")) Connector::database();
 		Connector::object_scnd();
 		Connector::http();
 		Connector::assets();
@@ -818,7 +818,7 @@ class Connector
 		Connector::caches();
 		Connector::security();
 		Connector::table();
-		Connector::database();
+		if(Component::isOn("database")) Connector::database();
 		Connector::object_scnd();
 		Connector::http();
 		Connector::assets();
