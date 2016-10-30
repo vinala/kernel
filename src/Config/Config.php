@@ -34,7 +34,7 @@ class Config
 	protected static function getFirstLevel()
 	{
 		return 
-			array('error','database','panel','app','license','maintenance','lang','security','auth','mail','view','loggin','storage','cache','alias','smiley','lumos'
+			array('error','database','panel','app','license','maintenance','lang','security','auth','mail','view','loggin','storage','cache','alias','smiley','lumos','components'
 				);
 	}
 
