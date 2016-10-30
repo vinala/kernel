@@ -125,7 +125,7 @@ class Fetcher
 	 */
 	protected static function commands()
 	{
-		foreach (self::fetch("console/commands") as $file) 
+		foreach (self::fetch("commands") as $file) 
 			Connector::need($file);
 	}
 	
