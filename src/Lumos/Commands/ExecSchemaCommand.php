@@ -28,6 +28,13 @@ class ExecSchemaCommand extends Commands
     public $description;
 
     /**
+     * True if the command will use database.
+     *
+     * @var bool
+     */
+    protected $database = false;
+
+    /**
      * Configure the command
      */ 
     public function set()
