@@ -31,7 +31,7 @@ class Fetcher
 		self::model();
 		self::controller();
 		self::link();
-		self::seed();
+		if(Component::isOn("database")) self::seed();
 		self::filtes();
 		self::routes($routes);
 		self::commands();
