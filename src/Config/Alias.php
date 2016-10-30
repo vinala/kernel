@@ -35,10 +35,17 @@ class Alias
 	{
 		switch ($target) 
 		{
-			case "Vinala\Kernel\Resources\Faker" : self::setIfOn($target , $alias); break;
+			case "Vinala\Kernel\Resources\Faker" : self::setIfOn("faker" , $target , $alias); break;
+			//
+			case "Vinala\Kernel\Database\Database" : self::setIfOn("database" , $target , $alias); break;
+			case "Vinala\Kernel\Database\Query" : self::setIfOn("database" , $target , $alias); break;
+			case "Vinala\Kernel\Database\DBTable" : self::setIfOn("database" , $target , $alias); break;
+			case "Vinala\Kernel\Database\Schema" : self::setIfOn("database" , $target , $alias); break;
+
 			
 			default: class_alias ( "$target" , $alias); break;
 		}
+
 		
 	}
 
@@ -57,9 +64,9 @@ class Alias
 	* @param string $component
 	* @return bool
 	*/
-	protected static function setIfOn($target , $alias)
+	protected static function setIfOn($component , $target , $alias)
 	{
-		if(Component::isOn($alias)) class_alias ( "$target" , $alias);
+		if(Component::isOn($component)) class_alias ( "$target" , $alias);
 
 	}
 	
