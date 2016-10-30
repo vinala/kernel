@@ -22,6 +22,13 @@ class ConfigDatabaseCommand extends Commands
     protected $key;
 
     /**
+     * true if the command will use database
+     *
+     * @var bool
+     */
+    public $database = false;
+
+    /**
      * The console command description.
      *
      * @var string
