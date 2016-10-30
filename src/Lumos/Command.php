@@ -16,6 +16,7 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Helper\Table;
 use Vinala\Kernel\Console\Argument;
 use Vinala\Kernel\Console\Option;
+use Vinala\Kernel\Database\Database;
 
 
 
@@ -37,6 +38,12 @@ class Commands extends Command
 	 * @var string
 	 */
 	protected $command;
+
+    /**
+     * if the command will use database
+     * @var bool
+     */
+    protected $database = false;
 
 	/**
 	 * command description
@@ -109,6 +116,8 @@ class Commands extends Command
     {
     	$this->input = $input;
     	$this->setOutput($output);
+        //
+        if($this->database) Database::ini();
         //
         $this->handle();
     }
