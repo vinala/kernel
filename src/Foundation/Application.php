@@ -167,7 +167,7 @@ class Application
 		self::consoleConnector();
 		Connector::run(true); 
 		//
-		self::ini();
+		self::ini(false);
 		//
 		self::fetcher(false);
 		//
@@ -199,7 +199,7 @@ class Application
 	/**
 	 * Init Framework classes
 	 */
-	protected static function ini()
+	protected static function ini($database = true)
 	{
 		Alias::ini(self::$root);
 		Sys::ini();
@@ -211,7 +211,7 @@ class Application
 		Errors::ini(self::$root);
 		License::ini(self::$page);
 		Lang::ini();
-		Database::ini();
+		if($database) Database::ini();
 		Auth::ini();
 		Panel::run();
 		Plugins::ini();
