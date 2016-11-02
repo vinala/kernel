@@ -23,5 +23,19 @@ class Component
 		//
 		return Config::get("components.".$name);
 	}
+
+	/**
+	* Load component list
+	*
+	* @return array
+	*/
+	public static function load()
+	{
+		$configParams = Config::all();
+		$compnentParams = $configParams["components"];
+		return $compnentParams;
+	}
+
+	
 	
 }
