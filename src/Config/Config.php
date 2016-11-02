@@ -153,4 +153,15 @@ class Config
 		return self::reach($value);
 	}
 
+	/**
+	* Get all config params
+	*
+	* @return array
+	*/
+	public static function all()
+	{
+		return self::$params;
+	}
+	
+
 }
