@@ -1,7 +1,7 @@
 <?php 
 
 /**
-* Form Class
+* Form Class beta
 */
 class Form
 {
