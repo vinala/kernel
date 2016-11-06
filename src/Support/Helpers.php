@@ -147,6 +147,25 @@ if ( ! function_exists("array_get"))
 	}	
 }
 
+if ( ! function_exists("array_add")) 
+{
+	/**
+	* get deeply index on array
+	*
+	* @param array $array
+	* @param string $index
+	* @param string $default
+	* @return mixed
+	*/
+	function array_add( $array , $index = null , $value )
+	{
+		if( is_null($index) ) $array[] = $value;
+		else $array[$index] = $value;
+		//
+		return $array;
+	}	
+}
+
 //--------------------------------------------------------
 // String Helpers
 //--------------------------------------------------------
