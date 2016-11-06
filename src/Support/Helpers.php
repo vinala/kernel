@@ -188,6 +188,46 @@ if ( ! function_exists("array_collapse"))
 
 
 
+
+
+if ( ! function_exists("array_forget")) 
+{
+	/**
+	* remove array item or items from a given array using "dot" notation.
+	*
+	* @param array $array
+	* @return mixed
+	*/
+	function array_forget(&$array , $keys)
+	{
+		$keys = (array) $keys;
+		//
+        if (count($keys) === 0) return;
+        //
+        foreach ($keys as $key) 
+        {
+        	if (array_key_exists($key , $array)) 
+        	{
+                unset($array[$key]);
+                continue;
+            }
+
+            $parts = dot($key);
+
+            while (count($parts) > 1) 
+            {
+                $part = array_shift($parts);
+                if (isset($array[$part]) && is_array($array[$part])) 
+                    $array = &$array[$part];
+                else continue 2;
+            }
+
+            unset($array[array_shift($parts)]);
+        }
+
+	}	
+}
+
 //--------------------------------------------------------
 // String Helpers
 //--------------------------------------------------------
