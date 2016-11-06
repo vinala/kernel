@@ -31,7 +31,7 @@ class Lang
 	{
 		$value = "";
 		//
-		if(array_key_exists ($key, self::$textes)) $value=self::$textes[$key];
+		if(array_key_exists ($key, self::$textes)) $value = array_get(self::$textes , $key);
 		else throw new  LanguageKeyNotFoundException($key);
 		//
 		return $value;
