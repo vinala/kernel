@@ -114,7 +114,7 @@ class Config
 		self::check($param);
 		//
 		if( $p['first'] == 'database') return self::callDatabase( $p['second'] );
-		return self::$params[ $p['first'] ][ $p['second'] ];
+		return array_get(self::$params , $param);
 
 	}
 
