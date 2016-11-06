@@ -51,3 +51,20 @@ if ( ! function_exists("get"))
 		return Route::get($uri , $callback , $subdomains);
 	}	
 }
+
+if ( ! function_exists("call")) 
+{
+	/**
+	* helper for get routing
+	*
+	* @param string $uri
+	* @param string $controller
+	* @param array $data
+	* @return mixed
+	*/
+	function call( $uri , $controller , $data = null )
+	{
+		return Route::call($uri , $controller , $data);
+	}	
+}
+
