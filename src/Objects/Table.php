@@ -205,7 +205,31 @@ class Table
 		return is_array($array);
 	}
 	
+	/**
+	* get deeply index on array
+	*
+	* @param array $array
+	* @param string $index
+	* @param string $default
+	* @return mixed
+	*/
+	public static function get( array $array , $index , $default = null)
+	{
+		if( ! self::accessible($array)) return $default;
 
+		if (is_null($key)) return $array;
+
+		if (self::exists($array, $index)) return $array[$index];
+
+		foreach (Strings::splite($index , '.') as $segment) 
+		{
+            if ( self::accessible($array) && self::exists($array, $segment)) $array = $array[$segment];
+            else return $default;
+        }
+
+		return $array;
+	}
+	
 
 
 
