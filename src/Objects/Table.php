@@ -181,4 +181,21 @@ class Table
 	}
 
 
+	/**
+	* check if array have a key
+	*
+	* @param array $array
+	* @param mixed $key
+	* @return bool
+	*/
+	public static function exists(array $array , $key)
+	{
+		return array_key_exists($key , $array);
+	}
+
+
+
+	
+
+
 }
