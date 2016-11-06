@@ -4,6 +4,7 @@
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\MVC\View\View;
 use Vinala\Kernel\Router\Route;
+use Vinala\Kernel\Objects\DateTime;
 
 
 if( ! function_exists("config"))
@@ -68,3 +69,15 @@ if ( ! function_exists("call"))
 	}	
 }
 
+if ( ! function_exists("now")) 
+{
+	/**
+	* helper for current timestamp
+	*
+	* @return int
+	*/
+	function now()
+	{
+		return DateTime::current();
+	}	
+}
