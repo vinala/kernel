@@ -217,7 +217,7 @@ class Table
 	{
 		if( ! self::accessible($array)) return $default;
 
-		if (is_null($key)) return $array;
+		if (is_null($index)) return $array;
 
 		if (self::exists($array, $index)) return $array[$index];
 
