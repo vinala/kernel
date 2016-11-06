@@ -127,6 +127,6 @@ if ( ! function_exists("array_get"))
 	*/
 	function array_get( $array , $index , $default = null )
 	{
-		Table::get( $array , $index , $default );
+		return Table::get( $array , $index , $default );
 	}	
 }
