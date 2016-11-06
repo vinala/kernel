@@ -3,6 +3,7 @@
 
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\MVC\View\View;
+use Vinala\Kernel\Router\Route;
 
 
 if( ! function_exists("config"))
@@ -15,7 +16,7 @@ if( ! function_exists("config"))
 	*/
 	function config($key)
 	{
-		return Config::get($param);;
+		return Config::get($key);
 	}
 }
 
@@ -32,5 +33,21 @@ if ( ! function_exists("view"))
 	function view( $value , array $data = null )
 	{
 		return View::make($value,$data);
+	}	
+}
+
+if ( ! function_exists("get")) 
+{
+	/**
+	* helper for get routing
+	*
+	* @param string $uri
+	* @param callback $callback
+	* @param array $subdomains
+	* @return mixed
+	*/
+	function get( $uri , $callback , $subdomains = null )
+	{
+		return Route::get($uri , $callback , $subdomains);
 	}	
 }
