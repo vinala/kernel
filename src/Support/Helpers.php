@@ -5,6 +5,7 @@ use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\MVC\View\View;
 use Vinala\Kernel\Router\Route;
 use Vinala\Kernel\Objects\DateTime;
+use Vinala\Kernel\Objects\Table;
 
 
 if( ! function_exists("config"))
@@ -110,5 +111,22 @@ if ( ! function_exists("abort"))
 	function abort($object)
 	{
 		die($object);
+	}	
+}
+
+
+if ( ! function_exists("array_get")) 
+{
+	/**
+	* get deeply index on array
+	*
+	* @param array $array
+	* @param string $index
+	* @param string $default
+	* @return mixed
+	*/
+	function array_get( $array , $index , $default = null )
+	{
+		Table::get( $array , $index , $default );
 	}	
 }
