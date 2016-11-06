@@ -150,7 +150,7 @@ if ( ! function_exists("array_get"))
 if ( ! function_exists("array_add")) 
 {
 	/**
-	* get deeply index on array
+	* add item to array
 	*
 	* @param array $array
 	* @param string $index
@@ -186,6 +186,8 @@ if ( ! function_exists("array_collapse"))
 	}	
 }
 
+
+
 //--------------------------------------------------------
 // String Helpers
 //--------------------------------------------------------
@@ -201,5 +203,19 @@ if ( ! function_exists("trans"))
 	function trans( $key )
 	{
 		return Lang::get($key);
+	}	
+}
+
+if ( ! function_exists("dot")) 
+{
+	/**
+	* get array from string by dot notation
+	*
+	* @param string $key
+	* @return array
+	*/
+	function dot( $key )
+	{
+		return Strings::splite($key , '.');
 	}	
 }
