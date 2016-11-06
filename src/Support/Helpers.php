@@ -37,6 +37,7 @@ if ( ! function_exists("view"))
 	}	
 }
 
+
 if ( ! function_exists("get")) 
 {
 	/**
@@ -52,6 +53,7 @@ if ( ! function_exists("get"))
 		return Route::get($uri , $callback , $subdomains);
 	}	
 }
+
 
 if ( ! function_exists("call")) 
 {
@@ -69,6 +71,7 @@ if ( ! function_exists("call"))
 	}	
 }
 
+
 if ( ! function_exists("now")) 
 {
 	/**
@@ -79,5 +82,19 @@ if ( ! function_exists("now"))
 	function now()
 	{
 		return DateTime::current();
+	}	
+}
+
+
+if ( ! function_exists("map")) 
+{
+	/**
+	* helper for var_dump
+	*
+	* @return null
+	*/
+	function map($object)
+	{
+		var_dump($object);
 	}	
 }
