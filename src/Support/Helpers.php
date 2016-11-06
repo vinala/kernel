@@ -4,7 +4,7 @@
 use Vinala\Kernel\Config\Config;
 
 
-if( ! function_exists(Config))
+if( ! function_exists("config"))
 {
 	/**
 	* helper for Config::get function
@@ -12,7 +12,7 @@ if( ! function_exists(Config))
 	* @param string $key
 	* @return mixed
 	*/
-	function Config($key)
+	function config($key)
 	{
 		return Config::get($param);;
 	}
