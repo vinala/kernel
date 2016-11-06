@@ -98,3 +98,17 @@ if ( ! function_exists("map"))
 		var_dump($object);
 	}	
 }
+
+
+if ( ! function_exists("abort")) 
+{
+	/**
+	* helper for die
+	*
+	* @return null
+	*/
+	function abort($object)
+	{
+		die($object);
+	}	
+}
