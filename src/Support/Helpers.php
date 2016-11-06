@@ -166,6 +166,26 @@ if ( ! function_exists("array_add"))
 	}	
 }
 
+if ( ! function_exists("array_collapse")) 
+{
+	/**
+	* merge many arrays in one array
+	*
+	* @param array $array
+	* @return mixed
+	*/
+	function array_collapse($array)
+	{
+		$results = [];
+		//
+		foreach ($array as $value) {
+			$results = array_merge($results, $value);
+		}
+		//
+		return $results;
+	}	
+}
+
 //--------------------------------------------------------
 // String Helpers
 //--------------------------------------------------------
