@@ -187,9 +187,6 @@ if ( ! function_exists("array_collapse"))
 }
 
 
-
-
-
 if ( ! function_exists("array_forget")) 
 {
 	/**
@@ -226,6 +223,34 @@ if ( ! function_exists("array_forget"))
 
             unset($array[array_shift($parts)]);
         }
+
+	}	
+}
+
+
+if ( ! function_exists("array_has")) 
+{
+	/**
+	* remove array item or items from a given array using "dot" notation.
+	*
+	* @param array $array
+	* @return mixed
+	*/
+	function array_has($array , $key)
+	{
+		$keys = dot($key);
+        //
+        foreach ($keys as $key) 
+        {
+        	if(array_key_exists($key , $array))
+        	{
+        		$array = (array) $array[$key];
+        		continue;
+        	}
+        	else return false;
+        }
+        //
+        return true;
 
 	}	
 }
