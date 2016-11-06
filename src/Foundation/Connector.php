@@ -68,7 +68,6 @@ class Connector
 		Connector::mail();
 		Connector::dataCollection();
 		Connector::fileSystem();
-		Connector::scoop();
 		Connector::intro();
 		Connector::plugins();
 		Connector::lumos();
@@ -605,14 +604,6 @@ class Connector
 	}
 
 	/**
-	 * scoop call
-	 */
-	public static function scoop()
-	{
-		self::need(self::$path.'Access/Scope.php');
-	}
-
-	/**
 	 * intro call
 	 */
 	public static function intro()
@@ -832,7 +823,6 @@ class Connector
 		Connector::mail();
 		Connector::dataCollection();
 		Connector::fileSystem();
-		Connector::scoop();
 		Connector::intro();
 		Connector::plugins();
 	}
