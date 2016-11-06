@@ -127,6 +127,18 @@ if ( ! function_exists("array_get"))
 	*/
 	function array_get( $array , $index , $default = null )
 	{
-		return Table::get( $array , $index , $default );
+		if( ! is_array($array)) return $default;
+		//
+		if (is_null($index)) return $array;
+		//
+		if (array_key_exists($index , $array)) return $array[$index];
+		//
+		foreach (explode('.', $index) as $segment) 
+		{
+            if ( is_array($array) && array_key_exists($segment , $array)) $array = $array[$segment];
+            else return $default;
+        }
+        //
+		return $array;
 	}	
 }
