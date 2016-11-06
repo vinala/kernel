@@ -200,6 +200,7 @@ if ( ! function_exists("array_forget"))
 	*/
 	function array_forget(&$array , $keys)
 	{
+		$original = &$array;
 		$keys = (array) $keys;
 		//
         if (count($keys) === 0) return;
@@ -211,6 +212,7 @@ if ( ! function_exists("array_forget"))
                 unset($array[$key]);
                 continue;
             }
+            $array = &$original;
 
             $parts = dot($key);
 
