@@ -6,6 +6,7 @@ use Vinala\Kernel\MVC\View\View;
 use Vinala\Kernel\Router\Route;
 use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Translator\Lang;
 
 
 if( ! function_exists("config"))
@@ -140,5 +141,19 @@ if ( ! function_exists("array_get"))
         }
         //
 		return $array;
+	}	
+}
+
+if ( ! function_exists("trans")) 
+{
+	/**
+	* get deeply index on array
+	*
+	* @param string $key
+	* @return string
+	*/
+	function trans( $key )
+	{
+		return Lang::get($key);
 	}	
 }
