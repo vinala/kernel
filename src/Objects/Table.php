@@ -194,8 +194,20 @@ class Table
 	}
 
 
-
+	/**
+	* check if object is an array
+	*
+	* @param array $array
+	* @return bool
+	*/
+	public static function accessible($array)
+	{
+		return is_array($array);
+	}
 	
+
+
+
 
 
 }
