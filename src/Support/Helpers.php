@@ -124,18 +124,20 @@ if ( ! function_exists("map"))
 }
 
 
-if ( ! function_exists("abort")) 
+if ( ! function_exists("out")) 
 {
 	/**
 	* helper for die
 	*
 	* @return null
 	*/
-	function abort($object)
+	function out($object)
 	{
 		die($object);
 	}	
 }
+
+
 
 //--------------------------------------------------------
 // Array Helpers
