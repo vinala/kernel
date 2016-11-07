@@ -338,3 +338,17 @@ if ( ! function_exists("dot"))
 		return Strings::splite($key , '.');
 	}	
 }
+
+if ( ! function_exists("e")) 
+{
+	/**
+	* return html entities value
+	*
+	* @param string $value
+	* @return string
+	*/
+	function e( $value )
+	{
+		return htmlentities($value);
+	}	
+}
