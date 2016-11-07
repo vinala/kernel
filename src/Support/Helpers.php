@@ -138,6 +138,22 @@ if ( ! function_exists("out"))
 }
 
 
+if ( ! function_exists("abort")) 
+{
+	/**
+	* helper for die
+	*
+	* @return null
+	*/
+	function abort($msg = "")
+	{
+		throw new Exception($msg);
+		//soon making http Exception
+	}	
+}
+
+
+
 
 //--------------------------------------------------------
 // Array Helpers
