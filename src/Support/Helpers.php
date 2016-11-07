@@ -141,8 +141,9 @@ if ( ! function_exists("out"))
 if ( ! function_exists("abort")) 
 {
 	/**
-	* helper for die
+	* helper for showing exception
 	*
+	* @param string $msg
 	* @return null
 	*/
 	function abort($msg = "")
@@ -155,8 +156,9 @@ if ( ! function_exists("abort"))
 if ( ! function_exists("abort_if")) 
 {
 	/**
-	* helper for die
+	* helper for showing exception if variable is true
 	*
+	* @param bool $expression
 	* @return null
 	*/
 	function abort_if($expression)
