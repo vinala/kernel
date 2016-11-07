@@ -39,6 +39,10 @@ if ( ! function_exists("view"))
 	}	
 }
 
+//--------------------------------------------------------
+// Routing
+//--------------------------------------------------------
+
 
 if ( ! function_exists("get")) 
 {
@@ -73,6 +77,10 @@ if ( ! function_exists("call"))
 	}	
 }
 
+//--------------------------------------------------------
+// DateTime
+//--------------------------------------------------------
+
 
 if ( ! function_exists("now")) 
 {
@@ -84,6 +92,20 @@ if ( ! function_exists("now"))
 	function now()
 	{
 		return DateTime::current();
+	}	
+}
+
+
+if ( ! function_exists("clean")) 
+{
+	/**
+	* helper for var_dump
+	*
+	* @return null
+	*/
+	function clean()
+	{
+		return ob_get_clean();
 	}	
 }
 
