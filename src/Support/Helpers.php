@@ -152,7 +152,19 @@ if ( ! function_exists("abort"))
 	}	
 }
 
-
+if ( ! function_exists("abort_if")) 
+{
+	/**
+	* helper for die
+	*
+	* @return null
+	*/
+	function abort_if($expression)
+	{
+		if($expression) 
+			throw new Exception();
+	}	
+}
 
 
 //--------------------------------------------------------
