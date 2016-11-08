@@ -1,12 +1,14 @@
 <?php 
 
-namespace Vinala\Kernel\Html\Form ;
+namespace Vinala\Kernel\Html ;
 
 /**
 * Form Class
 */
 class Form
 {
+
+	protected $reserved = array('method' , 'action' , 'url' , 'charset' , 'files');
 
 	/**
 	* function to open the form
@@ -18,7 +20,26 @@ class Form
 	{
 		// get the method passed in $options else use port
 		$method = array_get($options, 'method', 'post');
-		return ;
+		$attributes['method'] = $this->getMethod($method);
+		
+		$attributes['action'] = array_get($options, 'url' , '');
+		$attributes['accept-charset'] = array_get($options, 'charset' , 'UTF-8');
+		//
+		//PUT and PATCH and DELETE
+		//
+		//if form use files
+		if (isset($options['files']) && $options['files'])
+		{
+			$options['enctype'] = 'multipart/form-data';
+		}
+		
+		$attributes = array_merge(
+			$attributes, array_except($options, $this->reserved)
+		);
+		
+		$attributes = Html::attributes($attributes);
+
+		return '<form'.$attributes.'>';
 	}
 
 	/**
