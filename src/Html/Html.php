@@ -1,6 +1,6 @@
 <?php 
 
-namespace \Vinala\Kernel\Html ;
+namespace Vinala\Kernel\Html ;
 
 /**
 * Class for HTML Builder
