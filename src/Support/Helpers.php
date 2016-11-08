@@ -309,6 +309,24 @@ if ( ! function_exists("array_has"))
 	}	
 }
 
+
+if ( ! function_exists("array_except")) 
+{
+	/**
+	* remove array item or items from a given array using "dot" notation.
+	*
+	* @param array $array
+	* @return mixed
+	*/
+	function array_except(&$array , $keys)
+	{
+		array_forget( $array , $keys);
+		//
+		return $array;
+	}	
+}
+
+
 //--------------------------------------------------------
 // String Helpers
 //--------------------------------------------------------
