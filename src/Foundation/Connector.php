@@ -58,6 +58,7 @@ class Connector
 		Connector::object_scnd();
 		Connector::http();
 		Connector::assets();
+		Connector::Html();
 		Connector::hypertext();
 		Connector::translator();
 		Connector::model();
@@ -465,6 +466,24 @@ class Connector
 	}
 
 	/**
+	* call Vinala\Kernel\Html namespace
+	*
+	* @return null
+	*/
+	public static function Html()
+	{
+		self::call(
+			array(
+				'Html',
+				'Form'
+				),
+			self::$path.'Html/'
+			);
+		return ;
+	}
+	
+
+	/**
 	 * hypertext calls
 	 */
 	public static function hypertext()
@@ -813,6 +832,7 @@ class Connector
 		Connector::object_scnd();
 		Connector::http();
 		Connector::assets();
+		Connector::Html();
 		Connector::hypertext();
 		Connector::translator();
 		Connector::model();
