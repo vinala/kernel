@@ -136,13 +136,22 @@ class Compiler
 	}
 
 	/**
+	 * Replace Echos htmlentities
+	 */
+	protected static function compilEchoEntities()
+	{
+		self::replace("{{*", "<?php echo htmlentities(");
+		self::replace("*}}", "); ?>");
+	}
+
+	/**
 	 * Replace Echos
 	 */
 	protected static function compilEcho()
 	{
-		self::replace("{{", "<?php echo htmlentities(");
-		self::replace("}}", "); ?>");
-	}
+		self::replace("{{", "<?php echo ");
+		self::replace("}}", "; ?>");
+	}	
 
 	/**
 	 * Replace Echos
