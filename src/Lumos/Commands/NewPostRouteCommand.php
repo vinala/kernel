@@ -59,7 +59,7 @@ class NewPostRouteCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The route was created");
-        else $this->error("The route doesn't created");
+        if($process) $this->info("\nThe route was created\n");
+        else $this->error("\nThe route doesn't created\n");
     }
 }
