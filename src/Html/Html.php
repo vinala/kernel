@@ -9,6 +9,14 @@ class Html
 {
 	
 	/**
+	* array for opened tags
+	*
+	* @var array
+	*/
+	protected static $opened = array();
+	
+
+	/**
 	 * Build an HTML attribute string from an array.
 	 *
 	 * @param  array  $attributes
