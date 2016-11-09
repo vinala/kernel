@@ -27,7 +27,7 @@ class Form
 		$method = array_get($options, 'method', 'post');
 		$attributes['method'] = self::getMethod($method);
 		
-		$attributes['action'] = array_get($options, 'url' , '');
+		$attributes['action'] = self::getAction($options);
 		$attributes['accept-charset'] = array_get($options, 'charset' , 'UTF-8');
 		//
 		//PUT and PATCH and DELETE
@@ -62,6 +62,34 @@ class Form
 	}
 
 	/**
+	* Function to set the method
+	*
+	* @param array $options
+	* @return string
+	*/
+	protected static function getAction(array $options)
+	{
+		//check if action is URL
+		if(array_has($options , 'url'))
+		{
+			return 'http://'.array_get($options , 'url');
+		}
+
+		//check if action is secure for HTTPS
+		if(array_has($options , 'secure'))
+		{
+			return 'https://'.array_get($options , 'secure');
+		}
+
+		//check if action is route
+		if(array_has($options , 'route'))
+		{
+			return root().array_get($options , 'route');
+		}
+	}
+	
+
+	/**
 	* function to close form
 	*
 	* @return string
@@ -74,8 +102,7 @@ class Form
 	/**
 	* function to genenrate input text
 	*
-	* @param 
-	* @param 
+	* @param array $options
 	* @return string
 	*/
 	public static function text(array $options = array())
@@ -83,6 +110,23 @@ class Form
 		$options = array_except($options , ['type']);
 		
 		$options['type'] = 'text';
+
+		$attributes = Html::attributes($options);
+
+		return '<input'.$attributes.'/>';
+	}
+
+	/**
+	* function to genenrate submit
+	*
+	* @param array $options
+	* @return string
+	*/
+	public static function valid(array $options = array())
+	{
+		$options = array_except($options , ['type']);
+		
+		$options['type'] = 'submit';
 
 		$attributes = Html::attributes($options);
 
