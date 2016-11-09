@@ -89,6 +89,22 @@ if ( ! function_exists("get"))
 	}	
 }
 
+if ( ! function_exists("post")) 
+{
+	/**
+	* helper for post routing
+	*
+	* @param string $uri
+	* @param string $controller
+	* @param array $data
+	* @return mixed
+	*/
+	function post( $uri , $controller , $data = null )
+	{
+		return Route::post($uri , $controller , $data);
+	}	
+}
+
 
 if ( ! function_exists("target")) 
 {
