@@ -33,12 +33,23 @@ class Application
 	public static $Callbacks = array('before'=>null,'after'=>null);
 
 	/**
+	* For Route path to not to use $root
+	*
+	* @var string
+	*/
+	public static $path;
+
+	/**
 	 * True if the framework in test case
+	 *
+	 * @var bool
 	 */
 	public static $isTest;
 
 	/**
 	 * True if the framework use console
+	 *
+	 * @var bool
 	 */
 	public static $isConsole = false;
 
