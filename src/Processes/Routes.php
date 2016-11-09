@@ -88,7 +88,7 @@ class Router
 	*/
 	protected static function traitCall($route , $controller , $method)
 	{
-		$content = "call('$route' , '$controller@$method' );";
+		$content = "\n\ncall('$route','$controller@$method');";
 		//
 		return $content;
 	}
