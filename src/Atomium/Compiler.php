@@ -132,7 +132,7 @@ class Compiler
 	protected static function compilTag()
 	{
 		self::replace("{{?", "<?php");
-		self::replace("?}}", "?>");
+		self::replace("?}}", "?>\n");
 	}
 
 	/**
@@ -141,7 +141,7 @@ class Compiler
 	protected static function compilEchoEntities()
 	{
 		self::replace("{{*", "<?php echo htmlentities(");
-		self::replace("*}}", "); ?>");
+		self::replace("*}}", "); ?>\n");
 	}
 
 	/**
@@ -150,7 +150,7 @@ class Compiler
 	protected static function compilEcho()
 	{
 		self::replace("{{", "<?php echo ");
-		self::replace("}}", "; ?>");
+		self::replace("}}", "; ?>\n");
 	}	
 
 	/**
@@ -159,7 +159,7 @@ class Compiler
 	protected static function compilEchoApostrophe()
 	{
 		self::replace("{{ '", "<?php echo htmlentities('");
-		self::replace("' }}", "'); ?>");
+		self::replace("' }}", "'); ?>\n");
 	}
 
 	/**
@@ -168,7 +168,7 @@ class Compiler
 	protected static function compilEchoQuota()
 	{
 		self::replace('{{ "', '<?php echo htmlentities("');
-		self::replace('" }}', '"); ?>');
+		self::replace('" }}', '"); ?>\n');
 	}
 
 	/**
