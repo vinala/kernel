@@ -13,7 +13,7 @@ use Vinala\Kernel\Foundation\Application;
 if ( ! function_exists("root")) 
 {
 	/**
-	* return html entities value
+	* return Application::$root
 	*
 	* @param string $value
 	* @return string
@@ -21,6 +21,20 @@ if ( ! function_exists("root"))
 	function root()
 	{
 		return Application::$root;
+	}	
+}
+
+if ( ! function_exists("path")) 
+{
+	/**
+	* return Application::$path
+	*
+	* @param string $value
+	* @return string
+	*/
+	function path()
+	{
+		return Application::$path;
 	}	
 }
 
