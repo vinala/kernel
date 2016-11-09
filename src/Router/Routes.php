@@ -204,6 +204,8 @@ class Routes
 	{
 		$currentUrl=self::CheckUrl();
 		//
+		$currentRoot=self::setRoot($currentUrl);
+		//
 		if( ! Maintenance::check())
 		{
 			self::ReplaceParams();
@@ -368,6 +370,31 @@ class Routes
 		//
 		return $url;
 	}
+
+
+	/**
+	* Set Application::$root for root variable
+	*
+	* @param string $url
+	* @return string
+	*/
+	protected static function setRoot($url)
+	{
+		$parts = explode('/', $url);
+		$count = count($parts)-2;
+		//
+		$path = "";
+
+		for ($i=0; $i <$count; $i++) 
+		{ 
+			$path .= '../';
+		}
+
+		Application::$path .= $path;
+		return Application::$path;
+	}
+	
+
 
 	protected static function CheckMaintenance($url)
 	{
