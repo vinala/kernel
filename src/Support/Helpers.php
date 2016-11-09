@@ -90,6 +90,22 @@ if ( ! function_exists("get"))
 }
 
 
+if ( ! function_exists("target")) 
+{
+	/**
+	* helper for controller routing
+	*
+	* @param string $uri
+	* @param string $controller
+	* @param array $data
+	* @return mixed
+	*/
+	function target( $uri , $controller , $data = null )
+	{
+		return Route::controller($uri , $controller , $data);
+	}	
+}
+
 if ( ! function_exists("call")) 
 {
 	/**
