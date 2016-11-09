@@ -84,7 +84,7 @@ class Form
 		//check if action is route
 		if(array_has($options , 'route'))
 		{
-			return root().array_get($options , 'route');
+			return path().array_get($options , 'route');
 		}
 	}
 	
