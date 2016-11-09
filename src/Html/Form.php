@@ -8,7 +8,7 @@ namespace Vinala\Kernel\Html ;
 class Form
 {
 
-	protected $reserved = array('method' , 'action' , 'url' , 'charset' , 'files');
+	protected static $reserved = array('method' , 'action' , 'url' , 'charset' , 'files');
 
 	/**
 	* function to open the form
@@ -20,7 +20,7 @@ class Form
 	{
 		// get the method passed in $options else use port
 		$method = array_get($options, 'method', 'post');
-		$attributes['method'] = $this->getMethod($method);
+		$attributes['method'] = self::getMethod($method);
 		
 		$attributes['action'] = array_get($options, 'url' , '');
 		$attributes['accept-charset'] = array_get($options, 'charset' , 'UTF-8');
@@ -34,7 +34,7 @@ class Form
 		}
 		
 		$attributes = array_merge(
-			$attributes, array_except($options, $this->reserved)
+			$attributes, array_except($options, self::$reserved)
 		);
 		
 		$attributes = Html::attributes($attributes);
@@ -55,6 +55,17 @@ class Form
 		//
 		return $method != "GET" ? "POST" : $method;
 	}
+
+	/**
+	* function to close form
+	*
+	* @return string
+	*/
+	public static function close()
+	{
+		return '</form>';
+	}
+	
 	
 	
 }
