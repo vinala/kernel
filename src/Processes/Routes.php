@@ -18,14 +18,77 @@ class Router
 		return true;
 	}
 
+	/**
+	* function to generate Post Route
+	*
+	* @param string $route
+	* @return bool
+	*/
+	public static function post($route)
+	{
+		$content = self::traitPost($route);
+		//
+		self::addRoute($content);
+		return true;
+	}
+
+	/**
+	* function to generate call Route
+	*
+	* @param string $route
+	* @param string $controller
+	* @param string $method
+	* @return bool
+	*/
+	public static function call($route , $controller , $method)
+	{
+		$content = self::traitCall($route , $controller , $method);
+		//
+		self::addRoute($content);
+		return true;
+	}
+
 	protected static function traitGet($route)
 	{
 		$content = "";
 		//
-		$content.="\n\n".self::func($route)."\n";
+		$content.="\n\n".self::funcGet($route)."\n";
 		$content.='{'."\n";
 		$content.="\t".'//'."\n";
 		$content.='});';
+		//
+		return $content;
+	}
+
+	/**
+	* generate Post Route script
+	*
+	* @param string $route 
+	* @return string
+	*/
+	protected static function traitPost($route)
+	{
+		$content = "";
+		//
+		$content.="\n\n".self::funcPost($route)."\n";
+		$content.='{'."\n";
+		$content.="\t".'//'."\n";
+		$content.='});';
+		//
+		return $content;
+	}
+
+	/**
+	* generate CAll Route script
+	*
+	* @param string $route
+	* @param string $controller
+	* @param string $method
+	* @return string
+	*/
+	protected static function traitCall($route , $controller , $method)
+	{
+		$content = "call('$route' , '$controller@$method' );";
 		//
 		return $content;
 	}
@@ -42,14 +105,27 @@ class Router
 	}
 
 	/**
-	 * Set the header of the function
+	 * Set the header of the get function
 	 */
-	protected static function func($route)
+	protected static function funcGet($route)
 	{
 		$params = self::dynamic($route);
 		//
-		if(count($params)>0) return 'Route::get("'.$route.'",function('.self::formatParams($params).')';
-		else return 'Route::get("'.$route.'",function()';
+		if(count($params)>0) return 'get("'.$route.'",function('.self::formatParams($params).')';
+		else return 'get("'.$route.'",function()';
+	}
+
+	/**
+	 * Set the header of the get function
+	 *
+	 * @param string $route
+	 */
+	protected static function funcPost($route)
+	{
+		$params = self::dynamic($route);
+		//
+		if(count($params)>0) return 'post("'.$route.'",function('.self::formatParams($params).')';
+		else return 'post("'.$route.'",function()';
 	}
 
 	/**
