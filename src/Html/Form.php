@@ -7,8 +7,13 @@ namespace Vinala\Kernel\Html ;
 */
 class Form
 {
-
+	/**
+	* array for framework reserved attributes
+	*
+	* @var array 
+	*/
 	protected static $reserved = array('method' , 'action' , 'url' , 'charset' , 'files');
+
 
 	/**
 	* function to open the form
@@ -65,6 +70,25 @@ class Form
 	{
 		return '</form>';
 	}
+
+	/**
+	* function to genenrate input text
+	*
+	* @param 
+	* @param 
+	* @return string
+	*/
+	public static function text(array $options = array())
+	{
+		$options = array_except($options , ['type']);
+		
+		$options['type'] = 'text';
+
+		$attributes = Html::attributes($options);
+
+		return '<input'.$attributes.'/>';
+	}
+	
 	
 	
 	
