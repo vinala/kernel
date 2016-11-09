@@ -99,6 +99,7 @@ class Compiler
 		//
 	  	self::compilEchoApostrophe();
 	  	self::compilEchoQuota();
+	  	self::compilEchoEntities();
 	  	self::compilEndIF();
 	  	self::compilIf();
 
