@@ -14,7 +14,47 @@ class Html
 	* @var array
 	*/
 	protected static $opened = array();
-	
+
+
+	/**
+	* open html tag
+	*
+	* @param string $tag
+	* @param array $options
+	* @return string
+	*/
+	public static function open($tag ,array $options = array() , $self = false)
+	{
+		$attributes = Html::attributes($options);
+
+		//add the opened tag to $opened array
+		if( ! $self || is_null($self) )
+		{
+			self::$opened[] = $tag;
+			//
+			return '<'.$tag.$attributes.'>';
+		}
+		else
+			return '<'.$tag.$attributes.' />';
+	}
+
+	/**
+	* close the last open html tag
+	*
+	* @return string
+	*/
+	public static function close()
+	{
+		//get the last opened tag
+		$tag = self::$opened[count(self::$opened)-1];
+
+		//remove the last opened tag
+		array_pop(self::$opened);
+
+		return '</'.$tag.'>';
+	}
+		
+
 
 	/**
 	 * Build an HTML attribute string from an array.
