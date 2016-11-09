@@ -7,7 +7,22 @@ use Vinala\Kernel\Router\Route;
 use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Objects\Table;
 use Vinala\Kernel\Translator\Lang;
+use Vinala\Kernel\Foundation\Application;
 
+
+if ( ! function_exists("root")) 
+{
+	/**
+	* return html entities value
+	*
+	* @param string $value
+	* @return string
+	*/
+	function root()
+	{
+		return Application::$root;
+	}	
+}
 
 if( ! function_exists("config"))
 {
