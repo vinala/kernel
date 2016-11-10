@@ -115,18 +115,42 @@ class Form
 	 * @param  array   $attributes
 	 * @return string
 	 */
-	public function getIdAttribute($name, $attributes)
+	public static function getIdAttribute($name, $attributes)
 	{
-		if (array_has('id', $attributes))
+		if (array_has($attributes , 'id' ))
 		{
 			return $attributes['id'];
 		}
-		if (in_array($name, $this->labels))
+		if (in_array($name, self::$labels))
 		{
 			return $name;
 		}
 	}
 
+		/**
+	 * Create a form input field.
+	 *
+	 * @param  string  $type
+	 * @param  string  $name
+	 * @param  string  $value
+	 * @param  array   $options
+	 * @return string
+	 */
+	public static function input($type, $name, $value = null, $options = array())
+	{
+		if ( ! isset($options['name'])) $options['name'] = $name;
+
+
+		$id = self::getIdAttribute($name, $options);
+		// if ( ! in_array($type, $this->skipValueTypes))
+		// {
+		// 	$value = $this->getValueAttribute($name, $value);
+		// }
+
+		$merge = compact('type', 'value', 'id');
+		$options = array_merge($options, $merge);
+		return '<input'.Html::attributes($options).'>';
+	}
 
 
 	/**
