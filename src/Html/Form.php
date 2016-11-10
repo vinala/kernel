@@ -15,6 +15,15 @@ class Form
 	protected static $reserved = array('method' , 'action' , 'url' , 'charset' , 'files');
 
 
+	
+	/**
+	* array of labels used in form
+	*
+	* @var array 
+	*/
+	protected static $labels = array() ;
+
+
 	/**
 	* function to open the form
 	*
@@ -98,6 +107,27 @@ class Form
 	{
 		return '</form>';
 	}
+
+	/**
+	 * Get the ID attribute for a field name.
+	 *
+	 * @param  string  $name
+	 * @param  array   $attributes
+	 * @return string
+	 */
+	public function getIdAttribute($name, $attributes)
+	{
+		if (array_has('id', $attributes))
+		{
+			return $attributes['id'];
+		}
+		if (in_array($name, $this->labels))
+		{
+			return $name;
+		}
+	}
+
+
 
 	/**
 	* function to genenrate input text
