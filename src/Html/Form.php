@@ -167,7 +167,18 @@ class Form
 		return '<input'.Html::attributes($options).'>';
 	}
 
-
+	/**
+	* Exclure main input arguments from array
+	*
+	* @param array $options
+	* @param array $args
+	* @return array
+	*/
+	protected static function exclure(&$options , $args = ['type','value','name'])
+	{
+		return array_except($options , $args);
+	}
+	
 	/**
 	* Create a form input hidden
 	*
@@ -178,7 +189,7 @@ class Form
 	*/
 	public static function hidden($name , $value = null , array $options = array())
 	{
-		$options = array_except($options , ['type','value','name']);
+		$options = self::exclure();
 
 		return self::input("hidden" , $name , $value , $options);
 	}
@@ -205,10 +216,13 @@ class Form
 	*/
 	public static function text($name , $value = null , array $options = array())
 	{
-		$options = array_except($options , ['type','value','name']);
+		$options = self::exclure();
 		
 		return self::input("text" , $name , $value , $options);
 	}
+
+
+	
 
 	/**
 	* function to genenrate submit
@@ -219,10 +233,9 @@ class Form
 	*/
 	public static function submit($value , array $options = array())
 	{
-		$options = array_except($options , ['type','value']);
+		self::exclure($options , ['type','value']);
 
 		return self::input("submit" , 'null' , $value , $options);
-
 	}
 
 	/**
@@ -235,7 +248,7 @@ class Form
 	*/
 	public static function label($name ,$value = null , array $options = array() )
 	{
-		$options = array_except($options , ['value' , 'for']);
+		self::exclure($options , ['value','for']);
 
 		self::$labels[] = $name;
 
