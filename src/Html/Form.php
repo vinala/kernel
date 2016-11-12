@@ -154,6 +154,31 @@ class Form
 
 
 	/**
+	* Create a form input hidden
+	*
+	* @param string $name
+	* @param string $value
+	* @param array $options
+	* @return string
+	*/
+	public static function hidden($name , $value = $null , array $options = array())
+	{
+		$options = array_except($options , ['type']);
+		$options = array_except($options , ['value']);
+		$options = array_except($options , ['name']);
+		
+		$options['type'] = 'hidden';
+		$options['name'] = $name;
+		if(! is_null($value)) $options['value'] = $value;
+
+		$attributes = Html::attributes($options);
+
+		return '<input'.$attributes.'/>';
+	}
+	
+
+
+	/**
 	* function to genenrate input text
 	*
 	* @param array $options
