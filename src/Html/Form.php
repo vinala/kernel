@@ -198,14 +198,16 @@ class Form
 	/**
 	* function to genenrate submit
 	*
+	* @param string $value
 	* @param array $options
 	* @return string
 	*/
-	public static function valid(array $options = array())
+	public static function submit($value , array $options = array())
 	{
-		$options = array_except($options , ['type']);
+		$options = array_except($options , ['type','value']);
 		
 		$options['type'] = 'submit';
+		$options['value'] = $value;
 
 		$attributes = Html::attributes($options);
 
