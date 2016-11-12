@@ -182,11 +182,13 @@ class Form
 	* @param array $options
 	* @return string
 	*/
-	public static function text(array $options = array())
+	public static function text($name , $value = null , array $options = array())
 	{
-		$options = array_except($options , ['type']);
+		$options = array_except($options , ['type','value','name']);
 		
 		$options['type'] = 'text';
+		$options['name'] = $name;
+		if(! is_null($value)) $options['value'] = $value;
 
 		$attributes = Html::attributes($options);
 
