@@ -106,7 +106,7 @@ class Form
 	public static function close()
 	{
 		self::$labels = null;
-		
+
 		return '</form>';
 	}
 
@@ -188,13 +188,7 @@ class Form
 	{
 		$options = array_except($options , ['type','value','name']);
 		
-		$options['type'] = 'text';
-		$options['name'] = $name;
-		if(! is_null($value)) $options['value'] = $value;
-
-		$attributes = Html::attributes($options);
-
-		return '<input'.$attributes.'/>';
+		return self::input("test" , $name , $value , $options);
 	}
 
 	/**
@@ -232,7 +226,7 @@ class Form
 
 		$value = e(self::formatLabel($name, $value));
 
-		$options = self::attributes($options);
+		$options = Html::attributes($options);
 
 		return '<label for="'.$name.'"'.$options.'>'.$value.'</label>';
 	}
