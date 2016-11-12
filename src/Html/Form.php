@@ -64,7 +64,9 @@ class Form
 		
 		$attributes = Html::attributes($attributes);
 
-		return '<form'.$attributes.'>';
+		$token = self::token();
+
+		return '<form'.$attributes.'>'.$token;
 	}
 
 	/**
