@@ -213,6 +213,33 @@ class Form
 
 		return '<input'.$attributes.'/>';
 	}
+
+	/**
+	* Create a form label
+	*
+	* @param string $name
+	* @param string $value
+	* @param array $options
+	* @return string
+	*/
+	public static function label($name ,$value = null , array $options = array() )
+	{
+		$options = array_except($options , ['value' , 'for']);
+
+		self::$labels[] = $name;
+
+		$value = e(self::formatLabel($name, $value));
+
+		$options = self::attributes($options);
+
+		return '<label for="'.$name.'"'.$options.'>'.$value.'</label>';
+	}
+
+
+	
+	
+
+
 	
 	
 	
