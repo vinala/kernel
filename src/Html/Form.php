@@ -2,6 +2,8 @@
 
 namespace Vinala\Kernel\Html ;
 
+use Vinala\Kernel\Storage\Session;
+
 /**
 * Form Class
 */
@@ -22,6 +24,15 @@ class Form
 	* @var array 
 	*/
 	protected static $labels = array() ;
+
+
+	/**
+	* the CSRF token
+	*
+	* @var string 
+	*/
+	protected static $csrfToken ;
+	
 
 
 	/**
@@ -166,8 +177,20 @@ class Form
 	public static function hidden($name , $value = null , array $options = array())
 	{
 		$options = array_except($options , ['type','value','name']);
-		
+
 		return self::input("hidden" , $name , $value , $options);
+	}
+
+	/**
+	* Create a form csrf input hidden
+	*
+	* @return string
+	*/
+	public static function token()
+	{
+		$token = ! empty(self::$csrfToken) ? self::$csrfToken : Session::token() ;
+
+		return self::hidden("_token" , $token);
 	}
 	
 	/**
