@@ -308,6 +308,7 @@ if ( ! function_exists("array_forget"))
 	* remove array item or items from a given array using "dot" notation.
 	*
 	* @param array $array
+	* @param array $keys
 	* @return mixed
 	*/
 	function array_forget(&$array , $keys)
@@ -377,6 +378,7 @@ if ( ! function_exists("array_except"))
 	* remove array item or items from a given array using "dot" notation.
 	*
 	* @param array $array
+	* @param mixed $keys
 	* @return mixed
 	*/
 	function array_except(&$array , $keys)
