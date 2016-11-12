@@ -189,7 +189,7 @@ class Form
 	*/
 	public static function hidden($name , $value = null , array $options = array())
 	{
-		$options = self::exclure();
+		self::exclure($options);
 
 		return self::input("hidden" , $name , $value , $options);
 	}
@@ -216,7 +216,7 @@ class Form
 	*/
 	public static function text($name , $value = null , array $options = array())
 	{
-		$options = self::exclure();
+		self::exclure($options);
 		
 		return self::input("text" , $name , $value , $options);
 	}
