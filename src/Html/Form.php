@@ -202,12 +202,7 @@ class Form
 	{
 		$options = array_except($options , ['type','value']);
 		
-		$options['type'] = 'submit';
-		$options['value'] = $value;
-
-		$attributes = Html::attributes($options);
-
-		return '<input'.$attributes.'/>';
+		return self::input("submit" , 'null' , $value , $options);
 
 	}
 
