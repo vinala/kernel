@@ -188,9 +188,9 @@ class Form
 	*/
 	public static function token()
 	{
-		$token = ! empty(self::$csrfToken) ? self::$csrfToken : Session::token() ;
+		self::$csrfToken = ! empty(self::$csrfToken) ? self::$csrfToken : Session::token() ;
 
-		return self::hidden("_token" , $token);
+		return self::hidden("_token" , self::$csrfToken);
 	}
 	
 	/**
