@@ -167,13 +167,7 @@ class Form
 	{
 		$options = array_except($options , ['type','value','name']);
 		
-		$options['type'] = 'hidden';
-		$options['name'] = $name;
-		if(! is_null($value)) $options['value'] = $value;
-
-		$attributes = Html::attributes($options);
-
-		return '<input'.$attributes.'/>';
+		return self::input("hidden" , $name , $value , $options);
 	}
 	
 	/**
@@ -201,7 +195,7 @@ class Form
 	public static function submit($value , array $options = array())
 	{
 		$options = array_except($options , ['type','value']);
-		
+
 		return self::input("submit" , 'null' , $value , $options);
 
 	}
