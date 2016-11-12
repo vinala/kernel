@@ -221,9 +221,21 @@ class Form
 		return self::input("text" , $name , $value , $options);
 	}
 
-
+	/**
+	* function to create form password input
+	*
+	* @param string $name
+	* @param string $value
+	* @param array $options
+	* @return string
+	*/
+	public static function password($name , $value = null , array $options = array())
+	{
+		self::exclure($options);
+		
+		return self::input("password" , $name , $value , $options);
+	}
 	
-
 	/**
 	* function to genenrate submit
 	*
