@@ -174,11 +174,11 @@ class Form
 		return '<input'.$attributes.'/>';
 	}
 	
-
-
 	/**
 	* function to genenrate input text
 	*
+	* @param string $name
+	* @param string $value
 	* @param array $options
 	* @return string
 	*/
