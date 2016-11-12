@@ -188,7 +188,7 @@ class Form
 	{
 		$options = array_except($options , ['type','value','name']);
 		
-		return self::input("test" , $name , $value , $options);
+		return self::input("text" , $name , $value , $options);
 	}
 
 	/**
@@ -208,6 +208,7 @@ class Form
 		$attributes = Html::attributes($options);
 
 		return '<input'.$attributes.'/>';
+
 	}
 
 	/**
