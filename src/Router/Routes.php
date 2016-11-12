@@ -118,7 +118,7 @@ class Routes
 		self::$requests[]=$r;
 	}
 
-	protected static function addFiltred($_uri_,$_callback_,$_methode_,$_subdomain_=null)
+	protected static function addFiltred($_url_,$_callback_,$_methode_,$_subdomain_=null)
 	{
 		$_name_=self::convert($_url_);
 		$r = array(
