@@ -105,6 +105,8 @@ class Form
 	*/
 	public static function close()
 	{
+		self::$labels = null;
+		
 		return '</form>';
 	}
 
