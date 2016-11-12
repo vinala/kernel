@@ -235,7 +235,17 @@ class Form
 		return '<label for="'.$name.'"'.$options.'>'.$value.'</label>';
 	}
 
-
+	/**
+	* Get label form name and format
+	*
+	* @param string $name
+	* @param string $value
+	* @return string
+	*/
+	public static function formatLabel($name , $value)
+	{
+		return $value ?: ucwords(str_replace("_", " ", $name));
+	}
 	
 	
 
