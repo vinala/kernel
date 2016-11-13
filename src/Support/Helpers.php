@@ -347,7 +347,7 @@ if ( ! function_exists("array_forget"))
 if ( ! function_exists("array_has")) 
 {
 	/**
-	* remove array item or items from a given array using "dot" notation.
+	* check if array have a key from a given array using "dot" notation.
 	*
 	* @param array $array
 	* @return mixed
