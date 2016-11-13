@@ -312,7 +312,7 @@ class Form
 	*/
 	public static function setTextAreaSize($options)
 	{
-		if(isset($options['size'])) return $this->setQuickTextAreaSize($options);
+		if(isset($options['size'])) return self::setQuickTextAreaSize($options);
 		
 		$cols = array_get($options , "cols" , 50);
 		$rows = array_get($options , "rows" , 10);
