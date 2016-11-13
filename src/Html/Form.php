@@ -237,7 +237,7 @@ class Form
 	}
 	
 	/**
-	* create function to generate form input email
+	* generate form input email
 	*
 	* @param string $name
 	* @param string $value
@@ -250,6 +250,22 @@ class Form
 		
 		return self::input("email" , $name , $value , $options);
 	}
+
+	/**
+	* generate a url form input
+	*
+	* @param string $name
+	* @param string $value
+	* @param array $options
+	* @return string
+	*/
+	public static function url($name , $value = null , array $options = array())
+	{
+		self::exclure($options);
+		
+		return self::input("url" , $name , $value , $options);
+	}
+	
 	
 
 	/**
