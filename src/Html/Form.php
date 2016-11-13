@@ -267,18 +267,87 @@ class Form
 	}
 
 	/**
-	 * generate a file input field.
-	 *
-	 * @param  string  $name
-	 * @param  array   $options
-	 * @return string
-	 */
-	public function file($name, $options = array())
+	* generate a file input field.
+	*
+	* @param  string  $name
+	* @param  array   $options
+	* @return string
+	*/
+	public static function file($name, $options = array())
 	{
 		self::exclure($options);
 
 		return $this::input('file', $name, null, $options);
 	}
+
+	/**
+	* generate a textarea input field.
+	*
+	* @param string $name
+	* @param string $value
+	* @param array $options
+	* @return string
+	*/
+	public static function textarea($name , $value = null , array $options = array())
+	{
+		self::exclure($options);
+
+		
+	}
+
+	/**
+	* set a textarea size from options
+	*
+	* @param array $options
+	* @return 
+	*/
+	public static function setTextAreaSize($options)
+	{
+		if(isset($options['size'])) return $this->setQuickTextAreaSize($options);
+		
+		$cols = array_get($options , "cols" , 50);
+		$rows = array_get($options , "rows" , 10);
+		return array_merge($options, compact('cols', 'rows'));
+	}
+
+	/**
+	* get a textarea size from string option
+	*
+	* @param array $option
+	* @return array
+	*/
+	public static function setQuickTextAreaSize($options)
+	{
+		$value = explode('x', $options['size']);
+
+		if(count($value) < 2 ) 
+		{
+			return array_merge($options, array('cols' => 50, 'rows' => 10));
+		}
+		elseif( ! is_numeric($value[0]) || ! is_numeric($value[1]))
+		{
+			return array_merge($options, array('cols' => 50, 'rows' => 10));
+		}
+		else
+		{
+			return array_merge($options, array('cols' => $value[0], 'rows' => $value[1]));
+		}
+	}
+	
+	/**
+	* check
+	*
+	* @param 
+	* @param 
+	* @return 
+	*/
+	public static function name()
+	{
+		
+		return ;
+	}
+	
+	
 	
 	
 
