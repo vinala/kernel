@@ -292,7 +292,16 @@ class Form
 	{
 		self::exclure($options);
 
+		//for textarea size
+		$options = $this->setTextAreaSize($options);
+
+		$options['id'] = $this->getIdAttribute($name, $options);
+
+		unset($options['size']);
+	
+		$options = Html::attributes($options);
 		
+		return '<textarea'.$options.'>'.e($value).'</textarea>';
 	}
 
 	/**
