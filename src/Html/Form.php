@@ -343,7 +343,21 @@ class Form
 		}
 	}
 	
-
+	/**
+	* generate a select input field.
+	*
+	* @param string $name
+	* @param array $list
+	* @param string $selected
+	* @param array $options
+	* @return string
+	*/
+	public static function select($name, $list = array(), $selected = null, $options = array())
+	{
+		
+		return ;
+	}
+	
 	
 	
 	
