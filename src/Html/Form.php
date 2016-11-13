@@ -265,6 +265,20 @@ class Form
 		
 		return self::input("url" , $name , $value , $options);
 	}
+
+	/**
+	 * generate a file input field.
+	 *
+	 * @param  string  $name
+	 * @param  array   $options
+	 * @return string
+	 */
+	public function file($name, $options = array())
+	{
+		self::exclure($options);
+
+		return $this::input('file', $name, null, $options);
+	}
 	
 	
 
