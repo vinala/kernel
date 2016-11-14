@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Foundation;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Logging\Log;
 use Vinala\Kernel\Logging\Handler;
+use Vinala\Kernel\Logging\Error;
 use Vinala\Kernel\Foundation\Exception\ConnectorFileNotFoundException as CFNFE;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Foundation\Component;
@@ -39,7 +40,8 @@ class Connector
 		Connector::time();
 		//
 		Log::ini();
-		Handler::run();
+		$handler=new Error;
+		$handler->register();
 		//
 		Connector::component();
 		//
@@ -238,6 +240,7 @@ class Connector
 	{
 		self::call(
 			array(
+				'Error',
 				'Handler', 
 				'Log'
 				),
@@ -815,7 +818,8 @@ class Connector
 		Connector::time();
 		//
 		Log::ini();
-		Handler::run();
+		$handler=new Error;
+		$handler->register();
 		//
 		Connector::storage(false);
 		Connector::maintenance();
