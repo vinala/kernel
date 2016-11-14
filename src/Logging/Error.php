@@ -8,6 +8,9 @@ namespace Vinala\Kernel\Logging;
 class Error
 {
 
+	//--------------------------------------------------------
+	// Properties
+	//--------------------------------------------------------
 
 	/**
 	* if true the frameworrk will debug your errors
@@ -23,10 +26,25 @@ class Error
 	* @var book 
 	*/
 	protected $registered = array() ;
+
+
+	/**
+	* true if already error handled
+	*
+	* @var bool 
+	*/
+	protected $isHandled = false ;
+	
+
+
+
+	//--------------------------------------------------------
+	// Contructor
+	//--------------------------------------------------------
 	
 	function __construct()
 	{
-		
+		$this->handled = false ;
 	}
 
 
@@ -77,7 +95,32 @@ class Error
 	*/
     public function onShutdown()
     {
-    	
+    	if( ! $this->IsHandled)
+    	{
+    		
+    	}
     }
+
+    /**
+    * Clear Buffer
+    *
+    * @return string
+    */
+    public function clean()
+    {
+    	return clear();
+    }
+
+    /**
+    * set true to IsHandled
+    *
+    * @return bool
+    */
+    protected function handled()
+    {
+    	return $this->IsHandled = true;
+    }
+    
+    
 	
 }
