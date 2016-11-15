@@ -14,6 +14,8 @@ use Vinala\Kernel\Atomium\Compiler\AtomiumCompileForeach;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileEndForeach;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileWhile;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileEndWhile;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileUntil;
+use Vinala\Kernel\Atomium\Compiler\AtomiumCompileEndUntil;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileSub;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileExec;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileHtmlDiv;
@@ -112,6 +114,8 @@ class Compiler
 	  	self::compilBreak();
 	  	self::compilWhile();
 	  	self::compilEndWhile();
+	  	self::compilUntil();
+	  	self::compilEndUntil();
 	  	//
 	  	self::compilLang();
 	  	//
@@ -258,6 +262,22 @@ class Compiler
 	protected static function compilEndWhile()
 	{
 		self::$output = AtomiumCompileEndWhile::run(self::$output);
+	}
+
+	/**
+	 * Compile While
+	 */
+	protected static function compilUntil()
+	{
+		self::$output = AtomiumCompileUntil::run(self::$output);
+	}
+
+	/**
+	 * Compile While
+	 */
+	protected static function compilEndUntil()
+	{
+		self::$output = AtomiumCompileEndUntil::run(self::$output);
 	}
 
 	/**
