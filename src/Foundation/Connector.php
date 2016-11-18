@@ -11,6 +11,7 @@ use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Foundation\Component;
 use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Atomium\Compiler;
+use Vinala\Kernel\Http\Input;
 
 /**
 * Connector class to call framework core files
@@ -32,6 +33,8 @@ class Connector
 		else Connector::inilumos();
 		//**/
 		Connector::loggin();
+		Connector::input();
+		Input::register();
 
 		// Config
 		Connector::config();
@@ -452,12 +455,26 @@ class Connector
 				'Links',
 				'Http',
 				'Error',
-				'Input',
 				'Root'
 				),
 			self::$path.'Http/'
 			);
 	}
+
+	/**
+	* http input calls
+	*
+	*/
+	public static function input()
+	{
+		self::call(
+			array(
+				'Input'
+				),
+			self::$path.'Http/'
+			);
+	}
+	
 
 	/**
 	 * assets calls
@@ -810,6 +827,8 @@ class Connector
 	{
 		Connector::ini(true);
 		Connector::loggin();
+		Connector::input();
+		Input::register();
 
 		Connector::mock();
 		// Config
