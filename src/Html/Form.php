@@ -354,9 +354,34 @@ class Form
 	*/
 	public static function select($name, $list = array(), $selected = null, $options = array())
 	{
-		
-		return ;
+		self::exclure($options , ['name']);
+		//
+		$options['name'] = $name ;
+		//
+		$sub = "";
+		//
+		if( ! empty($list))
+			foreach ($list as $value) 
+				$sub .= self::option($value , ( ! is_null($selected) && $value==$selected ) );
+		//
+		$options = Html::attributes($options);
+		//		
+		return '<select'.$options.">\n".$sub."</select>\n";
 	}
+
+	/**
+	* set select options
+	*
+	* @param string $value
+	* @param string $key
+	* @param bool $seleceted
+	* @return string
+	*/
+	protected static function option( $value , $seleceted = false)
+	{
+		return "\t\t<option value='$value' ".( ! $seleceted ? '' : "selected").">$value</option>\n";
+	}
+	
 	
 	
 	
