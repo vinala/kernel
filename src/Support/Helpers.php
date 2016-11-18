@@ -8,6 +8,7 @@ use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Objects\Table;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Http\Input;
 
 
 if ( ! function_exists("root")) 
@@ -433,5 +434,20 @@ if ( ! function_exists("e"))
 	function e( $value )
 	{
 		return htmlentities($value);
+	}	
+}
+
+if ( ! function_exists("input")) 
+{
+	/**
+	* get Http vars
+	*
+	* @param string $key
+	* @param string $default
+	* @return string
+	*/
+	function input( $key , $default = null)
+	{
+		return Input::reach($key , $default);
 	}	
 }
