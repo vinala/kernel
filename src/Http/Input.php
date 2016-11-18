@@ -22,18 +22,18 @@ class Input
 	*
 	* @return array
 	*/
-	public static function regsiter()
+	public static function register()
 	{
 		self::$list = array();
 		//
-		self::$list['post'] = $_POST;
-		self::$list['get'] = $_GET;
-		self::$list['session'] = $_SESSION;
-		self::$list['cookie'] = $_COOKIE;
-		self::$list['files'] = $_FILES;
-		self::$list['server'] = $_SERVER;
-		self::$list['env'] = $_ENV;
-		self::$list['request'] = $_REQUEST;
+		self::$list['post'] = ! isset($_POST) ?: $_POST;
+		self::$list['get'] = ! isset($_GET) ?: $_GET;
+		self::$list['session'] =  ! isset($_SESSION) ?: $_SESSION;
+		self::$list['cookie'] = ! isset($_COOKIE) ?: $_COOKIE;
+		self::$list['files'] = ! isset($_FILES) ?: $_FILES;
+		self::$list['server'] = ! isset($_SERVER) ?: $_SERVER;
+		self::$list['env'] = ! isset($_ENV) ?: $_ENV;
+		self::$list['request'] = ! isset($_REQUEST) ?: $_REQUEST;
 		return self::$list;
 	}
 	
@@ -47,31 +47,6 @@ class Input
 	public static function reach($key , $default = null)
 	{
 		return array_get(self::$list , $key , $default);
-	}
-	
-
-	/**
-	* get $_GET input vars
-	*
-	* @param mixed $key
-	* @param mixed $default
-	* @return mixed
-	*/
-	public static function get($key , $default = null)
-	{
-		return array_get(self::$list , 'get.'.$key , $default);
-	}
-
-	/**
-	* get $_POST input vars
-	*
-	* @param mixed $key
-	* @param mixed $default
-	* @return mixed
-	*/
-	public static function post($key , $default = null)
-	{
-		return array_get(self::$list , 'post.'.$key , $default);
 	}
 	
 
