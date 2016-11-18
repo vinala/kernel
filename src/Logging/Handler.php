@@ -25,8 +25,7 @@ class Handler
 
 
 	public static function run()
-	{
-		
+	{	
 		if(Config::get('loggin.debug')) self::PrettyPage();
 		else self::SimplePage();
 	}
