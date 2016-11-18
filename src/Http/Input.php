@@ -62,7 +62,17 @@ class Input
 		return array_get(self::$list , 'get.'.$key , $default);
 	}
 
-
+	/**
+	* get $_POST input vars
+	*
+	* @param mixed $key
+	* @param mixed $default
+	* @return mixed
+	*/
+	public static function post($key , $default = null)
+	{
+		return array_get(self::$list , 'post.'.$key , $default);
+	}
 	
 
 }
