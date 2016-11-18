@@ -40,8 +40,7 @@ class Connector
 		Connector::time();
 		//
 		Log::ini();
-		$handler=new Error;
-		$handler->register();
+		Handler::run();
 		//
 		Connector::component();
 		//
@@ -240,7 +239,6 @@ class Connector
 	{
 		self::call(
 			array(
-				'Error',
 				'Handler', 
 				'Log'
 				),
@@ -454,6 +452,7 @@ class Connector
 				'Links',
 				'Http',
 				'Error',
+				'Input',
 				'Root'
 				),
 			self::$path.'Http/'
