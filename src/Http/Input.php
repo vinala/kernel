@@ -34,6 +34,7 @@ class Input
 		self::$list['server'] = ! isset($_SERVER) ?: $_SERVER;
 		self::$list['env'] = ! isset($_ENV) ?: $_ENV;
 		self::$list['request'] = ! isset($_REQUEST) ?: $_REQUEST;
+		//
 		return self::$list;
 	}
 	
