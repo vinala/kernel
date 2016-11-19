@@ -53,7 +53,7 @@ class Form
 		//PUT and PATCH and DELETE
 		//
 		//if form use files
-		if (isset($options['files']) && $options['files'])
+		if (isset($options['files']) || in_array("files", $options))
 		{
 			$options['enctype'] = 'multipart/form-data';
 		}
