@@ -142,15 +142,15 @@ class Form
 		}
 	}
 
-		/**
-	 * Create a form input field.
-	 *
-	 * @param  string  $type
-	 * @param  string  $name
-	 * @param  string  $value
-	 * @param  array   $options
-	 * @return string
-	 */
+	/**
+	* Create a form input field.
+	*
+	* @param  string  $type
+	* @param  string  $name
+	* @param  string  $value
+	* @param  array   $options
+	* @return string
+	*/
 	public static function input($type, $name, $value = null, $options = array())
 	{
 		if ( ! isset($options['name'])) $options['name'] = $name;
@@ -165,6 +165,29 @@ class Form
 		$merge = compact('type', 'value', 'id');
 		$options = array_merge($options, $merge);
 		return '<input'.Html::attributes($options).'>';
+	}
+
+	/**
+	* Create a form checked field.
+	*
+	* @param  string  $type
+	* @param  string  $name
+	* @param  string  $value
+	* @param  array   $options
+	* @return string
+	*/
+	public static function checked($type, $name, $checked = false , $options = array())
+	{
+		if ( ! isset($options['name'])) $options['name'] = $name;
+
+		$id = self::getIdAttribute($name, $options);
+
+		$merge = compact('type', 'value', 'id');
+		$options = array_merge($options, $merge);
+
+		$checked = ! $checked ? "" : "checked";
+
+		return '<input'.Html::attributes($options)." $checked>";
 	}
 
 	/**
@@ -277,7 +300,7 @@ class Form
 	{
 		self::exclure($options);
 
-		return $this::input('file', $name, null, $options);
+		return self::input('file', $name, null, $options);
 	}
 
 	/**
@@ -382,6 +405,20 @@ class Form
 		return "\t\t<option value='$value' ".( ! $seleceted ? '' : "selected").">$value</option>\n";
 	}
 	
+	/**
+	* Set a form checkbox
+	*
+	* @param string $name
+	* @param string $value
+	* @param bool $checked
+	* @return string
+	*/
+	public static function checkbox( $name , $checked = false , $options = array())
+	{
+		self::exclure($options);
+
+		return self::checked('checkbox', $name, $checked, $options);
+	}
 	
 	
 	
