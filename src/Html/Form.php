@@ -155,12 +155,7 @@ class Form
 	{
 		if ( ! isset($options['name'])) $options['name'] = $name;
 
-
 		$id = self::getIdAttribute($name, $options);
-		// if ( ! in_array($type, $this->skipValueTypes))
-		// {
-		// 	$value = $this->getValueAttribute($name, $value);
-		// }
 
 		$merge = compact('type', 'value', 'id');
 		$options = array_merge($options, $merge);
