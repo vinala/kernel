@@ -410,6 +410,7 @@ class Form
 	*
 	* @param string $name
 	* @param bool $checked
+	* @param array $options
 	* @return string
 	*/
 	public static function checkbox( $name , $checked = false , $options = array())
@@ -417,6 +418,21 @@ class Form
 		self::exclure($options);
 
 		return self::checked('checkbox', $name, $checked, $options);
+	}
+
+	/**
+	* Set a form radio
+	*
+	* @param string $name
+	* @param bool $checked
+	* @param array $options
+	* @return string
+	*/
+	public static function radio( $name , $checked = false , $options = array())
+	{
+		self::exclure($options);
+
+		return self::checked('radio', $name, $checked, $options);
 	}
 	
 	
