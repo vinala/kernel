@@ -37,6 +37,17 @@ class Input
 		//
 		return self::$list;
 	}
+
+	/**
+	* Get all PHP Global vars
+	*
+	* @return array
+	*/
+	public static function all()
+	{
+		return self::$list;
+	}
+	
 	
 	/**
 	* get any http vars by 'dot' notation
