@@ -438,7 +438,19 @@ class Form
 	
 	
 	
-	
+	/**
+	* function to genenrate reset
+	*
+	* @param string $value
+	* @param array $options
+	* @return string
+	*/
+	public static function reset($value , array $options = array())
+	{
+		self::exclure($options , ['type','value']);
+
+		return self::input("reset" , 'null' , $value , $options);
+	}	
 
 	/**
 	* function to genenrate submit
