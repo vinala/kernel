@@ -354,19 +354,21 @@ class Routes
 	protected static function MaintenanceUrl()
 	{
 		//$url=self::SplitSlash($_SERVER["REQUEST_URI"]);
-		$url=isset($_GET['url'])?$_GET['url']:"/";
+		$url=isset($_GET['_framework_url_'])?$_GET['_framework_url_']:"/";
 		return $url;
 		//return '/'.$url;
 	}
 
 	/**
-	 * Check and get $_GET['url'] and remove it
-	 **/
+	* Check and get $_GET['_framework_url_'] and remove it
+	*
+	* @return string
+	*/
 	protected static function CheckUrl()
 	{
-		$url=isset($_GET['url'])?'/'.$_GET['url']:"/";
+		$url=isset($_GET['_framework_url_'])?'/'.$_GET['_framework_url_']:"/";
 		//
-		unset($_GET['url']);
+		unset($_GET['_framework_url_']);
 		//
 		return $url;
 	}
