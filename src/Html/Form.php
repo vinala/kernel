@@ -409,7 +409,6 @@ class Form
 	* Set a form checkbox
 	*
 	* @param string $name
-	* @param string $value
 	* @param bool $checked
 	* @return string
 	*/
