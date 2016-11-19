@@ -60,6 +60,19 @@ class Input
 	{
 		return array_get(self::$list , $key , $default);
 	}
+
+	/**
+	* Get a PHP gloabl variable by default use request vars
+	*	
+	* @param string $key
+	* @param mixed $default
+	* @param string $type
+	* @return mixed
+	*/
+	public static function get($key , $default = null , $type = "request")
+	{
+		return array_get(self::$list , $type.'.'.$key , $default);
+	}
 	
 
 }
