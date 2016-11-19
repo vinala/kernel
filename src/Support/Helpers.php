@@ -446,8 +446,8 @@ if ( ! function_exists("input"))
 	* @param string $default
 	* @return string
 	*/
-	function input( $key , $default = null)
+	function input( $key , $default = null , $type = "request")
 	{
-		return Input::reach($key , $default);
+		return Input::get($key , $default , $type);
 	}	
 }
