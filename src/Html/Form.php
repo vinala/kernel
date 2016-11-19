@@ -435,9 +435,23 @@ class Form
 		return self::checked('radio', $name, $checked, $options);
 	}
 	
-	
-	
-	
+	/**
+	* generate a file image field.
+	*
+	* @param  string $url
+	* @param  string $name
+	* @param  array $options
+	* @return string
+	*/
+	public static function image($url , $name = null, $options = array())
+	{
+		$options["src"] = $url;
+
+		self::exclure($options);
+
+		return self::input('image', $name, null, $options);
+	}
+		
 	/**
 	* function to genenrate reset
 	*
