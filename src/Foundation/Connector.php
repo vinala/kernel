@@ -12,6 +12,7 @@ use Vinala\Kernel\Foundation\Component;
 use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Atomium\Compiler;
 use Vinala\Kernel\Http\Input;
+use Vinala\Kernel\Validation\Validator;
 
 /**
 * Connector class to call framework core files
@@ -754,6 +755,8 @@ class Connector
 				),
 			self::$path.'Validation/'
 			);
+
+		Validator::ini();
 	}
 	
 
