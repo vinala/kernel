@@ -94,6 +94,7 @@ if ( !function_exists( 'd' ) ) {
 	 */
 	function d($var)
 	{
+		clean();
 		!dg($var);
 
 		die(1);
