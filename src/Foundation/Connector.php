@@ -752,6 +752,7 @@ class Connector
 		self::call(
 			array(
 				'Validator',
+				'ValidationResult',
 				),
 			self::$path.'Validation/'
 			);
