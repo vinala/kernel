@@ -100,6 +100,20 @@ if ( !function_exists( 'd' ) ) {
 	}
 }
 
+if ( !function_exists( 'trace' ) ) {
+	/**
+	 * Show application trace
+	 * 
+	 * @return string
+	 */
+	function trace()
+	{
+		Kint::trace();
+
+		die(1);
+	}
+}
+
 //--------------------------------------------------------
 // Routing
 //--------------------------------------------------------
