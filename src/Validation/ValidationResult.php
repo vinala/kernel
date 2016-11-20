@@ -27,7 +27,7 @@ class ValidationResult
 	*
 	* @var bool 
 	*/
-	protected $fails = false ;
+	protected $fails = null ;
 
 
 	/**
@@ -44,6 +44,36 @@ class ValidationResult
 	function __construct(V $validator)
 	{
 		$this->validator = $validator;
+	}
+
+	//--------------------------------------------------------
+	// Functions
+	//--------------------------------------------------------		
+
+	/**
+	* Check if validation fails
+	*
+	* @return bool
+	*/
+	public function fails()
+	{
+		$this->fails = ! $this->validator->validate();
+
+		return $this->fails;
+	}
+
+	/**
+	* Get first validation error if exists 	
+	*
+	* @return string
+	*/
+	public function error()
+	{
+		$errors = $this->validator->errors();
+
+		$this->error = empty($errors) ?: array_pop($errors)[0];
+
+		return $this->error ;
 	}
 	
 	
