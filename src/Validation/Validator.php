@@ -85,6 +85,17 @@ class Validator
 	{
 		return explode('|', $colmuns);
 	}
+
+	/**
+	* Check if validation fails
+	*
+	* @return bool
+	*/
+	public static function fails()
+	{
+		return ! self::$validator->validate();
+	}
+	
 	
 	
 	
