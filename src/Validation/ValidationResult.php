@@ -2,18 +2,24 @@
 
 namespace Vinala\Kernel\Validation;
 
+use Valitron\Validator as V;
+
 /**
 * Result of Validation
 */
 class ValidationResult
 {
 
+	//--------------------------------------------------------
+	// Properties
+	//--------------------------------------------------------
+
 	/**
 	* Errors array
 	*
 	* @var array 
 	*/
-	protected static $errors = array() ;
+	protected $errors = array() ;
 
 
 	/**
@@ -21,7 +27,7 @@ class ValidationResult
 	*
 	* @var bool 
 	*/
-	protected static $fails = false ;
+	protected $fails = false ;
 
 
 	/**
@@ -29,7 +35,16 @@ class ValidationResult
 	*
 	* @var Valitron\Validator 
 	*/
-	protected static $validator ;
+	protected $validator ;
+
+	//--------------------------------------------------------
+	// Constructor
+	//--------------------------------------------------------
+
+	function __construct(V $validator)
+	{
+		$this->validator = $validator;
+	}
 	
 	
 	
