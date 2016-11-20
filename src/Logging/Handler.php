@@ -28,7 +28,20 @@ class Handler
 	{	
 		if(Config::get('loggin.debug')) self::PrettyPage();
 		else self::SimplePage();
+		//
+		self::setDebug();
 	}
+
+	/**
+	* Set Kint
+	*
+	* @return null
+	*/
+	protected static function setDebug()
+	{
+		\Kint::$theme = 'solarized-dark';
+	}
+	
 
 	protected static function PrettyPage()
 	{
