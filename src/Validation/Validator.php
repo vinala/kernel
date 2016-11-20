@@ -71,7 +71,7 @@ class Validator
 		foreach ($rules as $rule => $columns) 
 		{
 			$columns = self::separte($columns);
-			self::$validator->rule($rule, $columns);
+			self::$validator->rule(trim($rule) , $columns);
 		}
 	}
 
