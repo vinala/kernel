@@ -75,7 +75,16 @@ class Validator
 		}
 	}
 
-
+	/**
+	* Separte the data keys by |
+	*
+	* @param string $colmuns
+	* @return array
+	*/
+	protected static function separte($colmuns)
+	{
+		return explode('|', $colmuns);
+	}
 	
 	
 	
