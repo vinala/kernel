@@ -73,6 +73,8 @@ class Validator
 			$columns = self::separte($columns);
 			self::$validator->rule(trim($rule) , $columns);
 		}
+
+		return new ValidationResult(self::$validator);
 	}
 
 	/**
@@ -86,27 +88,7 @@ class Validator
 		return explode('|', $colmuns);
 	}
 
-	/**
-	* Check if validation fails
-	*
-	* @return bool
-	*/
-	public static function fails()
-	{
-		return ! self::$validator->validate();
-	}
 
-	/**
-	* Get first validation error if exists 	
-	*
-	* @return string
-	*/
-	public static function error()
-	{
-		$errors = self::$validator->errors();
-
-		return empty($errors) ?: array_pop($errors)[0];
-	}
 	
 	
 	
