@@ -52,6 +52,7 @@ class Connector
 		Connector::string();
 		Connector::object();
 		Connector::access();
+		Connector::validation();
 		if(Component::isOn("faker")) Connector::faker();
 		Connector::cookie();
 		Connector::router();
@@ -741,6 +742,22 @@ class Connector
 	}
 
 	/**
+	* call validation classes
+	*
+	* @return null
+	*/
+	public static function validation()
+	{
+		self::call(
+			array(
+				'Validator',
+				),
+			self::$path.'Validation/'
+			);
+	}
+	
+
+	/**
 	 * atomium call
 	 */
 	public static function atomium()
@@ -845,6 +862,7 @@ class Connector
 		Connector::string();
 		Connector::object();
 		Connector::access();
+		Connector::validation();
 		if(Component::isOn("faker"))  Connector::faker();
 		Connector::cookie();
 		Connector::router();
