@@ -22,11 +22,18 @@ class Validator
 	protected static $validator ;
 
 	/**
-	* Translator file path
+	* Translator folder path
 	*
 	* @var string 
 	*/
 	protected static $langFolder ;
+
+	/**
+	* Translator file path
+	*
+	* @var string 
+	*/
+	protected static $langFile ;
 	
 	//--------------------------------------------------------
 	// Functions
@@ -42,9 +49,12 @@ class Validator
 		$lang = config('lang.default');
 
 		self::$langFolder = dirname(dirname(__DIR__))."/app/lang/".$lang;
-
-		V::langDir(self::$langFolder); 
-		V::lang('validator');
+		self::$langFile = self::$langFolder."/validator.php";
+		if(is_file(self::$langFile))
+		{
+			V::langDir(self::$langFolder); 
+			V::lang('validator');
+		}
 	}
 	
 
