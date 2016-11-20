@@ -85,6 +85,20 @@ if ( !function_exists( 'dc' ) ) {
 	}
 }
 
+if ( !function_exists( 'd' ) ) {
+	/**
+	 * Show debug
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	function d($var)
+	{
+		!dg($var);
+
+		die(1);
+	}
+}
 
 //--------------------------------------------------------
 // Routing
