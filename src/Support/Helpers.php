@@ -72,14 +72,14 @@ if ( ! function_exists("view"))
 // Debuging
 //--------------------------------------------------------
 
-if ( !function_exists( 'dc' ) ) {
+if ( !function_exists( 'di' ) ) {
 	/**
 	 * Show debug without die
 	 * 
 	 * @param string $value
 	 * @return string
 	 */
-	function dc($var)
+	function di($var)
 	{
 		!dg($var);
 	}
