@@ -15,7 +15,7 @@ class Validator
 	//--------------------------------------------------------
 
 	/**
-	* the Kint validator 
+	* The Kint validator 
 	*
 	* @var Valitron\Validator
 	*/
@@ -56,6 +56,29 @@ class Validator
 			V::lang('validator');
 		}
 	}
+
+	/**
+	* Make new validation procces
+	*
+	* @param array $data
+	* @param array $rules
+	* @return Vinala\Kernel\Validation\Validator
+	*/
+	public static function make(array $data , array $rules)
+	{
+		self::$validator = new V($data);
+
+		foreach ($rules as $rule => $columns) 
+		{
+			$colmuns = self::separte($colmuns);
+			self::$validator->rule($rule, $colmuns);
+		}
+	}
+
+
+	
+	
+	
 	
 
 
