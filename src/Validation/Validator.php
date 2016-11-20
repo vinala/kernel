@@ -105,7 +105,7 @@ class Validator
 	{
 		$errors = self::$validator->errors();
 
-		return empty($errors) ?: array_pop($errors);
+		return empty($errors) ?: array_pop($errors)[0];
 	}
 	
 	
