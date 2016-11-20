@@ -74,9 +74,9 @@ if ( ! function_exists("view"))
 
 if ( !function_exists( 'dc' ) ) {
 	/**
-	 * Show debug
+	 * Show debug without die
+	 * 
 	 * @param string $value
-	 *
 	 * @return string
 	 */
 	function dc($var)
@@ -87,9 +87,9 @@ if ( !function_exists( 'dc' ) ) {
 
 if ( !function_exists( 'd' ) ) {
 	/**
-	 * Show debug
+	 * Show debug with die
+	 * 
 	 * @param string $value
-	 *
 	 * @return string
 	 */
 	function d($var)
