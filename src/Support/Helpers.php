@@ -10,19 +10,6 @@ use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Http\Input;
 
-if ( !function_exists( 'd' ) ) {
-	/**
-	 * Show debug
-	 * @param string $value
-	 *
-	 * @return string
-	 */
-	function d($var)
-	{
-		!dg($var);
-	}
-}
-
 if ( ! function_exists("root")) 
 {
 	/**
@@ -80,6 +67,24 @@ if ( ! function_exists("view"))
 		return View::make($value,$data);
 	}	
 }
+
+//--------------------------------------------------------
+// Debuging
+//--------------------------------------------------------
+
+if ( !function_exists( 'dc' ) ) {
+	/**
+	 * Show debug
+	 * @param string $value
+	 *
+	 * @return string
+	 */
+	function dc($var)
+	{
+		!dg($var);
+	}
+}
+
 
 //--------------------------------------------------------
 // Routing
