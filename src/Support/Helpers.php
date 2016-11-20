@@ -81,7 +81,7 @@ if ( !function_exists( 'di' ) ) {
 	 */
 	function di($var)
 	{
-		!dg($var);
+		-dg($var);
 	}
 }
 
