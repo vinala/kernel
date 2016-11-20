@@ -510,8 +510,7 @@ class Connector
 		self::call(
 			array(
 				'Res',
-				'HTML',
-				'Input'
+				'HTML'
 				),
 			self::$path.'Hypertext/'
 			);
