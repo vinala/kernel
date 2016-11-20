@@ -15,7 +15,7 @@ class Validator
 	//--------------------------------------------------------
 
 	/**
-	* The Kint validator 
+	* The validator 
 	*
 	* @var Valitron\Validator
 	*/
@@ -70,8 +70,8 @@ class Validator
 
 		foreach ($rules as $rule => $columns) 
 		{
-			$colmuns = self::separte($colmuns);
-			self::$validator->rule($rule, $colmuns);
+			$columns = self::separte($columns);
+			self::$validator->rule($rule, $columns);
 		}
 	}
 
@@ -94,6 +94,18 @@ class Validator
 	public static function fails()
 	{
 		return ! self::$validator->validate();
+	}
+
+	/**
+	* Get first validation error if exists 	
+	*
+	* @return string
+	*/
+	public static function error()
+	{
+		$errors = self::$validator->errors();
+
+		return empty($errors) ?: array_pop($errors);
 	}
 	
 	
