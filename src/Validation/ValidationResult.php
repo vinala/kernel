@@ -21,6 +21,12 @@ class ValidationResult
 	*/
 	protected $errors = array() ;
 
+	/**
+	* Error string
+	*
+	* @var string
+	*/
+	protected $error ;
 
 	/**
 	* If validation fails
@@ -74,6 +80,18 @@ class ValidationResult
 		$this->error = empty($errors) ?: array_pop($errors)[0];
 
 		return $this->error ;
+	}
+
+	/**
+	* Get validation errors if exists 	
+	*
+	* @return string
+	*/
+	public function errors()
+	{
+		$this->errors = $this->validator->errors();
+
+		return $this->errors ;
 	}
 	
 	
