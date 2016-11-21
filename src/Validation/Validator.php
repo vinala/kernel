@@ -71,7 +71,10 @@ class Validator
 		foreach ($rules as $rule => $columns) 
 		{
 			$columns = self::separte($columns);
-			self::$validator->rule(trim($rule) , $columns);
+
+			$value = self::getValue($rule);
+
+			self::$validator->rule($value['rule'] , $columns , $value['value']);
 		}
 
 		return new ValidationResult(self::$validator);
@@ -87,6 +90,24 @@ class Validator
 	{
 		return explode('|', $colmuns);
 	}
+
+	/**
+	* Get value of the rule
+	*
+	* @param string $param
+	* @return array
+	*/
+	protected static function getValue($param)
+	{
+		$data = explode(':', $param);
+
+		$result = ['rule' => trim($data[0])];
+
+		$result['value'] = count($data) > 1 ? $data[1] : null;
+
+		return $result;
+	}
+	
 
 
 	
