@@ -125,7 +125,7 @@ class Fetcher
 	 */
 	protected static function commands()
 	{
-		foreach (self::fetch("commands") as $file) 
+		foreach (self::fetch("support/lumos" , false) as $file) 
 			Connector::need($file);
 	}
 	
