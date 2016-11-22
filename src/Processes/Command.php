@@ -14,8 +14,8 @@ class Command
 	{
 		$Root = Process::root;
 		//
-		if(!file_exists($Root."app/commands/$file.php")){
-			$myfile = fopen($Root."app/commands/$file.php", "w");
+		if(!file_exists($Root."support/lumos/$file.php")){
+			$myfile = fopen($Root."support/lumos/$file.php", "w");
 			$txt = self::set($file, $command);
 			fwrite($myfile, $txt);
 			fclose($myfile);
@@ -31,7 +31,7 @@ class Command
 	*/
 	public static function set($file, $command)
 	{
-		$txt = "<?php\n\nnamespace Vinala\App\Console\Commands;\n\n";
+		$txt = "<?php\n\nnamespace Vinala\App\Support\Lumos;\n\n";
 		$txt .= "use Vinala\Kernel\Console\Command\Commands;\n\n";
 		$txt.="\n\nclass $file extends Commands\n{\n\t";
 
@@ -48,7 +48,7 @@ class Command
 	*/
 	public static function ListAll()
 	{
-		$commands = glob(Application::$root."app/commands/*.php");
+		$commands = glob(Application::$root."support/lumos/*.php");
 		//
 		return $commands;
 	}
