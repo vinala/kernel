@@ -120,7 +120,7 @@ class Console
 	 */
 	public static function setUserClasses()
 	{
-		$namespace = "Vinala\App\Console\Commands";
+		$namespace = "Vinala\App\Support\Lumos";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
@@ -146,7 +146,7 @@ class Console
 	{
 		$classes = array();
 		//
-		$namespace = "Vinala\App\Console\Commands";
+		$namespace = "Vinala\App\Support\Lumos";
 		//
         foreach (get_declared_classes() as $value)
             if(\Strings::contains($value,$namespace)) 
