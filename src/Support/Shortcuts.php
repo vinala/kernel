@@ -41,7 +41,7 @@ if ( ! function_exists("path"))
 if( ! function_exists("config"))
 {
 	/**
-	* helper for Config::get function
+	* shortcut for Config::get function
 	*		
 	* @param string $key
 	* @return mixed
@@ -56,7 +56,7 @@ if( ! function_exists("config"))
 if ( ! function_exists("view")) 
 {
 	/**
-	* helper for making view
+	* shortcut for making view
 	*
 	* @param string $value
 	* @param array $data
@@ -123,7 +123,7 @@ if ( !function_exists( 'trace' ) ) {
 if ( ! function_exists("get")) 
 {
 	/**
-	* helper for get routing
+	* shortcut for get routing
 	*
 	* @param string $uri
 	* @param callback $callback
@@ -139,7 +139,7 @@ if ( ! function_exists("get"))
 if ( ! function_exists("post")) 
 {
 	/**
-	* helper for post routing
+	* shortcut for post routing
 	*
 	* @param string $uri
 	* @param string $controller
@@ -156,7 +156,7 @@ if ( ! function_exists("post"))
 if ( ! function_exists("target")) 
 {
 	/**
-	* helper for controller routing
+	* shortcut for controller routing
 	*
 	* @param string $uri
 	* @param string $controller
@@ -172,7 +172,7 @@ if ( ! function_exists("target"))
 if ( ! function_exists("call")) 
 {
 	/**
-	* helper for get routing
+	* shortcut for get routing
 	*
 	* @param string $uri
 	* @param string $controller
@@ -193,7 +193,7 @@ if ( ! function_exists("call"))
 if ( ! function_exists("now")) 
 {
 	/**
-	* helper for current timestamp
+	* shortcut for current timestamp
 	*
 	* @return int
 	*/
@@ -207,7 +207,7 @@ if ( ! function_exists("now"))
 if ( ! function_exists("clean")) 
 {
 	/**
-	* helper for var_dump
+	* shortcut for var_dump
 	*
 	* @return null
 	*/
@@ -221,7 +221,7 @@ if ( ! function_exists("clean"))
 if ( ! function_exists("map")) 
 {
 	/**
-	* helper for var_dump
+	* shortcut for var_dump
 	*
 	* @return null
 	*/
@@ -235,7 +235,7 @@ if ( ! function_exists("map"))
 if ( ! function_exists("out")) 
 {
 	/**
-	* helper for die
+	* shortcut for die
 	*
 	* @return null
 	*/
@@ -249,7 +249,7 @@ if ( ! function_exists("out"))
 if ( ! function_exists("abort")) 
 {
 	/**
-	* helper for showing exception
+	* shortcut for showing exception
 	*
 	* @param string $msg
 	* @return null
@@ -264,7 +264,7 @@ if ( ! function_exists("abort"))
 if ( ! function_exists("abort_if")) 
 {
 	/**
-	* helper for showing exception if variable is true
+	* shortcut for showing exception if variable is true
 	*
 	* @param bool $expression
 	* @return null
@@ -278,7 +278,7 @@ if ( ! function_exists("abort_if"))
 
 
 //--------------------------------------------------------
-// Array Helpers
+// Array Shortcuts
 //--------------------------------------------------------
 
 if ( ! function_exists("array_get")) 
@@ -438,7 +438,7 @@ if ( ! function_exists("array_except"))
 
 
 //--------------------------------------------------------
-// String Helpers
+// String Shortcuts
 //--------------------------------------------------------
 
 if ( ! function_exists("trans")) 
