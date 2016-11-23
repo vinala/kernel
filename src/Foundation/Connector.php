@@ -234,7 +234,8 @@ class Connector
 	{
 		self::call(
 			array(
-				'Handler',  
+				'Handler', 
+				'Exception', 
 				'Log'
 				),
 			self::$path.'Logging/'
