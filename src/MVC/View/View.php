@@ -24,5 +24,17 @@ class View
 		return Views::import($plugin,$value,$data);
 	}
 
+	/**
+	* Check if the view exists
+	*
+	* @param string $name
+	* @return bool
+	*/
+	public static function exists($name)
+	{
+		return Views::exists($name);
+	}
+	
+
 
 }
