@@ -143,16 +143,6 @@ class Connector
 	}
 
 	/**
-	 * Logging
-	 **/
-	public static function logging()
-	{
-		$files = array('Handler', 'Log');
-		$filesPath = self::$path.'Logging/';
-		self::call($files,$filesPath);
-	}
-
-	/**
 	 * Config Core Files
 	 **/
 	public static function config()
@@ -244,7 +234,7 @@ class Connector
 	{
 		self::call(
 			array(
-				'Handler', 
+				'Handler',  
 				'Log'
 				),
 			self::$path.'Logging/'
