@@ -2,10 +2,19 @@
 
 namespace Vinala\Kernel\Database\Connector\Exception;
 
+use Vinala\Kernel\Logging\Exception;
+
 /**
 * Directory not fount exception
 */
-class ConnectorException extends \Exception
+class ConnectorException extends Exception
 {
-	protected $message = "We cannot connect to database";
+	
+
+	function __construct()
+	{
+		$this->message = 'We cannot connect to database';
+		$this->view = 'errors.database';
+	}
+
 }
