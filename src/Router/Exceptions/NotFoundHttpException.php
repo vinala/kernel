@@ -2,15 +2,17 @@
 
 namespace Vinala\Kernel\Router\Exception;
 
-/**
-* Route Exception
-*/
-class NotFoundHttpException extends \Exception
-{
-	protected $message;   // exception message
+use Vinala\Kernel\Logging\Exception;
 
-	function __construct() 
+/**
+* Not Found Http Exception
+*/
+class NotFoundHttpException extends Exception
+{
+
+	function __construct()
 	{
-		$this->message="Sorry, the page you are looking for could not be found.";
+		$this->message = 'Sorry, the page you are looking for could not be found.';
+		$this->view = 'errors.404';
 	}
 }
