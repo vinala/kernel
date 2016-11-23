@@ -28,6 +28,7 @@ class Fetcher
 		self::setAppPath();
 		self::setFrameworkPath();
 		//
+		self::exception();
 		self::model();
 		self::controller();
 		self::link();
@@ -35,6 +36,7 @@ class Fetcher
 		self::filtes();
 		self::routes($routes);
 		self::commands();
+
 	}
 
 	/**
@@ -88,6 +90,15 @@ class Fetcher
 	protected static function link()
 	{
 		foreach (self::fetch("links") as $file) 
+			Connector::need($file);
+	}
+
+	/**
+	 * Require files of exception folder
+	 */
+	protected static function exception()
+	{
+		foreach (self::fetch("exceptions") as $file) 
 			Connector::need($file);
 	}
 
