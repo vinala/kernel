@@ -823,6 +823,7 @@ class Connector
 				'Controller',
 				'Seeds',
 				'Routes',
+				'Exception',
 				),
 			self::$path.'Processes/'
 			);
