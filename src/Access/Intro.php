@@ -363,10 +363,10 @@ class Intro
 
 	public static function checkDb_step($host,$name,$usr,$pass,$prefix)
 	{
-		$host = input('db_host') ;
-		$name = input('db_name');
-		$usr = input('db_usr');
-		$pass = input('db_pass');
+		$host   = input('db_host');
+		$name   = input('db_name');
+		$usr    = input('db_usr');
+		$pass   = input('db_pass');
 		$prefix = input('db_prefix');
 		//
 		try {
