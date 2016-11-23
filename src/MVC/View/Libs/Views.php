@@ -175,5 +175,36 @@ class Views
 		return $atomium->show($file, $_data_);
 	}
 
+	/**
+	* Check if view exists
+	*
+	* @param string $name
+	* @return bool
+	*/
+	public static function exists($name)
+	{
+		$file = str_replace('.', '/', $name);
+
+		$extensions =[
+			'.php',
+			'.atom.php',
+			'.atom',
+			'.tpl.php'
+		];
+
+		foreach ($extensions as $extension) 
+		{
+			$path = Application::$root.'app/views/'.$file.$extension;
+
+			if(file_exists($path))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+
 
 }
