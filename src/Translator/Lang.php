@@ -25,7 +25,6 @@ class Lang
 		//
 		self::$lang= is_null($lang) ? self::detect() : $lang ;
 		self::put();
-		d(self::$textes);
 	}
 
 	public static function get($key)
@@ -50,7 +49,6 @@ class Lang
 	private static function put()
 	{
 		foreach (glob(Application::$root."resources/translator/".self::$lang."/*.php") as $filename)
-		// foreach (glob(Application::$root."app/lang/".self::$lang."/*.php") as $filename)
 		{
 			$tbl=(\Connector::need($filename));
 			foreach ($tbl as $key => $value) {
