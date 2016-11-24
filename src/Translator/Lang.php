@@ -25,6 +25,7 @@ class Lang
 		//
 		self::$lang= is_null($lang) ? self::detect() : $lang ;
 		self::put();
+		d(self::$textes);
 	}
 
 	public static function get($key)
@@ -48,7 +49,8 @@ class Lang
 
 	private static function put()
 	{
-		foreach (glob(Application::$root."app/lang/".self::$lang."/*.php") as $filename)
+		foreach (glob(Application::$root."resources/translator/".self::$lang."/*.php") as $filename)
+		// foreach (glob(Application::$root."app/lang/".self::$lang."/*.php") as $filename)
 		{
 			$tbl=(\Connector::need($filename));
 			foreach ($tbl as $key => $value) {
@@ -125,10 +127,10 @@ class Lang
 	private static function getSupported()
 	{
 		$supp=array();
-		$sup=(new Filesystem)->directories(Application::$root."app/lang");
+		$sup=(new Filesystem)->directories(Application::$root."resources/translator");
 		//
 		foreach ($sup as $value) {
-			$r=explode(Application::$root."app/lang/", $value);
+			$r=explode(Application::$root."resources/translator/", $value);
 			$supp[]=$r[1];
 		}
 		//
