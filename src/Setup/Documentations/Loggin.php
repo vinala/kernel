@@ -37,12 +37,12 @@ class Loggin
 		return $title.$doc."\n\n\t$param\n";
 	}
 
-	public static function set($loggin)
+	public static function set($loggin , $log ='app/storage/logs/lighty.log')
 	{
 		$loggin = $loggin ? "true" : "false" ;
 		$debug = self::logginRow("debug","'debug'=>$loggin,");
 		$error_debug_message = self::logginRow("error_debug_message","'msg' => \"Ohlala! il semble que quelque chose s'ait mal passé\",");
-		$error_log = self::logginRow("error_log","'log' => 'app/storage/logs/lighty.log',");
+		$error_log = self::logginRow("error_log","'log' => '$log',");
 		$background = self::logginRow("background","'bg' => '#a4003a',");
 		//
 		return "<?php \n\nreturn array(\n\t".$debug.$error_debug_message.$error_log.$background."\n);";
