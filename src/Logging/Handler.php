@@ -69,8 +69,6 @@ class Handler
 
 	protected static function setSimpleParams()
 	{
-		self::$page->msg=Config::get('loggin.msg');
-		self::$page->bg_color=Config::get('loggin.bg');
 		self::$page->handle();
 	}
 
