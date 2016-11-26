@@ -10,6 +10,13 @@ use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Http\Input;
 
+
+
+//--------------------------------------------------------
+// Global Shortcuts
+//--------------------------------------------------------
+
+
 if ( ! function_exists("root")) 
 {
 	/**
@@ -482,6 +489,24 @@ if ( ! function_exists("e"))
 		return htmlentities($value);
 	}	
 }
+
+if ( ! function_exists("str_contains")) 
+{
+	/**
+	* Check if string have substring
+	*
+	* @param string $string
+	* @param string $substring
+	* @return string
+	*/
+	function str_contains( $string , $substring )
+	{
+		if(strpos($string,$substring) !== false) return true;
+		else return false;
+	}	
+}
+
+
 
 if ( ! function_exists("input")) 
 {
