@@ -19,14 +19,11 @@ class EventListener
 	/**
 	* Get Events of Listener
 	*
-	* @param 
-	* @param 
-	* @return 
+	* @return array
 	*/
-	public static function name()
+	public static function getEvents()
 	{
-		
-		return ;
+		return static::$events;
 	}
 	
 
