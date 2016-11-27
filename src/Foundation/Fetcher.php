@@ -3,6 +3,7 @@
 namespace Vinala\Kernel\Foundation;
 
 use Vinala\Kernel\Router\Routes;
+use Vinala\Kernel\Events\Event;
 
 /**
 * this class help the framework to get all
@@ -29,6 +30,7 @@ class Fetcher
 		self::setFrameworkPath();
 		//
 		self::exception();
+		self::events();
 		self::model();
 		self::controller();
 		self::link();
@@ -36,6 +38,7 @@ class Fetcher
 		self::filtes();
 		self::routes($routes);
 		self::commands();
+		
 
 	}
 
@@ -138,6 +141,17 @@ class Fetcher
 	{
 		foreach (self::fetch("support/lumos" , false) as $file) 
 			Connector::need($file);
+	}
+
+	/**
+	 * Require files of Console
+	 */
+	protected static function events()
+	{
+		foreach (self::fetch("app/events" , false) as $file) 
+			Connector::need($file);
+		//
+		Event::register();
 	}
 	
 }
