@@ -845,6 +845,7 @@ class Connector
 				'Seeds',
 				'Routes',
 				'Exception',
+				'Events',
 				),
 			self::$path.'Processes/'
 			);
