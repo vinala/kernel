@@ -33,8 +33,10 @@ class Event
             {
             	$name = self::getName($value);
 
-            	if( ! is_null($value::$events))
-	            	foreach ($value::$events as $key => $value) 
+            	$events = $value::getEvents();
+
+            	if( ! is_null($events))
+	            	foreach ($events as $key => $value) 
 	            	{
 	            		$data[$name.".".$key] = $value;
 	            	}
