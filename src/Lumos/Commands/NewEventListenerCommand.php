@@ -30,7 +30,7 @@ class NewEventListenerCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = "make:event"./*config('lumos.new_event').*/
+        $this->key = config('lumos.new_event').
         ' {name : what\'s the name of the events listener ?}';
 
         $this->description = 'Create new events listener';
