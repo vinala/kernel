@@ -65,7 +65,7 @@ class Events
 	{
 		$txt = "\t/**\n\t* Set events pattern and thier function\n\t*\n\t* @var array\n\t*/\n\t";
 
-		$txt .= 'public static $events = ['."\n\t\t'someEvent' => 'onSomeEvent',\n\t];\n\n\n\n";
+		$txt .= 'protected static $events = ['."\n\t\t'someEvent' => 'onSomeEvent',\n\t];\n\n\n\n";
 
 		return $txt;
 	}
