@@ -14,6 +14,7 @@ use Vinala\Kernel\Atomium\Compiler;
 use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Validation\Validator;
 
+
 /**
 * Connector class to call framework core files
 */
@@ -81,6 +82,7 @@ class Connector
 		Connector::atomium();
 		Connector::process();
 		Connector::setup();
+		Connector::event();
 	}
 
 	/**
@@ -750,6 +752,25 @@ class Connector
 
 		Validator::ini();
 	}
+
+
+	/**
+	* call events calls
+	*
+	*/
+	public static function event()
+	{
+		self::call(
+			array(
+				'Event',
+				'EventListener',
+				),
+			self::$path.'Event/'
+			);
+
+		self::need(self::$path.'Event/Exceptions/ManyListenersArgumentsException.php');
+	}
+	
 	
 
 	/**
@@ -882,6 +903,7 @@ class Connector
 		Connector::fileSystem();
 		Connector::intro();
 		Connector::plugins();
+		Connector::events();
 	}
 
 	/**
