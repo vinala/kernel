@@ -1,6 +1,6 @@
 <?php
 
-namespace Vinala\Kernel\Objects\Stringss\Exception;
+namespace Vinala\Kernel\Objects\Strings\Exception;
 
 
 /**
