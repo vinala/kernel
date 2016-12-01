@@ -450,6 +450,7 @@ class Connector
 				'Links',
 				'Http',
 				'Error',
+				'Request',
 				'Root'
 				),
 			self::$path.'Http/'
