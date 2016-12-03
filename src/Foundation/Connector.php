@@ -455,7 +455,35 @@ class Connector
 				),
 			self::$path.'Http/'
 			);
+
+		self::middleware();
 	}
+
+	/**
+	* Middleware calls
+	*
+	* @return null
+	*/
+	public static function middleware()
+	{
+		// Classes calls
+		self::call(
+			array(
+				'Filters',
+				'Middleware',
+				),
+			self::$path.'Http/Middleware/'
+			);
+
+		//Exceptions calls
+		self::call(
+			array(
+				'MiddlewareNotFoundException',
+				),
+			self::$path.'Http/Middleware/Exceptions/'
+			);
+	}
+	
 
 	/**
 	* http input calls
