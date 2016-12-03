@@ -1,6 +1,6 @@
 <?php 
 
-namespace Vinala\Kernel\Http\Requests ;
+namespace Vinala\Kernel\Http;
 
 /**
 * Requests Class
