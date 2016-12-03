@@ -1,6 +1,6 @@
 <?php 
 
-namespace Vinala\Kernel\Http;
+namespace Vinala\Kernel\Http\Middleware;
 
 /**
 * Kernel Filters class
@@ -8,7 +8,7 @@ namespace Vinala\Kernel\Http;
 class Filters
 {
 	/**
-	* Get route's filters from middleware
+	* Get route's middlewares
 	*
 	* @return array
 	*/
@@ -16,5 +16,19 @@ class Filters
 	{
 		return static::$routesMiddleware;
 	}
+
+	/**
+	* Check if middleware exists
+	*
+	* @param string $name
+	* @return bool
+	*/
+	protected static function existsRoutesMiddleware($name)
+	{
+		$middleware = self::allRoutesMiddleware();
+		
+		return array_has($name);
+	}
+	
 	
 }
