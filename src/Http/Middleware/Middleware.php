@@ -2,6 +2,8 @@
 
 namespace Vinala\Kernel\Http\Middleware;
 
+use App\Http\Filters;
+
 /**
 * Middle ware class
 */
