@@ -2,13 +2,15 @@
 
 namespace Vinala\Kernel\Http\Middleware;
 
+use Vinala\Kernel\Http\Middleware\Exceptions\MiddlewareNotFoundException;
+
 /**
 * Kernel Filters class
 */
 class Filters
 {
 	/**
-	* Get route's middlewares
+	* Get routes middlewares
 	*
 	* @return array
 	*/
@@ -18,7 +20,7 @@ class Filters
 	}
 
 	/**
-	* Check if middleware exists
+	* Check if routes middleware exists
 	*
 	* @param string $name
 	* @return bool
@@ -26,9 +28,25 @@ class Filters
 	protected static function existsRoutesMiddleware($name)
 	{
 		$middleware = self::allRoutesMiddleware();
-		
+
 		return array_has($name);
 	}
+
+	/**
+	* Get routes middleware
+	*
+	* @param string $name
+	* @return string
+	*/
+	public static function RoutesMiddleware($name)
+	{
+		if( ! self::existsRoutesMiddleware($name)) throw new MiddlewareNotFoundException($name);
+
+		$middleware = self::allRoutesMiddleware();
+		
+		return array_get($middleware , $name);
+	}
+	
 	
 	
 }
