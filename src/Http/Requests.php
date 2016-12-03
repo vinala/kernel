@@ -3,9 +3,9 @@
 namespace Vinala\Kernel\Http\Requests ;
 
 /**
-* RequestClass
+* Requests Class
 */
-class Request
+class Requests
 {
 	
 
