@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Http\Middleware;
 
-use App\Http\Filters;
+use App\Http\Filters as appFilters;
 
 /**
 * Middle ware class
@@ -30,7 +30,7 @@ class Middleware
 	*/
 	protected static function call($name)
 	{
-		return Filters::RoutesMiddleware($name);
+		return appFilters::RoutesMiddleware($name);
 	}
 	
 	
