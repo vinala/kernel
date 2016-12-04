@@ -5,7 +5,7 @@ namespace Vinala\Kernel\Http;
 /**
 * Requests Class
 */
-class Requests
+class Request
 {
 	
 
