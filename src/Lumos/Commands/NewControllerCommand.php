@@ -31,7 +31,7 @@ class NewControllerCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_controller').' {name : what\'s the name of the controller ?} {route? : If set, a router for this controller will created in routes file}';
+        $this->key = Config::get('lumos.new_controller').' {name : what\'s the name of the controller ?} {route? : If set, a router for this controller will created in routes file} {--resource : If set, the controller will be created with recources methods}';
         $this->description = 'New Controller';
     }
 
@@ -50,8 +50,9 @@ class NewControllerCommand extends Commands
     {
         $name = $this->argument("name");
         $route = $this->argument("route");
+        $resource = $this->option("resource");
         //
-        $process = Controller::create($name , $route);
+        $process = Controller::create($name , $route , $resource);
         //
         $this->show($process);
     }
