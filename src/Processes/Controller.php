@@ -11,20 +11,23 @@ use Vinala\Kernel\Filesystem\Filesystem as File;
 */
 class Controller
 {
-	public static function create($fileName,$className,$Route,$rt = null)
+	public static function create($name,$route = null,$rt = null)
 	{
-		$addRoute = $Route;
-		$class = $className;
-		$file = $fileName;
+		// $addRoute = $Route;
+
 		$Root = is_null($rt) ? Process::root : $rt ;
 		//
-		if(!file_exists($Root."app/controllers/$file.php")){
-			$myfile = fopen($Root."app/controllers/$file.php", "w");
-			$txt = self::set($class);
+		if(!file_exists($Root."app/controllers/$name.php")){
+			$myfile = fopen($Root."app/controllers/$name.php", "w");
+			$txt = self::set($name);
 			fwrite($myfile, $txt);
 			fclose($myfile);
 			//
-			self::addRoute($addRoute,$className , $fileName ,$Root);
+			if( !is_null($route)) 
+			{
+				self::addRoute($route , $name ,$Root);
+			}
+
 			return true;
 		}
 		else return false;
@@ -71,17 +74,23 @@ class Controller
 		return $txt;
 	}
 
-	public static function addRoute($addRoute , $className , $fileName ,$Root)
+	/**
+	* Add controller route to routes file
+	*
+	* @param string $route
+	* @param string $controller
+	* @return bool
+	*/
+	public static function addRoute($route , $controller , $root)
 	{
-		if($addRoute)
-		{
-			$RouterFile 	= $Root."app/http/Routes.php";
-			$RouterContent 	 = "\n\n";
-			$RouterContent 	.= 'Route::controller("'.$fileName.'","'.$className.'");';
-			//
-			file_put_contents($RouterFile, $RouterContent, FILE_APPEND | LOCK_EX);
-		}
+		$file 	= $root."app/http/Routes.php";
+		$content 	 = "\n\ntarget('$route','$controller');";
+
+		file_put_contents($file, $content, FILE_APPEND | LOCK_EX);
+
+		return true;
 	}
+	
 
 	/** 
 	*	Listing all schemas
