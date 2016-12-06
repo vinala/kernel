@@ -31,7 +31,7 @@ class NewControllerCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_controller').' {fileName : what\'s the name of the file?} {className : what\'s the name of the controller class?} {--route : If set, a router for this controller will created in routes file}';
+        $this->key = Config::get('lumos.new_controller').' {name : what\'s the name of the controller ?} {route? : If set, a router for this controller will created in routes file}';
         $this->description = 'New Controller';
     }
 
@@ -48,11 +48,10 @@ class NewControllerCommand extends Commands
      */
     public function exec()
     {
-        $fileName = $this->argument("fileName");
-        $className = $this->argument("className");
-        $addRoute = $this->option("route");
+        $name = $this->argument("name");
+        $route = $this->argument("route");
         //
-        $process = Controller::create($fileName , $className , $addRoute);
+        $process = Controller::create($name , $route);
         //
         $this->show($process);
     }
@@ -62,7 +61,7 @@ class NewControllerCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The controller was created");
-        else $this->error("The controller is already existe");
+        if($process) $this->info("\nThe controller was created\n");
+        else $this->error("\nThe controller is already existe\n");
     }
 }
