@@ -32,7 +32,10 @@ class Request
 	*/
 	protected function getData()
 	{
-		return $_REQUEST;
+		$data = $_REQUEST;
+		unset($data['_framework_url_']);
+		
+		return $data;
 	}
 
 	/**
@@ -47,6 +50,17 @@ class Request
 			$this->$key = $value;
 		}
 	}
+
+	/**
+	* Get all Requests
+	*
+	* @return array
+	*/
+	public function all()
+	{
+		return $this->data;
+	}
+	
 	
 	
 
