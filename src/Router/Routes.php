@@ -8,6 +8,7 @@ use Vinala\Kernel\Objects\Table;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Router\Exception\NotFoundHttpException;
 use Vinala\Kernel\Http\Errors;
+use Vinala\Kernel\Http\Request;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Access\Url;
 use Vinala\Panel\Seeds;
@@ -267,10 +268,14 @@ class Routes
 							$ok=self::exec($params,$value);
 							break;
 						}
-						else if($value["methode"]=="resource")
+						
+						else if(is_array($value["methode"]))
 						{
-							$ok=self::exec($params,$value);
-							break;
+							if( $value['methode']['type'] == 'resource' )
+							{
+								$ok=self::exec($params,$value);
+								break;
+							}
 						}
 						else if($value["methode"]=="object")
 						{
@@ -460,6 +465,21 @@ class Routes
 	protected static function runRoute($request,$params)
 	{
 		self::$current=$request["name"];
+		
+		if(is_array($request['methode']))
+		{
+			if($request['methode']['type'] == 'resource' && $request['methode']['target'] == 'update')
+			{
+				$id = $params[0];
+				$params[0] = new Request;
+				$params[] = $id;
+			}
+			else if($request['methode']['type'] == 'resource' && $request['methode']['target'] == 'insert')
+			{
+				$params[] = new Request;
+			}
+		}
+
 		return call_user_func_array($request["callback"], $params);
 	}
 
@@ -549,14 +569,21 @@ class Routes
 	protected static function addController($url,$controller,$methode,$params=false)
 	{
 		if($methode=="show" || $methode=="edit" || $methode=="delete")
-			$callback=function($id) use ($controller,$methode){ $controller::$methode($id); };
-		else if($methode=="update")
 		{
-			if($params) $callback=function($id) use ($controller,$methode){ $controller::$methode($id); };
-			else $callback=function() use ($controller,$methode){ $controller::$methode(); };
+			$callback=function($id) use ($controller,$methode){ $controller::$methode($id); };
+		}
+		else if($methode=='update')
+		{
+			$callback=function($request , $id) use ($controller,$methode){ $controller::$methode($request , $id); };
+		}
+		else if($methode=='insert')
+		{
+			$callback=function($request) use ($controller,$methode){ $controller::$methode($request); };
 		}
 		else
+		{
 			$callback=function() use ($controller,$methode){ $controller::$methode(); };
+		}
 			
 
 		$_name_=self::convert($url);
@@ -564,7 +591,7 @@ class Routes
 			'name' => $_name_ ,
 			'url' => $url , 
 			'callback' => $callback,
-			'methode' => "resource",
+			'methode' => [ 'type' => 'resource' , 'target' => $methode ], //"resource",
 			"filtre" => null,
 			"subdomain" => null,
 			'controller' => $controller
@@ -576,7 +603,7 @@ class Routes
 			'name' => "$_name_"."/" , 
 			'url' => $url."/" , 
 			'callback' => $callback,
-			'methode' => "resource",
+			'methode' => [ 'type' => 'resource' , 'target' => $methode ],
 			"filtre" => null,
 			"subdomain" => null,
 			'controller' => $controller
