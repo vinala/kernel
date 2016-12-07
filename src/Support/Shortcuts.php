@@ -490,6 +490,20 @@ if ( ! function_exists("e"))
 	}	
 }
 
+if ( ! function_exists("ee")) 
+{
+	/**
+	* echo html entities value
+	*
+	* @param string $value
+	* @return string
+	*/
+	function ee( $value )
+	{
+		echo htmlentities($value);
+	}	
+}
+
 if ( ! function_exists("str_contains")) 
 {
 	/**
