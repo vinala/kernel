@@ -75,6 +75,21 @@ if ( ! function_exists("view"))
 	}	
 }
 
+if ( ! function_exists("validate")) 
+{
+	/**
+	* shortcut for making validator
+	*
+	* @param array $data
+	* @param array $rules
+	* @return Vinala\Kernel\Validation\ValidationResult
+	*/
+	function validate( array $data , array $rules )
+	{
+		return Vinala\Kernel\Validation\Validator::make($data,$rules);
+	}	
+}
+
 //--------------------------------------------------------
 // Debuging
 //--------------------------------------------------------
