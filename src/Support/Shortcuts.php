@@ -537,7 +537,7 @@ if ( ! function_exists("str_contains"))
 
 
 
-if ( ! function_exists("input")) 
+if ( ! function_exists("request")) 
 {
 	/**
 	* get Http vars
@@ -546,7 +546,7 @@ if ( ! function_exists("input"))
 	* @param string $default
 	* @return string
 	*/
-	function input( $key , $default = null , $type = "request")
+	function request( $key , $default = null , $type = "request")
 	{
 		return Input::get($key , $default , $type);
 	}	
