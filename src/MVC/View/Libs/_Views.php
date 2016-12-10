@@ -127,6 +127,25 @@ class Views
 		return false;
 	}
 
+	/**
+	* Add variables to the view
+	*
+	* @param array|string $data
+	* @param string $value
+	* @return Vinala\Kernel\MVC\views
+	*/
+	public function with($data , $value = null)
+	{
+		if(is_string($data))
+		{
+			$this->data = array_collapse( $this->data , [$data => $value]);
+		}
+		elseif(is_array($data))
+		{
+			$this->data = array_collapse( $this->data , $data );
+		}
+		return $this;
+	}
 	
 	
 
