@@ -2,12 +2,20 @@
 
 namespace Vinala\Kernel\MVC ;
 
+use Vinala\Kernel\MVC\View\Exception\ViewNotFoundException;
+
 /**
 * Views class
 */
 class Views
 {
-	
+	//--------------------------------------------------------
+	// Constantes
+	//--------------------------------------------------------
+
+	const NEST = root().'app/views/';
+
+
 	//--------------------------------------------------------
 	// The properties
 	//--------------------------------------------------------
@@ -61,10 +69,66 @@ class Views
 		//Merge data
 		$this->data = array_collapse( $this->data , $data);
 
+		if( ! $this->exists($name))
+		{
+			throw new ViewNotFoundException($name);
+		}
+		else
+		{
+			$this->path = $this->exists($name);
+		}
+
 		$nameSegments = dot($name);
-		
-		return ;
+
+		$this->name = $this->setName($nameSegments);
+
+		return $this;
 	}
+
+	/**
+	* Extract name from dotted name segements
+	*
+	* @param array $name
+	* @return string
+	*/
+	protected function setName($name)
+	{
+		return $name[count($name) - 1];
+	}
+
+
+	/**
+	* Check if view exists
+	*
+	* @param string $name
+	* @return bool
+	*/
+	public function exists($name)
+	{
+		$file = str_replace('.', '/', $name);
+
+		$extensions =[
+			'.php',
+			'.atom.php',
+			'.atom',
+			'.tpl.php'
+		];
+
+		foreach ($extensions as $extension) 
+		{
+			$path = self::NEST.$file.$extension;
+
+			if(file_exists($path))
+			{
+				return $path;
+			}
+		}
+
+		return false;
+	}
+
+	
+	
 
 
 	
