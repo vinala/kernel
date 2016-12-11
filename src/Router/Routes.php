@@ -18,6 +18,8 @@ use Vinala\Panel\Lang;
 use Vinala\Panel\Link;
 use Vinala\Panel\Model;
 use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\MVC\Views;
+use Vinala\Kernel\MVC\View;
 
 
 /**
@@ -480,8 +482,27 @@ class Routes
 			}
 		}
 
-		return call_user_func_array($request["callback"], $params);
+		self::treatment(call_user_func_array($request["callback"], $params));
 	}
+
+	/**
+	* treatment the result of the route
+	*
+	* @param closure $result
+	* @return string
+	*/
+	protected static function treatment($result)
+	{
+		if(is_string($result))
+		{
+			echo $result;
+		}
+		elseif ($result instanceof Views) 
+		{
+			View::show($result);
+		}
+	}
+	
 
 	protected static function falseFilter($key)
 	{
@@ -697,6 +718,7 @@ class Routes
 
 	
 }
+
 
 
 
