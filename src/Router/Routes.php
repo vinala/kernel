@@ -240,10 +240,13 @@ class Routes
 									$ok=self::exec($params,$value);
 									break;
 								}
-								else if($value["methode"]=="resource")
+								else if(is_array($value["methode"]))
 								{
-									$ok=self::exec($params,$value);
-									break;
+									if( $value['methode']['type'] == 'resource' )
+									{
+										$ok=self::exec($params,$value);
+										break;
+									}
 								}
 								else if($value["methode"]=="object")
 								{
@@ -591,19 +594,19 @@ class Routes
 	{
 		if($methode=="show" || $methode=="edit" || $methode=="delete")
 		{
-			$callback=function($id) use ($controller,$methode){ $controller::$methode($id); };
+			$callback=function($id) use ($controller,$methode){ return $controller::$methode($id); };
 		}
 		else if($methode=='update')
 		{
-			$callback=function($request , $id) use ($controller,$methode){ $controller::$methode($request , $id); };
+			$callback=function($request , $id) use ($controller,$methode){ return $controller::$methode($request , $id); };
 		}
 		else if($methode=='insert')
 		{
-			$callback=function($request) use ($controller,$methode){ $controller::$methode($request); };
+			$callback=function($request) use ($controller,$methode){ return $controller::$methode($request); };
 		}
 		else
 		{
-			$callback=function() use ($controller,$methode){ $controller::$methode(); };
+			$callback=function() use ($controller,$methode){ return $controller::$methode(); };
 		}
 			
 
