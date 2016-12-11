@@ -80,7 +80,7 @@ class Views
 	public function make( $name , $data = null)
 	{
 		//Merge data
-		$this->data = array_collapse( $this->data , $data);
+		$this->data = array_merge( $this->data , $data);
 
 		if( ! $this->exists($name))
 		{
