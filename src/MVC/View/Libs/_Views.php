@@ -77,10 +77,13 @@ class Views
 	* @param array $data
 	* @return Vinala\Kernel\MVC\Views
 	*/
-	public function make( $name , $data = null)
+	public function call( $name , $data = null)
 	{
 		//Merge data
-		$this->data = array_merge( $this->data , $data);
+		if( ! is_null($data))
+		{
+			$this->data = array_merge( $this->data , $data);
+		}		
 
 		if( ! $this->exists($name))
 		{
