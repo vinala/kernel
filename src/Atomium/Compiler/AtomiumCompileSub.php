@@ -14,6 +14,6 @@ class AtomiumCompileSub
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileInstructions::run($script, "@sub", ";", "<?php View::make" ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@sub", ";", "<?php View::extend" ,"; ?>");
 	}
 }
