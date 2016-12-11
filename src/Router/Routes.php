@@ -524,6 +524,8 @@ class Routes
 
 	public static function resource($uri,$controller,$data=null)
 	{
+
+		//to chose what resources to use
 		$only=(isset($data['only']) && !empty($data['only']))?$data['only']:null;
 		$except=(isset($data['except']) && !empty($data['except']))?$data['except']:null;
 		$names=(isset($data['names']) && !empty($data['names']))?$data['names']:null;
