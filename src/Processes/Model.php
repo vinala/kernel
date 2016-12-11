@@ -35,7 +35,7 @@ class Model
 	public static function set($class , $table)
 	{
 		$txt = "<?php\n\nuse Vinala\Kernel\MVC\ORM;\n\n";
-		$txt.="class $class extends ORM\n{\n\t/**\n\t* Name of the DataTable\n\t*/\n\tpublic static ".'$table'."='$table';\n\n}";
+		$txt.="class $class extends ORM\n{\n\t/**\n\t* Name of the DataTable\n\t*/\n\tpublic static ".'$_table'."='$table';\n\n}";
 		// $txt.="class $class extends ORM\n{\n\t//Name of the table in database\n\tpublic static ".'$table'."='$table';\n\tprotected static ".'$foreignKeys=array();'."\n\n}";
 		//
 		return $txt;
