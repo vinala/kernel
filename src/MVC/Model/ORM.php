@@ -36,7 +36,7 @@ class ORM
 	*
 	* @var string
 	*/
-    protected $model;
+    protected $_model;
 
 
 	/**
@@ -44,42 +44,42 @@ class ORM
 	*
 	* @var array
 	*/
-    public $key = array();
+    public $_key = array();
 
     /**
 	* the name of primary key of the model
 	*
 	* @var string
 	*/
-    protected $keyName;
+    protected $_keyName;
 
     /**
 	* the value of primary key of the model
 	*
 	* @var string
 	*/
-    protected $keyValue;
+    protected $_keyValue;
 
     /**
 	* the value of the model table name
 	*
 	* @var string
 	*/
-    protected $table;
+    protected $_table;
 
     /**
 	* the name of the model table with prifix
 	*
 	* @var string
 	*/
-    protected $prifixTable;
+    protected $_prifixTable;
 
     /**
 	* array contains all columns of data table
 	*
 	* @var array
 	*/
-    public $columns = array();
+    public $_columns = array();
 
     /**
 	* if data table could have kept data
@@ -87,14 +87,14 @@ class ORM
 	*
 	* @var bool
 	*/
-    protected $canKept = false;
+    protected $_canKept = false;
 
     /**
 	* if this data row is kept
 	*
 	* @var bool
 	*/
-    public $kept = false ;
+    public $_kept = false ;
 
     /**
 	* if this data row is kept all data 
@@ -102,7 +102,7 @@ class ORM
 	*
 	* @var array
 	*/
-    public $keptData ;
+    public $_keptData ;
 
     /**
 	* if data table could have stashed data
@@ -110,14 +110,14 @@ class ORM
 	*
 	* @var bool
 	*/
-    protected $canStashed = false;
+    protected $_canStashed = false;
 
     /**
 	* if this data row is stashed
 	*
 	* @var bool
 	*/
-    public $stashed = false ;
+    public $_stashed = false ;
 
     /**
 	* if this data row is stashed all data 
@@ -125,7 +125,7 @@ class ORM
 	*
 	* @var array
 	*/
-    public $stashedData ;
+    public $_stashedData ;
 
 	/**
 	* if data table is tracked data
@@ -133,14 +133,14 @@ class ORM
 	*
 	* @var bool
 	*/
-    public $tracked  = false ;
+    public $_tracked  = false ;
 
     /**
 	* the state of the ORM
 	*
 	* @var string
 	*/
-    protected $state ;
+    protected $_state ;
 
     
 
@@ -179,7 +179,7 @@ class ORM
 		$this->getTable();
 		$this->columns();
 		$this->key();
-		$this->state = CRUD::CREATE_STAT;
+		$this->_state = CRUD::CREATE_STAT;
 	}
 
 	/**
@@ -197,9 +197,9 @@ class ORM
 		if( ! is_null($key)) 
 		{
 			$this->struct($key , $fail);
-			$this->state = CRUD::UPDATE_STAT;
+			$this->_state = CRUD::UPDATE_STAT;
 		}
-		else $this->state = CRUD::CREATE_STAT;
+		else $this->_state = CRUD::CREATE_STAT;
 	}
 
 	/**
@@ -214,13 +214,13 @@ class ORM
 		$this->columns($data);
 		$this->key($data);
 		$this->fill($data);
-		$this->state = CRUD::UPDATE_STAT;
+		$this->_state = CRUD::UPDATE_STAT;
 		// if( ! is_null($key)) 
 		// {
 		// 	$this->struct($key , $fail);
-		// 	$this->state = CRUD::UPDATE_STAT;
+		// 	$this->_state = CRUD::UPDATE_STAT;
 		// }
-		// else $this->state = CRUD::CREATE_STAT;
+		// else $this->_state = CRUD::CREATE_STAT;
 	}
 	
 
@@ -253,7 +253,7 @@ class ORM
 	*/
 	protected function getModel($data = null)
 	{
-		$this->model = is_null($data) ? get_called_class() : $data["name"];
+		$this->_model = is_null($data) ? get_called_class() : $data["name"];
 	}
 
 	/**
@@ -266,13 +266,13 @@ class ORM
 	{
 		if(is_null($data))
 		{
-			$this->prifixTable = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->table ;
+			$this->_prifixTable = ( Config::get('database.prefixing') ? Config::get('database.prefixe') : "" ) . $this->_table ;
 			//
-			if( ! $this->checkTable() ) throw new TableNotFoundException($this->table);
+			if( ! $this->checkTable() ) throw new TableNotFoundException($this->_table);
 			//
-			return $this->prifixTable;
+			return $this->_prifixTable;
 		}
-		else $this->prifixTable = $data["prifixTable"];
+		else $this->_prifixTable = $data["prifixTable"];
 		
 	}
 
@@ -287,7 +287,7 @@ class ORM
 		$data = Query::from("information_schema.tables" , false)
 			->select("*")
 			->where("TABLE_SCHEMA","=",Config::get('database.database'))
-			->andwhere("TABLE_NAME","=",$this->prifixTable)
+			->andwhere("TABLE_NAME","=",$this->_prifixTable)
 			->get(Query::GET_ARRAY);
 		//
 		return (Table::count($data) > 0 ) ? true : false;
@@ -303,17 +303,17 @@ class ORM
 	{
 		if(is_null($data))
 		{
-			$this->columns = $this->extruct(
+			$this->_columns = $this->extruct(
 				Query::from("INFORMATION_SCHEMA.COLUMNS" , false)
 				->select("COLUMN_NAME")
 				->where("TABLE_SCHEMA","=",Config::get('database.database'))
-				->andwhere("TABLE_NAME","=",$this->prifixTable)
+				->andwhere("TABLE_NAME","=",$this->_prifixTable)
 				->get(Query::GET_ARRAY)
 				);
 			//
-			return $this->columns;
+			return $this->_columns;
 		}
-		else $this->columns = $data["columns"];
+		else $this->_columns = $data["columns"];
 	}
 
 	/**
@@ -333,13 +333,13 @@ class ORM
 				$data[] = $subValue;
 				//
 				// Check if kept
-				if( ! $this->canKept ) $this->isKept($subValue);
+				if( ! $this->_canKept ) $this->isKept($subValue);
 				//
 				// Check if stashed
-				if( ! $this->canStashed ) $this->isStashed($subValue);
+				if( ! $this->_canStashed ) $this->isStashed($subValue);
 				//
 				// Check if tracked
-				if( ! $this->tracked ) $this->isTracked($subValue);
+				if( ! $this->_tracked ) $this->isTracked($subValue);
 			}
 		//
 		return $data;
@@ -353,7 +353,7 @@ class ORM
 	*/
 	protected function isKept($column)
 	{
-		if($column == "deleted_at") $this->canKept = true;
+		if($column == "deleted_at") $this->_canKept = true;
 	}
 
 	/**
@@ -364,7 +364,7 @@ class ORM
 	*/
 	protected function isStashed($column)
 	{
-		if($column == "appeared_at") $this->canStashed = true;
+		if($column == "appeared_at") $this->_canStashed = true;
 	}
 
 	/**
@@ -376,7 +376,7 @@ class ORM
 	protected function isTracked($column)
 	{
 		if($column == "created_at" || $column == "edited_at") 
-			$this->tracked = true;
+			$this->_tracked = true;
 	}
 
 	/**
@@ -390,7 +390,7 @@ class ORM
 		{
 			case 'sqlite': break;
 			case 'mysql':
-					return Database::read("SHOW INDEX FROM ".$this->prifixTable." WHERE `Key_name` = 'PRIMARY'");
+					return Database::read("SHOW INDEX FROM ".$this->_prifixTable." WHERE `Key_name` = 'PRIMARY'");
 				break;
 
 			case 'pgsql': break;
@@ -412,15 +412,15 @@ class ORM
 			$data = $this->getPK();
 			//
 			if(Table::count($data) > 1) throw new ManyPrimaryKeysException();
-			else if(Table::count($data) == 0 ) throw new PrimaryKeyNotFoundException($this->table);
+			else if(Table::count($data) == 0 ) throw new PrimaryKeyNotFoundException($this->_table);
 			//
-			$this->keyName = $data[0]['Column_name'];
-			$this->key["name"] = $data[0]['Column_name'];
+			$this->_keyName = $data[0]['Column_name'];
+			$this->_key["name"] = $data[0]['Column_name'];
 		}
 		else
 		{
-			$this->keyName = $data['key'];
-			$this->key["name"] = $data['key'];
+			$this->_keyName = $data['key'];
+			$this->_key["name"] = $data['key'];
 		}
 	}
 
@@ -436,13 +436,13 @@ class ORM
 		//
 		if(Table::count($data) == 1)
 		{
-			if( $this->canKept && $this->keptAt($data) ) $this->kept = true ;
-			if( $this->canStashed && $this->stashedAt($data) ) $this->stashed = true ;
+			if( $this->_canKept && $this->keptAt($data) ) $this->_kept = true ;
+			if( $this->_canStashed && $this->stashedAt($data) ) $this->_stashed = true ;
 			//
 			$this->convert($data);
 		}
 		elseif($fail && Table::count($data) == 0)
-			throw new ModelNotFoundException($key , $this->model);
+			throw new ModelNotFoundException($key , $this->_model);
 			
 	}
 
@@ -454,8 +454,8 @@ class ORM
 	*/
 	protected function fill($data)
 	{
-		if( $this->canKept && $this->keptAt($data["values"]) ) $this->kept = true ;
-		if( $this->canStashed && $this->stashedAt($data["values"]) ) $this->stashed = true ;
+		if( $this->_canKept && $this->keptAt($data["values"]) ) $this->_kept = true ;
+		if( $this->_canStashed && $this->stashedAt($data["values"]) ) $this->_stashed = true ;
 		//
 		$this->convert($data["values"]);
 	}
@@ -468,9 +468,9 @@ class ORM
 	*/
 	protected function dig($key)
 	{
-		return Query::from($this->table)
+		return Query::from($this->_table)
 			->select("*")
-			->where( $this->keyName , "=" , $key)
+			->where( $this->_keyName , "=" , $key)
 			->get(Query::GET_ARRAY);
 	}
 
@@ -510,15 +510,15 @@ class ORM
 	protected function convert($data)
 	{
 		foreach ($data[0] as $key => $value) 
-			if( ! $this->kept && ! $this->stashed ) 
+			if( ! $this->_kept && ! $this->_stashed ) 
 			{
 				$this->$key = $value ;
 				$this->setKey($key , $value);
 			}
 			else
 			{
-				if($this->kept) $this->keptData[$key] = $value ;
-				if($this->stashed) $this->stashedData[$key] = $value ;
+				if($this->_kept) $this->_keptData[$key] = $value ;
+				if($this->_stashed) $this->_stashedData[$key] = $value ;
 			}
 	}
 
@@ -533,10 +533,10 @@ class ORM
 	*/
 	protected function setKey($key , $value)
 	{
-		if($key == $this->keyName)
+		if($key == $this->_keyName)
 		{
-			$this->keyValue = $value;
-			$this->key["value"] = $value;
+			$this->_keyValue = $value;
+			$this->_key["value"] = $value;
 		}
 	}
 
@@ -576,8 +576,8 @@ class ORM
 	*/
 	public function save()
 	{
-		if($this->state == CRUD::CREATE_STAT) $this->add();
-		elseif ($this->state == CRUD::UPDATE_STAT) $this->edit();
+		if($this->_state == CRUD::CREATE_STAT) $this->add();
+		elseif ($this->_state == CRUD::UPDATE_STAT) $this->edit();
 	}
 
 	/**
@@ -590,10 +590,10 @@ class ORM
 		$columns = array();
 		$values = array();
 		//
-		if($this->tracked) $this->created_at = Time::current();
+		if($this->_tracked) $this->created_at = Time::current();
 		//
-		foreach ($this->columns as $value)
-			if($value != $this->keyName && isset($this->$value) && !empty($this->$value) )
+		foreach ($this->_columns as $value)
+			if($value != $this->_keyName && isset($this->$value) && !empty($this->$value) )
 			{
 				$columns[] = $value;
 				$values [] = $this->$value;
@@ -611,7 +611,7 @@ class ORM
 	*/
 	private function insert($columns , $values)
 	{
-		return Query::table($this->table)
+		return Query::table($this->_table)
 		->column($columns)
 		->value($values)
 		->insert();
@@ -627,10 +627,10 @@ class ORM
 		$columns = array();
 		$values = array();
 		//
-		if($this->tracked) $this->edited_at = Time::current();
+		if($this->_tracked) $this->edited_at = Time::current();
 		//
-		foreach ($this->columns as $value)
-			if($value != $this->keyName && isset($this->$value) && !empty($this->$value) )
+		foreach ($this->_columns as $value)
+			if($value != $this->_keyName && isset($this->$value) && !empty($this->$value) )
 			{
 				$columns[] = $value;
 				$values [] = $this->$value;
@@ -648,12 +648,12 @@ class ORM
 	*/
 	private function update($columns , $values)
 	{
-		$query = Query::table($this->table);
+		$query = Query::table($this->_table);
 		//
 		for ($i=0; $i < Table::count($columns) ; $i++) 
 			$query = $query->set($columns[$i] , $values[$i]);
 		//
-		$query->where($this->keyName , "=" , $this->keyValue)
+		$query->where($this->_keyName , "=" , $this->_keyValue)
 		->update();
 		//
 		return $query;
@@ -667,13 +667,13 @@ class ORM
 	*/
 	public function delete()
 	{
-		if( ! $this->canKept)
+		if( ! $this->_canKept)
 			$this->forceDelete();
 
 		else 
-			Query::table($this->table)
+			Query::table($this->_table)
 			->set("deleted_at" , Time::current())
-			->where($this->keyName , "=" , $this->keyValue)
+			->where($this->_keyName , "=" , $this->_keyValue)
 			->update();	
 	}
 
@@ -685,10 +685,10 @@ class ORM
 	*/
 	public function forceDelete()
 	{
-		$key = $this->kept ? $this->keptData[$this->keyName] : $this->keyValue ;
+		$key = $this->_kept ? $this->_keptData[$this->_keyName] : $this->_keyValue ;
 		//
-		Query::table($this->table)
-			->where($this->keyName , "=" , $key)
+		Query::table($this->_table)
+			->where($this->_keyName , "=" , $key)
 			->delete();
 		//
 		$this->reset();
@@ -714,13 +714,13 @@ class ORM
 	*/
 	public function restore()
 	{
-		if( $this->kept )
+		if( $this->_kept )
 		{
 			$this->bring();
 			//
-			Query::table($this->table)
+			Query::table($this->_table)
 			->set("deleted_at" , "NULL" , false)
-			->where($this->keyName , "=" , $this->keyValue)
+			->where($this->_keyName , "=" , $this->_keyValue)
 			->update();	
 		}
 	}
@@ -732,13 +732,13 @@ class ORM
 	*/
 	private function bring()
 	{
-		foreach ($this->keptData as $key => $value)
+		foreach ($this->_keptData as $key => $value)
 			$this->$key = $value;
 		//
-		$this->keyValue = $this->keptData[$this->keyName];
+		$this->_keyValue = $this->_keptData[$this->_keyName];
 		//
-		$this->keptData = null;
-		$this->kept = false;
+		$this->_keptData = null;
+		$this->_kept = false;
 	}
 	
 
@@ -814,18 +814,18 @@ class ORM
 	{
 		$class = get_called_class();
 		$object = new $class ;
-		$table = $object->table;
-		$key = $object->keyName;
+		$table = $object->_table;
+		$key = $object->_keyName;
 		//
 		$data = Query::table($table)->select("*")->where("'true'", "=" , "true");
 		//
-		if($object->canKept) 
+		if($object->_canKept) 
 		$data = $data->orGroup(
 			"and" , 
 			Query::condition("deleted_at" , ">" , Time::current()) , 
 			Query::condition("deleted_at" , "is" , "NULL" , false));
 
-		if($object->canStashed) 
+		if($object->_canStashed) 
 		$data = $data->orGroup(
 			"and" , 
 			Query::condition("appeared_at" , "<=" , Time::current()) , 
@@ -845,12 +845,12 @@ class ORM
 	{
 		$class = get_called_class();
 		$object = new $class ;
-		$table = $object->table;
-		$key = $object->keyName;
+		$table = $object->_table;
+		$key = $object->_keyName;
 		//
 		$data = Query::table($table)->select("*")->where("'true'", "=" , "true");
 		//
-		if($object->canStashed) 
+		if($object->_canStashed) 
 		$data = $data->orGroup(
 			"and" , 
 			Query::condition("appeared_at" , "<=" , Time::current()) , 
@@ -870,12 +870,12 @@ class ORM
 	{
 		$class = get_called_class();
 		$object = new $class ;
-		$table = $object->table;
-		$key = $object->keyName;
+		$table = $object->_table;
+		$key = $object->_keyName;
 		//
 		$data = Query::table($table)->select("*");
 		//
-		if($object->canKept) 
+		if($object->_canKept) 
 		$data = $data->where("deleted_at" , "<=" , Time::current());
 		//
 		$data = $data->get(Query::GET_ARRAY);
@@ -892,12 +892,12 @@ class ORM
 	{
 		$class = get_called_class();
 		$object = new $class ;
-		$table = $object->table;
-		$key = $object->keyName;
+		$table = $object->_table;
+		$key = $object->_keyName;
 		//
 		$data = Query::table($table)->select("*")->where("'true'", "=" , "true");
 		//
-		if($object->canKept) 
+		if($object->_canKept) 
 		$data = $data->orGroup(
 			"and" , 
 			Query::condition("deleted_at" , ">" , Time::current()) , 
@@ -917,12 +917,12 @@ class ORM
 	{
 		$class = get_called_class();
 		$object = new $class ;
-		$table = $object->table;
-		$key = $object->keyName;
+		$table = $object->_table;
+		$key = $object->_keyName;
 		//
 		$data = Query::table($table)->select("*");
 		//
-		if($object->canKept) 
+		if($object->_canKept) 
 		$data = $data->where("appeared_at" , ">" , Time::current());
 		//
 		$data = $data->get(Query::GET_ARRAY);
@@ -950,10 +950,10 @@ class ORM
 				//
 				$value = 
 				[
-					"name" => $object->model , 
-					"prifixTable" => $object->prifixTable , 
-					"columns" => $object->columns , 
-					"key" => $object->keyName , 
+					"name" => $object->_model , 
+					"prifixTable" => $object->_prifixTable , 
+					"columns" => $object->_columns , 
+					"key" => $object->_keyName , 
 					"values" => $rows 
 				];
 				//
