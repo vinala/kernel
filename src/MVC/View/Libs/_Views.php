@@ -3,18 +3,14 @@
 namespace Vinala\Kernel\MVC ;
 
 use Vinala\Kernel\MVC\View\Exception\ViewNotFoundException;
+use Vinala\Kernel\Atomium\Atomium;
+use Vinala\Kernel\MVC\View\Template;
 
 /**
 * Views class
 */
 class Views
 {
-	//--------------------------------------------------------
-	// Constantes
-	//--------------------------------------------------------
-
-	const NEST = root().'app/views/';
-
 
 	//--------------------------------------------------------
 	// The properties
@@ -37,11 +33,28 @@ class Views
 
 
 	/**
+	* The engine used in the view
+	*
+	* @var string 
+	*/
+	protected $engine;
+
+
+	/**
 	* Array od data passed to the view
 	*
 	* @var array 
 	*/
 	protected $data = array() ;
+
+
+	/**
+	* The nest path of all views
+	*
+	* @var string 
+	*/
+	protected $nest ;
+	
 	
 
 	//--------------------------------------------------------
@@ -50,7 +63,7 @@ class Views
 
 	function __construct()
 	{
-		
+		$this->nest = root().'app/views/';
 	}
 
 	//--------------------------------------------------------
@@ -75,7 +88,10 @@ class Views
 		}
 		else
 		{
-			$this->path = $this->exists($name);
+			$data = $this->exists($name);
+
+			$this->path = $data['path'];
+			$this->engine = $data['engine'];
 		}
 
 		$nameSegments = dot($name);
@@ -101,7 +117,7 @@ class Views
 	* Check if view exists
 	*
 	* @param string $name
-	* @return bool
+	* @return array|false
 	*/
 	public function exists($name)
 	{
@@ -114,14 +130,29 @@ class Views
 			'.tpl.php'
 		];
 
+		$i = 0;
 		foreach ($extensions as $extension) 
 		{
-			$path = self::NEST.$file.$extension;
+			$path = $this->nest.$file.$extension;
 
 			if(file_exists($path))
 			{
-				return $path;
+				if($i == 0) 
+				{
+					$view = ['path' => $path , 'engine' => 'none'];
+				}
+				elseif($i == 1 || $i == 2)
+				{
+					$view = ['path' => $path , 'engine' => 'atomium'];
+				}
+				elseif($i == 3)
+				{
+					$view = ['path' => $path , 'engine' => 'smarty'];
+				}
+				return $view;
 			}
+
+			$i++;
 		}
 
 		return false;
@@ -138,14 +169,67 @@ class Views
 	{
 		if(is_string($data))
 		{
-			$this->data = array_collapse( $this->data , [$data => $value]);
+			$this->data = array_merge( $this->data , [$data => $value]);
 		}
 		elseif(is_array($data))
 		{
-			$this->data = array_collapse( $this->data , $data );
+			$this->data = array_merge( $this->data , $data );
 		}
 		return $this;
 	}
+
+	/**
+	* Show the view
+	*
+	* @return bool
+	*/
+	public function show(Views $_vinala_view = null)
+	{
+		if(is_null($_vinala_view))
+		{
+			$_vinala_view = $this;
+		}
+
+		if($_vinala_view->engine == 'atomium')
+		{	
+			self::atomium($_vinala_view->path , $_vinala_view->data);
+		}
+		elseif($_vinala_view->engine == 'smarty')
+		{
+			Template::show($_vinala_view->path , $_vinala_view->data);
+		}
+		else
+		{
+			if( ! is_null($_vinala_view->data))
+			{
+				foreach ($_vinala_view->data as $_vinala_view_keys => $_vinala_view_values) 
+				{
+					$$_vinala_view_keys = $_vinala_view_values;
+				}
+			}
+
+			include $_vinala_view->path;
+		}
+
+		return null;
+	}
+
+	/**
+	* Show atomium view
+	*
+	* @param string $file
+	* @param array $data
+	* @return 
+	*/
+	protected function atomium($file, $data)
+	{
+		$atomium = new Atomium;
+
+		return $atomium->show($file, $data);
+	}
+
+
+	
 	
 	
 
