@@ -2,7 +2,7 @@
 
 
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\MVC\View\View;
+use Vinala\Kernel\MVC\View;
 use Vinala\Kernel\Router\Route;
 use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Objects\Table;
