@@ -60,7 +60,6 @@ class Controller
 					$model->$key = $request->$key;
 				}
 			}
-			di($model);
 		}
 	}
 	
