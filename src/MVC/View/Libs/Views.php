@@ -1,187 +1,128 @@
-<?php
+<?php 
 
-namespace Vinala\Kernel\MVC\View;
+namespace Vinala\Kernel\MVC ;
 
 use Vinala\Kernel\MVC\View\Exception\ViewNotFoundException;
-use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Plugins\Plugins;
 use Vinala\Kernel\Atomium\Atomium;
+use Vinala\Kernel\MVC\View\Template;
 
 /**
-* View mother class
+* Views class
 */
 class Views
 {
-	public static $showed;
 
-	public static function make($_value_,$_data_=null)
+	//--------------------------------------------------------
+	// The properties
+	//--------------------------------------------------------
+
+	/**
+	* The name of the view
+	*
+	* @var string 
+	*/
+	protected $name;
+
+
+	/**
+	* The path of the view
+	*
+	* @var string 
+	*/
+	protected $path;
+
+
+	/**
+	* The engine used in the view
+	*
+	* @var string 
+	*/
+	protected $engine;
+
+
+	/**
+	* Array od data passed to the view
+	*
+	* @var array 
+	*/
+	protected $data = array() ;
+
+
+	/**
+	* The nest path of all views
+	*
+	* @var string 
+	*/
+	protected $nest ;
+	
+	
+
+	//--------------------------------------------------------
+	// constuctor
+	//--------------------------------------------------------
+
+	function __construct()
 	{
-		if(!is_null($_data_))
-		{
-			foreach ($_data_ as $_key_ => $_value2_) {
-				$$_key_=$_value2_;
-			}
-		}
-		//getFile
-		$_name_=str_replace('.', '/', $_value_);
-		//
-		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
-		$_link2_=Application::$root.'app/views/'.$_name_.'.atom';
-		$_link21_=Application::$root.'app/views/'.$_name_.'.atom.php';
-		$_link3_=Application::$root.'app/views/'.$_name_.'.tpl.php';
-		//
-		$_tpl_=false;
-		$_tpl_ = 0;
-		//
-		if(file_exists($_link1_)) { $_link4_=$_link1_; $_tpl_=0; }
-		//
-		else if(file_exists($_link2_)) { $_link4_=$_link2_; $_tpl_=1; }
-		else if(file_exists($_link21_)) { $_link4_=$_link21_; $_tpl_=1; }
-		//
-		else if(file_exists($_link3_)) { $_link4_=$_link3_; $_tpl_=2; }
-		//
-		else { throw new ViewNotFoundException($_name_); }
-
-		if($_tpl_ == 1)
-		{
-			self::$showed="atomium";
-			self::atomium($_link4_,$_data_);
-		}
-		elseif($_tpl_ == 2)
-		{
-			self::$showed="smarty";
-			Template::show($_link4_,$_data_);
-		}
-		else
-		{
-			self::$showed="smpl";
-			include($_link4_);
-		}
-
-
+		$this->nest = root().'app/views/';
 	}
 
-	public static function get($value_DGFSrtfg5,$data_kGdfgdf=null)
-	{
-		$name_fgdfgdf=str_replace('.', '/', $value_DGFSrtfg5);
-		if(!is_null($data_kGdfgdf))
-		{
-			foreach ($data_kGdfgdf as $key => $value2) {
-				$$key=$value2;
-			}
-		}
-		//
-		ob_start();    // start output buffering
-		//get File
-		//
-		$name_fgdfgdf=str_replace('.', '/', $value_DGFSrtfg5);
-		//
-		$link1=Application::$root.'app/views/'.$name_fgdfgdf.'.php';
-		$link2=Application::$root.'app/views/'.$name_fgdfgdf.'.atom.php';
-		$link21=Application::$root.'app/views/'.$name_fgdfgdf.'.atom';
-		$link3=Application::$root.'app/views/'.$name_fgdfgdf.'.tpl.php';
-		$link4='';
-		//
-		$tpl=false;
-		//
-		if(file_exists($link1)) { $link4=$link1; $tpl=0; }
-		//
-		else if(file_exists($link2)) { $link4=$link2; $tpl=1; }
-		else if(file_exists($link21)) { $link4=$link21; $tpl=1; }
-		//
-		else if(file_exists($link3)) { $link4=$link3; $tpl=2; }
-		//
-		else { throw new ViewNotFoundException($name_fgdfgdf); }
-		//
-		//Show the output
+	//--------------------------------------------------------
+	// Functions
+	//--------------------------------------------------------
 
-		if($tpl == 1)
+	/**
+	* Call a view
+	*
+	* @param string $name
+	* @param array $data
+	* @return Vinala\Kernel\MVC\Views
+	*/
+	public function call( $name , $data = null)
+	{
+		//Merge data
+		if( ! is_null($data))
 		{
-			self::$showed="atomium";
-			self::atomium($link4,$data_kGdfgdf);
-		}
-		elseif($tpl == 2)
+			$this->data = array_merge( $this->data , $data);
+		}		
+
+		if( ! $this->exists($name))
 		{
-			self::$showed="smarty";
-			Template::show($link4,$data_kGdfgdf);
+			throw new ViewNotFoundException($name);
 		}
 		else
 		{
-			self::$showed="smpl";
-			include($link3);
+			$data = $this->exists($name);
+
+			$this->path = $data['path'];
+			$this->engine = $data['engine'];
 		}
 
-		//
-		$returned_value = ob_get_contents();    // get contents from the buffer
-		ob_end_clean();
-		//
-		return $returned_value;
+		$nameSegments = dot($name);
+
+		$this->name = $this->setName($nameSegments);
+
+		return $this;
 	}
 
 	/**
-	 * View For Plugin
-	 */
-	public static function import($_plg,$_value_,$_data_=null)
+	* Extract name from dotted name segements
+	*
+	* @param array $name
+	* @return string
+	*/
+	protected function setName($name)
 	{
-		if(!is_null($_data_))
-		{
-			foreach ($_data_ as $_key_ => $_value2_) {
-				$$_key_=$_value2_;
-			}
-		}
-		//getFile
-		$_name_=str_replace('.', '/', $_value_);
-		//
-		$_link1_=Application::$root.'app/views/'.$_name_.'.php';
-		$_link2_=Application::$root.'app/views/'.$_name_.'.atom.php';
-		$_link21_=Application::$root.'app/views/'.$_name_.'.atom';
-		$_link3_=Application::$root.'app/views/'.$_name_.'.tpl.php';
-		//
-		$_link1_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.php';
-		$_link2_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.atom.php';
-		$_link21_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.atom';
-		$_link3_=Plugins::getPath($_plg).Plugins::getCore($_plg,"views").'/'.$_name_.'.tpl.php';
-		//
-		$_tpl_=0;
-		//
-		if(file_exists($_link1_)) { $_link4_=$_link1_; $_tpl_= 0 ; }
-		//
-		else if(file_exists($_link2_)) { $_link4_=$_link2_; $_tpl_= 1 ; }
-		else if(file_exists($_link21_)) { $_link4_=$_link21_; $_tpl_= 1 ; }
-		//
-		else if(file_exists($_link3_)) { $_link4_=$_link3_; $_tpl_= 2 ; }
-		else { throw new ViewNotFoundException($_name_); }
-
-		if($_tpl_ = 1)
-		{
-			self::$showed="atomium";
-			self::atomium($_link4_,$_data_);
-		}
-		else if($_tpl_ = 2)
-		{
-			self::$showed="smarty";
-			Template::show($_link4_,$_data_);
-		}
-		else
-		{
-			self::$showed="smpl";
-			include($_link4_);
-		}
+		return $name[count($name) - 1];
 	}
 
-	protected static function atomium($file, $_data_)
-	{
-		$atomium = new Atomium;
-		return $atomium->show($file, $_data_);
-	}
 
 	/**
 	* Check if view exists
 	*
 	* @param string $name
-	* @return bool
+	* @return array|false
 	*/
-	public static function exists($name)
+	public function exists($name)
 	{
 		$file = str_replace('.', '/', $name);
 
@@ -192,19 +133,110 @@ class Views
 			'.tpl.php'
 		];
 
+		$i = 0;
 		foreach ($extensions as $extension) 
 		{
-			$path = Application::$root.'app/views/'.$file.$extension;
+			$path = $this->nest.$file.$extension;
 
 			if(file_exists($path))
 			{
-				return true;
+				if($i == 0) 
+				{
+					$view = ['path' => $path , 'engine' => 'none'];
+				}
+				elseif($i == 1 || $i == 2)
+				{
+					$view = ['path' => $path , 'engine' => 'atomium'];
+				}
+				elseif($i == 3)
+				{
+					$view = ['path' => $path , 'engine' => 'smarty'];
+				}
+				return $view;
 			}
+
+			$i++;
 		}
 
 		return false;
 	}
+
+	/**
+	* Add variables to the view
+	*
+	* @param array|string $data
+	* @param string $value
+	* @return Vinala\Kernel\MVC\views
+	*/
+	public function with($data , $value = null)
+	{
+		if(is_string($data))
+		{
+			$this->data = array_merge( $this->data , [$data => $value]);
+		}
+		elseif(is_array($data))
+		{
+			$this->data = array_merge( $this->data , $data );
+		}
+		return $this;
+	}
+
+	/**
+	* Show the view
+	*
+	* @return bool
+	*/
+	public function show(Views $_vinala_view = null)
+	{
+		if(is_null($_vinala_view))
+		{
+			$_vinala_view = $this;
+		}
+
+		if($_vinala_view->engine == 'atomium')
+		{	
+			self::atomium($_vinala_view->path , $_vinala_view->data);
+		}
+		elseif($_vinala_view->engine == 'smarty')
+		{
+			Template::show($_vinala_view->path , $_vinala_view->data);
+		}
+		else
+		{
+			if( ! is_null($_vinala_view->data))
+			{
+				foreach ($_vinala_view->data as $_vinala_view_keys => $_vinala_view_values) 
+				{
+					$$_vinala_view_keys = $_vinala_view_values;
+				}
+			}
+
+			include $_vinala_view->path;
+		}
+
+		return null;
+	}
+
+	/**
+	* Show atomium view
+	*
+	* @param string $file
+	* @param array $data
+	* @return 
+	*/
+	protected function atomium($file, $data)
+	{
+		$atomium = new Atomium;
+
+		return $atomium->show($file, $data);
+	}
+
+
+	
+	
 	
 
 
+	
+	
 }
