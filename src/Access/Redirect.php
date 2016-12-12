@@ -41,7 +41,7 @@ class Redirect
 	*/
 	public function back()
 	{
-		return header('Location: ' . $_SERVER['HTTP_REFERER']);
+		return header('Location: javascript://history.go(-1)');
 	}
 	
 
