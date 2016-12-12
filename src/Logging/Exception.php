@@ -19,9 +19,10 @@ class Exception extends E
 	public $view ;
 
 
-	function __construct($view = null , $message = "" , $code = 0 , $previous = NULL)
+	function __construct($message = "" , $view = null , $code = 0 , $previous = NULL)
 	{
 		$this->view = $view;
+		$this->message = $message;
 	}
 	
 
