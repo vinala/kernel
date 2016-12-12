@@ -47,7 +47,7 @@ class Surface
 	*/
 	public static function setInstance($name)
 	{
-		$name = ucfirst($name);
+		$name = Accessor::$name();
 
 		static::$instance = new $name;
 
