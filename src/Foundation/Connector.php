@@ -48,7 +48,7 @@ class Connector
 		Handler::run();
 		//
 		Connector::component();
-		Connector::surfaces();
+		Connector::cubes();
 		//
 		Connector::storage($session);
 		Connector::maintenance();
@@ -188,12 +188,12 @@ class Connector
 	}
 
 	/**
-	 * Surfaces call
+	 * Cubes call
 	 */
-	public static function surfaces()
+	public static function cubes()
 	{
-		self::need(self::$path.'Surfaces/Surface.php');
-		self::need(self::$path.'Surfaces/Accessor.php');
+		self::need(self::$path.'Cubes/Cube.php');
+		self::need(self::$path.'Cubes/Accessor.php');
 	}
 
 	/**
