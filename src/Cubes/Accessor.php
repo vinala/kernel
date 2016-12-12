@@ -1,11 +1,11 @@
 <?php 
 
-namespace Vinala\Kernel\Surfaces ;
+namespace Vinala\Kernel\Cubes ;
 
 //use SomeClass;
 
 /**
-* Class to get surefaces accessors
+* Class to get cubes accessors
 *
 * @version 1.0
 * @author Youssef Had
