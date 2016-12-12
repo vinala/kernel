@@ -48,6 +48,7 @@ class Connector
 		Handler::run();
 		//
 		Connector::component();
+		Connector::surfaces();
 		//
 		Connector::storage($session);
 		Connector::maintenance();
@@ -187,6 +188,14 @@ class Connector
 	}
 
 	/**
+	 * Surfaces call
+	 */
+	public static function surfaces()
+	{
+		self::need(self::$path.'Surfaces/Surface.php');
+	}
+
+	/**
 	 * time call
 	 */
 	public static function time()
@@ -280,7 +289,7 @@ class Connector
 	 */
 	public static function access()
 	{
-		$files = array('Path','Url');
+		$files = array('Path','Url','Redirect');
 		$filesPath = self::$path.'Access/';
 		self::call($files,$filesPath);
 	}
