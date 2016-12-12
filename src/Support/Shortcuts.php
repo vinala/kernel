@@ -76,6 +76,20 @@ if ( ! function_exists("view"))
 	}	
 }
 
+if ( !function_exists( 'instance' ) ) 
+{
+	/**
+	 * create instance of class
+	 * 
+	 * @param string $name
+	 * @return mixed
+	 */
+	function instance($name)
+	{
+		return new $name;
+	}
+}
+
 if ( ! function_exists("validate")) 
 {
 	/**
@@ -92,20 +106,20 @@ if ( ! function_exists("validate"))
 }
 
 //--------------------------------------------------------
-// Surface
+// Cubes
 //--------------------------------------------------------
 
-if ( !function_exists( 'instance' ) ) 
+if ( !function_exists( 'cube' ) ) 
 {
 	/**
-	 * create instance of surface
+	 * create instance of cube
 	 * 
 	 * @param string $name
 	 * @return mixed
 	 */
-	function instance($name)
+	function cube($name)
 	{
-		return Surface::setInstance($name);
+		return Cubes::setInstance($name);
 	}
 }
 
