@@ -9,7 +9,7 @@ use Vinala\Kernel\Objects\Table;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Http\Input;
-use Vinala\Kernel\Surfaces\Surface;
+use Vinala\Kernel\Cubes\Cube;
 
 
 
@@ -119,7 +119,7 @@ if ( !function_exists( 'cube' ) )
 	 */
 	function cube($name)
 	{
-		return Cubes::setInstance($name);
+		return Cube::setInstance($name);
 	}
 }
 
