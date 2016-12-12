@@ -193,6 +193,7 @@ class Connector
 	public static function surfaces()
 	{
 		self::need(self::$path.'Surfaces/Surface.php');
+		self::need(self::$path.'Surfaces/Accessor.php');
 	}
 
 	/**
