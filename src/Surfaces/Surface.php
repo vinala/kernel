@@ -1,18 +1,18 @@
 <?php 
 
-namespace Vinala\Kernel\Surfaces ;
+namespace Vinala\Kernel\Cubes ;
 
 //use SomeClass;
 
 /**
-* The main surfaces class
+* The main cubes class
 *
 * @version 1.0
 * @author Youssef Had
-* @package Vinala\Kernel\Surfaces
+* @package Vinala\Kernel\Cubes
 * @since 3.3.0
 */
-class Surface
+class Cube
 {
 	
 	//--------------------------------------------------------
@@ -20,7 +20,7 @@ class Surface
 	//--------------------------------------------------------
 
 	/**
-	* The last Instance used bu Surface
+	* The last Instance used by cube
 	*
 	* @var mixed 
 	*/
