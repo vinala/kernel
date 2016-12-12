@@ -84,9 +84,13 @@ if ( !function_exists( 'instance' ) )
 	 * @param string $name
 	 * @return mixed
 	 */
-	function instance($name)
+	function instance()
 	{
-		return new $name;
+		$args = func_get_args();
+
+		$name = array_shift($args);
+
+		return new $name(...$args);
 	}
 }
 
@@ -117,9 +121,11 @@ if ( !function_exists( 'cube' ) )
 	 * @param string $name
 	 * @return mixed
 	 */
-	function cube($name)
+	function cube()
 	{
-		return Cube::setInstance($name);
+		$args = func_get_args();
+
+		return Cube::setInstance($args);
 	}
 }
 
@@ -309,10 +315,10 @@ if ( ! function_exists("abort"))
 	* @param string $msg
 	* @return null
 	*/
-	function abort($msg = "")
+	function abort($msg = "" , $view = null)
 	{
-		throw new Exception($msg);
 		//soon making http Exception
+		throw cube('exception' , $msg , $view);
 	}	
 }
 
@@ -328,6 +334,26 @@ if ( ! function_exists("abort_if"))
 	{
 		if($expression) 
 			throw new Exception();
+	}	
+}
+
+if ( ! function_exists("exception_if")) 
+{
+	/**
+	* shortcut for showing costum exception if $expression is true
+	*
+	* @param bool $expression
+	* @param string $exception
+	* @param string $message
+	* @param string $view
+	* @return null
+	*/
+	function exception_if($expression , $exception = 'exception' , $msg = '' , $view = null)
+	{
+		if($expression) 
+		{
+			throw $exception == 'exception' ? cube('exception' , $msg , $view) : instance($exception , $msg );
+		}
 	}	
 }
 
