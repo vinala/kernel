@@ -51,9 +51,8 @@ class Cube
 
 		$name = self::getAccessor($name);
 
-		static::$instance = new $name(...$args);
-
-		return static::$instance;
+		$reflect  = new ReflectionClass($name);
+    	return $reflect->newInstanceArgs($args);
 	}
 
 

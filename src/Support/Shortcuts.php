@@ -90,7 +90,10 @@ if ( !function_exists( 'instance' ) )
 
 		$name = array_shift($args);
 
-		return new $name(...$args);
+		$reflect  = new ReflectionClass($name);
+    	return $reflect->newInstanceArgs($args);
+
+		// return new $name(...$args);
 	}
 }
 
