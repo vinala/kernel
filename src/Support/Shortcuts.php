@@ -596,6 +596,6 @@ if ( ! function_exists("back"))
 	*/
 	function back()
 	{
-		return instance('redirect')->back();
+		return cube('redirect')->back();
 	}	
 }
