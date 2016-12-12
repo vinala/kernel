@@ -569,4 +569,19 @@ if ( ! function_exists("request"))
 	}	
 }
 
+//--------------------------------------------------------
+// Redirect
+//--------------------------------------------------------
 
+if ( ! function_exists("back")) 
+{
+	/**
+	* Redirect to previous location
+	*
+	* @return mixed
+	*/
+	function back()
+	{
+		return instance('redirect')->back();
+	}	
+}
