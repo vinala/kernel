@@ -9,6 +9,7 @@ use Vinala\Kernel\Objects\Table;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Http\Input;
+use Vinala\Kernel\Surfaces\Surface;
 
 
 
@@ -88,6 +89,24 @@ if ( ! function_exists("validate"))
 	{
 		return Vinala\Kernel\Validation\Validator::make($data,$rules);
 	}	
+}
+
+//--------------------------------------------------------
+// Surface
+//--------------------------------------------------------
+
+if ( !function_exists( 'instance' ) ) 
+{
+	/**
+	 * create instance of surface
+	 * 
+	 * @param string $name
+	 * @return mixed
+	 */
+	function instance($name)
+	{
+		return Surface::setInstance($name);
+	}
 }
 
 //--------------------------------------------------------
@@ -535,8 +554,6 @@ if ( ! function_exists("str_contains"))
 	}	
 }
 
-
-
 if ( ! function_exists("request")) 
 {
 	/**
@@ -551,3 +568,5 @@ if ( ! function_exists("request"))
 		return Input::get($key , $default , $type);
 	}	
 }
+
+
