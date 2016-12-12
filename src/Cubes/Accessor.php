@@ -29,6 +29,17 @@ class Accessor
 	{
 		return \Vinala\Kernel\Access\Redirect::class;
 	}
+
+	/**
+	* Exception accessor
+	*
+	* @return string
+	*/
+	public static function exception()
+	{
+		return \Vinala\Kernel\Logging\Exception::class;
+	}
+	
 	
 
 }
