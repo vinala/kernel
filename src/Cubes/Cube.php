@@ -45,11 +45,15 @@ class Cube
 	* @param string $name
 	* @return mixed
 	*/
-	public static function setInstance($name)
+	public static function setInstance()
 	{
+		$args = func_get_args();
+
+		$name = array_shift($args);
+
 		$name = Accessor::$name();
 
-		static::$instance = new $name;
+		static::$instance = new $name(...$args);
 
 		return static::$instance;
 	}
