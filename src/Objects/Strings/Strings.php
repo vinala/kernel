@@ -174,4 +174,36 @@ class Strings
 		{
 			return ucwords($value);
 		}
+
+
+	/**
+	* Check if string starts with another string
+	*
+	* @param string $string
+	* @param string $substring
+	* @return bool
+	*/
+	public static function startsWith($string , $substrings)
+	{
+		if(is_array($substrings))
+		{
+			foreach ((array) $substrings as $substring) 
+			{
+	            if ($substring != '' && mb_strpos($string, $substring) === 0) 
+	            {
+	                return true;
+	            }
+	        }
+		}
+		elseif(is_string($substrings))
+		{
+			if ($substrings != '' && mb_strpos($string, $substrings) === 0) 
+            {
+                return true;
+            }
+		}
+
+        return false;
+	}
+	
 }
