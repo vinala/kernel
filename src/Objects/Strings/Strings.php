@@ -18,7 +18,7 @@ define('TRIM_START', 'start');
 */
 class Strings
 {
-	public static function lenght($string)
+	public static function length($string)
 		{
 			return strlen($string);
 		}
@@ -104,8 +104,10 @@ class Strings
 			else throw new StringOutIndexException();
 		}
 
-	public static function subString($string,$indexStart,$count)
+	public static function subString($string,$indexStart,$count = null)
 		{
+			return mb_substr($string, $indexStart, $count, 'UTF-8');
+
 			if(self::checkIndex($string,$indexStart))
 			{
 				$str="";
@@ -113,7 +115,7 @@ class Strings
 					$str.=$string[$i];
 				}
 				return $str;
-			}
+			}			
 		}
 
 	static function checkIndex($string,$index)
@@ -177,10 +179,10 @@ class Strings
 
 
 	/**
-	* Check if string starts with another string
+	* Check if string starts with another string of collection of strings
 	*
 	* @param string $string
-	* @param string $substring
+	* @param string|array $substring
 	* @return bool
 	*/
 	public static function startsWith($string , $substrings)
@@ -205,5 +207,36 @@ class Strings
 
         return false;
 	}
+
+	/**
+	* Check ifstring ends with another string of collection of strings
+	*
+	* @param string $string
+	* @param string|array $substring
+	* @return bool
+	*/
+	public static function endsWith($string , $substrings)
+	{
+		if(is_array($substrings))
+		{
+			foreach ((array) $substrings as $substring) 
+			{
+	            if ((string) $substring === static::subString($string, -static::length($substring))) 
+	            {
+	                return true;
+	            }
+	        }
+		}
+		elseif(is_string($substrings))
+		{
+			if ((string) $substring === static::subString($string, -static::length($substring))) 
+            {
+                return true;
+            }
+		}
+
+        return false;
+	}
+	
 	
 }
