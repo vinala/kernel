@@ -19,7 +19,14 @@ class Redirect
 	// Properties
 	//--------------------------------------------------------
 
-	//
+	
+	/**
+	* Te scheme used for the last request
+	*
+	* @var string 
+	*/
+	protected $cacheScheme ;
+	
 
 	//--------------------------------------------------------
 	// Constructor
@@ -43,6 +50,47 @@ class Redirect
 	{
 		return header('Location: javascript://history.go(-1)');
 	}
+	
+	/**
+	* Redirect to some url
+	*
+	* @param string $url
+	* @return mixed
+	*/
+	public function to($url)
+	{
+		if ($this->isValidUrl($path)) {
+            return $path;
+        }
+
+		return ;
+	}
+
+	/**
+	* Get the scheme
+	*
+	* @param bool $secured
+	* @return string
+	*/
+	protected function getScheme($secured = null)
+	{
+		if(is_null($secured))
+		{
+			if(is_null($this->cacheScheme))
+			{
+				$this->cacheScheme = request( 'REQUEST_SCHEME' , 'http' , 'server').'://';
+
+				return $this->cacheScheme;
+			}
+
+			else $this->cacheScheme;
+		}
+
+		return $secured ? 'http://' : 'https://' ;
+	}
+	
+
+
 	
 
 }
