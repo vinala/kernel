@@ -1,6 +1,6 @@
 <?php 
 
-namespace Vinala\Kernel\Access ;
+namespace Vinala\Kernel\Http\Redirect;
 
 //use SomeClass;
 
@@ -9,17 +9,24 @@ namespace Vinala\Kernel\Access ;
 *
 * @version 1.0
 * @author Youssef Had
-* @package Vinala\Kernel\Access
+* @package Vinala\Kernel\Http\Redirect
 * @since v3.3.0
 */
-class Redirect 
+class Redirector
 {
 	
 	//--------------------------------------------------------
 	// Properties
 	//--------------------------------------------------------
 
-	//
+	
+	/**
+	* Te scheme used for the last request
+	*
+	* @var string 
+	*/
+	protected $cacheScheme ;
+	
 
 	//--------------------------------------------------------
 	// Constructor
@@ -50,10 +57,42 @@ class Redirect
 	* @param string $url
 	* @return mixed
 	*/
-	public function to($url)
+	public function to($url , $secure = null)
 	{
+		if ($this->isValidUrl($url)) {
+            return $path;
+        }
+
+        $scheme = $this->getScheme($secure);
+
 		return ;
 	}
+
+	/**
+	* Get the scheme
+	*
+	* @param bool $secured
+	* @return string
+	*/
+	protected function getScheme($secured = null)
+	{
+		if(is_null($secured))
+		{
+			if(is_null($this->cacheScheme))
+			{
+				$this->cacheScheme = request( 'REQUEST_SCHEME' , 'http' , 'server').'://';
+
+				return $this->cacheScheme;
+			}
+
+			else $this->cacheScheme;
+		}
+
+		return $secured ? 'http://' : 'https://' ;
+	}
+	
+
+
 	
 
 }
