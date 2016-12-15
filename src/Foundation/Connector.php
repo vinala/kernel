@@ -290,7 +290,7 @@ class Connector
 	 */
 	public static function access()
 	{
-		$files = array('Path','Url','Redirect');
+		$files = array('Path','Url');
 		$filesPath = self::$path.'Access/';
 		self::call($files,$filesPath);
 	}
@@ -318,6 +318,7 @@ class Connector
 	{
 		self::call(
 			array(
+				'Url',
 				'Routes', 
 				'Route'
 				),
@@ -466,8 +467,26 @@ class Connector
 			self::$path.'Http/'
 			);
 
+		self::redirect();
 		self::middleware();
 	}
+
+	/**
+	* Redirect calls
+	*
+	* @return null
+	*/
+	public static function redirect()
+	{
+		// Classes calls
+		self::call(
+			array(
+				'Redirector'
+				),
+			self::$path.'Http/Redirect/'
+			);
+	}
+	
 
 	/**
 	* Middleware calls
