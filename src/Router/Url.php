@@ -44,7 +44,7 @@ class Url
 	*/
 	public static function to($path , $extra = [] , $secure = null)
 	{
-		
+		return ;
 	}
 
 	/**
