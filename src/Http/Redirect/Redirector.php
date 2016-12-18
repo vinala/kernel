@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Http\Redirect;
 
-//use SomeClass;
+use Vianal\Kernel\Routing\Url;
 
 /**
 * Redirect class
@@ -32,10 +32,7 @@ class Redirector
 	// Constructor
 	//--------------------------------------------------------
 
-	function __construct()
-	{
-		
-	}
+	function __construct(){}
 
 	//--------------------------------------------------------
 	// Functions
@@ -57,15 +54,19 @@ class Redirector
 	* @param string $url
 	* @return mixed
 	*/
-	public function to($url , $secure = null)
+	public function to($url , $extra = [] , $secure = null)
 	{
 		if ($this->isValidUrl($url)) {
-            return $path;
+            return $url;
         }
 
         $scheme = $this->getScheme($secure);
 
-		return ;
+        $params = $this->setParams($extra);
+
+        $url = $scheme . $url . $params;
+
+		return $url;
 	}
 
 	/**
@@ -90,6 +91,46 @@ class Redirector
 
 		return $secured ? 'http://' : 'https://' ;
 	}
+
+	/**
+	* To set get parameters
+	*
+	* @param array $args
+	* @return string
+	*/
+	protected function setParams(array $args)
+	{
+		$request = '?';
+
+		foreach ($args as $key => $value) 
+		{
+			if(is_numeric($key))
+			{
+				if($request != '?') $request .= '&';
+				$request .= $value;
+			}
+			elseif(is_string($key))
+			{
+				if($request != '?') $request .= '&';
+				$request .= $key.'='.$value;
+			}
+		}
+
+		return $request;
+	}
+
+	/**
+	* Check if the url used is a valid url
+	*
+	* @param string $url
+	* @return bool
+	*/
+	protected function isValidUrl($url)
+	{
+		return Url::isValidUrl($url);
+	}
+	
+	
 	
 
 
