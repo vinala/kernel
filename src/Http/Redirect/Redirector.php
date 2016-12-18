@@ -39,6 +39,18 @@ class Redirector
 	//--------------------------------------------------------
 
 	/**
+	* Redirect to url
+	*
+	* @param string $url
+	* @return bool
+	*/
+	protected function locate($url)
+	{
+		return header('Location: '.$url);
+	}
+	
+
+	/**
 	* Redirect to previous location
 	*
 	* @return mixed
@@ -52,6 +64,8 @@ class Redirector
 	* Redirect to some url
 	*
 	* @param string $url
+	* @param array $extra
+	* @param bool $secure
 	* @return mixed
 	*/
 	public function to($url , $extra = [] , $secure = null)
