@@ -3,6 +3,7 @@
 namespace Vinala\Kernel\Http;
 
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Connector;
 
 /**
 * Links class
@@ -22,7 +23,7 @@ class Links
 		//
 		foreach ($files as $filename)
 		{
-			$tbl=(\Connector::need($filename));
+			$tbl=(Connector::need($filename));
 			foreach ($tbl as $key => $value)
 			{
 				self::$bigOne[$key]=$value;
@@ -57,7 +58,7 @@ class Links
 			$k=$url[1];
 		}
 		
-		$files=\Connector::need(Application::$root."app/links/$link.php");
+		$files=need(Application::$root."app/links/$link.php");
 		//
 		return $files[$k];
 	}

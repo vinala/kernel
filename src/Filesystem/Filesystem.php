@@ -25,13 +25,13 @@ class Filesystem
 
 	public function getRequire($path)
 	{
-		if($this->exists($path)) return \Connector::need($path);
+		if($this->exists($path)) return need($path);
 		else throw new FileNotFoundException($path);
 	}
 
 	public function getRequireOnce($path)
 	{
-		if($this->exists($path)) return \Connector::needOnce($path);
+		if($this->exists($path)) return needOnce($path);
 		else throw new FileNotFoundException($path);
 	}
 

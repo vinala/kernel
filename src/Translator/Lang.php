@@ -50,7 +50,7 @@ class Lang
 	{
 		foreach (glob(Application::$root."resources/translator/".self::$lang."/*.php") as $filename)
 		{
-			$tbl=(\Connector::need($filename));
+			$tbl=(need($filename));
 			foreach ($tbl as $key => $value) {
 				self::$textes[$key]=$value;
 			}

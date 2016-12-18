@@ -136,7 +136,7 @@ class Plugins
 	{
 		$file = $info["path"]."/".$info["autoload"]["file"];
 		//
-		if((new Filesystem())->exists($file)) \Connector::need($file);
+		if((new Filesystem())->exists($file)) need($file);
 		else throw new AutoloadFileNotFoundException($file);
 		
 
