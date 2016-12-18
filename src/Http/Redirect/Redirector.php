@@ -80,7 +80,7 @@ class Redirector
 
         $url = $scheme . $url . $params;
 
-		return $url;
+		return self::locate($url);
 	}
 
 	/**
