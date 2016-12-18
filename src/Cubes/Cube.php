@@ -51,7 +51,7 @@ class Cube
 
 		$name = self::getAccessor($name);
 
-		$reflect  = new ReflectionClass($name);
+		$reflect  = new \ReflectionClass($name);
     	return $reflect->newInstanceArgs($args);
 	}
 
