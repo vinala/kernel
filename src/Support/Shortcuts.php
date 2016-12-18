@@ -8,6 +8,7 @@ use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Objects\Table;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Connector;
 use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Cubes\Cube;
 
@@ -43,6 +44,34 @@ if ( ! function_exists("path"))
 	function path()
 	{
 		return Application::$path;
+	}	
+}
+
+if ( ! function_exists("need")) 
+{
+	/**
+	* return Connector:need
+	*
+	* @param string $file
+	* @return null
+	*/
+	function need($file)
+	{
+		return Connector::need($file);
+	}	
+}
+
+if ( ! function_exists("needOnce")) 
+{
+	/**
+	* return Connector:needOnce
+	*
+	* @param string $file
+	* @return null
+	*/
+	function needOnce($file)
+	{
+		return Connector::needOnce($file);
 	}	
 }
 
