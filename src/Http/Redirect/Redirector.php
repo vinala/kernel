@@ -57,7 +57,7 @@ class Redirector
 	*/
 	public function back()
 	{
-		return header('Location: javascript://history.go(-1)');
+		return self::locate('javascript://history.go(-1)');
 	}
 	
 	/**
