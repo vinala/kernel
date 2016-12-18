@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Foundation;
 
 use Vinala\Kernel\Router\Routes;
 use Vinala\Kernel\Events\Event;
+use Vinala\Kernel\Config\Alias;
 
 /**
 * this class help the framework to get all
@@ -36,6 +37,8 @@ class Fetcher
 		self::link();
 		if(Component::isOn("database")) self::seed();
 		self::filtes();
+		self::alias();
+		//
 		self::routes($routes);
 		self::commands();
 		
@@ -120,6 +123,14 @@ class Fetcher
 	protected static function filtes()
 	{
 		Connector::need(self::$appPath.'http/Filters.php');
+	}
+
+	/**
+	 * set app aliases
+	 */
+	protected static function alias()
+	{
+		return Alias::appAlias();
 	}
 
 	/**
