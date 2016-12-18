@@ -120,9 +120,8 @@ if ( !function_exists( 'instance' ) )
 		$name = array_shift($args);
 
 		$reflect  = new ReflectionClass($name);
-    	return $reflect->newInstanceArgs($args);
 
-		// return new $name(...$args);
+    	return $reflect->newInstanceArgs($args);
 	}
 }
 
@@ -174,7 +173,8 @@ if ( !function_exists( 'di' ) ) {
 	 */
 	function di($var)
 	{
-		-dg($var);
+		$vars = func_get_args();
+		-dg($vars);
 	}
 }
 
@@ -185,10 +185,11 @@ if ( !function_exists( 'd' ) ) {
 	 * @param string $value
 	 * @return string
 	 */
-	function d($var)
+	function d()
 	{
+		$vars = func_get_args();
 		clean();
-		!dg($var);
+		!dg($vars);
 
 		die(1);
 	}
