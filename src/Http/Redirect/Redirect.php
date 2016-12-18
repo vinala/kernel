@@ -10,7 +10,7 @@ namespace Vinala\Kernel\Http\Redirect ;
 * @package Vinala\Kernel\Http\Redirect
 * @since v3.3.0
 */
-class Redirect extends Redirector
+class Redirect
 {
 
 	//--------------------------------------------------------
