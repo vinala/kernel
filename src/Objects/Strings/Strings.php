@@ -79,7 +79,7 @@ class Strings
 
 	public static function at($string,$index)
 		{
-			if(self::lenght($string)>=($index+1))
+			if(self::length($string)>=($index+1))
 				return $string[$index];
 			else return false;
 		}
@@ -95,7 +95,7 @@ class Strings
 					$str1.=$string[$i];
 				}
 				//
-				for ($i=($index); $i < Strings::lenght($string) ; $i++) {
+				for ($i=($index); $i < Strings::length($string) ; $i++) {
 					$str2.=$string[$i];
 				}
 				//
@@ -126,7 +126,7 @@ class Strings
 
 	static function isIndexIN($string,$index)
 		{
-			if(Strings::lenght($string)>($index+1)) return true;
+			if(Strings::length($string)>($index+1)) return true;
 			else return false;
 		}
 

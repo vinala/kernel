@@ -210,7 +210,7 @@ class Commands extends Command
     	{
     		$cont = $this->strip($value);
     		//
-    		if(Strings::lenght($cont) > 2)
+    		if(Strings::length($cont) > 2)
     		{
     			if($cont[0] == "-" && $cont[1] == "-") $this->setOption($cont);
    				elseif($cont[0] != "-" && $cont[1] != "-") $this->setArgument($cont);

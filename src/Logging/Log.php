@@ -43,9 +43,9 @@ class Log
 
 	protected static function tabulation()
 	{
-		$lenght= 21+2+(Strings::lenght(DateTime::getTimezone()));
+		$length= 21+2+(Strings::length(DateTime::getTimezone()));
 		$txt = "";
-		for ($i=0; $i < $lenght; $i++) $txt .= " ";
+		for ($i=0; $i < $length; $i++) $txt .= " ";
 		return $txt." ";
 	}
 
@@ -53,7 +53,7 @@ class Log
 	{
 		$tab = self::getTime( DateTime::now() )." Trace : ";
 		$txt = "";
-		for ($i=0; $i < Strings::lenght($tab); $i++) $txt .= " ";
+		for ($i=0; $i < Strings::length($tab); $i++) $txt .= " ";
 		return $txt." ";
 	}
 

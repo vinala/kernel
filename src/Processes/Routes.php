@@ -151,7 +151,7 @@ class Router
         $param = "";
         $open = false;
         //
-        for ($i=0; $i < Strings::lenght($route); $i++) 
+        for ($i=0; $i < Strings::length($route); $i++) 
         {
 
             if($open && $route[$i] != "}") $param .= $route[$i];
