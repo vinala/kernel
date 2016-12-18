@@ -35,7 +35,7 @@ class Redirect
 	*	
 	* @return Vinala\Kernel\Http\Redirect\Redirector
 	*/
-	public static function getInstance()
+	protected static function getInstance()
 	{
 		if( ! is_null(self::$instance))
 		{
@@ -55,8 +55,22 @@ class Redirect
 	*/
 	public static function back()
 	{
-		return getInstance()->back();
+		return self::getInstance()->back();
 	}
+
+	/**
+	* Redirect to some url
+	*
+	* @param string $url
+	* @param array $extra
+	* @param bool $secure
+	* @return mixed
+	*/
+	public static function to($url , $extra = [] , $secure = null)
+	{
+		return self::getInstance()->to($url , $extra , $secure);
+	}
+	
 	
 
 }
