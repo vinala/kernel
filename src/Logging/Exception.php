@@ -10,6 +10,9 @@ use Exception as E;
 class Exception extends E
 {
 
+	//--------------------------------------------------------
+	// Properties
+	//--------------------------------------------------------
 
 	/**
 	* The view name to show if debugging mode was off
@@ -17,6 +20,11 @@ class Exception extends E
 	* @var string
 	*/
 	public $view ;
+	
+
+	//--------------------------------------------------------
+	// Constructor
+	//--------------------------------------------------------
 
 
 	function __construct($message = "" , $view = null , $code = 0 , $previous = NULL)
@@ -24,6 +32,5 @@ class Exception extends E
 		$this->view = $view;
 		$this->message = $message;
 	}
-	
 
 }
