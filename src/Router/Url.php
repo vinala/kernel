@@ -54,7 +54,7 @@ class Url
 	* @param string $path
 	* @return bool
 	*/
-	protected static function isValidUrl($path)
+	public static function isValidUrl($path)
 	{
 		if(Strings::startsWith($path,['#', '//', 'mailto:', 'tel:', 'http://', 'https://'])) {
             return true;
