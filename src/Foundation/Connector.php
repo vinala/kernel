@@ -481,7 +481,8 @@ class Connector
 		// Classes calls
 		self::call(
 			array(
-				'Redirector'
+				'Redirector',
+				'Redirect'
 				),
 			self::$path.'Http/Redirect/'
 			);
