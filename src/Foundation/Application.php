@@ -226,6 +226,7 @@ class Application
 		Auth::ini();
 		Panel::run();
 		Plugins::ini();
+		
 	}
 
 	/**
