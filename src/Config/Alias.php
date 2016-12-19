@@ -12,22 +12,57 @@ class Alias
 	protected static $aliases;
 	//
 
-	public static function ini($root)
+	public static function ini()
 	{
-		if(Config::get('alias.enable'))
+		if(config('alias.enable'))
 		{
-			self::load($root);
-			$frameworkAliases = self::frameworkAliases();
-			//
-			foreach (self::$aliases as $key => $value) self::set($value,$key);
-			foreach ($frameworkAliases as $key => $value) self::set($value,$key);
+			self::load();
+
+			self::kernelAlias();			
 		}
-		
 	}
 
-	protected static function load($root)
+	/**
+	* Set aliases for kernel classes
+	*
+	* @return null
+	*/
+	public static function kernelAlias()
 	{
-		self::$aliases = Config::get('alias.aliases');
+		if(config('alias.enable'))
+		{
+			foreach (array_get(self::$aliases ,'kernel') as $key => $value) 
+			{
+				self::set($value,$key);
+			}
+		}
+	}
+
+	/**
+	* Set aliases for app classes
+	*
+	* @return null
+	*/
+	public static function appAlias()
+	{
+		if(config('alias.enable'))
+		{
+			foreach (array_except(self::$aliases , 'kernel') as $aliases) 
+			{
+				foreach ($aliases as $key => $value) 
+				{
+					self::set($value,$key);
+				}
+			}
+		}
+	}
+
+	protected static function load()
+	{
+		self::$aliases['kernel'] = config('alias.kernel');
+		self::$aliases['user'] = config('alias.user');
+		self::$aliases['exceptions'] = config('alias.exceptions');
+		//
 		return self::$aliases;
 	}
 
@@ -41,12 +76,9 @@ class Alias
 			case "Vinala\Kernel\Database\Query" : self::setIfOn("database" , $target , $alias); break;
 			case "Vinala\Kernel\Database\DBTable" : self::setIfOn("database" , $target , $alias); break;
 			case "Vinala\Kernel\Database\Schema" : self::setIfOn("database" , $target , $alias); break;
-
 			
 			default: class_alias ( "$target" , $alias); break;
 		}
-
-		
 	}
 
 	protected static function frameworkAliases()

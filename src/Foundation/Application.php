@@ -172,8 +172,6 @@ class Application
 		//
 		self::setScreen();
 		self::setRoot($root);
-		//
-	
 		// call the connector and run it
 		self::consoleConnector();
 		Connector::run(true); 
