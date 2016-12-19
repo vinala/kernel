@@ -10,12 +10,10 @@ use Vinala\Kernel\Foundation\Application;
 */
 class Model
 {
-	public static function create($fileName , $className , $tableName, $rt= null)
+	public static function create($class , $table, $rt= null)
 	{
+		$file = $class;
 		
-		$class= $className;
-		$file = $fileName;
-		$table= $tableName;
 		$root = is_null($rt) ? Process::root : $rt ;
 
 		
