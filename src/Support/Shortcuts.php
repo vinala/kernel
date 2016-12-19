@@ -390,6 +390,22 @@ if ( ! function_exists("exception_if"))
 	}	
 }
 
+if ( ! function_exists("exception")) 
+{
+	/**
+	* shortcut for showing costum exception
+	*
+	* @param string $exception
+	* @param string $message
+	* @param string $view
+	* @return null
+	*/
+	function exception($exception = 'exception' , $msg = '' , $view = null)
+	{
+		throw $exception == 'exception' ? cube('exception' , $msg , $view) : instance($exception , $msg );
+	}	
+}
+
 
 //--------------------------------------------------------
 // Array Shortcuts
