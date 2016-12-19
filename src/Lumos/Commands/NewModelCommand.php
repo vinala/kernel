@@ -37,7 +37,7 @@ class NewModelCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_model').' {fileName : what\'s the name of the file?} {className : what\'s the name of the model class?} {tableName : what\'s the name of the datatable?}';
+        $this->key = Config::get('lumos.new_model').' {className : what\'s the name of the model class?} {tableName : what\'s the name of the datatable?}';
         $this->description = 'New model';
     }
 
@@ -54,11 +54,10 @@ class NewModelCommand extends Commands
      */
     public function exec()
     {
-        $fileName = $this->argument('fileName');
         $className = $this->argument('className');
         $tableName = $this->argument('tableName');
         //
-        $process = Model::create($fileName , $className , $tableName);
+        $process = Model::create( $className , $tableName);
         //
         $this->show($process);
     }
