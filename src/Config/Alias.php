@@ -62,6 +62,8 @@ class Alias
 		self::$aliases['kernel'] = config('alias.kernel');
 		self::$aliases['user'] = config('alias.user');
 		self::$aliases['exceptions'] = config('alias.exceptions');
+		self::$aliases['controllers'] = config('alias.controllers');
+		self::$aliases['models'] = config('alias.models');
 		//
 		return self::$aliases;
 	}
