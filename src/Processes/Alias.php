@@ -27,7 +27,7 @@ class Alias
 	protected static function docs()
 	{
 		return [
-			'enable' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Enable Aliases\n\t|----------------------------------------------------------\n\t| Here to activate classes aliases\n\t|\n\t**/\n",
+			'enabled' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Enable Aliases\n\t|----------------------------------------------------------\n\t| Here to activate classes aliases\n\t|\n\t**/\n",
 
 			'kernel' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Kernel Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of class\n\t| in the kernel.\n\t|\n\t**/\n",
 
@@ -50,13 +50,43 @@ class Alias
 	*/
 	public static function set($enabled , $params)
 	{
+
 		$docs = self::docs();
+		$content = $docs['enabled'].self::enbaledFormat($enabled);
+		d($params);
+		$content .= $docs['kernel'].self::arrayFormat($params['kernel'], 'kernel');
+		$content .= $docs['exceptions'].self::arrayFormat($params['exceptions'], 'exceptions');
+		$content .= $docs['controllers'].self::arrayFormat($params['controllers'], 'controllers');
+		$content .= $docs['models'].self::arrayFormat($params['models'], 'models');
 
-		$enabled = $docs['enabled'].self::enbaledFormat($enabled);
-		$kernel = $docs['kernel'].self::kernelFormat($params['kernel']);
+		$content = self::fileFormat($content);
 
-		return true;
+		return self::setFile($content);
 	}
+
+	/**
+	* Set the file
+	*
+	* @param 
+	* @param 
+	* @return 
+	*/
+	protected static function setFile($content)
+	{
+		$root = Process::root;
+
+		if(file_exists(Process::root.'config/alias.php'))
+		{
+			$file = fopen(Process::root.'config/alias.php', "w");
+			fwrite($file, $content);
+			fclose($file);
+			//
+			return true;
+		}
+		
+		return false;
+	}
+	
 
 	/**
 	* Enabled switch format
@@ -70,23 +100,42 @@ class Alias
 	}
 
 	/**
-	* Kernel array format
+	* Format args array
 	*
 	* @param array $data
+	* @param string $name
 	* @return string
 	*/
-	protected static function kernelFormat($data)
+	protected static function arrayFormat(array $data , $name)
 	{
-		$format = "\t'kernel' => [\n";
+		$format = "\t'$name' => [\n";
 
 		foreach ($data as $key => $value) {
 			$format .= "\t\t'$key' => $value::class , \n";
 		}
 
-		$format .= "\t],";
+		$format .= "\t],\n\n";
 
 		return $format;
 	}
+
+	/**
+	* Format the alias config file
+	*
+	* @param string $content
+	* @return bool
+	*/
+	protected static function fileFormat($content)
+	{
+		$container = "<?php\n\n\nreturn [\n";
+
+		$container .= $content;
+
+		$container .= "];";
+
+		return $container;
+	}
+	
 	
 	
 	
