@@ -905,6 +905,7 @@ class Connector
 				'Routes',
 				'Exception',
 				'Events',
+				'Alias',
 				),
 			self::$path.'Processes/'
 			);
