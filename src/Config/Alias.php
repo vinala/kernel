@@ -3,6 +3,7 @@
 namespace Vinala\Kernel\Config;
 
 use Vinala\Kernel\Foundation\Component;
+use Vinala\Kernel\Process\Alias as Aliases;
 
 /**
 * Alias Class for "lazy"
@@ -18,7 +19,7 @@ class Alias
 		{
 			self::load();
 
-			self::kernelAlias();			
+			self::kernelAlias();		
 		}
 	}
 
@@ -116,8 +117,9 @@ class Alias
 		$indexes = dot($key);
 
 		self::$aliases[$indexes[0]] = array_add(self::$aliases[$indexes[0]] , $indexes[1] , $class);
+		self::$aliases['kernel'] = config('alias.kernel');
 
-		d(self::$aliases);
+		Aliases::set(config('alias.enable') , self::$aliases);
 
 	}
 

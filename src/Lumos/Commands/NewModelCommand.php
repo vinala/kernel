@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Console\Commands;
 
 
 use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Config\Alias;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Model;
 
@@ -46,7 +47,8 @@ class NewModelCommand extends Commands
      */
     public function handle()
     {
-        $this->exec();
+        Alias::update('exceptions.rrrr','rtert');
+        // $this->exec();
     }
 
     /**

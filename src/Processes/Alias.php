@@ -31,13 +31,13 @@ class Alias
 
 			'kernel' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Kernel Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of class\n\t| in the kernel.\n\t|\n\t**/\n",
 
-			'user' => "\n\t/*\n\t|----------------------------------------------------------\n\t| User Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for your aliases, feel\n\t| free to register as many as \n\t| you wish as the aliases are 'lazy' loaded so \n\t| they don't hinder performance.\n\t|\n\t**/",
+			'user' => "\n\t/*\n\t|----------------------------------------------------------\n\t| User Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for your aliases, feel\n\t| free to register as many as \n\t| you wish as the aliases are 'lazy' loaded so \n\t| they don't hinder performance.\n\t|\n\t**/\n",
 
-			'exceptions' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Exceptions Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of exceptions class\n\t| classes\n\t|\n\t**/",
+			'exceptions' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Exceptions Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of exceptions class\n\t| classes\n\t|\n\t**/\n",
 
-			'controllers' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Controllers Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of controllers class\n\t| classes\n\t|\n\t**/",
+			'controllers' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Controllers Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of controllers class\n\t| classes\n\t|\n\t**/\n",
 
-			'models' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Models Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of models class\n\t| classes\n\t|\n\t**/",
+			'models' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Models Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of models class\n\t| classes\n\t|\n\t**/\n",
 		];
 	}
 
@@ -53,13 +53,14 @@ class Alias
 
 		$docs = self::docs();
 		$content = $docs['enabled'].self::enbaledFormat($enabled);
-		d($params);
 		$content .= $docs['kernel'].self::arrayFormat($params['kernel'], 'kernel');
 		$content .= $docs['exceptions'].self::arrayFormat($params['exceptions'], 'exceptions');
 		$content .= $docs['controllers'].self::arrayFormat($params['controllers'], 'controllers');
 		$content .= $docs['models'].self::arrayFormat($params['models'], 'models');
 
 		$content = self::fileFormat($content);
+
+		// d($content);
 
 		return self::setFile($content);
 	}
