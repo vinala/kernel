@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Console\Commands;
 
 
 use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Config\Alias;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Exception;
 // use Vinala\Kernel\Logging\Exception;
@@ -34,7 +35,8 @@ class NewExceptionCommand extends Commands
         $this->key = config('lumos.new_exception').
         ' {name : what\'s the name of the exception ?}'.
         ' {--message : what\'s the message to show if debug was on ?}'.
-        ' {--view= : what\'s the view to show if debug was off ?}';
+        ' {--view= : what\'s the view to show if debug was off ?}'.
+        ' {--not_aliased : if set , the exception will be not aliased}';
 
         $this->description = 'Create new exception';
     }
@@ -45,6 +47,8 @@ class NewExceptionCommand extends Commands
     public function handle()
     {
         $name = $this->argument("name");
+        $notAliased = $this->option('not_aliased');
+
         if($this->option("message"))
         {
             $message = $this->ask("what's the message");
@@ -53,6 +57,13 @@ class NewExceptionCommand extends Commands
         $view = $this->option("view");
         //
         $process = Exception::create($name , $message , $view);
+
+        if( ! $notAliased)
+        {
+            $class = ucfirst($name);
+            //
+            Alias::update('exceptions.'.$class , 'App\Exception\\'.$class );
+        }
         //
         $this->show($process);
     }
