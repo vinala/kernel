@@ -38,6 +38,9 @@ class Connector
 		Connector::input();
 		Input::register();
 
+		//Support
+		Connector::support();
+
 		// Config
 		Connector::config();
 		Config::load();
@@ -146,6 +149,19 @@ class Connector
 	}
 
 	/**
+	* Call support classes
+	*/
+	public static function support($files)
+	{
+		self::call(
+			array(
+				'FunctionArgs'
+				),
+			self::$path.'Support/'
+			);
+	}
+
+	/**
 	 * Config Core Files
 	 **/
 	public static function config()
@@ -158,7 +174,13 @@ class Connector
 			self::$path.'Config/'
 			);
 		//
-		self::need(self::$path.'Config/Exceptions/ConfigException.php');
+		self::call(
+			array(
+				'ConfigException', 
+				'AliasedClassNotFoundException'
+				),
+			self::$path.'Config/Exceptions/'
+			);
 	}
 
 	/**
