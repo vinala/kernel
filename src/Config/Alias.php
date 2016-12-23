@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Config;
 
 use Vinala\Kernel\Foundation\Component;
 use Vinala\Kernel\Process\Alias as Aliases;
+use Vinala\Kernel\Config\Exceptions\AliasedClassNotFoundException;
 
 /**
 * Alias Class for "lazy"
@@ -48,11 +49,13 @@ class Alias
 	{
 		if(config('alias.enable'))
 		{
-			foreach (array_except(self::$aliases , 'kernel') as $aliases) 
+			foreach (array_except(self::$aliases , 'kernel') as $array =>$aliases) 
 			{
 				foreach ($aliases as $key => $value) 
 				{
-					self::set($value,$key);
+					exception_if( ! class_exists($value) , AliasedClassNotFoundException::class , $value , $array);
+
+					self::set($value,$key);	
 				}
 			}
 		}
@@ -61,7 +64,6 @@ class Alias
 	protected static function load()
 	{
 		self::$aliases['kernel'] = config('alias.kernel');
-		self::$aliases['user'] = config('alias.user');
 		self::$aliases['exceptions'] = config('alias.exceptions');
 		self::$aliases['controllers'] = config('alias.controllers');
 		self::$aliases['models'] = config('alias.models');
