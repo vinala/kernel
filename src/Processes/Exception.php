@@ -45,7 +45,7 @@ class Exception
 	protected static function set($name , $message , $view)
 	{
 		$txt = "<?php\n\n";
-		$txt .= "namespace Vinala\App\Exception;\n\n";
+		$txt .= "namespace App\Exception;\n\n";
 		$txt .= "use Vinala\Kernel\Logging\Exception;\n\n";
 		$txt .= "/**\n* ".$name." Exception\n*/\n";
 		$txt .= "class $name extends Exception\n{\n\n";
