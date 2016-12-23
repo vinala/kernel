@@ -1,6 +1,7 @@
 <?php 
 
 
+use Vinala\Kernel\Support\FunctionArgs;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\MVC\View;
 use Vinala\Kernel\Router\Route;
@@ -117,11 +118,19 @@ if ( !function_exists( 'instance' ) )
 	{
 		$args = func_get_args();
 
-		$name = array_shift($args);
+		if($args[0] instanceof FunctionArgs)
+		{
+			$args = $args[0]->get();
+		}
 
-		$reflect  = new ReflectionClass($name);
+		$class = array_shift($args);
 
-    	return $reflect->newInstanceArgs($args);
+		if(class_exists($class))
+		{
+			return (new ReflectionClass($class))->newInstanceArgs($args);
+		}
+
+		else throw new LogicException("Class '$class' not found");
 	}
 }
 
@@ -381,11 +390,17 @@ if ( ! function_exists("exception_if"))
 	* @param string $view
 	* @return null
 	*/
-	function exception_if($expression , $exception = 'exception' , $msg = '' , $view = null)
+	function exception_if()
 	{
-		if($expression) 
+		$args = func_get_args();
+
+		$condition = array_shift($args);
+
+		if($condition) 
 		{
-			throw $exception == 'exception' ? cube('exception' , $msg , $view) : instance($exception , $msg );
+			$args = new FunctionArgs($args);
+			
+			throw instance($args);
 		}
 	}	
 }
@@ -400,9 +415,13 @@ if ( ! function_exists("exception"))
 	* @param string $view
 	* @return null
 	*/
-	function exception($exception = 'exception' , $msg = '' , $view = null)
+	function exception()
 	{
-		throw $exception == 'exception' ? cube('exception' , $msg , $view) : instance($exception , $msg );
+		$args = func_get_args();
+
+		$args = new FunctionArgs($args);
+
+		throw instance($args);
 	}	
 }
 
