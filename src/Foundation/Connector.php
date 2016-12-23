@@ -151,7 +151,7 @@ class Connector
 	/**
 	* Call support classes
 	*/
-	public static function support($files)
+	public static function support()
 	{
 		self::call(
 			array(
