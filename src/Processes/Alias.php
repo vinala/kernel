@@ -97,7 +97,7 @@ class Alias
 	*/
 	protected static function enbaledFormat($enabled)
 	{
-		return "'enable' => ".($enabled ? 'true' : 'false')." ,";
+		return "\t'enable' => ".($enabled ? 'true' : 'false')." ,\n\n";
 	}
 
 	/**
