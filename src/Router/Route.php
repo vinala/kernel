@@ -35,4 +35,15 @@ class Route
 		return Routes::call($uri,$controller,$data);
 	}
 
+	/**
+	* Get current route
+	*
+	* @return string
+	*/
+	public static function current()
+	{
+		return Routes::current();
+	}
+	
+
 }
