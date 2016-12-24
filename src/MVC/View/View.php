@@ -91,7 +91,7 @@ class View
 	*/
 	public static function exists($name)
 	{
-		return Views::exists($name);
+		return instance(Views::class)->exists($name);
 	}
 
 
