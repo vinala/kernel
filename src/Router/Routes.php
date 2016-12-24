@@ -209,94 +209,90 @@ class Routes
 		//
 		$currentRoot=self::setRoot($currentUrl);
 		//
-		if( ! Maintenance::check())
-		{
-			self::ReplaceParams();
-			self::Replace();
+		self::ReplaceParams();
+		self::Replace();
+		//
+		$ok=false;
+		//
+		foreach (self::$requests as $value) {
+			$requestsUrl=$value["url"];
+			//var_dump($value);
 			//
-			$ok=false;
-			//
-			foreach (self::$requests as $value) {
-				$requestsUrl=$value["url"];
-				//var_dump($value);
-				//
-				if(preg_match("#^$requestsUrl$#" , $currentUrl , $params))
+			if(preg_match("#^$requestsUrl$#" , $currentUrl , $params))
+			{
+				if(!is_null($value["subdomain"]))
 				{
-					if(!is_null($value["subdomain"]))
-					{
-						if(Table::contains($value["subdomain"],self::getDomain()))
-							{
-								if($value["methode"]=="post" && Res::isPost())
-								{
-									$ok=self::exec($params,$value);
-									break;
-								}
-								else if($value["methode"]=="post" && !Res::isPost())
-								{
-									$ok=0;
-								}
-								else if($value["methode"]=="get")
-								{
-									$ok=self::exec($params,$value);
-									break;
-								}
-								else if(is_array($value["methode"]))
-								{
-									if( $value['methode']['type'] == 'resource' )
-									{
-										$ok=self::exec($params,$value);
-										break;
-									}
-								}
-								else if($value["methode"]=="object")
-								{
-									$ok=self::exec($params,$value);
-									//var_dump($value);
-									break;
-								}
-							}
-						else $ok=0;
-					}
-					else
-					{
-						if($value["methode"]=="post" && Res::isPost())
+					if(Table::contains($value["subdomain"],self::getDomain()))
 						{
-							$ok=self::exec($params,$value);
-							break;
-						}
-						else if($value["methode"]=="post" && !Res::isPost())
-						{
-							$ok=0;
-						}
-						else if($value["methode"]=="get")
-						{
-							$ok=self::exec($params,$value);
-							break;
-						}
-						
-						else if(is_array($value["methode"]))
-						{
-							if( $value['methode']['type'] == 'resource' )
+							if($value["methode"]=="post" && Res::isPost())
 							{
 								$ok=self::exec($params,$value);
 								break;
 							}
+							else if($value["methode"]=="post" && !Res::isPost())
+							{
+								$ok=0;
+							}
+							else if($value["methode"]=="get")
+							{
+								$ok=self::exec($params,$value);
+								break;
+							}
+							else if(is_array($value["methode"]))
+							{
+								if( $value['methode']['type'] == 'resource' )
+								{
+									$ok=self::exec($params,$value);
+									break;
+								}
+							}
+							else if($value["methode"]=="object")
+							{
+								$ok=self::exec($params,$value);
+								//var_dump($value);
+								break;
+							}
 						}
-						else if($value["methode"]=="object")
+					else $ok=0;
+				}
+				else
+				{
+					if($value["methode"]=="post" && Res::isPost())
+					{
+						$ok=self::exec($params,$value);
+						break;
+					}
+					else if($value["methode"]=="post" && !Res::isPost())
+					{
+						$ok=0;
+					}
+					else if($value["methode"]=="get")
+					{
+						$ok=self::exec($params,$value);
+						break;
+					}
+					
+					else if(is_array($value["methode"]))
+					{
+						if( $value['methode']['type'] == 'resource' )
 						{
 							$ok=self::exec($params,$value);
 							break;
 						}
 					}
-
+					else if($value["methode"]=="object")
+					{
+						$ok=self::exec($params,$value);
+						break;
+					}
 				}
-			}
-			if($ok==0) 
-			{
-				exception(NotFoundHttpException::class);
+
 			}
 		}
-		else Maintenance::show();
+		if($ok==0) 
+		{
+			exception(NotFoundHttpException::class);
+		}
 	}
 
 	protected static function exec($params,&$one)
