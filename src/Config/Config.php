@@ -78,16 +78,34 @@ class Config
 	 * check if parameter exists
 	 * @param $param(string) primary and secondary parameter concatenated
 	 */
-	public static function check($param)
+	public static function check($param , $default = false)
 	{
+		// if($param == 'maintenance.out') d($default);
 		$p = self::separate($param);
 		//
 		if( $p['first'] == 'database') self::checkDatabase($p['second']);
 		//
 		else
 		{
-			if( ! in_array( $p['first'], self::getFirstLevel())) self::exception( $p['first'] , $p['second'] );
-			else if ( ! array_key_exists( $p['second'] , self::$params[ $p['first'] ]) ) self::exception( $p['first'] , $p['second'] );
+			if( ! in_array( $p['first'], self::getFirstLevel()))
+			{
+				d(1);
+				if( ! $default )
+				{
+					self::exception( $p['first'] , $p['second'] );
+				}
+				return true;
+			}
+			elseif ( ! array_key_exists( $p['second'] , self::$params[ $p['first'] ]) ) 
+			{
+				if($param == 'maintenance.out') dc(2,$default,$param);
+				if( ! $default )
+				{	
+					d(3,$default,$param);
+					self::exception( $p['first'] , $p['second'] );
+				}
+				return true;
+			}
 		}
 		//
 		return true;
@@ -108,13 +126,12 @@ class Config
 	 * find request parameter
 	 * @param $param(string) primary and secondary parameter concatenated
 	 */
-	protected static function reach($param)
+	protected static function reach($param , $default = null)
 	{
 		$p = self::separate($param);
-		self::check($param);
 		//
 		if( $p['first'] == 'database') return self::callDatabase( $p['second'] );
-		return array_get(self::$params , $param);
+		return array_get(self::$params , $param , $default);
 
 	}
 
@@ -151,7 +168,7 @@ class Config
 	 */
 	public static function get($key , $value = null)
 	{
-		if(self::check($param))
+		if(self::check($key , ! is_null($value)))
 		{
 			return self::reach($key , $value);
 		}
