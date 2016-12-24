@@ -1,38 +1,70 @@
 <?php 
 
-namespace Vinala\Kernel\Maintenance;
+namespace Vinala\Kernel\Maintenance ;
 
-use Vinala\Kernel\MVC\View\View;
-use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Router\Route;
 
 /**
 * Maintenance class
+*
+* @version 2.0
+* @author Youssef Had
+* @package Vinala\Kernel\Maintenance
+* @since v2.5.0.236 / v3.3.0
 */
 class Maintenance
 {
+	
+	//--------------------------------------------------------
+	// Properties
+	//--------------------------------------------------------
+	
+	/**
+	* Is the maintenance up or down
+	*
+	* @var bool 
+	*/
+	public static $enabled ;
+	
+
+	//--------------------------------------------------------
+	// Functions
+	//--------------------------------------------------------
+
+	/**
+	* Check if the app is under maintenance
+	*
+	* @return bool
+	*/
 	public static function check()
 	{
+		$route = $_GET['_framework_url_'];
 		
-		if(Config::get("panel.setup"))
+		if (config('panel.setup' , true)) 
 		{
-			if(Config::get("maintenance.activate") && !in_array(self::thisUrl(), Config::get("maintenance.outRoutes"))) return true;
-			else if(Config::get("maintenance.activate") && in_array(self::thisUrl(), Config::get("maintenance.outRoutes"))) return false;
-			else if( ! Config::get("maintenance.activate")) return false;
+			if(config('maintenance.enabled' , false ) && ! in_array($route, config('maintenance.out' , [])))
+			{
+				return static::$enabled = true;
+			}
 		}
-		else return false;
+		return static::$enabled = false;
 	}
 
-	public static function show()
+	/**
+	* Launch maintenance view
+	*
+	* @return null
+	*/
+	public static function Launch()
 	{
-		$msg=Config::get("maintenance.msg");
-		$bg_color=Config::get("maintenance.bg");
-		//include 'View.php';
-		View::make('maintenance.view',['msg' => $msg , 'bg_color' => $bg_color ]);
+		if(static::check())
+		{
+			clean();
+			include '../app/views/errors/maintenance.php';
+			out('');
+		}
 	}
+	
+	
 
-	protected static function thisUrl()
-	{
-		$url=isset($_GET['url'])?$_GET['url']:"/";
-		return $url;
-	}
 }
