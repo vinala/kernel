@@ -35,6 +35,8 @@ class Alias
 		{
 			foreach (array_get(self::$aliases ,'kernel') as $key => $value) 
 			{
+				exception_if( ! class_exists($value) , AliasedClassNotFoundException::class , $value , 'kernel');
+
 				self::set($value,$key);
 			}
 		}
