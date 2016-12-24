@@ -146,11 +146,17 @@ class Config
 
 	/**
 	 * get value of config parameter
+	 *
 	 * @param $value(string) primary and secondary parameter concatenated
 	 */
-	public static function get($value)
+	public static function get($key , $value = null)
 	{
-		return self::reach($value);
+		if(self::check($param))
+		{
+			return self::reach($key , $value);
+		}
+
+		return $value;
 	}
 
 	/**

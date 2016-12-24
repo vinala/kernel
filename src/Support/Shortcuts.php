@@ -84,9 +84,9 @@ if( ! function_exists("config"))
 	* @param string $key
 	* @return mixed
 	*/
-	function config($key)
+	function config($key ,$value = null)
 	{
-		return Config::get($key);
+		return Config::get($key , $value);
 	}
 }
 
