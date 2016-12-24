@@ -13,6 +13,7 @@ use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Atomium\Compiler;
 use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Validation\Validator;
+use Vinala\Kernel\Maintenance\Maintenance;
 
 
 /**
@@ -44,6 +45,7 @@ class Connector
 		// Config
 		Connector::config();
 		Config::load();
+		Connector::maintenance($lumos);
 		//
 		Connector::time();
 		//
@@ -54,7 +56,6 @@ class Connector
 		Connector::cubes();
 		//
 		Connector::storage($session);
-		Connector::maintenance();
 		Connector::string();
 		Connector::object();
 		Connector::access();
@@ -247,10 +248,14 @@ class Connector
 	/**
 	 * maintenance call
 	 */
-	public static function maintenance()
+	public static function maintenance($lumos)
 	{
 		self::need(self::$path.'Maintenance/Maintenance.php');
-		self::need(self::$path.'Maintenance/Debug.php');
+		if( ! $lumos )
+		{
+			Maintenance::launch();	
+		}
+		
 	}
 
 	/**
