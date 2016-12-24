@@ -293,8 +293,7 @@ class Routes
 			}
 			if($ok==0) 
 			{
-				if(Config::get('app.unrouted')) throw new NotFoundHttpException();
-				else Errors::r_404();
+				exception(NotFoundHttpException::class);
 			}
 		}
 		else Maintenance::show();
