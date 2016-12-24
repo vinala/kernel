@@ -710,7 +710,8 @@ class Connector
 			array(
 				'Exceptions/FileNotFoundException', 
 				'Exceptions/DirectoryNotFoundException', 
-				'Filesystem'
+				'Filesystem',
+				'File',
 				),
 			self::$path.'Filesystem/'
 			);
