@@ -173,37 +173,6 @@ if ( !function_exists( 'cube' ) )
 // Debuging
 //--------------------------------------------------------
 
-if ( !function_exists( 'di' ) ) {
-	/**
-	 * Show debug without die
-	 * 
-	 * @param string $value
-	 * @return string
-	 */
-	function di($var)
-	{
-		$vars = func_get_args();
-		-dg($vars);
-	}
-}
-
-if ( !function_exists( 'd' ) ) {
-	/**
-	 * Show debug with die
-	 * 
-	 * @param string $value
-	 * @return string
-	 */
-	function d()
-	{
-		$vars = func_get_args();
-		clean();
-		!dg($vars);
-
-		die(1);
-	}
-}
-
 if ( !function_exists( 'trace' ) ) {
 	/**
 	 * Show application trace
