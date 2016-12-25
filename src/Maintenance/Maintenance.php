@@ -38,7 +38,7 @@ class Maintenance
 	*/
 	public static function check()
 	{
-		$route = $_GET['_framework_url_'];
+		$route = isset($_GET['_framework_url_']) ? $_GET['_framework_url_'] : '';
 
 		$out = config('maintenance.out' , []);
 
