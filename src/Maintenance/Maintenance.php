@@ -59,13 +59,16 @@ class Maintenance
 	*
 	* @return null
 	*/
-	public static function Launch()
+	public static function launch()
 	{
 		if(static::check())
 		{
 			clean();
 
-			$view = '../app/views/'.config('maintenance.view');
+			$view = config('maintenance.view');
+			$view = str_replace('.', '/', $view).'.php';
+
+			$view = '../app/views/'.$view;
 			if(! file_exists($view))
 			{
 				throw new \Exception('The view \''.config('maintenance.view').'\' not found');
