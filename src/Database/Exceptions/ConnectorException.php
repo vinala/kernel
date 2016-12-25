@@ -14,7 +14,7 @@ class ConnectorException extends Exception
 	function __construct()
 	{
 		$this->message = 'We cannot connect to database';
-		$this->view = 'errors.database';
+		$this->view = config('error.database');
 	}
 
 }
