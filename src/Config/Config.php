@@ -80,7 +80,6 @@ class Config
 	 */
 	public static function check($param , $default = false)
 	{
-		// if($param == 'maintenance.out') d($default);
 		$p = self::separate($param);
 		//
 		if( $p['first'] == 'database') self::checkDatabase($p['second']);
@@ -89,7 +88,6 @@ class Config
 		{
 			if( ! in_array( $p['first'], self::getFirstLevel()))
 			{
-				d(1);
 				if( ! $default )
 				{
 					self::exception( $p['first'] , $p['second'] );
@@ -98,10 +96,8 @@ class Config
 			}
 			elseif ( ! array_key_exists( $p['second'] , self::$params[ $p['first'] ]) ) 
 			{
-				if($param == 'maintenance.out') dc(2,$default,$param);
 				if( ! $default )
 				{	
-					d(3,$default,$param);
 					self::exception( $p['first'] , $p['second'] );
 				}
 				return true;
