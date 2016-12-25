@@ -100,9 +100,9 @@ if ( ! function_exists("view"))
 	* @param array $data
 	* @return mixed
 	*/
-	function view( $value , array $data = null )
+	function view( $value , array $data = null , $nest = null)
 	{
-		return View::make($value,$data);
+		return View::make($value , $data , $nest);
 	}	
 }
 
@@ -279,13 +279,27 @@ if ( ! function_exists("now"))
 if ( ! function_exists("clean")) 
 {
 	/**
-	* shortcut for var_dump
+	* shortcut for ob_get_clean
 	*
 	* @return null
 	*/
 	function clean()
 	{
 		return ob_get_clean();
+	}	
+}
+
+
+if ( ! function_exists("clear")) 
+{
+	/**
+	* shortcut for ob_clean
+	*
+	* @return null
+	*/
+	function clear()
+	{
+		ob_clean();
 	}	
 }
 
