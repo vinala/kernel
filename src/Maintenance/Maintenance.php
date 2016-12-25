@@ -64,7 +64,15 @@ class Maintenance
 		if(static::check())
 		{
 			clean();
-			include '../app/views/errors/maintenance.php';
+
+			$view = '../app/views/'.config('maintenance.view');
+			if(! file_exists($view))
+			{
+				throw new \Exception('The view \''.config('maintenance.view').'\' not found');
+			}
+
+			include $view;
+
 			out('');
 		}
 	}
