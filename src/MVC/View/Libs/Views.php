@@ -77,7 +77,7 @@ class Views
 	* @param array $data
 	* @return Vinala\Kernel\MVC\Views
 	*/
-	public function call( $name , $data = null)
+	public function call( $name , $data = null , $nest = null)
 	{
 		//Merge data
 		if( ! is_null($data))
@@ -85,16 +85,17 @@ class Views
 			$this->data = array_merge( $this->data , $data);
 		}		
 
-		if( ! $this->exists($name))
+		if( ! $this->exists($name , $nest))
 		{
 			throw new ViewNotFoundException($name);
 		}
 		else
 		{
-			$data = $this->exists($name);
+			$data = $this->exists($name , $nest);
 
 			$this->path = $data['path'];
 			$this->engine = $data['engine'];
+			$this->nest = $nest;
 		}
 
 		$nameSegments = dot($name);
@@ -122,7 +123,7 @@ class Views
 	* @param string $name
 	* @return array|false
 	*/
-	public function exists($name)
+	public function exists($name , $nest = null)
 	{
 		$file = str_replace('.', '/', $name);
 
@@ -133,10 +134,12 @@ class Views
 			'.tpl.php'
 		];
 
+		$nest = $nest ?: $this->nest ;
+
 		$i = 0;
 		foreach ($extensions as $extension) 
 		{
-			$path = $this->nest.$file.$extension;
+			$path = $nest.$file.$extension;
 
 			if(file_exists($path))
 			{
@@ -188,6 +191,7 @@ class Views
 	*/
 	public function show(Views $_vinala_view = null)
 	{
+
 		if(is_null($_vinala_view))
 		{
 			$_vinala_view = $this;
@@ -195,7 +199,7 @@ class Views
 
 		if($_vinala_view->engine == 'atomium')
 		{	
-			self::atomium($_vinala_view->path , $_vinala_view->data);
+			self::atomium($_vinala_view->path , $_vinala_view->data , $_vinala_view->nest);
 		}
 		elseif($_vinala_view->engine == 'smarty')
 		{
@@ -224,11 +228,11 @@ class Views
 	* @param array $data
 	* @return 
 	*/
-	protected function atomium($file, $data)
+	protected function atomium($file, $data , $nest = null)
 	{
 		$atomium = new Atomium;
 
-		return $atomium->show($file, $data);
+		return $atomium->show($file, $data , $nest);
 	}
 
 

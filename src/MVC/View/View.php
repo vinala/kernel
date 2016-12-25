@@ -33,11 +33,11 @@ class View
 	* @param array $data
 	* @return Vinala\Kernel\MVC\Views
 	*/
-	public static function make( $name , $data = null)
+	public static function make( $name , $data = null , $nest = null)
 	{
 		self::$view = new Views;
 
-		return self::$view->call($name , $data);
+		return self::$view->call($name , $data , $nest);
 	}
 
 	/**
@@ -62,7 +62,6 @@ class View
 	*/
 	public static function extend($name , $data = null)
 	{
-		// d(self::$view);
 		return self::$view->call($name , $data)->show();
 	}
 	
@@ -89,9 +88,9 @@ class View
 	* @param string $name
 	* @return bool
 	*/
-	public static function exists($name)
+	public static function exists($name , $nest = null)
 	{
-		return instance(Views::class)->exists($name);
+		return instance(Views::class)->exists($name, $nest);
 	}
 
 

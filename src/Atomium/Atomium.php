@@ -37,20 +37,26 @@ class Atomium
      */
     protected function setTemplateDir($TemplateDir = null) 
     {
-        if( ! is_null($TemplateDir)) $this->TemplateDir = $TemplateDir;
-        else $this->TemplateDir = Application::$root."app/storage/framework/view/template/atomium";
+        if( ! is_null($TemplateDir)) 
+        {
+        	$this->TemplateDir = $TemplateDir;	
+        }
+        else 
+        {
+        	$this->TemplateDir = Application::$root."app/storage/framework/view/template/atomium";
+        }
     }
 
     /**
      * Set View file
      */
-    public function show($file, $data) 
+    public function show($file, $data , $nest = null) 
     {
     	$this->setTemplate($file);
     	//
     	$this->assign($data);
     	//
-    	$this->setTemplateDir();
+    	$this->setTemplateDir($nest);
     	//
     	$this->store($this->compile());
     	//
