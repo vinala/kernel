@@ -39,10 +39,14 @@ class Maintenance
 	public static function check()
 	{
 		$route = $_GET['_framework_url_'];
+
+		$out = config('maintenance.out' , []);
+
+		$out[] = config('panel.route' , 'vinala');
 		
 		if (config('panel.setup' , true)) 
 		{
-			if(config('maintenance.enabled' , false ) && ! in_array($route, config('maintenance.out' , [])))
+			if(config('maintenance.enabled' , false ) && ! in_array($route, $out))
 			{
 				return static::$enabled = true;
 			}
