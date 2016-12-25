@@ -487,7 +487,6 @@ class Connector
 			array(
 				'Links',
 				'Http',
-				'Error',
 				'Request',
 				'Root'
 				),

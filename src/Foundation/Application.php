@@ -217,7 +217,6 @@ class Application
 		Template::run();
 		if(Component::isOn("faker")) Faker::ini();
 		Links::ini();
-		Errors::ini(self::$root);
 		License::ini(self::$page);
 		Lang::ini();
 		if($database && Component::isOn("database")) Database::ini();
