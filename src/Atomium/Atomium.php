@@ -56,7 +56,7 @@ class Atomium
     	//
     	$this->assign($data);
     	//
-    	$this->setTemplateDir($nest);
+    	$this->setTemplateDir($nest.'storage/framework/view/temaplte/atomium');
     	//
     	$this->store($this->compile());
     	//
