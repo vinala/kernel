@@ -79,6 +79,7 @@ class Views
 	*/
 	public function call( $name , $data = null , $nest = null)
 	{
+		
 		//Merge data
 		if( ! is_null($data))
 		{
