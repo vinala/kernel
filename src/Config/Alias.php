@@ -11,8 +11,23 @@ use Vinala\Kernel\Config\Exceptions\AliasedClassNotFoundException;
 */
 class Alias
 {
-	protected static $aliases;
-	//
+		/**
+	* List of aliases
+	*
+	* @var array 
+	*/
+	protected static $aliases = [] ;
+
+
+	/**
+	* Components classes
+	*
+	* @var array 
+	*/
+	protected static $components = [
+		'faker' => Vinala\Kernel\Resources\Faker::class,
+		'database' => Vinala\Kernel\Database\Database::class,
+	] ;
 
 	public static function ini()
 	{
@@ -35,7 +50,7 @@ class Alias
 		{
 			foreach (array_get(self::$aliases ,'kernel') as $key => $value) 
 			{
-				exception_if( ! class_exists($value) , AliasedClassNotFoundException::class , $value , 'kernel');
+				exception_if( (! class_exists($value) && in_array('$key', self::$components)) , AliasedClassNotFoundException::class , $value , 'kernel');
 
 				self::set($value,$key);
 			}
