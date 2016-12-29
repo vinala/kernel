@@ -12,7 +12,6 @@ class App
 			'project_url' => "\n\t|  Your website root link, you should put your \n\t| root link , by default we using Application::root \n\t| function to get the root link even if you \n\t| working on localhost", 
 			'html_title' => "\n\t|  Default HTML title",
 			'timezone' => "\n\t|  Here you should set your timezone after that \n\t| whenever you wanna get time, Vinala will give\n\t| you exact time for the timezone.\n\t| To get all of timezones supported in php \n\t| visite here : http://php.net/manual/en/timezones.php",
-			'routing_inexists' => "\n\t|  When HttpNotFoundException trown if unrouted \n\t| parameter was true it will be show to \n\t| exception else the framework will redirect\n\t| user to Error::r_404 route,",
 			'character_set' => "\n\t|  Default encodage when you using HTML::charset"
 			);
 		//
@@ -27,7 +26,6 @@ class App
 			'project_url' => "Project url", 
 			'html_title' => "HTML Default title",
 			'timezone' => "Timezone",
-			'routing_inexists' => "Routing inexists event",
 			'character_set' => "Default Character Set"
 			);
 		//
