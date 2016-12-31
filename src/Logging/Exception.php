@@ -29,7 +29,7 @@ class Exception extends E
 
 	function __construct($message = "" , $view = null , $code = 0 , $previous = NULL)
 	{
-		$this->view = $view;
+		$this->view = ! is_null($view) ? $view : config('error.regular');
 		$this->message = $message;
 	}
 
