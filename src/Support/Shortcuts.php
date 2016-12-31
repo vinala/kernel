@@ -576,12 +576,26 @@ if ( ! function_exists("array_except"))
 if ( ! function_exists("trans")) 
 {
 	/**
-	* get deeply index on array
+	* get lang value
 	*
 	* @param string $key
 	* @return string
 	*/
 	function trans( $key )
+	{
+		return Lang::get($key);
+	}	
+}
+
+if ( ! function_exists("translate")) 
+{
+	/**
+	* get lang value
+	*
+	* @param string $key
+	* @return string
+	*/
+	function translate( $key )
 	{
 		return Lang::get($key);
 	}	
