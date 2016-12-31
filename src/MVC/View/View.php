@@ -48,9 +48,7 @@ class View
 	*/
 	public static function show(Views $view)
 	{
-		$v = new Views;
-
-		return $v->show($view);
+		return $view->show($view);
 	}
 
 	/**
