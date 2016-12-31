@@ -5,7 +5,7 @@ namespace Vinala\Kernel\Translator\Exception;
 use Vinala\Kernel\Logging\Exception;
 
 /**
-* Directory not fount exception
+* Language key not found exception
 */
 class LanguageKeyNotFoundException extends Exception
 {
