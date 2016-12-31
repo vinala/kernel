@@ -2,11 +2,12 @@
 
 namespace Vinala\Kernel\Translator;
 
-use Vinala\Kernel\Translator\Exception\LanguageKeyNotFoundException;
 use Vinala\Kernel\Storage\Cookie;
 use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Filesystem\File;
 
+use Vinala\Kernel\Translator\Exception\LanguageKeyNotFoundException;
+use Vinala\Kernel\Translator\Exception\LanguageNotSupportedException;
 
 /**
 * Translator class
@@ -88,6 +89,8 @@ class Lang
 		self::getSupported();
 		
 		self::$lang = is_null($lang) ? self::detect() : $lang ;
+
+		exception_if( ! in_array(self::$lang, self::$supported) , LanguageNotSupportedException::class , self::$lang);
 		
 		self::load();
 	}
@@ -220,6 +223,8 @@ class Lang
 	*/
 	public static function set($lang)
 	{
+		exception_if( ! in_array($lang, self::$supported) , LanguageNotSupportedException::class , $lang);
+
 		Cookie::create(self::$cookieName,$lang,(60*24*7*30));
 		Session::put(self::$sessionName , $lang);
 		return true;
