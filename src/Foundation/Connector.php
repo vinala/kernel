@@ -610,6 +610,8 @@ class Connector
 			);
 		//
 		self::need(self::$path.'Translator/Exceptions/LanguageKeyNotFoundException.php');
+		self::need(self::$path.'Translator/Exceptions/LanguageNotSupportedException.php');
+		
 	}
 
 	/**
