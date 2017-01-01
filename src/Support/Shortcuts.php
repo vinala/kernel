@@ -408,6 +408,20 @@ if ( ! function_exists("exception"))
 	}	
 }
 
+if ( ! function_exists("log")) 
+{
+	/**
+	* shortcut to write in log file
+	*
+	* @param string $message
+	* @return null
+	*/
+	function log($message)
+	{
+		error_log($message);
+	}	
+}
+
 
 //--------------------------------------------------------
 // Array Shortcuts
