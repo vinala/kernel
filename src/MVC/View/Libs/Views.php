@@ -232,7 +232,7 @@ class Views
 	protected function atomium($file, $data , $nest = null)
 	{
 		$atomium = new Atomium;
-
+		
 		return $atomium->show($file, $data , $nest);
 	}
 
