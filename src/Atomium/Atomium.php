@@ -55,6 +55,8 @@ class Atomium
     	$this->setTemplate($file);
     	//
     	$this->assign($data);
+
+    	$nest = ! is_null($nest) ?: '../app/';
     	//
     	$this->setTemplateDir($nest.'storage/framework/view/template/atomium');
     	//
