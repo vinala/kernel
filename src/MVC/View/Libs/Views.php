@@ -231,9 +231,9 @@ class Views
 	*/
 	protected function atomium($file, $data , $nest = null)
 	{
-		$atomium = new Atomium;
-		
-		return $atomium->show($file, $data , $nest);
+		$atomium = new Atomium($nest);
+
+		return $atomium->show($file, $data);
 	}
 
 

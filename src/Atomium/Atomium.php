@@ -43,6 +43,17 @@ class Atomium
 	 * @var array
 	 */
     protected $values = array();
+
+    //--------------------------------------------------------
+    // Contructor
+    //--------------------------------------------------------
+
+    function __construct($nest)
+    {
+    	$nest = ! is_null($nest) ?: '../app/';
+    	
+    	$this->setTemplateDir($nest.'storage/framework/view/template/atomium');
+    }
   
 
   	//--------------------------------------------------------
@@ -60,7 +71,7 @@ class Atomium
         }
         else 
         {
-        	$this->TemplateDir = Application::$root."app/storage/framework/view/template/atomium";
+        	$this->TemplateDir = root()."app/storage/framework/view/template/atomium";
         }
     }
 
@@ -72,15 +83,11 @@ class Atomium
     * @param string $nest
     * @return null
     */
-    public function show($file, $data , $nest = null) 
+    public function show($file, $data) 
     {
     	$this->setTemplate($file);
     	//
     	$this->assign($data);
-
-    	$nest = ! is_null($nest) ?: '../app/';
-    	//
-    	$this->setTemplateDir($nest.'storage/framework/view/template/atomium');
     	//
     	$this->store($this->compile());
     	//
