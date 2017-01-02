@@ -198,7 +198,7 @@ class Application
 		Connector::run(false,$session);
 		// set version cookie for Wappalyzer
 		//
-		self::ini();
+		self::ini(true , true);
 		//
 		self::fetcher($routes);
 		//
@@ -208,7 +208,7 @@ class Application
 	/**
 	 * Init Framework classes
 	 */
-	protected static function ini($database = true)
+	protected static function ini($database = true , $test = false)
 	{
 		Alias::ini(self::$root);
 		Sys::ini();
@@ -218,7 +218,7 @@ class Application
 		if(Component::isOn("faker")) Faker::ini();
 		Links::ini();
 		License::ini(self::$page);
-		Lang::ini();
+		Lang::ini($test);
 		if($database && Component::isOn("database")) Database::ini();
 		Auth::ini();
 		Panel::run();

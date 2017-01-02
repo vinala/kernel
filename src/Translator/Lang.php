@@ -117,8 +117,13 @@ class Lang
 	*
 	* @return string
 	*/
-	public static function detect()
+	public static function detect( $test = false )
 	{
+		if($test)
+		{
+			return 'en';
+		}
+
 		$key = self::$sessionName;
 
 		$cookieName = self::cookieName($key);
