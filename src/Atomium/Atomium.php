@@ -12,26 +12,43 @@ use Vinala\Kernel\Atomium\Exception\AromiumCaptureNotFoundException;
 class Atomium
 {
 
+	//--------------------------------------------------------
+	// Properties
+	//--------------------------------------------------------
+
 	/**
 	 * Path were template stored
+	 *
+	 * @var string
 	 */
 	protected $TemplateDir;
 
 	/**
 	 * the reel template
+	 *
+	 * @var string
 	 */
 	protected $templateFile;
 
 	/**
 	 * template file
+	 *
+	 * @var string
 	 */
     protected $file;
 
     /**
 	 * template vars
+	 *
+	 * @var array
 	 */
     protected $values = array();
   
+
+  	//--------------------------------------------------------
+  	// Functions
+  	//--------------------------------------------------------
+
     /**
      * Set template directory
      */
@@ -48,8 +65,13 @@ class Atomium
     }
 
     /**
-     * Set View file
-     */
+    * show the template
+    *
+    * @param string $file
+    * @param array $data
+    * @param string $nest
+    * @return null
+    */
     public function show($file, $data , $nest = null) 
     {
     	$this->setTemplate($file);
