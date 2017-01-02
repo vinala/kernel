@@ -84,11 +84,11 @@ class Lang
 	* @param string $lang
 	* @return null
 	*/
-	public static function ini($lang = null)
+	public static function ini($test = null)
 	{
 		self::getSupported();
 		
-		self::$lang = is_null($lang) ? self::detect() : $lang ;
+		self::$lang = self::detect($test);
 
 		exception_if( ! in_array(self::$lang, self::$supported) , LanguageNotSupportedException::class , self::$lang);
 		
