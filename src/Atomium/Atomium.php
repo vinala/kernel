@@ -50,7 +50,7 @@ class Atomium
 
     function __construct($nest)
     {
-    	$nest = ! is_null($nest) ?: '../app/';
+    	$nest = ! is_null($nest) ? $nest : root().'app/';
     	
     	$this->setTemplateDir($nest.'storage/framework/view/template/atomium');
     }
