@@ -138,6 +138,7 @@ if ( !function_exists( 'statically' ) )
 	 * 
 	 * @param string $class
 	 * @param string $function
+	 * @param array $arguments
 	 * @return mixed
 	 */
 	function statically()
