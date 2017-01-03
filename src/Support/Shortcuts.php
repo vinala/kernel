@@ -125,12 +125,9 @@ if ( !function_exists( 'instance' ) )
 
 		$class = array_shift($args);
 
-		if(class_exists($class))
-		{
-			return (new ReflectionClass($class))->newInstanceArgs($args);
-		}
+		exception_if( ! class_exists($class) , LogicException::class , "Class '$class' not found");
 
-		else throw new LogicException("Class '$class' not found");
+		return (new ReflectionClass($class))->newInstanceArgs($args);
 	}
 }
 
