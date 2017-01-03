@@ -50,7 +50,7 @@ class Alias
 		{
 			foreach (array_get(self::$aliases ,'kernel') as $key => $value) 
 			{
-				exception_if( (! class_exists($value) && in_array('$key', self::$components)) , AliasedClassNotFoundException::class , $value , 'kernel');
+				exception_if( (! class_exists($value) && in_array($key, self::$components)) , AliasedClassNotFoundException::class , $value , 'kernel');
 
 				self::set($value,$key);
 			}

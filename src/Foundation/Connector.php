@@ -488,7 +488,6 @@ class Connector
 				'Links',
 				'Http',
 				'Request',
-				'Root'
 				),
 			self::$path.'Http/'
 			);
