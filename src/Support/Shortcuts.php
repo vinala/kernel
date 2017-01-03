@@ -134,6 +134,31 @@ if ( !function_exists( 'instance' ) )
 	}
 }
 
+if ( !function_exists( 'statically' ) ) 
+{
+	/**
+	 * execute static function
+	 * 
+	 * @param string $class
+	 * @param string $function
+	 * @return mixed
+	 */
+	function statically()
+	{
+		$args = func_get_args();
+
+		$class = array_shift($args);
+		$function = array_shift($args);
+
+		exception_if( ! class_exists($class) , 'LogicException' , "Class '$class' not found");
+
+		exception_if( ! method_exists($class , $function) , 'LogicException' , "Fucntion '$function' not found in $class");
+
+		return call_user_func_array([$class , $function], $args);
+	}
+}
+
+
 if ( ! function_exists("validate")) 
 {
 	/**
