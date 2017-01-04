@@ -7,26 +7,24 @@ class Maintenance
 	protected static function MaintDoc($index)
 	{
 		$doc = array(
-			'activate' => "", 
-			'Message' => "",
-			'background' => "",
-			'out' => ""
+			'enabled' => 'To enabled maintenance', 
+			'out' => "List of routes that will not stopped by maintenance\n\t| middlware",
+			'view' => "The view that will be displayed if maintenance\n\t| is activated\n\t| ATTENTION : the view should not be in atomium and not\n\t| be using any of framework cubes or components",
 			);
 		//
-		return $doc[$index]."\n\t*/";
+		return "\t| ".$doc[$index]."\n\t|\n\t**/";
 	}
 
 	protected static function MaintTitles($index)
 	{
 		$titles = array(
-			'activate' => "App Maintenance", 
-			'Message' => "Maintenance Message",
-			'background' => "Maintenance background",
-			'out' => "Out Maintenance Routes",
+			'enabled' => "App Maintenance", 
+			'out' => "Routes out of maintenance",
+			'view' => "Maintenance view",
 			);
 		//
 		$sep = "\n\t|----------------------------------------------------------";
-		return "\n\n\t/*".$sep."\n\t| ".$titles[$index].$sep;
+		return "\n\n\t/*".$sep."\n\t| ".$titles[$index].$sep."\n";
 	}
 
 	protected static function MaintRow($index,$param)
@@ -34,16 +32,15 @@ class Maintenance
 		$title = self::MaintTitles($index);
 		$doc = self::MaintDoc($index);
 		//
-		return $title.$doc."\n\n\t$param\n";
+		return $title.$doc."\n\t$param\n";
 	}
 
-	public static function set($maintenance)
+	public static function set($maintenance , $out =[] , $view = 'errors.maintenance')
 	{
-		$activate = self::MaintRow("activate","'activate' => $maintenance, ");
-		$Message = self::MaintRow("Message","'msg'=>\"Le site web est en cours de maintenance...\",");
-		$background = self::MaintRow("background","'bg' => '#d6003e',");
-		$out = self::MaintRow("out","'outRoutes' => array(\n\t\tConfig::get('panel.route'),\n\t),");
+		$enabled = self::MaintRow("enabled","'enabled' => $maintenance, ");
+		$out = self::MaintRow("out","'out' => [\n\t\t//\n\t],");
+		$view = self::MaintRow("view","'view' => '$view',");
 		//
-		return "<?php \nuse Vinala\Kernel\Config\Config;\n\nreturn array(\n\t".$activate.$Message.$background.$out."\n);";
+		return "<?php\n\n\nreturn [".$enabled.$out.$view."\n];";
 	}
 }
