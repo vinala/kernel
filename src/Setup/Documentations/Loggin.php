@@ -31,7 +31,7 @@ class Loggin
 		$title = self::LogginTitles($index);
 		$doc = self::LogginDoc($index);
 		//
-		return $title.$doc."\n\n\t$param\n";
+		return $title.$doc."\n\t$param\n";
 	}
 
 	public static function set($loggin , $log ='storage/log/vinala.log')
@@ -40,6 +40,6 @@ class Loggin
 		$debug = self::logginRow("debug","'debug' => $loggin ,");
 		$error_log = self::logginRow("error_log","'log' => '$log' ,");
 		//
-		return "<?php\n\nreturn [\n\n\t".$debug.$error_log."\n\n];";
+		return "<?php\n\nreturn [".$debug.$error_log."\n\n];";
 	}
 }
