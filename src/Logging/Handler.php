@@ -63,7 +63,6 @@ class Handler
 
 	protected static function setPrettyParams()
 	{
-		self::$page->setPageTitle(Config::get('loggin.msg'));
 		self::$page->setEditor("sublime"); 
 	}
 
