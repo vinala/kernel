@@ -232,6 +232,9 @@ class Lang
 
 		Cookie::create(self::$cookieName,$lang,(60*24*7*30));
 		Session::put(self::$sessionName , $lang);
+
+		self::change($lang);
+
 		return true;
 	}
 
@@ -258,6 +261,25 @@ class Lang
 	public static function setDefault()
 	{
 		return self::set(config('lang.default'));
+	}
+	
+
+	/**
+	* Use a language temporarily
+	*
+	* @param string $lang
+	* @return true
+	*/
+	public static function change($lang)
+	{
+		exception_if( ! in_array($lang, self::$supported) , LanguageNotSupportedException::class , $lang);
+
+		self::$lang = $lang;
+		self::$words = [];
+
+		self::load();
+		
+		return true;
 	}
 	
 }
