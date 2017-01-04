@@ -128,7 +128,7 @@ class Alias
 	*/
 	protected static function fileFormat($content)
 	{
-		$container = "<?php\n\n\nreturn [\n";
+		$container = "<?php\n\nreturn [\n";
 
 		$container .= $content;
 
