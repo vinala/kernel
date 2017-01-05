@@ -9,7 +9,7 @@ use App\Http\Filters as appFilters;
 */
 class Middleware
 {
-	
+
 	/**
 	* Run Middleware
 	*
@@ -31,6 +31,17 @@ class Middleware
 	protected static function call($name)
 	{
 		return appFilters::RoutesMiddleware($name);
+	}
+	
+
+	/**
+	* Pass the middleware filter
+	*
+	* @return string
+	*/
+	public function next()
+	{
+		return 'DO NOTHING';
 	}
 	
 	
