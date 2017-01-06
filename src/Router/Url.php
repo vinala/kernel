@@ -61,6 +61,27 @@ class Url
 
         return filter_var($path, FILTER_VALIDATE_URL) !== false;
 	}
+
+
+	/**
+	* Get the app rooted url
+	*
+	* @return string
+	*/
+	public static function root($secure = null)
+	{
+		$framework = '/public/index.php';
+		$server = request('PHP_SELF' , '' , 'server');
+		$scheme = (is_null($secure) ? request('REQUEST_SCHEME' , '' , 'server') : ($secure ? 'https' : 'http')).'://';
+		$serverName = request('SERVER_NAME' , '' , 'server');
+
+		$parts = explode($framework, $server);
+
+		$root = $parts[0].'/';
+
+		return $scheme.$serverName.$root;
+	}
+	
 	
 	
 
