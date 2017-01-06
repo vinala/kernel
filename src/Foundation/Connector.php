@@ -534,6 +534,7 @@ class Connector
 		self::call(
 			array(
 				'MiddlewareNotFoundException',
+				'MiddlewareWallException',
 				),
 			self::$path.'Http/Middleware/Exceptions/'
 			);
