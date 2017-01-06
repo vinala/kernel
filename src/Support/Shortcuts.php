@@ -281,6 +281,19 @@ if ( ! function_exists("call"))
 	}	
 }
 
+if ( ! function_exists("go")) 
+{
+	/**
+	* shortcut for Middleware::next()
+	*
+	* @return string
+	*/
+	function go()
+	{
+		return 'DO NOTHING';
+	}	
+}
+
 //--------------------------------------------------------
 // DateTime
 //--------------------------------------------------------
