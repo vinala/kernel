@@ -70,6 +70,19 @@ class Redirect
 	{
 		return self::getInstance()->to($url , $extra , $secure);
 	}
+
+
+	/**
+	* Redirect to route
+	*
+	* @param string $route
+	* @param bool $secure
+	* @return mixed
+	*/
+	public static function route($route , $secure = null)
+	{
+		return self::getInstance()->route($route , $secure );
+	}
 	
 	
 
