@@ -48,6 +48,8 @@ class Url
 	{
 		$url = request('REQUEST_URI' , '' , 'server');
 		$root = request('DOCUMENT_ROOT' , '' , 'server');
+		$scheme = request('REQUEST_SCHEME' , '' , 'server');
+		$server = request('SERVER_NAME' , '' , 'server');
 
 		$url = substr($url, 1);
 
@@ -63,9 +65,13 @@ class Url
 			}
 			else
 			{
-				return $folder;
+				break;
 			}
 		}
+
+		return $scheme.'://'.$server.'/'.$folder;
 	}
 	
 }
+
+
