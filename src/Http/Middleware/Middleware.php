@@ -22,6 +22,15 @@ class Middleware
 	* @var array 
 	*/
 	protected static $filters = [] ;
+
+
+	/**
+	* the password of middleware surface to pass the wall
+	*
+	* @var string 
+	*/
+	protected static $pass = 'DO_NOTHING' ;
+	
 	
 
 	//--------------------------------------------------------
@@ -70,7 +79,7 @@ class Middleware
 	*/
 	public static function next()
 	{
-		return 'DO NOTHING';
+		return self::$pass;
 	}
 
 
