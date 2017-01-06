@@ -312,9 +312,10 @@ class Routes
 			if(!empty($filtre))
 			{
 				self::callFilter($filtre,$ok,$falseok);
-			}
+			}			
 		}
-		// self::$_request[$key] => $filtre
+		
+
 		else if(is_array($filtre))
 		{
 			if(!empty($filtre))
@@ -327,7 +328,10 @@ class Routes
 		if($ok) { self::runRoute($one,$params); }
 
 		//if the filter is false
-		else { $ok=self::falseFilter($falseok); }
+		else 
+		{ 
+			$ok=self::falseFilter($falseok); 
+		}
 		//
 		self::callAfter();
 		$ok=1;
@@ -454,7 +458,7 @@ class Routes
 		return self::$filters[$_name_];
 	}
 
-	protected static function callFilter($filtre,&$ok,&$falseok)
+	protected static function callFilter($filtre,&$result,&$falseok)
 	{
 		$middleware = Middleware::get($filtre);
 
@@ -462,9 +466,9 @@ class Routes
 
 		$result = $middleware->handle(new Request);
 
-		exception_if(($result != true) || ($result != pass()) , MiddlewareWallException::class , get_class($middleware));
-
 		if(!$result) { $falseok=$filtre;  }
+
+		exception_if( ! $result , MiddlewareWallException::class , get_class($middleware));
 	}
 
 	protected static function callFilters($filtre,&$ok,&$falseok)
