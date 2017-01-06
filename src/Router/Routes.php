@@ -21,6 +21,7 @@ use Vinala\Kernel\Objects\Strings;
 use Vinala\Kernel\MVC\Views;
 use Vinala\Kernel\MVC\View;
 use Vinala\Kernel\Http\Middleware\Middleware;
+use Vinala\Kernel\Http\Middleware\Exceptions\MiddlewareWallException;
 
 
 /**
@@ -461,11 +462,9 @@ class Routes
 
 		$result = $middleware->handle(new Request);
 
-		// d($result);
+		exception_if(($result != true) || ($result != pass()) , MiddlewareWallException::class , get_class($middleware));
 
 		if(!$result) { $falseok=$filtre;  }
-
-		return null;
 	}
 
 	protected static function callFilters($filtre,&$ok,&$falseok)
