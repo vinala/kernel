@@ -1,0 +1,58 @@
+<?php 
+
+namespace Vinala\Kernel\Console\Commands;
+
+
+use Vinala\Kernel\Console\Command\Commands;
+use Vinala\Kernel\Process\middleware;
+
+
+class NewMiddlewareCommand extends Commands
+{
+
+    /**
+     * The key of the console command.
+     *
+     * @var string
+     */
+    protected $key;
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    public $description;
+
+    /**
+     * Configure the command
+     */ 
+    public function set()
+    {
+        $this->key = config('lumos.new_middleware').
+        ' {name : what\'s the middleware name ?}';
+
+        $this->description = 'Create new middleware';
+    }
+
+    /**
+     * Handle the command
+     */
+    public function handle()
+    {
+        $name = ucfirst($this->argument("name"));
+
+        $process = Middleware::create($name);
+
+        $this->show($process);
+    }
+
+    /**
+     * Format the message to show
+    */
+    public function show($process)
+    {
+        if($process) $this->info("\nThe middleware was created\n");
+        else $this->error("\nThe middleware is already existe\n");
+    }
+}
