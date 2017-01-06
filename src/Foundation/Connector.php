@@ -935,6 +935,7 @@ class Connector
 				'Exception',
 				'Events',
 				'Alias',
+				'Middleware',
 				),
 			self::$path.'Processes/'
 			);
