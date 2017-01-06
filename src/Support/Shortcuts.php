@@ -12,6 +12,7 @@ use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Foundation\Connector;
 use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Cubes\Cube;
+use Vinala\Kernel\Http\Redirect\Redirect;
 
 
 
@@ -725,5 +726,38 @@ if ( ! function_exists("back"))
 	function back()
 	{
 		return cube('redirect')->back();
+	}	
+}
+
+
+if ( ! function_exists("redirect")) 
+{
+	/**
+	* Redirect to some url
+	*
+	* @return mixed
+	*/
+	function redirect($url , $extra = [] , $secure = null)
+	{
+		if(is_array($url))
+		{	
+			foreach ($url as $key => $value) 
+			{
+				if($key == 'route')
+				{
+					return Redirect::route($value , $secure);
+				}
+				elseif($key == 'url')
+				{
+					return Redirect::to($value , $extra , $secure);
+				}
+				break;
+			}
+		}
+		elseif(is_string($url))
+		{
+			return Redirect::to($url , $extra , $secure);
+		}
+		
 	}	
 }
