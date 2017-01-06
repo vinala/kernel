@@ -143,6 +143,22 @@ class Redirector
 	{
 		return Url::isValidUrl($url);
 	}
+
+
+	/**
+	* Redirect to route
+	*
+	* @param string $route
+	* @param bool $secure
+	* @return mixed
+	*/
+	public function route($route , $secure = null)
+	{
+		$path = Url::root();
+
+		return self::locate($path.$route , $secure);
+	}
+	
 	
 	
 	
