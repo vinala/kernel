@@ -46,7 +46,8 @@ class Redirector
 	*/
 	protected function locate($url)
 	{
-		return header('Location: '.$url);
+		header('Location: '.$url);
+		die();
 	}
 	
 
