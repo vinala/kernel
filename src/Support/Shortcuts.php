@@ -13,6 +13,7 @@ use Vinala\Kernel\Foundation\Connector;
 use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Cubes\Cube;
 use Vinala\Kernel\Http\Redirect\Redirect;
+use Vinala\Kernel\Http\Middleware\Middleware;
 
 
 
@@ -281,16 +282,16 @@ if ( ! function_exists("call"))
 	}	
 }
 
-if ( ! function_exists("go")) 
+if ( ! function_exists("pass")) 
 {
 	/**
 	* shortcut for Middleware::next()
 	*
 	* @return string
 	*/
-	function go()
+	function pass()
 	{
-		return 'DO NOTHING';
+		return Middleware::next();
 	}	
 }
 
