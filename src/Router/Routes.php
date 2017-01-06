@@ -20,6 +20,7 @@ use Vinala\Panel\Model;
 use Vinala\Kernel\Objects\Strings;
 use Vinala\Kernel\MVC\Views;
 use Vinala\Kernel\MVC\View;
+use Vinala\Kernel\Http\Middleware\Middleware;
 
 
 /**
@@ -216,7 +217,6 @@ class Routes
 		//
 		foreach (self::$requests as $value) {
 			$requestsUrl=$value["url"];
-			//var_dump($value);
 			//
 			if(preg_match("#^$requestsUrl$#" , $currentUrl , $params))
 			{
@@ -335,12 +335,20 @@ class Routes
 
 	protected static function callBefore()
 	{
-		call_user_func(Application::$Callbacks['before']);
+		// call_user_func(Application::$Callbacks['before']);
+
+		/**
+		* Working on...
+		**/
 	}
 
 	protected static function callAfter()
 	{
-		call_user_func(Application::$Callbacks['after']);
+		// call_user_func(Application::$Callbacks['after']);
+
+		/**
+		* Working on...
+		**/
 	}
 
 	protected static function SplitSlash($link)
@@ -433,7 +441,6 @@ class Routes
 			'falsecall' => $_falsecall_
 			 );
 		self::$filters[$_name_]=$r;
-		//if(!is_null($falsecall)) self::$_falsecall[$filter]=$falsecall;
 	}
 
 	public static function filter($_name_,$_callback_,$_falsecall_=null)
@@ -448,9 +455,17 @@ class Routes
 
 	protected static function callFilter($filtre,&$ok,&$falseok)
 	{
-		$call=self::$filters[$filtre];
-		$ok=call_user_func($call['callback']);
-		if(!$ok) { $falseok=$filtre;  }
+		$middleware = Middleware::get($filtre);
+
+		$middleware = instance($middleware);
+
+		$result = $middleware->handle(new Request);
+
+		// d($result);
+
+		if(!$result) { $falseok=$filtre;  }
+
+		return null;
 	}
 
 	protected static function callFilters($filtre,&$ok,&$falseok)
