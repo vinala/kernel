@@ -3,12 +3,41 @@
 namespace Vinala\Kernel\Http\Middleware;
 
 use App\Http\Filters as appFilters;
+use Vinala\Kernel\Http\Middleware\Exceptions\MiddlewareNotFoundException;
 
 /**
 * Middle ware class
 */
 class Middleware
 {
+
+	//--------------------------------------------------------
+	// Proprties
+	//--------------------------------------------------------	
+
+
+	/**
+	* The list of all filters
+	*
+	* @var array 
+	*/
+	protected static $filters = [] ;
+	
+
+	//--------------------------------------------------------
+	// Functions
+	//--------------------------------------------------------
+
+	/**
+	* Initiate the middleware cube
+	*
+	* @return null
+	*/
+	public static function ini()
+	{
+		self::load();
+	}
+	
 
 	/**
 	* Run Middleware
@@ -39,10 +68,46 @@ class Middleware
 	*
 	* @return string
 	*/
-	public function next()
+	public static function next()
 	{
 		return 'DO NOTHING';
 	}
+
+
+	/**
+	* Set the list of filters used by middleware
+	*
+	* @return array
+	*/
+	protected static function load()
+	{
+		need(root().'app/http/Filter.php');
+		
+		$filter = instance(\App\Http\Filter::class);
+
+		self::$filters['app'] = $filter::$middleware;
+		self::$filters['groups'] = $filter::$groupsMiddleware;
+		self::$filters['route'] = $filter::$routeMiddleware;
+
+		return self::$filters;
+	}
+
+
+	/**
+	* Get the Middleware by filter
+	*
+	* @param string $name
+	* @param string $key
+	* @return string
+	*/
+	public static function get($name , $key = 'route')
+	{
+		exception_if( ! array_has(self::$filters , $key.'.'.$name) , MiddlewareNotFoundException::class , $name);
+
+		return array_get(self::$filters , $key.'.'.$name);
+	}
+	
+	
 	
 	
 }
