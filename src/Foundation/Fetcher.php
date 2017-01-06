@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Foundation;
 use Vinala\Kernel\Router\Routes;
 use Vinala\Kernel\Events\Event;
 use Vinala\Kernel\Config\Alias;
+use Vinala\Kernel\Http\Middleware\Middleware;
 
 /**
 * this class help the framework to get all
@@ -119,10 +120,15 @@ class Fetcher
 
 	/**
 	 * Require files of Filters
+	 *
+	 * @deprecated 3.3.0
 	 */
 	protected static function filtes()
 	{
-		Connector::need(self::$appPath.'http/Filters.php');
+		/**
+		* The filters fetches are transported
+		* to router connector calls
+		**/
 	}
 
 	/**
@@ -134,12 +140,30 @@ class Fetcher
 	}
 
 	/**
+	* Require and call middleware classes
+	*
+	* @return null
+	*/
+	protected static function middleware()
+	{
+		foreach (self::fetch("http/middleware") as $file) 
+		{
+			Connector::need($file);
+		}
+					
+		Middleware::ini();
+	}
+	
+
+	/**
 	 * Require files of Routes
 	 */
 	protected static function routes($routes)
 	{
 		if($routes)
 			{
+				self::middleware();
+
 				Connector::need(self::$appPath.'http/Routes.php');
 				Routes::run();
 			}
