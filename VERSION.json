@@ -1,5 +1,5 @@
 {
-	"verion" : "3.3.8",
+	"version" : "3.3.8",
 	"tag" : "",
 	"stat" : "alpha",
 	"features" : [
@@ -8,5 +8,5 @@
 	"fixes" : [
 
 	],
-	"sha" : ""
+	"sha" : "7fec2866dcd6f9e8ba8702cd0f9765dce43cd704"
 }
