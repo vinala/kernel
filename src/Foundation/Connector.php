@@ -56,6 +56,7 @@ class Connector
 		Connector::cubes();
 		//
 		Connector::storage($session);
+		Connector::collections();
 		Connector::string();
 		Connector::object();
 		Connector::access();
@@ -280,6 +281,22 @@ class Connector
 			self::$path.'Logging/'
 			);
 	}
+
+	/**
+	* A call to Vinala\Kernel\collections namesapce classes
+	*
+	* @return null
+	*/
+	public static function collections()
+	{
+		self::call(
+			array(
+				'JSON',
+				),
+			self::$path.'Collections/'
+			);
+	}
+	
 
 	/**
 	 * string calls
