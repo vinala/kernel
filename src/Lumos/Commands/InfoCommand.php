@@ -6,6 +6,7 @@ namespace Vinala\Kernel\Console\Commands;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Foundation\Version;
 
 
 
@@ -40,20 +41,24 @@ class InfoCommand extends Commands
     public function show()
     {
         $this->line("");
-        $this->line(Config::get("app.project"));
-        $this->line("by ".Config::get("app.owner"));
+        if( ! empty(config('app.project'))) $this->line(config("app.project"));
+        if( ! empty(config('app.owner'))) $this->line('by '.config("app.owner"));
+        $this->line("\n\n");
         $this->line("***********");
         $this->line("Based on : ");
-        $version = Application::consoleVersion();
-        $this->question("Lighty ",true);
+        $version = Application::getVersion()->console();
+        $this->question("Vinala ",true);
         $this->line("v$version PHP Framework");
-        $this->line(Application::kernelVersion());
+        $this->line("\n");
+        $this->line(Application::getVersion()->kernel());
+        $this->line("\n");
         $this->write("created by Youssef Had (");
         $this->question("youssefhad2@gmail.com - www.facebook.com/yussef.had",true);
         $this->line(")");
         $this->write("Website ");
-        $this->question("www.gitlab.com/lighty/framework");
+        $this->question("www.github.com/vinala/vinala");
         $this->line("");
     }
 }
+
 
