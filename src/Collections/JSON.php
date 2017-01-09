@@ -27,9 +27,9 @@ class JSON
 	* @param bool $assoc
 	* @return mixed
 	*/
-	public static function decode($string , $assoc = true)
+	public static function decode($string , $assoc = false)
 	{
-		return json_decode($string , $assoc);
+		return json_decode($string , ! $assoc);
 	}
 
 
