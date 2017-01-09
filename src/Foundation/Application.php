@@ -22,8 +22,10 @@ use Vinala\Kernel\Logging\Log;
 use Vinala\Kernel\Objects\DateTime;
 use Vinala\Panel;
 use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Filesystem\File;
 use Vinala\Kernel\Plugins\Plugins;
 use Vinala\Kernel\Storage\Cookie;
+use Vinala\Kernel\Collections\JSON;
 
 
 class Application
@@ -55,37 +57,39 @@ class Application
 
 
 
+	/**
+	* The framework version info
+	*
+	* @var array 
+	*/
+	protected static $version = null ;
+	
 
-	public static function version()
-	{
-		$version=(new Filesystem)->get(self::$root."version.md");
-		return "Lighty v$version PHP Framework";
-	}
 
-	public static function consoleVersion()
-	{
-		return (new Filesystem)->get(self::$root."version.md");
-	}
 
-	public static function fullVersion()
-	{
-		return (new Filesystem)->get(self::$root."version.md");
-	}
+	//--------------------------------------------------------
+	// Functions
+	//--------------------------------------------------------
 
-	public static function kernelVersion()
+
+	/**
+	* Set the framework version
+	*
+	* @return array
+	*/
+	public static function setVersion()
 	{
-		$kernel = "vendor/vinala/kernel/";
-		$version=(new Filesystem)->get(self::$root.$kernel."version.md");
-		return "Lighty Kernel v".$version;
+		self::$version = instance(Version::class);
 	}
 
 	/**
-	 * Set Lighty version cookie
-	 */
-	public static function setVersionCookie()
+	* Get the framework version
+	*
+	* @return array
+	*/
+	public static function getVersion()
 	{
-		$version = (new Filesystem)->get(self::$root."version.md");
-		Cookie::create("lighty_version", $version,3);
+		return self::$version;	
 	}
 
 	protected static function callConnector($test = false)
@@ -143,8 +147,9 @@ class Application
 		// call the connector and run it
 		self::callConnector();
 		Connector::run(false,$session);
+		self::setVersion();
 		// set version cookie for Wappalyzer
-		self::setVersionCookie();
+		self::$version->cookie();
 		//
 		self::setSHA();
 		//
@@ -175,6 +180,8 @@ class Application
 		// call the connector and run it
 		self::consoleConnector();
 		Connector::run(true); 
+
+		self::setVersion();
 		//
 		self::ini(false);
 		//
@@ -189,13 +196,16 @@ class Application
 	public static function runTest($root="../",$routes=true,$session=true)
 	{
 		self::setScreen();
-		self::setRoot($root);
+		self::setRoot($root);		
 		//
 		self::$isTest = true;
 
 		// call the connector and run it
 		self::callConnector();
 		Connector::run(false,$session);
+
+		self::setVersion();
+
 		// set version cookie for Wappalyzer
 		//
 		self::ini(true , true);
