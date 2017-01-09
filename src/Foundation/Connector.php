@@ -34,6 +34,10 @@ class Connector
 	{
 		if( ! $lumos) Connector::ini();
 		else Connector::inilumos();
+
+		// Version
+		Connector::version();
+
 		//**/
 		Connector::loggin();
 		Connector::input();
@@ -99,6 +103,22 @@ class Connector
 		self::$path = $test ? "src/" : Application::$root."vendor/vinala/kernel/src/";
 		return self::$path;
 	}
+
+	/**
+	* Call the Vinala\Kernel\foundation\Version
+	*
+	* @return null
+	*/
+	public static function version()
+	{
+		self::call(
+			array(
+				'Version'
+				),
+			self::$path.'Foundation/'
+			);
+	}
+	
 
 	/**
 	 * Init Connector class
