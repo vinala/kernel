@@ -1,5 +1,6 @@
 <?php 
 	use Vinala\Kernel\Translator\Lang;
+	use Vinala\Kernel\Foundation\Application as App;
 ?>
 
 <div class="bg" id="bg"></div>
@@ -281,7 +282,7 @@
 				echo Lang::get('welcome');
 				//
 				//if(Base::full(Config::get('app.owner'))) 
-						echo " <span id='dev_nom'>".Config::get('app.owner')."</span>";
+						echo " <span id='dev_nom'>".config('app.owner')."</span>";
 			?>
 		</div>
 	</div>
@@ -301,11 +302,11 @@
 		
 		<div class="final_link_version" id="bottom_panel_2" style="display:none">
 			<a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/framework/blob/dev/changes.md">
-				<?php echo "v".App::fullVersion(); ?>
+				<?php echo "v".App::full(); ?>
 			</a>
 		</div>
 		<div class="final_link_panel" id="bottom_panel" style="display:none">
-			<a id="fst_panel" href="<?php echo Config::get("panel.route"); ?>">
+			<a id="fst_panel" href="<?php echo config("panel.route"); ?>">
 				<div class="btn hello_button" id="login">
 					Vinala Panel
 				</div>
