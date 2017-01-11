@@ -302,7 +302,7 @@
 		
 		<div class="final_link_version" id="bottom_panel_2" style="display:none">
 			<a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/framework/blob/dev/changes.md">
-				<?php echo "v".App::full(); ?>
+				<?php echo "v".App::getVersion()->full(); ?>
 			</a>
 		</div>
 		<div class="final_link_panel" id="bottom_panel" style="display:none">
