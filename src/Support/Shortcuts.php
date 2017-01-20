@@ -36,6 +36,20 @@ if ( ! function_exists("root"))
 	}	
 }
 
+if ( ! function_exists("check")) 
+{
+	/**
+	* check if given argument is not empty or null
+	*
+	* @param mixed $argument
+	* @return bool
+	*/
+	function check($argument)
+	{
+		return (isset($argument) && !empty($argument));
+	}	
+}
+
 if ( ! function_exists("path")) 
 {
 	/**
