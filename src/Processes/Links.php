@@ -32,9 +32,8 @@ class Links
 	public static function set($name)
 	{
 		$txt = "<?php\n\n";
-		$txt.="/*\n\tlinks of ".$name."\n*/\n\n";
-		$txt .= "return array(\n\t'link_name_1' => 'link_value_1',\n\t'link_name_2' => 'link_value_2'\n);";
-		$txt .= "\n\n?>";
+		$txt.="/**\n* links of ".$name."\n*\n* @var array \n*/\n";
+		$txt .= "return [\n\t//\n];";
 
 		return $txt;
 	}
@@ -44,7 +43,7 @@ class Links
 	*/
 	public static function ListAll()
 	{
-		$links = glob(Application::$root."app/links/*.php");
+		$links = glob(roo()."app/links/*.php");
 		//
 		return $links;
 	}
