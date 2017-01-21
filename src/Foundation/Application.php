@@ -10,7 +10,7 @@ use Vinala\Kernel\Access\Url;
 use Vinala\Kernel\Access\Path;
 use Vinala\Kernel\MVC\View\Template;
 use Vinala\Kernel\Resources\Faker;
-use Vinala\Kernel\Http\Links;
+use Vinala\Kernel\Http\Links\Link;
 use Vinala\Kernel\Http\Errors;
 use Vinala\Kernel\Security\License;
 use Vinala\Kernel\Translator\Lang;
@@ -226,7 +226,7 @@ class Application
 		Path::ini();
 		Template::run();
 		if(Component::isOn("faker")) Faker::ini();
-		Links::ini();
+		Link::ini();
 		License::ini(self::$page);
 		Lang::ini($test);
 		if($database && Component::isOn("database")) Database::ini();
