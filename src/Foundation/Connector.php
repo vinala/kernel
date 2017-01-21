@@ -522,16 +522,41 @@ class Connector
 	{
 		self::call(
 			array(
-				'Links',
 				'Http',
 				'Request',
 				),
 			self::$path.'Http/'
 			);
 
+		self::links();
 		self::redirect();
 		self::middleware();
 	}
+
+	/**
+	* Call the links surface
+	*
+	* @return null
+	*/
+	public static function links()
+	{
+		//Class calls
+		self::call(
+			array(
+				'Link',
+				),
+			self::$path.'Http/Links/'
+			);
+
+		//Exceptions calls
+		self::call(
+			array(
+				'LinkKeyNotFoundException',
+				),
+			self::$path.'Http/Links/Exceptions/'
+			);
+	}
+	
 
 	/**
 	* Redirect calls
