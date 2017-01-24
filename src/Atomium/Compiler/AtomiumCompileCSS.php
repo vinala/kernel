@@ -14,6 +14,6 @@ class AtomiumCompileCSS
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileInstructions::run($script, "@css", ";", "<?php Libs::css" ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@css", ";", "<?php Assets::css" ,"; ?>");
 	}
 }

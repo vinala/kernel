@@ -14,6 +14,6 @@ class AtomiumCompileJS
 	 */
 	public static function run($script)
 	{
-		return AtomiumCompileInstructions::run($script, "@js", ";", "<?php Libs::js" ,"; ?>");
+		return AtomiumCompileInstructions::run($script, "@js", ";", "<?php Assets::js" ,"; ?>");
 	}
 }
