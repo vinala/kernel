@@ -173,7 +173,7 @@ class Compiler
 	protected static function compilEchoQuota()
 	{
 		self::replace('{{ "', '<?php echo htmlentities("');
-		self::replace('" }}', '"); ?>\n');
+		self::replace('" }}', '"); ?>'."\n");
 	}
 
 	/**
