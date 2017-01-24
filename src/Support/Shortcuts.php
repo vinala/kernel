@@ -227,7 +227,7 @@ if ( !function_exists( 'trace' ) ) {
 }
 
 //--------------------------------------------------------
-// Routing
+// HTTP
 //--------------------------------------------------------
 
 
@@ -309,6 +309,21 @@ if ( ! function_exists("pass"))
 	}	
 }
 
+if ( ! function_exists("request")) 
+{
+	/**
+	* get Http vars
+	*
+	* @param string $key
+	* @param string $default
+	* @return string
+	*/
+	function request( $key , $default = null , $type = "request")
+	{
+		return Input::get($key , $default , $type);
+	}	
+}
+
 //--------------------------------------------------------
 // DateTime
 //--------------------------------------------------------
@@ -326,6 +341,11 @@ if ( ! function_exists("now"))
 		return DateTime::current();
 	}	
 }
+
+
+//--------------------------------------------------------
+// Screen shortcuts
+//--------------------------------------------------------
 
 
 if ( ! function_exists("clean")) 
@@ -725,20 +745,6 @@ if ( ! function_exists("str_contains"))
 	}	
 }
 
-if ( ! function_exists("request")) 
-{
-	/**
-	* get Http vars
-	*
-	* @param string $key
-	* @param string $default
-	* @return string
-	*/
-	function request( $key , $default = null , $type = "request")
-	{
-		return Input::get($key , $default , $type);
-	}	
-}
 
 //--------------------------------------------------------
 // Redirect
