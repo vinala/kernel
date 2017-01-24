@@ -2,7 +2,7 @@
 <html>
 	<head>
 	<?php 
-		use Vinala\Kernel\Resources\Libs;
+		use Vinala\Kernel\Resources\Assets;
 		use Vinala\Kernel\HyperText\Html;
 		use Vinala\Kernel\Access\Path;
 		use Vinala\Kernel\Config\Config;
@@ -10,15 +10,15 @@
 		use Vinala\Kernel\Foundation\Application;
 		use Vinala\Kernel\Foundation\Connector;
 		//
-		Libs::css("app/resources/library/bootstrap-3.3.1.min.css",false);
-		Libs::css("app/resources/library/bootstrap-theme-3.3.1.min.css",false);
-		Libs::js("app/resources/library/jquery-1.11.3.min.js",false);
+		Assets::css("bootstrap");
+		Assets::css("bootstrap-theme");
+		Assets::js("jquery");
 		//
 		Html::charset("utf-8"); 
 		Html::title();
 		Html::favicon(Path::$public."/favicon.ico");
-		Libs::css("vendor/vinala/kernel/src/Setup/Assets/css/hello.css",false);
-		Libs::js("vendor/vinala/kernel/src/Setup/Assets/js/hello.js",false);
+		Assets::css("vendor/vinala/kernel/src/Setup/Assets/css/hello.css",false);
+		Assets::js("vendor/vinala/kernel/src/Setup/Assets/js/hello.js",false);
 	?>
 	</head>
 	<body>
