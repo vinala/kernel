@@ -34,7 +34,8 @@ class Path
 		self::$app=self::$host.self::$root."app";
 		//self::$app="app";
 		self::$core=self::$host.self::$root."core";
-		self::$public=self::$host.self::$root."public";
+		// self::$public=self::$host.self::$root."public";
+		self::$public = "public";
 		//
 		self::$path="http://$_SERVER[HTTP_HOST]/";
 	}
