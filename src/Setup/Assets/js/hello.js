@@ -31,6 +31,13 @@ $(document).ready(function() {
     function f() {
         $("#welcom").fadeTo("slow", 1), clearInterval(u)
     }
+
+    function z() 
+    {
+        $("#vnl_config_icon").animate({marginTop:"140" , width: "250" , height : "95"});
+    }
+
+
     var s, r, u;
     Timer0 = setInterval(function() {
         t()
@@ -40,31 +47,15 @@ $(document).ready(function() {
         return $("#fst_db_msg_step").fadeOut(300, function() {
             $("#fst_glob_conf_step").fadeIn(300)
         }), !1
-    }), $("#fst-config-db-form").submit(function() {
-        return $.post("hello/db_check", $("#fst-config-db-form").serialize(), function(e) {
-            "true" == e ? $("#fst_db_conf_step").fadeOut(300, function() {
-                $("#fst_pass_msg_step").fadeIn(300)
-            }) : $("#fst_db_config_error").slideDown()
-        }), !1
-    }), $("#nxt_to_glob").click(function() {
+    }), 
+    $("#nxt_to_glob").click(function() {
         return $("#fst_pass_msg_step").fadeOut(300, function() {
             $("#fst_glob_conf_step").fadeIn(300)
         }), !1
     }), $("#fst-glob-db-form").submit(function() {
         return $.post("hello/set_glob", $("#fst-glob-db-form").serialize(), function(e) {
             "true" == e ? (document.getElementById("dev_nom").innerHTML = document.getElementById("dev_name").value, $("#fst_glob_conf_step").fadeOut(300, function() {
-                $("#fst_pnl_conf_step").fadeIn(300)
-            })) : alert("Un erreur est survenue")
-        }), !1
-    }), $("#fst-sec-db-form").submit(function() {
-        return $.post("hello/set_secur", $("#fst-sec-db-form").serialize(), function(e) {
-            "true" == e ? $("#fst_sec_conf_step").fadeOut(300, function() {
-                $("#fst_pnl_conf_step").fadeIn(300)
-            }) : alert("Un erreur est survenue")
-        }), !1
-    }), $("#fst-pnl-db-form").submit(function() {
-        return $.post("hello/set_panel", $("#fst-pnl-db-form").serialize(), function(e) {
-            "true" == e ? ("" != document.getElementById("pnl_route").value ? document.getElementById("fst_panel").href = document.getElementById("pnl_route").value : document.getElementById("fst_panel").href = "lighty", $("#fst_config_icon").fadeOut(300), $("#fst_pnl_conf_step").fadeOut(300, function() {
+                z();
                 Timer3 = setInterval(function() {
                     o()
                 }, 200), u = setInterval(function() {
@@ -72,6 +63,7 @@ $(document).ready(function() {
                 }, 400), r = setInterval(function() {
                     n()
                 }, 800)
+
             })) : alert("Un erreur est survenue")
         }), !1
     })

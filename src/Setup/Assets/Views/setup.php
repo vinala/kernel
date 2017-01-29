@@ -3,15 +3,15 @@
 	use Vinala\Kernel\Foundation\Application as App;
 ?>
 
-<div class="bg" id="bg"></div>
-<div class="content" id="content">
+<!-- <div class="bg" id="bg"></div> -->
+
 
 	<div style="height:60px"></div>
-	<div class="fst_config_icon" id="fst_config_icon"></div>
+	<div class="vnl_config_icon" id="vnl_config_icon"></div>
 	
 	<div id="fst_db_msg_step">
 		<div class="fst-config-text">
-			<div class="fst-config-pargraph">
+			<div class="vnl-config-pargraph">
 				Welcome to Vinala. Before we launch, we need some information about your application. You'll have to fill the following information forms to proceed.
 			</div>
 			<form class="fst-config-form" id="fst-config-msg-form">
@@ -26,7 +26,7 @@
 		<!-- <h1 class="conf_title">Database</h1>
 		<div class="progres"><div class="progres_2"></div></div> -->
 		<div class="fst-config-text">
-			<div class="fst-config-pargraph">
+			<div class="vnl-config-pargraph">
 				You must enter below the login details to your database. If you do not know them, contact your host.
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 		<div class="fst-config-cont">
 		<form class="fst-config-form fst-config-db-form" id="fst-config-db-form">
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Database server</div>
+				<div class="vnl-config-label db-input-label">Database server</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="migname" name="db_host" placeholder="Server" value="">
 				</div>
@@ -43,7 +43,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Database Name</div>
+				<div class="vnl-config-label db-input-label">Database Name</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="migname" name="db_name" placeholder="Database" value="">
 				</div>
@@ -51,7 +51,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Database user</div>
+				<div class="vnl-config-label db-input-label">Database user</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="migname" name="db_usr" placeholder="User" value="">
 				</div>
@@ -59,7 +59,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Database password</div>
+				<div class="vnl-config-label db-input-label">Database password</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="migname" name="db_pass" placeholder="Password" value="">
 				</div>
@@ -67,7 +67,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Tables prefix</div>
+				<div class="vnl-config-label db-input-label">Tables prefix</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="migname" name="db_prefix" placeholder="Prefixe" value="<?php $str=str_shuffle("azertyuiopqsdfghjklmwxcvbn");echo substr($str, 0, 3); ?>">
 					<p class="conf_input_note">If you keep it blank, prefixing will be disabled</p>
@@ -114,7 +114,7 @@
 		<form class="fst-config-form fst-config-db-form" id="fst-glob-db-form">
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Project Name</div>
+				<div class="vnl-config-label db-input-label">Project Name</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="project_name" name="project_name" placeholder="Your project" value="">
 				</div>
@@ -122,7 +122,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Developer Name</div>
+				<div class="vnl-config-label db-input-label">Developer Name</div>
 				<div class="fst-config-input db-input-input">
 					<input type="text" class="form-control" id="dev_name" name="dev_name" placeholder="Your name" value="">
 				</div>
@@ -130,7 +130,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Language</div>
+				<div class="vnl-config-label db-input-label">Language</div>
 				<div class="fst-config-input db-input-input">
 					<select class="form-control" id="sel1" name="langue">
 					    <option value="fr">Français</option>
@@ -142,7 +142,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Hide from search engines</div>
+				<div class="vnl-config-label db-input-label">Hide from search engines</div>
 				<div class="fst-config-input db-input-input">
 					<div class="switch">
 					    <input type="checkbox" name="ckeck_search" class="switch-checkbox" id="chechBox6" checked>
@@ -153,7 +153,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Debugging</div>
+				<div class="vnl-config-label db-input-label">Debugging</div>
 				<div class="fst-config-input db-input-input">
 					<div class="switch">
 					    <input type="checkbox" name="ckeck_loggin" class="switch-checkbox" id="chechBox1" >
@@ -164,7 +164,7 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="fst-config-label db-input-label">Maintenance</div>
+				<div class="vnl-config-label db-input-label">Maintenance</div>
 				<div class="fst-config-input db-input-input">
 					<div class="switch">
 					    <input type="checkbox" name="ckeck_maintenance" class="switch-checkbox" id="chechBox5">
@@ -193,7 +193,7 @@
 		<div class="fst-config-cont">
 			<form class="fst-config-form fst-config-db-form" id="fst-sec-db-form">
 				<div class="control_c_row">
-					<div class="fst-config-label db-input-label">First security key</div>
+					<div class="vnl-config-label db-input-label">First security key</div>
 					<div class="fst-config-input db-input-input">
 						<input type="text" class="form-control" name="sec_1" value="<?php echo md5(uniqid(rand(), TRUE)) ?>" readonly>
 					</div>
@@ -201,7 +201,7 @@
 				</div>
 
 				<div class="control_c_row">
-					<div class="fst-config-label db-input-label">Second security key</div>
+					<div class="vnl-config-label db-input-label">Second security key</div>
 					<div class="fst-config-input db-input-input">
 						<input type="text" class="form-control" name="sec_2" value="<?php echo md5(uniqid(rand(), TRUE)) ?>" readonly>
 					</div>
@@ -209,7 +209,7 @@
 				</div>
 
 				<div style="margin-top:20px">
-					<input type="submit" class="btn hello_button" value="Next" name="nxt" id="nxt"   />
+					<input type="submit" class="btn hello_button" value="Finish" name="nxt" id="nxt"   />
 				</div>
 			</form>
 		</div>
@@ -227,7 +227,7 @@
 			<form class="fst-config-form fst-config-db-form" id="fst-pnl-db-form">
 
 				<div class="control_c_row">
-					<div class="fst-config-label db-input-label">Activation</div>
+					<div class="vnl-config-label db-input-label">Activation</div>
 					<div class="fst-config-input db-input-input">
 						<div class="switch">
 						    <input type="checkbox" name="stat" class="switch-checkbox" id="myswitch-violet" checked>
@@ -238,7 +238,7 @@
 				</div>
 
 				<div class="control_c_row">
-					<div class="fst-config-label db-input-label">Route</div>
+					<div class="vnl-config-label db-input-label">Route</div>
 					<div class="fst-config-input db-input-input">
 						    <input type="text" class="form-control" id="pnl_route" name="route" placeholder="HTTP" value="" >
 							<p class="conf_input_note">By default : Lighty</p>
@@ -247,7 +247,7 @@
 				</div>
 
 				<div class="control_c_row">
-					<div class="fst-config-label db-input-label">First password</div>
+					<div class="vnl-config-label db-input-label">First password</div>
 					<div class="fst-config-input db-input-input">
 						<input type="text" class="form-control" name="pass_1" placeholder="Password 1" value="">
 						<p class="conf_input_note">By default : 1234</p>
@@ -256,7 +256,7 @@
 				</div>
 
 				<div class="control_c_row">
-					<div class="fst-config-label db-input-label">Second password</div>
+					<div class="vnl-config-label db-input-label">Second password</div>
 					<div class="fst-config-input db-input-input">
 						<input type="text" class="form-control" name="pass_2" placeholder="Password 2" value="">
 						<p class="conf_input_note">By default : 5678</p>
@@ -273,7 +273,7 @@
 	</div>
 
 
-	<img src="<?php echo "app/resources/images/lighty_logo.png" ?>" class="img" id="hello_logo" style="display:none">
+	<!-- <img src="<?php echo "app/resources/images/lighty_logo.png" ?>" class="img" id="hello_logo" style="display:none"> -->
 
 	<div id="welcom" style="display:none">
 	
@@ -305,12 +305,5 @@
 				<?php echo "v".App::getVersion()->full(); ?>
 			</a>
 		</div>
-		<div class="final_link_panel" id="bottom_panel" style="display:none">
-			<a id="fst_panel" href="<?php echo config("panel.route"); ?>">
-				<div class="btn hello_button" id="login">
-					Vinala Panel
-				</div>
-			</a>
-		</div>
-	</div>
+	
 </div>
