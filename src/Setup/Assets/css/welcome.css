@@ -106,4 +106,83 @@ body
     color: #ee6a05;
     text-decoration: none;
 }
+
+.vnl-config-cont {
+    width: 800px;
+    margin: 0 auto
+}
+.vnl-config-text {
+    width: 600px;
+    margin: 0 auto
+}
+
+.vnl-config-form {
+    color: #fff;
+    text-align: center;
+    margin: 0 auto
+}
+
 /* Switches */
+
+
+.switch {
+    position: relative;
+    width: 31px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    margin-top: 9px;
+}
+.switch-checkbox {
+    display: none;
+}
+.switch-label {
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    height: 16px;
+    padding: 0;
+    line-height: 16px;
+    border: 2px solid #CCCCCC;
+    border-radius: 16px;
+    background-color: #CCCCCC;
+    transition: background-color 0.3s ease-in;
+}
+.switch-label:before {
+    content: "";
+    display: block;
+    width: 16px;
+    margin: 0px;
+    background: #FFFFFF;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 17px;
+    border: 2px solid #CCCCCC;
+    border-radius: 16px;
+    transition: all 0.3s ease-in 0s;
+}
+.switch-checkbox:checked + .switch-label-blue {
+    background-color: #058cbc;
+}
+.switch-checkbox:checked + .switch-label-blue,
+.switch-checkbox:checked + .switch-label-blue:before {
+    border-color: #058cbc;
+}
+.switch-checkbox:checked + .switch-label-violet {
+    background-color: #ee6a05;
+}
+.switch-checkbox:checked + .switch-label-violet,
+.switch-checkbox:checked + .switch-label-violet:before {
+    border-color: #ee6a05;
+}
+.switch-checkbox:checked + .switch-label-deeppink {
+    background-color: #bf0346;
+}
+.switch-checkbox:checked + .switch-label-deeppink,
+.switch-checkbox:checked + .switch-label-deeppink:before {
+    border-color: #bf0346;
+}
+.switch-checkbox:checked + .switch-label:before {
+    right: 0px;
+}

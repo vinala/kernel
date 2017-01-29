@@ -43,7 +43,7 @@ $(document).ready(function() {
         t()
     }, 200), s = setInterval(function() {
         e()
-    }, 400), $("#fst-config-msg-form").submit(function() {
+    }, 400), $("#vnl-config-msg-form").submit(function() {
         return $("#fst_db_msg_step").fadeOut(300, function() {
             $("#fst_glob_conf_step").fadeIn(300)
         }), !1
@@ -52,8 +52,8 @@ $(document).ready(function() {
         return $("#fst_pass_msg_step").fadeOut(300, function() {
             $("#fst_glob_conf_step").fadeIn(300)
         }), !1
-    }), $("#fst-glob-db-form").submit(function() {
-        return $.post("hello/set_glob", $("#fst-glob-db-form").serialize(), function(e) {
+    }), $("#vnl-glob-db-form").submit(function() {
+        return $.post("hello/set_glob", $("#vnl-glob-db-form").serialize(), function(e) {
             "true" == e ? (document.getElementById("dev_nom").innerHTML = document.getElementById("dev_name").value, $("#fst_glob_conf_step").fadeOut(300, function() {
                 z();
                 Timer3 = setInterval(function() {
