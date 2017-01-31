@@ -17,7 +17,6 @@
 		Html::charset("utf-8"); 
 		Html::title();
 		Html::favicon(Path::$public."/favicon.ico");
-		Assets::css("vendor/vinala/kernel/src/Setup/Assets/css/hello.css",false);
 		Assets::css("vendor/vinala/kernel/src/Setup/Assets/css/welcome.css",false);
 		Assets::js("vendor/vinala/kernel/src/Setup/Assets/js/hello.js",false);
 	?>

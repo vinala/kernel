@@ -97,7 +97,7 @@ class Response
 			file_put_contents(Application::$root."config/lang.php", $translatorCont, 0);
 			file_put_contents(Application::$root."config/loggin.php", $logginCont, 0);
 			//
-			echo "true";
+			return true;
 		}
 	}
 
