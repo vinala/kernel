@@ -998,6 +998,7 @@ class Connector
 				'Events',
 				'Alias',
 				'Middleware',
+				'Helper',
 				),
 			self::$path.'Processes/'
 			);
