@@ -45,6 +45,8 @@ class App
 
 	public static function set($name, $project , $setup)
 	{
+		$setup  = $setup ? 'true' : 'false' ;
+
 		$project_name = self::appRow("project_name","'project' => '$project' ,");
 		$owner_name = self::appRow("owner_name","'owner' => '".$name."' ,");
 		$project_url = self::appRow("project_url","'url' => root() ,");
