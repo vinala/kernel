@@ -36,7 +36,7 @@ class MysqlDriver extends Driver
 	*/
 	public static function connect($host = null, $database = null, $user = null, $password = null)
 	{
-		if(Config::get('panel.setup')) 
+		if(config('app.setup')) 
 		{
 			self::$connection = new MysqlConnector($host, $database, $user, $password);
 			self::$server = self::$connection->connector;
