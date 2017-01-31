@@ -21,7 +21,6 @@
 		Assets::js("vendor/vinala/kernel/src/Setup/Assets/js/hello.js",false);
 	?>
 	</head>
-	<body>
-		<?php Connector::need(Application::$root."vendor/vinala/kernel/src/Setup/Assets/Views/setup.php"); ?>
-	</body>
+	
+	<?php need(root()"vendor/vinala/kernel/src/Setup/Assets/Views/setup.php"); ?>
 </html>
