@@ -20,7 +20,6 @@ use Vinala\Kernel\Router\Routes;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Logging\Log;
 use Vinala\Kernel\Objects\DateTime;
-use Vinala\Panel;
 use Vinala\Kernel\Filesystem\Filesystem;
 use Vinala\Kernel\Filesystem\File;
 use Vinala\Kernel\Plugins\Plugins;
@@ -231,7 +230,6 @@ class Application
 		Lang::ini($test);
 		if($database && Component::isOn("database")) Database::ini();
 		Auth::ini();
-		Panel::run();
 		Plugins::ini();
 		
 	}
