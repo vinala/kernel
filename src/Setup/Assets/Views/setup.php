@@ -43,18 +43,6 @@
 			</div>
 
 			<div class="control_c_row">
-				<div class="vnl-config-label db-input-label">Language</div>
-				<div class="vnl-config-input db-input-input">
-					<select class="form-control" id="sel1" name="langue">
-					    <option value="fr">Français</option>
-						<option value="ar">العربية</option>
-						<option value="en" selected>English</option>
-			        </select>
-				</div>
-				<div class="vnl-config-input-desc db-input-input-desc">What's your application default language</div>
-			</div>
-
-			<div class="control_c_row">
 				<div class="vnl-config-label db-input-label">Hide from search engines</div>
 				<div class="vnl-config-input db-input-input">
 					<div class="switch">

@@ -26,7 +26,6 @@ class Response
 	{
 		$project=$_POST['project_name'];		
 		$name=$_POST['dev_name'];		
-		$langue=$_POST['langue'];		
 		//		
 		if(isset($_POST['ckeck_loggin'])) $loggin="true";		
 		else $loggin="false";		
@@ -40,7 +39,7 @@ class Response
 		if( ! Application::$isTest)
 		{
 			$appCont = App::set($name, $project , true );
-			$translatorCont = Translator::set($langue);
+			$translatorCont = Translator::set('en');
 			$logginCont = Loggin::set($loggin);
 			Robots::set($robot);
 			//
@@ -48,7 +47,7 @@ class Response
 			file_put_contents(Application::$root."config/lang.php", $translatorCont, 0);
 			file_put_contents(Application::$root."config/loggin.php", $logginCont, 0);
 			//
-			return true;
+			echo 'true';
 		}
 	}
 }
