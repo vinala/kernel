@@ -22,5 +22,5 @@
 	?>
 	</head>
 	
-	<?php need(root()"vendor/vinala/kernel/src/Setup/Assets/Views/setup.php"); ?>
+	<?php need(root()."vendor/vinala/kernel/src/Setup/Assets/Views/setup.php"); ?>
 </html>
