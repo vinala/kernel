@@ -1,12 +1,14 @@
 {
-	"version" : "3.3.9",
+	"version" : "3.3.10",
 	"tag" : "",
 	"stat" : "alpha",
 	"features" : [
-		"Create surface deal with versions"
+		"Update Setup and welcome views",
+		"Update Assets surface",
+		"Update Links surface"
 	],
 	"fixes" : [
 
 	],
-	"sha" : "7fec25dce43cd70486602cd0f976cd704dcd6f9"
+	"sha" : "9ef64090b4b1ad0beabb7d7ac0d886761d901e39"
 }
