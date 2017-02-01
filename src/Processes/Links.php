@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Process;
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Objects\DateTime as Time;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Filesystem\File;
 
 /**
 * Link class
@@ -17,12 +18,12 @@ class Links
 		if(empty($name)) $name=$time;
 		//
 		$Root = is_null($rt) ? Process::root : $rt ;
-		if(!file_exists($Root."app/links/".$name.".php"))
+
+		$path = $Root.'resources/links/'.$name.'.php';
+		
+		if( ! File::exists($path))
 		{
-			$myfile = fopen($Root."app/links/".$name.".php", "w");
-			$txt = self::set($name);
-			fwrite($myfile, $txt);
-			fclose($myfile);
+			File::put($path , self::set($name));
 			//
 			return true;
 		}
@@ -43,7 +44,7 @@ class Links
 	*/
 	public static function ListAll()
 	{
-		$links = glob(roo()."app/links/*.php");
+		$links = glob(root()."resources/links/*.php");
 		//
 		return $links;
 	}
