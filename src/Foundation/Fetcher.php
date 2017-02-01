@@ -78,7 +78,7 @@ class Fetcher
 	 */
 	protected static function model()
 	{
-		foreach (self::fetch("models") as $file) 
+		foreach (self::fetch('resources/models' , false) as $file) 
 			Connector::need($file);
 	}
 
