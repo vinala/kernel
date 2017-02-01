@@ -4,7 +4,7 @@ namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Filesystem\Filesystem as File;
+use Vinala\Kernel\Filesystem\File;
 
 /**
 * Controller class
@@ -17,12 +17,12 @@ class Controller
 
 		$Root = is_null($rt) ? Process::root : $rt ;
 		//
-		if(!file_exists($Root."app/controllers/$name.php")){
-			$myfile = fopen($Root."app/controllers/$name.php", "w");
-			$txt = self::set($name , $resources);
-			fwrite($myfile, $txt);
-			fclose($myfile);
-			//
+		$path = $Root."resources/controllers/$name.php";
+
+		if( ! File::exists($path))
+		{
+			File::put($path , self::set($name , $resources));
+			
 			if( !is_null($route)) 
 			{
 				self::addRoute($route , $name ,$Root);
@@ -39,8 +39,6 @@ class Controller
 		$txt = "<?php\n\nuse Vinala\Kernel\MVC\Controller;\n\n";
 		$txt.="/**\n* class de controller $class\n*/\nclass $class extends Controller\n{";
 
-		//view
-		// $txt.="\n\t\n\tpublic static ".'$id = null'.";\n\tpublic static ".'$object = null'.";\n\n";
 		if($resources)
 		{
 			//index
@@ -104,7 +102,9 @@ class Controller
 	*/
 	public static function ListAll()
 	{
-		$controllers = glob(Application::$root."app/controllers/*.php");
+		$path = root().'resources/controllers/*.php';
+
+		$controllers = glob($path);
 		//
 		return $controllers;
 	}
@@ -115,7 +115,9 @@ class Controller
 	*/
 	public static function clear()
 	{
-		$files = File::glob(Application::$root."app/controllers/*");
+		$path = root().'resources/controllers/*.php';
+
+		$files = File::glob($path);
 		//
 		foreach ($files as $file) 
 			File::delete($file);

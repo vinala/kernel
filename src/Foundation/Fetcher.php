@@ -87,7 +87,7 @@ class Fetcher
 	 */
 	protected static function controller()
 	{
-		foreach (self::fetch("controllers") as $file) 
+		foreach (self::fetch('resources/controllers' , false) as $file) 
 			Connector::need($file);
 	}
 
