@@ -39,10 +39,7 @@ class NewModelCommand extends Commands
     public function set()
     {
         $this->key = Config::get('lumos.new_model').
-        ' {className : what\'s the name of the model class?} 
-        {tableName : what\'s the name of the datatable?} 
-        {--not_aliased : if set , the model will be not aliased}
-        ';
+        ' {className : what\'s the name of the model class?} {tableName : what\'s the name of the datatable?} {--not_aliased : if set , the model will be not aliased}';
         $this->description = 'New model';
     }
 
@@ -63,7 +60,7 @@ class NewModelCommand extends Commands
         $table = $this->argument('tableName');
         $notAliased = $this->option('not_aliased');
         //
-        $process = Model::create( $class , $table);
+        $process = Model::create( $class , $table , $notAliased);
 
         if( ! $notAliased)
         {

@@ -10,7 +10,7 @@ use Vinala\Kernel\Filesystem\File;
 */
 class Model
 {
-	public static function create($class , $table, $rt= null)
+	public static function create($class , $table , $rt= null)
 	{
 		$class = ucfirst($class);
 		
