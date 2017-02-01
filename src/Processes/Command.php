@@ -14,8 +14,8 @@ class Command
 	{
 		$Root = Process::root;
 		//
-		if(!file_exists($Root."support/lumos/$file.php")){
-			$myfile = fopen($Root."support/lumos/$file.php", "w");
+		if(!file_exists($Root."support/shell/$file.php")){
+			$myfile = fopen($Root."support/shell/$file.php", "w");
 			$txt = self::set($file, $command);
 			fwrite($myfile, $txt);
 			fclose($myfile);
