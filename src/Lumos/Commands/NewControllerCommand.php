@@ -54,7 +54,7 @@ class NewControllerCommand extends Commands
         $resource = $this->option("resource");
         $notAliased = $this->option('not_aliased');
         //
-        $process = Controller::create($name , $route , $resource);
+        $process = Controller::create($name , $route , $resource , $notAliased);
 
         if( ! $notAliased)
         {

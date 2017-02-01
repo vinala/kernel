@@ -36,7 +36,7 @@ class Controller
 
 	public static function set($class , $resources = false)
 	{
-		$txt = "<?php\n\nuse Vinala\Kernel\MVC\Controller;\n\n";
+		$txt = "<?php\n\nnamespace App\Controller;\n\nuse Vinala\Kernel\MVC\Controller;\n\n";
 		$txt.="/**\n* class de controller $class\n*/\nclass $class extends Controller\n{";
 
 		if($resources)
