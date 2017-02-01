@@ -30,7 +30,6 @@ class Link
 	private static $links = [] ;
 	
 
-
 	//--------------------------------------------------------
 	// Functions
 	//--------------------------------------------------------
@@ -42,7 +41,7 @@ class Link
 	*/
 	public static function ini()
 	{
-		$files = glob(root().'app/links/*.php');
+		$files = glob(static::path().'*.php');
 
 		foreach ($files as $file) {
 			
@@ -66,7 +65,7 @@ class Link
 	public static function get($key)
 	{
 		exception_if(! array_has(self::$links , $key) , LinkKeyNotFoundException::class , $key);
-		dc(self::$links);
+		
 		return array_get(self::$links , $key);
 	}
 
@@ -120,5 +119,17 @@ class Link
 	{
 		return File::name($path);
 	}
+
+
+	/**
+	* Get the path of links nest
+	*
+	* @return string
+	*/
+	public static function path()
+	{
+		return root().'resources/links/';
+	}
+	
 	
 }
