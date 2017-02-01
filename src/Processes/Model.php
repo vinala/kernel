@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Process\Process;
-use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Filesystem\File;
 
 /**
 * Model class
@@ -18,13 +18,11 @@ class Model
 
 		$root = is_null($rt) ? Process::root : $rt ;
 
-		if( ! file_exists($root."app/models/$file.php"))
-		{
-			$myfile = fopen($root."app/models/$file.php", "w");
-			$txt = self::set($class , $table);
+		$path = $root."resources/models/$file.php";
 
-			fwrite($myfile, $txt);
-			fclose($myfile);
+		if( ! File::exists($path))
+		{
+			File::put($path , self::set($class , $table));
 			//
 			return true;
 		}
@@ -45,7 +43,7 @@ class Model
 	*/
 	public static function ListAll()
 	{
-		$models = glob(Application::$root."app/models/*.php");
+		$models = glob(root()."resources/models/*.php");
 		//
 		return $models;
 	}
