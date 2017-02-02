@@ -50,4 +50,17 @@ class Response
 			echo 'true';
 		}
 	}
+
+	
+	public static function setSecur_step($sec_1 , $sec_2)		
+	{		
+		if( ! Application::$isTest) 		
+		{		
+			$content = Security::set($sec_1,$sec_2);		
+			//		
+			file_put_contents(Application::$root."config/security.php", $content , 0);		
+			//		
+			return true;		
+		}		
+	}
 }
