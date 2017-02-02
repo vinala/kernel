@@ -19,7 +19,7 @@ class View
 
 	protected static function createFolders($folders, $root)
 	{
-		$path = $root."app/views/";
+		$path = $root."resources/views/";
 		//
 		for ($i=0; $i < count($folders)-1 ; $i++)
 		{
@@ -73,7 +73,7 @@ class View
 	protected static function set($ext , $file , $path)
 	{
 		$path = Strings::replace($path,"/",".");
-		$strings = Strings::splite($path , "app.views.");
+		$strings = Strings::splite($path , "resources.views.");
 		$path = $strings[1].$file;
 		//
 		if($ext == '.atom') 

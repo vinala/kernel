@@ -63,7 +63,7 @@ class Views
 
 	function __construct()
 	{
-		$this->nest = root().'app/views/';
+		$this->nest = root().'resources/views/';
 	}
 
 	//--------------------------------------------------------
