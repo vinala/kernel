@@ -59,7 +59,7 @@ class Assets
 			if($nest)
 			{
 				$file = str_replace('.', '/', $file);
-				$path = 'assets/css/'.$file.'.css';
+				$path = path().'assets/css/'.$file.'.css';
 			}
 			else
 			{
