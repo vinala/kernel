@@ -39,7 +39,8 @@ class Handler
 	*/
 	protected static function setDebug()
 	{
-		\Kint::$theme = 'solarized-dark';
+		// \Kint::$theme = 'solarized-dark';
+		\Kint::$theme = 'dark';
 	}
 	
 
