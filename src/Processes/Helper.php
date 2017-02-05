@@ -37,9 +37,8 @@ class Helper
 	*/
 	public static function set($name)
 	{
-		$txt = "<?php\n\nif ( ! function_exists('$name'))\n{";
-		$txt.="\n\t/**\n\t* $name helper\n\t*\n\t* @param //\n\t* @return // \n\t**/\n\t";
-		$txt.="function $name()\n\t{\n\t\t// Do something \n\t}\n}";
+		$txt = "<?php\n\n/**\n* $name helper\n*\n* @param //\n* @return // \n**/\n";
+		$txt.="function $name()\n{\n\t// Do something \n}";
 
 		return $txt;
 	}
@@ -49,7 +48,7 @@ class Helper
 	*/
 	public static function ListAll()
 	{
-		$controllers = glob(Application::$root."support/helpers/*.php");
+		$controllers = glob(root()."support/helpers/*.php");
 		//
 		return $controllers;
 	}

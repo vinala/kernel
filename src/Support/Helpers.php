@@ -14,6 +14,7 @@ use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Cubes\Cube;
 use Vinala\Kernel\Http\Redirect\Redirect;
 use Vinala\Kernel\Http\Middleware\Middleware;
+use Vinala\Kernel\Object\Strings;
 
 
 

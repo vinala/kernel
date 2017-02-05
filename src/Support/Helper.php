@@ -12,5 +12,14 @@ $files = glob('../support/helpers/*');
 *
 */
 foreach ($files as $file) {
-	include($file);
+	$segments = explode('../support/helpers/', $file);
+
+	$name = explode('.', $segments[1]);
+
+	$name = $name[0];
+	
+	if ( ! function_exists($name))
+	{
+		include($file);
+	}
 }
