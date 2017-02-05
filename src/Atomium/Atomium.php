@@ -50,9 +50,9 @@ class Atomium
 
     function __construct($nest)
     {
-    	$nest = ! is_null($nest) ? $nest : root().'app/';
+    	$nest = ! is_null($nest) ? $nest : root();
     	
-    	$this->setTemplateDir($nest.'storage/framework/view/template/atomium');
+    	$this->setTemplateDir($nest.'storage/view/template/atomium');
     }
   
 
@@ -71,7 +71,7 @@ class Atomium
         }
         else 
         {
-        	$this->TemplateDir = root()."app/storage/framework/view/template/atomium";
+        	$this->TemplateDir = root().'storage/view/template/atomium';
         }
     }
 
@@ -222,8 +222,8 @@ class Atomium
 	{
 		$file=str_replace('.', '/', $view);
 		//
-		$link1=Application::$root.'app/views/'.$file.'.atom.php';
-		$link2=Application::$root.'app/views/'.$file.'.atom';
+		$link1 = root().'resources/views/'.$file.'.atom.php';
+		$link2 = root().'resources/views/'.$file.'.atom';
 		//
 		if(file_exists($link1)) { $link3 = $link1;  }
 		else if(file_exists($link2)) { $link3 = $link2;  }
