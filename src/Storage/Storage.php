@@ -5,6 +5,8 @@ namespace Vinala\Kernel\Storage;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Objects\Sys;
 use Whoops\Exception\ErrorException;
+use Vinala\Kernel\Storage\Exception\NotFoundStorageDiskException;
+
 /**
 * Storage class
 */
@@ -14,33 +16,37 @@ class Storage
 	protected $storagePath;
 	protected $basePath;
 
+
+	/**
+	* Main Path where storage folder in
+	*
+	* @var string 
+	*/
+	protected $path = 'storage/file/' ;
+	
+
 	function __construct($disk=null)
 	{
 		if(empty($disk)) 
 		{
-			if($this->checkDiskExiste(Config::get('storage.default'))) 
-			{ 
-				$this->disk=Config::get('storage.default'); 
-				$this->basePath=Sys::$app."/storage/file";
-				$this->storagePath=$this->basePath."/".Config::get('storage.default');
-			}
-			else throw new \invalidArgumentException("There is no disk call's ".Config::get('storage.default'));
+			exception_if( ! $this->checkDiskExiste(config('storage.default')) , NotFoundStorageDiskException::class , config('storage.default'));
+
+			$this->disk = config('storage.default');			
 		}
 		else 
 		{
-			if($this->checkDiskExiste($disk)) 
-			{ 
-				$this->disk=$disk;
-				$this->basePath=Sys::$app."/storage/file";
-				$this->storagePath=$this->basePath."/".$disk;
-			}
-			else throw new \invalidArgumentException("There is no disk call's ".$disk);
+			exception_if( ! $this->checkDiskExiste($disk) , NotFoundStorageDiskException::class , $disk);
+			
+			$this->disk = $disk;
 		}
+
+		$this->basePath = $this->path;
+		$this->storagePath = $this->basePath."/".$this->disk;
 	}
 
 	protected function checkDiskExiste($value)
 	{
-		return is_dir(Sys::$app."/storage/file/".$value);
+		return is_dir($this->path.$value);
 	}
 
 	protected function isDir($value)
@@ -50,7 +56,7 @@ class Storage
 
 	protected function path($value)
 	{
-		return Sys::$app."/storage/file/".$this->disk."/".$value;
+			return $this->path.$this->disk."/".$value;
 	}
 
 	public static function disk($name)
