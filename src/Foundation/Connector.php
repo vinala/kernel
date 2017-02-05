@@ -264,6 +264,8 @@ class Connector
 	{
 		self::session($session);
 		self::need(self::$path.'Storage/Storage.php');
+
+		self::need(self::$path.'Storage/Exceptions/Storage.php');
 	}
 
 	/**
