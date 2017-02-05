@@ -88,7 +88,7 @@ class FileCache
 	{
 		$hash = $this->hash($key);
 		$parts=str_split($hash, 2);
-		return Application::$root."app/".Config::get('cache.options')["file"]['location'].'/'.$hash;
+		return root().Config::get('cache.options')["file"]['location'].'/'.$hash;
 		//return Application::$root."app/".Config::get('cache.location').'/'.$hash;
 	}
 
@@ -129,7 +129,7 @@ class FileCache
 
 	public function clearOld()
 	{
-		$all=(new Filesystem)->files(Application::$root."app/".Config::get('cache.options')["file"]['location']);
+		$all=(new Filesystem)->files(root()."".Config::get('cache.options')["file"]['location']);
 		//
 		foreach ($all as $value) {
 			//
