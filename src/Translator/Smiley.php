@@ -20,7 +20,7 @@ class Smiley
 	**/
 	public static function Ini()
 	{
-		echo "<link href='".Path::$app.Config::get('smiley.css')."' rel='stylesheet' type='text/css'>";
+		echo "<link href='".config('smiley.css')."' rel='stylesheet' type='text/css'>";
 	}
 
 	/*
