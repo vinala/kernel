@@ -698,7 +698,7 @@ if ( ! function_exists("dot"))
 	*/
 	function dot( $key )
 	{
-		return Strings::splite($key , '.');
+		return explode('.' , $key);
 	}	
 }
 
