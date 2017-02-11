@@ -70,6 +70,7 @@ class Connector
 		Connector::router();
 		Connector::caches();
 		Connector::security();
+		Connector::auth();
 		Connector::table();
 		if(Component::isOn("database")) Connector::database();
 		Connector::object_scnd();
@@ -419,7 +420,6 @@ class Connector
 	{
 		self::call(
 			array(
-				'Auth',
 				'Encrypt',
 				'Security',
 				'License'
@@ -427,6 +427,28 @@ class Connector
 			self::$path.'Security/'
 			);
 	}
+
+	/**
+	* Call authentication surface
+	*
+	*/
+	public static function auth()
+	{
+		self::call(
+			array(
+				'Auth'
+				),
+			self::$path.'Authentication/'
+			);
+
+		self::call(
+			array(
+				'AuthenticationModelNotFoundException'
+				),
+			self::$path.'Authentication/Exceptions/'
+			);
+	}
+	
 
 	/**
 	 * table calls
