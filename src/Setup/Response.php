@@ -27,8 +27,8 @@ class Response
 		$project=$_POST['project_name'];		
 		$name=$_POST['dev_name'];		
 		//		
-		if(isset($_POST['ckeck_loggin'])) $loggin="true";		
-		else $loggin="false";		
+		if(isset($_POST['ckeck_loggin'])) $loggin = true;		
+		else $loggin = false;		
 		//		
 		if(isset($_POST['ckeck_maintenance'])) $maintenance="true";		
 		else $maintenance="false";		
