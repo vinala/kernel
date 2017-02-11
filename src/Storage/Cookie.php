@@ -34,9 +34,6 @@ class Cookie
 
 	public static function forget($name)
 	{
-		echo $name;
-		
-		//setcookie($name, false, time()-3000);
 		setcookie($name, '', time() - 999999, '/' );
 		unset($_COOKIE[$name]);
 	}
