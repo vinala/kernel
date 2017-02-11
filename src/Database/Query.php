@@ -61,6 +61,15 @@ class Query
 	protected $group = "";
 
 
+	/**
+	* The last SQL query used in surface
+	*
+	* @var string 
+	*/
+	protected static $sql = null ;
+	
+
+
 	//--------------------------------------------------------
 	// Constructor
 	//--------------------------------------------------------
@@ -99,6 +108,17 @@ class Query
 		$this->order = 
 		$this->group = "";
 	}
+
+	/**
+	* Get the last query used
+	*
+	* @return string
+	*/
+	public static function last()
+	{
+		return static::$sql;
+	}
+	
 
 	/**
 	 * Set the query table
@@ -152,6 +172,8 @@ class Query
 	public function query($type = "object")
 	{
 		$sql = "select ".$this->columns." from ".$this->table." ".$this->where." ".$this->order." ".$this->group;
+
+		static::$sql = $sql;
 		//
 		if($data = Database::read($sql)) return self::fetch($data , $type);
 		elseif(Database::execerr()) throw new QueryException();
@@ -221,9 +243,16 @@ class Query
 	 * @param string $value
 	 * @return Array
 	 */
-	public function where($column, $relation, $value)
+	public function where($column = null, $relation = null, $value = null)
 	{
-		$this->where = " where $column $relation '$value' ";
+		if(is_null($column) && is_null($relation) && is_null($value))
+		{
+			$this->where = " where 1 = 1 ";
+		}
+		else
+		{
+			$this->where = " where $column $relation '$value' ";
+		}
 		//
 		return $this;
 	}
