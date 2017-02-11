@@ -124,7 +124,7 @@ class Console
 		$namespace = "Vinala\App\Support\Lumos";
 		//
         foreach (get_declared_classes() as $value)
-            if(\Strings::contains($value,$namespace)) 
+            if(str_contains($value,$namespace)) 
             	self::$userCommands[] = $value;
 	}
 
@@ -136,7 +136,7 @@ class Console
 		$namespace = "Vinala\Kernel\Console\Commands";
 		//
         foreach (get_declared_classes() as $value)
-            if(\Strings::contains($value,$namespace)) 
+            if(str_contains($value,$namespace)) 
             	self::$kernelCommands[] = $value;
 	}
 
@@ -150,7 +150,7 @@ class Console
 		$namespace = "Vinala\App\Support\Lumos";
 		//
         foreach (get_declared_classes() as $value)
-            if(\Strings::contains($value,$namespace)) 
+            if(str_contains($value,$namespace)) 
             	$classes[] = $value;
 
 		return $classes;            
