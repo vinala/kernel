@@ -55,7 +55,9 @@ class Seeder
 	{
 		$data = self::fill($seeder);
 		//
-		return Schema::table($seeder->table)->insert($data);
+		$table = new DBTable($seeder->table);
+		
+		return $table->insert($data);
 	}
 
 	/**
