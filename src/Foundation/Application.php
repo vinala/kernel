@@ -15,7 +15,7 @@ use Vinala\Kernel\Http\Errors;
 use Vinala\Kernel\Security\License;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Database\Database;
-use Vinala\Kernel\Security\Auth;
+use Vinala\Kernel\Authentication\Auth;
 use Vinala\Kernel\Router\Routes;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Logging\Log;
