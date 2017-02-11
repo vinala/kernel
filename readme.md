@@ -3,7 +3,7 @@
 
 -------
 
-[![Latest Stable Version](https://poser.pugx.org/vinala/kernel/v/stable)](https://packagist.org/packages/vinala/kernel)[![Total Downloads](https://poser.pugx.org/vinala/kernel/downloads)](https://packagist.org/packages/vinala/kernel)[![Latest Unstable Version](https://poser.pugx.org/vinala/kernel/v/unstable)](https://packagist.org/packages/vinala/kernel)[![License](https://poser.pugx.org/vinala/kernel/license)](https://packagist.org/packages/vinala/kernel)
+[![Latest Stable Version](https://poser.pugx.org/vinala/kernel/v/stable)](https://packagist.org/packages/vinala/kernel) [![Total Downloads](https://poser.pugx.org/vinala/kernel/downloads)](https://packagist.org/packages/vinala/kernel) [![Latest Unstable Version](https://poser.pugx.org/vinala/kernel/v/unstable)](https://packagist.org/packages/vinala/kernel) [![License](https://poser.pugx.org/vinala/kernel/license)](https://packagist.org/packages/vinala/kernel)
 
 This repo is the core of Vinala framework
 
