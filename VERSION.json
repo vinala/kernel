@@ -1,14 +1,14 @@
 {
-	"version" : "3.3.10",
+	"version" : "3.3.11",
 	"tag" : "",
 	"stat" : "alpha",
 	"features" : [
-		"Update Setup and welcome views",
-		"Update Assets surface",
-		"Update Links surface"
+		"Helpers stored in files",
+		"Replace storage files out of app folder",
+		"New version of Athu surface"
 	],
 	"fixes" : [
 
 	],
-	"sha" : "9ef64090b4b1ad0beabb7d7ac0d886761d901e39"
+	"sha" : "d33c5072fb689775266dc021e5d7cd06c8cb55d2"
 }
