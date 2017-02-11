@@ -27,6 +27,13 @@ class NewSeedCommand extends Commands
     public $description;
 
     /**
+     * True if the command will use database.
+     *
+     * @var bool
+     */
+    protected $database = true;
+
+    /**
      * Configure the command
      */ 
     public function set()
