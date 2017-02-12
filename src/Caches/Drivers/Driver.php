@@ -2,10 +2,10 @@
 
 namespace Vinala\Kernel\Cache\Driver ;
 
-//use SomeClass;
+use Vinala\Kernel\Cache\Item;
 
 /**
-* File system driver cache
+* The main driver cache
 *
 * @version 1.0
 * @author Youssef Had
@@ -24,31 +24,40 @@ class Driver
 	*
 	* @var Symfony\Component\Cache\Adapter 
 	*/
-	private static $adapter = null ;
+	private $adapter = null ;
 	
-
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
-
-	function __construct()
-	{
-		//
-	}
 
 	//--------------------------------------------------------
 	// Functions
 	//--------------------------------------------------------
 
 	/**
+	* Use the driver
+	*
+	* @param mixed $driver
+	* @return null
+	*/
+	public function call($driver)
+	{
+		$this->adapter = $driver;
+	}
+	
+	/**
 	* Set the cache item
 	*
 	* @param string $key
 	* @return Symfony\Component\Cache\CacheItem
 	*/
-	private function set($key)
+	private function set($key ,  $secs = null)
 	{
-		return static::$adapter->getItem($key);
+		$item = $this->adapter->getItem($key);
+
+		if(is_null($secs))
+		{
+			$item->expiresAfter($secs);
+		}
+
+		return $item;
 	}
 	
 	/**
@@ -64,7 +73,8 @@ class Driver
 
 		if ($item->isHit()) 
 		{
-		    return $item;
+			$item = new Item($item);
+			return $item->value();
 		}
 
 		return $default;
@@ -75,17 +85,18 @@ class Driver
 	*
 	* @param string $key
 	* @param string $value
+	* @param int $secs
 	* @return mixed
 	*/
-	public function put($key  , $value)
+	public function put($key  , $value , $secs = 0)
 	{
-		$item = $this->set($key);
+		$item = $this->set($key , $secs);
 
 		$item->set($value);
 
-		static::$adapter->save($item);
+		$this->adapter->save($item);
 
-		return $item;
+		return new Item($item);
 	}
 
 	/**
@@ -109,7 +120,7 @@ class Driver
 	*/
 	public function remove($key)
 	{
-		return static::$adapter->deleteItem($key);
+		return $this->adapter->deleteItem($key);
 	}
 
 	/**
@@ -126,14 +137,24 @@ class Driver
 
 		return $item;
 	}
-	
-	
-	
-	
-	
 
+	/**
+	* prolong a lifetime of cache item
+	*
+	* @param string $key
+	* @param int $secs
+	* @return mixed
+	*/
+	public function prolong($key , $secs)
+	{
+		$item = $this->set($key);
 
+		$item->expiresAfter($secs); 
+		
+		$this->adapter->save($item);
+
+		return $item;
+	}
 	
 	
-
 }	
