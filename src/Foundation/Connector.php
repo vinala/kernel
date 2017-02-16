@@ -402,6 +402,18 @@ class Connector
 	{
 		self::call(
 			array(
+				'Driver', 
+				'FileDriver', 
+				'ArrayDriver',
+				'PhpFilesDriver',
+				'PDODriver'
+				),
+			self::$path.'Caches/Drivers/'
+			);
+
+		self::call(
+			array(
+				'Item', 
 				'Caches', 
 				'Cache', 
 				'FileCache', 
