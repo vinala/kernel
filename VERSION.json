@@ -1,11 +1,9 @@
 {
-	"version" : "3.3.11",
+	"version" : "3.3.12-build",
 	"tag" : "",
 	"stat" : "alpha",
 	"features" : [
-		"Helpers stored in files",
-		"Replace storage files out of app folder",
-		"New version of Athu surface"
+
 	],
 	"fixes" : [
 
