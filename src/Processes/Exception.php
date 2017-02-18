@@ -4,6 +4,10 @@ namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Config\Alias;
+use Vinala\Kernel\Filesystem\File;
+use Vinala\Kernel\Objects\DateTime;
+
 
 /**
 * Exception class
@@ -22,13 +26,14 @@ class Exception
 	public static function create($name , $message , $view)
 	{
 		$root = Process::root;
+		$name = ucfirst($name);
+		$path = $root."app/exceptions/$name.php";
 		//
-		if(!file_exists($root."app/exceptions/$name.php")){
-			$file = fopen($root."app/exceptions/$name.php", "w");
-			$txt = self::set($name , $message , $view);
-			fwrite($file, $txt);
-			fclose($file);
-			//
+
+		if( ! File::exists($path))
+		{
+			File::put($path , self::set($name , $message , $view) );
+
 			return true;
 		}
 		else return false;
@@ -47,15 +52,38 @@ class Exception
 		$txt = "<?php\n\n";
 		$txt .= "namespace App\Exception;\n\n";
 		$txt .= "use Vinala\Kernel\Logging\Exception;\n\n";
-		$txt .= "/**\n* ".$name." Exception\n*/\n";
+		$txt .= "/**\n* ".$name." Exception\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "**/\n";
 		$txt .= "class $name extends Exception\n{\n\n";
-		$txt .= "\tfunction __construct()\n\t{";
+		$txt .= "\t/**\n\t* The exception constructor\n\t*\n\t*/\n";
+		$txt .= "\tfunction __construct()\n\t{\n";
+		$txt .= "\t\t/**\n\t\t* The exception message\n\t\t*\n\t\t* @param string\n\t\t*/";
 		$txt .= "\n\t\t".'$this->message = '."'$message';";
+		$txt .= "\n\n\t\t/**\n\t\t* The exception view if debugging mode activated\n\t\t*\n\t\t* @param string\n\t\t*/";
 		$txt .= "\n\t\t".'$this->view = '."'$view';";
-		$txt .= "\n\t}\n\n}";
+		$txt .= "\n\t}\n}";
 
 		return $txt;
 	}
 	
+	/**
+	* clear all controllers created
+	*
+	* @return bool
+	*/
+	public static function clear()
+	{
+		$path = root().'app/exceptions/*.php';
+
+		$files = File::glob($path);
+		//
+		foreach ($files as $file) 
+			File::delete($file);
+		//
+		Alias::clear('exceptions');
+		//
+		return true;
+	}
 
 }
