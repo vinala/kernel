@@ -142,6 +142,22 @@ class Alias
 
 	}
 
+	/**
+	* Clear alias array
+	*
+	* @param string $key (exceptions , controllers , models)
+	* @return bool
+	*/
+	public static function clear($key)
+	{
+		self::$aliases[$key] = [];
+		self::$aliases['kernel'] = config('alias.kernel');
+		dc(self::$aliases);
+		//
+		Aliases::set(config('alias.enable') , self::$aliases);
+	}
+	
+
 	
 	
 
