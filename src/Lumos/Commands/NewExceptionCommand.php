@@ -65,15 +65,21 @@ class NewExceptionCommand extends Commands
             Alias::update('exceptions.'.$class , 'App\Exception\\'.$class );
         }
         //
-        $this->show($process);
+        $this->show($process , $name);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
-        if($process) $this->info("\nThe exception was created\n");
+        $this->title('New exception command :');
+        //
+        if($process) 
+        {
+            $this->info("\nThe exception was created");
+            $this->comment(" -> Path : app/exceptions/$name.php\n");
+        }
         else $this->error("\nThe exception is already existe\n");
     }
 }
