@@ -490,6 +490,33 @@ class Commands extends Command
     }
 
     /**
+    * Show to Vinala lumos title
+    *
+    * @param string $title
+    * @return null
+    */
+    public function title($sub = '' , $title = 'Vinala Lumos')
+    {
+        if($title != '')
+        {
+            $this->console->line("\n".$title);
+            //
+            $underline = '';
+            for ($i=0; $i < strlen($title); $i++) { 
+                $underline .= '=';
+            }
+            //
+            $this->console->line($underline);
+        }
+        //
+        if($sub != '')
+        {
+            $this->console->line("\n".$sub);
+        }
+    }
+    
+
+    /**
      * ask user for some information
      */
     public function ask($text,$response = "")
