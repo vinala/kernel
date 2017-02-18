@@ -157,7 +157,16 @@ class Redirector
 	{
 		$path = Url::root();
 
-		return self::locate($path.$route , $secure);
+		if($route == '/') 
+		{
+			$route = $path;
+		}
+		else
+		{
+			$route = $path.$route;
+		}
+
+		return self::locate($route , $secure);
 	}
 	
 	
