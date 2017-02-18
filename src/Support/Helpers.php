@@ -791,7 +791,16 @@ if ( ! function_exists("redirect"))
 		}
 		elseif(is_string($url))
 		{
-			return Redirect::to($url , $extra , $secure);
+			if($url[0] = '@')
+			{
+				$url = substr($url, 1);
+
+				return Redirect::route($url , $secure);
+			}
+			else
+			{
+				return Redirect::to($url , $extra , $secure);
+			}
 		}
 		
 	}	
