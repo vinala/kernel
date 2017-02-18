@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Process ;
 
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Filesystem\File;
+use Vinala\Kernel\Objects\DateTime;
 
 /**
 * Documentation
@@ -54,7 +55,9 @@ class Middleware
 		$txt = "<?php\n\n";
 		$txt .= "namespace App\Http\Middleware;\n\n";
 		$txt .= "use Vinala\Kernel\Http\Request;\n\n";
-		$txt .= "/**\n* ".$name." Middleware\n*\n* @author ".config('app.owner')."\n**/\n";
+		$txt .= "/**\n* ".$name." Middleware\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "**/\n";
 		$txt .= "class $name\n{\n\n";
 		$txt .= "\t/**\n\t* Handle the middleware\n";
 		$txt .= "\t*\n\t* @param Vinala\Kernel\Http\Request \$req\n";
