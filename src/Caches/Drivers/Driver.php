@@ -52,11 +52,6 @@ class Driver
 	{
 		$item = $this->adapter->getItem($key);
 
-		if(is_null($secs))
-		{
-			$item->expiresAfter($secs);
-		}
-
 		return $item;
 	}
 	
@@ -70,6 +65,8 @@ class Driver
 	public function get($key , $default = null)
 	{
 		$item = $this->set($key);
+
+		return $item->get();
 
 		if ($item->isHit()) 
 		{
@@ -90,13 +87,13 @@ class Driver
 	*/
 	public function put($key  , $value , $secs = 0)
 	{
-		$item = $this->set($key , $secs);
+		$item = $this->set($key);
 
 		$item->set($value);
 
-		$this->adapter->save($item);
+		$item->expiresAfter($secs);
 
-		return new Item($item);
+		$this->adapter->save($item);
 	}
 
 	/**
@@ -149,7 +146,20 @@ class Driver
 	{
 		$item = $this->set($key);
 
-		$item->expiresAfter($secs); 
+		$expiration = $item->getExpiration()->getTimestamp();
+
+		$now = time();
+
+		if($expiration > $now) 
+		{
+			$interval = ($expiration - $now) + $secs;
+		}
+		else
+		{
+			$interval = $secs;
+		}
+
+		$item->expiresAfter($interval); 
 		
 		$this->adapter->save($item);
 
