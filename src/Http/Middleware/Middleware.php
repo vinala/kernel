@@ -109,11 +109,22 @@ class Middleware
 	* @param string $key
 	* @return string
 	*/
-	public static function get($name , $key = 'route')
+	public static function get($name)
 	{
-		exception_if( ! array_has(self::$filters , $key.'.'.$name) , MiddlewareNotFoundException::class , $name);
+		if(array_has(self::$filters , 'app.'.$name))
+		{
+			return ['app' , array_get(self::$filters , 'app.'.$name)];
+		}
+		elseif(array_has(self::$filters , 'route.'.$name))
+		{
+			return ['route' , array_get(self::$filters , 'route.'.$name)];
+		}
+		elseif(array_has(self::$filters , 'groups.'.$name))
+		{
+			return ['groups' , array_get(self::$filters , 'groups.'.$name)];
+		}
 
-		return array_get(self::$filters , $key.'.'.$name);
+		exception(MiddlewareNotFoundException::class , $name);
 	}
 	
 	
