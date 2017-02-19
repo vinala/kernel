@@ -152,7 +152,6 @@ class Alias
 	{
 		self::$aliases[$key] = [];
 		self::$aliases['kernel'] = config('alias.kernel');
-		dc(self::$aliases);
 		//
 		Aliases::set(config('alias.enable') , self::$aliases);
 	}
