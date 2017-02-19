@@ -4,6 +4,8 @@ namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Objects\DateTime;
+use Vinala\Kernel\Filesystem\File;
 
 /**
 * Exception class
@@ -22,13 +24,13 @@ class Events
 	public static function create($name)
 	{
 		$root = Process::root;
-		//
-		if(!file_exists($root."app/events/$name.php")){
-			$file = fopen($root."app/events/$name.php", "w");
-			$txt = self::set($name);
-			fwrite($file, $txt);
-			fclose($file);
-			//
+		
+		$path = $root."app/events/$name.php";
+
+		if( ! File::exists($path))
+		{
+			File::put($path , self::set($name) );
+
 			return true;
 		}
 		else return false;
@@ -47,7 +49,9 @@ class Events
 		$txt = "<?php\n\n";
 		$txt .= "namespace Vinala\App\Events;\n\n";
 		$txt .= "use Vinala\Kernel\Events\EventListener as Listener;\n\n";
-		$txt .= "/**\n* ".$name." Event\n*/\n";
+		$txt .= "/**\n* $name Event\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "**/\n";
 		$txt .= "class $name extends Listener\n{\n\n";
 		$txt .= self::eventArray();
 		$txt .= self::eventFunction();
