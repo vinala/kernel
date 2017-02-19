@@ -38,8 +38,8 @@ class NewModelCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_model').
-        ' {className : what\'s the name of the model class?} {tableName : what\'s the name of the datatable?} {--not_aliased : if set , the model will be not aliased}';
+        $this->key = config('lumos.new_model').
+        ' {className : what\'s the name of the model class?} {tableName? : what\'s the name of the datatable?} {--not_aliased : if set , the model will be not aliased}';
         $this->description = 'New model';
     }
 
@@ -58,6 +58,12 @@ class NewModelCommand extends Commands
     {
         $class = $this->argument('className');
         $table = $this->argument('tableName');
+        //
+        if( is_null($table) )
+        {
+            $table = $class;
+        }
+        //
         $notAliased = $this->option('not_aliased');
         //
         $process = Model::create( $class , $table , $notAliased);
@@ -69,15 +75,21 @@ class NewModelCommand extends Commands
             Alias::update('models.'.$class , 'App\Model\\'.$class );
         }
         //
-        $this->show($process);
+        $this->show($process , $class);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
-        if($process) $this->info("\nThe model was created\n");
+        $this->title('New model command :');
+        //
+        if($process) 
+        {
+            $this->info("\nThe model was created");
+            $this->comment(" -> Path : resources/models/$name.php\n");
+        }
         else $this->error("\nThe model is already existe\n");
     }
 }
