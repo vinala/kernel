@@ -462,14 +462,55 @@ class Routes
 	{
 		$middleware = Middleware::get($filtre);
 
-		$middleware = instance($middleware);
-
-		$result = $middleware->handle(new Request);
+		if($middleware[0] == 'route')
+		{
+			$result = static::callRouteMiddleware($middleware[1]);
+		}
+		elseif($middleware[0] == 'groups')
+		{
+			$result = static::callGroupMiddleware($middleware[1]);
+		}
 
 		if(!$result) { $falseok=$filtre;  }
 
 		exception_if( ! $result , MiddlewareWallException::class , get_class($middleware));
 	}
+
+	/**
+	* Check middleware group
+	*
+	* @param array $middlewares
+	* @return bool
+	*/
+	protected static function callGroupMiddleware(array $middlewares)
+	{
+		$result = 'DO_NOTHING';
+		//
+		foreach ($middlewares as $key => $value) 
+		{
+			if( $result != 'DO_NOTHING' ) break;
+			//
+			$middleware = instance($value);
+
+			$result = $middleware->handle(new Request);
+		}
+
+		return $result;
+	}
+
+	/**
+	* Check middleware route
+	*
+	* @param mixed $middlewares
+	* @return bool
+	*/
+	protected static function callRouteMiddleware($middleware)
+	{
+		$middleware = instance($middleware);
+
+		return $middleware->handle(new Request);
+	}
+	
 
 	protected static function callFilters($filtre,&$ok,&$falseok)
 	{
