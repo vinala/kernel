@@ -49,8 +49,9 @@ class ClearControllersCommand extends Commands
      * Execute the command
      */
     public function exec()
-    {
-        $ok = $this->confirm("Are you sure ? [y/n]" , false);
+    {        
+        $this->title();
+        $ok = $this->confirm("\nAre you sure ? [y/n]" , false);
         //
         if($ok)
         {
@@ -65,7 +66,12 @@ class ClearControllersCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("The controllers folder was emptied");
-        else $this->error("The controllers folder won't be emptied : ".Database::execErr());
+        $this->title('Clear controllers command :' , '');
+        //
+        if($process) 
+        {
+            $this->info("\nThe controllers folder was emptied\n");
+        }
+        else $this->error("\nThe controllers folder won't be emptied\n");
     }
 }
