@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Process;
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Filesystem\File;
+use Vinala\Kernel\Objects\DateTime;
 
 /**
 * Controller class
@@ -37,8 +38,12 @@ class Controller
 	public static function set($class , $resources = false)
 	{
 		$txt = "<?php\n\nnamespace App\Controller;\n\nuse Vinala\Kernel\MVC\Controller;\n\n";
-		$txt.="/**\n* class de controller $class\n*/\nclass $class extends Controller\n{";
-
+		//
+		$txt .= "/**\n* ".$class." Controller\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "**/\n";
+		$txt .= "class $class extends Controller\n{";
+		//
 		if($resources)
 		{
 			//index
