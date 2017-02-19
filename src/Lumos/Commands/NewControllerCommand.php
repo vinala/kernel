@@ -54,23 +54,29 @@ class NewControllerCommand extends Commands
         $resource = $this->option("resource");
         $notAliased = $this->option('not_aliased');
         //
-        $process = Controller::create($name , $route , $resource , $notAliased);
+        $process = Controller::create($name , $route , $resource);
 
         if( ! $notAliased)
         {
             $class = ucfirst($name);
             //
-            Alias::update('controllers.'.$class , 'App\Controller\\'.$class );
+            Alias::update('controllers.'.$class , 'App\Controller\\'.$name );
         }
-        $this->show($process);
+        $this->show($process , $name);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
-        if($process) $this->info("\nThe controller was created\n");
+        $this->title('New controller command :');
+        //
+        if($process) 
+        {
+            $this->info("\nThe controller was created");
+            $this->comment(" -> Path : resources/controllers/$name.php\n");
+        }
         else $this->error("\nThe controller is already existe\n");
     }
 }
