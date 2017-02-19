@@ -35,7 +35,7 @@ class Command
 	{
 		$txt = "<?php\n\nnamespace Vinala\App\Support\Lumos;\n\n";
 		$txt .= "use Vinala\Kernel\Console\Command\Commands;\n\n";
-		$txt .= "/**\n* $file Controller\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "/**\n* $file Command\n*\n* @author ".config('app.owner')."\n";
 		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
 		$txt .= "**/\n";
 		$txt .=" class $file extends Commands\n{\n\t";
