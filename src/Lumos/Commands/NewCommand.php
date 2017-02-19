@@ -53,15 +53,24 @@ class NewCommand extends Commands
         //
         $process = Command::create($file , $command);
         //
-        $this->show($process);
+        $this->show($process , $file);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
         if($process) $this->info("The command was created");
         else $this->error("The command is already existe");
+
+        $this->title('New command :');
+        //
+        if($process) 
+        {
+            $this->info("\nThe command was created");
+            $this->comment(" -> Path : support/shell/$name.php\n");
+        }
+        else $this->error("\nThe command is already existe\n");
     }
 }
