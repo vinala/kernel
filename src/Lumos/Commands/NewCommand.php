@@ -61,9 +61,6 @@ class NewCommand extends Commands
     */
     public function show($process , $name)
     {
-        if($process) $this->info("The command was created");
-        else $this->error("The command is already existe");
-
         $this->title('New command :');
         //
         if($process) 
