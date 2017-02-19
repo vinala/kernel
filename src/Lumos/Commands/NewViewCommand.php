@@ -64,16 +64,45 @@ class NewViewCommand extends Commands
         //
         $process = View::create($name , $temp);
         //
-        $this->show($process);
+        $this->show($process , [$name , $temp]);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    private function show($process , $extra)
     {
-        if($process == 1) $this->info("The view was created");
+        $path = $this->name($extra);
+
+        $this->title('New View command :');
+        //
+        if($process == 1) 
+        {
+            $this->info("\nThe view was created");
+            $this->comment(" -> Path : resources/views/$path\n");
+        }
         else if($process == 2) $this->error("The view is already existe");
         else if($process == 3) $this->error("Failed to create directories ...");
     }
+
+    /**
+    * Get the path , name , and type of view
+    *
+    * @param string $name
+    * @return string
+    */
+    private function name($extra)
+    {
+        $file = $extra[0];
+        $file = str_replace('.', '/', $file);
+        //
+        switch ($extra[1]) {
+            case 'smarty': $extention = ".tpl.php"; break;
+            case 'atom': $extention = ".atom"; break;
+            default: $extention = ".php"; break;
+        }
+
+        return $file.$extention;
+    }
+    
 }
