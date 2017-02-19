@@ -78,15 +78,19 @@ class ExecSchemaCommand extends Commands
      */
     protected function backup($process)
     {
+        $this->title('Execute schema command :');
         if($process)
         {
             $this->line("");
             //
-            $ok = $this->confirm("Wanna make backup for database ? [yes/no]" , false);
+            $ok = $this->confirm("\nWanna make backup for database ? [yes/no]" , false);
             //
             if($ok) 
-                if(Database::export()) $this->info("The database saved");
-                else $this->error("The database wasn't saved");
+            {
+                if(Database::export()) $this->info("\nThe database saved\n");
+                else $this->error("\nThe database wasn't saved\n");
+            }
+                
         }
     }
 }
