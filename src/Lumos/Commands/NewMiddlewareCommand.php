@@ -44,15 +44,21 @@ class NewMiddlewareCommand extends Commands
 
         $process = Middleware::create($name);
 
-        $this->show($process);
+        $this->show($process , $name);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
-        if($process) $this->info("\nThe middleware was created\n");
+        $this->title('New middleware command :');
+        //
+        if($process) 
+        {
+            $this->info("\nThe middleware was created");
+            $this->comment(" -> Path : app/http/middleware/$name.php\n");
+        }
         else $this->error("\nThe middleware is already existe\n");
     }
 }
