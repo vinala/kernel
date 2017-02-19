@@ -4,6 +4,8 @@ namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Objects\DateTime;
+use Vinala\Kernel\Filesystem\File;
 
 /**
 * Controller class
@@ -13,13 +15,13 @@ class Command
 	public static function create($file,$command)
 	{
 		$Root = Process::root;
-		//
-		if(!file_exists($Root."support/shell/$file.php")){
-			$myfile = fopen($Root."support/shell/$file.php", "w");
-			$txt = self::set($file, $command);
-			fwrite($myfile, $txt);
-			fclose($myfile);
-			//
+		
+		$path = $Root."support/shell/$file.php";
+
+		if( ! File::exists($path))
+		{
+			File::put($path , self::set($file , $command));
+
 			return true;
 		}
 		else return false;
@@ -33,7 +35,10 @@ class Command
 	{
 		$txt = "<?php\n\nnamespace Vinala\App\Support\Lumos;\n\n";
 		$txt .= "use Vinala\Kernel\Console\Command\Commands;\n\n";
-		$txt.="\n\nclass $file extends Commands\n{\n\t";
+		$txt .= "/**\n* $file Controller\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "**/\n";
+		$txt .=" class $file extends Commands\n{\n\t";
 
 		$txt.="\n\t/**\n\t * The key of the console command.\n\t *\n\t * @var string\n\t */\n\tprotected ".'$key = '."'$command';\n\n";
 		$txt.="\n\t/**\n\t * The console command description.\n\t *\n\t * @var string\n\t */\n\tprotected ".'$description = '."'say hello to the world';\n\n";
