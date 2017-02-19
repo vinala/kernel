@@ -53,10 +53,12 @@ class NewEventListenerCommand extends Commands
     */
     public function show($process , $file)
     {
+        $this->title('New event command :');
+        //
         if($process) 
         {
             $this->info("\nThe event listener was created");
-            $this->comment("  **file : app/events/$file.php \n");
+            $this->comment(" -> Path : app/events/$file.php\n");
         }
         else $this->error("\nThe event listener is already existe\n");
     }
