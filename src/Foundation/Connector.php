@@ -200,6 +200,7 @@ class Connector
 		self::call(
 			array(
 				'ConfigException', 
+				'DatabaseDriverNotFoundException',
 				'AliasedClassNotFoundException'
 				),
 			self::$path.'Config/Exceptions/'
@@ -406,6 +407,7 @@ class Connector
 				'FileDriver', 
 				'ArrayDriver',
 				'PhpFilesDriver',
+				'ApcDriver',
 				'PDODriver'
 				),
 			self::$path.'Caches/Drivers/'
