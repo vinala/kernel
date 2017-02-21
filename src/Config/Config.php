@@ -6,6 +6,7 @@ use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Foundation\Connector;
 use Vinala\Kernel\Config\Exceptions\ConfigException;
 use Vinala\Kernel\Mocking\configMocking;
+use Vinala\Kernel\Config\Exceptions\DatabaseDriverNotFoundException;
 
 /**
 * Config Class
@@ -153,6 +154,8 @@ class Config
 		$params = array("migration" ,"prefixing" ,"prefixe" ,"default" );
 		$data = self::$params['database'];
 		$driver = $data['default'];
+		//
+		exception_if(! in_array( $driver , $data['connections'] ) , DatabaseDriverNotFoundException::class ,  $driver );
 		//
 		return ( ! in_array( $key , $params )) ? $data['connections'][$driver][$key] : $data[$key] ;
 	}
