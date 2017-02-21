@@ -155,7 +155,7 @@ class Config
 		$data = self::$params['database'];
 		$driver = $data['default'];
 		//
-		exception_if(! in_array( $driver , $data['connections'] ) , DatabaseDriverNotFoundException::class ,  $driver );
+		exception_if(! array_has( $data['connections'] , $driver ) , DatabaseDriverNotFoundException::class ,  $driver );
 		//
 		return ( ! in_array( $key , $params )) ? $data['connections'][$driver][$key] : $data[$key] ;
 	}
