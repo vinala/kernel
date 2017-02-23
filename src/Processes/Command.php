@@ -12,7 +12,7 @@ use Vinala\Kernel\Filesystem\File;
 */
 class Command
 {
-	public static function create($file,$command)
+	public static function create($file,$command , $database)
 	{
 		$Root = Process::root;
 		
@@ -20,7 +20,7 @@ class Command
 
 		if( ! File::exists($path))
 		{
-			File::put($path , self::set($file , $command));
+			File::put($path , self::set($file , $command , $database));
 
 			return true;
 		}
@@ -31,8 +31,10 @@ class Command
 	/**
 	* prepare the text to put in command file
 	*/
-	public static function set($file, $command)
+	public static function set($file, $command , $database)
 	{
+		$database = $database ? 'true' : 'false' ;
+		//
 		$txt = "<?php\n\nnamespace Vinala\App\Support\Lumos;\n\n";
 		$txt .= "use Vinala\Kernel\Console\Command\Commands;\n\n";
 		$txt .= "/**\n* $file Command\n*\n* @author ".config('app.owner')."\n";
@@ -42,7 +44,7 @@ class Command
 
 		$txt.="\n\t/**\n\t * The key of the console command.\n\t *\n\t * @var string\n\t */\n\tprotected ".'$key = '."'$command';\n\n";
 		$txt.="\n\t/**\n\t * The console command description.\n\t *\n\t * @var string\n\t */\n\tprotected ".'$description = '."'say hello to the world';\n\n";
-		$txt.="\n\t/**\n\t * True if the command will use database.\n\t *\n\t * @var bool\n\t */\n\tprotected ".'$database = '."false;\n\n";
+		$txt.="\n\t/**\n\t * True if the command will use database.\n\t *\n\t * @var bool\n\t */\n\tprotected ".'$database = '."$database ;\n\n";
 		$txt.="\n\t/**\n\t * Execute the console command.\n\t *\n\t * @return mixed\n\t */\n\tpublic function handle()\n\t{\n\t\t ".'$this->line("What\'s up!"); '."\n\t}";
 		$txt.="\n}";
 		return $txt;
