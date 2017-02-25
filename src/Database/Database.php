@@ -17,7 +17,23 @@ class Database
 	static $default=null;
 	static $serverData=array();
 	static $defaultData=array();
-	private static $driver=null;
+
+	/**
+	* The driver used in database surface
+	*
+	* @var Vinala\Kernel\Database\Drivers 
+	*/
+	private static $driver = null ;
+
+
+	/**
+	* True if the framework use the database surface
+	*
+	* @var bool 
+	*/
+	private static $enabled = false ;
+	
+	
 
 	public static function ini()
 	{
@@ -25,12 +41,24 @@ class Database
 		{
 			self::$driver=self::driver();
 			self::$driver->connect();
+			static::$enabled = true;
 		}
 	}
 
 	//--------------------------------------------------------
 	// Conenction functions
 	//--------------------------------------------------------
+
+	/**
+	* Get if database surface is enabled
+	*
+	* @return bool
+	*/
+	public static function isEnabled()
+	{
+		return static::$enabled;
+	}
+	
 
 	/**
 	* Set the driver used in config files
