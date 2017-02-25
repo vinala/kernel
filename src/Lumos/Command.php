@@ -17,6 +17,7 @@ use Symfony\Component\Console\Helper\Table;
 use Vinala\Kernel\Console\Argument;
 use Vinala\Kernel\Console\Option;
 use Vinala\Kernel\Database\Database;
+use LogicException;
 
 
 
@@ -117,7 +118,14 @@ class Commands extends Command
     	$this->input = $input;
     	$this->setOutput($output);
         //
-        if($this->database) Database::ini();
+        if($this->database && config('components.database'))
+        {
+            Database::ini();
+        } 
+        elseif($this->database && ! config('components.database'))
+        {
+            exception(LogicException::class , 'The database surface is disabled');
+        }
         //
         $this->handle();
     }
