@@ -231,6 +231,7 @@ class Connector
 	public static function component()
 	{
 		self::need(self::$path.'Foundation/Component.php');
+		self::need(self::$path.'Foundation/Exceptions/SurfaceDisabledException.php');
 	}
 
 	/**
