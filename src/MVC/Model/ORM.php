@@ -14,6 +14,7 @@ use Vinala\Kernel\MVC\ORM\Exception\TableNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
 use Vinala\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\ModelNotFoundException;
+use Vinala\Kernel\Foundation\Exceptions\SurfaceDisabledException;
 
 /**
 * The Mapping Objet-Relationnel (ORM) class
@@ -142,7 +143,12 @@ class ORM
 	*/
     protected $_state ;
 
-    
+    /**
+    * Array of data
+    *
+    * @var array 
+    */
+    protected $data = null ;   
 
 
 
@@ -159,6 +165,8 @@ class ORM
 	function __construct()
 	{
 		$params = func_get_args();
+		//
+		$this->checkDatabase();
 		//
 		if(Table::count($params) == 1 && is_array($params[0])) 
 			$this->secondConstruct($params[0]);
@@ -245,6 +253,27 @@ class ORM
 	//--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
+
+    /**
+    * Check if database surface is on
+    *
+    * @return bool
+    */
+    protected function checkDatabase()
+    {
+    	exception_if( ! config('components.database') , SurfaceDisabledException::class  , 'database' , 'The ORM surface require the Database surface to be enabled'  );
+    }
+
+    /**
+    * Get array of data
+    *
+    * @return array
+    */
+    public function getData()
+    {
+    	return $this->data;
+    }
+    
 
     /**
 	* get the model name
@@ -510,6 +539,7 @@ class ORM
 	protected function convert($data)
 	{
 		foreach ($data[0] as $key => $value) 
+		{
 			if( ! $this->_kept && ! $this->_stashed ) 
 			{
 				$this->$key = $value ;
@@ -520,6 +550,9 @@ class ORM
 				if($this->_kept) $this->_keptData[$key] = $value ;
 				if($this->_stashed) $this->_stashedData[$key] = $value ;
 			}
+
+			$this->data[$key] = $value ;
+		}
 	}
 
 	/**
