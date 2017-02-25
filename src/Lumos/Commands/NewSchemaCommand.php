@@ -59,15 +59,22 @@ class NewSchemaCommand extends Commands
         //
         $process = Migrations::add($name);
         //
-        $this->show($process);
+        $this->show($process , $name);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
-        if($process) $this->info("The schema was created");
-        else $this->error("The schema is already existe");
+        $this->title('New schema command :');
+        //
+        if(! is_null($process) )
+        {
+            $this->info("\nThe schema was created");
+            $this->comment(" -> Path : database/schema/$process"."_$name.php\n");
+        }
+        else $this->error("\nThe schema is already existe\n");
+
     }
 }

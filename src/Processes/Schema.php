@@ -116,7 +116,7 @@ class Migrations
 		//
 		Migration::updateRegister($Unixtime."_".$name,"init",$root);
 		//
-		return true;
+		return $Unixtime;
 	}
 
 	public static function rollback($rt = null)
