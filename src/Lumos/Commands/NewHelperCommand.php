@@ -50,15 +50,21 @@ class NewHelperCommand extends Commands
         //
         $process = Helper::create($name);
 
-        $this->show($process);
+        $this->show($process , $name);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
-        if($process) $this->info("\nThe helper was created\n");
+        $this->title('New helper command :');
+        //
+        if(! is_null($process) )
+        {
+            $this->info("\nThe helper was created");
+            $this->comment(" -> Path : support/helpers/$name.php\n");
+        }
         else $this->error("\nThe helper is already existe\n");
     }
 }
