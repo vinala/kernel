@@ -53,6 +53,7 @@ class SwitchDebugCommand extends Commands
     */
     public function show($process , $debug)
     {
+        $this->title('Switch debug mode command :');
         if($process) $this->info("\nThe debug mode is " . ($debug ? 'enabled' : 'disabled') ."\n");
         else $this->error("\nThe debug mode won't be switched\n");
     }
