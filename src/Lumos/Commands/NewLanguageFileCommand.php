@@ -52,15 +52,23 @@ class NewLanguageFileCommand extends Commands
         //
         $process = Translator::create($file);
         //
-        $this->show($process);
+        $file = str_replace('.','/', $file);
+        //
+        $this->show($process , $file);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $name)
     {
-        if($process) $this->info("The translator file was created");
-        else $this->error("The translator file is already existe");
+        $this->title('New translator command :');
+        //
+        if(! is_null($process) )
+        {
+            $this->info("\nThe translator file was created");
+            $this->comment(" -> Path : resources/translator/$name.php\n");
+        }
+        else $this->error("\nThe translator file is already existe\n");
     }
 }

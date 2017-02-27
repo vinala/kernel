@@ -5,6 +5,9 @@ namespace Vinala\Kernel\Process;
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Objects\DateTime;
+use Vinala\Kernel\Filesystem\File;
+
 use Vinala\Kernel\Process\Exception\TranslatorFolderNeededException;
 use Vinala\Kernel\Process\Exception\TranslatorManyFolderException;
 
@@ -33,7 +36,7 @@ class Translator
 
 	protected static function createFolders($folders, $root)
 	{
-		$initPath = $path = $root."app/lang/";
+		$initPath = $path = $root."resources/translator/";
 		//
 		if(count($folders) > 2) throw new TranslatorManyFolderException();
 		//
@@ -58,23 +61,24 @@ class Translator
 
 	public static function createFile($file, $path)
 	{
-
-		if(!file_exists("$path$file.php"))
+		if( ! File::exists("$path$file.php"))
 		{
-			$myfile = fopen("$path/$file.php" , "w");
-			$txt = self::set();
-			//
-			fwrite($myfile, $txt);
-			fclose($myfile);
-			//
+			File::put("$path$file.php" , self::set($file));
+
 			return true;
 		}
 		else return false;
 	}
 
-	public static function set()
+	public static function set($file)
 	{
-		return "<?php\n\nreturn array(\n\t'var_lan_name_1' => 'var_lang_value_1',\n\t'var_lan_name_2' => 'var_lang_value_2'\n);";
+		$txt = "<?php\n\n";
+		$txt .= "/**\n* $file translator\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "**/\n\n";
+		$txt .= 'return'." [\n\t // 'key' => 'value',\n];";
+		
+		return $txt;
 	}
 
 	/** 
@@ -84,15 +88,15 @@ class Translator
 	{
 		$data = array();
 		//
-		$folders = glob(Application::$root."app/lang/*");
+		$folders = glob(Application::$root."resources/translator/*");
 		//
 		foreach ($folders as $key => $value) {
-			$folder = \Strings::splite($value , "app/lang/");
+			$folder = \Strings::splite($value , "resources/translator/");
 			$folder = $folder[1];
 			//
 			$data[] = ">".$folder;
 			//
-			foreach (glob(Application::$root."app/lang/".$folder."/*.php") as $key2 => $value2) {
+			foreach (glob(Application::$root."resources/translator/".$folder."/*.php") as $key2 => $value2) {
 				$file = \Strings::splite($value2 , "app/lang/$folder/");
 				$file = $file[1];
 				//
