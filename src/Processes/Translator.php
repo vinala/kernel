@@ -74,9 +74,9 @@ class Translator
 	{
 		$txt = "<?php\n\n";
 		$txt .= "/**\n* $file translator\n*\n* @author ".config('app.owner')."\n";
-		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n* @var array \n";
 		$txt .= "**/\n\n";
-		$txt .= 'return'." [\n\t // 'key' => 'value',\n];";
+		$txt .= 'return'." [\n\t// 'key' => 'value',\n];";
 		
 		return $txt;
 	}
