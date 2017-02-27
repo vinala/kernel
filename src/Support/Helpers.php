@@ -3,6 +3,7 @@
 
 use Vinala\Kernel\Support\FunctionArgs;
 use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Environment\Environment;
 use Vinala\Kernel\MVC\View;
 use Vinala\Kernel\Router\Route;
 use Vinala\Kernel\Objects\DateTime;
@@ -99,11 +100,27 @@ if( ! function_exists("config"))
 	* shortcut for Config::get function
 	*		
 	* @param string $key
+	* @param string $value
 	* @return mixed
 	*/
 	function config($key ,$value = null)
 	{
 		return Config::get($key , $value);
+	}
+}
+
+if( ! function_exists("env"))
+{
+	/**
+	* Helper to get environment variables
+	*		
+	* @param string $key
+	* @param mixed $value
+	* @return mixed
+	*/
+	function env($key , $value = null)
+	{
+		return Environment::get($key , $value);
 	}
 }
 
