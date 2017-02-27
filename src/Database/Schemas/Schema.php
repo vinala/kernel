@@ -236,13 +236,13 @@ class Schema
 	}
 
 	/**
-	* function to add remembreToken column
+	* function to add rememberToken column
 	*
 	* @return schema
 	*/
-	public function remembreToken()
+	public function rememberToken()
 	{
-		return self::$driver->remembreToken();
+		return self::$driver->rememberToken();
 	}
 
 	//--------------------------------------------------------
