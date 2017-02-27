@@ -50,15 +50,21 @@ class NewLinkFileCommand extends Commands
         $name = $this->argument("name");
         $process = Links::create($name);
         //
-        $this->show($process);
+        $this->show($process , $name);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process , $file)
     {
-        if($process) $this->info("\nThe link file was created\n");
+        $this->title('New linker command :');
+        //
+        if(! is_null($process) )
+        {
+            $this->info("\nThe link file was created");
+            $this->comment(" -> Path : resources/links/$file.php\n");
+        }
         else $this->error("\nThe link file is already existe\n");
     }
 }
