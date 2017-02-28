@@ -40,7 +40,7 @@ class ExecSchemaCommand extends Commands
     public function set()
     {
 
-        $this->key = Config::get('lumos.exec_schema');
+        $this->key = Config::get('lumos.exec_schema').' {schema? : what\'s the name of the schema?} ';
         $this->description = 'Execute the last schema created';
 
     }
@@ -58,7 +58,9 @@ class ExecSchemaCommand extends Commands
      */
     public function exec()
     {
-        $process = Migrations::exec();
+        $schema = $this->argument("schema");
+        
+        $process = Migrations::exec($schema);
         //
         $this->show($process);
         $this->backup($process);

@@ -15,45 +15,57 @@ use Exception;
 */
 class Migrations
 {
-	public static function exec($rt = null)
+	public static function exec($file = null , $rt = null)
 	{
 		Schema::ini();
 		//
 		$root = is_null($rt) ? Process::root : $rt ;
-		//
-		$r=glob($root."database/schema/*.php");
-		//
-		$pieces=array();
-		$pieces1=array();
-		$pieces2=array();
-		//
-		$time="";
-		$name="";
-		//
-		$f = array();
-		foreach ($r as $key) {
-			$pieces = explode("database/schema/", $key);
-			$pieces1 = explode("_", $pieces[1]);
-			$time=$pieces1[0];
-			$p=explode(".", $pieces1[1]);
-			$name=$p[0];
-			$f[]=$pieces1[0];
-			$pieces2[]=$pieces[1];
-			$full_name=$pieces1[0]."_".$name;
-		}
-		//
-		$mx=max($f);
-		//
-		$ind=0;$i=0;
-		//
-		foreach ($pieces2 as $value) {
-			
-			if (strpos($value,$mx) !== false) $ind=$i;
 
-			$i++;
+		if(is_null($file))
+		{
+			//
+			$r=glob($root."database/schema/*.php");
+			//
+			$pieces=array();
+			$pieces1=array();
+			$pieces2=array();
+			//
+			$time="";
+			$name="";
+			//
+			$f = array();
+			foreach ($r as $key) {
+				$pieces = explode("database/schema/", $key);
+				$pieces1 = explode("_", $pieces[1]);
+				$time=$pieces1[0];
+				$p=explode(".", $pieces1[1]);
+				$name=$p[0];
+				$f[]=$pieces1[0];
+				$pieces2[]=$pieces[1];
+				$full_name=$pieces1[0]."_".$name;
+			}
+			//
+			$mx=max($f);
+			//
+			$ind=0;$i=0;
+			//
+			foreach ($pieces2 as $value) {
+				
+				if (strpos($value,$mx) !== false) $ind=$i;
+
+				$i++;
+			}
+			$link=$r[$ind];
+			//
 		}
-		$link=$r[$ind];
-		//
+		else
+		{
+			$link = $root."database/schema/$file.php";
+			$segemnts = explode('_', $file);
+			$time = $segemnts[0];
+			$name = $segemnts[1];
+			$full_name = $file;
+		}
 
 
 		include_once $link;
