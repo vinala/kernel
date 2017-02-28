@@ -87,7 +87,7 @@ class Migrations
 		$txt.="/*\n* @date : ".$Datetime."(".$Unixtime.")\n* @name : ".$name."\n*/\n\n\n";
 		$txt .= "/**\n* Run the schemas.\n*/\n";
 		$txt .= "function up()\n{\n/*\treturn Schema::create('$name',function(".'$tab'.")\n\t{\n\t\t";
-		$txt .= '$tab->id('."'$name"."_id'".");\n\t\t".'$tab->string('."'name'".");\n\t});\n*/";
+		$txt .= '$tab->id('."'$name"."_id'".");\n\t\t".'$tab->string('."'name'".");\n\t});*/";
 		$txt .= "\n}\n\n";
 		$txt .= "/**\n* Reverse the schemas.\n*/\n";
 		$txt .= "function down()\n{\n\t// return Schema::drop('$name');\n";
