@@ -114,7 +114,7 @@ class Html
 			$encode = config( 'app.charset' );
 		}
 
-		return satic::selfTag('meta' , ['charset' => $encode]);
+		return static::selfTag('meta' , ['charset' => $encode]);
 	}
 
 	/**
