@@ -114,7 +114,27 @@ class Html
 			$encode = config( 'app.charset' );
 		}
 
-		return sattic::selfTag('meta' , ['charset' => $encode]);
+		return satic::selfTag('meta' , ['charset' => $encode]);
+	}
+
+	/**
+	* The HTML title tag
+	*
+	* @param string $title
+	* @return string
+	*/
+	public static function title( $title = null )
+	{
+		if( is_null($title) )
+		{
+			$title = config('app.title');	
+		} 
+
+		$tag = static::open('title');
+		$tag .= $title;
+		$tag .= static::close();
+
+		return $tag;
 	}
 	
 }
