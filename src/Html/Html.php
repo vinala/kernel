@@ -100,5 +100,21 @@ class Html
 	{
 		return static::open($tag , $options , true);
 	}
+
+	/**
+	* The HTML charset tag
+	*
+	* @param string $encode
+	* @return string
+	*/
+	public static function charset( $encode = null)
+	{
+		if( is_null($encode)) 
+		{
+			$encode = config( 'app.charset' );
+		}
+
+		return sattic::selfTag('meta' , ['charset' => $encode]);
+	}
 	
 }
