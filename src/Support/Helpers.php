@@ -16,6 +16,7 @@ use Vinala\Kernel\Cubes\Cube;
 use Vinala\Kernel\Http\Redirect\Redirect;
 use Vinala\Kernel\Http\Middleware\Middleware;
 use Vinala\Kernel\Object\Strings;
+use Vinala\Kernel\Http\Links;
 
 
 
@@ -672,6 +673,23 @@ if ( ! function_exists("array_except"))
 	}	
 }
 
+//--------------------------------------------------------
+// Linker Shortcuts
+//--------------------------------------------------------
+
+if ( ! function_exists("link")) 
+{
+	/**
+	* get link key
+	*
+	* @param string $key
+	* @return string
+	*/
+	function link( $key )
+	{
+		return Link::get($key);
+	}	
+}
 
 //--------------------------------------------------------
 // String Shortcuts
