@@ -135,7 +135,7 @@ class Views
 			'.tpl.php'
 		];
 
-		$nest = ! is_null($nest) ? $nest.'views/': $this->nest ;
+		$nest = ! is_null($nest) ? $nest.'views/': ! is_null($this->nest) ? $this->nest :root().'resources/views/' ;
 
 		$i = 0;
 		foreach ($extensions as $extension) 

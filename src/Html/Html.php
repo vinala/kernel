@@ -88,4 +88,53 @@ class Html
 		if (is_numeric($key)) $key = $value;
 		if ( ! is_null($value)) return $key.'="'.e($value).'"';
 	}
+
+	/**
+	* Build a self HTML Tag
+	*
+	* @param string $tag
+	* @param array $options
+	* @return string
+	*/
+	protected static function selfTag($tag , $options = array())
+	{
+		return static::open($tag , $options , true);
+	}
+
+	/**
+	* The HTML charset tag
+	*
+	* @param string $encode
+	* @return string
+	*/
+	public static function charset( $encode = null)
+	{
+		if( is_null($encode)) 
+		{
+			$encode = config( 'app.charset' );
+		}
+
+		return static::selfTag('meta' , ['charset' => $encode]);
+	}
+
+	/**
+	* The HTML title tag
+	*
+	* @param string $title
+	* @return string
+	*/
+	public static function title( $title = null )
+	{
+		if( is_null($title) )
+		{
+			$title = config('app.title');	
+		} 
+
+		$tag = static::open('title');
+		$tag .= $title;
+		$tag .= static::close();
+
+		return $tag;
+	}
+	
 }
