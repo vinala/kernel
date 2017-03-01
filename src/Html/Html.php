@@ -88,4 +88,17 @@ class Html
 		if (is_numeric($key)) $key = $value;
 		if ( ! is_null($value)) return $key.'="'.e($value).'"';
 	}
+
+	/**
+	* Build a self HTML Tag
+	*
+	* @param string $tag
+	* @param array $options
+	* @return string
+	*/
+	protected static function selfTag($tag , $options = array())
+	{
+		return static::open($tag , $options , true);
+	}
+	
 }
