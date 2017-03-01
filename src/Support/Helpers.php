@@ -677,7 +677,7 @@ if ( ! function_exists("array_except"))
 // Linker Shortcuts
 //--------------------------------------------------------
 
-if ( ! function_exists("link")) 
+if ( ! function_exists("lnk")) 
 {
 	/**
 	* get link key
@@ -685,7 +685,7 @@ if ( ! function_exists("link"))
 	* @param string $key
 	* @return string
 	*/
-	function link( $key )
+	function lnk( $key )
 	{
 		return Link::get($key);
 	}	
