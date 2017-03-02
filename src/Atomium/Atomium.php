@@ -180,7 +180,7 @@ class Atomium
 	{
 		foreach ($this->values as $key => $value) $$key = $value;
 		//
-		require_once  $this->TemplateDir.'/'.$this->templateFile;
+		require  $this->TemplateDir.'/'.$this->templateFile;
 	}
 
 	/**
