@@ -148,8 +148,10 @@ class Atomium
 	protected function name($name = null)
 	{
 		$filename = is_null($name) ? $this->filename() : $name;
+		
 		$hash = Hash::make($filename);
-		$name = $hash."_".$filename;
+
+		$name = $hash;
 		//
 		$this->templateFile = $name ;
 		//
@@ -169,8 +171,7 @@ class Atomium
 	 */
 	protected function filename()
 	{
-		$data = Strings::splite($this->file , "/");
-		return $data[count($data)-1];
+		return $this->file;
 	}
 
 	/**
@@ -179,7 +180,7 @@ class Atomium
 	protected function display()
 	{
 		foreach ($this->values as $key => $value) $$key = $value;
-		//
+
 		require  $this->TemplateDir.'/'.$this->templateFile;
 	}
 
