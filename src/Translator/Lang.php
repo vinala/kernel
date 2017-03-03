@@ -142,12 +142,12 @@ class Lang
 			{
 				if(Cookie::get($cookieName) != Session::get($key))
 				{
-					Cookie::create($cookieName , Session::get($key) , (60*24*7));
+					Cookie::create($cookieName , Session::get($key) , config('lang.lifetime') );
 				}
 			}
 			else
 			{
-				Cookie::create($cookieName , Session::get($key) , (60*24*7));
+				Cookie::create($cookieName , Session::get($key) , config('lang.lifetime') );
 			}
 		}
 
@@ -162,7 +162,7 @@ class Lang
 			else
 			{
 				Session::put($key , config('lang.default' , 'en'));
-				Cookie::create($cookieName , config('lang.default' , 'en') , (60*24*7));
+				Cookie::create($cookieName , config('lang.default' , 'en') , config('lang.lifetime') );
 			}
 		}
 
@@ -170,7 +170,7 @@ class Lang
 		else
 		{
 			Session::put($key , config('lang.default' , 'en'));
-			Cookie::create($cookieName , config('lang.default' , 'en') , (60*24*7));
+			Cookie::create($cookieName , config('lang.default' , 'en') , config('lang.lifetime') );
 		}
 
 		return Session::get($key);
@@ -230,7 +230,7 @@ class Lang
 	{
 		exception_if( ! in_array($lang, self::$supported) , LanguageNotSupportedException::class , $lang);
 
-		Cookie::create(self::$cookieName,$lang,(60*24*7*30));
+		Cookie::create(self::$cookieName,$lang, config('lang.lifetime') );
 		Session::put(self::$sessionName , $lang);
 
 		self::change($lang);
