@@ -155,9 +155,9 @@ class Lang
 		elseif(Cookie::existe($cookieName))
 		{
 			//check if supported languages contains the cookie lang value 
-			if( in_array(Cookie::get($key) , self::$supported))
+			if( in_array(Cookie::get($cookieName) , self::$supported))
 			{
-				Session::put($key , Cookie::get($key) );
+				Session::put($key , Cookie::get($cookieName) );
 			}
 			else
 			{
