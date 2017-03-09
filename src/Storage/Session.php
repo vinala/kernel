@@ -145,6 +145,8 @@ class Session
 			$lifetime = config('storage.session_lifetime');
 		}
 
+		$lifetime = time() + $lifetime;
+
 		$item = ['name' => $name , 'object' => $object , 'lifetime' => $lifetime];
 
 		static::$register[$name] = $item;
