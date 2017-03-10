@@ -99,7 +99,7 @@ class Auth
 	{
 		if(self::check())
 		{
-			if(Session::existe('auths'))
+			if(Session::exists('auths'))
 			{
 				$user=new userM(Session::get("auths")[0]);
 				//
@@ -125,7 +125,7 @@ class Auth
 	*/
 	public static function check()
 	{
-		if(Session::existe('auths'))
+		if(Session::exists('auths'))
 			return true;
 		else if(Cookie::existe(Config::get('auth.rememeber_cookie'))) 
 			{

@@ -17,6 +17,7 @@ use Vinala\Kernel\Http\Redirect\Redirect;
 use Vinala\Kernel\Http\Middleware\Middleware;
 use Vinala\Kernel\Object\Strings;
 use Vinala\Kernel\Http\Links;
+use Vinala\Kernel\Storage\Session;
 
 
 
@@ -341,6 +342,34 @@ if ( ! function_exists("request"))
 	{
 		return Input::get($key , $default , $type);
 	}	
+}
+
+//--------------------------------------------------------
+// Storage
+//--------------------------------------------------------
+
+if ( ! function_exists("session")) 
+{
+	/**
+	* To set or get session variables
+	*
+	* @param string $name
+	* @param mixed $object
+	* @param int $lifetime
+	* @return mixed
+	*/
+	function session($name , $object = null , $lifetime = null)
+	{
+		if(is_null($object))
+		{
+			return Session::get($name);
+		}
+		else
+		{
+			return Session::put($name , $object , $lifetime);
+		}
+	}
+			
 }
 
 //--------------------------------------------------------

@@ -213,7 +213,7 @@ class Auth
 	*/
 	public static function check()
 	{
-		if(Session::existe( static::resource('session') ))
+		if(Session::exists( static::resource('session') ))
 		{
 			return true;
 		}

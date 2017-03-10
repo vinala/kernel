@@ -276,7 +276,11 @@ class Connector
 	public static function session($session)
 	{
 		self::need(self::$path.'Storage/Session.php');
-		if($session) Session::start();
+		self::need(self::$path.'Storage/Exceptions/NotFoundStorageDiskException.php');
+		if($session) 
+		{
+			Session::ini();
+		}
 	}
 
 	/**
@@ -287,7 +291,8 @@ class Connector
 		self::session($session);
 		self::need(self::$path.'Storage/Storage.php');
 
-		self::need(self::$path.'Storage/Exceptions/NotFoundStorageDiskException.php');
+		self::need(self::$path.'Storage/Exceptions/SessionKeyNotFoundException.php');
+		self::need(self::$path.'Storage/Exceptions/SessionSurfaceIsOffException.php');
 	}
 
 	/**

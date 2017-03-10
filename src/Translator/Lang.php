@@ -129,7 +129,7 @@ class Lang
 		$cookieName = self::cookieName($key);
 
 		// check if the session lang exists
-		if(Session::existe($key))
+		if(Session::exists($key))
 		{
 		
 			//check if supported languages contains the session lang value 
