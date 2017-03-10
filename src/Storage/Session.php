@@ -3,6 +3,8 @@
 namespace Vinala\Kernel\Storage ;
 
 use Vinala\Kernel\Security\Hash;
+use Vinala\Kernel\Storage\Exception\SessionKeyNotFoundException;
+use Vinala\Kernel\Storage\Exception\SessionSurfaceIsOffException;
 
 /**
 * The storage session surface
@@ -53,6 +55,7 @@ class Session
 	public static function ini()
 	{
 		static::start();
+		static::load();
 	}
 	
 	
@@ -84,7 +87,7 @@ class Session
 			return true;
 		}
 
-		exception_if($exception , LogicException::class);
+		exception_if($exception , SessionSurfaceIsOffException::class);
 
 		return false;
 	}
@@ -101,9 +104,9 @@ class Session
 		{
 			return false;
 		}
-		elseif( ! check($_SESSION[static::$register_name]) )
+		elseif( ! array_has($_SESSION , static::$register_name) )
 		{
-			return false;
+			$_SESSION[static::$register_name] = [];
 		}
 
 		static::$register = $_SESSION[static::$register_name];
@@ -145,7 +148,10 @@ class Session
 			$lifetime = config('storage.session_lifetime');
 		}
 
-		$lifetime = time() + $lifetime;
+		if($lifetime > 0 ) 
+		{
+			$lifetime = time() + $lifetime;
+		}
 
 		$item = ['name' => $name , 'object' => $object , 'lifetime' => $lifetime];
 
@@ -166,15 +172,15 @@ class Session
 	{
 		static::isOn(true);
 
-		exception_if( ! check(static::$register[$name]) , Exception::class);
+		exception_if( ! array_has(static::$register , $name ) , SessionKeyNotFoundException::class , $name);
 
-		$item = static::$register_name[$name];
+		$item = static::$register[$name];
 
 		if(($item['lifetime'] < time() && $item['lifetime'] > 0 ) )
 		{
 			static::remove($name);
 
-			exception(Exception::class);
+			exception(SessionKeyNotFoundException::class , $name);
 		}
 		else
 		{
@@ -192,7 +198,7 @@ class Session
 	{
 		static::isOn(true);
 
-		if( ! check(static::$register[$name]))
+		if( ! isset(static::$register[$name]))
 		{
 			return false;
 		}
@@ -213,7 +219,7 @@ class Session
 	*/
 	public static function remove($name)
 	{
-		exception_if( ! static::exists($name) , Exception::class);
+		exception_if( ! static::exists($name) , SessionKeyNotFoundException::class , $name);
 		//
 		static::$register[$name] = null;
 
