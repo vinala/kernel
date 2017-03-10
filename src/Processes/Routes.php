@@ -111,8 +111,8 @@ class Router
 	{
 		$params = self::dynamic($route);
 		//
-		if(count($params)>0) return 'get("'.$route.'",function('.self::formatParams($params).')';
-		else return 'get("'.$route.'",function()';
+		if(count($params)>0) return 'get(\''.$route.'\',function('.self::formatParams($params).')';
+		else return 'get(\''.$route.'\',function()';
 	}
 
 	/**
@@ -124,8 +124,8 @@ class Router
 	{
 		$params = self::dynamic($route);
 		//
-		if(count($params)>0) return 'post("'.$route.'",function('.self::formatParams($params).')';
-		else return 'post("'.$route.'",function()';
+		if(count($params)>0) return 'post(\''.$route.'\',function('.self::formatParams($params).')';
+		else return 'post(\''.$route.'\',function()';
 	}
 
 	/**
