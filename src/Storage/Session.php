@@ -299,7 +299,7 @@ class Session
 	*/
 	public static function token()
 	{
-		$name = '#eyuD#BR@w';
+		$name = config('security.key1');
 
 		$token = '';
 
