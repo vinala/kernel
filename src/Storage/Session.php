@@ -163,6 +163,47 @@ class Session
 	}
 
 	/**
+	* Prolong a session variable lang time
+	*
+	* @param string $name
+	* @param int $time
+	* @return bool
+	*/
+	public static function prolong($name , $lifetime)
+	{
+		$item = static::reach($name);
+
+		if($item['lifetime'] > 0)
+		{
+			$item['lifetime'] += $lifetime;
+		}
+		elseif($item['lifetime'] == 0)
+		{
+			$item['lifetime'] = time() + $lifetime;
+		}
+
+		static::$register[$name] = $item;
+
+		static::save();
+
+		return true;
+	}
+
+	/**
+	* Get the session item
+	*
+	* @param string $name
+	* @return array
+	*/
+	protected static function reach($name)
+	{
+		exception_if( ! static::exists($name) , SessionKeyNotFoundException::class , $name);
+
+		return static::$register[$name];
+	}
+	
+
+	/**
 	* Get a seesion variable
 	*
 	* @param string $name
@@ -172,9 +213,7 @@ class Session
 	{
 		static::isOn(true);
 
-		exception_if( ! array_has(static::$register , $name ) , SessionKeyNotFoundException::class , $name);
-
-		$item = static::$register[$name];
+		$item = static::reach($name);
 
 		if(($item['lifetime'] < time() && $item['lifetime'] > 0 ) )
 		{
