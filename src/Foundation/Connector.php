@@ -33,77 +33,77 @@ class Connector
 	 */
 	public static function run($lumos = false, $session = true)
 	{
-		if( ! $lumos) Connector::ini();
-		else Connector::inilumos();
+		if( ! $lumos) static::ini();
+		else static::inilumos();
 
 		// Version
-		Connector::version();
+		static::version();
 
 		//**/
-		Connector::loggin();
-		Connector::input();
+		static::loggin();
+		static::input();
 		Input::register();
 
 		//Support
-		Connector::support();
+		static::support();
 
 		// Config
-		Connector::config();
+		static::config();
 		Config::load();
 		//
 		// Config
-		Connector::environment();
+		static::environment();
 		Environment::ini();
 		//
-		Connector::maintenance($lumos);
+		static::maintenance($lumos);
 		//
-		Connector::time();
+		static::time();
 		//
 		Log::ini();
 		Handler::run();
 		//
-		Connector::component();
-		Connector::cubes();
+		static::component();
+		static::cubes();
 		//
-		Connector::storage($session);
-		Connector::collections();
-		Connector::string();
-		Connector::object();
-		Connector::access();
-		Connector::validation();
-		if(Component::isOn("faker")) Connector::faker();
-		Connector::cookie();
-		Connector::router();
-		Connector::caches();
-		Connector::security();
-		Connector::auth();
-		Connector::table();
-		if(Component::isOn("database")) Connector::database();
-		Connector::object_scnd();
-		Connector::http();
-		Connector::assets();
-		Connector::Html();
-		Connector::hypertext();
-		Connector::translator();
-		Connector::model();
-		Connector::relations();
-		Connector::media();
-		Connector::view();
-		Connector::controller();
-		Connector::mail();
-		Connector::dataCollection();
-		Connector::fileSystem();
-		Connector::intro();
-		Connector::plugins();
-		Connector::lumos();
-		Connector::atomium();
-		Connector::process();
-		Connector::setup();
-		Connector::event();
+		static::storage($session);
+		static::collections();
+		static::string();
+		static::object();
+		static::access();
+		static::validation();
+		if(Component::isOn("faker")) static::faker();
+		static::cookie();
+		static::router();
+		static::caches();
+		static::security();
+		static::auth();
+		static::table();
+		if(Component::isOn("database")) static::database();
+		static::object_scnd();
+		static::http();
+		static::assets();
+		static::Html();
+		static::hypertext();
+		static::translator();
+		static::model();
+		static::relations();
+		static::media();
+		static::view();
+		static::controller();
+		static::mail();
+		static::dataCollection();
+		static::fileSystem();
+		static::intro();
+		static::plugins();
+		static::lumos();
+		static::atomium();
+		static::process();
+		static::setup();
+		static::event();
 	}
 
 	/**
-	 * Init Connector class
+	 * Init static class
 	 */
 	public static function ini($test = false)
 	{
@@ -128,7 +128,7 @@ class Connector
 	
 
 	/**
-	 * Init Connector class
+	 * Init static class
 	 */
 	public static function inilumos()
 	{
@@ -525,13 +525,13 @@ class Connector
 			);
 
 		//--------------------------------------------------------
-		// Calling connectors
+		// Calling statics
 		//--------------------------------------------------------
 		self::call(
 			array(
-				'MysqlConnector', 
+				'Mysqlstatic', 
 				),
-			self::$path.'Database/Connectors/'
+			self::$path.'Database/statics/'
 			);
 		
 		//--------------------------------------------------------
@@ -539,7 +539,7 @@ class Connector
 		//--------------------------------------------------------
 		self::call(
 			array(
-				'ConnectorException',
+				'staticException',
 				'QueryException',
 				'SeedersEmptyException',
 				'DatabaseArgumentsException', 
@@ -886,7 +886,7 @@ class Connector
 	protected static function commands()
 	{
 		foreach (self::fetch(self::$path."Lumos/Commands") as $file) 
-			Connector::need($file);
+			static::need($file);
 	}
 
 	/**
@@ -1071,56 +1071,56 @@ class Connector
 	}
 
 	/**
-	 * Run connector for test
+	 * Run static for test
 	 */
 	public static function runTest($kernelTest = false)
 	{
-		Connector::ini(true);
-		Connector::loggin();
-		Connector::input();
+		static::ini(true);
+		static::loggin();
+		static::input();
 		Input::register();
 
-		Connector::mock();
+		static::mock();
 		// Config
-		Connector::config();
+		static::config();
 		Config::load($kernelTest);
 		//
-		Connector::time();
+		static::time();
 		//
 		Log::ini();
 		$handler=new Error;
 		$handler->register();
 		//
-		Connector::storage(false);
-		Connector::maintenance();
-		Connector::string();
-		Connector::object();
-		Connector::access();
-		Connector::validation();
-		if(Component::isOn("faker"))  Connector::faker();
-		Connector::cookie();
-		Connector::router();
-		Connector::caches();
-		Connector::security();
-		Connector::table();
-		if(Component::isOn("database")) Connector::database();
-		Connector::object_scnd();
-		Connector::http();
-		Connector::assets();
-		Connector::Html();
-		Connector::hypertext();
-		Connector::translator();
-		Connector::model();
-		Connector::relations();
-		Connector::media();
-		Connector::view();
-		Connector::controller();
-		Connector::mail();
-		Connector::dataCollection();
-		Connector::fileSystem();
-		Connector::intro();
-		Connector::plugins();
-		Connector::events();
+		static::storage(false);
+		static::maintenance();
+		static::string();
+		static::object();
+		static::access();
+		static::validation();
+		if(Component::isOn("faker"))  static::faker();
+		static::cookie();
+		static::router();
+		static::caches();
+		static::security();
+		static::table();
+		if(Component::isOn("database")) static::database();
+		static::object_scnd();
+		static::http();
+		static::assets();
+		static::Html();
+		static::hypertext();
+		static::translator();
+		static::model();
+		static::relations();
+		static::media();
+		static::view();
+		static::controller();
+		static::mail();
+		static::dataCollection();
+		static::fileSystem();
+		static::intro();
+		static::plugins();
+		static::events();
 	}
 
 	/**
