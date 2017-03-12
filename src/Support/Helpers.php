@@ -374,7 +374,7 @@ if ( ! function_exists("session"))
 
 if ( ! function_exists("cookie")) 
 {
-				
+	//
 }
 
 //--------------------------------------------------------
