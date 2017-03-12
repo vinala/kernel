@@ -55,11 +55,11 @@ class Hash
     public static function create($lenght)
     {
         $characters = 'abcdefghijk01234lmnopq56789rstuxyvwz';
-        $charNumber = strlen($characters);
+        $charLenght = strlen($characters);
 
         $string = '';
         for ($i=0; $i < $lenght; $i++) { 
-            $index = mt_rand(0, $charNumber - 1);
+            $index = mt_rand(0, $charLenght - 1);
             $string .= $characters[$index];
         }
 
