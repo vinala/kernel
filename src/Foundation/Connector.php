@@ -459,7 +459,7 @@ class Connector
 	{
 		self::call(
 			array(
-				'Encrypt',
+				'Hash',
 				'Security',
 				'License'
 				),
