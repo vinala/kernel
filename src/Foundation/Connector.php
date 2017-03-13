@@ -3,7 +3,6 @@
 namespace Vinala\Kernel\Foundation;
 
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Environment\Environment;
 use Vinala\Kernel\Logging\Log;
 use Vinala\Kernel\Logging\Handler;
 use Vinala\Kernel\Logging\Error;
@@ -53,7 +52,6 @@ class Connector
 		//
 		// Config
 		static::environment();
-		Environment::ini();
 		//
 		static::maintenance($lumos);
 		//

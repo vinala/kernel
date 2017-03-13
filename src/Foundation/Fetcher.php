@@ -6,6 +6,7 @@ use Vinala\Kernel\Router\Routes;
 use Vinala\Kernel\Events\Event;
 use Vinala\Kernel\Config\Alias;
 use Vinala\Kernel\Http\Middleware\Middleware;
+use Vinala\Kernel\Environment\Environment;
 
 /**
 * this class help the framework to get all
@@ -39,6 +40,7 @@ class Fetcher
 		if(Component::isOn("database")) self::seed();
 		self::filtes();
 		self::alias();
+		Environment::ini();
 		//
 		self::routes($routes);
 		self::commands();
