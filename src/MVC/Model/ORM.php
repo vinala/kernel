@@ -223,12 +223,6 @@ class ORM
 		$this->key($data);
 		$this->fill($data);
 		$this->_state = CRUD::UPDATE_STAT;
-		// if( ! is_null($key)) 
-		// {
-		// 	$this->struct($key , $fail);
-		// 	$this->_state = CRUD::UPDATE_STAT;
-		// }
-		// else $this->_state = CRUD::CREATE_STAT;
 	}
 	
 
