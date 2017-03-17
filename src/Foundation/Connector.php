@@ -350,7 +350,7 @@ class Connector
 	 */
 	public static function string()
 	{
-		$path = self::$path.'Objects/Strings/';
+		$path = self::$path.'Strings/';
 		//
 		self::need($path.'Strings.php');
 		self::need($path.'Exceptions/StringOutIndexException.php');
