@@ -29,9 +29,8 @@ class Hash
     {
         $key1 = config('security.key1');
         $key2 = config('security.key2');
-        $owner = config('app.owner');
 
-        return sha1(md5($string.$owner.$key1)).md5(sha1($string."Vinala".$key2));
+        return sha1(md5($string.'youssef'.$key1)).md5(sha1($string.'Vinala'.$key2));
     }
 
     /**
