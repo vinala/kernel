@@ -1,15 +1,20 @@
 <?php
 
-namespace Vinala\Kernel\Objects\Strings\Exception;
+namespace Vinala\Kernel\Foundation\Exceptions;
 
+use Vinala\Kernel\Logging\Exception;
 
 /**
 * String Out Index Exception
 */
-class StringOutIndexException extends \Exception{
+class StringOutIndexException extends Exception
+{
 
-	function __construct() {
-		$this->message = "The index is out of string ";
+	//--------------------------------------------------------
+	// Constructor
+	//--------------------------------------------------------
+	function __construct() 
+	{
+		$this->message = 'The index is out of string range';		
 	}
-
 }
