@@ -49,7 +49,7 @@ class configMocking
 					'Storage' => 		Vinala\Kernel\Storage\Storage::class,
 					'Strings' => 		Vinala\Kernel\String\Strings::class,
 					'Sys' => 			Vinala\Kernel\Objects\Sys::class,
-					'Table' => 			Vinala\Kernel\Objects\Table::class,
+					'Table' => 			Vinala\Kernel\Collections\Collection::class,
 					'Time' => 			Vinala\Kernel\Objects\DateTime::class,
 					'Translator' => 	Vinala\Kernel\Translator\Lang::class,
 					'Url' => 			Vinala\Kernel\Access\Url::class,

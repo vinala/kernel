@@ -5,7 +5,7 @@ namespace Vinala\Kernel\MVC ;
 use Vinala\Kernel\Database\Database;
 use Vinala\Kernel\Database\Query;
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection as Table;
 use Vinala\Kernel\Objects\DateTime as Time;
 use Vinala\Kernel\MVC\ORM\CRUD;
 use Vinala\Kernel\MVC\ORM\Collection;

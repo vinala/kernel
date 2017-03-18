@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Database;
 
 use Vinala\Kernel\Filesystem\Filesystem;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Foundation\Application;
 
 /**

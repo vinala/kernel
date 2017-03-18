@@ -9,7 +9,7 @@ use Monolog\Handler\StreamHandler;
 use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Objects\DateTime as Time;
 use Vinala\Kernel\String\Strings;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 
 /**
 * 

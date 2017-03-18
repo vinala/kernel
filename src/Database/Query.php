@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Database;
 
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\String\Strings;
 //
 use Vinala\Kernel\Database\Exceptions\QueryException;

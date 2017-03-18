@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Database\Schema;
 
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Schema;
 use Vinala\Kernel\Database\Database;

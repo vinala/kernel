@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Atomium\Compiler;
 
 use Vinala\Kernel\String\Strings;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 
 /**
 * Class to compile One line instruction

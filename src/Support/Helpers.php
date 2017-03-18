@@ -7,7 +7,7 @@ use Vinala\Kernel\Environment\Environment;
 use Vinala\Kernel\MVC\View;
 use Vinala\Kernel\Router\Route;
 use Vinala\Kernel\Objects\DateTime;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Foundation\Connector;

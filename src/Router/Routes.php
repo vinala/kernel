@@ -4,7 +4,7 @@ namespace Vinala\Kernel\Router;
 
 use Vinala\Kernel\HyperText\Res;
 use Vinala\Kernel\Maintenance\Maintenance;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Router\Exception\NotFoundHttpException;
 use Vinala\Kernel\Http\Errors;

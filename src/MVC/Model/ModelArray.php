@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\MVC\Model;
 
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 
 /**
 * Model array Class

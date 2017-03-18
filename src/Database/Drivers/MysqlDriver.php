@@ -8,7 +8,7 @@ use Vinala\Kernel\Database\Exception\DatabaseArgumentsException;
 use Vinala\Kernel\Database\Exception\DatabaseConnectionException;
 use mysqli as Sql;
 use Vinala\Kernel\Objects\DateTime as Time;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Database\Connector\MysqlConnector;
 use Vinala\Kernel\Database\Exporters\MysqlExporter;
 
