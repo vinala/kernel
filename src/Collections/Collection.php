@@ -336,5 +336,16 @@ class Collection
 		return $txt;
     }
 
+    /**
+    * Sort an array
+    *
+    * @param array $array
+    * @return array
+    */
+    public static function sort($array)
+    {
+        return sort($array);
+    }
+
 
 }
