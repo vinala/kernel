@@ -1,6 +1,6 @@
 <?php
 
-namespace Vinala\Kernel\Strings ;
+namespace Vinala\Kernel\String ;
 
 use Vinala\Kernel\Strings\Exception\StringOutIndexException;
 use Vinala\Kernel\Collections\Collection;

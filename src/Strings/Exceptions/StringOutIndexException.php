@@ -1,6 +1,6 @@
 <?php
 
-namespace Vinala\Kernel\Strings\Exception;
+namespace Vinala\Kernel\String\Exception;
 
 use Vinala\Kernel\Logging\Exception;
 
