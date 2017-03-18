@@ -1,184 +1,335 @@
 <?php
 
-namespace Vinala\Kernel\Objects;
+namespace Vinala\Kernel\Strings ;
 
-use Vinala\Kernel\Objects\Strings\Exception\StringOutIndexException;
-use Vinala\Kernel\Objects\Table;
-
-/**
-* String Trim Consts
-**/
-define('TRIM_BOTH', 'both');
-define('TRIM_END', 'end');
-define('TRIM_START', 'start');
-
+use Vinala\Kernel\Strings\Exception\StringOutIndexException;
+use Vinala\Kernel\Collections\Collection;
 
 /**
-* Strings Class
+* The String surface
+*
+* @version 3.0
+* @author Youssef Had
+* @package Vinala\Kernel\Strings
+* @since v3.3.0
 */
 class Strings
 {
-	public static function length($string)
-		{
-			return strlen($string);
-		}
 
-	public static function splite($string,$limit)
-		{
-			return explode($limit, $string);
-		}
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	public static function concat()
-		{
-			$args=func_get_args();
-			$string="";
-			foreach ($args as $value) {
-				$string.=$value;
-			}
-			return $string;
-		}
+    //
 
-	public static function compare($string1,$string2,$ignoreCase=true)
-		{
-			if($ignoreCase)
-			{
-				if(strcasecmp($string1,$string2)==0) return true;
-				else return false;
-			}
-			else
-			{
-				if(strcmp($string1,$string2)==0) return true;
-				else return false;
-			}
-		}
+    //--------------------------------------------------------
+    // Constants
+    //--------------------------------------------------------
 
-	public static function join($array,$separator,$startIndex=0,$count=-1)
-		{
-			$string="";
-			//
-			$end= $count==-1 ? Table::count($array) : $count;
-			//
-			for ($i=$startIndex; $i < $end ; $i++) {
-				if($i==($end-1)) $string.=$array[$i];
-				else echo $string.=$array[$i].$separator;
-			}
-			//
-			return $string;
-		}
+    /**
+    * String constant for both side trime
+    *
+    * @var string
+    */
+    const TRIM_BOTH = 'both';
 
-	public static function replace($target,$search,$object)
-		{
-			return str_replace($search, $object, $target);
-		}
+    /**
+    * String constant for end side trime
+    *
+    * @var string
+    */
+    const TRIM_END = 'end';
 
-	public static function contains($string,$substring)
-		{
-			if(strpos($string,$substring) !== false) return true;
-			else return false;
-		}
+    /**
+    * String constant for strat side trime
+    *
+    * @var string
+    */
+    const TRIM_START = 'start';
 
-	public static function at($string,$index)
-		{
-			if(self::length($string)>=($index+1))
-				return $string[$index];
-			else return false;
-		}
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	public static function insert($string,$new,$index)
-		{
-			$str1="";
-			$str2="";
-			//
-			if(self::isIndexIN($string,$index))
-			{
-				for ($i=0; $i < ($index) ; $i++) {
-					$str1.=$string[$i];
-				}
-				//
-				for ($i=($index); $i < Strings::length($string) ; $i++) {
-					$str2.=$string[$i];
-				}
-				//
-				return $str1.$new.$str2;
-			}
-			else throw new StringOutIndexException();
-		}
+    function __construct()
+    {
+        //
+    }
 
-	public static function subString($string,$indexStart,$count = null)
-		{
-			return mb_substr($string, $indexStart, $count, 'UTF-8');
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-			if(self::checkIndex($string,$indexStart))
-			{
-				$str="";
-				for ($i=$indexStart; $i < ($indexStart+$count) ; $i++) {
-					$str.=$string[$i];
-				}
-				return $str;
-			}			
-		}
+    /**
+    * Get length of a given string 
+    *
+    * @param string $string
+    * @return int 
+    */
+    public static function length($string)
+    {
+        return strlen($string);
+    }
 
-	static function checkIndex($string,$index)
-		{
-			if(self::isIndexIN($string,$index)) return true;
-			else throw new StringOutIndexException();
-		}
+    /**
+    * Splite a given string to many strings by a limiter
+    *
+    * @param string $string
+    * @param string $limit
+    * @return array
+    */
+    public static function splite($string , $limit)
+    {
+        return explode($limit , $string);
+    }
 
-	static function isIndexIN($string,$index)
-		{
-			if(Strings::length($string)>($index+1)) return true;
-			else return false;
-		}
+    /**
+    * Concat strings as many as args
+    *
+    * @param param[]
+    * @return string
+    */
+    public static function concat()
+    {
+        $args = func_get_arg();
+        $string = '';
 
-	static function trimCollShars($param)
-		{
-			$string="";
-			if(is_array($param)) foreach ($param as $value) $string.=$value;
-			else if(is_string($param)) $string=$param;
-			return $string;
-		}
+        foreach ($args as $arg) 
+        {
+            $string .= $arg;
+        }
 
-	public static function trim($string,$chars=null,$side=TRIM_BOTH)
-		{
-			if( $side == TRIM_START)
-			{
-				if(is_null($chars)) return ltrim($string);
-				else return ltrim($string,self::trimCollShars($chars));
-			}
-			else if( $side == TRIM_END)
-			{
-				if(is_null($chars)) return rtrim($string);
-				else return rtrim($string,self::trimCollShars($chars));
-			}
-			else if( $side == TRIM_BOTH)
-			{
-				if(is_null($chars)) return trim($string);
-				else return trim($string,self::trimCollShars($chars));
-			}
-		}
+        return $string;
+    }
 
-	public static function toLower($value)
-		{
-			return strtolower($value);
-		}
+    /**
+    * Compare between two strings
+    *
+    * @param string $str1
+    * @param string $str2
+    * @param bool $ignoreCase
+    * @return bool
+    */
+    public static function compare($str1 , $str2 , $ignoreCase=true)
+    {
+        if($ignoreCase)
+        {
+            if(strcasecmp($str1 , $str2)==0)
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if(strcmp($str1 , $str2)==0)
+            {
+                return true;
+            }
+        }
 
-	public static function toUpper($value)
-		{
-			return strtoupper($value);
-		}
+        return false;
+    }
 
-	public static function firstUpper($value)
-		{
-			return ucfirst($value);
-		}
+    /**
+    * Join array element to string 
+    *
+    * @param array $strings
+    * @param string $separator
+    * @param int $start
+    * @param int $count
+    * @return simplexml_load_string
+    */
+    public static function join($strings , $separator , $start = 0 , $count = -1)
+    {
+        $string = '';
 
-	public static function firstsUpper($value)
-		{
-			return ucwords($value);
-		}
+        $end = $count == -1 ? Collection::count($strings) : $count;
 
+        for ($i=$start; $i < $end; $i++) 
+        { 
+            $string .= $strings[$i].$separator;
 
-	/**
+            if ($i == ($end-1)) 
+            {
+                $string .= $separator;
+            } 
+        }
+
+        return $string;
+    }
+
+    /**
+    * Replace string by other string
+    *
+    * @param string $target
+    * @param string $search
+    * @param string $object
+    * @return string
+    */
+    public static function replace($target , $search , $object)
+    {
+        return str_replace($search , $object , $target);
+    }
+
+    /**
+    * Check if string contains another string 
+    *
+    * @param string $string
+    * @param string $substring
+    * @return bool
+    */
+    public static function contains($string , $substring)
+    {
+        if(strpos($string,$substring) !== false)
+        {
+            return true;
+        }
+
+		return false;
+    }
+    
+    /**
+    * Get the char at an index from a given string 
+    *
+    * @param string $string 
+    * @param int $index
+    * @return string | bool
+    */
+    public static function at($string , $index)
+    {
+        if(self::length($string) >= ($index+1))
+        {
+            return $string[$index];
+        }
+
+        exception(StringOutIndexException::class);
+    }
+
+    /**
+    * Insert a substring inside another string 
+    *
+    * @param string $string
+    * @param string $substring
+    * @return string
+    */
+    public static function insert($string , $substring , $index)
+    {
+        exception_if( ! self::checkIndex($string,$index) , StringOutIndexException::class);
+
+        $str = '';
+                
+        for ($i=0; $i < static::length($string) ; $i++) 
+        {
+            if($i == $index)
+            {
+                $str .= $substring;
+            }
+
+            $str .= $string[$i];
+        }
+
+        return $str;
+    }
+
+    /**
+    * Get substring from string
+    *
+    * @param string $string
+    * @param int $indexStart
+    * @param int $count
+    * @return string 
+    */
+    public static function substring($string , $substring , $count=null)
+    {
+        return mb_substr($string, $indexStart, $count, 'UTF-8');
+    }
+
+    /**
+    * Check if index is in string range 
+    *
+    * @param string $string
+    * @param int $index
+    * @return bool
+    */
+    protected static function checkIndex($string , $index)
+    {
+        if (static::length($string) > ($index+1) ) 
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+    * Trim a string
+    *
+    * @param string $string
+    * @param string $chars
+    * @param string side
+    * @return string
+    */
+    public static function trim($string , $side = Strings::TRIM_BOTH , $chars=null )
+    {
+        if( $side == TRIM_START)
+        {
+            return ltrim($string , $chars);
+        }
+        else if( $side == TRIM_END)
+        {
+            return rtrim($string , $chars);
+        }
+        else if( $side == TRIM_BOTH)
+        {
+            return trim($string , $chars);
+        }
+    }
+
+    /**
+    * Convert string to lower
+    *
+    * @param string $string 
+    * @return string 
+    */
+    public static function toLower($string)
+    {
+        return strtolower($string);
+    }
+
+    /**
+    * Convert string to upper
+    *
+    * @param string $string 
+    * @return string 
+    */
+    public static function toUpper($string)
+    {
+        return strtoupper($string);
+    }
+
+    /**
+    * Convert first char in string to upper
+    *
+    * @param string $string 
+    * @return string 
+    */
+    public static function firstUpper($string)
+    {
+        return ucfirst($string);
+    }
+
+     /**
+    * Convert first chars of paragraph to upper
+    *
+    * @param string $string 
+    * @return string 
+    */
+    public static function wordsUpper($string)
+    {
+        return ucwords($string);
+    }
+
+    /**
 	* Check if string starts with another string of collection of strings
 	*
 	* @param string $string
@@ -237,6 +388,5 @@ class Strings
 
         return false;
 	}
-	
-	
+
 }
