@@ -318,4 +318,23 @@ class Collection
         return true;
     }
 
+    /**
+    * Convert array to string
+    *
+    * @param array $array
+    * @return string
+    */
+    public static function toString($array)
+    {
+        $txt = '';
+
+		foreach ($array as $key => $value) 
+        {
+			$txt .= "'$key' => '$value',\n";
+		}
+
+		return $txt;
+    }
+
+
 }
