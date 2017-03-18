@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\String ;
 
-use Vinala\Kernel\Strings\Exception\StringOutIndexException;
+use Vinala\Kernel\String\Exception\StringOutIndexException;
 use Vinala\Kernel\Collections\Collection;
 
 /**
@@ -318,7 +318,7 @@ class Strings
         return ucfirst($string);
     }
 
-     /**
+    /**
     * Convert first chars of paragraph to upper
     *
     * @param string $string 
