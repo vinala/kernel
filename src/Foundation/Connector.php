@@ -339,6 +339,7 @@ class Connector
 		self::call(
 			array(
 				'JSON',
+				'Collection',
 				),
 			self::$path.'Collections/'
 			);
