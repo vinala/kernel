@@ -50,7 +50,7 @@ class Connector
 		static::config();
 		Config::load();
 		//
-		// Config
+		// Environment
 		static::environment();
 		//
 		static::maintenance($lumos);
@@ -63,8 +63,8 @@ class Connector
 		static::component();
 		static::cubes();
 		//
-		static::storage($session);
 		static::collections();
+		static::storage($session);
 		static::string();
 		static::object();
 		static::access();
@@ -75,7 +75,6 @@ class Connector
 		static::caches();
 		static::security();
 		static::auth();
-		static::table();
 		if(Component::isOn("database")) static::database();
 		static::object_scnd();
 		static::http();
@@ -485,15 +484,6 @@ class Connector
 				),
 			self::$path.'Authentication/Exceptions/'
 			);
-	}
-	
-
-	/**
-	 * table calls
-	 */
-	public static function table()
-	{
-		self::need(self::$path.'Objects/Table.php');
 	}
 
 	/**
@@ -1080,16 +1070,27 @@ class Connector
 		Input::register();
 
 		static::mock();
+		
+		//Support
+		static::support();
+
 		// Config
 		static::config();
 		Config::load($kernelTest);
-		//
+
+		// Environment
+		static::environment();
+
 		static::time();
 		//
 		Log::ini();
 		$handler=new Error;
 		$handler->register();
 		//
+		static::component();
+		static::cubes();
+		//
+		static::collections();
 		static::storage(false);
 		static::maintenance();
 		static::string();
@@ -1101,7 +1102,7 @@ class Connector
 		static::router();
 		static::caches();
 		static::security();
-		static::table();
+		static::auth();
 		if(Component::isOn("database")) static::database();
 		static::object_scnd();
 		static::http();
