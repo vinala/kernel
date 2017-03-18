@@ -76,7 +76,6 @@ class Connector
 		static::security();
 		static::auth();
 		if(Component::isOn("database")) static::database();
-		static::object_scnd();
 		static::http();
 		static::assets();
 		static::Html();
@@ -362,16 +361,6 @@ class Connector
 	public static function object()
 	{
 		$files = array('Vars');
-		$filesPath = self::$path.'Objects/';
-		self::call($files,$filesPath);
-	}
-
-	/**
-	 * object calls
-	 */
-	public static function object_scnd()
-	{
-		$files = array('Sys','Base');
 		$filesPath = self::$path.'Objects/';
 		self::call($files,$filesPath);
 	}
@@ -1104,7 +1093,6 @@ class Connector
 		static::security();
 		static::auth();
 		if(Component::isOn("database")) static::database();
-		static::object_scnd();
 		static::http();
 		static::assets();
 		static::Html();
