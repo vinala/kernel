@@ -47,7 +47,7 @@ class configMocking
 					'Session' => 		Vinala\Kernel\Storage\Session::class,
 					'Smile' => 			Vinala\Kernel\Translator\Smiley::class,
 					'Storage' => 		Vinala\Kernel\Storage\Storage::class,
-					'Strings' => 		Vinala\Kernel\Objects\Strings::class,
+					'Strings' => 		Vinala\Kernel\String\Strings::class,
 					'Sys' => 			Vinala\Kernel\Objects\Sys::class,
 					'Table' => 			Vinala\Kernel\Objects\Table::class,
 					'Time' => 			Vinala\Kernel\Objects\DateTime::class,

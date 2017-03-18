@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Console\Command;
 
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

@@ -6,7 +6,7 @@ use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Filesystem\Filesystem;
 use Vinala\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
 use Vinala\Kernel\Plugins\Exception\InfoStructureException;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\Config\Alias;
 
 /**

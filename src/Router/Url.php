@@ -2,7 +2,7 @@
 
 namespace Vianal\Kernel\Routing ;
 
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 
 /**
 * The URL genarator class

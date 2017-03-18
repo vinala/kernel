@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Objects;
 
-use Vinala\Kernel\Objects\Strings\Exception\StringOutIndexException;
+use Vinala\Kernel\String\Strings\Exception\StringOutIndexException;
 use Vinala\Kernel\Objects\Table;
 
 /**

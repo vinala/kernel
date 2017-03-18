@@ -11,7 +11,7 @@ use Vinala\Kernel\Database\Database;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Objects\DateTime as Time;
 use InvalidArgumentException;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\Objects\Table;
 use Vinala\Kernel\MVC\Relations\OneToOne;
 use Vinala\Kernel\MVC\Relations\OneToMany;

@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\MVC\Relations;
 
 use Vinala\Kernel\Objects\Table;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\MVC\Relations\Exception\ManyRelationException;
 use Vinala\Kernel\MVC\Relations\Exception\ModelNotFindedException;
 

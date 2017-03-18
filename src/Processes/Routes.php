@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Process\Process;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 
 /**
 * Controller class

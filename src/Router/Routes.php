@@ -17,7 +17,7 @@ use Vinala\Panel\Controller;
 use Vinala\Panel\Lang;
 use Vinala\Panel\Link;
 use Vinala\Panel\Model;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\MVC\Views;
 use Vinala\Kernel\MVC\View;
 use Vinala\Kernel\Http\Middleware\Middleware;

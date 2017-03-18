@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Database\Connector;
 
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Connector\Exception\ConnectorException;
 use PDO;
