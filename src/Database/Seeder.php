@@ -69,9 +69,9 @@ class Seeder
 		//
 		if($seeder->count <= 0)
 			foreach ($seeder->data() as $value)
-				Table::push($data , $value);
+				Collection::push($data , $value);
 		else for ($i=0; $i < $seeder->count; $i++)
-			Table::push($data , $seeder->data());
+			Collection::push($data , $seeder->data());
 		//
 		return $data;
 	}

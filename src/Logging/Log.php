@@ -81,42 +81,42 @@ class Log
 	public static function error($message , $data = array())
 	{
 		self::log("Error : " . $message);
-		if( ! empty($data) ) self::log(self::tabulation(). Table::toString ($data),false);
+		if( ! empty($data) ) self::log(self::tabulation(). Collection::toString ($data),false);
 	}
 
 	public static function warning($message , $data = array())
 	{
 		self::log("Warning : " . $message);
-		if( ! empty($data) ) self::log(self::tabulation(). Table::toString ($data),false);
+		if( ! empty($data) ) self::log(self::tabulation(). Collection::toString ($data),false);
 	}
 
 	public static function info($message , $data = array())
 	{
 		self::log("Info : " . $message);
-		if( ! empty($data) ) self::log(self::tabulation(). Table::toString ($data),false);
+		if( ! empty($data) ) self::log(self::tabulation(). Collection::toString ($data),false);
 	}
 
 	public static function debug($message , $data = array())
 	{
 		self::log("Debug : " . $message);
-		if( ! empty($data) ) self::log(self::tabulation(). Table::toString ($data),false);
+		if( ! empty($data) ) self::log(self::tabulation(). Collection::toString ($data),false);
 	}
 
 	public static function notice($message , $data = array())
 	{
 		self::log("Notice : " . $message);
-		if( ! empty($data) ) self::log(self::tabulation(). Table::toString ($data),false);
+		if( ! empty($data) ) self::log(self::tabulation(). Collection::toString ($data),false);
 	}
 
 	public static function critical($message , $data = array())
 	{
 		self::log("Critical : " . $message);
-		if( ! empty($data) ) self::log(self::tabulation(). Table::toString ($data),false);
+		if( ! empty($data) ) self::log(self::tabulation(). Collection::toString ($data),false);
 	}
 
 	public static function alert($message , $data = array())
 	{
 		self::log("Alert : " . $message);
-		if( ! empty($data) ) self::log(self::tabulation(). Table::toString ($data),false);
+		if( ! empty($data) ) self::log(self::tabulation(). Collection::toString ($data),false);
 	}
 }

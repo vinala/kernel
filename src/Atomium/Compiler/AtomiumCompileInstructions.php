@@ -52,7 +52,7 @@ class AtomiumCompileInstructions
 		$output = $data[0];
 		
 		//
-		for ($i=1; $i < Table::count($data); $i++) 
+		for ($i=1; $i < Collection::count($data); $i++) 
 		{
 			$items = self::getParmas($data[$i], $closeChar);
 			//

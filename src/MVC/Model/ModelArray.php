@@ -51,7 +51,7 @@ class ModelArray
 	{
 		if(! empty($this->data))
 		{
-			if(Table::count($this->data)>0) return $this->data[0];
+			if(Collection::count($this->data)>0) return $this->data[0];
 			else return null;
 		}
 		else return null;

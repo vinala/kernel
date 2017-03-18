@@ -216,8 +216,8 @@ class BelongsTo
 	protected function prepare($models)
 	{
 		return ! is_null($models->data) ? 
-					((Table::count($models->data) > 0) 
-						? ((Table::count($models->data) == 1) 
+					((Collection::count($models->data) > 0) 
+						? ((Collection::count($models->data) == 1) 
 							? $models->data[0] 
 							: $models->data
 						) 

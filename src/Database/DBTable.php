@@ -28,7 +28,7 @@ class DBTable
 		$columns=Database::read("select COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '".Config::get('database.database')."' AND TABLE_NAME = '".$this->name."';");
 		//
 		foreach ($columns as $key => $value) {
-			Table::push($this->columns,$value['COLUMN_NAME']);
+			Collection::push($this->columns,$value['COLUMN_NAME']);
 		}
 	}
 

@@ -82,7 +82,7 @@ class OneToOne
 	 */
 	protected function prepare($model , $remote)
 	{
-		return !empty($model) ? isset($model->data) ? Table::count($model->data) == 1 ? $model->data[0] : $this->ManyRelationException($remote, $model) : null : null;
+		return !empty($model) ? isset($model->data) ? Collection::count($model->data) == 1 ? $model->data[0] : $this->ManyRelationException($remote, $model) : null : null;
 	}
 
 		/**

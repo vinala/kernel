@@ -223,7 +223,7 @@ class Routes
 			{
 				if(!is_null($value["subdomain"]))
 				{
-					if(Table::contains($value["subdomain"],self::getDomain()))
+					if(Collection::contains($value["subdomain"],self::getDomain()))
 						{
 							if($value["methode"]=="post" && Res::isPost())
 							{
@@ -594,7 +594,7 @@ class Routes
 		$update=isset($names['update'])?(!empty($names['update'])?$names['update']:"update"):"update";
 		$delete=isset($names['delete'])?(!empty($names['delete'])?$names['delete']:"delete"):"delete";
 		//
-		if(Table::contains($routes,"index"))
+		if(Collection::contains($routes,"index"))
 		{
 			self::addController($uri."",                  $controller,"index");
 			self::addController($uri."/",                 $controller,"index");
@@ -602,25 +602,25 @@ class Routes
 			self::addController($uri."/".$index."/",      $controller,"index");
 		}
 		//
-		if(Table::contains($routes,"show"))
+		if(Collection::contains($routes,"show"))
 		{
 			self::addController($uri."/$show/{}",         $controller,"show");
 			self::addController($uri."/$show/{}/",        $controller,"show");
 		}
 		//
-		if(Table::contains($routes,"add"))
+		if(Collection::contains($routes,"add"))
 		{
 			self::addController($uri."/$add",             $controller,"add");
 			self::addController($uri."/$add/",            $controller,"add");
 		}
 		//
-		if(Table::contains($routes,"insert"))
+		if(Collection::contains($routes,"insert"))
 		{
 			self::addController($uri."/$insert",          $controller,"insert");
 			self::addController($uri."/$insert/",         $controller,"insert");
 		}
 		//
-		if(Table::contains($routes,"edit"))
+		if(Collection::contains($routes,"edit"))
 		{
 			
 			// self::addController($uri."/{}/$edit",         $controller,"edit");
@@ -631,7 +631,7 @@ class Routes
 			self::addController($uri."/$edit/{}/",        $controller,"edit");
 		}
 		//
-		if(Table::contains($routes,"update"))
+		if(Collection::contains($routes,"update"))
 		{
 			self::addController($uri."/$update",          $controller,"update");
 			self::addController($uri."/$update/",         $controller,"update");
@@ -639,7 +639,7 @@ class Routes
 			self::addController($uri."/$update/{}/",      $controller,"update",true);
 		}
 		//
-		if(Table::contains($routes,"delete"))
+		if(Collection::contains($routes,"delete"))
 		{
 			self::addController($uri."/$delete/{}",       $controller,"delete");
 			self::addController($uri."/$delete/{}/",      $controller,"delete");
@@ -701,7 +701,7 @@ class Routes
 			$i=0;
 			foreach ($all as  $value) 
 			{
-				if(Table::contains($except,$value)) unset($all[$i]);
+				if(Collection::contains($except,$value)) unset($all[$i]);
 				$i++;
 			}
 		}

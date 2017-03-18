@@ -110,7 +110,7 @@ class MysqlDriver extends Driver
 		$all = self::getColmuns($table);
 		$incs = self::getIncrement($table);
 		//
-		return Table::except($incs,$all);
+		return Collection::except($incs,$all);
 	}
 
 	/**

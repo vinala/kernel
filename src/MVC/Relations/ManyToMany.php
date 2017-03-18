@@ -47,7 +47,7 @@ class ManyToMany
 	{
 		$args = func_get_args();
 		//
-		$args = Table::sort($args);
+		$args = Collection::sort($args);
 		return $args[0].'_'.$args[1];
 	}
 
