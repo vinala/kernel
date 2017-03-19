@@ -269,7 +269,7 @@ class Strings
     * @param string side
     * @return string
     */
-    public static function trim($string , $side = Strings::TRIM_BOTH , $chars=null )
+    public static function trim($string , $side = Strings::TRIM_BOTH , $chars = null )
     {
         if( $side == Strings::TRIM_START)
         {
