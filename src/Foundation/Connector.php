@@ -509,7 +509,7 @@ class Connector
 		//--------------------------------------------------------
 		self::call(
 			array(
-				'staticException',
+				// 'staticException',
 				'QueryException',
 				'SeedersEmptyException',
 				'DatabaseArgumentsException', 
