@@ -66,7 +66,6 @@ class Connector
 		static::collections();
 		static::storage($session);
 		static::string();
-		static::object();
 		static::access();
 		static::validation();
 		if(Component::isOn("faker")) static::faker();
@@ -353,16 +352,6 @@ class Connector
 		//
 		self::need($path.'Strings.php');
 		self::need($path.'Exceptions/StringOutIndexException.php');
-	}
-
-	/**
-	 * object calls
-	 */
-	public static function object()
-	{
-		$files = array('Vars');
-		$filesPath = self::$path.'Objects/';
-		self::call($files,$filesPath);
 	}
 
 	/**
@@ -1083,7 +1072,6 @@ class Connector
 		static::storage(false);
 		static::maintenance();
 		static::string();
-		static::object();
 		static::access();
 		static::validation();
 		if(Component::isOn("faker"))  static::faker();
