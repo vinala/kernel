@@ -271,15 +271,15 @@ class Strings
     */
     public static function trim($string , $side = Strings::TRIM_BOTH , $chars=null )
     {
-        if( $side == TRIM_START)
+        if( $side == Strings::TRIM_START)
         {
             return ltrim($string , $chars);
         }
-        else if( $side == TRIM_END)
+        else if( $side == Strings::TRIM_END)
         {
             return rtrim($string , $chars);
         }
-        else if( $side == TRIM_BOTH)
+        else if( $side == Strings::TRIM_BOTH)
         {
             return trim($string , $chars);
         }
