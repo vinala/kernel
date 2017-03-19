@@ -98,7 +98,7 @@ class Connector
 	}
 
 	/**
-	 * Init static class
+	 * Init Connector class
 	 */
 	public static function ini($test = false)
 	{
@@ -123,7 +123,7 @@ class Connector
 	
 
 	/**
-	 * Init static class
+	 * Init Connector class
 	 */
 	public static function inilumos()
 	{
@@ -492,17 +492,16 @@ class Connector
 			);
 
 		//--------------------------------------------------------
-		// Calling statics
+		// Calling Connectors
 		//--------------------------------------------------------
 		
-		/*
+
 		self::call(
 			array(
-				'Mysqlstatic', 
+				'MysqlConnector', 
 				),
-			self::$path.'Database/statics/'
+			self::$path.'Database/Connectors/'
 			);
-		*/
 		
 		//--------------------------------------------------------
 		// Calling Exceptions
@@ -1041,7 +1040,7 @@ class Connector
 	}
 
 	/**
-	 * Run static for test
+	 * Run Connector for test
 	 */
 	public static function runTest($kernelTest = false)
 	{
