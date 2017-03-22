@@ -13,7 +13,6 @@ class View
 {
 	protected static function replace($name)
 	{
-		// return str_replace(":", "/", $name);
 		return str_replace(".", "/", $name);
 	}
 
@@ -76,13 +75,10 @@ class View
 		$strings = Strings::splite($path , "resources.views.");
 		$path = $strings[1].$file;
 		//
-		if($ext == '.atom') 
-			return "/// View file  : $file \n/// Path : $path";
-		
-		elseif($ext == '.tpl.php') 
-			return "{// View file  : $file //} \n {// Path : $path //}";
+		if($ext == '.atom' || $ext == '.tpl.php') 
+			return "{//\n\t@file $file\n\t@path $path\n\t@autor ".config('app.owner')."\n\t@time ".Time::now()." ('".time()."')\n//}\n\n";
 
 		else 
-			return "<?php\n\n/**\n* View file  : $file\n*/\n\n// Path : $path";
+			return "<?php\n/*\n\t@file $file\n\t@path $path\n\t@autor ".config('app.owner')."\n\t@time ".Time::now()." ('".time()."')\n**/\n?>\n";
 	}
 }
