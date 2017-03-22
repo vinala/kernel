@@ -31,7 +31,7 @@ class NewTagCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_tag').' {class : what\'s the name of the tag class ?} {tag? : what\'s the name of the tag ?} {target? : what\'s the name of the function ?} {--write : if set Atomium will write the returned value from function}';
+        $this->key = config('lumos.commands.new_tag').' {class : what\'s the name of the tag class ?} {tag? : what\'s the name of the tag ?} {target? : what\'s the name of the function ?} {--write : if set Atomium will write the returned value from function}';
         $this->description = "New User Atomium Tag";
     }
 

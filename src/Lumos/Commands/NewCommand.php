@@ -31,7 +31,7 @@ class NewCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_command').' {file : what\'s the name of the file?} {--database : if is set the command will use the database} {--command=greeting : the command}';
+        $this->key = config('lumos.commands.new_command').' {file : what\'s the name of the file?} {--database : if is set the command will use the database} {--command=greeting : the command}';
         $this->description = "New User Console Cammand";
     }
 
