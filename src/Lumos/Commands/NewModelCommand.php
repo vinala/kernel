@@ -38,7 +38,7 @@ class NewModelCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.new_model').
+        $this->key = config('lumos.commands.new_model').
         ' {className : what\'s the name of the model class?} {tableName? : what\'s the name of the datatable?} {--not_aliased : if set , the model will be not aliased}';
         $this->description = 'New model';
     }

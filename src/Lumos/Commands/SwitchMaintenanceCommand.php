@@ -28,7 +28,7 @@ class SwitchMaintenanceCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.switch_maintenance');
+        $this->key = config('lumos.commands.switch_maintenance');
         $this->description = 'Enable or disable maintenance mode';
     }
 

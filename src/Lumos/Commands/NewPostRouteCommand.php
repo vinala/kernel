@@ -30,7 +30,7 @@ class NewPostRouteCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.post_routes').' {http : what\'s the http of route?}';
+        $this->key = config('lumos.commands.post_routes').' {http : what\'s the http of route?}';
         $this->description = 'Add new post route to Routes file';
     }
 
