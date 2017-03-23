@@ -73,4 +73,31 @@ class Cookie
         return true;
     }
 
+    
+    /**
+    * Save the cookies register
+    *
+    * @param string $name
+    * @return bool
+    */
+    protected static function save($name)
+    {
+        
+        return ;
+    }
+
+
+    /**
+    * Set new cookie
+    *
+    * @param 
+    * @param 
+    * @return 
+    */
+    public static function name()
+    {
+        
+        return ;
+    }
+
 }
