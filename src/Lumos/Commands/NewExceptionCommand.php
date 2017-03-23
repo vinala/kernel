@@ -32,7 +32,7 @@ class NewExceptionCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.new_exception').
+        $this->key = config('lumos.commands.new_exception').
         ' {name : what\'s the name of the exception ?}'.
         ' {--message : what\'s the message to show if debug was on ?}'.
         ' {--view= : what\'s the view to show if debug was off ?}'.

@@ -29,7 +29,7 @@ class NewHelperCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.new_helper').' {name : what\'s the name of the helper ?}';
+        $this->key = config('lumos.commands.new_helper').' {name : what\'s the name of the helper ?}';
         $this->description = 'New Helper';
     }
 

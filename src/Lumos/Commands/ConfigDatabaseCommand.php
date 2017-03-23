@@ -40,7 +40,7 @@ class ConfigDatabaseCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.config_database').' {driver : what\'s the database server ? }';
+        $this->key = config('lumos.commands.config_database').' {driver : what\'s the database server ? }';
         $this->description = 'Config database params';
     }
 

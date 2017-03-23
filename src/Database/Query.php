@@ -3,8 +3,8 @@
 namespace Vinala\Kernel\Database;
 
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Objects\Table;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Collections\Collection;
+use Vinala\Kernel\String\Strings;
 //
 use Vinala\Kernel\Database\Exceptions\QueryException;
 
@@ -160,7 +160,7 @@ class Query
 	public function first()
 	{
 		$data = self::query();
-		if(Table::count($data) > 0) return $data[0];
+		if(Collection::count($data) > 0) return $data[0];
 	}
 
 	/**
@@ -299,10 +299,10 @@ class Query
 	{
 		$query = (Strings::trim($begin) == "or") ? " or ( " : (Strings::trim($begin) == "and") ? " and ( " : " ( " ;
 		//
-		for ($i=1; $i < Table::count($conditions); $i++) 
+		for ($i=1; $i < Collection::count($conditions); $i++) 
 		{
 			$query .= $conditions[$i];
-			$query .= ($i < Table::count($conditions)-1) ? " $between " : " " ;
+			$query .= ($i < Collection::count($conditions)-1) ? " $between " : " " ;
 		}
 		//
 		$query .= " ) ";
@@ -320,7 +320,7 @@ class Query
 	public function orGroup()
 	{
 		$conditions = func_get_args();;
-		if( Table::count($conditions) == 0 ) throw new ErrorException("Missing arguments for orGroup() ");
+		if( Collection::count($conditions) == 0 ) throw new ErrorException("Missing arguments for orGroup() ");
 		//
 		return $this->groupWhere($conditions[0] , "or" , $conditions);
 	}
@@ -333,7 +333,7 @@ class Query
 	public function andGroup()
 	{
 		$conditions = func_get_args();;
-		if( Table::count($conditions) == 0 ) throw new ErrorException("Missing arguments for andGroup() ");
+		if( Collection::count($conditions) == 0 ) throw new ErrorException("Missing arguments for andGroup() ");
 		//
 		return $this->groupWhere($conditions[0] , "and" , $conditions);
 	}	
@@ -424,7 +424,7 @@ class Query
 	{
 		$columns = func_get_args();
 		//
-		if( Table::count($columns)==1 && is_array($columns[0]) ) $columns = $columns[0] ;
+		if( Collection::count($columns)==1 && is_array($columns[0]) ) $columns = $columns[0] ;
 		//
 		$target = "";
 		//
@@ -449,7 +449,7 @@ class Query
 	{
 		$values = func_get_args();
 		//
-		if( Table::count($values)==1 && is_array($values[0]) ) $values = $values[0] ;
+		if( Collection::count($values)==1 && is_array($values[0]) ) $values = $values[0] ;
 		//
 		$target = "";
 		//
@@ -508,8 +508,8 @@ class Query
 	{
 		$query = "update ".$this->table." set ";
 		//
-		for ($i=0; $i < Table::count($this->sets); $i++) 
-			if($i < Table::count($this->sets)-1) $query.=$this->sets[$i].",";
+		for ($i=0; $i < Collection::count($this->sets); $i++) 
+			if($i < Collection::count($this->sets)-1) $query.=$this->sets[$i].",";
 			else $query.=$this->sets[$i];
 		//
 		$query .= " ".$this->where;

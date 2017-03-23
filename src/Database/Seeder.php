@@ -5,7 +5,7 @@ namespace Vinala\Kernel\Database;
 use SeedsCaller as Caller;
 use Vinala\Kernel\Database\Exception\SeedersEmptyException;
 use Vinala\Kernel\Database\Schema;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 
 /**
 * Seeder class
@@ -69,9 +69,9 @@ class Seeder
 		//
 		if($seeder->count <= 0)
 			foreach ($seeder->data() as $value)
-				Table::push($data , $value);
+				Collection::push($data , $value);
 		else for ($i=0; $i < $seeder->count; $i++)
-			Table::push($data , $seeder->data());
+			Collection::push($data , $seeder->data());
 		//
 		return $data;
 	}

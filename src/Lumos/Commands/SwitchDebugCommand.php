@@ -27,7 +27,7 @@ class SwitchDebugCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.switch_debug');
+        $this->key = config('lumos.commands.switch_debug');
         $this->description = 'Enable or disable debug mode';
     }
 

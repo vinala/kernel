@@ -32,7 +32,7 @@ class ClearExceptionsCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.clear_exception');
+        $this->key = config('lumos.commands.clear_exception');
         $this->description = 'Clear all exceptions created';
     }
 

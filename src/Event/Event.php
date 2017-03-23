@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Events ;
 
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\Event\Exception\ManyListenersArgumentsException;
 
 /**

@@ -30,7 +30,7 @@ class NewCallRouteCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.call_routes').' {http : what\'s the http of route?} {controller : what\'s the controller you wanna to use?} {method : what\'s the method you wanna to use?}';
+        $this->key = config('lumos.commands.call_routes').' {http : what\'s the http of route?} {controller : what\'s the controller you wanna to use?} {method : what\'s the method you wanna to use?}';
         $this->description = 'Add new call route to Routes file';
     }
 

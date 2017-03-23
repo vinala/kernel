@@ -4,7 +4,7 @@ namespace Vinala\Kernel\Atomium;
 
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Security\Hash;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\MVC\View\Views;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileCapture;
 use Vinala\Kernel\Atomium\Exception\AromiumCaptureNotFoundException;

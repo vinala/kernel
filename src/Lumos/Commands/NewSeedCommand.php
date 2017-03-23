@@ -39,7 +39,7 @@ class NewSeedCommand extends Commands
     public function set()
     {
 
-        $this->key = Config::get('lumos.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?} {count? : who much of rows ?}';
+        $this->key = config('lumos.commands.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?} {count? : who much of rows ?}';
         $this->description = 'New Seeder';
 
     }

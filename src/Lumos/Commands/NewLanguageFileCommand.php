@@ -31,7 +31,7 @@ class NewLanguageFileCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = Config::get('lumos.new_lang')." {file : what's the name of the file?} ";
+        $this->key = config('lumos.commands.new_lang')." {file : what's the name of the file?} ";
         $this->description = "Make new translator file";
     }
 

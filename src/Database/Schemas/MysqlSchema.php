@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Database\Schema;
 
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Schema;
 use Vinala\Kernel\Database\Database;
@@ -256,7 +256,7 @@ class MysqlSchema extends Schema
 	*/
 	public function affect($value)
 	{
-		$i=Table::count(self::$colmuns)-1;
+		$i=Collection::count(self::$colmuns)-1;
 		self::$colmuns[$i].=" default '".$value."'";
 		//
 		return $this;
@@ -269,7 +269,7 @@ class MysqlSchema extends Schema
 	*/
 	public function notnull()
 	{
-		$i=Table::count(self::$colmuns)-1;
+		$i=Collection::count(self::$colmuns)-1;
 		self::$colmuns[$i].=" not null";
 		//
 		return $this;
@@ -284,7 +284,7 @@ class MysqlSchema extends Schema
 	*/
 	public function foreignkey($table, $colmun=null)
 	{
-		$i=Table::count(self::$colmuns)-1;
+		$i=Collection::count(self::$colmuns)-1;
 		//
 		self::$colmuns[$i] .= " references ".$table;
 		if(!empty($colmun)) self::$colmuns[$i] .= "(".$colmun.")";
@@ -305,8 +305,8 @@ class MysqlSchema extends Schema
 		{
 			$query = "CONSTRAINT $name UNIQUE (";
 			//
-			for ($i=0; $i < Table::count($colmuns); $i++) {
-				if($i==Table::count($colmuns)-1) $query .= $colmuns[$i];
+			for ($i=0; $i < Collection::count($colmuns); $i++) {
+				if($i==Collection::count($colmuns)-1) $query .= $colmuns[$i];
 				else $query .= $colmuns[$i].",";
 			}
 			$query .= ")";
@@ -356,8 +356,8 @@ class MysqlSchema extends Schema
 			//
 			$query = "";
 			//
-			for ($i=0; $i < Table::count(self::$colmuns); $i++)
-				$query .= ($i == (Table::count(self::$colmuns)-1)) ? self::$colmuns[$i] : self::$colmuns[$i]."," ;
+			for ($i=0; $i < Collection::count(self::$colmuns); $i++)
+				$query .= ($i == (Collection::count(self::$colmuns)-1)) ? self::$colmuns[$i] : self::$colmuns[$i]."," ;
 			//
 			self::$query .= $query.") DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;";
 			//
@@ -451,8 +451,8 @@ class MysqlSchema extends Schema
 			$script($object);
 			//
 			$query = "";
-			for ($i=0; $i < Table::count(self::$colmuns); $i++)
-				$query .= " add " . self::$colmuns[$i] . (($i == (Table::count(self::$colmuns)-1)) ? "" : ",");
+			for ($i=0; $i < Collection::count(self::$colmuns); $i++)
+				$query .= " add " . self::$colmuns[$i] . (($i == (Collection::count(self::$colmuns)-1)) ? "" : ",");
 			//
 			self::$query .= $query;
 			//
@@ -477,9 +477,9 @@ class MysqlSchema extends Schema
 			self::$query = "alter table ".$name." ";
 			//
 			if(is_array($colmuns))
-				for ($i=0; $i < Table::count($colmuns); $i++)
+				for ($i=0; $i < Collection::count($colmuns); $i++)
 				{
-					self::$query .= " drop ".$colmuns[$i] . (($i == (Table::count($colmuns)-1)) ? "" : ",");
+					self::$query .= " drop ".$colmuns[$i] . (($i == (Collection::count($colmuns)-1)) ? "" : ",");
 				}
 			else self::$query .= " drop ".$colmuns;
 			//

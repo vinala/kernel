@@ -4,7 +4,7 @@ namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Filesystem\File;
 

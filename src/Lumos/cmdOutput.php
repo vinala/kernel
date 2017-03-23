@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Console\Command;
 
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;

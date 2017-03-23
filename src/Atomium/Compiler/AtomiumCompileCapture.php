@@ -2,8 +2,8 @@
 
 namespace Vinala\Kernel\Atomium\Compiler;
 
-use Vinala\Kernel\Objects\Strings;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\String\Strings;
+use Vinala\Kernel\Collections\Collection;
 
 /**
 * 
@@ -65,12 +65,12 @@ class AtomiumCompileCapture
 		//
 		$output = "";
 		//
-		for ($i=1; $i < Table::count($data); $i++) 
+		for ($i=1; $i < Collection::count($data); $i++) 
 		{
 			$next = Strings::splite( $data[$i], self::$endOpenTag);
 			$rest = "";
 			//
-			for ($j=0; $j < Table::count($next) ; $j++)
+			for ($j=0; $j < Collection::count($next) ; $j++)
 				$rest .= $next[$j]."\n";
 			//
 			$next = Strings::splite( $rest , self::$closeTag);
@@ -104,14 +104,14 @@ class AtomiumCompileCapture
 		//
 		$output = $data[0];
 		//
-		for ($i=1; $i < Table::count($data); $i++) 
+		for ($i=1; $i < Collection::count($data); $i++) 
 		{
 			//
 			$next = Strings::splite( $data[$i], self::$endOpenTag);
 			//
-			for ($j=1; $j < Table::count($next) ; $j++)
+			for ($j=1; $j < Collection::count($next) ; $j++)
 			{
-				if($j==(Table::count($next)-1)) $output .= $next[$j];
+				if($j==(Collection::count($next)-1)) $output .= $next[$j];
 				else $output .= $next[$j].self::$endOpenTag;
 			}
 		}

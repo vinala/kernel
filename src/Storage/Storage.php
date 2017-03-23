@@ -3,7 +3,6 @@
 namespace Vinala\Kernel\Storage;
 
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Objects\Sys;
 use Whoops\Exception\ErrorException;
 use Vinala\Kernel\Storage\Exception\NotFoundStorageDiskException;
 

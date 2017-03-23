@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\MVC\ORM;
 
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection as Table;
 
 /**
 * The class Collection of ORM

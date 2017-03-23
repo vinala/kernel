@@ -40,7 +40,7 @@ class ExecSchemaCommand extends Commands
     public function set()
     {
 
-        $this->key = Config::get('lumos.exec_schema').' {schema? : what\'s the name of the schema?} ';
+        $this->key = config('lumos.commands.exec_schema').' {schema? : what\'s the name of the schema?} ';
         $this->description = 'Execute the last schema created';
 
     }

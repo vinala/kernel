@@ -12,7 +12,7 @@ use mysqli as Sql;
 use Vinala\Kernel\Objects\DateTime as Time;
 use Vinala\Kernel\Filesystem\Filesystem;
 use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Database\Connector\MysqlConnector;
 
 

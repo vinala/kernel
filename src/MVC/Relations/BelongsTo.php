@@ -2,8 +2,8 @@
 
 namespace Vinala\Kernel\MVC\Relations;
 
-use Vinala\Kernel\Objects\Table;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Collections\Collection;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\MVC\Relations\Exception\ModelNotFindedException as ModelNotFoundException;
 
 define('OneToOneRelation', 'one');
@@ -216,8 +216,8 @@ class BelongsTo
 	protected function prepare($models)
 	{
 		return ! is_null($models->data) ? 
-					((Table::count($models->data) > 0) 
-						? ((Table::count($models->data) == 1) 
+					((Collection::count($models->data) > 0) 
+						? ((Collection::count($models->data) == 1) 
 							? $models->data[0] 
 							: $models->data
 						) 

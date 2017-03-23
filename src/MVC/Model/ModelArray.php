@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\MVC\Model;
 
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 
 /**
 * Model array Class
@@ -51,7 +51,7 @@ class ModelArray
 	{
 		if(! empty($this->data))
 		{
-			if(Table::count($this->data)>0) return $this->data[0];
+			if(Collection::count($this->data)>0) return $this->data[0];
 			else return null;
 		}
 		else return null;

@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Database;
 
 use Vinala\Kernel\Filesystem\Filesystem;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Foundation\Application;
 
 /**
@@ -99,9 +99,9 @@ class Migration
 		$schemas = self::getSchemas($root);
 		//
 		// contains
-		for ($i=0; $i < Table::count($data); $i++)
+		for ($i=0; $i < Collection::count($data); $i++)
 		{ 
-			if( ! Table::contains($schemas,$data[$i]['name']))
+			if( ! Collection::contains($schemas,$data[$i]['name']))
 			{
 				$data[$i]['state']="droped";
 				$data[$i]['exec']=time();
@@ -120,7 +120,7 @@ class Migration
 		//
 		foreach ($f as $value) {
 			$t=explode("/", $value);
-			$t=$t[Table::count($t)-1];
+			$t=$t[Collection::count($t)-1];
 			$t=explode(".php", $t);
 			$t=$t[0];
 			$sch[]=$t;

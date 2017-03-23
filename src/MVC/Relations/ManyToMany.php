@@ -2,8 +2,8 @@
 
 namespace Vinala\Kernel\MVC\Relations;
 
-use Vinala\Kernel\Objects\Table;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Collections\Collection;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\MVC\Relations\Exception\ManyRelationException;
 use Vinala\Kernel\MVC\Relations\Exception\ModelNotFindedException;
 
@@ -47,7 +47,7 @@ class ManyToMany
 	{
 		$args = func_get_args();
 		//
-		$args = Table::sort($args);
+		$args = Collection::sort($args);
 		return $args[0].'_'.$args[1];
 	}
 

@@ -29,7 +29,7 @@ class NewMiddlewareCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.new_middleware').
+        $this->key = config('lumos.commands.new_middleware').
         ' {name : what\'s the middleware name ?}';
 
         $this->description = 'Create new middleware';

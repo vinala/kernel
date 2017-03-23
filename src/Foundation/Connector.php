@@ -50,7 +50,7 @@ class Connector
 		static::config();
 		Config::load();
 		//
-		// Config
+		// Environment
 		static::environment();
 		//
 		static::maintenance($lumos);
@@ -63,10 +63,9 @@ class Connector
 		static::component();
 		static::cubes();
 		//
-		static::storage($session);
 		static::collections();
+		static::storage($session);
 		static::string();
-		static::object();
 		static::access();
 		static::validation();
 		if(Component::isOn("faker")) static::faker();
@@ -75,9 +74,7 @@ class Connector
 		static::caches();
 		static::security();
 		static::auth();
-		static::table();
 		if(Component::isOn("database")) static::database();
-		static::object_scnd();
 		static::http();
 		static::assets();
 		static::Html();
@@ -101,7 +98,7 @@ class Connector
 	}
 
 	/**
-	 * Init static class
+	 * Init Connector class
 	 */
 	public static function ini($test = false)
 	{
@@ -126,7 +123,7 @@ class Connector
 	
 
 	/**
-	 * Init static class
+	 * Init Connector class
 	 */
 	public static function inilumos()
 	{
@@ -339,6 +336,7 @@ class Connector
 		self::call(
 			array(
 				'JSON',
+				'Collection',
 				),
 			self::$path.'Collections/'
 			);
@@ -350,30 +348,10 @@ class Connector
 	 */
 	public static function string()
 	{
-		$path = self::$path.'Objects/Strings/';
+		$path = self::$path.'Strings/';
 		//
 		self::need($path.'Strings.php');
 		self::need($path.'Exceptions/StringOutIndexException.php');
-	}
-
-	/**
-	 * object calls
-	 */
-	public static function object()
-	{
-		$files = array('Vars');
-		$filesPath = self::$path.'Objects/';
-		self::call($files,$filesPath);
-	}
-
-	/**
-	 * object calls
-	 */
-	public static function object_scnd()
-	{
-		$files = array('Sys','Base');
-		$filesPath = self::$path.'Objects/';
-		self::call($files,$filesPath);
 	}
 
 	/**
@@ -485,15 +463,6 @@ class Connector
 			self::$path.'Authentication/Exceptions/'
 			);
 	}
-	
-
-	/**
-	 * table calls
-	 */
-	public static function table()
-	{
-		self::need(self::$path.'Objects/Table.php');
-	}
 
 	/**
 	 * database calls
@@ -523,13 +492,15 @@ class Connector
 			);
 
 		//--------------------------------------------------------
-		// Calling statics
+		// Calling Connectors
 		//--------------------------------------------------------
+		
+
 		self::call(
 			array(
-				'Mysqlstatic', 
+				'MysqlConnector', 
 				),
-			self::$path.'Database/statics/'
+			self::$path.'Database/Connectors/'
 			);
 		
 		//--------------------------------------------------------
@@ -537,7 +508,7 @@ class Connector
 		//--------------------------------------------------------
 		self::call(
 			array(
-				'staticException',
+				// 'staticException',
 				'QueryException',
 				'SeedersEmptyException',
 				'DatabaseArgumentsException', 
@@ -1069,7 +1040,7 @@ class Connector
 	}
 
 	/**
-	 * Run static for test
+	 * Run Connector for test
 	 */
 	public static function runTest($kernelTest = false)
 	{
@@ -1079,20 +1050,30 @@ class Connector
 		Input::register();
 
 		static::mock();
+		
+		//Support
+		static::support();
+
 		// Config
 		static::config();
 		Config::load($kernelTest);
-		//
+
+		// Environment
+		static::environment();
+
 		static::time();
 		//
 		Log::ini();
 		$handler=new Error;
 		$handler->register();
 		//
+		static::component();
+		static::cubes();
+		//
+		static::collections();
 		static::storage(false);
 		static::maintenance();
 		static::string();
-		static::object();
 		static::access();
 		static::validation();
 		if(Component::isOn("faker"))  static::faker();
@@ -1100,9 +1081,8 @@ class Connector
 		static::router();
 		static::caches();
 		static::security();
-		static::table();
+		static::auth();
 		if(Component::isOn("database")) static::database();
-		static::object_scnd();
 		static::http();
 		static::assets();
 		static::Html();

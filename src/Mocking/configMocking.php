@@ -17,7 +17,6 @@ class configMocking
 					'Alias' => 			Vinala\Kernel\Config\Alias::class,
 					'App' => 			Vinala\Kernel\Foundation\Application::class,
 					'Auth' => 			Vinala\Kernel\Security\Auth::class,
-					'Base' => 			Vinala\Kernel\Objects\Base::class,
 					'Cache' => 			Vinala\Kernel\Caches\Cache::class,
 					'Config' => 		Vinala\Kernel\Config\Config::class,
 					'Cookie' => 		Vinala\Kernel\Storage\Cookie::class,
@@ -47,13 +46,11 @@ class configMocking
 					'Session' => 		Vinala\Kernel\Storage\Session::class,
 					'Smile' => 			Vinala\Kernel\Translator\Smiley::class,
 					'Storage' => 		Vinala\Kernel\Storage\Storage::class,
-					'Strings' => 		Vinala\Kernel\Objects\Strings::class,
-					'Sys' => 			Vinala\Kernel\Objects\Sys::class,
-					'Table' => 			Vinala\Kernel\Objects\Table::class,
+					'Strings' => 		Vinala\Kernel\String\Strings::class,
+					'Collection' => 			Vinala\Kernel\Collections\Collection::class,
 					'Time' => 			Vinala\Kernel\Objects\DateTime::class,
 					'Translator' => 	Vinala\Kernel\Translator\Lang::class,
 					'Url' => 			Vinala\Kernel\Access\Url::class,
-					'Vars' => 			Vinala\Kernel\Objects\Vars::class,
 					'View' => 			Vinala\Kernel\MVC\View\View::class,
 		));
 	}

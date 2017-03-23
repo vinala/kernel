@@ -2,8 +2,8 @@
 
 namespace Vinala\Kernel\MVC\Relations;
 
-use Vinala\Kernel\Objects\Table;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\Collections\Collection;
+use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\MVC\Relations\Exception\ManyRelationException;
 use Vinala\Kernel\MVC\Relations\Exception\ModelNotFindedException;
 
@@ -82,7 +82,7 @@ class OneToOne
 	 */
 	protected function prepare($model , $remote)
 	{
-		return !empty($model) ? isset($model->data) ? Table::count($model->data) == 1 ? $model->data[0] : $this->ManyRelationException($remote, $model) : null : null;
+		return !empty($model) ? isset($model->data) ? Collection::count($model->data) == 1 ? $model->data[0] : $this->ManyRelationException($remote, $model) : null : null;
 	}
 
 		/**

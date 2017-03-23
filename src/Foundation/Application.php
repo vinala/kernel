@@ -5,7 +5,6 @@ namespace Vinala\Kernel\Foundation;
 use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Logging\Handler;
 use Vinala\Kernel\Config\Alias;
-use Vinala\Kernel\Objects\Sys;
 use Vinala\Kernel\Access\Url;
 use Vinala\Kernel\Access\Path;
 use Vinala\Kernel\MVC\View\Template;
@@ -220,7 +219,6 @@ class Application
 	protected static function ini($database = true , $test = false)
 	{
 		Alias::ini(self::$root);
-		Sys::ini();
 		Url::ini();
 		Path::ini();
 		Template::run();

@@ -2,8 +2,8 @@
 
 namespace Vinala\Kernel\Atomium\Compiler;
 
-use Vinala\Kernel\Objects\Strings;
-use Vinala\Kernel\Objects\Table;
+use Vinala\Kernel\String\Strings;
+use Vinala\Kernel\Collections\Collection;
 
 /**
 * Class to compile One line instruction
@@ -52,7 +52,7 @@ class AtomiumCompileInstructions
 		$output = $data[0];
 		
 		//
-		for ($i=1; $i < Table::count($data); $i++) 
+		for ($i=1; $i < Collection::count($data); $i++) 
 		{
 			$items = self::getParmas($data[$i], $closeChar);
 			//

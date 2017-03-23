@@ -19,7 +19,7 @@ use Vinala\Kernel\Console\Command\Seed\ExecSeedCommand;
 use Vinala\Kernel\Console\Command\Various\AllCommand;
 use Vinala\Kernel\Console\Command\Command\testCommand;
 use Vinala\Kernel\Console\Command\Info;
-use Vinala\Kernel\Objects\Strings;
+use Vinala\Kernel\String\Strings;
 
 
 class Console
