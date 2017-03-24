@@ -590,7 +590,7 @@ if ( ! function_exists("array_add"))
 	* @param string $value
 	* @return mixed
 	*/
-	function array_add( $array , $index = null , $value )
+	function array_add( &$array , $index = null , $value )
 	{
 		if( is_null($index) ) 
 		{
