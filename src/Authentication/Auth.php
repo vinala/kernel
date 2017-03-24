@@ -171,7 +171,7 @@ class Auth
 
 		$name = static::resource('session');
 
-		Session::put($name,$saved);
+		Session::put($name , $saved , config('auth.cookie_lifetime'));
 
 		return true;
 	}
@@ -188,7 +188,7 @@ class Auth
 		return Cookie::create(
 			$name,
 			static::$user->rememberToken,
-			time()+(3600*24*7)
+			config('auth.cookie_lifetime')
 			);
 	}
 

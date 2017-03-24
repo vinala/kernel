@@ -1,7 +1,7 @@
 {
 	"name": "vinala/kernel",
 	"description": "The core of Vinala Framework.",
-	"keywords": ["framework", "vinala", "kernel"],
+	"keywords": ["framework", "vinala", "kernel", "php"],
 	"license": "MIT",
 	"authors": [
 		{
