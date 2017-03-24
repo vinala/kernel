@@ -601,20 +601,20 @@ if ( ! function_exists("array_add"))
 
 		$object = &$array;
 
-		foreach (dot($index) as  $value) 
+		foreach (dot($index) as  $segement) 
 		{
-			if( ! isset($object[$value]))
+			if( ! isset($object[$segement]))
 			{
 				if(count($object) > 0)
 				{
-					$object[$value] = null;
+					$object[$segement] = null;
 				}
 				else
 				{
-					$object = array($value => null);
+					$object = array($segement => null);
 				}
 			}
-			$object = &$object[$value];
+			$object = &$object[$segement];
 		}		
 		$object = $value;
 		
