@@ -172,6 +172,8 @@ class Config
 			return self::reach($key , $value);
 		}
 
+		static::set($key , $value);
+
 		return $value;
 	}
 
@@ -183,6 +185,18 @@ class Config
 	public static function all()
 	{
 		return self::$params;
+	}
+
+	/**
+	* Set a config param in runtime
+	*
+	* @param string $key 
+	* @param mixed $value
+	* @return bool
+	*/
+	public static function set($key , $value)
+	{
+		array_add( self::$params , $key , $value);
 	}
 	
 
