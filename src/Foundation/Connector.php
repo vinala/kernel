@@ -436,8 +436,6 @@ class Connector
 		self::call(
 			array(
 				'Hash',
-				'Security',
-				'License'
 				),
 			self::$path.'Security/'
 			);
