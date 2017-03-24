@@ -587,14 +587,37 @@ if ( ! function_exists("array_add"))
 	*
 	* @param array $array
 	* @param string $index
-	* @param string $default
+	* @param string $value
 	* @return mixed
 	*/
 	function array_add( $array , $index = null , $value )
 	{
-		if( is_null($index) ) $array[] = $value;
-		else $array[$index] = $value;
-		//
+		if( is_null($index) ) 
+		{
+			$array[] = $value;
+
+			return $array;
+		}
+
+		$object = &$array;
+
+		foreach (dot($index) as  $value) 
+		{
+			if( ! isset($object[$value]))
+			{
+				if(count($object) > 0)
+				{
+					$object[$value] = null;
+				}
+				else
+				{
+					$object = array($value => null);
+				}
+			}
+			$object = &$object[$value];
+		}		
+		$object = $value;
+		
 		return $array;
 	}	
 }
