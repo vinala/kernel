@@ -416,8 +416,7 @@ class Connector
 
 		self::call(
 			array(
-				'Item', 
-				'Caches', 
+				'Item',
 				'Cache', 
 				'FileCache', 
 				'DatabaseCache'
