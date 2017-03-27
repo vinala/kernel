@@ -2,8 +2,7 @@
 
 namespace Vinala\Kernel\Cache\Driver ;
 
-use Stash\Pool;
-use Stash\Driver\Apc as Adapter;
+use Symfony\Component\Cache\Adapter\ApcuAdapter as Adapter;
 
 /**
 * The file system cache driver
@@ -16,17 +15,27 @@ use Stash\Driver\Apc as Adapter;
 class ApcDriver extends Driver
 {
 	//--------------------------------------------------------
+	// Proprties
+	//--------------------------------------------------------
+
+	/**
+	* The Library used by the driver
+	*
+	* @var string
+	*/
+	private $library = 'symfony' ;
+
+	//--------------------------------------------------------
 	// Constructor
 	//--------------------------------------------------------
 
 	function __construct()
 	{
-		$options = array('ttl' => 3600, 'namespace' => md5(__file__));
+		$lifetime = config('cache.lifetime');
 
 		// Set the driver
-		$driver = new Adapter($options);
+		$driver = new Adapter('' , $lifetime);
 
-		// Set the Pool
 		parent::call(new Pool($driver));
 	}
 

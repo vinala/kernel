@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Caches;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Caches\Exception\DriverNotFoundException;
 use Vinala\Kernel\Cache\Driver\FileDriver;
+use Vinala\Kernel\Cache\Driver\ApcDriver;
 
 /**
 * Cache class
@@ -54,6 +55,10 @@ class Cache
 		switch ($default) {
 			case 'file':
 				return new FileDriver;
+				break;
+
+			case 'apc':
+				return new ApcDriver;
 				break;
 			
 			case 'database':
