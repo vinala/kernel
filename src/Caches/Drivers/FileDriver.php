@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Cache\Driver ;
 
 use Stash\Pool;
-use Stash\Driver\FileSystem as Adapter;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter as Adapter;
 
 /**
 * The file system cache driver
@@ -22,12 +22,13 @@ class FileDriver extends Driver
 	function __construct()
 	{
 		$path = '../'.config('cache.options.file.location');
+		$lifetime = config('cache.lifetime');
 
 		// Set the driver
-		$driver = new Adapter(['path' => $path]);
+		$driver = new Adapter('' , $lifetime , $path);
 
 		// Set the Pool
-		parent::call(new Pool($driver));
+		parent::call($driver);
 	}
 
 }
