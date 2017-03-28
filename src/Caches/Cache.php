@@ -6,6 +6,7 @@ use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Caches\Exception\DriverNotFoundException;
 use Vinala\Kernel\Cache\Driver\FileDriver;
 use Vinala\Kernel\Cache\Driver\ApcDriver;
+use Vinala\Kernel\Cache\Driver\PDODriver;
 
 /**
 * Cache class
@@ -62,7 +63,7 @@ class Cache
 				break;
 			
 			case 'database':
-				return new DatabaseCache;
+				return new PDODriver;
 				break;
 
 			default:
