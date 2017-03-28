@@ -43,6 +43,31 @@ class PDODriver extends Driver
     //--------------------------------------------------------
 
     /**
+    * Find item in cache 
+    *
+    * @param string $key 
+    * @return array
+    */
+    private function find($key)
+    {
+        if($this->exists($name))
+        {
+            $data = Query::from($this->table)
+                        ->where('name' , '=' , $name)
+                        ->first();
+
+            if($data->lifetime >= time())
+            {
+                return ['name' => $key , 'value' => $this->unpacking($data->value) , 'lifetime' => $data->lifetime ];
+            }
+            else
+            {   
+                $this->remove($name);
+            }
+        }
+    }
+
+    /**
     * Check if Cache table is exists
     *
     * @return boom
@@ -171,7 +196,7 @@ class PDODriver extends Driver
     {
         return Query::from($this->table)
                     ->where('name' , '=' , $name)
-                    ->remove();
+                    ->delete();
     }
 
     /**
@@ -235,11 +260,71 @@ class PDODriver extends Driver
                 return $this->unpacking($data->value);
             }
             else
-            {
+            {   
+                $this->remove($name);
                 return $default;
             }
         }
+
+        return $default;
     }
+
+    /**
+	* Get an item cache and remove it
+	*
+	* @param string $key
+	* @return mixed
+	*/
+	public function pull($key)
+	{
+		$item = $this->get($key);
+
+		$this->remove($key);
+
+		return $item;
+	}
+
+    /**
+    * Get Expiration time of a key 
+    *
+    * @param string $key 
+    * @return int 
+    */
+    public function expiration($key)
+    {
+        if($this->exists($name))
+        {
+            $data = Query::from($this->table)
+                        ->where('name' , '=' , $name)
+                        ->first();
+
+            if($data->lifetime >= time())
+            {
+                return $data->lifetime;
+            }
+        }
+    }
+
+    /**
+    * Prolong a lifetime of cache item
+    *
+    * @param string $key 
+    * @param int $lifetime 
+    * @return bool
+    */
+    public function prolong($key , $lifetime)
+    {
+        $item = $this->find($key);
+
+        if( ! is_null($item))
+        {
+            $lifetime = $this->lifetime + $lifetime;
+
+            $this->put($key , $this->value , $lifetime);
+        }
+    }
+
+
 
 
 
