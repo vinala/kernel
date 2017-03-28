@@ -46,11 +46,20 @@ class Driver
 	* Set the cache item
 	*
 	* @param string $key
-	* @return Symfony\Component\Cache\CacheItem
+	* @return Symfony\Component\Cache\CacheItem | Stash\CacheItem
 	*/
 	private function set($key ,  $secs = null)
 	{
+		
 		$item = $this->adapter->getItem($key);
+		
+		if( ! is_null($secs))
+		{
+			if($secs > 0)
+			{
+				$item->expiresAfter($secs);
+			}
+		}
 
 		return $item;
 	}
@@ -59,22 +68,15 @@ class Driver
 	* Get the cache value by the key name
 	*
 	* @param string $key
-	* @param [string $default]
+	* @param string $default
 	* @return mixed
 	*/
 	public function get($key , $default = null)
 	{
 		$item = $this->set($key);
-
+		d($item);
+		
 		return $item->get();
-
-		if ($item->isHit()) 
-		{
-			$item = new Item($item);
-			return $item->value();
-		}
-
-		return $default;
 	}
 
 	/**
@@ -87,11 +89,9 @@ class Driver
 	*/
 	public function put($key  , $value , $secs = 0)
 	{
-		$item = $this->set($key);
+		$item = $this->set($key , $secs);
 
 		$item->set($value);
-
-		$item->expiresAfter($secs);
 
 		$this->adapter->save($item);
 	}
