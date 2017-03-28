@@ -98,8 +98,8 @@ class Query
 	 */
 	private function reset()
 	{
-		$this->table = 
-		$this->columns = null ;
+		$this->table = null ;
+		$this->columns = "*" ;
 		//
 		$this->values = 
 		$this->sets = array() ;
@@ -157,9 +157,9 @@ class Query
 	 *
 	 * @return Array
 	 */
-	public function first()
+	public function first($type = "object")
 	{
-		$data = self::query();
+		$data = self::query($type);
 		if(Collection::count($data) > 0) return $data[0];
 	}
 
