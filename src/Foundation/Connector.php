@@ -409,7 +409,7 @@ class Connector
 				'ArrayDriver',
 				'PhpFilesDriver',
 				'ApcDriver',
-				'PDODriver'
+				'DatabaseDriver'
 				),
 			self::$path.'Caches/Drivers/'
 			);
@@ -424,7 +424,14 @@ class Connector
 			self::$path.'Caches/'
 			);
 		//
-		self::need(self::$path.'Caches/Exceptions/DriverNotFoundException.php');
+		self::call(
+			array(
+				'CacheItemNotFoundException',
+				'DriverNotFoundException',
+				),
+			self::$path.'Caches/Exceptions/'
+			);
+
 	}
 
 	/**
