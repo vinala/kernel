@@ -74,7 +74,6 @@ class Driver
 	public function get($key , $default = null)
 	{
 		$item = $this->set($key);
-		d($item);
 		
 		return $item->get();
 	}
