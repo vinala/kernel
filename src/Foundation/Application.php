@@ -13,6 +13,7 @@ use Vinala\Kernel\Http\Links\Link;
 use Vinala\Kernel\Http\Errors;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Database\Database;
+use Vinala\Kernel\Database\Schema;
 use Vinala\Kernel\Authentication\Auth;
 use Vinala\Kernel\Router\Routes;
 use Vinala\Kernel\Config\Config;
@@ -224,7 +225,11 @@ class Application
 		if(Component::isOn("faker")) Faker::ini();
 		Link::ini();
 		Lang::ini($test);
-		if($database && Component::isOn("database")) Database::ini();
+		if($database && Component::isOn("database"))
+		{
+			Database::ini();
+			Schema::ini();
+		}
 		Auth::ini();
 		Plugins::ini();
 		
