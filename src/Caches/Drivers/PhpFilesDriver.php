@@ -15,6 +15,17 @@ use Symfony\Component\Cache\Adapter\PhpFilesAdapter as Adapter;
 class PhpFilesDriver extends Driver
 {
 	//--------------------------------------------------------
+	// Proprties
+	//--------------------------------------------------------
+
+	/**
+	* The Library used by the driver
+	*
+	* @var string
+	*/
+	private $library = 'symfony' ;
+
+	//--------------------------------------------------------
 	// Constructor
 	//--------------------------------------------------------
 

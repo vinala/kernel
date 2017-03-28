@@ -16,6 +16,17 @@ use Vinala\Kernel\Database\Database;
 class PDODriver extends Driver
 {
 	//--------------------------------------------------------
+	// Proprties
+	//--------------------------------------------------------
+
+	/**
+	* The Library used by the driver
+	*
+	* @var string
+	*/
+	private $library = 'symfony' ;
+
+	//--------------------------------------------------------
 	// Constructor
 	//--------------------------------------------------------
 

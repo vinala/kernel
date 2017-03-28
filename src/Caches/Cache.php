@@ -23,6 +23,11 @@ class Cache
 		return self::driver()->get($key);
 	}
 
+	public static function remove($key)
+	{
+		return self::driver()->remove($key);
+	}
+
 	public static function exists($key)
 	{
 		return self::driver()->exists($key);
