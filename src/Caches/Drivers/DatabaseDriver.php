@@ -33,7 +33,7 @@ class PDODriver extends Driver
 
     function __construct()
     {
-        $this->table = config('cache.option.database.table');
+        $this->table = config('cache.options.database.table');
 
         $this->establish();
     }
@@ -65,7 +65,7 @@ class PDODriver extends Driver
 				$tab->inc("id");
 				$tab->string("name");
 				$tab->string("value");
-				$tab->long("life");
+				$tab->long("lifetime");
 				$tab->unique("cacheunique",["name"]);
 			});
     }
@@ -119,6 +119,12 @@ class PDODriver extends Driver
         {
             $lifetime = confg('cache.lifetime');
         }
+
+        $lifetime = time()+$lifetime;
+
+        $value = $this->packing($value);
+
+        $this->save($name , $value , $lifetime);
     }
 
     /**
@@ -132,7 +138,7 @@ class PDODriver extends Driver
     protected function add($name , $value , $lifetime)
     {
         return Query::into($this->table)
-                    ->column('name' , 'value' , 'life')
+                    ->column('name' , 'value' , 'lifetime')
                     ->value($name , $value , $lifetime)
                     ->insert();
     }
@@ -209,6 +215,32 @@ class PDODriver extends Driver
     {
         return $this->exists($key);
     }
+
+    /**
+    * Get a cache key 
+    *
+    * @param string name 
+    * @return mixed
+    */
+    public function get($name , $default = null)
+    {
+        if($this->exists($name))
+        {
+            $data = Query::from($this->table)
+                        ->where('name' , '=' , $name)
+                        ->first();
+
+            if($data->lifetime >= time())
+            {
+                return $this->unpacking($data->value);
+            }
+            else
+            {
+                return $default;
+            }
+        }
+    }
+
 
 
 
