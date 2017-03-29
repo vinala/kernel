@@ -80,4 +80,17 @@ class Cache
 
 	}
 
+	/**
+	* Set new expiration time above the old one
+	*
+	* @param string $key 
+	* @param int $lifetime
+	* @return null
+	*/
+	public static function prolong($key , $lifetime)
+	{
+		return self::driver()->prolong($key , $lifetime);
+	}
+	
+
 }
