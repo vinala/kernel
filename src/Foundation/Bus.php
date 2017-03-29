@@ -41,7 +41,12 @@ class Bus
     {
         static::init(($lumos) ? 'lumos' : 'web');
 
-        return ;
+        //Version Surface
+        static::version();
+
+        //Logging Surface
+        static::logging();
+
     }
 
     /**
@@ -127,6 +132,53 @@ class Bus
             static::need($files);
         }
     }
+
+    //--------------------------------------------------------
+    // Calling the framework surfaces
+    //--------------------------------------------------------
+
+    /**
+    * call version surface
+    * surface namespace is Vinala\Kernel\Foundation\Version
+    *
+    * @return null
+    */
+    private static function version()
+    {
+        $files = ['Version'];
+        $folder  = self::$path.'Foundation'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call logging surface
+    * surface namespace is Vinala\Kernel\Logging
+    *
+    * @return null
+    */
+    private static function logging()
+    {
+        $files = ['Handler' , 'Exception' , 'Log'];
+        $folder  = self::$path.'Logging'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call and init Input surface
+    *
+    * @param 
+    * @param 
+    * @return 
+    */
+    public static function name()
+    {
+        
+        return ;
+    }
+
+    
 
     
 
