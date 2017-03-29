@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Cache\Driver ;
 
 use Vinala\Kernel\Database\Query;
 use Vinala\Kernel\Database\Schema;
+use Vinala\Kernel\Cache\Exception\DatabaseSurfaceDisabledException;
 
 /**
 * The cache driver of database
@@ -102,6 +103,8 @@ class PDODriver extends Driver
     */
     private function establish()
     {
+        exception_if( ! config('components.database') , DatabaseSurfaceDisabledException::class);
+
         if( ! $this->checkTable())
         {
             $this->createTable();
