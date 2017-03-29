@@ -884,6 +884,13 @@ class Connector
 				),
 			self::$path.'Setup/'
 			);
+
+		self::call(
+			array(
+				'AppSetupException', 
+				),
+			self::$path.'Setup/Exceptions/'
+			);
 	}
 
 	/**
