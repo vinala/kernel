@@ -409,7 +409,7 @@ class Connector
 				'ArrayDriver',
 				'PhpFilesDriver',
 				'ApcDriver',
-				'DatabaseDriver'
+				'PDODriver'
 				),
 			self::$path.'Caches/Drivers/'
 			);
