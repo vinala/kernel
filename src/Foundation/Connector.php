@@ -409,7 +409,7 @@ class Connector
 				'ArrayDriver',
 				'PhpFilesDriver',
 				'ApcDriver',
-				'DatabaseDriver'
+				'PDODriver'
 				),
 			self::$path.'Caches/Drivers/'
 			);
@@ -428,6 +428,7 @@ class Connector
 			array(
 				'CacheItemNotFoundException',
 				'DriverNotFoundException',
+				'DatabaseSurfaceDisabledException',
 				),
 			self::$path.'Caches/Exceptions/'
 			);
@@ -882,6 +883,13 @@ class Connector
 				'Documentations/Robots', 
 				),
 			self::$path.'Setup/'
+			);
+
+		self::call(
+			array(
+				'AppSetupException', 
+				),
+			self::$path.'Setup/Exceptions/'
 			);
 	}
 

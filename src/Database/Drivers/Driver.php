@@ -14,6 +14,7 @@ use Vinala\Kernel\Filesystem\Filesystem;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Database\Connector\MysqlConnector;
+use LogicException;
 
 
 /**
@@ -28,7 +29,7 @@ class Driver
 	 * the PDO to database server
 	 * @var PDO
 	 */
-	public static $server;
+	public static $server = 'out';
 
 	/**
 	 * the connection to Mysql database server
@@ -68,6 +69,8 @@ class Driver
 	*/
 	public static function exec($sql)
 	{
+		exception_if(self::$server == 'out' , LogicException::class , 'The app is not yet setted up, visit the home page or set true in setup parameter in app config file');
+
 		self::$server->exec($sql);
 		return true;
 	}
@@ -97,6 +100,8 @@ class Driver
 	*/
 	public static function query($sql)
 	{
+		exception_if(self::$server == 'out' , LogicException::class , 'The app is not yet setted up, visit the home page or set true in setup parameter in app config file');
+
 		return self::$server->query($sql);
 	}
 	
@@ -122,6 +127,8 @@ class Driver
 	*/
 	public static function error()
 	{
+		exception_if(self::$server == 'out' , LogicException::class , 'The app is not yet setted up, visit the home page or set true in setup parameter in app config file');
+
 		return self::$server->errorInfo();
 	}
 	
