@@ -1,96 +1,125 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Caches;
+namespace Vinala\Kernel\Caches ;
 
-use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Caches\Exception\DriverNotFoundException;
 use Vinala\Kernel\Cache\Driver\FileDriver;
 use Vinala\Kernel\Cache\Driver\ApcDriver;
 use Vinala\Kernel\Cache\Driver\PDODriver;
 
+use Vinala\Kernel\Caches\Exception\DriverNotFoundException;
+
 /**
-* Cache class
+* The cache main surface
+*
+* @version 2.0
+* @author Youssef Had
+* @package Vinala\Kernel\Caches
+* @since v3.3.0
 */
 class Cache
 {
-	public static function put($key,$value,$minutes)
-	{
-		return self::driver()->put($key, $value, $minutes);
-	}
 
-	public static function get($key)
-	{
-		return self::driver()->get($key);
-	}
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-	public static function remove($key)
-	{
-		return self::driver()->remove($key);
-	}
+    /**
+    * Set the cache surface driver
+    *
+    * @return Driver
+    */
+    private static function driver()
+    {
+        $options = config('cache.options');
 
-	public static function exists($key)
-	{
-		return self::driver()->exists($key);
-	}
+        $driver = config('cache.default');
 
-	public static function forever($key,$value)
-	{
-		return self::driver()->forever($key,$value);
-	}
+        switch ($driver) 
+        {
+            case 'file':
+                    return instance(FileDriver::class);
+                break;
 
-	public static function clearOld()
-	{
-		return self::driver()->clearOld();
-	}
+            case 'apc':
+                    return instance(ApcDriver::class);
+                break;
 
-	public static function prolongation($key,$minutes)
-	{
-		return self::driver()->prolongation($key,$minutes);
-	}
+            case 'database':
+                    return instance(PDODriver::class);
+                break;
+            
+            default:
+                    exception(DriverNotFoundException::class);
+                break;
+        }
+    }
 
-	public static function pull($key)
-	{
-		return self::driver()->pull($key);
-	}
+    /**
+    * Set an cache item to cache data
+    *
+    * @param string $name
+    * @param mixed $value
+    * @param int $lifetime
+    * @return null
+    */
+    public static function put($name, $value, $lifetime)
+    {
+        return self::driver()->put($name, $value, $lifetime);
+    }
 
-	protected static function driver()
-	{
-		$option=Config::get('cache.options');
-		$default=Config::get('cache.default');
-		//
-		switch ($default) {
-			case 'file':
-				return new FileDriver;
-				break;
+    /**
+    * Return a value of cache item
+    *
+    * @param string $name
+    * @return mixed
+    */
+    public static function get($key)
+    {
+        return self::driver()->get($key);
+    }
 
-			case 'apc':
-				return new ApcDriver;
-				break;
-			
-			case 'database':
-				return new PDODriver;
-				break;
+    /**
+    * Remove item from cache data 
+    *
+    * @param string $name
+    * @return bool|null
+    */
+    public static function remove($name)
+    {
+        return self::driver()->remove($name);
+    }
 
-			default:
-			throw new DriverNotFoundException();
-				break;
-		}
-		
+    /**
+    * Return true item exists in cache data 
+    *
+    * @param string $name
+    * @return bool
+    */
+    public static function has($name)
+    {
+        return self::driver()->has($name);
+    }
 
+    /**
+    * Get item from cache data and remove it 
+    *
+    * @param string $name
+    * @return mixed
+    */
+    public static function pull($name)
+    {
+        return self::driver()->pull($name);
+    }
 
-	}
-
-	/**
-	* Set new expiration time above the old one
-	*
-	* @param string $key 
-	* @param int $lifetime
-	* @return null
-	*/
-	public static function prolong($key , $lifetime)
-	{
-		return self::driver()->prolong($key , $lifetime);
-	}
-	
-
+    /**
+    * Extend lifetime of cache item
+    *
+    * @param string $name
+    * @param int $lifetime
+    * @return null
+    */
+    public static function prolong($name , $lifetime)
+    {
+        return self::driver()->prolong($name , $lifetime);
+    }
 }
