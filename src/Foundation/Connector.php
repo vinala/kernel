@@ -428,6 +428,7 @@ class Connector
 			array(
 				'CacheItemNotFoundException',
 				'DriverNotFoundException',
+				'DatabaseSurfaceDisabledException',
 				),
 			self::$path.'Caches/Exceptions/'
 			);
