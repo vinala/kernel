@@ -51,10 +51,10 @@ class PDODriver extends Driver
     */
     private function find($key)
     {
-        if($this->exists($name))
+        if($this->exists($key))
         {
             $data = Query::from($this->table)
-                        ->where('name' , '=' , $name)
+                        ->where('name' , '=' , $key)
                         ->first();
 
             if($data->lifetime >= time())
@@ -63,7 +63,7 @@ class PDODriver extends Driver
             }
             else
             {   
-                $this->remove($name);
+                $this->remove($key);
             }
         }
     }
@@ -141,14 +141,17 @@ class PDODriver extends Driver
     * @param int $lifetime
     * @return bool
     */
-    public function put($name , $value , $lifetime = null)
+    public function put($name , $value , $lifetime = null , $timestamp = false)
     {
         if (is_null($lifetime)) 
         {
             $lifetime = confg('cache.lifetime');
         }
 
-        $lifetime = time()+$lifetime;
+        if( ! $timestamp)
+        {
+            $lifetime = time()+$lifetime;
+        }        
 
         $value = $this->packing($value);
 
@@ -321,9 +324,9 @@ class PDODriver extends Driver
 
         if( ! is_null($item))
         {
-            $lifetime = $this->lifetime + $lifetime;
+            $lifetime = $item['lifetime'] + $lifetime;
 
-            $this->put($key , $this->value , $lifetime);
+            $this->put($key , $item['value'] , $lifetime , true);
         }
     }
 
