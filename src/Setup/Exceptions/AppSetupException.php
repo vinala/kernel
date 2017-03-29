@@ -1,11 +1,13 @@
 <?php 
 
-namespace Vinala\Kernel\Foundation\Exception;
+namespace Vinala\Kernel\Setup\Exception;
+
+use Vinala\Kernel\Logging\Exception;
 
 /**
 * Directory not fount exception
 */
-class AppSetupException extends \Exception{
+class AppSetupException extends Exception{
 
 	protected $message;
 	//

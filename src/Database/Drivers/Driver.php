@@ -14,7 +14,7 @@ use Vinala\Kernel\Filesystem\Filesystem;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Database\Connector\MysqlConnector;
-use LogicException;
+use Vinala\Kernel\Setup\Exception\AppSetupException;
 
 
 /**
@@ -69,7 +69,7 @@ class Driver
 	*/
 	public static function exec($sql)
 	{
-		exception_if(self::$server == 'out' , LogicException::class , 'The app is not yet setted up, visit the home page or set true in setup parameter in app config file');
+		exception_if(self::$server == 'out' , AppSetupException::class);
 
 		self::$server->exec($sql);
 		return true;
@@ -100,7 +100,7 @@ class Driver
 	*/
 	public static function query($sql)
 	{
-		exception_if(self::$server == 'out' , LogicException::class , 'The app is not yet setted up, visit the home page or set true in setup parameter in app config file');
+		exception_if(self::$server == 'out' , AppSetupException::class);
 
 		return self::$server->query($sql);
 	}
@@ -127,7 +127,7 @@ class Driver
 	*/
 	public static function error()
 	{
-		exception_if(self::$server == 'out' , LogicException::class , 'The app is not yet setted up, visit the home page or set true in setup parameter in app config file');
+		exception_if(self::$server == 'out' , AppSetupException::class);
 
 		return self::$server->errorInfo();
 	}
