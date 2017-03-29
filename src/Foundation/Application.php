@@ -97,6 +97,10 @@ class Application
 
 		require $test ? 'src/Foundation/Exceptions/ConnectorFileNotFoundException.php' : self::$root.'vendor/vinala/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
 
+		// require ($test ? '' : root().'vendor/vinala/kernel/').'src/Foundation/Bus.php';
+
+		// require ($test ? '' : root().'vendor/vinala/kernel/').'src/Foundation/Exceptions/BusFileNotFoundException.php';
+
 	}
 
 	/**
