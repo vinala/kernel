@@ -2,6 +2,10 @@
 
 namespace Vinala\Kernel\Foundation ;
 
+use Vinala\Kernel\Http\Input;
+use Vinala\Kernel\Config\Config;
+use Vinala\Kernel\Maintenance\Maintenance;
+
 use Vinala\Kernel\Foundation\Exception\BusFileNotFoundException;
 
 /**
@@ -46,6 +50,15 @@ class Bus
 
         //Logging Surface
         static::logging();
+
+        //Input Surface
+        static::input();
+        
+        //Support Surface
+        static::support();
+
+        //Environment Surface
+        static::environment();
 
     }
 
@@ -168,18 +181,80 @@ class Bus
     /**
     * Call and init Input surface
     *
-    * @param 
-    * @param 
-    * @return 
+    * @return null
     */
-    public static function name()
+    private static function input()
     {
-        
-        return ;
+        $files = ['Input'];
+        $folder  = self::$path.'Http'.'/';
+
+        self::call($files , $folder);
+
+        Input::register();
     }
 
-    
+    /**
+    * Call the support surface
+    *
+    * @return null
+    */
+    private static function support()
+    {
+        $files = ['FunctionArgs'];
+        $folder  = self::$path.'Support'.'/';
 
-    
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Config surface and initiate it 
+    *
+    * @return null
+    */
+    private static function config()
+    {
+        $files = ['Config' , 'Alias' ];
+        $folder  = self::$path.'Config'.'/';
+
+        self::call($files , $folder);
+        //
+        $files = ['ConfigException' , 'DatabaseDriverNotFoundException' , 'AliasedClassNotFoundException' ];
+        $folder  = self::$path.'Config/Exceptions'.'/';
+
+        self::call($files , $folder);
+        //
+        Config::load();
+    }
+
+    /**
+    * Call Environment surface
+    *
+    * @return null
+    */
+    private static function environment()
+    {
+        $files = ['Environment'];
+        $folder  = self::$path.'Environment'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Maintenance surface
+    *
+    * @return null
+    */
+    private static function maintenance($lumos)
+    {
+        $files = ['Maintenance'];
+        $folder  = self::$path.'Maintenance'.'/';
+
+        self::call($files , $folder);
+
+        if( ! $lumos )
+		{
+			Maintenance::launch();	
+		}
+    }   
 
 }
