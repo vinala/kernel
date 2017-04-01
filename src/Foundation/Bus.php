@@ -5,6 +5,11 @@ namespace Vinala\Kernel\Foundation ;
 use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Maintenance\Maintenance;
+use Vinala\Kernel\Logging\Log;
+use Vinala\Kernel\Logging\Handler;
+use Vinala\Kernel\Storage\Session;
+use Vinala\Kernel\Validation\Validator;
+use Vinala\Kernel\Foundation\Component;
 
 use Vinala\Kernel\Foundation\Exception\BusFileNotFoundException;
 
@@ -59,6 +64,54 @@ class Bus
 
         //Environment Surface
         static::environment();
+
+        //Time Surface
+        static::time();
+
+        //Initiate the Logging Surface
+        static::initLogging();
+
+        //Component Surface
+        static::component();
+
+        //Cubes Surface
+        static::cubes();
+
+        //Collections Surface
+        static::collections();
+
+        //Storage Surface
+        static::storage($session);
+
+        //Strings Surface
+        static::strings();
+
+        //Access Surface
+        static::access();
+
+        //Validation Surface
+        static::validation();
+
+        //Call Faker Surface if enabled in Component surface
+        if(Component::isOn("faker"))
+        {
+            static::faker();
+        }
+        
+        //Cookie Surface
+        static::cookie();
+
+        //Router Surface
+        static::router();
+
+        //Caches Surface
+        static::caches();
+
+        //Security Surface
+        static::security();
+
+        //Auth Surface
+        static::auth();
 
     }
 
@@ -256,5 +309,268 @@ class Bus
 			Maintenance::launch();	
 		}
     }   
+
+    /**
+    * Call Time surface
+    *
+    * @return numm
+    */
+    private static function time()
+    {
+        $files = ['DateTime'];
+        $folder  = self::$path.'Objects'.'/'; // to do : cahnge the folder
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Init Logging surface
+    *   
+    * @return null
+    */
+    private static function initLogging()
+    {
+        Log::ini();
+		Handler::run();
+    }
+
+    /**
+    * Call Component surface
+    *
+    * @return null
+    */
+    private static function component()
+    {
+        $files = ['Component'];
+        $folder  = self::$path.'Foundation'.'/';
+
+        self::call($files , $folder);
+        //
+        $files = ['SurfaceDisabledException'];
+        $folder  = self::$path.'Foundation/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Cubes surface
+    *
+    * @return null
+    */
+    private static function cubes()
+    {
+        $files = ['Cube','Accessor'];
+        $folder  = self::$path.'Cubes'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Collections surface
+    *
+    * @return null
+    */
+    private static function collections()
+    {
+        $files = ['JSON','Collection'];
+        $folder  = self::$path.'Collections'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Session class
+    *
+    * @param bool $session
+    * @return null
+    */
+    private static function session($session)
+    {
+        $files = ['Session'];
+        $folder  = self::$path.'Storage'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['SessionKeyNotFoundException' , 'SessionSurfaceIsOffException'];
+        $folder  = self::$path.'Storage/Exceptions'.'/';
+
+        self::call($files , $folder);
+
+        //Initiat the class
+        if($session) 
+		{
+			Session::ini();
+		}
+    }
+
+    /**
+    * Call the Storage surface
+    *
+    * @return null
+    */
+    private static function storage($seesion)
+    {
+        //Initiat the class
+        static::session($session);
+
+        $files = ['Storage'];
+        $folder  = self::$path.'Storage'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['NotFoundStorageDiskException'];
+        $folder  = self::$path.'Storage/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the String surface
+    *
+    * @return null
+    */
+    private static function string($seesion)
+    {
+        $files = ['Strings'];
+        $folder  = self::$path.'Strings'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['StringOutIndexException'];
+        $folder  = self::$path.'Strings/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Access surface
+    *
+    * @return null
+    */
+    private static function access()
+    {
+        $files = ['Path' , 'Url'];
+        $folder  = self::$path.'Access'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Validation surface
+    *
+    * @return null
+    */
+    private static function validation()
+    {
+        $files = ['Validator' , 'ValidationResultUrl'];
+        $folder  = self::$path.'Validation'.'/';
+
+        self::call($files , $folder);
+
+        //Initiate the validation surface
+        Validator::ini();
+    }
+
+    /**
+    * Call the Faker surface
+    *
+    * @return null
+    */
+    private static function faker()
+    {
+        $files = ['Faker'];
+        $folder  = self::$path.'Resources'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Cookie surface
+    *
+    * @return null
+    */
+    private static function cookie()
+    {
+         $files = ['Cookie'];
+        $folder  = self::$path.'Storage'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Router surface
+    *
+    * @return null
+    */
+    private static function router()
+    {
+        $files = ['Url' , 'Routes' , 'Route'];
+        $folder  = self::$path.'Router'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['NotFoundHttpException'];
+        $folder  = self::$path.'Router/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Caches surface
+    *
+    * @return null
+    */
+    private static function caches()
+    {
+        $files = ['Driver', 'FileDriver', 'ArrayDriver','PhpFilesDriver','ApcDriver','PDODriver'];
+        $folder  = self::$path.'Caches/Drivers'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['Item', 'Cache', 'FileCache', 'DatabaseCache'];
+        $folder  = self::$path.'Caches'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['CacheItemNotFoundException', 'DriverNotFoundException', 'DatabaseSurfaceDisabledException'];
+        $folder  = self::$path.'Caches/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Securtiy surface
+    *
+    * @return null
+    */
+    private static function securtiy()
+    {
+        $files = ['Hash'];
+        $folder  = self::$path.'Securtiy'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call Securtiy surface
+    *
+    * @return null
+    */
+    private static function auth()
+    {
+        $files = ['Auth'];
+        $folder  = self::$path.'Authentication'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['AuthenticationModelNotFoundException'];
+        $folder  = self::$path.'Authentication/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    
+
+
 
 }
