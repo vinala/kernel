@@ -11,6 +11,7 @@ use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Validation\Validator;
 use Vinala\Kernel\Foundation\Component;
 use Vinala\Kernel\Atomium\Compiler;
+use Vinala\Kernel\Logging\Error;
 
 use Vinala\Kernel\Foundation\Exception\BusFileNotFoundException;
 
@@ -47,9 +48,12 @@ class Bus
     * @param bool $session
     * @return null
     */
-    public static function run($lumos = false , $session = true)
+    public static function run($type = 'web' , $session = true)
+    // public static function run($lumos = false , $session = true)
     {
-        static::init(($lumos) ? 'lumos' : 'web');
+        $lumos = $type == 'lumos' ? true : false ;
+        static::init($type);
+        // static::init(($lumos) ? 'lumos' : 'web');
 
         //Version Surface
         static::version();
@@ -59,18 +63,30 @@ class Bus
 
         //Input Surface
         static::input();
+
+        if($type == 'test')
+        {
+            //Mock Surface
+            static::mock();
+        }
         
         //Support Surface
         static::support();
 
+        //Config Surface
+        static::config($type == 'test' ? true : false);
+
         //Environment Surface
         static::environment();
+
+        //Maintenance Surface
+        static::maintenance($lumos);
 
         //Time Surface
         static::time();
 
         //Initiate the Logging Surface
-        static::initLogging();
+        static::initLogging($type);
 
         //Component Surface
         static::component();
@@ -85,7 +101,7 @@ class Bus
         static::storage($session);
 
         //Strings Surface
-        static::strings();
+        static::string();
 
         //Access Surface
         static::access();
@@ -172,6 +188,15 @@ class Bus
         //Atomium Surface
         static::atomium();
 
+        //Proccess Surface
+        static::proccess();
+
+        //Setup Surface
+        static::setup();
+
+        //Events Surface
+        static::event();
+
     }
 
     /**
@@ -180,23 +205,23 @@ class Bus
     * @param bool $test
     * @return string
     */
-    private static function init($test)
+    private static function init($type)
     {
         switch ($type) {
             case 'test':
-                    self::$path = 'src/';
+                    static::$root = 'src/';
                 break;
 
             case 'web':
-                    self::$path = root().'vendor/vinala/kernel/src/';
+                    static::$root = root().'vendor/vinala/kernel/src/';
                 break;
 
             case 'lumos':
-                    self::$path = 'vendor/vinala/kernel/src/';
+                    static::$root = 'vendor/vinala/kernel/src/';
                 break;
         }
 
-        return self::$path;
+        return static::$root;
     }
     
     //--------------------------------------------------------
@@ -240,7 +265,7 @@ class Bus
     {
         foreach ($files as $file) 
         {
-            static::need($path.$file.'.'.$ext);
+            static::need($folder.$file.'.'.$ext);
         }
     }
 
@@ -265,7 +290,7 @@ class Bus
     * @param bool $app : if using app/files 
     * @return array
     */
-    private static function fetch($pattern , $app = false)
+    public static function fetch($pattern , $app = false)
     {
         if ($app) {
             $path = root() . 'app/'.$pattern.'/*.php';
@@ -288,7 +313,7 @@ class Bus
     private static function version()
     {
         $files = ['Version'];
-        $folder  = self::$path.'Foundation'.'/';
+        $folder  = static::$root.'Foundation'.'/';
 
         self::call($files , $folder);
     }
@@ -302,7 +327,7 @@ class Bus
     private static function logging()
     {
         $files = ['Handler' , 'Exception' , 'Log'];
-        $folder  = self::$path.'Logging'.'/';
+        $folder  = static::$root.'Logging'.'/';
 
         self::call($files , $folder);
     }
@@ -315,7 +340,7 @@ class Bus
     private static function input()
     {
         $files = ['Input'];
-        $folder  = self::$path.'Http'.'/';
+        $folder  = static::$root.'Http'.'/';
 
         self::call($files , $folder);
 
@@ -330,7 +355,7 @@ class Bus
     private static function support()
     {
         $files = ['FunctionArgs'];
-        $folder  = self::$path.'Support'.'/';
+        $folder  = static::$root.'Support'.'/';
 
         self::call($files , $folder);
     }
@@ -340,19 +365,19 @@ class Bus
     *
     * @return null
     */
-    private static function config()
+    private static function config($test = false)
     {
         $files = ['Config' , 'Alias' ];
-        $folder  = self::$path.'Config'.'/';
+        $folder  = static::$root.'Config'.'/';
 
         self::call($files , $folder);
         //
         $files = ['ConfigException' , 'DatabaseDriverNotFoundException' , 'AliasedClassNotFoundException' ];
-        $folder  = self::$path.'Config/Exceptions'.'/';
+        $folder  = static::$root.'Config/Exceptions'.'/';
 
         self::call($files , $folder);
         //
-        Config::load();
+        Config::load($test);
     }
 
     /**
@@ -363,7 +388,7 @@ class Bus
     private static function environment()
     {
         $files = ['Environment'];
-        $folder  = self::$path.'Environment'.'/';
+        $folder  = static::$root.'Environment'.'/';
 
         self::call($files , $folder);
     }
@@ -376,7 +401,7 @@ class Bus
     private static function maintenance($lumos)
     {
         $files = ['Maintenance'];
-        $folder  = self::$path.'Maintenance'.'/';
+        $folder  = static::$root.'Maintenance'.'/';
 
         self::call($files , $folder);
 
@@ -394,7 +419,7 @@ class Bus
     private static function time()
     {
         $files = ['DateTime'];
-        $folder  = self::$path.'Objects'.'/'; // to do : cahnge the folder
+        $folder  = static::$root.'Objects'.'/'; // to do : cahnge the folder
 
         self::call($files , $folder);
     }
@@ -404,10 +429,19 @@ class Bus
     *   
     * @return null
     */
-    private static function initLogging()
+    private static function initLogging($test)
     {
         Log::ini();
-		Handler::run();
+        if($test == 'web')
+        {
+            Handler::run();
+        }
+        else
+        {
+            $handler = new Error;
+		    $handler->register();
+        }
+		
     }
 
     /**
@@ -418,12 +452,12 @@ class Bus
     private static function component()
     {
         $files = ['Component'];
-        $folder  = self::$path.'Foundation'.'/';
+        $folder  = static::$root.'Foundation'.'/';
 
         self::call($files , $folder);
         //
         $files = ['SurfaceDisabledException'];
-        $folder  = self::$path.'Foundation/Exceptions'.'/';
+        $folder  = static::$root.'Foundation/Exceptions'.'/';
 
         self::call($files , $folder);
     }
@@ -436,7 +470,7 @@ class Bus
     private static function cubes()
     {
         $files = ['Cube','Accessor'];
-        $folder  = self::$path.'Cubes'.'/';
+        $folder  = static::$root.'Cubes'.'/';
 
         self::call($files , $folder);
     }
@@ -449,7 +483,7 @@ class Bus
     private static function collections()
     {
         $files = ['JSON','Collection'];
-        $folder  = self::$path.'Collections'.'/';
+        $folder  = static::$root.'Collections'.'/';
 
         self::call($files , $folder);
     }
@@ -463,12 +497,12 @@ class Bus
     private static function session($session)
     {
         $files = ['Session'];
-        $folder  = self::$path.'Storage'.'/';
+        $folder  = static::$root.'Storage'.'/';
 
         self::call($files , $folder);
 
         $files = ['SessionKeyNotFoundException' , 'SessionSurfaceIsOffException'];
-        $folder  = self::$path.'Storage/Exceptions'.'/';
+        $folder  = static::$root.'Storage/Exceptions'.'/';
 
         self::call($files , $folder);
 
@@ -484,18 +518,18 @@ class Bus
     *
     * @return null
     */
-    private static function storage($seesion)
+    private static function storage($session)
     {
         //Initiat the class
         static::session($session);
 
         $files = ['Storage'];
-        $folder  = self::$path.'Storage'.'/';
+        $folder  = static::$root.'Storage'.'/';
 
         self::call($files , $folder);
 
         $files = ['NotFoundStorageDiskException'];
-        $folder  = self::$path.'Storage/Exceptions'.'/';
+        $folder  = static::$root.'Storage/Exceptions'.'/';
 
         self::call($files , $folder);
     }
@@ -505,15 +539,15 @@ class Bus
     *
     * @return null
     */
-    private static function string($seesion)
+    private static function string()
     {
         $files = ['Strings'];
-        $folder  = self::$path.'Strings'.'/';
+        $folder  = static::$root.'Strings'.'/';
 
         self::call($files , $folder);
 
         $files = ['StringOutIndexException'];
-        $folder  = self::$path.'Strings/Exceptions'.'/';
+        $folder  = static::$root.'Strings/Exceptions'.'/';
 
         self::call($files , $folder);
     }
@@ -526,7 +560,7 @@ class Bus
     private static function access()
     {
         $files = ['Path' , 'Url'];
-        $folder  = self::$path.'Access'.'/';
+        $folder  = static::$root.'Access'.'/';
 
         self::call($files , $folder);
     }
@@ -538,8 +572,8 @@ class Bus
     */
     private static function validation()
     {
-        $files = ['Validator' , 'ValidationResultUrl'];
-        $folder  = self::$path.'Validation'.'/';
+        $files = ['Validator' , 'ValidationResult'];
+        $folder  = static::$root.'Validation'.'/';
 
         self::call($files , $folder);
 
@@ -555,7 +589,7 @@ class Bus
     private static function faker()
     {
         $files = ['Faker'];
-        $folder  = self::$path.'Resources'.'/';
+        $folder  = static::$root.'Resources'.'/';
 
         self::call($files , $folder);
     }
@@ -568,7 +602,7 @@ class Bus
     private static function cookie()
     {
          $files = ['Cookie'];
-        $folder  = self::$path.'Storage'.'/';
+        $folder  = static::$root.'Storage'.'/';
 
         self::call($files , $folder);
     }
@@ -581,12 +615,12 @@ class Bus
     private static function router()
     {
         $files = ['Url' , 'Routes' , 'Route'];
-        $folder  = self::$path.'Router'.'/';
+        $folder  = static::$root.'Router'.'/';
 
         self::call($files , $folder);
 
         $files = ['NotFoundHttpException'];
-        $folder  = self::$path.'Router/Exceptions'.'/';
+        $folder  = static::$root.'Router/Exceptions'.'/';
 
         self::call($files , $folder);
     }
@@ -599,30 +633,30 @@ class Bus
     private static function caches()
     {
         $files = ['Driver', 'FileDriver', 'ArrayDriver','PhpFilesDriver','ApcDriver','PDODriver'];
-        $folder  = self::$path.'Caches/Drivers'.'/';
+        $folder  = static::$root.'Caches/Drivers'.'/';
 
         self::call($files , $folder);
 
         $files = ['Item', 'Cache', 'FileCache', 'DatabaseCache'];
-        $folder  = self::$path.'Caches'.'/';
+        $folder  = static::$root.'Caches'.'/';
 
         self::call($files , $folder);
 
         $files = ['CacheItemNotFoundException', 'DriverNotFoundException', 'DatabaseSurfaceDisabledException'];
-        $folder  = self::$path.'Caches/Exceptions'.'/';
+        $folder  = static::$root.'Caches/Exceptions'.'/';
 
         self::call($files , $folder);
     }
 
     /**
-    * Call Securtiy surface
+    * Call security surface
     *
     * @return null
     */
-    private static function securtiy()
+    private static function security()
     {
         $files = ['Hash'];
-        $folder  = self::$path.'Securtiy'.'/';
+        $folder  = static::$root.'Security'.'/';
 
         self::call($files , $folder);
     }
@@ -635,12 +669,12 @@ class Bus
     private static function auth()
     {
         $files = ['Auth'];
-        $folder  = self::$path.'Authentication'.'/';
+        $folder  = static::$root.'Authentication'.'/';
 
         self::call($files , $folder);
 
         $files = ['AuthenticationModelNotFoundException'];
-        $folder  = self::$path.'Authentication/Exceptions'.'/';
+        $folder  = static::$root.'Authentication/Exceptions'.'/';
 
         self::call($files , $folder);
     }
@@ -652,7 +686,7 @@ class Bus
     */
     private static function database()
     {
-        $path = self::$path.'Database/';
+        $path = static::$root.'Database/';
 
         //--------------------------------------------------------
 		// Calling drivers
@@ -717,7 +751,7 @@ class Bus
     private static function http()
     {
         $files = ['Http','Request'];
-        $folder  = self::$path.'Http'.'/';
+        $folder  = static::$root.'Http'.'/';
 
         self::call($files , $folder);
 
@@ -734,12 +768,12 @@ class Bus
 	private static function links()
 	{
         $files = ['Link'];
-        $folder  = self::$path.'Http/Links'.'/';
+        $folder  = static::$root.'Http/Links'.'/';
 
         self::call($files , $folder);
 
         $files = ['LinkKeyNotFoundException'];
-        $folder  = self::$path.'Http/Links/Exceptions'.'/';
+        $folder  = static::$root.'Http/Links/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -752,7 +786,7 @@ class Bus
 	private static function redirect()
 	{
         $files = ['Redirector' , 'Redirect'];
-        $folder  = self::$path.'Http/Redirect'.'/';
+        $folder  = static::$root.'Http/Redirect'.'/';
 
         self::call($files , $folder);
 	}
@@ -765,12 +799,12 @@ class Bus
 	private static function middleware()
 	{
         $files = ['Filters','Middleware'];
-        $folder  = self::$path.'Http/Middleware'.'/';
+        $folder  = static::$root.'Http/Middleware'.'/';
 
         self::call($files , $folder);
 
         $files = ['MiddlewareNotFoundException', 'MiddlewareWallException'];
-        $folder  = self::$path.'Http/Middleware/Exceptions'.'/';
+        $folder  = static::$root.'Http/Middleware/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -783,7 +817,7 @@ class Bus
 	private static function assets()
 	{
         $files = ['Assets'];
-        $folder  = self::$path.'Resources'.'/';
+        $folder  = static::$root.'Resources'.'/';
 
         self::call($files , $folder);
 	}
@@ -796,7 +830,7 @@ class Bus
 	private static function html()
 	{
         $files = ['Html' , 'Form'];
-        $folder  = self::$path.'Html'.'/';
+        $folder  = static::$root.'Html'.'/';
 
         self::call($files , $folder);
 	}
@@ -810,7 +844,7 @@ class Bus
 	private static function hypertext()
 	{
         $files = ['Res' , 'HTML'];
-        $folder  = self::$path.'Hypertext'.'/';
+        $folder  = static::$root.'Hypertext'.'/';
 
         self::call($files , $folder);
 	}
@@ -823,12 +857,12 @@ class Bus
 	private static function translator()
 	{
         $files = ['Lang', 'Smiley'];
-        $folder  = self::$path.'Translator'.'/';
+        $folder  = static::$root.'Translator'.'/';
 
         self::call($files , $folder);
 
         $files = ['LanguageKeyNotFoundException', 'LanguageNotSupportedException'];
-        $folder  = self::$path.'Translator/Exceptions'.'/';
+        $folder  = static::$root.'Translator/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -841,12 +875,12 @@ class Bus
 	private static function model()
 	{
         $files = ['ORM_','CRUD','ORM','Collection','ModelArray'];
-        $folder  = self::$path.'MVC/Model'.'/';
+        $folder  = static::$root.'MVC/Model'.'/';
 
         self::call($files , $folder);
 
         $files = ['ForeingKeyMethodException', 'ColumnNotEmptyException', 'ManyPrimaryKeysException', 'TableNotFoundException','ModelNotFoundException','PrimaryKeyNotFoundException'];
-        $folder  = self::$path.'MVC/Model/Exceptions'.'/';
+        $folder  = static::$root.'MVC/Model/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -859,12 +893,12 @@ class Bus
 	private static function relations()
 	{
         $files = ['OneToOne', 'OneToMany', 'ManyToMany', 'BelongsTo'];
-        $folder  = self::$path.'MVC/Relations'.'/';
+        $folder  = static::$root.'MVC/Relations'.'/';
 
         self::call($files , $folder);
 
         $files = ['ManyRelationException', 'ModelNotFindedException'];
-        $folder  = self::$path.'MVC/Relations/Exceptions'.'/';
+        $folder  = static::$root.'MVC/Relations/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -877,7 +911,7 @@ class Bus
 	private static function media()
 	{
         $files = ['QR'];
-        $folder  = self::$path.'Media'.'/';
+        $folder  = static::$root.'Media'.'/';
 
         self::call($files , $folder);
 	}
@@ -890,17 +924,17 @@ class Bus
 	private static function view()
 	{
         $files = ['View'];
-        $folder  = self::$path.'MVC/View'.'/';
+        $folder  = static::$root.'MVC/View'.'/';
 
         self::call($files , $folder);
 
         $files = ['Template' , 'Views'];
-        $folder  = self::$path.'MVC/View/Libs'.'/';
+        $folder  = static::$root.'MVC/View/Libs'.'/';
 
         self::call($files , $folder);
 
         $files = ['ViewNotFoundException'];
-        $folder  = self::$path.'MVC/View/Exceptions'.'/';
+        $folder  = static::$root.'MVC/View/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -913,7 +947,7 @@ class Bus
 	private static function controller()
 	{
         $files = ['Controller'];
-        $folder  = self::$path.'MVC'.'/';
+        $folder  = static::$root.'MVC'.'/';
 
         self::call($files , $folder);
 	}
@@ -926,7 +960,7 @@ class Bus
 	private static function mail()
 	{
         $files = ['mail'];
-        $folder  = self::$path.'Mailing'.'/';
+        $folder  = static::$root.'Mailing'.'/';
 
         self::call($files , $folder);
 	}
@@ -939,7 +973,7 @@ class Bus
 	private static function dataCollection()
 	{
         $files = ['DataCollection'];
-        $folder  = self::$path.'Objects'.'/';
+        $folder  = static::$root.'Objects'.'/';
 
         self::call($files , $folder);
 	}
@@ -952,12 +986,12 @@ class Bus
 	private static function file()
 	{
         $files = ['File' , 'Filesystem'];
-        $folder  = self::$path.'Filesystem'.'/';
+        $folder  = static::$root.'Filesystem'.'/';
 
         self::call($files , $folder);
 
-        $files = ['Exceptions/FileNotFoundException', 'Exceptions/DirectoryNotFoundException'];
-        $folder  = self::$path.'Filesystem/Exceptions'.'/';
+        $files = ['FileNotFoundException', 'DirectoryNotFoundException'];
+        $folder  = static::$root.'Filesystem/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -970,7 +1004,7 @@ class Bus
 	private static function intro()
 	{
         $files = ['intro'];
-        $folder  = self::$path.'Access'.'/';
+        $folder  = static::$root.'Access'.'/';
 
         self::call($files , $folder);
 	}
@@ -983,12 +1017,12 @@ class Bus
 	private static function plugins()
 	{
         $files = ['Plugins'];
-        $folder  = self::$path.'Plugins'.'/';
+        $folder  = static::$root.'Plugins'.'/';
 
         self::call($files , $folder);
 
         $files = ['AutoloadFileNotFound' , 'InfoStructureException'];
-        $folder  = self::$path.'Plugins/Exceptions'.'/';
+        $folder  = static::$root.'Plugins/Exceptions'.'/';
 
         self::call($files , $folder);
 	}
@@ -1001,7 +1035,7 @@ class Bus
 	private static function lumos()
 	{
         $files = ['cmdOutput', 'bashOutput', 'Argument', 'Option', 'Command'];
-        $folder  = self::$path.'Lumos'.'/';
+        $folder  = static::$root.'Lumos'.'/';
 
         self::call($files , $folder);
 
@@ -1009,12 +1043,12 @@ class Bus
         Static::commands();
 
         $files = ['Console'];
-        $folder  = self::$path.'Lumos'.'/';
+        $folder  = static::$root.'Lumos'.'/';
 
         self::call($files , $folder);
 
         $files = ['ConfigSetting'];
-        $folder  = self::$path.'Lumos/Response'.'/';
+        $folder  = static::$root.'Lumos/Response'.'/';
 
         self::call($files , $folder);
 	}
@@ -1026,7 +1060,7 @@ class Bus
 	*/
 	private static function commands()
 	{
-        foreach (self::fetch(self::$path."Lumos/Commands") as $file) 
+        foreach (self::fetch(static::$root."Lumos/Commands") as $file) 
         {
             static::need($file);
         }
@@ -1039,7 +1073,7 @@ class Bus
 	*/
 	private static function atomium()
 	{
-        $path = self::$path.'Atomium/';
+        $path = static::$root.'Atomium/';
 
         $files = ['Atomium', 'Compiler'];
         $folder  = $path;
@@ -1071,7 +1105,77 @@ class Bus
         Compiler::setUserTags();
 	}
 
+    /**
+    * Call the Process surface
+    *
+    * @return null
+    */
+    private static function proccess()
+    {
+        $files = ['Command', 'Process', 'Translator', 'Schema', 'Links', 'Tag', 'Model', 'View', 'Controller', 'Seeds', 'Routes', 'Exception', 'Events', 'Alias','Middleware','Helper'];
+        $folder  = static::$root.'Processes'.'/';
 
+        self::call($files , $folder);
+
+        $files = ['TranslatorFolderNeededException', 'TranslatorManyFolderException'];
+        $folder  = static::$root.'Processes/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Setup surface
+    *
+    * @return null
+    */
+    private static function setup()
+    {
+        $files = ['Routes', 'Setup', 'Response'];
+        $folder  = static::$root.'Setup'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['Database', 'Panel', 'Security', 'Maintenance', 'Loggin', 'Translator', 'App', 'Robots'];
+        $folder  = static::$root.'Setup/Documentations'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['AppSetupException'];
+        $folder  = static::$root.'Setup/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Event surface
+    *
+    * @return null
+    */
+    private static function event()
+    {
+        $files = ['Event', 'EventListener'];
+        $folder  = static::$root.'Event'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['ManyListenersArgumentsException'];
+        $folder  = static::$root.'Event/Exceptions'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Mocking surface
+    *
+    * @return null
+    */
+    private static function mock()
+    {
+        $files = ['configMocking'];
+        $folder  = static::$root.'Mocking'.'/';
+
+        self::call($files , $folder);
+    }
 
     
 
