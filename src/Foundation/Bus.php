@@ -432,7 +432,7 @@ class Bus
     private static function initLogging($test)
     {
         Log::ini();
-        if($test == 'web')
+        if($test != 'test')
         {
             Handler::run();
         }
@@ -959,7 +959,7 @@ class Bus
 	*/
 	private static function mail()
 	{
-        $files = ['mail'];
+        $files = ['Mail'];
         $folder  = static::$root.'Mailing'.'/';
 
         self::call($files , $folder);
@@ -1003,7 +1003,7 @@ class Bus
 	*/
 	private static function intro()
 	{
-        $files = ['intro'];
+        $files = ['Intro'];
         $folder  = static::$root.'Access'.'/';
 
         self::call($files , $folder);
