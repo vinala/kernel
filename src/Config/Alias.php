@@ -108,7 +108,7 @@ class Alias
 		return 
 			array
 			(
-				'Connector' => \Vinala\Kernel\Foundation\Connector::class,
+				'Bus' => \Vinala\Kernel\Foundation\Bus::class,
 			);
 	}
 

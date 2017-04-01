@@ -28,7 +28,7 @@ use Vinala\Kernel\Atomium\Compiler\AtomiumCompileCSS;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileJS;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileAssign;
 use Vinala\Kernel\Atomium\Compiler\AtomiumCompileRun;
-use Vinala\Kernel\Foundation\Connector;
+use Vinala\Kernel\Foundation\Bus;
 
 
 
@@ -404,11 +404,11 @@ class Compiler
 	 */
 	protected static function fetchUserTags()
 	{
-		$files = Connector::fetch( "tags",true);
+		$files = Bus::fetch( "tags",true);
 		//
 		if( ! is_null($files))
-			foreach (Connector::fetch( "tags",true) as $file) 
-				Connector::need($file);
+			foreach (Bus::fetch( "tags",true) as $file) 
+				Bus::need($file);
 	}
 
 	/**

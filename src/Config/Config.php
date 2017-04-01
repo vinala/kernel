@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Config;
 
 use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Foundation\Connector;
+use Vinala\Kernel\Foundation\Bus;
 use Vinala\Kernel\Config\Exceptions\ConfigException;
 use Vinala\Kernel\Mocking\configMocking;
 use Vinala\Kernel\Config\Exceptions\DatabaseDriverNotFoundException;
@@ -26,7 +26,7 @@ class Config
 	{
 		$path = (is_null(Application::$root) ? "config/$param.php" :  Application::$root."config/$param.php");
 		//
-		return Connector::need((is_null(Application::$root) ? "config/$param.php" :  Application::$root."config/$param.php"));
+		return Bus::need((is_null(Application::$root) ? "config/$param.php" :  Application::$root."config/$param.php"));
 	}
 
 	/**

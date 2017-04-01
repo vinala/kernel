@@ -8,7 +8,6 @@
 		use Vinala\Kernel\Config\Config;
 		use Vinala\Kernel\Translator\Lang;
 		use Vinala\Kernel\Foundation\Application;
-		use Vinala\Kernel\Foundation\Connector;
 		//
 		Assets::css("bootstrap");
 		Assets::css("bootstrap-theme");

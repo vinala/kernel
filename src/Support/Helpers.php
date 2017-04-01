@@ -10,7 +10,7 @@ use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Translator\Lang;
 use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Foundation\Connector;
+use Vinala\Kernel\Foundation\Bus;
 use Vinala\Kernel\Http\Input;
 use Vinala\Kernel\Cubes\Cube;
 use Vinala\Kernel\Http\Redirect\Redirect;
@@ -71,28 +71,28 @@ if ( ! function_exists("path"))
 if ( ! function_exists("need")) 
 {
 	/**
-	* return Connector:need
+	* return Bus:need
 	*
 	* @param string $file
 	* @return null
 	*/
 	function need($file)
 	{
-		return Connector::need($file);
+		return Bus::need($file);
 	}	
 }
 
 if ( ! function_exists("needOnce")) 
 {
 	/**
-	* return Connector:needOnce
+	* return Bus:needOnce
 	*
 	* @param string $file
 	* @return null
 	*/
 	function needOnce($file)
 	{
-		return Connector::needOnce($file);
+		return Bus::needOnce($file);
 	}	
 }
 

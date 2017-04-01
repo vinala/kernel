@@ -3,12 +3,12 @@
 namespace Vinala\Kernel\Setup;
 
 use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Foundation\Connector;
+use Vinala\Kernel\Foundation\Bus;
 
 class Setup
 {
 	public static function launch()
 	{
-		Connector::need(Application::$root."vendor/vinala/kernel/src/Setup/Assets/Views/main.php");
+		Bus::need(Application::$root."vendor/vinala/kernel/src/Setup/Assets/Views/main.php");
 	}
 }
