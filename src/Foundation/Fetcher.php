@@ -81,7 +81,7 @@ class Fetcher
 	protected static function model()
 	{
 		foreach (self::fetch('resources/models' , false) as $file) 
-			Connector::need($file);
+			Bus::need($file);
 	}
 
 	/**
@@ -90,7 +90,7 @@ class Fetcher
 	protected static function controller()
 	{
 		foreach (self::fetch('resources/controllers' , false) as $file) 
-			Connector::need($file);
+			Bus::need($file);
 	}
 
 	/**
@@ -99,7 +99,7 @@ class Fetcher
 	protected static function link()
 	{
 		foreach (self::fetch("links") as $file) 
-			Connector::need($file);
+			Bus::need($file);
 	}
 
 	/**
@@ -108,7 +108,7 @@ class Fetcher
 	protected static function exception()
 	{
 		foreach (self::fetch("exceptions") as $file) 
-			Connector::need($file);
+			Bus::need($file);
 	}
 
 	/**
@@ -117,7 +117,7 @@ class Fetcher
 	protected static function seed()
 	{
 		foreach (self::fetch("database/seeds" , false) as $file) 
-			Connector::need($file);
+			Bus::need($file);
 	}
 
 	/**
@@ -129,7 +129,7 @@ class Fetcher
 	{
 		/**
 		* The filters fetches are transported
-		* to router connector calls
+		* to router Bus calls
 		**/
 	}
 
@@ -150,7 +150,7 @@ class Fetcher
 	{
 		foreach (self::fetch("http/middleware") as $file) 
 		{
-			Connector::need($file);
+			Bus::need($file);
 		}
 					
 		Middleware::ini();
@@ -166,7 +166,7 @@ class Fetcher
 			{
 				self::middleware();
 
-				Connector::need(self::$appPath.'http/Routes.php');
+				Bus::need(self::$appPath.'http/Routes.php');
 				Routes::run();
 			}
 	}
@@ -177,7 +177,7 @@ class Fetcher
 	protected static function commands()
 	{
 		foreach (self::fetch("support/shell" , false) as $file) 
-			Connector::need($file);
+			Bus::need($file);
 	}
 
 	/**
@@ -186,7 +186,7 @@ class Fetcher
 	protected static function events()
 	{
 		foreach (self::fetch("app/events" , false) as $file) 
-			Connector::need($file);
+			Bus::need($file);
 		//
 		Event::register();
 	}
