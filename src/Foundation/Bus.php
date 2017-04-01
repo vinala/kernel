@@ -10,6 +10,7 @@ use Vinala\Kernel\Logging\Handler;
 use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Validation\Validator;
 use Vinala\Kernel\Foundation\Component;
+use Vinala\Kernel\Atomium\Compiler;
 
 use Vinala\Kernel\Foundation\Exception\BusFileNotFoundException;
 
@@ -113,6 +114,64 @@ class Bus
         //Auth Surface
         static::auth();
 
+        //Call Database Surface if enabled in Component surface
+        if(Component::isOn("database"))
+        {
+            static::database();
+        }
+
+        //HTTP Surface
+        static::http();
+
+        //Assets Surface
+        static::assets();
+
+        //HTML Surface
+        static::html();
+
+        //Hypertext Surface
+        //Depracted
+        static::Hypertext();
+
+        //Translator Surface
+        static::translator();
+
+        //Model Surface
+        static::model();
+
+        //Relations Surface
+        static::relations();
+
+        //Media Surface
+        static::media();
+
+        //Views Surface
+        static::view();
+
+        //Controllers Surface
+        static::controller();
+
+        //Mail Surface
+        static::mail();
+
+        //Data Collection Surface
+        static::dataCollection();
+
+        //Files Surface
+        static::file();
+
+        //Intro Surface
+        static::intro();
+
+        //Plugins Surface
+        static::plugins();
+
+        //Lumos Surface
+        static::lumos();
+
+        //Atomium Surface
+        static::atomium();
+
     }
 
     /**
@@ -197,6 +256,23 @@ class Bus
         {
             static::need($files);
         }
+    }
+
+    /**
+    * Fetch files from folder
+    *
+    * @param string $pattern
+    * @param bool $app : if using app/files 
+    * @return array
+    */
+    private static function fetch($pattern , $app = false)
+    {
+        if ($app) {
+            $path = root() . 'app/'.$pattern.'/*.php';
+        } else {
+            $path = root() .$pattern.'/*.php';
+        }
+        return glob($path);
     }
 
     //--------------------------------------------------------
@@ -552,7 +628,7 @@ class Bus
     }
 
     /**
-    * Call Securtiy surface
+    * Call Auth surface
     *
     * @return null
     */
@@ -568,6 +644,434 @@ class Bus
 
         self::call($files , $folder);
     }
+
+    /**
+    * Call Database surface
+    *
+    * @return null
+    */
+    private static function database()
+    {
+        $path = self::$path.'Database/';
+
+        //--------------------------------------------------------
+		// Calling drivers
+		//--------------------------------------------------------
+
+        $files = ['Driver' , 'MysqlDriver'];
+        $folder  = $path.'Drivers'.'/';
+
+        self::call($files , $folder);
+
+        //--------------------------------------------------------
+		// Calling exporters
+		//--------------------------------------------------------
+
+        $files = ['MysqlExporter'];
+        $folder  = $path.'Exporters'.'/';
+
+        self::call($files , $folder);
+
+        //--------------------------------------------------------
+		// Calling Connectors
+		//--------------------------------------------------------
+
+        $files = ['MysqlConnector'];
+        $folder  = $path.'Connectors'.'/';
+
+        self::call($files , $folder);
+
+        //--------------------------------------------------------
+		// Calling Exceptions
+		//--------------------------------------------------------
+
+        $files = ['ConnectorException','QueryException','SeedersEmptyException','DatabaseArgumentsException', 'DatabaseConnectionException', 'SchemaTableExistsException','SchemaTableNotExistException'];
+        $folder  = $path.'Exceptions'.'/';
+
+        self::call($files , $folder);
+
+        //--------------------------------------------------------
+		// Calling Schemas
+		//--------------------------------------------------------
+
+        $files = ['Schema','MysqlSchema'];
+        $folder  = $path.'Schemas'.'/';
+
+        self::call($files , $folder);
+
+        //--------------------------------------------------------
+		// Calling Database parts
+		//--------------------------------------------------------
+
+        $files = ['Migration', 'Seeder', 'DBTable','Query', 'Row', 'Database'];
+        $folder  = $path;
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call HTTP surface
+    *
+    * @return null
+    */
+    private static function http()
+    {
+        $files = ['Http','Request'];
+        $folder  = self::$path.'Http'.'/';
+
+        self::call($files , $folder);
+
+        static::links();
+		static::redirect();
+		static::middleware();
+    }
+
+    /**
+	* Call the Links surface
+	*
+	* @return null
+	*/
+	private static function links()
+	{
+        $files = ['Link'];
+        $folder  = self::$path.'Http/Links'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['LinkKeyNotFoundException'];
+        $folder  = self::$path.'Http/Links/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Redirection surface
+	*
+	* @return null
+	*/
+	private static function redirect()
+	{
+        $files = ['Redirector' , 'Redirect'];
+        $folder  = self::$path.'Http/Redirect'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Middleware surface
+	*
+	* @return null
+	*/
+	private static function middleware()
+	{
+        $files = ['Filters','Middleware'];
+        $folder  = self::$path.'Http/Middleware'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['MiddlewareNotFoundException', 'MiddlewareWallException'];
+        $folder  = self::$path.'Http/Middleware/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Assets surface
+	*
+	* @return null
+	*/
+	private static function assets()
+	{
+        $files = ['Assets'];
+        $folder  = self::$path.'Resources'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Html surface
+	*
+	* @return null
+	*/
+	private static function html()
+	{
+        $files = ['Html' , 'Form'];
+        $folder  = self::$path.'Html'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Hypertext surface
+	*
+    * @depracted v3.3.0
+	* @return null
+	*/
+	private static function hypertext()
+	{
+        $files = ['Res' , 'HTML'];
+        $folder  = self::$path.'Hypertext'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Translator surface
+	*
+	* @return null
+	*/
+	private static function translator()
+	{
+        $files = ['Lang', 'Smiley'];
+        $folder  = self::$path.'Translator'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['LanguageKeyNotFoundException', 'LanguageNotSupportedException'];
+        $folder  = self::$path.'Translator/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Model surface
+	*
+	* @return null
+	*/
+	private static function model()
+	{
+        $files = ['ORM_','CRUD','ORM','Collection','ModelArray'];
+        $folder  = self::$path.'MVC/Model'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['ForeingKeyMethodException', 'ColumnNotEmptyException', 'ManyPrimaryKeysException', 'TableNotFoundException','ModelNotFoundException','PrimaryKeyNotFoundException'];
+        $folder  = self::$path.'MVC/Model/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Realtons surface
+	*
+	* @return null
+	*/
+	private static function relations()
+	{
+        $files = ['OneToOne', 'OneToMany', 'ManyToMany', 'BelongsTo'];
+        $folder  = self::$path.'MVC/Relations'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['ManyRelationException', 'ModelNotFindedException'];
+        $folder  = self::$path.'MVC/Relations/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Media surface
+	*
+	* @return null
+	*/
+	private static function media()
+	{
+        $files = ['QR'];
+        $folder  = self::$path.'Media'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the View surface
+	*
+	* @return null
+	*/
+	private static function view()
+	{
+        $files = ['View'];
+        $folder  = self::$path.'MVC/View'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['Template' , 'Views'];
+        $folder  = self::$path.'MVC/View/Libs'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['ViewNotFoundException'];
+        $folder  = self::$path.'MVC/View/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Controllers surface
+	*
+	* @return null
+	*/
+	private static function controller()
+	{
+        $files = ['Controller'];
+        $folder  = self::$path.'MVC'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Mail surface
+	*
+	* @return null
+	*/
+	private static function mail()
+	{
+        $files = ['mail'];
+        $folder  = self::$path.'Mailing'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Data Collection surface
+	*
+	* @return null
+	*/
+	private static function dataCollection()
+	{
+        $files = ['DataCollection'];
+        $folder  = self::$path.'Objects'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Files surface
+	*
+	* @return null
+	*/
+	private static function file()
+	{
+        $files = ['File' , 'Filesystem'];
+        $folder  = self::$path.'Filesystem'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['Exceptions/FileNotFoundException', 'Exceptions/DirectoryNotFoundException'];
+        $folder  = self::$path.'Filesystem/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Intro surface
+	*
+	* @return null
+	*/
+	private static function intro()
+	{
+        $files = ['intro'];
+        $folder  = self::$path.'Access'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Plugins surface
+	*
+	* @return null
+	*/
+	private static function plugins()
+	{
+        $files = ['Plugins'];
+        $folder  = self::$path.'Plugins'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['AutoloadFileNotFound' , 'InfoStructureException'];
+        $folder  = self::$path.'Plugins/Exceptions'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Call the Lumos surface
+	*
+	* @return null
+	*/
+	private static function lumos()
+	{
+        $files = ['cmdOutput', 'bashOutput', 'Argument', 'Option', 'Command'];
+        $folder  = self::$path.'Lumos'.'/';
+
+        self::call($files , $folder);
+
+        // Call Kernel commands
+        Static::commands();
+
+        $files = ['Console'];
+        $folder  = self::$path.'Lumos'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['ConfigSetting'];
+        $folder  = self::$path.'Lumos/Response'.'/';
+
+        self::call($files , $folder);
+	}
+
+    /**
+	* Require commands of Lumos
+	*
+	* @return null
+	*/
+	private static function commands()
+	{
+        foreach (self::fetch(self::$path."Lumos/Commands") as $file) 
+        {
+            static::need($file);
+        }
+	}
+
+    /**
+	* Call the Atomium surface
+	*
+	* @return null
+	*/
+	private static function atomium()
+	{
+        $path = self::$path.'Atomium/';
+
+        $files = ['Atomium', 'Compiler'];
+        $folder  = $path;
+
+        self::call($files , $folder);
+
+        $files = [
+                    'AtomiumUserTags',
+                    //
+                    'AtomiumCompileCSS','AtomiumCompileJS','AtomiumCompileAssign','AtomiumCompileRun',
+                    //
+                    'AtomiumCompileComments','AtomiumCompileComment',
+                    //
+                    'AtomiumCompileInstruction','AtomiumCompileInstructions','AtomiumCompileIf','AtomiumCompileFor','AtomiumCompileEndFor','AtomiumCompileBreak','AtomiumCompileOneLineComment','AtomiumCompileElse','AtomiumCompileEndIf','AtomiumCompileElseIf','AtomiumCompileForeach','AtomiumCompileEndForeach','AtomiumCompileWhile','AtomiumCompileEndWhile','AtomiumCompileUntil','AtomiumCompileEndUntil','AtomiumCompileSub','AtomiumCompileExec',
+                    //
+                    'AtomiumCompileLang',
+                    //
+                    'AtomiumCompileTake','AtomiumCompileCapture'
+                ];
+        $folder  = $path.'Compiler'.'/';
+
+        self::call($files , $folder);
+
+        $files = ['AromiumCaptureNotFoundException'];
+        $folder  = $path.'Exception/';
+
+        self::call($files , $folder);
+
+        Compiler::setUserTags();
+	}
+
+
 
     
 
