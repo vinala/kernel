@@ -3,6 +3,7 @@
 namespace Vinala\Kernel\Testing ;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Vinala\Kernel\Foundation\Application;
 
 /**
 * The TestCase class
@@ -14,8 +15,6 @@ use PHPUnit\Framework\TestCase as BaseTestCase;
 */
 class TestCase extends BaseTestCase
 {
-
-
     /**
     * Check if two given values is the same
     *
@@ -23,9 +22,20 @@ class TestCase extends BaseTestCase
     * @param mixed $expected
     * @return bool
     */
-    public function isEquals($actual , $expected)
+    public function equals($actual , $expected)
     {
         $this->assertEquals( $expected , $actual );
+    }
+
+    /**
+    * Check if given value is true
+    *
+    * @param mixed $actual
+    * @return bool
+    */
+    public function true($actual , $message = '')
+    {
+        $this->assertTrue($actual , $message);
     }
 
 }
