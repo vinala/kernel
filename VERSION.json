@@ -1,12 +1,13 @@
 {
-	"version" : "3.3.16",
+	"version" : "3.3.17",
 	"tag" : "",
 	"stat" : "alpha",
 	"features" : [
-
+		"Create Bus surface instead of Connector to use it in Web case , Lumos case and test case",
+		"Working in Cache surface"
 	],
 	"fixes" : [
 
 	],
-	"sha" : "1dda71048e85a225a00f70c9afc2d602d23f476a"
+	"sha" : "999aa4337d4a91e35b0bf82fb367e2dc6422d58b"
 }
