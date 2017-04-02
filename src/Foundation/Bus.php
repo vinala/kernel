@@ -49,11 +49,12 @@ class Bus
     * @return null
     */
     public static function run($type = 'web' , $session = true)
-    // public static function run($lumos = false , $session = true)
     {
         $lumos = $type == 'lumos' ? true : false ;
         static::init($type);
-        // static::init(($lumos) ? 'lumos' : 'web');
+
+        //Support Surface
+        static::support();
 
         //Version Surface
         static::version();
@@ -69,9 +70,6 @@ class Bus
             //Mock Surface
             static::mock();
         }
-        
-        //Support Surface
-        static::support();
 
         //Config Surface
         static::config($type == 'test' ? true : false);
@@ -86,7 +84,7 @@ class Bus
         static::time();
 
         //Initiate the Logging Surface
-        static::initLogging($type);
+        static::initLogging();
 
         //Component Surface
         static::component();
@@ -209,7 +207,7 @@ class Bus
     {
         switch ($type) {
             case 'test':
-                    static::$root = 'src/';
+                    static::$root = 'vendor/vinala/kernel/src/';
                 break;
 
             case 'web':
@@ -354,10 +352,7 @@ class Bus
     */
     private static function support()
     {
-        $files = ['FunctionArgs'];
-        $folder  = static::$root.'Support'.'/';
-
-        self::call($files , $folder);
+        require_once static::$root.'Support'.'/'.'FunctionArgs.php';
     }
 
     /**
@@ -377,7 +372,7 @@ class Bus
 
         self::call($files , $folder);
         //
-        Config::load($test);
+        Config::load();
     }
 
     /**
@@ -407,7 +402,7 @@ class Bus
 
         if( ! $lumos )
 		{
-			Maintenance::launch();	
+			Maintenance::launch();            
 		}
     }   
 
@@ -429,19 +424,10 @@ class Bus
     *   
     * @return null
     */
-    private static function initLogging($test)
+    private static function initLogging()
     {
         Log::ini();
-        if($test != 'test')
-        {
-            Handler::run();
-        }
-        else
-        {
-            $handler = new Error;
-		    $handler->register();
-        }
-		
+        Handler::run();		
     }
 
     /**
