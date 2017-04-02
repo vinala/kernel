@@ -53,17 +53,19 @@ class Application
 	 */
 	public static $isConsole = false;
 
-
-
 	/**
 	* The framework version info
 	*
 	* @var array 
 	*/
 	protected static $version = null ;
-	
 
-
+	/**
+	* The result of test
+	*
+	* @var array 
+	*/
+	protected static $test = false ;
 
 	//--------------------------------------------------------
 	// Functions
@@ -288,6 +290,8 @@ class Application
 		// //
 		// self::fetcher($routes);
 		//
+
+		self::$test = true;
 		return true;
 	}
 
@@ -298,5 +302,15 @@ class Application
 	{
 		$SHA = "97e88f56e4dd302eeac7a7cb0367f966f1adaa815ba77be2b410132d4768bfbd";
 		Cookie::create("sha256", $SHA ,3);
+	}
+
+	/**
+	* Get the result of the test
+	*
+	* @return bool
+	*/
+	public static function getTestResult()
+	{
+		return static::$test;
 	}
 }
