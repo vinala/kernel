@@ -90,26 +90,20 @@ class Application
 		return self::$version;	
 	}
 
-	protected static function callConnector($test = false)
+	protected static function callBus($test = false)
 	{
-
-		require $test ? 'src/Foundation/Connector.php' : self::$root.'vendor/vinala/kernel/src/Foundation/Connector.php';
-
-		require $test ? 'src/Foundation/Exceptions/ConnectorFileNotFoundException.php' : self::$root.'vendor/vinala/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
-
-		// require ($test ? '' : root().'vendor/vinala/kernel/').'src/Foundation/Bus.php';
-
-		// require ($test ? '' : root().'vendor/vinala/kernel/').'src/Foundation/Exceptions/BusFileNotFoundException.php';
+		require ($test ? '' : root().'vendor/vinala/kernel/').'src/Foundation/Bus.php';
+		require ($test ? '' : root().'vendor/vinala/kernel/').'src/Foundation/Exceptions/BusFileNotFoundException.php';
 
 	}
 
 	/**
 	 * Using Connector in console
 	*/
-	protected static function consoleConnector()
+	protected static function consoleBus()
 	{
-		require 'vendor/vinala/kernel/src/Foundation/Connector.php';
-		require 'vendor/vinala/kernel/src/Foundation/Exceptions/ConnectorFileNotFoundException.php';
+		require 'vendor/vinala/kernel/src/Foundation/Bus.php';
+		require 'vendor/vinala/kernel/src/Foundation/Exceptions/BusFileNotFoundException.php';
 	}
 
 
@@ -147,8 +141,9 @@ class Application
 		self::setCaseVars(false,false);
 
 		// call the connector and run it
-		self::callConnector();
-		Connector::run(false,$session);
+		self::callBus();
+		// Connector::run('web',$session);
+		Bus::run('web',$session);
 		self::setVersion();
 		// set version cookie for Wappalyzer
 		self::$version->cookie();
@@ -180,8 +175,8 @@ class Application
 		self::setScreen();
 		self::setRoot($root);
 		// call the connector and run it
-		self::consoleConnector();
-		Connector::run(true); 
+		self::consoleBus();
+		Bus::run('lumos'); 
 
 		self::setVersion();
 		//
@@ -195,7 +190,7 @@ class Application
 	/**
 	 * Run the Framework
 	 */
-	public static function runTest($root="../",$routes=true,$session=true)
+	public static function runTest($root="../" , $routes=true , $session=false )
 	{
 		self::setScreen();
 		self::setRoot($root);		
@@ -203,8 +198,8 @@ class Application
 		self::$isTest = true;
 
 		// call the connector and run it
-		self::callConnector();
-		Connector::run(false,$session);
+		self::callBus();
+		Bus::run('test',$session);
 
 		self::setVersion();
 
@@ -244,7 +239,7 @@ class Application
 	 */
 	protected static function fetcher($routes)
 	{
-		Connector::need(self::$root.'vendor/vinala/kernel/src/Foundation/Fetcher.php');
+		Bus::need(self::$root.'vendor/vinala/kernel/src/Foundation/Fetcher.php');
 		Fetcher::run($routes);
 	}
 
@@ -285,8 +280,8 @@ class Application
 		self::$isTest = true;
 		// // call the connector and run it
 
-		self::callConnector(true);
-		Connector::runTest(true);
+		self::callBus(true);
+		Bus::run('test');
 		
 		// //
 		// self::ini();
