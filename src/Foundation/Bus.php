@@ -195,6 +195,9 @@ class Bus
         //Events Surface
         static::event();
 
+        //Tests Surface
+        static::test();
+
     }
 
     /**
@@ -1159,6 +1162,19 @@ class Bus
     {
         $files = ['configMocking'];
         $folder  = static::$root.'Mocking'.'/';
+
+        self::call($files , $folder);
+    }
+
+    /**
+    * Call the Tests surface
+    *
+    * @return null
+    */
+    private static function test()
+    {
+        $files = ['TestCase'];
+        $folder  = static::$root.'Testing'.'/';
 
         self::call($files , $folder);
     }
