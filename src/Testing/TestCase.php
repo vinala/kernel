@@ -1,49 +1,31 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Testing;
+namespace Vinala\Kernel\Testing ;
 
-use PHPUnit_Framework_TestCase;
-use Vinala\Kernel\Foundation\Application;
-
+use PHPUnit\Framework\TestCase as BaseTestCase;
 
 /**
-* TestCase Class For testing
+* The TestCase class
+*
+* @version 2.0
+* @author Youssef Had
+* @package Vinala\Kernel\Testing
+* @since v3.3.0
 */
-class TestCase
+class TestCase extends BaseTestCase
 {
-	
-	/**
-	 * Run the test
-	 */
-	public static function run()
-	{
-		self::call();
-		//
-		return self::mock();
-	}
 
-	/**
-	 * Call the Lighty Framework
-	 */
-	public static function call()
-	{
-		require_once __DIR__.'/../Foundation/Application.php';
-	}
 
-	/**
-	 * Return instance the Framework App Class
-	 */
-	public static function instance($path)
-	{
-		return Application::runTest("",$path,false,false,true);
-	}
+    /**
+    * Check if two given values is the same
+    *
+    * @param mixed $actual
+    * @param mixed $expected
+    * @return bool
+    */
+    public function isEquals($actual , $expected)
+    {
+        $this->assertEquals( $expected , $actual );
+    }
 
-	/**
-	 * Check if App Class retruns true
-	 */
-	public static function mock()
-	{
-		return self::instance(__DIR__."/../");
-	}
 }
-
