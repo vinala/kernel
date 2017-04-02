@@ -210,7 +210,7 @@ class Bus
     {
         switch ($type) {
             case 'test':
-                    static::$root = 'vendor/vinala/kernel/src/';
+                    static::$root = 'src/';
                 break;
 
             case 'web':
