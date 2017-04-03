@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Process;
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Filesystem\File;
+use Vinala\Kernel\Objects\Datetime;
 
 /**
 * Controller class
@@ -35,7 +36,8 @@ class Tests
 	*/
 	public static function set($name)
 	{
-		$txt = "<?php\n\nuse Vinala\Kernel\Testing\TestCase as BaseTestCase;\n\n/**\n* ".$name."Test test case\n**/\n";
+		$txt = "<?php\n\nuse Vinala\Kernel\Testing\TestCase as BaseTestCase;\n\n/**\n* ".$name."Test test case\n*\n* @author ".config('app.owner')."\n";
+		$txt .= "* @time ".DateTime::now().' ('.time().')'."\n**/\n";
 		$txt.="class ".$name."Test extends BaseTestCase \n{\n";
         $txt.="\t/*\n\t* Add functions for test with the argument @test \n\t* in function docblock to mention that the function\n\t* will used for test\n\t**/";
         $txt.="\n}";

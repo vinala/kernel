@@ -63,7 +63,7 @@ class NewTestCommand extends Commands
         if(! is_null($process) )
         {
             $this->info("\nThe test class was created");
-            $this->comment(" -> Path : tests/$name.php\n");
+            $this->comment(" -> Path : tests/$name.test.php\n");
         }
         else $this->error("\nThe test class is already existe\n");
     }
