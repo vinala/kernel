@@ -43,6 +43,28 @@ class Routes
 		else if(is_array($callback)) self::addFiltred($uri,$callback,"get",$domains);
 	}
 
+	/**
+	* The HTTP get router
+	*
+	* @param string $uri
+	* @param callable $Callbacks
+	* @return null
+	*/
+	public static function get_($uri , $callback , $filter = null , $subdomains = null)
+	{
+		$domains = null;
+
+		if(!is_null($subdomains)) {
+			$domains = static::extractSubdomains($subdomains);
+		}
+
+		if(is_null($filter)){
+			static::addCallable($uri,$callback,"get",$domains);
+		} else {
+			static::addFiltred($uri,$callback,"get",$domains);	
+		}
+	}
+
 	public static function post($uri,$callback)
 	{
 		if(is_callable($callback)) self::addCallable($uri,$callback,"post");
@@ -123,6 +145,40 @@ class Routes
 			);
 		//
 		self::$requests[]=$r;
+	}
+
+	/**
+	* to add route with filter
+	*
+	* @param string $url
+	* @param callable $callback
+	* @param string $methode
+	* @param string|array $filter
+	* @param string $subdomain
+	* @return null
+	*/
+	private static function addFiltred_($url , $callback , $methode , $filter , $subdomain = null)
+	{
+		$name = self::convert($url);
+
+		$request = [
+				'name' => $name , 
+				'url' => $url , 
+				'callback' => $callback,
+				'methode' => $methode,
+				"filtre" => $filter,
+				"subdomain" => $subdomain,
+				'controller' => null
+			];
+
+		self::$requests[] = $request;
+
+		$request['name'] .= '/';
+		$request['url'] .= '/';
+
+		self::$requests[] = $request;
+
+		return ;
 	}
 
 	protected static function addFiltred($_url_,$_callback_,$_methode_,$_subdomain_=null)
