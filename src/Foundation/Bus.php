@@ -59,9 +59,6 @@ class Bus
         //Version Surface
         static::version();
 
-        //Views Surface
-        static::view();
-
         //Logging Surface
         static::logging();
 
@@ -161,6 +158,9 @@ class Bus
 
         //Media Surface
         static::media();
+
+        //Views Surface
+        static::view();
 
         //Controllers Surface
         static::controller();
