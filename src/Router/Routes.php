@@ -6,7 +6,6 @@ use Vinala\Kernel\HyperText\Res;
 use Vinala\Kernel\Maintenance\Maintenance;
 use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Router\Exception\NotFoundHttpException;
 use Vinala\Kernel\Http\Errors;
 use Vinala\Kernel\Http\Request;
 use Vinala\Kernel\Foundation\Application;
@@ -21,6 +20,9 @@ use Vinala\Kernel\String\Strings;
 use Vinala\Kernel\MVC\Views;
 use Vinala\Kernel\MVC\View;
 use Vinala\Kernel\Http\Middleware\Middleware;
+use App\Http\Filter;
+
+use Vinala\Kernel\Router\Exception\NotFoundHttpException;
 use Vinala\Kernel\Http\Middleware\Exceptions\MiddlewareWallException;
 
 
@@ -300,7 +302,7 @@ class Routes
 	{
 		array_shift($params);
 		//
-		self::callBefore();
+		self::runAppMiddleware();
 		//
 		$ok=true;
 		$falseok=null;
@@ -332,8 +334,8 @@ class Routes
 		{ 
 			$ok=self::falseFilter($falseok); 
 		}
+
 		//
-		self::callAfter();
 		$ok=1;
 		return $ok;
 	}
@@ -772,12 +774,22 @@ class Routes
 		return array('controller' => $data[0], 'methode' => $data[1]);
 	}
 
+	/**
+	* Check app middlewares before run the application
+	*
+	* @return null
+	*/
+	protected static function runAppMiddleware()
+	{
+		$appMiddleware = Filter::$middleware;
 
+		foreach ($appMiddleware as $middleware ) {
+			$middleware = instance($middleware);
 
+			$middleware->handle(new Request);
+		}
 
-	
+		return true;
+	}
+
 }
-
-
-
-
