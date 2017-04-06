@@ -35,15 +35,7 @@ class Route
 		return Routes::call($uri,$controller,$data);
 	}
 
-	/**
-	* Get current route
-	*
-	* @return string
-	*/
-	public static function current()
-	{
-		return Routes::current();
-	}
+	
 	
 
 }
@@ -75,7 +67,7 @@ class Route_
 	*/
 	public static function get($uri , $callback , $filter = null , $subdomains = null )
 	{
-		return Routes::get($uri , $callback , $filter);
+		return Routes::get_($uri , $callback , $filter , $subdomains);
 	}
 
 	/**
@@ -117,5 +109,15 @@ class Route_
 	public static function call($uri , $controllerFunction , $filter = null , $data = null)
 	{
 		return Routes::call($uri , $controllerFunction , $filter , $data);
+	}
+
+	/**
+	* Get current route
+	*
+	* @return string
+	*/
+	public static function current()
+	{
+		return Routes::current();
 	}
 }

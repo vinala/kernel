@@ -59,9 +59,9 @@ class Routes
 		}
 
 		if(is_null($filter)){
-			static::addCallable($uri,$callback,"get",$domains);
+			static::addCallable($uri,$callback,"get",$filter,$domains);
 		} else {
-			static::addFiltred($uri,$callback,"get",$domains);	
+			static::addFiltred_($uri,$callback,"get",$filter,$domains);	
 		}
 	}
 
@@ -529,7 +529,7 @@ class Routes
 			$result = static::callGroupMiddleware($middleware[1]);
 		}
 
-		if(!$result) { $falseok=$filtre;  }
+		if(!$result) { $falseok=$filtre;  return ;}
 
 		exception_if( ! $result , MiddlewareWallException::class , get_class($middleware));
 	}
