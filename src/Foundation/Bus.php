@@ -626,7 +626,7 @@ class Bus
 
         self::call($files , $folder);
 
-        $files = ['Item', 'Cache', 'FileCache', 'DatabaseCache'];
+        $files = ['Item', 'Cache'];
         $folder  = static::$root.'Caches'.'/';
 
         self::call($files , $folder);
