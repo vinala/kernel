@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Http;
 
@@ -7,61 +7,66 @@ namespace Vinala\Kernel\Http;
 */
 class Request
 {
-	
+    
 
-	/**
-	* Data array contains request data
-	*
-	* @var array 
-	*/
-	protected $data = array() ;
-
-
-	function __construct()
-	{
-		$this->data = $this->getData();
-
-		$this->setProperties();
-	}
+    /**
+    * Data array contains request data
+    *
+    * @var array
+    */
+    protected $data = array() ;
 
 
-	/**
-	* Get resuest data
-	*
-	* @return array
-	*/
-	protected function getData()
-	{
-		$data = $_REQUEST;
-		unset($data['_framework_url_']);
-		
-		return $data;
-	}
+    function __construct()
+    {
+        $this->data = $this->getData();
 
-	/**
-	* Set request data as class properties
-	*
-	* @return bool
-	*/
-	protected function setProperties()
-	{
-		foreach ($this->data as $key => $value) 
-		{
-			$this->$key = $value;
-		}
-	}
+        $this->setProperties();
+    }
 
-	/**
-	* Get all Requests
-	*
-	* @return array
-	*/
-	public function all()
-	{
-		return $this->data;
-	}
-	
-	
-	
 
+    /**
+    * Get resuest data
+    *
+    * @return array
+    */
+    protected function getData()
+    {
+        $data = $_REQUEST;
+        unset($data['_framework_url_']);
+        
+        return $data;
+    }
+
+    /**
+    * Set request data as class properties
+    *
+    * @return bool
+    */
+    protected function setProperties()
+    {
+        foreach ($this->data as $key => $value) {
+            $this->$key = $value;
+        }
+    }
+
+    /**
+    * Get all Requests
+    *
+    * @return array
+    */
+    public function all()
+    {
+        return $this->data;
+    }
+    
+    /**
+    * Return true if the current request is post
+    *
+    * @return bool
+    */
+    public static function isPost()
+    {
+        return (!empty($_POST) && isset($_POST));
+    }
 }
