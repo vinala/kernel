@@ -14,89 +14,86 @@ namespace Vinala\Kernel\Http\Router ;
 */
 class Route
 {
-
+    
     //--------------------------------------------------------
     // Properties
     //--------------------------------------------------------
-
+    
     /**
     * The name of the route
     *
     * @var string
     */
     private $name ;
-
+    
     /**
     * The url of the route
     *
     * @var string
     */
-    private $url ;
-
+    public $url ;
+    
     /**
     * The closure of the rotue
     *
     * @var Closure
     */
     private $closure ;
-
+    
     /**
     * The method of http request
     *
     * @var string
     */
     private $method ;
-
+    
     /**
     * The route middlewares
     *
     * @var array
     */
     private $middleware ;
-
+    
     /**
     * The resource controller route
     *
     * @var string
     */
     private $resource ;
-
+    
     /**
     * The subdomains
     *
     * @var array
     */
     private $subdomains ;
-
+    
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
-
+    
     function __construct($url)
     {
         $name = $this->format($url);
-
+        
         $this->url = $url;
         $this->name = $name;
     }
-
+    
     //--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
-
+    
     /**
     * Save the route into Routes class
     *
-    * @param
-    * @param
-    * @return
+    * @return null
     */
-    public static function name()
+    private function add()
     {
-        
-        return ;
+        Routes::add($this);
     }
-
+    
     /**
     * Get the current route with slashed at end
     *
@@ -104,13 +101,14 @@ class Route
     */
     public function getWithSlash()
     {
-        $current = $this;
+        $route = clone $this;
         
-        $current->name .= '/';
-        $current->url .= '/';
-        return $current;
+        $route->name .= '/';
+        $route->url .= '/';
+        
+        return $route;
     }
-
+    
     /**
     * Format the name and the url of Route
     *
@@ -127,35 +125,9 @@ class Route
             $url = '/'.$url;
         }
         
-        return value;
+        return $value;
     }
-
-    /**
-    * To set the HTTP method
-    *
-    * @param string $method
-    * @return $this
-    */
-    private function setMethod($method)
-    {
-        $this->method = $method ;
-
-        return $this;
-    }
-
-    /**
-    * Set the closure of route
-    *
-    * @param Closure $closure
-    * @return $this
-    */
-    private function setClosure($closure)
-    {
-        $this->closure = $closure ;
-
-        return $this;
-    }
-
+    
     /**
     * Set the subdomains
     *
@@ -165,14 +137,84 @@ class Route
     public function subDomains($subdomains)
     {
         $domains = explode(',', $subdomains);
-
+        
         $this->subdomains = $domains;
     }
-
+    
+    //--------------------------------------------------------
+    // Getters and setters
+    //--------------------------------------------------------
+    
+    /**
+    * To set the HTTP method
+    *
+    * @param string $method
+    * @return $this
+    */
+    private function setMethod($method)
+    {
+        $this->method = $method ;
+        
+        return $this;
+    }
+    
+    /**
+    * Set the closure of route
+    *
+    * @param Closure $closure
+    * @return $this
+    */
+    private function setClosure($closure)
+    {
+        $this->closure = $closure ;
+        
+        return $this;
+    }
+    
+    /**
+    * get the subdomains of route
+    *
+    * @return array
+    */
+    public function getSubdomain()
+    {
+        return $this->subdomains;
+    }
+    
+    /**
+    * get the method of route
+    *
+    * @return array
+    */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+    
+    /**
+    * get the target of route
+    *
+    * @return string
+    */
+    public function getTarget()
+    {
+        return $this->target;
+    }
+    
+    /**
+    * Get the closure of route
+    *
+    * @return Closure
+    */
+    public function getClosure()
+    {
+        return $this->closure;
+    }
+    
     //--------------------------------------------------------
     // Static Functions
     //--------------------------------------------------------
-
+    
     /**
     * To add HTTP get request
     *
@@ -184,7 +226,28 @@ class Route
     {
         $route = new self($url);
         $route->setClosure($callback);
-
+        $route->setMethod('get');
+        
+        $route->add();
+        
+        return $route;
+    }
+    
+    /**
+    * To add HTTP post request
+    *
+    * @param string $url
+    * @param Closure $callback
+    * @return $this
+    */
+    public static function post($url, $callback)
+    {
+        $route = new self($url);
+        $route->setClosure($callback);
+        $route->setMethod('post');
+        
+        $route->add();
+        
         return $route;
     }
 }
