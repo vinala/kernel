@@ -83,39 +83,39 @@ class Routes
         foreach (static::$register as $route) {
             $url = $route->url;
             
-            if(preg_match("#^$url$#" , $current , $param)){
-                if ( ! is_null($route->getSubdomain())) {
-                    if(Collection::contains($route->getSubdomain(), static::getSubDomain())){
-                        $result = static::treat($route , $param);
-                        if($result) {
+            if (preg_match("#^$url$#", $current, $param)) {
+                if (! is_null($route->getSubdomain())) {
+                    if (Collection::contains($route->getSubdomain(), static::getSubDomain())) {
+                        $result = static::treat($route, $param);
+                        if ($result) {
                             break;
+                        }
+                    }
+                } else {
+                    $result = static::treat($route, $param);
+                    if ($result) {
+                        break;
                     }
                 }
-            } else {
-                $result = static::treat($route , $param);
-                if($result) {
-                    break;
             }
         }
-    }
-}
 
-exception_if( ! $result , NotFoundHttpException::class);
-}
+        exception_if( ! $result, NotFoundHttpException::class);
+    }
 
 /**
 * Get user request from _framework_url_ in get array
 *
 * @return string
 */
-private static function getRequest()
-{
-    $url = '/'.request('_framework_url_', '', 'get');
+    private static function getRequest()
+    {
+        $url = '/'.request('_framework_url_', '', 'get');
     
-    unset($_GET['_framework_url_']);
+        unset($_GET['_framework_url_']);
     
-    return $url;
-}
+        return $url;
+    }
 
 /**
 * Set the app root param
@@ -123,20 +123,20 @@ private static function getRequest()
 * @param string $url
 * @return string
 */
-private static function setRoot($url)
-{
-    $segements = explode('/', $url);
-    $count = count($segements)-2;
+    private static function setRoot($url)
+    {
+        $segements = explode('/', $url);
+        $count = count($segements)-2;
     
-    $path = '';
+        $path = '';
     
-    for ($i=0; $i < $count; $i++) {
-        $path .= '../';
+        for ($i=0; $i < $count; $i++) {
+            $path .= '../';
+        }
+    
+        Application::$path .= $path;
+        return Application::$path;
     }
-    
-    Application::$path .= $path;
-    return Application::$path;
-}
 
 /**
 * Clean the url if there is dynamic parts in it
@@ -145,57 +145,57 @@ private static function setRoot($url)
 * @param string $url
 * @return string
 */
-private static function cleanUrl($url)
-{
-    $result = '';
-    $inner = false;
+    private static function cleanUrl($url)
+    {
+        $result = '';
+        $inner = false;
     
-    for ($i=0; $i < strlen($url); $i++) {
-        if (! $inner) {
-            if ($url[$i] != '{') {
-                $result .= $url[$i];
-            } else {
-                $result .= '{';
+        for ($i=0; $i < strlen($url); $i++) {
+            if (! $inner) {
+                if ($url[$i] != '{') {
+                    $result .= $url[$i];
+                } else {
+                    $result .= '{';
                     $inner = true;
                 }
             } else {
-            if ($url[$i] == '}') {
-            $result .= '}';
-            $inner = false;
+                if ($url[$i] == '}') {
+                    $result .= '}';
+                    $inner = false;
+                }
+            }
         }
-    }
-}
 
-return $result;
-}
+        return $result;
+    }
 
 /**
 * Clean all routes url and change string between brackets to '(.*)?'
 *
 * @return null
 */
-private static function cleanUrls()
-{
-    foreach (static::$register as $route) {
-        $route->url = static::cleanUrl($route->url);
-    }
+    private static function cleanUrls()
+    {
+        foreach (static::$register as $route) {
+            $route->url = static::cleanUrl($route->url);
+        }
     
-    foreach (static::$register as $route) {
-        if (str_contains($route->url, '{}')) {
-            $route->url = str_replace('{}', '(.*)?', $route->url);
+        foreach (static::$register as $route) {
+            if (str_contains($route->url, '{}')) {
+                $route->url = str_replace('{}', '(.*)?', $route->url);
+            }
         }
     }
-}
 
 /**
 * Get the subdomain of the current request
 *
 * @return string
 */
-private static function getSubDomain()
-{
-    return request('SERVER_NAME', null, 'server');
-}
+    private static function getSubDomain()
+    {
+        return request('SERVER_NAME', null, 'server');
+    }
 
 /**
 * Treat the request according to it's method
@@ -204,16 +204,15 @@ private static function getSubDomain()
 * @param array $params
 * @return bool
 */
-private static function treat(Route $route , $params)
-{
-    // in case of get request or post request
-    if(($route->getMethod() == 'post' && Request::isPost()) || ($route->getMethod() == 'get') || ($route->getMethod() == 'resource') || ($route->getMethod() == 'call') ) {
-        return static::execute($route , $params);
+    private static function treat(Route $route, $params)
+    {
+        // in case of get request or post request
+        if (($route->getMethod() == 'post' && Request::isPost()) || ($route->getMethod() == 'get') || ($route->getMethod() == 'resource') || ($route->getMethod() == 'call')) {
+            return static::execute($route, $params);
+        }
+    
+        return false;
     }
-    
-    return false;
-    
-}
 
 /**
 * Execute the route
@@ -222,34 +221,33 @@ private static function treat(Route $route , $params)
 * @param array $params
 * @return bool
 */
-private static function execute(&$route , $params)
-{
-    array_shift($params);
-    
-    if(static::runAppMiddleware())
+    private static function execute(&$route, $params)
     {
-        static::prepare($route,$params);
+        array_shift($params);
+    
+        if (static::runAppMiddleware()) {
+            static::prepare($route, $params);
+        }
+        return ;
     }
-    return ;
-}
 
 /**
 * Check app middlewares before run the route
 *
 * @return null
 */
-private static function runAppMiddleware()
-{
-    $appMiddleware = Filter::$middleware;
+    private static function runAppMiddleware()
+    {
+        $appMiddleware = Filter::$middleware;
     
-    foreach ($appMiddleware as $middleware ) {
-        $middleware = instance($middleware);
+        foreach ($appMiddleware as $middleware) {
+            $middleware = instance($middleware);
         
-        $middleware->handle(new Request);
-    }
+            $middleware->handle(new Request);
+        }
     
-    return true;
-}
+        return true;
+    }
 
 /**
 * prepare the route to be executed
@@ -258,22 +256,22 @@ private static function runAppMiddleware()
 * @param array $params
 * @return null
 */
-private static function prepare(Route $route , $params)
-{
-    static::$current = $route;
+    private static function prepare(Route $route, $params)
+    {
+        static::$current = $route;
     
-    if($route->getMethod() == 'resource'){
-        if($route->getTarget() == 'update'){
-            $id = $params[0];
-            $params[0] = new Request;
-            $params[] = $id;
-        } elseif ($route->getTarget() == 'insert') {
-            $params[] = new Request;
+        if ($route->getMethod() == 'resource') {
+            if ($route->getTarget() == 'update') {
+                $id = $params[0];
+                $params[0] = new Request;
+                $params[] = $id;
+            } elseif ($route->getTarget() == 'insert') {
+                $params[] = new Request;
+            }
         }
-    }
     
-    self::treatment(call_user_func_array($route->getClosure(), $params));
-}
+        self::treatment(call_user_func_array($route->getClosure(), $params));
+    }
 
 /**
 * Treat the result of the route closure
@@ -281,14 +279,14 @@ private static function prepare(Route $route , $params)
 * @param mixed $result
 * @return string
 */
-private static function treatment($result)
-{
-    if (is_string($result)) {
-        echo $result;
-    } elseif ($result instanceof Views) {
-        View::show($result);
+    private static function treatment($result)
+    {
+        if (is_string($result)) {
+            echo $result;
+        } elseif ($result instanceof Views) {
+            View::show($result);
+        }
     }
-}
 
 /**
 * Add new route to register
@@ -296,19 +294,19 @@ private static function treatment($result)
 * @param Route $route
 * @return null
 */
-public static function add(Route $route)
-{
-    exception_if(self::checkDuplicated($route), RouteDuplicatedException::class, $route);
+    public static function add(Route $route)
+    {
+        exception_if(self::checkDuplicated($route), RouteDuplicatedException::class, $route);
     
-    // Create new route for url ended with '/'
-    $routeWithoutSlash = $route;
-    $routeWithSlash = $route->getWithSlash();
+        // Create new route for url ended with '/'
+        $routeWithoutSlash = $route;
+        $routeWithSlash = $route->getWithSlash();
     
-    self::$register[] = $routeWithoutSlash;
-    self::$register[] = $routeWithSlash;
+        self::$register[] = $routeWithoutSlash;
+        self::$register[] = $routeWithSlash;
     
-    return ;
-}
+        return ;
+    }
 
 /**
 * Check if route is duplicated
@@ -316,14 +314,14 @@ public static function add(Route $route)
 * @param Route $route
 * @return bool
 */
-private static function checkDuplicated(Route $route)
-{
-    foreach (self::$register as $registeredRoute) {
-        if ($registeredRoute->name == $route->name) {
-            return true;
+    private static function checkDuplicated(Route $route)
+    {
+        foreach (self::$register as $registeredRoute) {
+            if ($registeredRoute->name == $route->name) {
+                return true;
+            }
         }
-    }
     
-    return false;
-}
+        return false;
+    }
 }
