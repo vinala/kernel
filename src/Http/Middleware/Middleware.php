@@ -95,7 +95,6 @@ class Middleware
 		$filter = instance(\App\Http\Filter::class);
 
 		self::$filters['app'] = $filter::$middleware;
-		self::$filters['groups'] = $filter::$groupsMiddleware;
 		self::$filters['route'] = $filter::$routeMiddleware;
 
 		return self::$filters;
@@ -118,10 +117,6 @@ class Middleware
 		elseif(array_has(self::$filters , 'route.'.$name))
 		{
 			return ['route' , array_get(self::$filters , 'route.'.$name)];
-		}
-		elseif(array_has(self::$filters , 'groups.'.$name))
-		{
-			return ['groups' , array_get(self::$filters , 'groups.'.$name)];
 		}
 
 		exception(MiddlewareNotFoundException::class , $name);
