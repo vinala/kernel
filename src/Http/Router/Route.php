@@ -93,6 +93,16 @@ class Route
     {
         Routes::add($this);
     }
+
+    /**
+    * Save the edits of the route into Routes class
+    *
+    * @return null
+    */
+    private function edit()
+    {
+        Routes::edit($this);
+    }
     
     /**
     * Get the current route with slashed at end
@@ -140,11 +150,37 @@ class Route
         
         $this->subdomains = $domains;
     }
+
+    /**
+    * Set middlewares for the route
+    *
+    * @return Route
+    */
+    public function middleware()
+    {
+        $args = func_get_args();
+
+        $this->middleware = $args;
+
+        $this->edit();
+
+        return $this;
+    }
     
     //--------------------------------------------------------
     // Getters and setters
     //--------------------------------------------------------
     
+    /**
+    * To get the name of route
+    *
+    * @return $this
+    */
+    public function getName()
+    {        
+        return $this->name;
+    }
+
     /**
     * To set the HTTP method
     *
@@ -209,6 +245,16 @@ class Route
     public function getClosure()
     {
         return $this->closure;
+    }
+
+    /**
+    * Get the middleware of route
+    *
+    * @return array|null
+    */
+    public function getMiddleware()
+    {
+        return $this->middleware;
     }
     
     //--------------------------------------------------------
