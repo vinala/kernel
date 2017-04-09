@@ -8,6 +8,7 @@ use Vinala\Kernel\Http\Request;
 use App\Http\Filter;
 
 use Vinala\Kernel\Http\Router\Exceptions\RouteDuplicatedException;
+use Vinala\Kernel\Http\Router\Exceptions\RouteMiddlewareNotFoundException;
 use Vinala\Kernel\Router\Exception\NotFoundHttpException;
 
 /**
@@ -17,7 +18,7 @@ use Vinala\Kernel\Router\Exception\NotFoundHttpException;
 * @author Youssef Had
 * @package Vinala\Kernel\Http\Router
 * @since v3.3.0
-*/
+**/
 class Routes
 {
     
@@ -29,14 +30,14 @@ class Routes
     * The routes register
     *
     * @var array
-    */
+    **/
     public static $register = [];
     
     /**
     * The current route
     *
     * @var Route
-    */
+    **/
     private static $current ;
     
     //--------------------------------------------------------
@@ -56,7 +57,7 @@ class Routes
     * Run the router
     *
     * @return null
-    */
+    **/
     public static function run()
     {
         $request = static::getRequest();
@@ -75,7 +76,7 @@ class Routes
     *
     * @param string $current
     * @return bool
-    */
+    **/
     private static function fetch($current)
     {
         $result = false;
@@ -103,11 +104,11 @@ class Routes
         exception_if( ! $result, NotFoundHttpException::class);
     }
 
-/**
-* Get user request from _framework_url_ in get array
-*
-* @return string
-*/
+    /**
+    * Get user request from _framework_url_ in get array
+    *
+    * @return string
+    **/
     private static function getRequest()
     {
         $url = '/'.request('_framework_url_', '', 'get');
@@ -117,12 +118,13 @@ class Routes
         return $url;
     }
 
-/**
-* Set the app root param
-*
-* @param string $url
-* @return string
-*/
+
+    /**
+    * Set the app root param
+    *
+    * @param string $url
+    * @return string
+    **/
     private static function setRoot($url)
     {
         $segements = explode('/', $url);
@@ -138,13 +140,13 @@ class Routes
         return Application::$path;
     }
 
-/**
-* Clean the url if there is dynamic parts in it
-* and delete strings between brackets {}
-*
-* @param string $url
-* @return string
-*/
+    /*
+    * Clean the url if there is dynamic parts in it
+    * and delete strings between brackets {}
+    *
+    * @param string $url
+    * @return string
+    ***/
     private static function cleanUrl($url)
     {
         $result = '';
@@ -169,11 +171,12 @@ class Routes
         return $result;
     }
 
-/**
-* Clean all routes url and change string between brackets to '(.*)?'
-*
-* @return null
-*/
+
+    /**
+    * Clean all routes url and change string between brackets to '(.*)?'
+    *
+    * @return null
+    */
     private static function cleanUrls()
     {
         foreach (static::$register as $route) {
@@ -187,23 +190,23 @@ class Routes
         }
     }
 
-/**
-* Get the subdomain of the current request
-*
-* @return string
-*/
+    /**
+    * Get the subdomain of the current request
+    *
+    * @return string
+    */
     private static function getSubDomain()
     {
         return request('SERVER_NAME', null, 'server');
     }
 
-/**
-* Treat the request according to it's method
-*
-* @param Route $route
-* @param array $params
-* @return bool
-*/
+    /**
+    * Treat the request according to it's method
+    *
+    * @param Route $route
+    * @param array $params
+    * @return bool
+    **/
     private static function treat(Route $route, $params)
     {
         // in case of get request or post request
@@ -214,31 +217,32 @@ class Routes
         return false;
     }
 
-/**
-* Execute the route
-*
-* @param Route $one
-* @param array $params
-* @return bool
-*/
+    /**
+    * Execute the route
+    *
+    * @param Route $one
+    * @param array $params
+    * @return bool
+    **/
     private static function execute(&$route, $params)
     {
         array_shift($params);
     
-        if (static::runAppMiddleware()) {
+        if (static::runAppMiddleware() && static::runRouteMiddleware($route)) {
             static::prepare($route, $params);
         }
         return ;
     }
 
-/**
-* Check app middlewares before run the route
-*
-* @return null
-*/
+    /**
+    * Check app middlewares before run the route
+    *
+    * @return null
+    **/
     private static function runAppMiddleware()
     {
         $appMiddleware = Filter::$middleware;
+        // d($appMiddleware);
     
         foreach ($appMiddleware as $middleware) {
             $middleware = instance($middleware);
@@ -249,13 +253,38 @@ class Routes
         return true;
     }
 
-/**
-* prepare the route to be executed
-*
-* @param Route $request
-* @param array $params
-* @return null
-*/
+    /**
+    * Check route middlewares before run the route
+    * and check if the requested middleware are realy in filter class
+    *
+    * @return null
+    **/
+    private static function runRouteMiddleware($route)
+    {
+        $routeMiddleware = Filter::$routeMiddleware;
+
+        if (! is_null($route->getMiddleware())) {
+            // if ($route->getMiddleware()['type'] == 'route' && ! is_null($route->getMiddleware()['middlewares'])) {
+            foreach ($route->getMiddleware() as $middleware) {
+                //Check if the routes middlewares are in filter class
+                exception_if( ! array_has($routeMiddleware, $middleware), RouteMiddlewareNotFoundException::class, $middleware);
+
+                $middleware = instance($routeMiddleware[$middleware]);
+        
+                $middleware->handle(new Request);
+            }
+        }
+
+        return true;
+    }
+
+    /**
+    * prepare the route to be executed
+    *
+    * @param Route $request
+    * @param array $params
+    * @return null
+    **/
     private static function prepare(Route $route, $params)
     {
         static::$current = $route;
@@ -273,12 +302,12 @@ class Routes
         self::treatment(call_user_func_array($route->getClosure(), $params));
     }
 
-/**
-* Treat the result of the route closure
-*
-* @param mixed $result
-* @return string
-*/
+    /**
+    * Treat the result of the route closure
+    *
+    * @param mixed $result
+    * @return string
+    **/
     private static function treatment($result)
     {
         if (is_string($result)) {
@@ -288,12 +317,12 @@ class Routes
         }
     }
 
-/**
-* Add new route to register
-*
-* @param Route $route
-* @return null
-*/
+    /**
+    * Add new route to register
+    *
+    * @param Route $route
+    * @return null
+    **/
     public static function add(Route $route)
     {
         exception_if(self::checkDuplicated($route), RouteDuplicatedException::class, $route);
@@ -302,22 +331,39 @@ class Routes
         $routeWithoutSlash = $route;
         $routeWithSlash = $route->getWithSlash();
     
-        self::$register[] = $routeWithoutSlash;
-        self::$register[] = $routeWithSlash;
+        self::$register[$routeWithoutSlash->getName()] = $routeWithoutSlash;
+        self::$register[$routeWithSlash->getName()] = $routeWithSlash;
     
         return ;
     }
 
-/**
-* Check if route is duplicated
-*
-* @param Route $route
-* @return bool
-*/
+    /**
+    * Update an existant route in register
+    *
+    * @param Route $route
+    * @return null
+    **/
+    public static function edit(Route $route)
+    {
+        $routeWithoutSlash = $route;
+        $routeWithSlash = $route->getWithSlash();
+    
+        self::$register[$routeWithoutSlash->getName()] = $routeWithoutSlash;
+        self::$register[$routeWithSlash->getName()] = $routeWithSlash;
+        
+        return ;
+    }
+
+    /**
+    * Check if route is duplicated
+    *
+    * @param Route $route
+    * @return bool
+    **/
     private static function checkDuplicated(Route $route)
     {
         foreach (self::$register as $registeredRoute) {
-            if ($registeredRoute->name == $route->name) {
+            if ($registeredRoute->getName() == $route->getName()) {
                 return true;
             }
         }
