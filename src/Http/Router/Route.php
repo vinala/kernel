@@ -327,19 +327,51 @@ class Route
     public static function resource($url, $controller)
     {
         $route = new self($url);
-        
-        $route->setIndexResource($url, '', $controller);
-        $route->setIndexResource($url, '/index', $controller);
+
+        $route->setResourceMethods($url, $controller);
         // d(Routes::$register);
 
         // return $route;
     }
 
     /**
+    * Set the methods resource
+    *
+    * @param string $url
+    * @param string $controller
+    * @return null
+    */
+    private function setResourceMethods($url, $controller)
+    {
+        //index
+        $this->setIndexResource($url, '', $controller);
+        $this->setIndexResource($url, '/index', $controller);
+        
+        //show
+        $this->setShowResource($url, '/show/{param}', $controller);
+
+        //add
+        $this->setAddResource($url, '/add', $controller);
+
+        //insert
+        $this->setInsertResource($url, '/insert', $controller);
+
+        //edit
+        $this->setEditResource($url, '/edit/{param}', $controller);
+
+        //update
+        $this->setUpdateResource($url, '/update', $controller);
+        $this->setUpdateResource($url, '/update/{param}', $controller);
+
+        //delete
+        $this->setDeleteResource($url, '/delete/{param}', $controller);
+    }
+
+    /**
     * Return a resource closure for resource route
     *
-    * @param $controller
-    * @param $methode
+    * @param string $controller
+    * @param string $methode
     * @return Closure
     */
     private function getResourceClosure($controller, $method)
@@ -376,29 +408,120 @@ class Route
     }
 
     /**
-    * Set the index resource routes
+    * Set a resource routes
     *
     * @param string $url
+    * @param string $route
     * @param string $controller
-    * @param string $method
     * @return null
     */
-    private function setIndexResource($url, $route = 'index', $controller)
+    private function setResource($url, $route, $controller, $target)
     {
         $url = $url.$route;
 
         $route = new self($url);
 
-        $closure = $this->getResourceClosure($controller, 'index');
+        $closure = $this->getResourceClosure($controller, $target);
 
         $route->setClosure($closure);
         $route->setMethod('resource');
-        $route->setTarget($controller, 'index');
+        $route->setTarget($controller, $target);
 
         $this->addResource($route);
         
         $route->add();
         
         return $route;
+    }
+
+    /**
+    * Set the index resource routes
+    *
+    * @param string $url
+    * @param string $route
+    * @param string $controller
+    * @return null
+    */
+    private function setIndexResource($url, $route = '/index', $controller)
+    {
+        return $this->setResource($url, $route, $controller, 'index');
+    }
+
+    /**
+    * Set the show resource routes
+    *
+    * @param string $url
+    * @param string $route
+    * @param string $controller
+    * @return null
+    */
+    private function setShowResource($url, $route = '/show/{}', $controller)
+    {
+        return $this->setResource($url, $route, $controller, 'show');
+    }
+
+    /**
+    * Set the add resource routes
+    *
+    * @param string $url
+    * @param string $route
+    * @param string $controller
+    * @return null
+    */
+    private function setAddResource($url, $route = '/add', $controller)
+    {
+        return $this->setResource($url, $route, $controller, 'add');
+    }
+
+    /**
+    * Set the insert resource routes
+    *
+    * @param string $url
+    * @param string $route
+    * @param string $controller
+    * @return null
+    */
+    private function setInsertResource($url, $route = '/insert', $controller)
+    {
+        return $this->setResource($url, $route, $controller, 'insert');
+    }
+
+    /**
+    * Set the edit resource routes
+    *
+    * @param string $url
+    * @param string $route
+    * @param string $controller
+    * @return null
+    */
+    private function setEditResource($url, $route = '/edit/{}', $controller)
+    {
+        return $this->setResource($url, $route, $controller, 'edit');
+    }
+
+    /**
+    * Set the update resource routes
+    *
+    * @param string $url
+    * @param string $route
+    * @param string $controller
+    * @return null
+    */
+    private function setUpdateResource($url, $route = '/update/{}', $controller)
+    {
+        return $this->setResource($url, $route, $controller, 'update');
+    }
+
+    /**
+    * Set the delete resource routes
+    *
+    * @param string $url
+    * @param string $route
+    * @param string $controller
+    * @return null
+    */
+    private function setDeleteResource($url, $route = '/delete/{}', $controller)
+    {
+        return $this->setResource($url, $route, $controller, 'delete');
     }
 }
