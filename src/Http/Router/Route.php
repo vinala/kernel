@@ -55,11 +55,18 @@ class Route
     private $middleware ;
     
     /**
-    * The resource controller route
+    * All resource routes
     *
-    * @var string
+    * @var array
     */
-    private $resource ;
+    private $resources ;
+
+    /**
+    * The route resource target
+    *
+    * @var array
+    */
+    private $target ;
     
     /**
     * The subdomains
@@ -177,7 +184,7 @@ class Route
     * @return $this
     */
     public function getName()
-    {        
+    {
         return $this->name;
     }
 
@@ -190,6 +197,19 @@ class Route
     private function setMethod($method)
     {
         $this->method = $method ;
+        
+        return $this;
+    }
+
+    /**
+    * To set the Resource target method
+    *
+    * @param string $method
+    * @return $this
+    */
+    private function setTarget($controller, $method)
+    {
+        $this->target = ['controller' => $controller , 'method' => $method] ;
         
         return $this;
     }
@@ -291,6 +311,91 @@ class Route
         $route = new self($url);
         $route->setClosure($callback);
         $route->setMethod('post');
+        
+        $route->add();
+        
+        return $route;
+    }
+
+    /**
+    * Call resource route
+    *
+    * @param string $url
+    * @param string $controller
+    * @return mixed
+    */
+    public static function resource($url, $controller)
+    {
+        $route = new self($url);
+        
+        $route->setIndexResource($url, '', $controller);
+        $route->setIndexResource($url, '/index', $controller);
+        // d(Routes::$register);
+
+        // return $route;
+    }
+
+    /**
+    * Return a resource closure for resource route
+    *
+    * @param $controller
+    * @param $methode
+    * @return Closure
+    */
+    private function getResourceClosure($controller, $method)
+    {
+        if ($method == 'show' || $method == 'edit' || $method == 'delete') {
+            return function ($id) use ($controller, $method) {
+                return $controller::$method($id);
+            };
+        } elseif ($method == 'update') {
+            return function ($request, $id) use ($controller, $method) {
+                return $controller::$method($request, $id);
+            };
+        } elseif ($method == 'insert') {
+            return function ($request) use ($controller, $method) {
+                return $controller::$method($request);
+            };
+        } else {
+            return function () use ($controller, $method) {
+                return $controller::$method();
+            };
+        }
+    }
+
+    /**
+    * Add resource route
+    *
+    * @param Route $route
+    * @return $this
+    */
+    private function addResource(Route $route)
+    {
+        $this->resources[$route->getName()] = $route;
+        return $this;
+    }
+
+    /**
+    * Set the index resource routes
+    *
+    * @param string $url
+    * @param string $controller
+    * @param string $method
+    * @return null
+    */
+    private function setIndexResource($url, $route = 'index', $controller)
+    {
+        $url = $url.$route;
+
+        $route = new self($url);
+
+        $closure = $this->getResourceClosure($controller, 'index');
+
+        $route->setClosure($closure);
+        $route->setMethod('resource');
+        $route->setTarget($controller, 'index');
+
+        $this->addResource($route);
         
         $route->add();
         
