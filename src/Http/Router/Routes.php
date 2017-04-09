@@ -230,8 +230,9 @@ class Routes
     
         if (static::runAppMiddleware() && static::runRouteMiddleware($route)) {
             static::prepare($route, $params);
+            return true;
         }
-        return ;
+        
     }
 
     /**
@@ -242,7 +243,6 @@ class Routes
     private static function runAppMiddleware()
     {
         $appMiddleware = Filter::$middleware;
-        // d($appMiddleware);
     
         foreach ($appMiddleware as $middleware) {
             $middleware = instance($middleware);
@@ -290,11 +290,11 @@ class Routes
         static::$current = $route;
     
         if ($route->getMethod() == 'resource') {
-            if ($route->getTarget() == 'update') {
+            if ($route->getTarget()['method'] == 'update') {
                 $id = $params[0];
                 $params[0] = new Request;
                 $params[] = $id;
-            } elseif ($route->getTarget() == 'insert') {
+            } elseif ($route->getTarget()['method'] == 'insert') {
                 $params[] = new Request;
             }
         }
