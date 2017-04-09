@@ -329,9 +329,31 @@ class Route
         $route = new self($url);
 
         $route->setResourceMethods($url, $controller);
-        // d(Routes::$register);
 
-        // return $route;
+        return $route;
+    }
+
+    /**
+    * Call target route
+    *
+    * @param string $url
+    * @param string $target
+    * @return Route
+    */
+    public static function target($url, $target)
+    {
+        $route = new self($url);
+
+        $segements = explode('@', $target);
+
+        exception_if(count($segements) != 2, \LogicException::class, 'The method name in targeted route expect two names, the controller and method, '.count($segements).' given in '.$target);
+
+        $controller = $segements[0];
+        $method = $segements[1];
+
+        $route->setResourceMethods($url, $controller, $method);
+
+        return $route;
     }
 
     /**
@@ -365,6 +387,18 @@ class Route
 
         //delete
         $this->setDeleteResource($url, '/delete/{param}', $controller);
+    }
+
+    /**
+    * Set the methods resource
+    *
+    * @param string $url
+    * @param string $controller
+    * @return null
+    */
+    private function setTargetMethod($url, $controller, $method)
+    {
+        return $this->setResource($url, '', $controller, $method);
     }
 
     /**
