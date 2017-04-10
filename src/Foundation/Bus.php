@@ -612,7 +612,7 @@ class Bus
 
         self::call($files, $folder);
 
-        $files = ['RouteDuplicatedException' , 'RouteMiddlewareNotFoundException'];
+        $files = ['RouteDuplicatedException' , 'RouteMiddlewareNotFoundException', 'RouteNotFoundInRoutesRegisterException'];
         $folder  = static::$root.'Http/Router/Exceptions'.'/';
 
         self::call($files, $folder);
