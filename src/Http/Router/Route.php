@@ -117,6 +117,16 @@ class Route
     {
         Routes::edit($this);
     }
+
+    /**
+    * Remove a route from Routes register
+    *
+    * @return null
+    */
+    private function delete()
+    {
+        Routes::delete($this);
+    }
     
     /**
     * Get the current route with slashed at end
@@ -399,6 +409,46 @@ class Route
     }
 
     /**
+    * Get the resource name
+    *
+    * @param string $url
+    * @param string $target
+    * @return array
+    */
+    private function getResourceName($url, $target)
+    {
+        switch ($target) {
+            case 'index':
+                return [$url , $url.'/index'];
+                break;
+
+            case 'show':
+                return [$url.'/show/{param}'];
+                break;
+
+            case 'add':
+                return [$url.'/add'];
+                break;
+                
+            case 'insert':
+                return [$url.'/insert'];
+                break;
+
+            case 'edit':
+                return [$url.'/edit/{param}'];
+                break;
+
+            case 'update':
+                return [$url.'/update' , $url.'/update/{param}'];
+                break;
+            
+            case 'update':
+                return [$url.'/delete/{param}'];
+                break;
+        }
+    }
+
+    /**
     * Set the methods resource
     *
     * @param string $url
@@ -582,12 +632,21 @@ class Route
         foreach ($this->targets as $method) {
             if (in_array($method, $targets)) {
                 array_push($result, $method);
+            } else {
+                if(! is_null($this->getResourceName($this->name, $method)))
+                {
+                    foreach ($this->getResourceName($this->name, $method) as $resource) {
+                        if (array_has($this->resources, $resource)) {
+                            $this->resources[$resource]->delete();
+
+                            unset($this->resources[$resource]);
+                        }
+                    }
+                }
             }
         }
 
         $this->targets = $result;
-
-        //update
 
         return $this;
     }
@@ -606,12 +665,21 @@ class Route
         foreach ($this->targets as $method) {
             if (! in_array($method, $targets)) {
                 array_push($result, $method);
+            } else {
+                if(! is_null($this->getResourceName($this->name, $method)))
+                {
+                    foreach ($this->getResourceName($this->name, $method) as $resource) {
+                        if (array_has($this->resources, $resource)) {
+                            $this->resources[$resource]->delete();
+
+                            unset($this->resources[$resource]);
+                        }
+                    }
+                }
             }
         }
 
         $this->targets = $result;
-
-        //update
 
         return $this;
     }
