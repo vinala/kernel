@@ -5,7 +5,6 @@ use Vinala\Kernel\Support\FunctionArgs;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Environment\Environment;
 use Vinala\Kernel\MVC\View;
-use Vinala\Kernel\Router\Route;
 use Vinala\Kernel\Objects\DateTime;
 use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Translator\Lang;
@@ -18,6 +17,7 @@ use Vinala\Kernel\Http\Middleware\Middleware;
 use Vinala\Kernel\Object\Strings;
 use Vinala\Kernel\Http\Links;
 use Vinala\Kernel\Storage\Session;
+use Vinala\Kernel\Http\Router\Route;
 
 
 
@@ -258,12 +258,11 @@ if ( ! function_exists("get"))
 	*
 	* @param string $uri
 	* @param callback $callback
-	* @param array $subdomains
 	* @return mixed
 	*/
-	function get( $uri , $callback , $subdomains = null )
+	function get( $uri , $callback )
 	{
-		return Route::get($uri , $callback , $subdomains);
+		return Route::get($uri , $callback);
 	}	
 }
 
@@ -277,9 +276,9 @@ if ( ! function_exists("post"))
 	* @param array $data
 	* @return mixed
 	*/
-	function post( $uri , $controller , $data = null )
+	function post( $uri , $controller)
 	{
-		return Route::post($uri , $controller , $data);
+		return Route::post($uri , $controller);
 	}	
 }
 
@@ -294,13 +293,13 @@ if ( ! function_exists("target"))
 	* @param array $data
 	* @return mixed
 	*/
-	function target( $uri , $controller , $data = null )
+	function target( $uri , $controller)
 	{
-		return Route::controller($uri , $controller , $data);
+		return Route::target($uri , $controller);
 	}	
 }
 
-if ( ! function_exists("call")) 
+if ( ! function_exists("resource")) 
 {
 	/**
 	* shortcut for get routing
@@ -310,9 +309,9 @@ if ( ! function_exists("call"))
 	* @param array $data
 	* @return mixed
 	*/
-	function call( $uri , $controller , $data = null )
+	function resource( $uri , $controller)
 	{
-		return Route::call($uri , $controller , $data);
+		return Route::resource($uri , $controller);
 	}	
 }
 
