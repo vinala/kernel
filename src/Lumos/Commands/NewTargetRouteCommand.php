@@ -8,7 +8,7 @@ use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Router;
 
 
-class NewCallRouteCommand extends Commands
+class NewTargetRouteCommand extends Commands
 {
 
     /**
@@ -30,8 +30,8 @@ class NewCallRouteCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.commands.call_routes').' {http : what\'s the http of route?} {controller : what\'s the controller you wanna to use?} {method : what\'s the method you wanna to use?}';
-        $this->description = 'Add new call route to Routes file';
+        $this->key = config('lumos.commands.target_route').' {http : what\'s the http of route?} {controller : what\'s the controller you wanna to use?} {method : what\'s the method you wanna to use?}';
+        $this->description = 'Add new target route to Routes file';
     }
 
     /**
@@ -51,7 +51,7 @@ class NewCallRouteCommand extends Commands
         $controller = $this->argument('controller');
         $method = $this->argument('method');
         //
-        $process = Router::call($http , $controller , $method);
+        $process = Router::target($http , $controller , $method);
         //
         $this->show($process);
     }
@@ -61,7 +61,13 @@ class NewCallRouteCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("\nThe route was created\n");
+        $this->title('New traget route command :');
+        //
+        if($process) 
+        {
+            $this->info("\nThe route was created");
+            $this->comment(" -> Path : app/http/Routes.php\n");
+        }
         else $this->error("\nThe route doesn't created\n");
     }
 }
