@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Process\Exception;
 
@@ -7,10 +7,10 @@ namespace Vinala\Kernel\Process\Exception;
 */
 class TranslatorManyFolderException extends \Exception
 {
-	protected $message;
-	//
-	function __construct() 
-	{
-		$this->message="Lighty can't detect sub folder in languages folder, use only one folder : \n'folder.file'";
-	}
+    protected $message;
+    //
+    function __construct()
+    {
+        $this->message="Vinala can't detect sub folder in languages folder, use only one folder : \n'folder.file'";
+    }
 }
