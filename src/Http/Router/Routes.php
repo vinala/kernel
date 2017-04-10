@@ -9,7 +9,9 @@ use App\Http\Filter;
 
 use Vinala\Kernel\Http\Router\Exceptions\RouteDuplicatedException;
 use Vinala\Kernel\Http\Router\Exceptions\RouteMiddlewareNotFoundException;
+use Vinala\Kernel\Http\Router\Exceptions\RouteNotFoundInRoutesRegisterException;
 use Vinala\Kernel\Router\Exception\NotFoundHttpException;
+
 
 /**
 * The routes class where framework store all kind of routes
@@ -352,6 +354,34 @@ class Routes
         self::$register[$routeWithSlash->getName()] = $routeWithSlash;
         
         return ;
+    }
+
+    /**
+    * Remove an existant route from register
+    *
+    * @param Route $route
+    * @return null
+    */
+    public static function delete(Route $route)
+    {
+        $routeWithoutSlash = $route;
+        $routeWithSlash = $route->getWithSlash();
+
+        // exception_if(! check(self::$register[$routeWithoutSlash->getName()]), RouteNotFoundInRoutesRegisterException::class , $routeWithoutSlash);
+        // exception_if(! check(self::$register[$routeWithSlash->getName()]), RouteNotFoundInRoutesRegisterException::class , $routeWithSlash);
+
+        if( check(self::$register[$routeWithoutSlash->getName()]) )
+        {
+            unset(self::$register[$routeWithoutSlash->getName()]);
+        }
+
+        if( check(self::$register[$routeWithSlash->getName()]) )
+        {
+            unset(self::$register[$routeWithSlash->getName()]);
+        }
+
+        return null;
+
     }
 
     /**
