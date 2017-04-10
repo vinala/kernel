@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Foundation;
 
-use Vinala\Kernel\Router\Routes;
+use Vinala\Kernel\Http\Router\Routes;
 use Vinala\Kernel\Events\Event;
 use Vinala\Kernel\Config\Alias;
 use Vinala\Kernel\Http\Middleware\Middleware;
@@ -168,6 +168,7 @@ class Fetcher
 
 				Bus::need(self::$appPath.'http/Routes.php');
 				Routes::run();
+				// \Vinala\Kernel\Http\Router\Routes::run();
 			}
 	}
 

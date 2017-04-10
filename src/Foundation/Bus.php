@@ -595,13 +595,8 @@ class Bus
     */
     private static function router()
     {
-        $files = ['Url' , 'Routes' , 'Route'];
+        $files = ['Url'];
         $folder  = static::$root.'Router'.'/';
-
-        self::call($files, $folder);
-
-        $files = ['NotFoundHttpException'];
-        $folder  = static::$root.'Router/Exceptions'.'/';
 
         self::call($files, $folder);
 
