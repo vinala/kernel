@@ -10,7 +10,7 @@ use App\Http\Filter;
 use Vinala\Kernel\Http\Router\Exceptions\RouteDuplicatedException;
 use Vinala\Kernel\Http\Router\Exceptions\RouteMiddlewareNotFoundException;
 use Vinala\Kernel\Http\Router\Exceptions\RouteNotFoundInRoutesRegisterException;
-use Vinala\Kernel\Router\Exception\NotFoundHttpException;
+use Vinala\Kernel\Http\Router\Exceptions\NotFoundHttpException;
 
 
 /**
