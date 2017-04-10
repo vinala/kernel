@@ -30,7 +30,7 @@ class NewPostRouteCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.commands.post_routes').' {http : what\'s the http of route?}';
+        $this->key = config('lumos.commands.post_route').' {http : what\'s the http of route?}';
         $this->description = 'Add new post route to Routes file';
     }
 
@@ -59,7 +59,13 @@ class NewPostRouteCommand extends Commands
     */
     public function show($process)
     {
-        if($process) $this->info("\nThe route was created\n");
+        $this->title('New post route command :');
+        //
+        if(! is_null($process) )
+        {
+            $this->info("\nThe route was created");
+            $this->comment(" -> Path : app/http/Route.php\n");
+        }
         else $this->error("\nThe route doesn't created\n");
     }
 }

@@ -30,7 +30,7 @@ class NewGetRouteCommand extends Commands
      */ 
     public function set()
     {
-        $this->key = config('lumos.commands.get_routes').' {http : what\'s the http of route?}';
+        $this->key = config('lumos.commands.get_route').' {http : what\'s the http of route?}';
         $this->description = 'Add new get route to Routes file';
     }
 
