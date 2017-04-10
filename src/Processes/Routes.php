@@ -33,16 +33,16 @@ class Router
 	}
 
 	/**
-	* function to generate call Route
+	* function to generate target Route
 	*
 	* @param string $route
 	* @param string $controller
 	* @param string $method
 	* @return bool
 	*/
-	public static function call($route , $controller , $method)
+	public static function target($route , $controller , $method)
 	{
-		$content = self::traitCall($route , $controller , $method);
+		$content = self::traitTarget($route , $controller , $method);
 		//
 		self::addRoute($content);
 		return true;
@@ -86,9 +86,9 @@ class Router
 	* @param string $method
 	* @return string
 	*/
-	protected static function traitCall($route , $controller , $method)
+	protected static function traitTarget($route , $controller , $method)
 	{
-		$content = "\n\ncall('$route','$controller@$method');";
+		$content = "\n\ntarget('$route','$controller@$method');";
 		//
 		return $content;
 	}
