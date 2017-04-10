@@ -74,6 +74,13 @@ class Route
     * @var array
     */
     private $subdomains ;
+
+    /**
+    * The resources to use
+    *
+    * @var array
+    */
+    private $targets;
     
     //--------------------------------------------------------
     // Constructor
@@ -328,6 +335,8 @@ class Route
     {
         $route = new self($url);
 
+        $route->targets = ['index','show','insert','add','update','edit','delete'];
+
         $route->setResourceMethods($url, $controller);
 
         return $route;
@@ -557,5 +566,53 @@ class Route
     private function setDeleteResource($url, $route = '/delete/{}', $controller)
     {
         return $this->setResource($url, $route, $controller, 'delete');
+    }
+
+    /**
+    * Choose the resource methods to work
+    *
+    * @return Route
+    */
+    public function only()
+    {
+        $targets = func_get_args();
+
+        $result = [];
+        
+        foreach ($this->targets as $method) {
+            if (in_array($method, $targets)) {
+                array_push($result, $method);
+            }
+        }
+
+        $this->targets = $result;
+
+        //update
+
+        return $this;
+    }
+
+    /**
+    * Use all resources excpet these
+    *
+    * @return Route
+    */
+    public function except()
+    {
+        $targets = func_get_args();
+
+        $result = [];
+        
+        foreach ($this->targets as $method) {
+            if (! in_array($method, $targets)) {
+                array_push($result, $method);
+            }
+        }
+
+        $this->targets = $result;
+
+        //update
+
+        return $this;
     }
 }
