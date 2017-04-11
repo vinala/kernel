@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Maintenance ;
 
@@ -14,72 +14,67 @@ use Vinala\Kernel\Router\Route;
 */
 class Maintenance
 {
-	
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
-	
-	/**
-	* Is the maintenance up or down
-	*
-	* @var bool 
-	*/
-	public static $enabled ;
-	
+    
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
+    
+    /**
+    * Is the maintenance up or down
+    *
+    * @var bool
+    */
+    public static $enabled ;
+    
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-	/**
-	* Check if the app is under maintenance
-	*
-	* @return bool
-	*/
-	public static function check()
-	{
-		$route = isset($_GET['_framework_url_']) ? $_GET['_framework_url_'] : '';
+    /**
+    * Check if the app is under maintenance
+    *
+    * @return bool
+    */
+    public static function check()
+    {
+        $route = isset($_GET['_framework_url_']) ? $_GET['_framework_url_'] : '';
 
-		$out = config('maintenance.out' , []);
+        $out = config('maintenance.out', []);
 
-		$out[] = config('panel.route' , 'vinala');
-		
-		if (config('panel.setup' , true)) 
-		{
-			if(config('maintenance.enabled' , false ) && ! in_array($route, $out))
-			{
-				return static::$enabled = true;
-			}
-		}
-		return static::$enabled = false;
-	}
+        $out[] = config('panel.route', 'vinala');
+        
+        if (config('panel.setup', true)) {
+            if (config('maintenance.enabled', false ) && ! in_array($route, $out)) {
+                return static::$enabled = true;
+            }
+        }
+        return static::$enabled = false;
+    }
 
-	/**
-	* Launch maintenance view
-	*
-	* @return null
-	*/
-	public static function launch()
-	{
-		if(static::check())
-		{
-			clean();
+    /**
+    * Launch maintenance view
+    *
+    * @return null
+    */
+    public static function launch()
+    {
+        if (static::check()) {
+            clean();
 
-			$view = config('maintenance.view');
-			$view = str_replace('.', '/', $view).'.php';
+            $view = config('maintenance.view');
+            $view = str_replace('.', '/', $view).'.php';
 
-			$view = '../app/views/'.$view;
-			if(! file_exists($view))
-			{
-				throw new \Exception('The view \''.config('maintenance.view').'\' not found');
-			}
+            // $view = '../app/views/'.$view;
+            $view = '../resources/views/'.$view;
+            // d($view);:
+            if (! file_exists($view)) {
+                throw new \Exception('The view \''.config('maintenance.view').'\' not found');
+            }
 
-			include $view;
+            include $view;
 
-			out('');
-		}
-	}
-	
-	
-
+            out('');
+        }
+    }
 }
