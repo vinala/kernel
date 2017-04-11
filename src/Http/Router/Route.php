@@ -370,7 +370,8 @@ class Route
         $controller = $segements[0];
         $method = $segements[1];
 
-        $route->setResourceMethods($url, $controller, $method);
+        // $route->setResourceMethods($url, $controller, $method);
+        $route->setResource($url, '', $controller, $method);
 
         return $route;
     }
@@ -384,8 +385,12 @@ class Route
     */
     private function setResourceMethods($url, $controller)
     {
+        
         //index
         $this->setIndexResource($url, '', $controller);
+
+        $url = ($url == '/') ? '' : $url;
+        
         $this->setIndexResource($url, '/index', $controller);
         
         //show
@@ -633,8 +638,7 @@ class Route
             if (in_array($method, $targets)) {
                 array_push($result, $method);
             } else {
-                if(! is_null($this->getResourceName($this->name, $method)))
-                {
+                if (! is_null($this->getResourceName($this->name, $method))) {
                     foreach ($this->getResourceName($this->name, $method) as $resource) {
                         if (array_has($this->resources, $resource)) {
                             $this->resources[$resource]->delete();
@@ -666,8 +670,7 @@ class Route
             if (! in_array($method, $targets)) {
                 array_push($result, $method);
             } else {
-                if(! is_null($this->getResourceName($this->name, $method)))
-                {
+                if (! is_null($this->getResourceName($this->name, $method))) {
                     foreach ($this->getResourceName($this->name, $method) as $resource) {
                         if (array_has($this->resources, $resource)) {
                             $this->resources[$resource]->delete();
