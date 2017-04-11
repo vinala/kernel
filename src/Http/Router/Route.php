@@ -370,7 +370,6 @@ class Route
         $controller = $segements[0];
         $method = $segements[1];
 
-        // $route->setResourceMethods($url, $controller, $method);
         $route->setResource($url, '', $controller, $method);
 
         return $route;
@@ -390,7 +389,7 @@ class Route
         $this->setIndexResource($url, '', $controller);
 
         $url = ($url == '/') ? '' : $url;
-        
+
         $this->setIndexResource($url, '/index', $controller);
         
         //show
