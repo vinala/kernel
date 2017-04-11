@@ -6,12 +6,13 @@ use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Http\Request;
 use App\Http\Filter;
+use Vinala\Kernel\MVC\Views;
+use Vinala\Kernel\MVC\View;
 
 use Vinala\Kernel\Http\Router\Exceptions\RouteDuplicatedException;
 use Vinala\Kernel\Http\Router\Exceptions\RouteMiddlewareNotFoundException;
 use Vinala\Kernel\Http\Router\Exceptions\RouteNotFoundInRoutesRegisterException;
 use Vinala\Kernel\Http\Router\Exceptions\NotFoundHttpException;
-
 
 /**
 * The routes class where framework store all kind of routes
@@ -234,7 +235,6 @@ class Routes
             static::prepare($route, $params);
             return true;
         }
-        
     }
 
     /**
@@ -370,18 +370,15 @@ class Routes
         // exception_if(! check(self::$register[$routeWithoutSlash->getName()]), RouteNotFoundInRoutesRegisterException::class , $routeWithoutSlash);
         // exception_if(! check(self::$register[$routeWithSlash->getName()]), RouteNotFoundInRoutesRegisterException::class , $routeWithSlash);
 
-        if( check(self::$register[$routeWithoutSlash->getName()]) )
-        {
+        if (check(self::$register[$routeWithoutSlash->getName()])) {
             unset(self::$register[$routeWithoutSlash->getName()]);
         }
 
-        if( check(self::$register[$routeWithSlash->getName()]) )
-        {
+        if (check(self::$register[$routeWithSlash->getName()])) {
             unset(self::$register[$routeWithSlash->getName()]);
         }
 
         return null;
-
     }
 
     /**
