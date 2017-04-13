@@ -83,7 +83,7 @@ class Events
 	{
 		$txt = "\t/**\n\t* Event function\n\t*/\n\t";
 
-		$txt .= 'public function onSomeEvent()'."\n\t{\n\t\t// Do something \n\t}\n\n";
+		$txt .= 'public function onSomeEvent()'."\n\t{\n\t\t// do something \n\t}\n\n";
 
 		return $txt;
 	}

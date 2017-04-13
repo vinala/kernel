@@ -63,7 +63,7 @@ class Middleware
 		$txt .= "\t*\n\t* @param Vinala\Kernel\Http\Request \$req\n";
 		$txt .= "\t* @return bool|string\n\t**/\n";
 		$txt .= "\tpublic function handle(Request \$req)\n\t{";
-		$txt .= "\n\t\t// ";
+		$txt .= "\n\t\t// do something";
 		$txt .= "\n\t}\n\n}";
 
 		return $txt;
