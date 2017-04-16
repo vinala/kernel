@@ -7,7 +7,6 @@ namespace Vinala\Kernel\Http ;
 */
 class Input
 {
-	
 
 	/**
 	* list of alla input vars
