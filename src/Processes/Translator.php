@@ -23,8 +23,9 @@ class Translator
 		//
 		$file	=	self::replace($name);
 		$folders = Strings::splite($file,"/");
+		$folder = $folders[0];
 		//
-		$file = self::createFolders($folders, $root);
+		$file = self::createFolders($folders, $root, $folder);
 		//
 		return self::createFile($file["file"], $file["path"]);
 	}
@@ -34,7 +35,7 @@ class Translator
 		return str_replace(".", "/", $name);
 	}
 
-	protected static function createFolders($folders, $root)
+	protected static function createFolders($folders, $root, $folder)
 	{
 		$initPath = $path = $root."resources/translator/";
 		//
@@ -50,6 +51,8 @@ class Translator
 			{
 				$path .= $value."/";
 				mkdir($path, 0777, true);
+				//
+				File::put("$path$folder.php" , self::index($folder));
 			}
 		}
 		$file = $folders[count($folders)-1];
@@ -75,6 +78,22 @@ class Translator
 		$txt = "<?php\n\n";
 		$txt .= "/**\n* $file translator\n*\n* @author ".config('app.owner')."\n";
 		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n* @var array \n";
+		$txt .= "**/\n\n";
+		$txt .= 'return'." [\n\t// 'key' => 'value',\n];";
+		
+		return $txt;
+	}
+
+	/**
+	* Create index language file
+	*
+	* @param string $lang
+	* @return string
+	*/
+	protected static function index($file)
+	{
+		$txt = "<?php\n\n";
+		$txt .= "/**\n* The short key file for $file language\n*\n";
 		$txt .= "**/\n\n";
 		$txt .= 'return'." [\n\t// 'key' => 'value',\n];";
 		
