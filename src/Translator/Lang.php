@@ -195,8 +195,10 @@ class Lang
             $words = need($file);
     
             // get file name
-            $filename = (explode('../resources/translator/'.self::$lang.'/', $file))[1];
-            $filename = (explode('.php', $filename))[0];
+            $filename = explode('resources/translator/'.self::$lang.'/', $file);
+            $filename = $filename[1];
+            $filename = explode('.php', $filename);
+            $filename = $filename[0];
 
             foreach ($words as $key => $value) {
                 if ($filename == self::$lang) {
