@@ -1,11 +1,10 @@
 {
-	"version": "3.3.19",
+	"version": "3.3.20",
 	"tag": "",
 	"stat": "alpha",
 	"features": [
-		"New Router surface",
-		"update Setup and Processes surfaces"
+		"update a small feature to use language file name as one of indexes"
 	],
 	"fixes": [],
-	"sha": "f29a2f45856de723ebd5f44e9c9307bacdc4b804"
+	"sha": "aa46a08e96cae4c10325168ad1efe25458b0ef56"
 }
