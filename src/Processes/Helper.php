@@ -38,7 +38,7 @@ class Helper
 	public static function set($name)
 	{
 		$txt = "<?php\n\n/**\n* $name helper\n*\n* @param //\n* @return // \n**/\n";
-		$txt.="function $name()\n{\n\t// Do something \n}";
+		$txt.="function $name()\n{\n\t// do something \n}";
 
 		return $txt;
 	}

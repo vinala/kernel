@@ -54,7 +54,7 @@ class Router
 		//
 		$content.="\n\n".self::funcGet($route)." ";
 		$content.='{'."\n";
-		$content.="\t".'//'."\n";
+		$content.="\t".'// do something'."\n";
 		$content.='});';
 		//
 		return $content;
@@ -72,7 +72,7 @@ class Router
 		//
 		$content.="\n\n".self::funcPost($route)." ";
 		$content.='{'."\n";
-		$content.="\t".'//'."\n";
+		$content.="\t".'// do something'."\n";
 		$content.='});';
 		//
 		return $content;
