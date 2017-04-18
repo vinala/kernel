@@ -212,11 +212,14 @@ class Lang
 		foreach ($files as $file) 
 		{
 			$words = need($file);
+	
+            // get file name
+            $filename = (explode('../resources/translator/'.self::$lang.'/', $file))[1];
+            $filename = (explode('.php', $filename))[0];
 
-			foreach ($words as $key => $value) 
-			{
-				self::$words[$key] = $value ;
-			}
+            foreach ($words as $key => $value) {
+                self::$words[$filename][$key] = $value ;
+            }
 		}
 	}
 
