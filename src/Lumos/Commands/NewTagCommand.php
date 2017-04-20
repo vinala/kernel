@@ -52,13 +52,13 @@ class NewTagCommand extends Commands
         //
         $process = Tag::create($class, $target, $tag, $hold);
         //
-        $this->show($process);
+        $this->show($process, $class);
     }
 
     /**
      * Format the message to show
     */
-    public function show($process)
+    public function show($process, $name)
     {
         $this->title('New Atomium tag command :');
         //

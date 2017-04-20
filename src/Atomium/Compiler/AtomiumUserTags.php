@@ -35,7 +35,7 @@ class AtomiumUserTags
         $called = get_called_class();
         //
         $result = "<?php ";
-        $result .= $called::$hold ? "echo " : "";
+        $result .= ! $called::$hold ? "echo " : "";
         $result .= $called::$target;
         //
         return AtomiumCompileInstructions::run($script, "@".$called::$tag, ";", $result, "; ?>");

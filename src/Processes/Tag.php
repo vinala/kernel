@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Process;
 use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Filesystem\File;
+use Vinala\Kernel\Objects\DateTime;
 
 /**
 * Controller class
@@ -14,7 +15,7 @@ class Tag
     public static function create($class, $target, $tag, $write = false)
     {
         $Root = Process::root;
-        //$path = $Root."resources/tags/$class.php";
+        $path = $Root."resources/tags/$class.php";
 
         if (! File::exists($path)) {
             File::put($path, self::set($class, $target, $tag, $write));
@@ -25,8 +26,12 @@ class Tag
 
     protected static function set($class, $target, $tag, $write = false)
     {
-        $txt = "<?php\n\nnamespace App\View\Atomium\UserTag;\n\n";
-        $txt .= "use Vinala\Kernel\Atomium\UserCompiler\AtomiumUserTags;\n\n";
+        $txt = "<?php\n\nnamespace App\View\Atomium\UserTag;\n\nuse Vinala\Kernel\Atomium\UserCompiler\AtomiumUserTags;\n\n";
+
+        $txt .= "/**\n* ".$class." Atomium tag\n*\n* @author ".config('app.owner')."\n";
+        $txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+        $txt .= "**/\n";
+
         $txt.="\n\nclass $class extends AtomiumUserTags\n{\n\t";
 
         $txt.="\n\t/**\n\t * The function that Atomium should replace it.\n\t *\n\t * @var string\n\t */\n\tprotected static ".'$target = '.'"'.$target.'"'.";\n\n";
