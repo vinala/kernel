@@ -392,7 +392,7 @@ class Compiler
 	{
 		self::fetchUserTags();
 		//
-		$namespace = "Vinala\Kernel\Atomium\User\\";
+		$namespace = 'App\View\Atomium\UserTag\\';
 		//
         foreach (get_declared_classes() as $value)
             if(strpos($value,$namespace) !== false) 
@@ -404,10 +404,10 @@ class Compiler
 	 */
 	protected static function fetchUserTags()
 	{
-		$files = Bus::fetch( "tags",true);
+		$files = Bus::fetch('resources/tags', false);
 		//
 		if( ! is_null($files))
-			foreach (Bus::fetch( "tags",true) as $file) 
+			foreach (Bus::fetch('resources/tags', false) as $file) 
 				Bus::need($file);
 	}
 
