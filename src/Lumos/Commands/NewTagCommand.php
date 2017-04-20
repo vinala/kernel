@@ -60,10 +60,13 @@ class NewTagCommand extends Commands
     */
     public function show($process)
     {
+        $this->title('New Atomium tag command :');
+        //
         if ($process) {
-            $this->info("The command was created");
+            $this->info("\nThe tag was created");
+            $this->comment(" -> Path : resources/tags/$name.php\n");
         } else {
-            $this->error("The command is already existe");
+            $this->error("\nThe tag is already existe\n");
         }
     }
 }
