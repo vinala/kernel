@@ -33,8 +33,14 @@ class Links
 	public static function set($name)
 	{
 		$txt = "<?php\n\n";
-		$txt .= "/**\n* $name linker\n*\n* @author ".config('app.owner')."\n";
-		$txt .= "* creation time : ".Time::now().' ('.time().')'."\n* @var array \n";
+		$txt .= "/**\n* $name linker\n*\n";
+
+		if (config('lumos.tracking')) {
+			$txt .= "* @author ".config('app.owner')."\n";
+			$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		}
+
+		$txt .= "* @var array \n";
 		$txt .= "**/\n\n";
 		$txt .= 'return'." [\n\t// 'key' => 'value',\n];";
 

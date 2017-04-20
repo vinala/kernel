@@ -39,8 +39,13 @@ class Controller
 	{
 		$txt = "<?php\n\nnamespace App\Controller;\n\nuse Vinala\Kernel\MVC\Controller;\n\n";
 		//
-		$txt .= "/**\n* ".$class." Controller\n*\n* @author ".config('app.owner')."\n";
-		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "/**\n* ".$class." Controller\n*\n";
+		
+		if (config('lumos.tracking')) {
+			$txt .= "* @author ".config('app.owner')."\n";
+			$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		}
+		
 		$txt .= "**/\n";
 		$txt .= "class $class extends Controller\n{";
 		//

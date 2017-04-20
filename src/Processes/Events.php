@@ -49,8 +49,13 @@ class Events
 		$txt = "<?php\n\n";
 		$txt .= "namespace Vinala\App\Events;\n\n";
 		$txt .= "use Vinala\Kernel\Events\EventListener as Listener;\n\n";
-		$txt .= "/**\n* $name Event\n*\n* @author ".config('app.owner')."\n";
-		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "/**\n* $name Event\n*\n";
+
+		if (config('lumos.tracking')) {
+			$txt .= "* @author ".config('app.owner')."\n";
+			$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		}
+
 		$txt .= "**/\n";
 		$txt .= "class $name extends Listener\n{\n\n";
 		$txt .= self::eventArray();

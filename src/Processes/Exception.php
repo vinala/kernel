@@ -52,8 +52,13 @@ class Exception
 		$txt = "<?php\n\n";
 		$txt .= "namespace App\Exception;\n\n";
 		$txt .= "use Vinala\Kernel\Logging\Exception;\n\n";
-		$txt .= "/**\n* ".$name." Exception\n*\n* @author ".config('app.owner')."\n";
-		$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		$txt .= "/**\n* ".$name." Exception\n*\n";
+
+		if (config('lumos.tracking')) {
+			$txt .= "* @author ".config('app.owner')."\n";
+			$txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
+		}
+
 		$txt .= "**/\n";
 		$txt .= "class $name extends Exception\n{\n\n";
 		$txt .= "\t/**\n\t* The exception constructor\n\t*\n\t*/\n";
