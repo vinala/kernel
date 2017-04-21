@@ -10,7 +10,7 @@ use Vinala\Kernel\Objects\DateTime;
 /**
 * Controller class
 */
-class Tag
+class Tag extends Process
 {
     public static function create($class, $target, $tag, $write = false)
     {
@@ -27,11 +27,8 @@ class Tag
     protected static function set($class, $target, $tag, $write = false)
     {
         $txt = "<?php\n\nnamespace App\View\Atomium\UserTag;\n\nuse Vinala\Kernel\Atomium\UserCompiler\AtomiumUserTags;\n\n";
-
-        $txt .= "/**\n* ".$class." Atomium tag\n*\n* @author ".config('app.owner')."\n";
-        $txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
-        $txt .= "**/\n";
-
+        
+        $txt .= self::docs("$class Atomium tag");
         $txt.="\n\nclass $class extends AtomiumUserTags\n{\n\t";
 
         $txt.="\n\t/**\n\t * The function that Atomium should replace it.\n\t *\n\t * @var string\n\t */\n\tprotected static ".'$target = '.'"'.$target.'"'.";\n\n";

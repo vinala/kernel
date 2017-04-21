@@ -14,7 +14,7 @@ use Vinala\Kernel\Objects\DateTime;
 * @package Vinala\Kernel\Process
 * @since v3.3.0
 */
-class Middleware
+class Middleware extends Process
 {
 
     //--------------------------------------------------------
@@ -54,14 +54,7 @@ class Middleware
         $txt = "<?php\n\n";
         $txt .= "namespace App\Http\Middleware;\n\n";
         $txt .= "use Vinala\Kernel\Http\Request;\n\n";
-        $txt .= "/**\n* ".$name." Middleware\n*\n";
-
-        if (config('lumos.tracking')) {
-            $txt .= "* @author ".config('app.owner')."\n";
-            $txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
-        }
-
-        $txt .= "**/\n";
+        $txt .= self::docs("$name Middleware");
         $txt .= "class $name\n{\n\n";
         $txt .= "\t/**\n\t* Handle the middleware\n";
         $txt .= "\t*\n\t* @param Vinala\Kernel\Http\Request \$req\n";

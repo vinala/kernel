@@ -10,11 +10,11 @@ use Vinala\Kernel\Filesystem\File;
 /**
 * Controller class
 */
-class Command
+class Command extends Process
 {
     public static function create($file, $command, $database)
     {
-        $Root = Process::root;
+        $Root = self::root;
         
         $path = $Root."support/shell/$file.php";
 
@@ -36,14 +36,9 @@ class Command
         //
         $txt = "<?php\n\nnamespace Vinala\App\Support\Lumos;\n\n";
         $txt .= "use Vinala\Kernel\Console\Command\Commands;\n\n";
-        $txt .= "/**\n* $file Command\n*\n";
-
-        if (config('lumos.tracking')) {
-            $txt .= "* @author ".config('app.owner')."\n";
-            $txt .= "* creation time : ".DateTime::now().' ('.time().')'."\n";
-        }
         
-        $txt .= "**/\n";
+        $txt .= self::docs("$file Command");
+        
         $txt .=" class $file extends Commands\n{\n\t";
 
         $txt.="\n\t/**\n\t * The key of the console command.\n\t *\n\t * @var string\n\t */\n\tprotected ".'$key = '."'$command';\n\n";
