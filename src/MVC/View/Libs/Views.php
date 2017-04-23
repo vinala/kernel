@@ -227,13 +227,27 @@ class Views
 	*
 	* @param string $file
 	* @param array $data
-	* @return 
+	* @return string
 	*/
 	protected function atomium($file, $data , $nest = null)
 	{
 		$atomium = new Atomium($nest);
 
 		return $atomium->show($file, $data);
+	}
+
+	/**
+	* Get the result of the view
+	*
+	* @return string
+	*/
+	public function get()
+	{
+		ob_start();
+		$this->show();
+		$result = ob_get_clean();
+
+		return $result;
 	}
 
 
