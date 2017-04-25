@@ -67,7 +67,7 @@ class Mail
 		}
 		else if($selfmail->type=="html")
 		{
-			$body=View::get($view,$array);
+			$body = View::make($view,$array)->get();
 			$type="text/html";
 		}
 		//
@@ -190,14 +190,11 @@ class Mail
 		//
 		if(count($r)==1)
 		{
-			echo "a";
 			if(is_array($r))
 			{
-				echo "1";
 				foreach ($r as $key => $value) {
 					if(is_array($value))
 					{
-						echo "3";
 						$i=0;
 						$ry=array();
 						foreach ($value as $key => $value) {
@@ -206,7 +203,6 @@ class Mail
 					}
 					else if(is_string($value))
 					{
-						echo "4";
 						// $r2[]= array(
 						// 'mail' => $value
 						// );
@@ -217,7 +213,6 @@ class Mail
 			}
 			else if(is_string($r))
 			{
-				echo "2";
 				$r2[]= array(
 				'mail' => $r
 				);
@@ -225,7 +220,6 @@ class Mail
 		}
 		else if(count($r)==2)
 		{
-			echo "b";
 
 			$r2[]= array(
 				'mail' => $r[0], 
