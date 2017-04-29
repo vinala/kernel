@@ -1,10 +1,10 @@
 {
-	"version": "3.3.21",
+	"version": "3.3.22",
 	"tag": "",
-	"stat": "alpha",
+	"stat": "beta",
 	"features": [
-		"Enable or disable tracking tool in new files commands"
+		"Finalizing the kernel for v3.3 release"
 	],
 	"fixes": [],
-	"sha": "6b640ac1d8e4c87d753733c0d1088eb171873b18"
+	"sha": "634fa40ceb1737c48a2029a517a04183c093ce3e"
 }
