@@ -86,7 +86,7 @@
 	<div id="welcom" style="display:none">
 		<div class="text">
 			<?php 
-				echo trans('welcome');
+				echo trans('framework.welcome');
 				//
 				echo " <span id='dev_nom'>".config('app.owner')."</span>";
 			?>
