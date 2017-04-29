@@ -107,7 +107,7 @@
 		</div>
 		
 		<div class="final_link_version" id="bottom_panel_2" style="display:none">
-			<a id="fst_panel" class="final_link_owner_a" href="https://github.com/vinala/vinala/blob/dev/CHANGES.md">
+			<a id="fst_panel" class="final_link_owner_a" href="https://github.com/vinala/vinala/blob/master/CHANGES.md">
 				<?php echo "v".App::getVersion()->full(); ?>
 			</a>
 		</div>	
