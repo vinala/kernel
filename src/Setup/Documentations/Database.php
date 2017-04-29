@@ -81,7 +81,7 @@ class Database
         }
         //
         $connections = self::dbRow("connections", $connections);
-        $table = self::dbRow("table", "'migration' => 'lighty_migrations',");
+        $table = self::dbRow("table", "'migration' => 'vinala_migrations',");
         $prefixing = self::dbRow("prefixing", "'prefixing' => $prefixing ,");
         $prefixe = self::dbRow("prefixe", "'prefixe' => '".$prefix."_',");
         

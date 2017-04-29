@@ -22,7 +22,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function testLogginConfigParams()
     {
-        $this->assertEquals('app/storage/logs/lighty.log', Config::get("loggin.log"));
+        $this->assertEquals('app/storage/logs/vinala.log', Config::get("loggin.log"));
         $this->assertTrue( ! Config::get("loggin.debug"));
     }
 }
