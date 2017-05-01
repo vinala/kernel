@@ -12,6 +12,7 @@ use Vinala\Kernel\Validation\Validator;
 use Vinala\Kernel\Foundation\Component;
 use Vinala\Kernel\Atomium\Compiler;
 use Vinala\Kernel\Logging\Error;
+use Vinala\Kernel\Time\DateTime;
 
 use Vinala\Kernel\Foundation\Exception\BusFileNotFoundException;
 
@@ -410,9 +411,11 @@ class Bus
     private static function time()
     {
         $files = ['DateTime'];
-        $folder  = static::$root.'Objects'.'/'; // to do : cahnge the folder
+        $folder  = static::$root.'Time'.'/';
 
         self::call($files, $folder);
+
+        DateTime::setTimezone();
     }
 
     /**

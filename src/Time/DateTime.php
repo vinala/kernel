@@ -15,7 +15,7 @@ class DateTime
 	 */
 	public static function setTimezone()
 	{
-		date_default_timezone_set(Config::get('app.timezone'));
+		date_default_timezone_set(config('app.timezone'));
 	}
 
 	/**
