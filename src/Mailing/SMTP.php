@@ -60,17 +60,24 @@ class SMTP
 
 
     /**
-    * The SMTP from credits
+    * The sender email adress
     *
-    * @var array
+    * @var string
     */
-    private $from;
+    private $sender_email ;
 
 
+    /**
+    * The sender name
+    *
+    * @var string
+    */
+    private $sender_name ;
 
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
+
 
     function __construct($host, $port, $secure, $username, $password, $from)
     {

@@ -66,7 +66,7 @@ class Plugins
 		$files = self::getFiles();
 		//
 		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/lighty.json"),$path);
+			$data = self::convert(self::readFile($path."/vinala.json"),$path);
 			$data = $data['system'];
 			$data['path']=$path;
 
@@ -85,7 +85,7 @@ class Plugins
 		$files = self::getFiles();
 		//
 		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/lighty.json"),$path);
+			$data = self::convert(self::readFile($path."/vinala.json"),$path);
 			$setting = $data['configuration'];
 			$system = $data['system'];
 			$setting['path']=$path;

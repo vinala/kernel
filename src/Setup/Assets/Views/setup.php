@@ -86,7 +86,7 @@
 	<div id="welcom" style="display:none">
 		<div class="text">
 			<?php 
-				echo trans('welcome');
+				echo trans('framework.welcome');
 				//
 				echo " <span id='dev_nom'>".config('app.owner')."</span>";
 			?>
@@ -107,7 +107,7 @@
 		</div>
 		
 		<div class="final_link_version" id="bottom_panel_2" style="display:none">
-			<a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/framework/blob/dev/changes.md">
+			<a id="fst_panel" class="final_link_owner_a" href="https://github.com/vinala/vinala/blob/master/CHANGES.md">
 				<?php echo "v".App::getVersion()->full(); ?>
 			</a>
 		</div>	
