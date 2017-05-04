@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Foundation ;
 
@@ -16,174 +16,172 @@ use Vinala\Kernel\Collections\JSON;
 */
 class Version
 {
-	
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	
-	/**
-	* The framework version data
-	*
-	* @var array 
-	*/
-	protected $framework = null ;
-
-
-	/**
-	* The kernel version data
-	*
-	* @var array 
-	*/
-	protected $kernel = null ;
+    
+    /**
+    * The framework version data
+    *
+    * @var array
+    */
+    protected $framework = null ;
 
 
-	/**
-	* The framework version file path
-	*
-	* @var string 
-	*/
-	private $frameworkPath = 'VERSION.json' ;
+    /**
+    * The kernel version data
+    *
+    * @var array
+    */
+    protected $kernel = null ;
 
 
-	/**
-	* The kernel version file path
-	*
-	* @var string 
-	*/
-	private $kernelPath = 'vendor/vinala/kernel/VERSION.json' ;
+    /**
+    * The framework version file path
+    *
+    * @var string
+    */
+    private $frameworkPath = 'VERSION.json' ;
 
 
-	/**
-	* The URL of the vinala kernel on the internet
-	*
-	* @var string 
-	*/
-	private $kernelURL = 'http://raw.githubusercontent.com/vinala/kernel/dev/VERSION.json' ;
-	
-	
-	
-	
-
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
-
-	function __construct()
-	{
-		$version = File::get(root().$this->frameworkPath);
-		//
-		$this->framework = JSON::decode($version , true);
-		//
-
-		$version = File::get(root().$this->kernelPath);
-		
-		$this->kernel = JSON::decode($version , true);
-	}
-
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
-
-	/**
-	* Get the formal version of framework
-	*
-	* @return string
-	*/
-	public function version()
-	{
-		return 'Vinala v'.$this->framework->version.( !empty($this->framework->tag) ? ' '.$this->framework->tag : '').' ('.$this->framework->stat.') PHP Framework';
-	}
+    /**
+    * The kernel version file path
+    *
+    * @var string
+    */
+    private $kernelPath = 'vendor/vinala/kernel/VERSION.json' ;
 
 
-	/**
-	* Get the console format of version of framework
-	*
-	* @return string
-	*/
-	public function console()
-	{
-		return $this->framework->version.( !empty($this->framework->tag) ? ' '.$this->framework->tag : '').' ('.$this->framework->stat.')';
-	}
+    /**
+    * The URL of the vinala kernel on the internet
+    *
+    * @var string
+    */
+    private $kernelURL = 'http://raw.githubusercontent.com/vinala/kernel/dev/VERSION.json' ;
+    
+    
+    
+    
+
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
+
+    function __construct()
+    {
+        $version = File::get(root().$this->frameworkPath);
+        //
+        $this->framework = JSON::decode($version, true);
+        //
+
+        $version = File::get(root().$this->kernelPath);
+        
+        $this->kernel = JSON::decode($version, true);
+    }
+
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
+
+    /**
+    * Get the formal version of framework
+    *
+    * @return string
+    */
+    public function version()
+    {
+        return 'Vinala v'.$this->framework->version.( !empty($this->framework->tag) ? ' '.$this->framework->tag : '').' ('.$this->framework->stat.') PHP Framework';
+    }
 
 
-	/**
-	* The full version of framework
-	*
-	* @return string
-	*/
-	public function full()
-	{
-		return $this->framework->version.( !empty($this->framework->tag) ? ' '.$this->framework->tag : '').' ('.$this->framework->stat.')';
-	}
+    /**
+    * Get the console format of version of framework
+    *
+    * @return string
+    */
+    public function console()
+    {
+        return $this->framework->version.( !empty($this->framework->tag) ? ' '.$this->framework->tag : '').' ('.$this->framework->stat.')';
+    }
 
 
-	/**
-	* Get the kernel version 
-	*
-	* @return string
-	*/
-	public function kernel()
-	{
-		return "Vinala Kernel v".$this->kernel->version.( !empty($this->kernel->tag) ? ' '.$this->kernel->tag : '').' ('.$this->kernel->stat.')'."\n".$this->kernel->sha;
-	}
+    /**
+    * The full version of framework
+    *
+    * @return string
+    */
+    public function full()
+    {
+        if ($this->framework->stat != 'final') {
+            return $this->framework->version.( !empty($this->framework->tag) ? ' '.$this->framework->tag : '').' ('.$this->framework->stat.')';
+        } else {
+            return $this->framework->version.( !empty($this->framework->tag) ? ' '.$this->framework->tag : '');
+        }
+    }
 
 
-	/**
-	* Set the cookie responsible for the version
-	*
-	* @return true
-	*/
-	public function cookie()
-	{
-		Cookie::create("vinala_version", $this->framework->sha,3);
-	}
+    /**
+    * Get the kernel version
+    *
+    * @return string
+    */
+    public function kernel()
+    {
+        return "Vinala Kernel v".$this->kernel->version.( !empty($this->kernel->tag) ? ' '.$this->kernel->tag : '').' ('.$this->kernel->stat.')'."\n".$this->kernel->sha;
+    }
 
 
-	/**
-	* To check if there is a new release of kernel
-	*
-	* @return bool|array
-	*/
-	public function checkKernel()
-	{
-		$content = file_get_contents($this->kernelURL);
-
-		$out = JSON::decode($content , true);
-
-		if( $this->compaireSecondary($out->version , $this->kernel->version)
-		 && ($out->sha != $this->kernel->sha)) return $out;
-		else return false;
-	}
+    /**
+    * Set the cookie responsible for the version
+    *
+    * @return true
+    */
+    public function cookie()
+    {
+        Cookie::create("vinala_version", $this->framework->sha, 3);
+    }
 
 
-	/**
-	* Compaire secondary verion
-	*
-	* @param string $old
-	* @param string $new
-	* @return bool
-	*/
-	protected function compaireSecondary($old , $new)
-	{
-		$oldMajor = dot($old)[0];
-		$newMajor = dot($new)[0];
+    /**
+    * To check if there is a new release of kernel
+    *
+    * @return bool|array
+    */
+    public function checkKernel()
+    {
+        $content = file_get_contents($this->kernelURL);
 
-		$oldMinor = dot($old)[1];
-		$newMinor = dot($new)[1];
+        $out = JSON::decode($content, true);
 
-		$oldSecondary = dot($old)[2];
-		$newSecondary = dot($new)[2];
+        if ($this->compaireSecondary($out->version, $this->kernel->version)
+         && ($out->sha != $this->kernel->sha)) {
+            return $out;
+        } else {
+            return false;
+        }
+    }
 
-		return ($oldSecondary != $newSecondary && $oldMajor == $newMajor && $oldMinor == $newMinor);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 
-}			
+    /**
+    * Compaire secondary verion
+    *
+    * @param string $old
+    * @param string $new
+    * @return bool
+    */
+    protected function compaireSecondary($old, $new)
+    {
+        $oldMajor = dot($old)[0];
+        $newMajor = dot($new)[0];
+
+        $oldMinor = dot($old)[1];
+        $newMinor = dot($new)[1];
+
+        $oldSecondary = dot($old)[2];
+        $newSecondary = dot($new)[2];
+
+        return ($oldSecondary != $newSecondary && $oldMajor == $newMajor && $oldMinor == $newMinor);
+    }
+}
