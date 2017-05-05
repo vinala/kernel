@@ -79,14 +79,15 @@ class SMTP
     //--------------------------------------------------------
 
 
-    function __construct($host, $port, $secure, $username, $password, $from)
+    function __construct($host, $port, $secure, $username, $password, $sender_email, $sender_name)
     {
         $this->host = $host ;
         $this->port = $port ;
         $this->secure = $secure ;
         $this->username = $username ;
         $this->password = $password ;
-        $this->from = $from ;
+        $this->sender_email = $sender_email ;
+        $this->sender_name = $sender_name ;
     }
 
     //--------------------------------------------------------
