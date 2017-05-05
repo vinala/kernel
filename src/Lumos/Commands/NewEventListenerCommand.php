@@ -1,16 +1,13 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
-
 
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Events;
 
-
 class NewEventListenerCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -26,8 +23,8 @@ class NewEventListenerCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.new_event').
@@ -37,29 +34,29 @@ class NewEventListenerCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
-        $name = $this->argument("name");
+        $name = $this->argument('name');
         //
         $process = Events::create($name);
         //
-        $this->show($process , $name);
+        $this->show($process, $name);
     }
 
     /**
-     * Format the message to show
-    */
-    public function show($process , $file)
+     * Format the message to show.
+     */
+    public function show($process, $file)
     {
         $this->title('New event command :');
         //
-        if($process) 
-        {
+        if ($process) {
             $this->info("\nThe event listener was created");
             $this->comment(" -> Path : app/events/$file.php\n");
+        } else {
+            $this->error("\nThe event listener is already existe\n");
         }
-        else $this->error("\nThe event listener is already existe\n");
     }
 }

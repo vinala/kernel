@@ -2,31 +2,29 @@
 
 namespace Vinala\Kernel\Process;
 
-use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Filesystem\File;
-use Vinala\Kernel\Objects\DateTime;
 
 /**
-* Model class
-*/
+ * Model class.
+ */
 class Model extends Process
 {
     public static function create($class, $table, $rt = null)
     {
         $class = ucfirst($class);
-        
+
         $file = $class;
 
-        $root = is_null($rt) ? Process::root : $rt ;
+        $root = is_null($rt) ? Process::root : $rt;
 
         $path = $root."resources/models/$file.php";
 
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             File::put($path, self::set($class, $table));
             //
             return true;
         }
-        
+
         return false;
     }
 
@@ -42,11 +40,11 @@ class Model extends Process
     }
 
     /**
-    *   Listing all schemas
-    */
+     *   Listing all schemas.
+     */
     public static function ListAll()
     {
-        $models = glob(root()."resources/models/*.php");
+        $models = glob(root().'resources/models/*.php');
         //
         return $models;
     }

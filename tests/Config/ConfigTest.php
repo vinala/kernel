@@ -3,26 +3,25 @@
 use Vinala\Kernel\Config\Config;
 
 /**
-* ConfigTest for testing
-*/
+ * ConfigTest for testing.
+ */
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
-     * Test on App Config Params
+     * Test on App Config Params.
      */
     public function testAppConfigParams()
     {
-        $this->assertEquals(Config::get("app.project"), "Vinala Kernel");
-        $this->assertEquals(Config::get("app.timezone"), "UTC");
+        $this->assertEquals(Config::get('app.project'), 'Vinala Kernel');
+        $this->assertEquals(Config::get('app.timezone'), 'UTC');
     }
 
     /**
-     * Test on Loggin Config Params
+     * Test on Loggin Config Params.
      */
     public function testLogginConfigParams()
     {
-        $this->assertEquals('app/storage/logs/vinala.log', Config::get("loggin.log"));
-        $this->assertTrue( ! Config::get("loggin.debug"));
+        $this->assertEquals('app/storage/logs/vinala.log', Config::get('loggin.log'));
+        $this->assertTrue(!Config::get('loggin.debug'));
     }
 }

@@ -1,154 +1,155 @@
 <?php
 
-namespace Vinala\Kernel\Http\Router ;
+namespace Vinala\Kernel\Http\Router;
 
 //use SomeClass;
 
 /**
-* The main route surface
-*
-* @version 3.0
-* @author Youssef Had
-* @package Vinala\Kernel\Http\Router
-* @since v3.3.0
-*/
+ * The main route surface.
+ *
+ * @version 3.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Route
 {
-    
     //--------------------------------------------------------
     // Properties
     //--------------------------------------------------------
-    
-    /**
-    * The name of the route
-    *
-    * @var string
-    */
-    private $name ;
-    
-    /**
-    * The url of the route
-    *
-    * @var string
-    */
-    public $url ;
-    
-    /**
-    * The closure of the rotue
-    *
-    * @var Closure
-    */
-    private $closure ;
-    
-    /**
-    * The method of http request
-    *
-    * @var string
-    */
-    private $method ;
-    
-    /**
-    * The route middlewares
-    *
-    * @var array
-    */
-    private $middleware ;
-    
-    /**
-    * All resource routes
-    *
-    * @var array
-    */
-    private $resources ;
 
     /**
-    * The route resource target
-    *
-    * @var array
-    */
-    private $target ;
-    
-    /**
-    * The subdomains
-    *
-    * @var array
-    */
-    private $subdomains ;
+     * The name of the route.
+     *
+     * @var string
+     */
+    private $name;
 
     /**
-    * The resources to use
-    *
-    * @var array
-    */
+     * The url of the route.
+     *
+     * @var string
+     */
+    public $url;
+
+    /**
+     * The closure of the rotue.
+     *
+     * @var Closure
+     */
+    private $closure;
+
+    /**
+     * The method of http request.
+     *
+     * @var string
+     */
+    private $method;
+
+    /**
+     * The route middlewares.
+     *
+     * @var array
+     */
+    private $middleware;
+
+    /**
+     * All resource routes.
+     *
+     * @var array
+     */
+    private $resources;
+
+    /**
+     * The route resource target.
+     *
+     * @var array
+     */
+    private $target;
+
+    /**
+     * The subdomains.
+     *
+     * @var array
+     */
+    private $subdomains;
+
+    /**
+     * The resources to use.
+     *
+     * @var array
+     */
     private $targets;
-    
+
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
-    
-    function __construct($url)
+
+    public function __construct($url)
     {
         $name = $this->format($url);
-        
+
         $this->url = $url;
         $this->name = $name;
     }
-    
+
     //--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
-    
+
     /**
-    * Save the route into Routes class
-    *
-    * @return null
-    */
+     * Save the route into Routes class.
+     *
+     * @return null
+     */
     private function add()
     {
         Routes::add($this);
     }
 
     /**
-    * Save the edits of the route into Routes class
-    *
-    * @return null
-    */
+     * Save the edits of the route into Routes class.
+     *
+     * @return null
+     */
     private function edit()
     {
         Routes::edit($this);
     }
 
     /**
-    * Remove a route from Routes register
-    *
-    * @return null
-    */
+     * Remove a route from Routes register.
+     *
+     * @return null
+     */
     private function delete()
     {
         Routes::delete($this);
     }
-    
+
     /**
-    * Get the current route with slashed at end
-    *
-    * @return Route
-    */
+     * Get the current route with slashed at end.
+     *
+     * @return Route
+     */
     public function getWithSlash()
     {
         $route = clone $this;
-        
+
         $route->name .= '/';
         $route->url .= '/';
-        
+
         return $route;
     }
-    
+
     /**
-    * Format the name and the url of Route
-    *
-    * @param string $url
-    * @return string
-    */
+     * Format the name and the url of Route.
+     *
+     * @param string $url
+     *
+     * @return string
+     */
     private function format(&$url)
     {
         if ($url == '/') {
@@ -158,28 +159,29 @@ class Route
             $value = $url;
             $url = '/'.$url;
         }
-        
+
         return $value;
     }
-    
+
     /**
-    * Set the subdomains
-    *
-    * @param string $subdomains
-    * @return $this
-    */
+     * Set the subdomains.
+     *
+     * @param string $subdomains
+     *
+     * @return $this
+     */
     public function subDomains($subdomains)
     {
         $domains = explode(',', $subdomains);
-        
+
         $this->subdomains = $domains;
     }
 
     /**
-    * Set middlewares for the route
-    *
-    * @return Route
-    */
+     * Set middlewares for the route.
+     *
+     * @return Route
+     */
     public function middleware()
     {
         $args = func_get_args();
@@ -190,162 +192,168 @@ class Route
 
         return $this;
     }
-    
+
     //--------------------------------------------------------
     // Getters and setters
     //--------------------------------------------------------
-    
+
     /**
-    * To get the name of route
-    *
-    * @return $this
-    */
+     * To get the name of route.
+     *
+     * @return $this
+     */
     public function getName()
     {
         return $this->name;
     }
 
     /**
-    * To set the HTTP method
-    *
-    * @param string $method
-    * @return $this
-    */
+     * To set the HTTP method.
+     *
+     * @param string $method
+     *
+     * @return $this
+     */
     private function setMethod($method)
     {
-        $this->method = $method ;
-        
+        $this->method = $method;
+
         return $this;
     }
 
     /**
-    * To set the Resource target method
-    *
-    * @param string $method
-    * @return $this
-    */
+     * To set the Resource target method.
+     *
+     * @param string $method
+     *
+     * @return $this
+     */
     private function setTarget($controller, $method)
     {
-        $this->target = ['controller' => $controller , 'method' => $method] ;
-        
+        $this->target = ['controller' => $controller, 'method' => $method];
+
         return $this;
     }
-    
+
     /**
-    * Set the closure of route
-    *
-    * @param Closure $closure
-    * @return $this
-    */
+     * Set the closure of route.
+     *
+     * @param Closure $closure
+     *
+     * @return $this
+     */
     private function setClosure($closure)
     {
-        $this->closure = $closure ;
-        
+        $this->closure = $closure;
+
         return $this;
     }
-    
+
     /**
-    * get the subdomains of route
-    *
-    * @return array
-    */
+     * get the subdomains of route.
+     *
+     * @return array
+     */
     public function getSubdomain()
     {
         return $this->subdomains;
     }
-    
+
     /**
-    * get the method of route
-    *
-    * @return array
-    */
+     * get the method of route.
+     *
+     * @return array
+     */
     public function getMethod()
     {
         return $this->method;
     }
-    
+
     /**
-    * get the target of route
-    *
-    * @return string
-    */
+     * get the target of route.
+     *
+     * @return string
+     */
     public function getTarget()
     {
         return $this->target;
     }
-    
+
     /**
-    * Get the closure of route
-    *
-    * @return Closure
-    */
+     * Get the closure of route.
+     *
+     * @return Closure
+     */
     public function getClosure()
     {
         return $this->closure;
     }
 
     /**
-    * Get the middleware of route
-    *
-    * @return array|null
-    */
+     * Get the middleware of route.
+     *
+     * @return array|null
+     */
     public function getMiddleware()
     {
         return $this->middleware;
     }
-    
+
     //--------------------------------------------------------
     // Static Functions
     //--------------------------------------------------------
-    
+
     /**
-    * To add HTTP get request
-    *
-    * @param string $url
-    * @param Closure $callback
-    * @return $this
-    */
+     * To add HTTP get request.
+     *
+     * @param string  $url
+     * @param Closure $callback
+     *
+     * @return $this
+     */
     public static function get($url, $callback)
     {
         $route = new self($url);
         $route->setClosure($callback);
         $route->setMethod('get');
-        
+
         $route->add();
-        
+
         return $route;
     }
-    
+
     /**
-    * To add HTTP post request
-    *
-    * @param string $url
-    * @param Closure $callback
-    * @return $this
-    */
+     * To add HTTP post request.
+     *
+     * @param string  $url
+     * @param Closure $callback
+     *
+     * @return $this
+     */
     public static function post($url, $callback)
     {
         $route = new self($url);
         $route->setClosure($callback);
         $route->setMethod('post');
-        
+
         $route->add();
-        
+
         return $route;
     }
 
     /**
-    * Call resource route
-    *
-    * @param string $url
-    * @param string $controller
-    * @return mixed
-    */
+     * Call resource route.
+     *
+     * @param string $url
+     * @param string $controller
+     *
+     * @return mixed
+     */
     public static function resource($url, $controller)
     {
         $route = new self($url);
 
-        $route->targets = ['index','show','insert','add','update','edit','delete'];
+        $route->targets = ['index', 'show', 'insert', 'add', 'update', 'edit', 'delete'];
 
         $route->setResourceMethods($url, $controller);
 
@@ -353,12 +361,13 @@ class Route
     }
 
     /**
-    * Call target route
-    *
-    * @param string $url
-    * @param string $target
-    * @return Route
-    */
+     * Call target route.
+     *
+     * @param string $url
+     * @param string $target
+     *
+     * @return Route
+     */
     public static function target($url, $target)
     {
         $route = new self($url);
@@ -376,22 +385,23 @@ class Route
     }
 
     /**
-    * Set the methods resource
-    *
-    * @param string $url
-    * @param string $controller
-    * @return null
-    */
+     * Set the methods resource.
+     *
+     * @param string $url
+     * @param string $controller
+     *
+     * @return null
+     */
     private function setResourceMethods($url, $controller)
     {
-        
+
         //index
         $this->setIndexResource($url, '', $controller);
 
         $url = ($url == '/') ? '' : $url;
 
         $this->setIndexResource($url, '/index', $controller);
-        
+
         //show
         $this->setShowResource($url, '/show/{param}', $controller);
 
@@ -413,17 +423,18 @@ class Route
     }
 
     /**
-    * Get the resource name
-    *
-    * @param string $url
-    * @param string $target
-    * @return array
-    */
+     * Get the resource name.
+     *
+     * @param string $url
+     * @param string $target
+     *
+     * @return array
+     */
     private function getResourceName($url, $target)
     {
         switch ($target) {
             case 'index':
-                return [$url , $url.'/index'];
+                return [$url, $url.'/index'];
                 break;
 
             case 'show':
@@ -433,7 +444,7 @@ class Route
             case 'add':
                 return [$url.'/add'];
                 break;
-                
+
             case 'insert':
                 return [$url.'/insert'];
                 break;
@@ -443,9 +454,9 @@ class Route
                 break;
 
             case 'update':
-                return [$url.'/update' , $url.'/update/{param}'];
+                return [$url.'/update', $url.'/update/{param}'];
                 break;
-            
+
             case 'update':
                 return [$url.'/delete/{param}'];
                 break;
@@ -453,24 +464,26 @@ class Route
     }
 
     /**
-    * Set the methods resource
-    *
-    * @param string $url
-    * @param string $controller
-    * @return null
-    */
+     * Set the methods resource.
+     *
+     * @param string $url
+     * @param string $controller
+     *
+     * @return null
+     */
     private function setTargetMethod($url, $controller, $method)
     {
         return $this->setResource($url, '', $controller, $method);
     }
 
     /**
-    * Return a resource closure for resource route
-    *
-    * @param string $controller
-    * @param string $methode
-    * @return Closure
-    */
+     * Return a resource closure for resource route.
+     *
+     * @param string $controller
+     * @param string $methode
+     *
+     * @return Closure
+     */
     private function getResourceClosure($controller, $method)
     {
         if ($method == 'show' || $method == 'edit' || $method == 'delete') {
@@ -493,25 +506,28 @@ class Route
     }
 
     /**
-    * Add resource route
-    *
-    * @param Route $route
-    * @return $this
-    */
+     * Add resource route.
+     *
+     * @param Route $route
+     *
+     * @return $this
+     */
     private function addResource(Route $route)
     {
         $this->resources[$route->getName()] = $route;
+
         return $this;
     }
 
     /**
-    * Set a resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
+     * Set a resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
     private function setResource($url, $route, $controller, $target)
     {
         $url = $url.$route;
@@ -525,119 +541,126 @@ class Route
         $route->setTarget($controller, $target);
 
         $this->addResource($route);
-        
+
         $route->add();
-        
+
         return $route;
     }
 
     /**
-    * Set the index resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
-    private function setIndexResource($url, $route = '/index', $controller)
+     * Set the index resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
+    private function setIndexResource($url, $route, $controller)
     {
         return $this->setResource($url, $route, $controller, 'index');
     }
 
     /**
-    * Set the show resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
-    private function setShowResource($url, $route = '/show/{}', $controller)
+     * Set the show resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
+    private function setShowResource($url, $route, $controller)
     {
         return $this->setResource($url, $route, $controller, 'show');
     }
 
     /**
-    * Set the add resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
-    private function setAddResource($url, $route = '/add', $controller)
+     * Set the add resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
+    private function setAddResource($url, $route, $controller)
     {
         return $this->setResource($url, $route, $controller, 'add');
     }
 
     /**
-    * Set the insert resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
-    private function setInsertResource($url, $route = '/insert', $controller)
+     * Set the insert resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
+    private function setInsertResource($url, $route, $controller)
     {
         return $this->setResource($url, $route, $controller, 'insert');
     }
 
     /**
-    * Set the edit resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
-    private function setEditResource($url, $route = '/edit/{}', $controller)
+     * Set the edit resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
+    private function setEditResource($url, $route, $controller)
     {
         return $this->setResource($url, $route, $controller, 'edit');
     }
 
     /**
-    * Set the update resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
-    private function setUpdateResource($url, $route = '/update/{}', $controller)
+     * Set the update resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
+    private function setUpdateResource($url, $route, $controller)
     {
         return $this->setResource($url, $route, $controller, 'update');
     }
 
     /**
-    * Set the delete resource routes
-    *
-    * @param string $url
-    * @param string $route
-    * @param string $controller
-    * @return null
-    */
-    private function setDeleteResource($url, $route = '/delete/{}', $controller)
+     * Set the delete resource routes.
+     *
+     * @param string $url
+     * @param string $route
+     * @param string $controller
+     *
+     * @return null
+     */
+    private function setDeleteResource($url, $route, $controller)
     {
         return $this->setResource($url, $route, $controller, 'delete');
     }
 
     /**
-    * Choose the resource methods to work
-    *
-    * @return Route
-    */
+     * Choose the resource methods to work.
+     *
+     * @return Route
+     */
     public function only()
     {
         $targets = func_get_args();
 
         $result = [];
-        
+
         foreach ($this->targets as $method) {
             if (in_array($method, $targets)) {
                 array_push($result, $method);
             } else {
-                if (! is_null($this->getResourceName($this->name, $method))) {
+                if (!is_null($this->getResourceName($this->name, $method))) {
                     foreach ($this->getResourceName($this->name, $method) as $resource) {
                         if (array_has($this->resources, $resource)) {
                             $this->resources[$resource]->delete();
@@ -655,21 +678,21 @@ class Route
     }
 
     /**
-    * Use all resources excpet these
-    *
-    * @return Route
-    */
+     * Use all resources excpet these.
+     *
+     * @return Route
+     */
     public function except()
     {
         $targets = func_get_args();
 
         $result = [];
-        
+
         foreach ($this->targets as $method) {
-            if (! in_array($method, $targets)) {
+            if (!in_array($method, $targets)) {
                 array_push($result, $method);
             } else {
-                if (! is_null($this->getResourceName($this->name, $method))) {
+                if (!is_null($this->getResourceName($this->name, $method))) {
                     foreach ($this->getResourceName($this->name, $method) as $resource) {
                         if (array_has($this->resources, $resource)) {
                             $this->resources[$resource]->delete();

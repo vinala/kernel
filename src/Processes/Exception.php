@@ -2,26 +2,24 @@
 
 namespace Vinala\Kernel\Process;
 
-use Vinala\Kernel\Process\Process;
-use Vinala\Kernel\Foundation\Application;
+
 use Vinala\Kernel\Config\Alias;
 use Vinala\Kernel\Filesystem\File;
-use Vinala\Kernel\Objects\DateTime;
 
 /**
-* Exception class
-*/
+ * Exception class.
+ */
 class Exception extends Process
 {
-
     /**
-    * Create exception
-    *
-    * @param string $name
-    * @param string $message
-    * @param string $view
-    * @return bool
-    */
+     * Create exception.
+     *
+     * @param string $name
+     * @param string $message
+     * @param string $view
+     *
+     * @return bool
+     */
     public static function create($name, $message, $view)
     {
         $root = Process::root;
@@ -29,8 +27,8 @@ class Exception extends Process
         $path = $root."app/exceptions/$name.php";
         //
 
-        if (! File::exists($path)) {
-            File::put($path, self::set($name, $message, $view) );
+        if (!File::exists($path)) {
+            File::put($path, self::set($name, $message, $view));
 
             return true;
         } else {
@@ -39,13 +37,14 @@ class Exception extends Process
     }
 
     /**
-    * Build the class script
-    *
-    * @param string $name
-    * @param string $message
-    * @param string $view
-    * @return string
-    */
+     * Build the class script.
+     *
+     * @param string $name
+     * @param string $message
+     * @param string $view
+     *
+     * @return string
+     */
     protected static function set($name, $message, $view)
     {
         $txt = "<?php\n\n";
@@ -63,12 +62,12 @@ class Exception extends Process
 
         return $txt;
     }
-    
+
     /**
-    * clear all controllers created
-    *
-    * @return bool
-    */
+     * clear all controllers created.
+     *
+     * @return bool
+     */
     public static function clear()
     {
         $path = root().'app/exceptions/*.php';

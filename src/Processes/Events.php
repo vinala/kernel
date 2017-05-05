@@ -2,33 +2,31 @@
 
 namespace Vinala\Kernel\Process;
 
-use Vinala\Kernel\Process\Process;
-use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Objects\DateTime;
+
 use Vinala\Kernel\Filesystem\File;
 
 /**
-* Exception class
-*/
+ * Exception class.
+ */
 class Events extends Process
 {
-
     /**
-    * Create exception
-    *
-    * @param string $name
-    * @param string $message
-    * @param string $view
-    * @return bool
-    */
+     * Create exception.
+     *
+     * @param string $name
+     * @param string $message
+     * @param string $view
+     *
+     * @return bool
+     */
     public static function create($name)
     {
         $root = Process::root;
-        
+
         $path = $root."app/events/$name.php";
 
-        if (! File::exists($path)) {
-            File::put($path, self::set($name) );
+        if (!File::exists($path)) {
+            File::put($path, self::set($name));
 
             return true;
         } else {
@@ -37,13 +35,14 @@ class Events extends Process
     }
 
     /**
-    * Build the class script
-    *
-    * @param string $name
-    * @param string $message
-    * @param string $view
-    * @return string
-    */
+     * Build the class script.
+     *
+     * @param string $name
+     * @param string $message
+     * @param string $view
+     *
+     * @return string
+     */
     protected static function set($name)
     {
         $txt = "<?php\n\n";
@@ -53,16 +52,16 @@ class Events extends Process
         $txt .= "class $name extends Listener\n{\n\n";
         $txt .= self::eventArray();
         $txt .= self::eventFunction();
-        $txt .= "}";
+        $txt .= '}';
 
         return $txt;
     }
 
     /**
-    * Generate events array
-    *
-    * @return string
-    */
+     * Generate events array.
+     *
+     * @return string
+     */
     protected static function eventArray()
     {
         $txt = "\t/**\n\t* Set events pattern and thier function\n\t*\n\t* @var array\n\t*/\n\t";
@@ -73,10 +72,10 @@ class Events extends Process
     }
 
     /**
-    * Generate events function
-    *
-    * @return string
-    */
+     * Generate events function.
+     *
+     * @return string
+     */
     protected static function eventFunction()
     {
         $txt = "\t/**\n\t* Event function\n\t*/\n\t";

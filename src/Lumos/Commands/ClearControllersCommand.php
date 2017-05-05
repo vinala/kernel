@@ -1,18 +1,13 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
-
 
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Controller;
-use Vinala\Kernel\Database\Database;
-
-
 
 class ClearControllersCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -28,8 +23,8 @@ class ClearControllersCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.clear_controller');
@@ -37,7 +32,7 @@ class ClearControllersCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -46,15 +41,14 @@ class ClearControllersCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
-    {        
+    {
         $this->title();
-        $ok = $this->confirm("\nAre you sure ? [y/n]" , false);
+        $ok = $this->confirm("\nAre you sure ? [y/n]", false);
         //
-        if($ok)
-        {
+        if ($ok) {
             $process = Controller::clear();
             //
             $this->show($process);
@@ -62,16 +56,16 @@ class ClearControllersCommand extends Commands
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($process)
     {
-        $this->title('Clear controllers command :' , '');
+        $this->title('Clear controllers command :', '');
         //
-        if($process) 
-        {
+        if ($process) {
             $this->info("\nThe controllers folder was emptied\n");
+        } else {
+            $this->error("\nThe controllers folder won't be emptied\n");
         }
-        else $this->error("\nThe controllers folder won't be emptied\n");
     }
 }

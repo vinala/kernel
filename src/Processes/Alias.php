@@ -1,29 +1,29 @@
 <?php
 
-namespace Vinala\Kernel\Process ;
+namespace Vinala\Kernel\Process;
 
 //use SomeClass;
 
 /**
-* Alias process class
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Process
-* @since v3.3.0
-*/
+ * Alias process class.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Alias extends Process
 {
-
     //--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
 
     /**
-    * Get documentation of config file
-    *
-    * @return array
-    */
+     * Get documentation of config file.
+     *
+     * @return array
+     */
     protected static function documentations()
     {
         return [
@@ -42,15 +42,15 @@ class Alias extends Process
     }
 
     /**
-    * Set the config params
-    *
-    * @param bool $enabled
-    * @param array $params
-    * @return bool
-    */
+     * Set the config params.
+     *
+     * @param bool  $enabled
+     * @param array $params
+     *
+     * @return bool
+     */
     public static function set($enabled, $params)
     {
-
         $docs = self::documentations();
         $content = $docs['enabled'].self::enbaledFormat($enabled);
         $content .= $docs['kernel'].self::arrayFormat($params['kernel'], 'kernel');
@@ -66,46 +66,48 @@ class Alias extends Process
     }
 
     /**
-    * Set the file
-    *
-    * @param
-    * @param
-    * @return
-    */
+     * Set the file.
+     *
+     * @param
+     * @param
+     *
+     * @return
+     */
     protected static function setFile($content)
     {
         $root = Process::root;
 
         if (file_exists(Process::root.'config/alias.php')) {
-            $file = fopen(Process::root.'config/alias.php', "w");
+            $file = fopen(Process::root.'config/alias.php', 'w');
             fwrite($file, $content);
             fclose($file);
             //
             return true;
         }
-        
+
         return false;
     }
-    
 
     /**
-    * Enabled switch format
-    *
-    * @param bool $enabled
-    * @return string
-    */
+     * Enabled switch format.
+     *
+     * @param bool $enabled
+     *
+     * @return string
+     */
     protected static function enbaledFormat($enabled)
     {
         return "\t'enable' => ".($enabled ? 'true' : 'false')." ,\n\n";
     }
 
     /**
-    * Format args array
-    *
-    * @param array $data
-    * @param string $name
-    * @return string
-    */
+     * Format args array.
+     *
+     * @param array  $data
+     * @param string $name
+     *
+     * @return string
+     */
     protected static function arrayFormat(array $data, $name)
     {
         $format = "\t'$name' => [\n";
@@ -120,18 +122,19 @@ class Alias extends Process
     }
 
     /**
-    * Format the alias config file
-    *
-    * @param string $content
-    * @return bool
-    */
+     * Format the alias config file.
+     *
+     * @param string $content
+     *
+     * @return bool
+     */
     protected static function fileFormat($content)
     {
         $container = "<?php\n\nreturn [\n";
 
         $container .= $content;
 
-        $container .= "];";
+        $container .= '];';
 
         return $container;
     }

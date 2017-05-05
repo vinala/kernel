@@ -1,72 +1,67 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\MVC\ORM;
 
 use Vinala\Kernel\Collections\Collection as Table;
 
 /**
-* The class Collection of ORM
-*/
+ * The class Collection of ORM.
+ */
 class Collection
 {
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
-
-	/**
-	* the array contains the ORMs
-	*
-	* @var array
-	*/
-    private $list = array();
-
+    /**
+     * the array contains the ORMs.
+     *
+     * @var array
+     */
+    private $list = [];
 
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
 
-
-    function __construct($data = null)
+    public function __construct($data = null)
     {
-    	$this->list = is_null($data) ? array() : $data ;
+        $this->list = is_null($data) ? [] : $data;
     }
-
 
     //--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
 
     /**
-    * get list of rows of ORM
-    *
-    * @return array
-    */
+     * get list of rows of ORM.
+     *
+     * @return array
+     */
     public function get()
     {
-    	return $this->list;
+        return $this->list;
     }
-    
 
     /**
-    * add ORM to Collection
-    *
-    * @param ORM $object
-    * @return null
-    */
+     * add ORM to Collection.
+     *
+     * @param ORM $object
+     *
+     * @return null
+     */
     public function add($object)
     {
-    	$this->list[] = $object;
+        $this->list[] = $object;
     }
 
     /**
-    * count Collection list
-    *
-    * @return int
-    */
+     * count Collection list.
+     *
+     * @return int
+     */
     public function count()
     {
         return Table::count($this->list);
     }
-
 }

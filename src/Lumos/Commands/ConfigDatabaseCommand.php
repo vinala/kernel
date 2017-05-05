@@ -1,19 +1,15 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
 
-
 use Vinala\Kernel\Config\Config;
-use Vinala\Lumos\Response\ConfigSetting;
 use Vinala\Kernel\Console\Command\Commands;
-use Vinala\Kernel\Process\Controller;
 use Vinala\Kernel\Database\Database;
-
-
+use Vinala\Kernel\Process\Controller;
+use Vinala\Lumos\Response\ConfigSetting;
 
 class ConfigDatabaseCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -22,7 +18,7 @@ class ConfigDatabaseCommand extends Commands
     protected $key;
 
     /**
-     * true if the command will use database
+     * true if the command will use database.
      *
      * @var bool
      */
@@ -36,8 +32,8 @@ class ConfigDatabaseCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.config_database').' {driver : what\'s the database server ? }';
@@ -45,44 +41,44 @@ class ConfigDatabaseCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
         // $server = $this->choice("What's your database server ?" , ['sqlite' , 'mysql' , 'pgsql' , 'sqlsrv']);
-        $driver = $this->argument("driver");
+        $driver = $this->argument('driver');
         //
         switch ($driver) {
 
             case 'mysql':
                     $this->line();
-                    $host = $this->ask("What's your host name ?" , "localhost");
+                    $host = $this->ask("What's your host name ?", 'localhost');
                     $database = $this->ask("What's your database name ?");
                     $user = $this->ask("What's your user name ?");
                     $password = $this->hidden("What's your password ?");
                     $prefix = $this->ask("What's database prefix (if you keep it empty the prefixing will be disabled) ?");
-                    if(empty($prefix)) $prefix = null;
+                    if (empty($prefix)) {
+                        $prefix = null;
+                    }
                     //
-                    if(ConfigSetting::database($driver , $host , $database , $user , $password , $prefix))
+                    if (ConfigSetting::database($driver, $host, $database, $user, $password, $prefix)) {
                         $this->info("\nThe database configuration complated with seccus\n");
-                    else $this->error("\nThere is an error\n");
+                    } else {
+                        $this->error("\nThere is an error\n");
+                    }
                 break;
-            
-
-
 
         }
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
-        $ok = $this->confirm("Are you sure ? [y/n]" , false);
+        $ok = $this->confirm('Are you sure ? [y/n]', false);
         //
-        if($ok)
-        {
+        if ($ok) {
             $process = Controller::clear();
             //
             $this->show($process);
@@ -90,11 +86,14 @@ class ConfigDatabaseCommand extends Commands
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($process)
     {
-        if($process) $this->info("The controllers folder was emptied");
-        else $this->error("The controllers folder won't be emptied : ".Database::execErr());
+        if ($process) {
+            $this->info('The controllers folder was emptied');
+        } else {
+            $this->error("The controllers folder won't be emptied : ".Database::execErr());
+        }
     }
 }

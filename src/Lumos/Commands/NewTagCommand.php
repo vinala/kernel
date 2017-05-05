@@ -8,7 +8,6 @@ use Vinala\Kernel\Process\Tag;
 
 class NewTagCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -24,16 +23,16 @@ class NewTagCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
+     * Configure the command.
      */
     public function set()
     {
         $this->key = config('lumos.commands.new_tag').' {class : what\'s the name of the tag class ?} {tag : what\'s the name of the tag (without @) ?} {target : what\'s the name of the function ?} {--hold : if set Atomium will just excute the function without write the returned value from function}';
-        $this->description = "New User Atomium Tag";
+        $this->description = 'New User Atomium Tag';
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -41,14 +40,14 @@ class NewTagCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
-        $class = $this->argument("class");
-        $target = $this->argument("target");
-        $tag = $this->argument("tag");
-        $hold = $this->option("hold");
+        $class = $this->argument('class');
+        $target = $this->argument('target');
+        $tag = $this->argument('tag');
+        $hold = $this->option('hold');
         //
         $process = Tag::create($class, $target, $tag, $hold);
         //
@@ -56,8 +55,8 @@ class NewTagCommand extends Commands
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($process, $name)
     {
         $this->title('New Atomium tag command :');

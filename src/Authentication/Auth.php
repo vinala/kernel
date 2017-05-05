@@ -1,345 +1,332 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Authentication ;
+namespace Vinala\Kernel\Authentication;
 
-use Vinala\Kernel\Authentication\EXceptions\AuthenticationModelNotFoundException as AMNFE;
-use Vinala\Kernel\Security\Hash;
-use Vinala\Kernel\Database\Query;
-use Vinala\Kernel\Storage\Session;
-use Vinala\Kernel\Database\Row;
-use Vinala\Kernel\Storage\Cookie;
-use Vinala\Kernel\MVC\ORM;
 use LogicException;
-
+use Vinala\Kernel\Authentication\EXceptions\AuthenticationModelNotFoundException as AMNFE;
+use Vinala\Kernel\Database\Query;
+use Vinala\Kernel\Database\Row;
+use Vinala\Kernel\MVC\ORM;
+use Vinala\Kernel\Security\Hash;
+use Vinala\Kernel\Storage\Cookie;
+use Vinala\Kernel\Storage\Session;
 
 /**
-* Authentication surface
-*
-* @version 2.0
-* @author Youssef Had
-* @package Vinala\Kernel\Authentication
-* @since v3.3.0
-*/
+ * Authentication surface.
+ *
+ * @version 2.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Auth
 {
-	
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	/**
-	* The data source table
-	*
-	* @var string 
-	*/
-	private static $table ;
-	
-	/**
-	* The fields used in authentication
-	*
-	* @var array 
-	*/
-	private static $fields = array() ;
+    /**
+     * The data source table.
+     *
+     * @var string
+     */
+    private static $table;
 
-	/**
-	* The cookie saved fields
-	*
-	* @var array 
-	*/
-	private static $saved = array() ;	
+    /**
+     * The fields used in authentication.
+     *
+     * @var array
+     */
+    private static $fields = [];
 
-	/**
-	* The user authenticated data
-	*
-	* @var Row 
-	*/
-	private static $user ;
-	
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
+    /**
+     * The cookie saved fields.
+     *
+     * @var array
+     */
+    private static $saved = [];
 
-	function __construct()
-	{
-		//
-	}
+    /**
+     * The user authenticated data.
+     *
+     * @var Row
+     */
+    private static $user;
 
-	/**
-	* The init of surface
-	*
-	* @return null
-	*/
-	public static function ini()
-	{
-		static::$table = config('auth.table');
-		static::$fields = config('auth.hashed_fields');
-		static::$saved = config('auth.saved_fields');
-	}
-	
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+    public function __construct()
+    {
+        //
+    }
 
-	/**
-	* Try to authenticate
-	*
-	* @param array $fields
-	* @param bool $remember
-	* @return bool
-	*/
-	public static function attempt( $fields , $remember = false)
-	{
-		$hashed = static::hash($fields);
+    /**
+     * The init of surface.
+     *
+     * @return null
+     */
+    public static function ini()
+    {
+        static::$table = config('auth.table');
+        static::$fields = config('auth.hashed_fields');
+        static::$saved = config('auth.saved_fields');
+    }
 
-		$data = static::query($hashed);
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-		if(count($data) > 0)
-		{
-			//Set the user
-			static::$user = static::orm($data[0]);
+    /**
+     * Try to authenticate.
+     *
+     * @param array $fields
+     * @param bool  $remember
+     *
+     * @return bool
+     */
+    public static function attempt($fields, $remember = false)
+    {
+        $hashed = static::hash($fields);
 
-			static::save_session();
+        $data = static::query($hashed);
 
-			static::save_cookie();
+        if (count($data) > 0) {
+            //Set the user
+            static::$user = static::orm($data[0]);
 
-			return true;
-		}
-		
-		return false;
-	}
+            static::save_session();
 
-	/**
-	* Hash the authentication data
-	*
-	* @param array $data
-	* @return array
-	*/
-	protected static function hash($fields)
-	{
-		foreach ($fields as $key => $value) 
-		{
-			if(in_array($key , self::$fields ) )
-			{
-				$fields[$key] = Hash::make($value);
-			}			
-		}
+            static::save_cookie();
 
-		return $fields;
-	}
+            return true;
+        }
 
-	/**
-	* Get the user authenticate
-	*
-	* @param array $fields
-	* @param array $hashed
-	* @return array
-	*/
-	protected static function query($fields)
-	{
-		$result = Query::from(static::$table);
-		
-		$result = $result->where();
+        return false;
+    }
 
-		foreach ($fields as $key => $value) 
-		{
-			$result = $result->andWhere($key , '=' , $value);
-		}
+    /**
+     * Hash the authentication data.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    protected static function hash($fields)
+    {
+        foreach ($fields as $key => $value) {
+            if (in_array($key, self::$fields)) {
+                $fields[$key] = Hash::make($value);
+            }
+        }
 
-		return $result->get();
-	}
+        return $fields;
+    }
 
-	/**
-	* Save the user in the session
-	*
-	* @param array $user
-	* @return bool
-	*/
-	protected static function save_session()
-	{
-		$saved = array();
+    /**
+     * Get the user authenticate.
+     *
+     * @param array $fields
+     * @param array $hashed
+     *
+     * @return array
+     */
+    protected static function query($fields)
+    {
+        $result = Query::from(static::$table);
 
-		$user = (array) static::$user;
+        $result = $result->where();
 
-		foreach ($user as $key => $value) 
-		{
-			if(in_array($key , static::$saved))
-			{
-				$saved[$key] = $value;
-			}
-		}
+        foreach ($fields as $key => $value) {
+            $result = $result->andWhere($key, '=', $value);
+        }
 
-		$name = static::resource('session');
+        return $result->get();
+    }
 
-		Session::put($name , $saved , config('auth.cookie_lifetime'));
+    /**
+     * Save the user in the session.
+     *
+     * @param array $user
+     *
+     * @return bool
+     */
+    protected static function save_session()
+    {
+        $saved = [];
 
-		return true;
-	}
+        $user = (array) static::$user;
 
-	/**
-	* Create Cookie if the authentication will be remembred
-	*
-	* @return bool
-	*/
-	protected static function save_cookie()
-	{
-		$name = static::resource('cookie');
+        foreach ($user as $key => $value) {
+            if (in_array($key, static::$saved)) {
+                $saved[$key] = $value;
+            }
+        }
 
-		return Cookie::create(
-			$name,
-			static::$user->rememberToken,
-			config('auth.cookie_lifetime')
-			);
-	}
+        $name = static::resource('session');
 
-	/**
-	* Logout the user from the app
-	*
-	* @return true
-	*/
-	public static function logout()
-	{
-		Session::forget( static::resource('session') );
-		Cookie::forget( static::resource('cookie') );
-		static::$user = null;
+        Session::put($name, $saved, config('auth.cookie_lifetime'));
 
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	* Check if user logged in
-	*
-	* @return bool
-	*/
-	public static function check()
-	{
-		if(Session::exists( static::resource('session') ))
-		{
-			return true;
-		}
-		elseif(Cookie::existe( static::resource('cookie') ))
-		{
-			$token= Cookie::get(static::resource('cookie'));
+    /**
+     * Create Cookie if the authentication will be remembred.
+     *
+     * @return bool
+     */
+    protected static function save_cookie()
+    {
+        $name = static::resource('cookie');
 
-			$result = Query::from( config('auth.table') )
-				->where('rememberToken' , '=' , $token)
-				->get();
+        return Cookie::create(
+            $name,
+            static::$user->rememberToken,
+            config('auth.cookie_lifetime')
+            );
+    }
 
-			if(count($result) > 0) return true;
+    /**
+     * Logout the user from the app.
+     *
+     * @return true
+     */
+    public static function logout()
+    {
+        Session::forget(static::resource('session'));
+        Cookie::forget(static::resource('cookie'));
+        static::$user = null;
 
-			return false;
-		}
+        return true;
+    }
 
-		return false;
-	}
+    /**
+     * Check if user logged in.
+     *
+     * @return bool
+     */
+    public static function check()
+    {
+        if (Session::exists(static::resource('session'))) {
+            return true;
+        } elseif (Cookie::existe(static::resource('cookie'))) {
+            $token = Cookie::get(static::resource('cookie'));
 
-	/**
-	* Get the user logged in
-	*
-	* @return Vinala\Kernel\MVC\ORM
-	*/
-	public static function user()
-	{
-		if(self::check())
-		{
-			if( is_null(static::$user) )
-			{
-				$data = Session::get(static::resource('session'));
+            $result = Query::from(config('auth.table'))
+                ->where('rememberToken', '=', $token)
+                ->get();
 
-				$data = static::query($data);
+            if (count($result) > 0) {
+                return true;
+            }
 
-				static::$user = static::orm($data[0]);
-			}
+            return false;
+        }
 
-			return static::$user;
-		}
-	}
+        return false;
+    }
 
-	/**
-	* Login the user if session or cookie saved
-	*
-	* @return Vinala\Kernel\MVC\ORM|bool
-	*/
-	public static function login()
-	{
-		if(Cookie::existe( static::resource('cookie') ))
-		{
-			$token= Cookie::get(static::resource('cookie'));
+    /**
+     * Get the user logged in.
+     *
+     * @return Vinala\Kernel\MVC\ORM
+     */
+    public static function user()
+    {
+        if (self::check()) {
+            if (is_null(static::$user)) {
+                $data = Session::get(static::resource('session'));
 
-			$result = Query::from( config('auth.table') )
-				->where('rememberToken' , '=' , $token)
-				->get();
+                $data = static::query($data);
 
-			if(count($result) > 0) 
-			{
-				static::$user = static::orm($result[0]);
+                static::$user = static::orm($data[0]);
+            }
 
-				static::save_session();
+            return static::$user;
+        }
+    }
 
-				return static::$user;
-			}
+    /**
+     * Login the user if session or cookie saved.
+     *
+     * @return Vinala\Kernel\MVC\ORM|bool
+     */
+    public static function login()
+    {
+        if (Cookie::existe(static::resource('cookie'))) {
+            $token = Cookie::get(static::resource('cookie'));
 
-			return false;
-		}
+            $result = Query::from(config('auth.table'))
+                ->where('rememberToken', '=', $token)
+                ->get();
 
-		return false;
-	}
+            if (count($result) > 0) {
+                static::$user = static::orm($result[0]);
 
-	/**
-	* Check if the user is a guest
-	*
-	* @return bool
-	*/
-	public static function guest()
-	{
-		if(self::check()) 
-		{
-			return false;
-		}
+                static::save_session();
 
-		return true;
-	}
+                return static::$user;
+            }
 
-	/**
-	* Convert data from array of 
-	* Vinala\Kernel\Database\Row to 
-	* Vinala\Kernel\MVC\ORM
-	*
-	* @param array $data
-	* @return Vinala\Kernel\MVC\ORM
-	*/
-	private static function orm(Row $data)
-	{
-		// exception_if( ! ( $data instanceof Row) , \LogicException::class , 'The result of Authentication query is not instance of Vinala\Kernel\Database\Row');
+            return false;
+        }
 
-		$data = (array) $data;
-		$id = array_shift($data);
+        return false;
+    }
 
-		$model = config('auth.model');
+    /**
+     * Check if the user is a guest.
+     *
+     * @return bool
+     */
+    public static function guest()
+    {
+        if (self::check()) {
+            return false;
+        }
 
-		exception_if( ! class_exists($model) , AMNFE::class );
+        return true;
+    }
 
-		return new $model($id);
-	}
+    /**
+     * Convert data from array of
+     * Vinala\Kernel\Database\Row to
+     * Vinala\Kernel\MVC\ORM.
+     *
+     * @param array $data
+     *
+     * @return Vinala\Kernel\MVC\ORM
+     */
+    private static function orm(Row $data)
+    {
+        // exception_if( ! ( $data instanceof Row) , \LogicException::class , 'The result of Authentication query is not instance of Vinala\Kernel\Database\Row');
 
-	/**
-	* Get the resources hashed name
-	*
-	* @param string $resource session|cookie
-	* @return string
-	*/
-	private static function resource($resource)
-	{
-		exception_if(($resource != 'session' && $resource != 'cookie') , LogicException::class , 'The resource name of \''.$resource.'\' is not supported by Vinala, only session or cookie');
+        $data = (array) $data;
+        $id = array_shift($data);
 
-		return Hash::make(config('auth.'.$resource));
+        $model = config('auth.model');
 
-		// For more security, make for every user a resource name
-		return Hash::make(config('auth.'.$resource).static::$user->rememberToken);
+        exception_if(!class_exists($model), AMNFE::class);
 
+        return new $model($id);
+    }
 
-	}
-	
-	
-	
+    /**
+     * Get the resources hashed name.
+     *
+     * @param string $resource session|cookie
+     *
+     * @return string
+     */
+    private static function resource($resource)
+    {
+        exception_if(($resource != 'session' && $resource != 'cookie'), LogicException::class, 'The resource name of \''.$resource.'\' is not supported by Vinala, only session or cookie');
+
+        return Hash::make(config('auth.'.$resource));
+
+        // For more security, make for every user a resource name
+        return Hash::make(config('auth.'.$resource).static::$user->rememberToken);
+    }
 }

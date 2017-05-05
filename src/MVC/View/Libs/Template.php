@@ -3,54 +3,55 @@
 namespace Vinala\Kernel\MVC\View;
 
 use Smarty;
-use Vinala\Kernel\Foundation\Application;
-
-
 
 /**
-* Smarty Template class
-*/
+ * Smarty Template class.
+ */
 class Template
 {
-	public static $smarty;
+    public static $smarty;
 
-	public static function run()
-	{
-		self::$smarty=new Smarty;
-		//
-		self::setParams();
-		self::setCache();
-	}
+    public static function run()
+    {
+        self::$smarty = new Smarty();
+        //
+        self::setParams();
+        self::setCache();
+    }
 
-	public static function show($view,$data=null)
-	{
-		self::assign($data);
-		return self::display($view);
-	}
+    public static function show($view, $data = null)
+    {
+        self::assign($data);
 
-	protected static function setCache()
-	{
-		self::$smarty->setTemplateDir(root().'storage/view/compile');
-		self::$smarty->setCompileDir(root().'storage/view/template/smarty');
-	}
+        return self::display($view);
+    }
 
-	protected static function setParams()
-	{
-		self::$smarty->force_compile = false;
-		//self::$smarty->debugging = true;
-		//self::$smarty->caching = true;
-		//self::$smarty->cache_lifetime = 120;
-		//Smarty::muteExpectedErrors();
-	}
+    protected static function setCache()
+    {
+        self::$smarty->setTemplateDir(root().'storage/view/compile');
+        self::$smarty->setCompileDir(root().'storage/view/template/smarty');
+    }
 
-	protected static function display($view)
-	{
-		return self::$smarty->display($view);
-	}
+    protected static function setParams()
+    {
+        self::$smarty->force_compile = false;
+        //self::$smarty->debugging = true;
+        //self::$smarty->caching = true;
+        //self::$smarty->cache_lifetime = 120;
+        //Smarty::muteExpectedErrors();
+    }
 
-	protected static function assign($data)
-	{
-		if(!is_null($data)) 
-			foreach ($data as $key => $value) self::$smarty->assign($key, $value);
-	}
+    protected static function display($view)
+    {
+        return self::$smarty->display($view);
+    }
+
+    protected static function assign($data)
+    {
+        if (!is_null($data)) {
+            foreach ($data as $key => $value) {
+                self::$smarty->assign($key, $value);
+            }
+        }
+    }
 }

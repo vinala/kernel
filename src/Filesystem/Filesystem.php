@@ -1,245 +1,266 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Filesystem;
 
 use Vinala\Kernel\Filesystem\Exception\DirectoryNotFoundException;
 use Vinala\Kernel\Filesystem\Exception\FileNotFoundException;
 
-
 /**
-* File system
-*/
+ * File system.
+ */
 class Filesystem
 {
-	
-	public function exists($path)
-	{
-		return file_exists($path);
-	}
+    public function exists($path)
+    {
+        return file_exists($path);
+    }
 
-	public function get($path)
-	{
-		if($this->exists($path)) return file_get_contents($path);
-		else throw new FileNotFoundException($path);
-	}
+    public function get($path)
+    {
+        if ($this->exists($path)) {
+            return file_get_contents($path);
+        } else {
+            throw new FileNotFoundException($path);
+        }
+    }
 
-	public function getRequire($path)
-	{
-		if($this->exists($path)) return need($path);
-		else throw new FileNotFoundException($path);
-	}
+    public function getRequire($path)
+    {
+        if ($this->exists($path)) {
+            return need($path);
+        } else {
+            throw new FileNotFoundException($path);
+        }
+    }
 
-	public function getRequireOnce($path)
-	{
-		if($this->exists($path)) return needOnce($path);
-		else throw new FileNotFoundException($path);
-	}
+    public function getRequireOnce($path)
+    {
+        if ($this->exists($path)) {
+            return needOnce($path);
+        } else {
+            throw new FileNotFoundException($path);
+        }
+    }
 
-	public function put($path,$content,$lock=false)
-	{
-		// $myfile = fopen($path, "w");
-		// fwrite($myfile, $content);
-		// fclose($myfile);
-		//
-		return file_put_contents($path, $content, $lock ? LOCK_EX : 0);
-	}
+    public function put($path, $content, $lock = false)
+    {
+        // $myfile = fopen($path, "w");
+        // fwrite($myfile, $content);
+        // fclose($myfile);
+        //
+        return file_put_contents($path, $content, $lock ? LOCK_EX : 0);
+    }
 
-	public function prepend($path,$content)
-	{
-		if($this->exists($path))		
-		{
-			$oldContent=$this->get($path);	
-			$this->put($name,($content.$oldContent));	
-		}
-		else throw new FileNotFoundException($path);
-	}
+    public function prepend($path, $content)
+    {
+        if ($this->exists($path)) {
+            $oldContent = $this->get($path);
+            $this->put($name, ($content.$oldContent));
+        } else {
+            throw new FileNotFoundException($path);
+        }
+    }
 
-	public function append($path,$content)
-	{
-		if($this->exists($path))		
-		{
-			$oldContent=$this->get($path);	
-			$this->put($name,($oldContent.$content));	
-		}
-		else throw new FileNotFoundException($path);
-	}
+    public function append($path, $content)
+    {
+        if ($this->exists($path)) {
+            $oldContent = $this->get($path);
+            $this->put($name, ($oldContent.$content));
+        } else {
+            throw new FileNotFoundException($path);
+        }
+    }
 
-	public function delete($path)
-	{
-		$paths=is_array($path) ? $path : func_get_args() ;
-		//
-		$ok=true;
+    public function delete($path)
+    {
+        $paths = is_array($path) ? $path : func_get_args();
+        //
+        $ok = true;
 
-		foreach ($paths as $value) if( !unlink($path)) $ok=false;
+        foreach ($paths as $value) {
+            if (!unlink($path)) {
+                $ok = false;
+            }
+        }
 
-		return $ok;
-	}
+        return $ok;
+    }
 
-	public function copy($from,$to)
-	{
-		if($this->exists($from))		
-		{
-			$content=$this->get($from);
-			return $this->put($to,$content);
-		}
-		else throw new FileNotFoundException($path);
-	}
+    public function copy($from, $to)
+    {
+        if ($this->exists($from)) {
+            $content = $this->get($from);
 
-	public function move($from,$to)
-	{
-		if($this->exists($from))		
-		{
-			$content=$this->get($from);
-			$this->put($to,$content);
-			$this->delete($from);
-		}
-		else throw new FileNotFoundException($path);
-	}
+            return $this->put($to, $content);
+        } else {
+            throw new FileNotFoundException($path);
+        }
+    }
 
-	public function name($path)
-	{
-		return pathinfo($path, PATHINFO_FILENAME);
-	}
+    public function move($from, $to)
+    {
+        if ($this->exists($from)) {
+            $content = $this->get($from);
+            $this->put($to, $content);
+            $this->delete($from);
+        } else {
+            throw new FileNotFoundException($path);
+        }
+    }
 
-	public function type($path)
-	{
-		return filetype($path);
-	}
+    public function name($path)
+    {
+        return pathinfo($path, PATHINFO_FILENAME);
+    }
 
-	public function baseName($path)
-	{
-		return basename($path);
-	}
+    public function type($path)
+    {
+        return filetype($path);
+    }
 
-	public function extension($path)
-	{
-		return pathinfo($path, PATHINFO_EXTENSION);
-	}
+    public function baseName($path)
+    {
+        return basename($path);
+    }
 
-	public function size($path)
-	{
-		return filesize($path);
-	}
+    public function extension($path)
+    {
+        return pathinfo($path, PATHINFO_EXTENSION);
+    }
 
-	public function lastEdit($path)
-	{
-		return filemtime($path);
-	}
+    public function size($path)
+    {
+        return filesize($path);
+    }
 
-	public function isDirectory($directory)
-	{
-		return is_dir($directory);
-	}
+    public function lastEdit($path)
+    {
+        return filemtime($path);
+    }
 
-	// public function isWritable($path)
-	// {
-	// 	return is_writable($path);
-	// }
+    public function isDirectory($directory)
+    {
+        return is_dir($directory);
+    }
 
-	public function isFile($file)
-	{
-		return is_file($file);
-	}
+    // public function isWritable($path)
+    // {
+    // 	return is_writable($path);
+    // }
 
-	public function glob($pattern, $flags=0)
-	{
-		return glob($pattern, $flags);
-	}
+    public function isFile($file)
+    {
+        return is_file($file);
+    }
 
-	public function all($directory)
-	{
-		$glob = glob($directory.'/*');
+    public function glob($pattern, $flags = 0)
+    {
+        return glob($pattern, $flags);
+    }
 
-		if ($glob === false) return array();
-		 
-		return $glob;
-	}
+    public function all($directory)
+    {
+        $glob = glob($directory.'/*');
 
-	public function files($directory)
-	{
-		$glob = glob($directory.'/*');
+        if ($glob === false) {
+            return [];
+        }
 
-		if ($glob === false) return array();
-		 
-		return array_filter($glob, function($file)
-		{
-			//return filetype($file) == 'file';
-			return $this->isFile($file);
-		});
-	}
+        return $glob;
+    }
 
-	public function directories($directory)
-	{
-		$glob = glob($directory.'/*');
+    public function files($directory)
+    {
+        $glob = glob($directory.'/*');
 
-		if ($glob === false) return array();
-		 
-		return array_filter($glob, function($file)
-		{
-			//return filetype($file) != 'file';
-			return $this->isDirectory($file);
-		});
-	}
+        if ($glob === false) {
+            return [];
+        }
 
-	public function makeDirectory($path,$mode=0755,$recursive = false)
-	{
-		return mkdir ( $path, $mode, $recursive);
-	}
+        return array_filter($glob, function ($file) {
+            //return filetype($file) == 'file';
+            return $this->isFile($file);
+        });
+    }
 
-	public function copyDirectory($from, $to, $options=null)
-	{
-		if(! $this->isDirectory($from)) { throw new DirectoryNotFoundException($from); return false; }
-		//
-		if(! $this->isDirectory($to)) $this->makeDirectory($to,0777,true);
-		//
-		$options = $options ?: \FilesystemIterator::SKIP_DOTS;
-		$items = new \FilesystemIterator($from, $options);
-		//
-		//$items=$this->all($from);
-		//
-		foreach ($items as $item) {
-			$target=$to."/".$item->getBasename();
-			if($this->isDirectory($item))
-			{
-				$path=$item->getPathname();
-				if ( ! $this->copyDirectory($path, $target, $options)) break; // return false; 
-			}
-			else
-			{
-				if ( ! $this->copy($item->getPathname(), $target)) break; //return false;
-			}
-		}
+    public function directories($directory)
+    {
+        $glob = glob($directory.'/*');
 
-		return true;
-	}
+        if ($glob === false) {
+            return [];
+        }
 
-	public function deleteDirectory($directory, $preserve = false)
-	{
-		if ( ! $this->isDirectory($directory)) { throw new DirectoryNotFoundException($directory); return false; }
+        return array_filter($glob, function ($file) {
+            //return filetype($file) != 'file';
+            return $this->isDirectory($file);
+        });
+    }
 
-		$items = new \FilesystemIterator($directory);
+    public function makeDirectory($path, $mode = 0755, $recursive = false)
+    {
+        return mkdir($path, $mode, $recursive);
+    }
 
-		foreach ($items as $item)
-		{
-			if ($item->isDir())
-			{
-				$this->deleteDirectory($item->getPathname());
-			}
-			else
-			{
-				$this->delete($item->getPathname());
-			}
-		}
+    public function copyDirectory($from, $to, $options = null)
+    {
+        if (!$this->isDirectory($from)) {
+            throw new DirectoryNotFoundException($from);
+            return false;
+        }
+        //
+        if (!$this->isDirectory($to)) {
+            $this->makeDirectory($to, 0777, true);
+        }
+        //
+        $options = $options ?: \FilesystemIterator::SKIP_DOTS;
+        $items = new \FilesystemIterator($from, $options);
+        //
+        //$items=$this->all($from);
+        //
+        foreach ($items as $item) {
+            $target = $to.'/'.$item->getBasename();
+            if ($this->isDirectory($item)) {
+                $path = $item->getPathname();
+                if (!$this->copyDirectory($path, $target, $options)) {
+                    break;
+                } // return false;
+            } else {
+                if (!$this->copy($item->getPathname(), $target)) {
+                    break;
+                } //return false;
+            }
+        }
 
-		if ( ! $preserve) @rmdir($directory);
+        return true;
+    }
 
-		return true;
-	}
+    public function deleteDirectory($directory, $preserve = false)
+    {
+        if (!$this->isDirectory($directory)) {
+            throw new DirectoryNotFoundException($directory);
+            return false;
+        }
 
-	public function clearDirectory($path)
-	{
-		return $this->deleteDirectory($path, true);
-	}
+        $items = new \FilesystemIterator($directory);
 
+        foreach ($items as $item) {
+            if ($item->isDir()) {
+                $this->deleteDirectory($item->getPathname());
+            } else {
+                $this->delete($item->getPathname());
+            }
+        }
 
+        if (!$preserve) {
+            @rmdir($directory);
+        }
+
+        return true;
+    }
+
+    public function clearDirectory($path)
+    {
+        return $this->deleteDirectory($path, true);
+    }
 }
