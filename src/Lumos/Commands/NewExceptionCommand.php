@@ -1,18 +1,16 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
 
-
-use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Config\Alias;
+use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Exception;
-// use Vinala\Kernel\Logging\Exception;
 
+// use Vinala\Kernel\Logging\Exception;
 
 class NewExceptionCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -28,8 +26,8 @@ class NewExceptionCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.new_exception').
@@ -42,44 +40,43 @@ class NewExceptionCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
-        $name = $this->argument("name");
+        $name = $this->argument('name');
         $notAliased = $this->option('not_aliased');
 
-        if($this->option("message"))
-        {
+        if ($this->option('message')) {
             $message = $this->ask("what's the message");
+        } else {
+            $message = '';
         }
-        else $message = "";
-        $view = $this->option("view");
+        $view = $this->option('view');
         //
-        $process = Exception::create($name , $message , $view);
+        $process = Exception::create($name, $message, $view);
 
-        if( ! $notAliased)
-        {
+        if (!$notAliased) {
             $class = ucfirst($name);
             //
-            Alias::update('exceptions.'.$class , 'App\Exception\\'.$class );
+            Alias::update('exceptions.'.$class, 'App\Exception\\'.$class);
         }
         //
-        $this->show($process , $name);
+        $this->show($process, $name);
     }
 
     /**
-     * Format the message to show
-    */
-    public function show($process , $name)
+     * Format the message to show.
+     */
+    public function show($process, $name)
     {
         $this->title('New exception command :');
         //
-        if($process) 
-        {
+        if ($process) {
             $this->info("\nThe exception was created");
             $this->comment(" -> Path : app/exceptions/$name.php\n");
+        } else {
+            $this->error("\nThe exception is already existe\n");
         }
-        else $this->error("\nThe exception is already existe\n");
     }
 }

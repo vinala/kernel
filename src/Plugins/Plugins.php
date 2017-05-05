@@ -1,220 +1,224 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Plugins;
 
-use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\Config\Alias;
 use Vinala\Kernel\Filesystem\Filesystem;
+use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Plugins\Exception\AutoloadFileNotFoundException;
 use Vinala\Kernel\Plugins\Exception\InfoStructureException;
 use Vinala\Kernel\String\Strings;
-use Vinala\Kernel\Config\Alias;
 
-/**
-* 
-*/
 class Plugins
 {
-	/**
-	 * All info about plugins
-	 */
-	protected static $infos = array();
+    /**
+     * All info about plugins.
+     */
+    protected static $infos = [];
 
-	/**
-	 * All info about plugins
-	 */
-	protected static $config = array();
+    /**
+     * All info about plugins.
+     */
+    protected static $config = [];
 
-	/**
-	 * Init Plug-in class
-	 */
-	public static function ini()
-	{
-		
-		// \Http::clear();
-		self::getInfo();
-		self::getConfig();
-		//
-		self::req();
-	}
+    /**
+     * Init Plug-in class.
+     */
+    public static function ini()
+    {
 
-	/**
-	 * Check if the plugin is enbled by user
-	 */
-	protected static function isEnabled($alias)
-	{
-		if(self::$config[$alias]["enable"]) return true;
-	}
+        // \Http::clear();
+        self::getInfo();
+        self::getConfig();
+        //
+        self::req();
+    }
 
-	protected static function req()
-	{
-		foreach (self::$infos as $key => $value) {
-			if(self::isEnabled($key))
-			{
-				self::call($value);
-				self::setAlias($key);
-				self::exec($value);
-			}
-			
-		}
-	}
+    /**
+     * Check if the plugin is enbled by user.
+     */
+    protected static function isEnabled($alias)
+    {
+        if (self::$config[$alias]['enable']) {
+            return true;
+        }
+    }
 
-	/**
-	 * Get infos about plug-ins
-	 */
-	protected static function getInfo()
-	{
-		$files = self::getFiles();
-		//
-		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/vinala.json"),$path);
-			$data = $data['system'];
-			$data['path']=$path;
+    protected static function req()
+    {
+        foreach (self::$infos as $key => $value) {
+            if (self::isEnabled($key)) {
+                self::call($value);
+                self::setAlias($key);
+                self::exec($value);
+            }
+        }
+    }
 
-				if(array_key_exists("alias", $data)) self::$infos[$data["alias"]]=$data;
-				else 
-				{
-					// die($path."/.info");
-				}
-		}
-		//
-		return self::$infos;
-	}
+    /**
+     * Get infos about plug-ins.
+     */
+    protected static function getInfo()
+    {
+        $files = self::getFiles();
+        //
+        foreach ($files as $path) {
+            $data = self::convert(self::readFile($path.'/vinala.json'), $path);
+            $data = $data['system'];
+            $data['path'] = $path;
 
-	protected static function getConfig()
-	{
-		$files = self::getFiles();
-		//
-		foreach ($files as $path) {
-			$data = self::convert(self::readFile($path."/vinala.json"),$path);
-			$setting = $data['configuration'];
-			$system = $data['system'];
-			$setting['path']=$path;
-			self::$config[$system["alias"]]=$setting;
-		}
-		//
-		return self::$infos;
-	}
+            if (array_key_exists('alias', $data)) {
+                self::$infos[$data['alias']] = $data;
+            } else {
+                // die($path."/.info");
+            }
+        }
+        //
+        return self::$infos;
+    }
 
-	/**
-	 * Convert JSON to PHP array
-	 */
-	protected static function convert($string,$path)
-	{
-		$data = json_decode($string,true);
-		//
-		if(json_last_error() == JSON_ERROR_SYNTAX)
-		{
-			throw new InfoStructureException($path);
-		} 
-		//
-		return $data;
-	}
+    protected static function getConfig()
+    {
+        $files = self::getFiles();
+        //
+        foreach ($files as $path) {
+            $data = self::convert(self::readFile($path.'/vinala.json'), $path);
+            $setting = $data['configuration'];
+            $system = $data['system'];
+            $setting['path'] = $path;
+            self::$config[$system['alias']] = $setting;
+        }
+        //
+        return self::$infos;
+    }
 
-	/**
-	 * Get content of file
-	 */
-	protected static function readFile($path)
-	{
-		return (new Filesystem())->get($path);
-	}
+    /**
+     * Convert JSON to PHP array.
+     */
+    protected static function convert($string, $path)
+    {
+        $data = json_decode($string, true);
+        //
+        if (json_last_error() == JSON_ERROR_SYNTAX) {
+            throw new InfoStructureException($path);
+        }
+        //
+        return $data;
+    }
 
-	/**
-	 * Get all info files path
-	 */
-	protected static function getFiles()
-	{
-		$files = array();
-		//
-		foreach (glob(Application::$root."plugins/*") as  $value) {
-			$files[] = $value;
-		}
-		//
-		return $files;
-	}
+    /**
+     * Get content of file.
+     */
+    protected static function readFile($path)
+    {
+        return (new Filesystem())->get($path);
+    }
 
-	protected static function call($info)
-	{
-		$file = $info["path"]."/".$info["autoload"]["file"];
-		//
-		if((new Filesystem())->exists($file)) need($file);
-		else throw new AutoloadFileNotFoundException($file);
-		
+    /**
+     * Get all info files path.
+     */
+    protected static function getFiles()
+    {
+        $files = [];
+        //
+        foreach (glob(Application::$root.'plugins/*') as  $value) {
+            $files[] = $value;
+        }
+        //
+        return $files;
+    }
 
-	}
+    protected static function call($info)
+    {
+        $file = $info['path'].'/'.$info['autoload']['file'];
+        //
+        if ((new Filesystem())->exists($file)) {
+            need($file);
+        } else {
+            throw new AutoloadFileNotFoundException($file);
+        }
+    }
 
-	protected static function exec($info)
-	{
-		$use = isset($info["autoload"]["script"]);
-		if($use)
-		{
-			$callback = Strings::replace($info["autoload"]["script"],"/","\\");
-			//
-			call_user_func($callback);
-		}
-	}
+    protected static function exec($info)
+    {
+        $use = isset($info['autoload']['script']);
+        if ($use) {
+            $callback = Strings::replace($info['autoload']['script'], '/', '\\');
+            //
+            call_user_func($callback);
+        }
+    }
 
-	protected static function isConfigKeyExist()
-	{
-		$args = func_get_args();
-		//
-		$data = self::$config;
-		foreach ($args as $value) {
-			if(isset($data[$value])) { $data = $data[$value]; break;  }
-			else return false;
-		}
-		return true;
-	}
+    protected static function isConfigKeyExist()
+    {
+        $args = func_get_args();
+        //
+        $data = self::$config;
+        foreach ($args as $value) {
+            if (isset($data[$value])) {
+                $data = $data[$value];
+                break;
+            } else {
+                return false;
+            }
+        }
 
-	protected static function isInfoKeyExist()
-	{
-		$args = func_get_args();
-		//
-		$data = self::$infos;
-		foreach ($args as $value) {
-			if(isset($data[$value])) { $data = $data[$value];  }
-			else return false;
-		}
-		return true;
-	}
+        return true;
+    }
 
-	/**
-	 * Set classes aliases
-	 */
-	public static function setAlias($alias)
-	{
-		if(self::isConfigKeyExist($alias,"shortcuts"))
-		{
-			$shortcuts = self::$config[$alias]["shortcuts"];
-			//
-			foreach ($shortcuts as $alias => $target) {
-				$target = Strings::replace($target,"/","\\");
-				Alias::set($target,$alias);
-			}
-		}
-	}
+    protected static function isInfoKeyExist()
+    {
+        $args = func_get_args();
+        //
+        $data = self::$infos;
+        foreach ($args as $value) {
+            if (isset($data[$value])) {
+                $data = $data[$value];
+            } else {
+                return false;
+            }
+        }
 
-	/**
-	 * Get plugin path
-	 */
-	public static function getPath($alias)
-	{
-		return self::$infos[$alias]["path"];
-	}
+        return true;
+    }
 
-	/**
-	 * Get core
-	 */
-	public static function getCore($alias,$param)
-	{
-		if(self::isInfoKeyExist($alias,"core",$param)) 
-		{
-			return self::$infos[$alias]["core"][$param];
-		}
-		else return null;
-	}
+    /**
+     * Set classes aliases.
+     */
+    public static function setAlias($alias)
+    {
+        if (self::isConfigKeyExist($alias, 'shortcuts')) {
+            $shortcuts = self::$config[$alias]['shortcuts'];
+            //
+            foreach ($shortcuts as $alias => $target) {
+                $target = Strings::replace($target, '/', '\\');
+                Alias::set($target, $alias);
+            }
+        }
+    }
 
-	public static function getCoreParams($alias,$param)
-	{
-		return self::getCore($alias,$param);
-	}
+    /**
+     * Get plugin path.
+     */
+    public static function getPath($alias)
+    {
+        return self::$infos[$alias]['path'];
+    }
+
+    /**
+     * Get core.
+     */
+    public static function getCore($alias, $param)
+    {
+        if (self::isInfoKeyExist($alias, 'core', $param)) {
+            return self::$infos[$alias]['core'][$param];
+        } else {
+            return;
+        }
+    }
+
+    public static function getCoreParams($alias, $param)
+    {
+        return self::getCore($alias, $param);
+    }
 }

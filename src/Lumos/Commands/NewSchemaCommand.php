@@ -1,17 +1,13 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
-
 
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Migrations;
 
-
-
 class NewSchemaCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -34,8 +30,8 @@ class NewSchemaCommand extends Commands
     protected $database = true;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.new_schema').' {name : what\'s the name of the schema?}';
@@ -43,7 +39,7 @@ class NewSchemaCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -51,30 +47,29 @@ class NewSchemaCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
-        $name = $this->argument("name");
+        $name = $this->argument('name');
         //
         $process = Migrations::add($name);
         //
-        $this->show($process , $name);
+        $this->show($process, $name);
     }
 
     /**
-     * Format the message to show
-    */
-    public function show($process , $name)
+     * Format the message to show.
+     */
+    public function show($process, $name)
     {
         $this->title('New schema command :');
         //
-        if(! is_null($process) )
-        {
+        if (!is_null($process)) {
             $this->info("\nThe schema was created");
             $this->comment(" -> Path : database/schema/$process"."_$name.php\n");
+        } else {
+            $this->error("\nThe schema is already existe\n");
         }
-        else $this->error("\nThe schema is already existe\n");
-
     }
 }

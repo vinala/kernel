@@ -1,17 +1,13 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
-
 
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Database\Database;
 
-
-
 class ExportDatabaseCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -34,18 +30,16 @@ class ExportDatabaseCommand extends Commands
     protected $database = false;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
-
         $this->key = config('lumos.commands.export_database');
         $this->description = 'Save database in current time';
-
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -53,7 +47,7 @@ class ExportDatabaseCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
@@ -63,11 +57,14 @@ class ExportDatabaseCommand extends Commands
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($process)
     {
-        if($process) $this->info("The database saved");
-        else $this->error("The database wasn't saved");
+        if ($process) {
+            $this->info('The database saved');
+        } else {
+            $this->error("The database wasn't saved");
+        }
     }
 }

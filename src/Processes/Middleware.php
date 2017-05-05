@@ -1,39 +1,38 @@
 <?php
 
-namespace Vinala\Kernel\Process ;
+namespace Vinala\Kernel\Process;
 
-use Vinala\Kernel\Process\Process;
 use Vinala\Kernel\Filesystem\File;
-use Vinala\Kernel\Objects\DateTime;
 
 /**
-* Documentation
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Process
-* @since v3.3.0
-*/
+ * Documentation.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Middleware extends Process
 {
-
     //--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
 
     /**
-    * Function to create Middleware
-    *
-    * @param string $name
-    * @return bool
-    */
+     * Function to create Middleware.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
     public static function create($name)
     {
         $root = Process::root;
 
         $path = $root."app/http/middleware/$name.php";
 
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             File::put($path, self::set($name));
 
             return true;
@@ -42,13 +41,13 @@ class Middleware extends Process
         return false;
     }
 
-
     /**
-    * Build the middleware script
-    *
-    * @param string $name
-    * @return string
-    */
+     * Build the middleware script.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
     protected static function set($name)
     {
         $txt = "<?php\n\n";

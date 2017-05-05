@@ -3,36 +3,31 @@
 namespace Vinala\Kernel\Console;
 
 /**
-*  Argument
-*/
+ *  Argument.
+ */
 class Argument
 {
-	
-	/**
-	 * name of argument
+    /**
+     * name of argument.
      *
-	 * @var OutputInterface
-	 */
-	public $name;
+     * @var OutputInterface
+     */
+    public $name;
 
     /**
-     * if the argument is optional
-     *
+     * if the argument is optional.
      */
     public $requirement;
 
     /**
-     * description of argument
-     *
+     * description of argument.
      */
     public $description;
 
-
-
-	function __construct($name, $requirement = null, $description = "")
-	{
-		$this->name = $name;
+    public function __construct($name, $requirement = null, $description = '')
+    {
+        $this->name = $name;
         $this->requirement = $requirement;
         $this->description = $description;
-	}
+    }
 }

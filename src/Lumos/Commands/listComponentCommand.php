@@ -1,18 +1,13 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
 
-
-use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
-use Vinala\Kernel\Process\Translator;
 use Vinala\Kernel\Foundation\Component;
-
-
+use Vinala\Kernel\Process\Translator;
 
 class listComponentCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -28,17 +23,17 @@ class listComponentCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
-        $this->key = "list:component";
+        $this->key = 'list:component';
         //
         $this->description = 'List all folders and files language';
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -46,14 +41,17 @@ class listComponentCommand extends Commands
         //
         foreach ($compnentParams as $key => $value) {
             $this->write($key);
-            $this->write(".....");
-            if($value)$this->info("Enabled");
-            else $this->error("Disabled");
+            $this->write('.....');
+            if ($value) {
+                $this->info('Enabled');
+            } else {
+                $this->error('Disabled');
+            }
         }
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
@@ -65,22 +63,22 @@ class listComponentCommand extends Commands
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($array)
     {
-        $this->table(["files"] , $array);
+        $this->table(['files'], $array);
     }
 
     /**
-     * traite data array
-    */
+     * traite data array.
+     */
     public function splite($array)
     {
-        $data = array();
+        $data = [];
         //
         foreach ($array as $key => $value) {
-            $data[] = array($value);
+            $data[] = [$value];
         }
         //
         return $data;

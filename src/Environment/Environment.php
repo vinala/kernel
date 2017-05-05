@@ -1,84 +1,80 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Environment ;
+namespace Vinala\Kernel\Environment;
 
 //use SomeClass;
 
 /**
-* Environment surface
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Environment
-* @since v3.3.0
-*/
+ * Environment surface.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Environment
 {
-	
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	
-	/**
-	* The environment variables
-	*
-	* @var array 
-	*/
-	protected static $register = array() ;
-	
+    /**
+     * The environment variables.
+     *
+     * @var array
+     */
+    protected static $register = [];
 
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	/**
-	* Initiate the environment surface
-	*
-	* @return bool
-	*/
-	public static function ini()
-	{
-		$path = root().'app/environment.php';
+    /**
+     * Initiate the environment surface.
+     *
+     * @return bool
+     */
+    public static function ini()
+    {
+        $path = root().'app/environment.php';
 
-		static::$register = need($path);
-	}
-	
+        static::$register = need($path);
+    }
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-	/**
-	* Set new variable
-	*
-	* @param string $key
-	* @param mixed $value
-	* @return mixed
-	*/
-	protected static function set($key , $value)
-	{
-		return static::$register[$key] = $value;
-	}
+    /**
+     * Set new variable.
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return mixed
+     */
+    protected static function set($key, $value)
+    {
+        return static::$register[$key] = $value;
+    }
 
-	/**
-	* Get a variable
-	*
-	* @param string $key
-	* @param mixed $value
-	* @return mixed
-	*/
-	public static function get($key , $value = null)
-	{
-		if(array_has(static::$register , $key))
-		{
-			return static::$register[$key];
-		}
-		else
-		{
-			static::set($key , $value);
-			return $value;
-		}
-	}	
+    /**
+     * Get a variable.
+     *
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return mixed
+     */
+    public static function get($key, $value = null)
+    {
+        if (array_has(static::$register, $key)) {
+            return static::$register[$key];
+        } else {
+            static::set($key, $value);
 
+            return $value;
+        }
+    }
 }

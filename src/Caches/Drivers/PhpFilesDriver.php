@@ -1,40 +1,40 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Cache\Driver ;
+namespace Vinala\Kernel\Cache\Driver;
 
 use Symfony\Component\Cache\Adapter\PhpFilesAdapter as Adapter;
 
 /**
-* The PHP files cache driver
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Cache\Driver
-* @since v3.3.0
-*/
+ * The PHP files cache driver.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class PhpFilesDriver extends Driver
 {
-	//--------------------------------------------------------
-	// Proprties
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Proprties
+    //--------------------------------------------------------
 
-	/**
-	* The Library used by the driver
-	*
-	* @var string
-	*/
-	private $library = 'symfony' ;
+    /**
+     * The Library used by the driver.
+     *
+     * @var string
+     */
+    private $library = 'symfony';
 
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	function __construct()
-	{
-		$path = '../'.config('cache.options.file.location');
-		$lifetime = config('cache.lifetime');
+    public function __construct()
+    {
+        $path = '../'.config('cache.options.file.location');
+        $lifetime = config('cache.lifetime');
 
-		parent::call(new Adapter('' , $lifetime , $path ));
-	}
-
+        parent::call(new Adapter('', $lifetime, $path));
+    }
 }

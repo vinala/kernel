@@ -1,18 +1,14 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
 
-
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
-use Vinala\Kernel\Process\Seeds;
 use Vinala\Kernel\Database\Database;
-
-
+use Vinala\Kernel\Process\Seeds;
 
 class ExecSeedCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -35,8 +31,8 @@ class ExecSeedCommand extends Commands
     protected $database = true;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.exec_seed');
@@ -44,7 +40,7 @@ class ExecSeedCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -52,7 +48,7 @@ class ExecSeedCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
@@ -64,41 +60,42 @@ class ExecSeedCommand extends Commands
 
     public function onoff($key, $stat)
     {
-        if($stat)
-        {
+        if ($stat) {
             $this->write("$key -> ");
-            $this->green("succeed");
-        }
-        else
-        {
+            $this->green('succeed');
+        } else {
             $this->write("$key -> ");
-            $this->red("failed");
+            $this->red('failed');
         }
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($process)
     {
-        foreach ($process as $key => $value) 
+        foreach ($process as $key => $value) {
             self::onoff($key, $value);
+        }
     }
 
     /**
-     * Make backup for database
+     * Make backup for database.
      */
     protected function backup($process)
     {
-        if($process)
-        {
-            $this->line("");
+        if ($process) {
+            $this->line('');
             //
-            $ok = $this->confirm("Wanna make backup for database ? [yes/no]" , false);
+            $ok = $this->confirm('Wanna make backup for database ? [yes/no]', false);
             //
-            if($ok) 
-                if(Database::export()) $this->info("The database saved");
-                else $this->error("The database wasn't saved");
+            if ($ok) {
+                if (Database::export()) {
+                    $this->info('The database saved');
+                } else {
+                    $this->error("The database wasn't saved");
+                }
+            }
         }
     }
 }

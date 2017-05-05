@@ -2,28 +2,26 @@
 
 namespace Vinala\Kernel\Process;
 
-use Vinala\Kernel\Process\Process;
-use Vinala\Kernel\Objects\DateTime as Time;
-use Vinala\Kernel\Foundation\Application;
 use Vinala\Kernel\Filesystem\File;
+use Vinala\Kernel\Objects\DateTime as Time;
 
 /**
-* Link class
-*/
+ * Link class.
+ */
 class Links extends Process
 {
     public static function create($name, $rt = null)
     {
         $time = Time::now();
         if (empty($name)) {
-            $name=$time;
+            $name = $time;
         }
         //
-        $Root = is_null($rt) ? Process::root : $rt ;
+        $Root = is_null($rt) ? Process::root : $rt;
 
         $path = $Root.'resources/links/'.$name.'.php';
-        
-        if (! File::exists($path)) {
+
+        if (!File::exists($path)) {
             File::put($path, self::set($name));
             //
             return true;
@@ -47,11 +45,11 @@ class Links extends Process
     }
 
     /**
-    *   Listing all schemas
-    */
+     *   Listing all schemas.
+     */
     public static function ListAll()
     {
-        $links = glob(root()."resources/links/*.php");
+        $links = glob(root().'resources/links/*.php');
         //
         return $links;
     }
