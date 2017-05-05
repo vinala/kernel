@@ -7,7 +7,7 @@ use Vinala\Kernel\String\Strings;
 /**
  * Router Process class.
  */
-class Router extends Process
+class Routes extends Process
 {
     public static function get($route)
     {

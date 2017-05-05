@@ -12,7 +12,7 @@ use Vinala\Kernel\Foundation\Application;
 /**
  * Migrations class.
  */
-class Migrations extends Process
+class Schema extends Process
 {
     public static function exec($file = null, $rt = null)
     {

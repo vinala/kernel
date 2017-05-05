@@ -22,7 +22,7 @@ use Vinala\Panel\Link;
 /**
  * Routes 2.
  */
-class Routes
+class Router
 {
     public static $requests = [];
     private static $filters = [];
