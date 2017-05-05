@@ -7,7 +7,7 @@ use Vinala\Kernel\Foundation\Application;
 /**
  * TestCase Class For testing.
  */
-class TestCase_ extends \PHPUnit_Framework_TestCase
+class TestCase_old extends \PHPUnit_Framework_TestCase
 {
     /**
      * Run the test.

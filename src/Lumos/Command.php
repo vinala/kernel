@@ -18,7 +18,7 @@ use Vinala\Kernel\Console\Option;
 use Vinala\Kernel\Database\Database;
 use Vinala\Kernel\String\Strings;
 
-class Commands extends Command
+class Command extends Command
 {
     const VALUE = 'VALUE';
     const OPTIONAL = 'OPTIONAL';

@@ -7,7 +7,7 @@ use Vinala\Kernel\Config\Config;
 /**
  * HTML class.
  */
-class Html
+class HTML
 {
     public static $tag;
 

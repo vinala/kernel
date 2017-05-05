@@ -5,7 +5,7 @@ namespace Vinala\Kernel\Plugins\Exception;
 /**
  * Directory not fount exception.
  */
-class AutoloadFileNotFoundException extends \Exception
+class AutoloadFileNotFound extends \Exception
 {
     protected $message;
 

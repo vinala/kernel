@@ -5,13 +5,14 @@ namespace Vinala\Kernel\Storage;
 use Vinala\Kernel\Storage\Exception\CookieKeyNotFoundException;
 
 /**
-* Cookies surface
-*
-* @version 2.0
-* @author Youssef Had
-* @package Vinala\Kernel\Storage
-* @since v3.3.0
-*/
+ * Cookies surface.
+ *
+ * @version 2.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Cookie
 {
     //--------------------------------------------------------
@@ -28,7 +29,7 @@ class Cookie
     //--------------------------------------------------------
 
     /**
-     * Get a cookie
+     * Get a cookie.
      *
      * @param string $name
      *
@@ -44,11 +45,12 @@ class Cookie
     }
 
     /**
-    * Check if a cookie exists
-    *
-    * @param string $name
-    * @return bool
-    */
+     * Check if a cookie exists.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
     public static function exists($name)
     {
         if (isset($_COOKIE[$name]) && !empty($_COOKIE[$name])) {
@@ -59,15 +61,15 @@ class Cookie
     }
 
     /**
-    * Create new cookie
-    *
-    * @param string $name
-    * @param string $value
-    * @param int $lifetime By minutes
-    * @param string $path
-    *
-    * @return null
-    */
+     * Create new cookie.
+     *
+     * @param string $name
+     * @param string $value
+     * @param int    $lifetime By minutes
+     * @param string $path
+     *
+     * @return null
+     */
     public static function create($name, $value, $lifetime, $path = '/')
     {
         $expire = self::lifetime($lifetime);
@@ -76,11 +78,12 @@ class Cookie
     }
 
     /**
-    * Delete a cookie
-    *
-    * @param string $name
-    * @return null
-    */
+     * Delete a cookie.
+     *
+     * @param string $name
+     *
+     * @return null
+     */
     public static function forget($name)
     {
         setcookie($name, '', time() - 999999, '/');
@@ -88,7 +91,7 @@ class Cookie
     }
 
     /**
-     * Set the cookie lifetime
+     * Set the cookie lifetime.
      *
      * @param int $minutes
      *
