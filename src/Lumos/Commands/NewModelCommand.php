@@ -1,17 +1,14 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
 
-
-use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Config\Alias;
+use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Model;
 
-
 class NewModelCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -34,8 +31,8 @@ class NewModelCommand extends Commands
     protected $database = false;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.new_model').
@@ -44,7 +41,7 @@ class NewModelCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -52,44 +49,42 @@ class NewModelCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
         $class = $this->argument('className');
         $table = $this->argument('tableName');
         //
-        if( is_null($table) )
-        {
+        if (is_null($table)) {
             $table = $class;
         }
         //
         $notAliased = $this->option('not_aliased');
         //
-        $process = Model::create( $class , $table , $notAliased);
+        $process = Model::create($class, $table, $notAliased);
 
-        if( ! $notAliased)
-        {
+        if (!$notAliased) {
             $class = ucfirst($class);
             //
-            Alias::update('models.'.$class , 'App\Model\\'.$class );
+            Alias::update('models.'.$class, 'App\Model\\'.$class);
         }
         //
-        $this->show($process , $class);
+        $this->show($process, $class);
     }
 
     /**
-     * Format the message to show
-    */
-    public function show($process , $name)
+     * Format the message to show.
+     */
+    public function show($process, $name)
     {
         $this->title('New model command :');
         //
-        if($process) 
-        {
+        if ($process) {
             $this->info("\nThe model was created");
             $this->comment(" -> Path : resources/models/$name.php\n");
+        } else {
+            $this->error("\nThe model is already existe\n");
         }
-        else $this->error("\nThe model is already existe\n");
     }
 }

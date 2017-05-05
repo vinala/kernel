@@ -2,17 +2,15 @@
 
 namespace Vinala\Kernel\Testing;
 
-use PHPUnit_Framework_TestCase;
 use Vinala\Kernel\Foundation\Application;
 
 /**
-* TestCase Class For testing
-*/
-class TestCase_ extends \PHPUnit_Framework_TestCase
+ * TestCase Class For testing.
+ */
+class TestCase_old extends \PHPUnit_Framework_TestCase
 {
-    
     /**
-     * Run the test
+     * Run the test.
      */
     public function run()
     {
@@ -22,7 +20,7 @@ class TestCase_ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Call the Vinala Framework
+     * Call the Vinala Framework.
      */
     public static function call()
     {
@@ -30,18 +28,18 @@ class TestCase_ extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Return instance the Framework App Class
+     * Return instance the Framework App Class.
      */
     public static function instance($path)
     {
-        return Application::runTest("", $path, false, false, true);
+        return Application::runTest('', $path, false, false, true);
     }
 
     /**
-     * Check if App Class retruns true
+     * Check if App Class retruns true.
      */
     public static function mock()
     {
-        return self::instance(__DIR__."/../");
+        return self::instance(__DIR__.'/../');
     }
 }

@@ -1,89 +1,83 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Http\Redirect ;
+namespace Vinala\Kernel\Http\Redirect;
 
 /**
-* Main redirect class
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Http\Redirect
-* @since v3.3.0
-*/
+ * Main redirect class.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Redirect
 {
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    /**
+     * Instance of Redirector class.
+     *
+     * @var Vinala\Kernel\Http\Redirect\Redirector
+     */
+    protected static $instance = null;
 
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-	/**
-	* Instance of Redirector class
-	*
-	* @var Vinala\Kernel\Http\Redirect\Redirector
-	*/
-	protected static $instance = null;
-	
+    /**
+     * Get and set instance of Redirector.
+     *
+     * @return Vinala\Kernel\Http\Redirect\Redirector
+     */
+    protected static function getInstance()
+    {
+        if (!is_null(self::$instance)) {
+            return self::$instance;
+        }
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+        self::$instance = cube('redirector');
 
-	/**
-	* Get and set instance of Redirector
-	*	
-	* @return Vinala\Kernel\Http\Redirect\Redirector
-	*/
-	protected static function getInstance()
-	{
-		if( ! is_null(self::$instance))
-		{
-			return self::$instance;
-		}
+        return self::$instance;
+    }
 
-		self::$instance = cube('redirector');
+    /**
+     * Redirect back function.
+     *
+     * @return bool
+     */
+    public static function back()
+    {
+        return self::getInstance()->back();
+    }
 
-		return self::$instance;
-	}
-	
+    /**
+     * Redirect to some url.
+     *
+     * @param string $url
+     * @param array  $extra
+     * @param bool   $secure
+     *
+     * @return mixed
+     */
+    public static function to($url, $extra = [], $secure = null)
+    {
+        return self::getInstance()->to($url, $extra, $secure);
+    }
 
-	/**
-	* Redirect back function
-	*
-	* @return bool
-	*/
-	public static function back()
-	{
-		return self::getInstance()->back();
-	}
-
-	/**
-	* Redirect to some url
-	*
-	* @param string $url
-	* @param array $extra
-	* @param bool $secure
-	* @return mixed
-	*/
-	public static function to($url , $extra = [] , $secure = null)
-	{
-		return self::getInstance()->to($url , $extra , $secure);
-	}
-
-
-	/**
-	* Redirect to route
-	*
-	* @param string $route
-	* @param bool $secure
-	* @return mixed
-	*/
-	public static function route($route , $secure = null)
-	{
-		return self::getInstance()->route($route , $secure );
-	}
-	
-	
-
+    /**
+     * Redirect to route.
+     *
+     * @param string $route
+     * @param bool   $secure
+     *
+     * @return mixed
+     */
+    public static function route($route, $secure = null)
+    {
+        return self::getInstance()->route($route, $secure);
+    }
 }

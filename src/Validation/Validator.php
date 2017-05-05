@@ -1,121 +1,110 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Validation;
 
 use Valitron\Validator as V;
 
 /**
-* Validatior class
-*/
+ * Validatior class.
+ */
 class Validator
 {
-	
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	/**
-	* The validator 
-	*
-	* @var Valitron\Validator
-	*/
-	protected static $validator ;
+    /**
+     * The validator.
+     *
+     * @var Valitron\Validator
+     */
+    protected static $validator;
 
-	/**
-	* Translator folder path
-	*
-	* @var string 
-	*/
-	protected static $langFolder ;
+    /**
+     * Translator folder path.
+     *
+     * @var string
+     */
+    protected static $langFolder;
 
-	/**
-	* Translator file path
-	*
-	* @var string 
-	*/
-	protected static $langFile ;
-	
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+    /**
+     * Translator file path.
+     *
+     * @var string
+     */
+    protected static $langFile;
 
-	/**
-	* Initiate validator
-	*
-	* @return null
-	*/
-	public static function ini()
-	{
-		$lang = config('lang.default');
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-		self::$langFolder = dirname(dirname(__DIR__))."/app/lang/".$lang;
-		self::$langFile = self::$langFolder."/validator.php";
-		if(is_file(self::$langFile))
-		{
-			V::langDir(self::$langFolder); 
-			V::lang('validator');
-		}
-	}
+    /**
+     * Initiate validator.
+     *
+     * @return null
+     */
+    public static function ini()
+    {
+        $lang = config('lang.default');
 
-	/**
-	* Make new validation procces
-	*
-	* @param array $data
-	* @param array $rules
-	* @return Vinala\Kernel\Validation\Validator
-	*/
-	public static function make(array $data , array $rules)
-	{
-		self::$validator = new V($data);
+        self::$langFolder = dirname(dirname(__DIR__)).'/app/lang/'.$lang;
+        self::$langFile = self::$langFolder.'/validator.php';
+        if (is_file(self::$langFile)) {
+            V::langDir(self::$langFolder);
+            V::lang('validator');
+        }
+    }
 
-		foreach ($rules as $rule => $columns) 
-		{
-			$columns = self::separte($columns);
+    /**
+     * Make new validation procces.
+     *
+     * @param array $data
+     * @param array $rules
+     *
+     * @return Vinala\Kernel\Validation\Validator
+     */
+    public static function make(array $data, array $rules)
+    {
+        self::$validator = new V($data);
 
-			$value = self::getValue($rule);
+        foreach ($rules as $rule => $columns) {
+            $columns = self::separte($columns);
 
-			self::$validator->rule($value['rule'] , $columns , $value['value']);
-		}
+            $value = self::getValue($rule);
 
-		return new ValidationResult(self::$validator);
-	}
+            self::$validator->rule($value['rule'], $columns, $value['value']);
+        }
 
-	/**
-	* Separte the data keys by |
-	*
-	* @param string $colmuns
-	* @return array
-	*/
-	protected static function separte($colmuns)
-	{
-		return explode('|', $colmuns);
-	}
+        return new ValidationResult(self::$validator);
+    }
 
-	/**
-	* Get value of the rule
-	*
-	* @param string $param
-	* @return array
-	*/
-	protected static function getValue($param)
-	{
-		$data = explode(':', $param);
+    /**
+     * Separte the data keys by |.
+     *
+     * @param string $colmuns
+     *
+     * @return array
+     */
+    protected static function separte($colmuns)
+    {
+        return explode('|', $colmuns);
+    }
 
-		$result = ['rule' => trim($data[0])];
+    /**
+     * Get value of the rule.
+     *
+     * @param string $param
+     *
+     * @return array
+     */
+    protected static function getValue($param)
+    {
+        $data = explode(':', $param);
 
-		$result['value'] = count($data) > 1 ? $data[1] : null;
+        $result = ['rule' => trim($data[0])];
 
-		return $result;
-	}
-	
+        $result['value'] = count($data) > 1 ? $data[1] : null;
 
-
-	
-	
-	
-	
-	
-
-
-	
+        return $result;
+    }
 }

@@ -1,56 +1,55 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Foundation ;
+namespace Vinala\Kernel\Foundation;
 
 //use SomeClass;
 
 /**
-* The Elixir of the framework
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Foundation
-* @since v3.3.0
-*/
+ * The Elixir of the framework.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Elixir
 {
-	
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	
-	/**
-	* The Elixir SHA
-	*
-	* @var string 
-	*/
-	private static $_SHA = "" ;
-	
+    /**
+     * The Elixir SHA.
+     *
+     * @var string
+     */
+    private static $_SHA = '';
 
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	function __construct()
-	{
-		//
-	}
+    public function __construct()
+    {
+        //
+    }
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-	/**
-	* Check if Elixir allowed
-	*
-	* @return bool
-	*/
-	protected static function check()
-	{
-		if(self::remote() != self::$_SHA) return false;
-		return true;
-	}
-	
+    /**
+     * Check if Elixir allowed.
+     *
+     * @return bool
+     */
+    protected static function check()
+    {
+        if (self::remote() != self::$_SHA) {
+            return false;
+        }
 
+        return true;
+    }
 }

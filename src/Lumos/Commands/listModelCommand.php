@@ -1,17 +1,12 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
 
-
-use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Model;
 
-
-
 class listModelCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -27,17 +22,17 @@ class listModelCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
-        $this->key = "list:model";
+        $this->key = 'list:model';
         //
         $this->description = 'List all models';
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -45,7 +40,7 @@ class listModelCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
@@ -57,22 +52,22 @@ class listModelCommand extends Commands
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($array)
     {
-        $this->table(["files"] , $array);
+        $this->table(['files'], $array);
     }
 
     /**
-     * traite data array
-    */
+     * traite data array.
+     */
     public function splite($array)
     {
-        $data = array();
+        $data = [];
         //
         foreach ($array as $key => $value) {
-            $data[] = array($value);
+            $data[] = [$value];
         }
         //
         return $data;

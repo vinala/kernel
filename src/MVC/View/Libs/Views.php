@@ -1,261 +1,226 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\MVC ;
+namespace Vinala\Kernel\MVC;
 
-use Vinala\Kernel\MVC\View\Exception\ViewNotFoundException;
 use Vinala\Kernel\Atomium\Atomium;
+use Vinala\Kernel\MVC\View\Exception\ViewNotFoundException;
 use Vinala\Kernel\MVC\View\Template;
 
 /**
-* Views class
-*/
+ * Views class.
+ */
 class Views
 {
+    //--------------------------------------------------------
+    // The properties
+    //--------------------------------------------------------
 
-	//--------------------------------------------------------
-	// The properties
-	//--------------------------------------------------------
+    /**
+     * The name of the view.
+     *
+     * @var string
+     */
+    protected $name;
 
-	/**
-	* The name of the view
-	*
-	* @var string 
-	*/
-	protected $name;
+    /**
+     * The path of the view.
+     *
+     * @var string
+     */
+    protected $path;
 
+    /**
+     * The engine used in the view.
+     *
+     * @var string
+     */
+    protected $engine;
 
-	/**
-	* The path of the view
-	*
-	* @var string 
-	*/
-	protected $path;
+    /**
+     * Array od data passed to the view.
+     *
+     * @var array
+     */
+    protected $data = [];
 
+    /**
+     * The nest path of all views.
+     *
+     * @var string
+     */
+    protected $nest;
 
-	/**
-	* The engine used in the view
-	*
-	* @var string 
-	*/
-	protected $engine;
+    //--------------------------------------------------------
+    // constuctor
+    //--------------------------------------------------------
 
+    public function __construct()
+    {
+        $this->nest = root().'resources/views/';
+    }
 
-	/**
-	* Array od data passed to the view
-	*
-	* @var array 
-	*/
-	protected $data = array() ;
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
+    /**
+     * Call a view.
+     *
+     * @param string $name
+     * @param array  $data
+     *
+     * @return Vinala\Kernel\MVC\Views
+     */
+    public function call($name, $data = null, $nest = null)
+    {
 
-	/**
-	* The nest path of all views
-	*
-	* @var string 
-	*/
-	protected $nest ;
-	
-	
+        //Merge data
+        if (!is_null($data)) {
+            $this->data = array_merge($this->data, $data);
+        }
 
-	//--------------------------------------------------------
-	// constuctor
-	//--------------------------------------------------------
+        if (!$this->exists($name, $nest)) {
+            throw new ViewNotFoundException($name);
+        } else {
+            $data = $this->exists($name, $nest);
 
-	function __construct()
-	{
-		$this->nest = root().'resources/views/';
-	}
+            $this->path = $data['path'];
+            $this->engine = $data['engine'];
+            $this->nest = $nest;
+        }
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+        $nameSegments = dot($name);
 
-	/**
-	* Call a view
-	*
-	* @param string $name
-	* @param array $data
-	* @return Vinala\Kernel\MVC\Views
-	*/
-	public function call( $name , $data = null , $nest = null)
-	{
-		
-		//Merge data
-		if( ! is_null($data))
-		{
-			$this->data = array_merge( $this->data , $data);
-		}		
+        $this->name = $this->setName($nameSegments);
 
-		if( ! $this->exists($name , $nest))
-		{
-			throw new ViewNotFoundException($name);
-		}
-		else
-		{
-			$data = $this->exists($name , $nest);
+        return $this;
+    }
 
-			$this->path = $data['path'];
-			$this->engine = $data['engine'];
-			$this->nest = $nest;
-		}
+    /**
+     * Extract name from dotted name segements.
+     *
+     * @param array $name
+     *
+     * @return string
+     */
+    protected function setName($name)
+    {
+        return $name[count($name) - 1];
+    }
 
-		$nameSegments = dot($name);
+    /**
+     * Check if view exists.
+     *
+     * @param string $name
+     *
+     * @return array|false
+     */
+    public function exists($name, $nest = null)
+    {
+        $file = str_replace('.', '/', $name);
 
-		$this->name = $this->setName($nameSegments);
+        $extensions = [
+            '.php',
+            '.atom.php',
+            '.atom',
+            '.tpl.php',
+        ];
 
-		return $this;
-	}
+        $nest = !is_null($nest) ? $nest.'views/' : !is_null($this->nest) ? $this->nest : root().'resources/views/';
 
-	/**
-	* Extract name from dotted name segements
-	*
-	* @param array $name
-	* @return string
-	*/
-	protected function setName($name)
-	{
-		return $name[count($name) - 1];
-	}
+        $i = 0;
+        foreach ($extensions as $extension) {
+            $path = $nest.$file.$extension;
 
+            if (file_exists($path)) {
+                if ($i == 0) {
+                    $view = ['path' => $path, 'engine' => 'none'];
+                } elseif ($i == 1 || $i == 2) {
+                    $view = ['path' => $path, 'engine' => 'atomium'];
+                } elseif ($i == 3) {
+                    $view = ['path' => $path, 'engine' => 'smarty'];
+                }
 
-	/**
-	* Check if view exists
-	*
-	* @param string $name
-	* @return array|false
-	*/
-	public function exists($name , $nest = null)
-	{
-		$file = str_replace('.', '/', $name);
+                return $view;
+            }
 
-		$extensions =[
-			'.php',
-			'.atom.php',
-			'.atom',
-			'.tpl.php'
-		];
+            $i++;
+        }
 
-		$nest = ! is_null($nest) ? $nest.'views/': ! is_null($this->nest) ? $this->nest :root().'resources/views/' ;
+        return false;
+    }
 
-		$i = 0;
-		foreach ($extensions as $extension) 
-		{
-			$path = $nest.$file.$extension;
+    /**
+     * Add variables to the view.
+     *
+     * @param array|string $data
+     * @param string       $value
+     *
+     * @return Vinala\Kernel\MVC\views
+     */
+    public function with($data, $value = null)
+    {
+        if (is_string($data)) {
+            $this->data = array_merge($this->data, [$data => $value]);
+        } elseif (is_array($data)) {
+            $this->data = array_merge($this->data, $data);
+        }
 
-			if(file_exists($path))
-			{
-				if($i == 0) 
-				{
-					$view = ['path' => $path , 'engine' => 'none'];
-				}
-				elseif($i == 1 || $i == 2)
-				{
-					$view = ['path' => $path , 'engine' => 'atomium'];
-				}
-				elseif($i == 3)
-				{
-					$view = ['path' => $path , 'engine' => 'smarty'];
-				}
-				return $view;
-			}
+        return $this;
+    }
 
-			$i++;
-		}
+    /**
+     * Show the view.
+     *
+     * @return bool
+     */
+    public function show(Views $_vinala_view = null)
+    {
+        if (is_null($_vinala_view)) {
+            $_vinala_view = $this;
+        }
 
-		return false;
-	}
+        if ($_vinala_view->engine == 'atomium') {
+            self::atomium($_vinala_view->path, $_vinala_view->data, $_vinala_view->nest);
+        } elseif ($_vinala_view->engine == 'smarty') {
+            Template::show($_vinala_view->path, $_vinala_view->data);
+        } else {
+            if (!is_null($_vinala_view->data)) {
+                foreach ($_vinala_view->data as $_vinala_view_keys => $_vinala_view_values) {
+                    $$_vinala_view_keys = $_vinala_view_values;
+                }
+            }
 
-	/**
-	* Add variables to the view
-	*
-	* @param array|string $data
-	* @param string $value
-	* @return Vinala\Kernel\MVC\views
-	*/
-	public function with($data , $value = null)
-	{
-		if(is_string($data))
-		{
-			$this->data = array_merge( $this->data , [$data => $value]);
-		}
-		elseif(is_array($data))
-		{
-			$this->data = array_merge( $this->data , $data );
-		}
-		return $this;
-	}
+            include $_vinala_view->path;
+        }
+    }
 
-	/**
-	* Show the view
-	*
-	* @return bool
-	*/
-	public function show(Views $_vinala_view = null)
-	{
+    /**
+     * Show atomium view.
+     *
+     * @param string $file
+     * @param array  $data
+     *
+     * @return string
+     */
+    protected function atomium($file, $data, $nest = null)
+    {
+        $atomium = new Atomium($nest);
 
-		if(is_null($_vinala_view))
-		{
-			$_vinala_view = $this;
-		}
+        return $atomium->show($file, $data);
+    }
 
-		if($_vinala_view->engine == 'atomium')
-		{	
-			self::atomium($_vinala_view->path , $_vinala_view->data , $_vinala_view->nest);
-		}
-		elseif($_vinala_view->engine == 'smarty')
-		{
-			Template::show($_vinala_view->path , $_vinala_view->data);
-		}
-		else
-		{
-			if( ! is_null($_vinala_view->data))
-			{
-				foreach ($_vinala_view->data as $_vinala_view_keys => $_vinala_view_values) 
-				{
-					$$_vinala_view_keys = $_vinala_view_values;
-				}
-			}
+    /**
+     * Get the result of the view.
+     *
+     * @return string
+     */
+    public function get()
+    {
+        ob_start();
+        $this->show();
+        $result = ob_get_clean();
 
-			include $_vinala_view->path;
-		}
-
-		return null;
-	}
-
-	/**
-	* Show atomium view
-	*
-	* @param string $file
-	* @param array $data
-	* @return string
-	*/
-	protected function atomium($file, $data , $nest = null)
-	{
-		$atomium = new Atomium($nest);
-
-		return $atomium->show($file, $data);
-	}
-
-	/**
-	* Get the result of the view
-	*
-	* @return string
-	*/
-	public function get()
-	{
-		ob_start();
-		$this->show();
-		$result = ob_get_clean();
-
-		return $result;
-	}
-
-
-	
-	
-	
-
-
-	
-	
+        return $result;
+    }
 }

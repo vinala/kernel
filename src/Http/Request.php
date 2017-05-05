@@ -3,46 +3,42 @@
 namespace Vinala\Kernel\Http;
 
 /**
-* Requests Class
-*/
+ * Requests Class.
+ */
 class Request
 {
-    
-
     /**
-    * Data array contains request data
-    *
-    * @var array
-    */
-    protected $data = array() ;
+     * Data array contains request data.
+     *
+     * @var array
+     */
+    protected $data = [];
 
-
-    function __construct()
+    public function __construct()
     {
         $this->data = $this->getData();
 
         $this->setProperties();
     }
 
-
     /**
-    * Get resuest data
-    *
-    * @return array
-    */
+     * Get resuest data.
+     *
+     * @return array
+     */
     protected function getData()
     {
         $data = $_REQUEST;
         unset($data['_framework_url_']);
-        
+
         return $data;
     }
 
     /**
-    * Set request data as class properties
-    *
-    * @return bool
-    */
+     * Set request data as class properties.
+     *
+     * @return bool
+     */
     protected function setProperties()
     {
         foreach ($this->data as $key => $value) {
@@ -51,22 +47,22 @@ class Request
     }
 
     /**
-    * Get all Requests
-    *
-    * @return array
-    */
+     * Get all Requests.
+     *
+     * @return array
+     */
     public function all()
     {
         return $this->data;
     }
-    
+
     /**
-    * Return true if the current request is post
-    *
-    * @return bool
-    */
+     * Return true if the current request is post.
+     *
+     * @return bool
+     */
     public static function isPost()
     {
-        return (!empty($_POST) && isset($_POST));
+        return !empty($_POST) && isset($_POST);
     }
 }

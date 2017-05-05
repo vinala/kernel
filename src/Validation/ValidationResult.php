@@ -1,100 +1,94 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Validation;
 
 use Valitron\Validator as V;
 
 /**
-* Result of Validation
-*/
+ * Result of Validation.
+ */
 class ValidationResult
 {
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    /**
+     * Errors array.
+     *
+     * @var array
+     */
+    protected $errors = [];
 
-	/**
-	* Errors array
-	*
-	* @var array 
-	*/
-	protected $errors = array() ;
+    /**
+     * Error string.
+     *
+     * @var string
+     */
+    protected $error;
 
-	/**
-	* Error string
-	*
-	* @var string
-	*/
-	protected $error ;
+    /**
+     * If validation fails.
+     *
+     * @var bool
+     */
+    protected $fails = null;
 
-	/**
-	* If validation fails
-	*
-	* @var bool 
-	*/
-	protected $fails = null ;
+    /**
+     * The validator class.
+     *
+     * @var Valitron\Validator
+     */
+    protected $validator;
 
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	/**
-	* The validator class
-	*
-	* @var Valitron\Validator 
-	*/
-	protected $validator ;
+    public function __construct(V $validator)
+    {
+        $this->validator = $validator;
+    }
 
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-	function __construct(V $validator)
-	{
-		$this->validator = $validator;
-	}
+    /**
+     * Check if validation fails.
+     *
+     * @return bool
+     */
+    public function fails()
+    {
+        $this->fails = !$this->validator->validate();
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------		
+        return $this->fails;
+    }
 
-	/**
-	* Check if validation fails
-	*
-	* @return bool
-	*/
-	public function fails()
-	{
-		$this->fails = ! $this->validator->validate();
+    /**
+     * Get first validation error if exists.
+     *
+     * @return string
+     */
+    public function error()
+    {
+        $errors = $this->validator->errors();
 
-		return $this->fails;
-	}
+        $this->error = empty($errors) ?: array_pop($errors)[0];
 
-	/**
-	* Get first validation error if exists 	
-	*
-	* @return string
-	*/
-	public function error()
-	{
-		$errors = $this->validator->errors();
+        return $this->error;
+    }
 
-		$this->error = empty($errors) ?: array_pop($errors)[0];
+    /**
+     * Get validation errors if exists.
+     *
+     * @return string
+     */
+    public function errors()
+    {
+        $this->errors = $this->validator->errors();
 
-		return $this->error ;
-	}
-
-	/**
-	* Get validation errors if exists 	
-	*
-	* @return string
-	*/
-	public function errors()
-	{
-		$this->errors = $this->validator->errors();
-
-		return $this->errors ;
-	}
-	
-	
-	
-	
+        return $this->errors;
+    }
 }

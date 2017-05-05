@@ -1,16 +1,13 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
-
 
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Router;
 
-
 class NewGetRouteCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -26,8 +23,8 @@ class NewGetRouteCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.get_route').' {http : what\'s the http of route?}';
@@ -35,7 +32,7 @@ class NewGetRouteCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -43,7 +40,7 @@ class NewGetRouteCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
@@ -55,17 +52,17 @@ class NewGetRouteCommand extends Commands
     }
 
     /**
-     * Format the message to show
-    */
+     * Format the message to show.
+     */
     public function show($process)
     {
         $this->title('New get route command :');
         //
-        if(! is_null($process) )
-        {
+        if (!is_null($process)) {
             $this->info("\nThe route was created");
             $this->comment(" -> Path : app/http/Route.php\n");
+        } else {
+            $this->error("\nThe route doesn't created\n");
         }
-        else $this->error("\nThe route doesn't created\n");
     }
 }

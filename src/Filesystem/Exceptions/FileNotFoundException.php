@@ -1,17 +1,16 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Filesystem\Exception;
 
 /**
-* File not fount exception
-*/
+ * File not fount exception.
+ */
 class FileNotFoundException extends \Exception
 {
-	protected $message;   // exception message
+    protected $message;   // exception message
 
-	function __construct($path) 
-	{
-		$this->message="File does not existe in ($path)";
-	}
+    public function __construct($path)
+    {
+        $this->message = "File does not existe in ($path)";
+    }
 }
-

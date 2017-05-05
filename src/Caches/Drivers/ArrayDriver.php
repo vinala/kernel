@@ -1,41 +1,40 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Cache\Driver ;
+namespace Vinala\Kernel\Cache\Driver;
 
 use Symfony\Component\Cache\Adapter\ArrayAdapter as Adapter;
 
 /**
-* The array cache driver
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Cache\Driver
-* @since v3.3.0
-*/
+ * The array cache driver.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class ArrayDriver extends Driver
 {
-	//--------------------------------------------------------
-	// Proprties
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Proprties
+    //--------------------------------------------------------
 
-	/**
-	* The Library used by the driver
-	*
-	* @var string
-	*/
-	private $library = 'symfony' ;
+    /**
+     * The Library used by the driver.
+     *
+     * @var string
+     */
+    private $library = 'symfony';
 
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	function __construct()
-	{
-		
-		$lifetime = config('cache.lifetime');
-		$serialize = config('cache.options.array.serialize');
+    public function __construct()
+    {
+        $lifetime = config('cache.lifetime');
+        $serialize = config('cache.options.array.serialize');
 
-		parent::call(new Adapter($lifetime , $serialize ));
-	}
-
+        parent::call(new Adapter($lifetime, $serialize));
+    }
 }

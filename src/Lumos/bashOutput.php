@@ -2,30 +2,25 @@
 
 namespace Vinala\Kernel\Console\Command;
 
-use Vinala\Kernel\String\Strings;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
-/**
-* 
-*/
 class bashOutput
 {
-	
-	/**
-	 * the console input
-	 * @var OutputInterface
-	 */
-	public $output;
+    /**
+     * the console input.
+     *
+     * @var OutputInterface
+     */
+    public $output;
 
-	function __construct(OutputInterface $output)
-	{
-		$this->output = $output;
-	}
+    public function __construct(OutputInterface $output)
+    {
+        $this->output = $output;
+    }
 
-	/**
-     * to write in the console
+    /**
+     * to write in the console.
      */
     public function line($text)
     {
@@ -33,59 +28,58 @@ class bashOutput
     }
 
     /**
-     * to write in the console
+     * to write in the console.
      */
     public function write($key)
     {
-         $this->output->write($key);
+        $this->output->write($key);
     }
 
     /**
-     * to write text in green color in the console
+     * to write text in green color in the console.
      */
     public function info($text)
     {
-        return "<info>".$text."</info>";
+        return '<info>'.$text.'</info>';
     }
 
     /**
-     * to write text in yellow color in the console
+     * to write text in yellow color in the console.
      */
     public function comment($text)
     {
-        return "<comment>".$text."</comment>";
+        return '<comment>'.$text.'</comment>';
     }
 
     /**
-     * to write text in cyan color in the console
+     * to write text in cyan color in the console.
      */
     public function question($text)
     {
-        return "<question>".$text."</question>";
+        return '<question>'.$text.'</question>';
     }
 
     /**
-     * to write text in red color in the console
+     * to write text in red color in the console.
      */
     public function error($text)
     {
-        return "<error>".$text."</error>";
+        return '<error>'.$text.'</error>';
     }
 
     /**
-     * to write text in red color in the console
+     * to write text in red color in the console.
      */
     public function red($text)
     {
-        return chr(27) . "[1;31m" . "$text" . chr(27) . "[0m";
+        return chr(27).'[1;31m'."$text".chr(27).'[0m';
     }
 
     /**
-     * to write text in green color in the console
+     * to write text in green color in the console.
      */
     public function green($text)
     {
-        return chr(27) . "[1;32m" . "$text" . chr(27) . "[0m";
+        return chr(27).'[1;32m'."$text".chr(27).'[0m';
     }
-
 }

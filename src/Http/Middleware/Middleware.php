@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Http\Middleware;
 
@@ -6,123 +6,108 @@ use App\Http\Filters as appFilters;
 use Vinala\Kernel\Http\Middleware\Exceptions\MiddlewareNotFoundException;
 
 /**
-* Middle ware class
-*/
+ * Middle ware class.
+ */
 class Middleware
 {
+    //--------------------------------------------------------
+    // Proprties
+    //--------------------------------------------------------
 
-	//--------------------------------------------------------
-	// Proprties
-	//--------------------------------------------------------	
+    /**
+     * The list of all filters.
+     *
+     * @var array
+     */
+    protected static $filters = [];
 
+    /**
+     * the password of middleware surface to pass the wall.
+     *
+     * @var string
+     */
+    protected static $pass = 'DO_NOTHING';
 
-	/**
-	* The list of all filters
-	*
-	* @var array 
-	*/
-	protected static $filters = [] ;
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
+    /**
+     * Initiate the middleware cube.
+     *
+     * @return null
+     */
+    public static function ini()
+    {
+        self::load();
+    }
 
-	/**
-	* the password of middleware surface to pass the wall
-	*
-	* @var string 
-	*/
-	protected static $pass = 'DO_NOTHING' ;
-	
-	
+    /**
+     * Run Middleware.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public static function run($name)
+    {
+    }
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+    /**
+     * Get Middle ware.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    protected static function call($name)
+    {
+        return appFilters::RoutesMiddleware($name);
+    }
 
-	/**
-	* Initiate the middleware cube
-	*
-	* @return null
-	*/
-	public static function ini()
-	{
-		self::load();
-	}
-	
+    /**
+     * Pass the middleware filter.
+     *
+     * @return string
+     */
+    public static function next()
+    {
+        return self::$pass;
+    }
 
-	/**
-	* Run Middleware
-	*
-	* @param string $name
-	* @return bool
-	*/
-	public static function run($name)
-	{
-		
-		return ;
-	}
+    /**
+     * Set the list of filters used by middleware.
+     *
+     * @return array
+     */
+    protected static function load()
+    {
+        need(root().'app/http/Filter.php');
 
-	/**
-	* Get Middle ware
-	*
-	* @param string $name		
-	* @return string
-	*/
-	protected static function call($name)
-	{
-		return appFilters::RoutesMiddleware($name);
-	}
-	
+        $filter = instance(\App\Http\Filter::class);
 
-	/**
-	* Pass the middleware filter
-	*
-	* @return string
-	*/
-	public static function next()
-	{
-		return self::$pass;
-	}
+        self::$filters['app'] = $filter::$middleware;
+        self::$filters['route'] = $filter::$routeMiddleware;
 
+        return self::$filters;
+    }
 
-	/**
-	* Set the list of filters used by middleware
-	*
-	* @return array
-	*/
-	protected static function load()
-	{
-		need(root().'app/http/Filter.php');
-		
-		$filter = instance(\App\Http\Filter::class);
+    /**
+     * Get the Middleware by filter.
+     *
+     * @param string $name
+     * @param string $key
+     *
+     * @return string
+     */
+    public static function get($name)
+    {
+        if (array_has(self::$filters, 'app.'.$name)) {
+            return ['app', array_get(self::$filters, 'app.'.$name)];
+        } elseif (array_has(self::$filters, 'route.'.$name)) {
+            return ['route', array_get(self::$filters, 'route.'.$name)];
+        }
 
-		self::$filters['app'] = $filter::$middleware;
-		self::$filters['route'] = $filter::$routeMiddleware;
-
-		return self::$filters;
-	}
-
-
-	/**
-	* Get the Middleware by filter
-	*
-	* @param string $name
-	* @param string $key
-	* @return string
-	*/
-	public static function get($name)
-	{
-		if(array_has(self::$filters , 'app.'.$name))
-		{
-			return ['app' , array_get(self::$filters , 'app.'.$name)];
-		}
-		elseif(array_has(self::$filters , 'route.'.$name))
-		{
-			return ['route' , array_get(self::$filters , 'route.'.$name)];
-		}
-
-		exception(MiddlewareNotFoundException::class , $name);
-	}
-	
-	
-	
-	
+        exception(MiddlewareNotFoundException::class, $name);
+    }
 }

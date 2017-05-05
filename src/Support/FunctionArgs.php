@@ -1,55 +1,51 @@
-<?php 
+<?php
 
-namespace Vinala\Kernel\Support ;
+namespace Vinala\Kernel\Support;
 
 //use SomeClass;
 
 /**
-* Class for functions arguments
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Support
-* @since v3.3.0
-*/
+ * Class for functions arguments.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class FunctionArgs
 {
-	
-	//--------------------------------------------------------
-	// Properties
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Properties
+    //--------------------------------------------------------
 
-	
-	/**
-	* The arguments list
-	*
-	* @var array 
-	*/
-	protected $args = array() ;
-	
+    /**
+     * The arguments list.
+     *
+     * @var array
+     */
+    protected $args = [];
 
-	//--------------------------------------------------------
-	// Constructor
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
-	function __construct($args)
-	{
-		$this->args = $args;
-	}
+    public function __construct($args)
+    {
+        $this->args = $args;
+    }
 
-	//--------------------------------------------------------
-	// Functions
-	//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
 
-	/**
-	* Get arguments array
-	*
-	* @return array
-	*/
-	public function get()
-	{
-		return $this->args;
-	}
-	
-
+    /**
+     * Get arguments array.
+     *
+     * @return array
+     */
+    public function get()
+    {
+        return $this->args;
+    }
 }

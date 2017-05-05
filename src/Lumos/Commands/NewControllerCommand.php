@@ -1,18 +1,14 @@
-<?php 
+<?php
 
 namespace Vinala\Kernel\Console\Commands;
 
-
-use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Config\Alias;
+use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Controller;
 
-
-
 class NewControllerCommand extends Commands
 {
-
     /**
      * The key of the console command.
      *
@@ -28,8 +24,8 @@ class NewControllerCommand extends Commands
     public $description;
 
     /**
-     * Configure the command
-     */ 
+     * Configure the command.
+     */
     public function set()
     {
         $this->key = config('lumos.commands.new_controller').' {name : what\'s the name of the controller ?} {route? : If set, a router for this controller will created in routes file} {--resource : If set, the controller will be created with recources methods} {--not_aliased : if set , the controller will be not aliased}';
@@ -37,7 +33,7 @@ class NewControllerCommand extends Commands
     }
 
     /**
-     * Handle the command
+     * Handle the command.
      */
     public function handle()
     {
@@ -45,38 +41,37 @@ class NewControllerCommand extends Commands
     }
 
     /**
-     * Execute the command
+     * Execute the command.
      */
     public function exec()
     {
-        $name = $this->argument("name");
-        $route = $this->argument("route");
-        $resource = $this->option("resource");
+        $name = $this->argument('name');
+        $route = $this->argument('route');
+        $resource = $this->option('resource');
         $notAliased = $this->option('not_aliased');
         //
-        $process = Controller::create($name , $route , $resource);
+        $process = Controller::create($name, $route, $resource);
 
-        if( ! $notAliased)
-        {
+        if (!$notAliased) {
             $class = ucfirst($name);
             //
-            Alias::update('controllers.'.$class , 'App\Controller\\'.$name );
+            Alias::update('controllers.'.$class, 'App\Controller\\'.$name);
         }
-        $this->show($process , $name);
+        $this->show($process, $name);
     }
 
     /**
-     * Format the message to show
-    */
-    public function show($process , $name)
+     * Format the message to show.
+     */
+    public function show($process, $name)
     {
         $this->title('New controller command :');
         //
-        if($process) 
-        {
+        if ($process) {
             $this->info("\nThe controller was created");
             $this->comment(" -> Path : resources/controllers/$name.php\n");
+        } else {
+            $this->error("\nThe controller is already existe\n");
         }
-        else $this->error("\nThe controller is already existe\n");
     }
 }
