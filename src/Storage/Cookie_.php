@@ -12,7 +12,7 @@ namespace Vinala\Kernel\Storage;
 * @package Vinala\Kernel\Storage
 * @since v3.3.0
 */
-class Cookie_
+class Cookie
 {
     //--------------------------------------------------------
     // Properties

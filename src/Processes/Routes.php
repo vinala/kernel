@@ -5,9 +5,9 @@ namespace Vinala\Kernel\Process;
 use Vinala\Kernel\String\Strings;
 
 /**
- * Controller class.
+ * Router Process class.
  */
-class Routes extends Process
+class Router extends Process
 {
     public static function get($route)
     {

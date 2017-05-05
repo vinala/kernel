@@ -22,7 +22,7 @@ use Vinala\Panel\Link;
 /**
  * Routes 2.
  */
-class Router
+class Routes
 {
     public static $requests = [];
     private static $filters = [];
@@ -331,8 +331,7 @@ class Router
         // run the route callback
         if ($ok) {
             self::runRoute($one, $params);
-        }
-        //if the filter is false
+        } //if the filter is false
         else {
             $ok = self::falseFilter($falseok);
         }
@@ -618,7 +617,6 @@ class Router
         }
         //
         if (Collection::contains($routes, 'edit')) {
-
             // self::addController($uri."/{}/$edit",         $controller,"edit");
             // self::addController($uri."/{}/$edit/",        $controller,"edit");
 
@@ -691,7 +689,7 @@ class Router
         //
         if (isset($except)) {
             $i = 0;
-            foreach ($all as  $value) {
+            foreach ($all as $value) {
                 if (Collection::contains($except, $value)) {
                     unset($all[$i]);
                 }
@@ -700,9 +698,9 @@ class Router
         }
         //
         if (isset($only)) {
-            foreach ($all as $key =>$value) {
+            foreach ($all as $key => $value) {
                 $ext = false;
-                foreach ($only as  $value2) {
+                foreach ($only as $value2) {
                     if ($value == $value2) {
                         $ext = true;
                         break;

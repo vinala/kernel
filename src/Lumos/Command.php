@@ -18,7 +18,7 @@ use Vinala\Kernel\Console\Option;
 use Vinala\Kernel\Database\Database;
 use Vinala\Kernel\String\Strings;
 
-class Command extends Command
+class Commands extends Command
 {
     const VALUE = 'VALUE';
     const OPTIONAL = 'OPTIONAL';
@@ -141,9 +141,15 @@ class Command extends Command
     protected function setOutput(OutputInterface $output)
     {
         switch (Config::get('lumos.terminal')) {
-            case 'bash': $op = new bashOutput($output); break;
-            case 'cmd': $op = new cmdOutput($output); break;
-            default: $op = new bashOutput($output); break;
+            case 'bash':
+                $op = new bashOutput($output);
+                break;
+            case 'cmd':
+                $op = new cmdOutput($output);
+                break;
+            default:
+                $op = new bashOutput($output);
+                break;
         }
         //
         $this->console = $op;
