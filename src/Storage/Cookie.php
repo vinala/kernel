@@ -2,24 +2,54 @@
 
 namespace Vinala\Kernel\Storage;
 
+use Vinala\Kernel\Storage\Exception\CookieKeyNotFoundException;
+
 /**
- * cookies.
- */
+* Cookies surface
+*
+* @version 2.0
+* @author Youssef Had
+* @package Vinala\Kernel\Storage
+* @since v3.3.0
+*/
 class Cookie
 {
-    public static function create($name, $value, $minute = 0, $path = '/')
-    {
-        $expire = time() + self::time($minute);
+    //--------------------------------------------------------
+    // Constructor
+    //--------------------------------------------------------
 
+    public function __construct()
+    {
         //
-        if ($path == null) {
-            setcookie($name, $value, $expire);
-        } else {
-            setcookie($name, $value, $expire, $path);
-        }
     }
 
-    public static function existe($name)
+    //--------------------------------------------------------
+    // Functions
+    //--------------------------------------------------------
+
+    /**
+     * Get a cookie
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public static function get($name)
+    {
+        if (self::existe($name)) {
+            return $_COOKIE[$name];
+        }
+
+        exception(CookieKeyNotFoundException::class, $name);
+    }
+
+    /**
+    * Check if a cookie exists
+    *
+    * @param string $name
+    * @return bool
+    */
+    public static function exists($name)
     {
         if (isset($_COOKIE[$name]) && !empty($_COOKIE[$name])) {
             return true;
@@ -28,23 +58,46 @@ class Cookie
         }
     }
 
-    public static function get($name)
+    /**
+    * Create new cookie
+    *
+    * @param string $name
+    * @param string $value
+    * @param int $lifetime By minutes
+    * @param string $path
+    *
+    * @return null
+    */
+    public static function create($name, $value, $lifetime, $path = '/')
     {
-        if (self::existe($name)) {
-            return $_COOKIE[$name];
-        } else {
-            return;
-        }
+        $expire = self::lifetime($lifetime);
+
+        return setcookie($name, $value, $expire, $path);
     }
 
+    /**
+    * Delete a cookie
+    *
+    * @param string $name
+    * @return null
+    */
     public static function forget($name)
     {
         setcookie($name, '', time() - 999999, '/');
         unset($_COOKIE[$name]);
     }
 
-    private static function time($minute)
+    /**
+     * Set the cookie lifetime
+     *
+     * @param int $minutes
+     *
+     * @return long
+     */
+    private static function lifetime($minutes)
     {
-        return $minute * 60;
+        $seconds = $minutes * 60;
+
+        return time() + $seconds;
     }
 }
