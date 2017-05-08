@@ -61,6 +61,19 @@ class Cookie
     }
 
     /**
+     * Check if a cookie exists.
+     *
+     * @param string $name
+     *
+     * @deprecated
+     * @return bool
+     */
+    public static function existe($name)
+    {
+        return self::exists($name);
+    }
+
+    /**
      * Create new cookie.
      *
      * @param string $name
