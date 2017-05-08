@@ -1,10 +1,12 @@
 {
-	"version": "3.3.22",
+	"version": "3.3.25",
 	"tag": "",
-	"stat": "beta",
+	"stat": "finala",
 	"features": [
-		"Finalizing the kernel for v3.3 release"
+		"Fixing some bugs"
 	],
-	"fixes": [],
-	"sha": "634fa40ceb1737c48a2029a517a04183c093ce3e"
+	"fixes": [
+		"Datetime namesapce"
+	],
+	"sha": "bfb217c7bb209ebfb6ba96af8370b1b15fa62671"
 }
