@@ -4,8 +4,8 @@ namespace Vinala\Kernel\Logging;
 
 use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Config\Config;
-use Vinala\Kernel\Objects\DateTime;
-use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Time\DateTime;
+use Vinala\Kernel\Time\DateTime as Time;
 use Vinala\Kernel\String\Strings;
 
 class Log

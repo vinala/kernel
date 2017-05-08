@@ -13,7 +13,7 @@ use Vinala\Kernel\MVC\Relations\BelongsTo;
 use Vinala\Kernel\MVC\Relations\ManyToMany;
 use Vinala\Kernel\MVC\Relations\OneToMany;
 use Vinala\Kernel\MVC\Relations\OneToOne;
-use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Time\DateTime as Time;
 
 /**
   * ORM class.

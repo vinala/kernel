@@ -3,7 +3,7 @@
 namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Filesystem\File;
-use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Time\DateTime as Time;
 
 /**
  * Link class.

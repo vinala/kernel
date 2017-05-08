@@ -14,7 +14,7 @@ use Vinala\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
 use Vinala\Kernel\MVC\ORM\Exception\ModelNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\TableNotFoundException;
-use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Time\DateTime as Time;
 
 /**
  * The Mapping Objet-Relationnel (ORM) class.

@@ -11,7 +11,7 @@ use Vinala\Kernel\Http\Middleware\Middleware;
 use Vinala\Kernel\Http\Redirect\Redirect;
 use Vinala\Kernel\Http\Router\Route;
 use Vinala\Kernel\MVC\View;
-use Vinala\Kernel\Objects\DateTime;
+use Vinala\Kernel\Time\DateTime;
 use Vinala\Kernel\Storage\Session;
 use Vinala\Kernel\Support\FunctionArgs;
 use Vinala\Kernel\Translator\Lang;

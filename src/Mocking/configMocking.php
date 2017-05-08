@@ -48,7 +48,7 @@ class configMocking
                     'Storage'        => Vinala\Kernel\Storage\Storage::class,
                     'Strings'        => Vinala\Kernel\String\Strings::class,
                     'Collection'     => Vinala\Kernel\Collections\Collection::class,
-                    'Time'           => Vinala\Kernel\Objects\DateTime::class,
+                    'Time'           => Vinala\Kernel\Time\DateTime::class,
                     'Translator'     => Vinala\Kernel\Translator\Lang::class,
                     'Url'            => Vinala\Kernel\Access\Url::class,
                     'View'           => Vinala\Kernel\MVC\View\View::class,

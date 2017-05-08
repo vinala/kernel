@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Process;
 
-use Vinala\Kernel\Objects\DateTime;
+use Vinala\Kernel\Time\DateTime;
 
 /**
  * Language class.

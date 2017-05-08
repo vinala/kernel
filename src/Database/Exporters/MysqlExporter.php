@@ -6,7 +6,7 @@ use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Drivers\MysqlDriver as Driver;
 use Vinala\Kernel\Filesystem\Filesystem;
 use Vinala\Kernel\Foundation\Application;
-use Vinala\Kernel\Objects\DateTime as Time;
+use Vinala\Kernel\Time\DateTime as Time;
 
 /**
  * database export class.
