@@ -1,7 +1,12 @@
 {
 	"name": "vinala/kernel",
 	"description": "The core of Vinala Framework.",
-	"keywords": ["framework", "vinala", "kernel", "php"],
+	"keywords": [
+		"framework",
+		"vinala",
+		"kernel",
+		"php"
+	],
 	"license": "MIT",
 	"authors": [
 		{
@@ -14,7 +19,9 @@
 		"mockery/mockery": "0.9.*"
 	},
 	"autoload": {
-		"files": ["src/Foundation/Application.php"]
+		"files": [
+			"src/Foundation/Application.php"
+		]
 	},
 	"extra": {
 		"branch-alias": {
