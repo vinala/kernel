@@ -841,7 +841,7 @@ class Bus
      */
     private static function hypertext()
     {
-        $files = ['Res', 'HTML'];
+        $files = ['Res', 'Html'];
         $folder = static::$root.'Hypertext'.'/';
 
         self::call($files, $folder);
