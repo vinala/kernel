@@ -2,7 +2,9 @@
 	"version": "3.3.26",
 	"tag": "",
 	"stat": "finala",
-	"features": [],
+	"features": [
+		"Allow folders in tests"
+	],
 	"fixes": [
 		"Fixing issues generated from StyleCI",
 		"Fixing issues setup view"
