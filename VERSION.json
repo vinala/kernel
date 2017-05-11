@@ -1,12 +1,11 @@
 {
-	"version": "3.3.25",
+	"version": "3.3.26",
 	"tag": "",
 	"stat": "finala",
-	"features": [
-		"Fixing some bugs"
-	],
+	"features": [],
 	"fixes": [
-		"Datetime namesapce"
+		"Fixing issues generated from StyleCI",
+		"Fixing issues setup view"
 	],
-	"sha": "bfb217c7bb209ebfb6ba96af8370b1b15fa62671"
+	"sha": "69fa1914278f0232662633ab0302d39966c0a4a7"
 }
