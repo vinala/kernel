@@ -2,8 +2,8 @@
 
 namespace Vinala\Kernel\Process;
 
-use Vinala\Kernel\Time\DateTime as Time;
 use Vinala\Kernel\String\Strings;
+use Vinala\Kernel\Time\DateTime as Time;
 
 /**
  * View class.
