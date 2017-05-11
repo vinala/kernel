@@ -1019,7 +1019,7 @@ class Bus
 
         self::call($files, $folder);
 
-        $files = ['AutoloadFileNotFound', 'InfoStructureException'];
+        $files = ['AutoloadFileNotFoundException', 'InfoStructureException'];
         $folder = static::$root.'Plugins/Exceptions'.'/';
 
         self::call($files, $folder);
