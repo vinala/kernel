@@ -1032,7 +1032,7 @@ class Bus
      */
     private static function lumos()
     {
-        $files = ['cmdOutput', 'bashOutput', 'Argument', 'Option', 'Command'];
+        $files = ['cmdOutput', 'bashOutput', 'Argument', 'Option', 'Commands'];
         $folder = static::$root.'Lumos'.'/';
 
         self::call($files, $folder);
