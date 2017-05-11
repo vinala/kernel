@@ -7,13 +7,13 @@ class App
     protected static function appDoc($index)
     {
         $doc = [
-            'project_name'  => "\n\t|  Your project name",
-            'owner_name'    => "\n\t|  Your name",
-            'project_url'   => "\n\t|  Your website root link, you should put your \n\t| root link , by default we using Application::root \n\t| function to get the root link even if you \n\t| working on localhost",
-            'html_title'    => "\n\t|  Default HTML title",
-            'timezone'      => "\n\t|  Here you should set your timezone after that \n\t| whenever you wanna get time, Vinala will give\n\t| you exact time for the timezone.\n\t| To get all of timezones supported in php \n\t| visite here : http://php.net/manual/en/timezones.php",
-            'character_set' => "\n\t|  The framework will set true if you passed\n\t|  the setup",
-            'setup'         => "\n\t|  Default encodage when you using HTML::charset",
+            'project_name'  => "\t|  Your project name",
+            'owner_name'    => "\t|  Your name",
+            'project_url'   => "\t|  Your website root link, you should put your \n\t| root link , by default we using Application::root \n\t| function to get the root link even if you \n\t| working on localhost",
+            'html_title'    => "\t|  Default HTML title",
+            'timezone'      => "\t|  Here you should set your timezone after that \n\t| whenever you wanna get time, Vinala will give\n\t| you exact time for the timezone.\n\t| To get all of timezones supported in php \n\t| visite here : http://php.net/manual/en/timezones.php",
+            'character_set' => "\t|  The framework will set true if you passed\n\t|  the setup",
+            'setup'         => "\t|  Default encodage when you using HTML::charset",
             ];
         //
         return $doc[$index]."\n\t|\n\t**/";
@@ -56,6 +56,6 @@ class App
         $character_set = self::appRow('character_set', "'charset' => 'utf-8' , ");
         $setup_set = self::appRow('setup', "'setup' => $setup , ");
         //
-        return "<?php\n\n\n\nreturn [\n\n\t".$project_name.$owner_name.$project_url.$html_title.$timezone.$character_set.$setup_set."\n];";
+        return "<?php\n\nreturn [\n\t".$project_name.$owner_name.$project_url.$html_title.$timezone.$character_set.$setup_set."\n];";
     }
 }
