@@ -47,7 +47,7 @@ class NewTestCommand extends Commands
         //
         $process = Tests::create($name);
 
-        $this->show($process, $name);
+        $this->show($process['process'], $process['path']);
     }
 
     /**
@@ -59,7 +59,7 @@ class NewTestCommand extends Commands
         //
         if (!is_null($process)) {
             $this->info("\nThe test class was created");
-            $this->comment(" -> Path : tests/$name.test.php\n");
+            $this->comment(" -> Path : $name\n");
         } else {
             $this->error("\nThe test class is already existe\n");
         }

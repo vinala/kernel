@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Process;
 
 use Vinala\Kernel\Filesystem\File;
 use Vinala\Kernel\Foundation\Application;
+use Vinala\Kernel\String\Strings;
 
 /**
  * Controller class.
@@ -14,15 +15,44 @@ class Tests extends Process
     {
         $Root = is_null($rt) ? Process::root : $rt;
         //
-        $path = $Root."tests/$name.test.php";
+
+        $folders = Strings::splite($name, '.');
+        $file = static::createFolders($folders, $Root);
+        
+        $path =  $file['path'].$file['file'].".test.php";
 
         if (!File::exists($path)) {
-            File::put($path, self::set($name));
+            File::put($path, self::set($file['file']));
 
-            return true;
+            return ['process' => true , 'path' => $path];
         } else {
-            return false;
+            return ['process' => false , 'path' => ''];
         }
+    }
+
+    /**
+    * Create a test folder
+    *
+    * @param string $folder
+    * @param string $root
+    * @return string
+    */
+    private static function createFolders($folders, $root)
+    {
+        $path = $root.'tests/';
+        //
+        for ($i = 0; $i < count($folders) - 1; $i++) {
+            $value = $folders[$i];
+            //
+            if (is_dir($path.$value)) {
+                $path .= $value.'/';
+            } else {
+                $path .= $value.'/';
+                mkdir($path, 0777, true);
+            }
+        }
+        //
+        return ['path' => $path, 'file' => $folders[count($folders) - 1]];
     }
 
     /**
