@@ -66,6 +66,7 @@ class Cookie
      * @param string $name
      *
      * @deprecated
+     *
      * @return bool
      */
     public static function existe($name)
