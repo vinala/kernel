@@ -18,25 +18,26 @@ class Tests extends Process
 
         $folders = Strings::splite($name, '.');
         $file = static::createFolders($folders, $Root);
-        
-        $path =  $file['path'].$file['file'].".test.php";
+
+        $path = $file['path'].$file['file'].'.test.php';
 
         if (!File::exists($path)) {
             File::put($path, self::set($file['file']));
 
-            return ['process' => true , 'path' => $path];
+            return ['process' => true, 'path' => $path];
         } else {
-            return ['process' => false , 'path' => ''];
+            return ['process' => false, 'path' => ''];
         }
     }
 
     /**
-    * Create a test folder
-    *
-    * @param string $folder
-    * @param string $root
-    * @return string
-    */
+     * Create a test folder.
+     *
+     * @param string $folder
+     * @param string $root
+     *
+     * @return string
+     */
     private static function createFolders($folders, $root)
     {
         $path = $root.'tests/';
