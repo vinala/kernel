@@ -1,13 +1,10 @@
 {
-	"version": "3.3.26",
+	"version": "3.3.27",
 	"tag": "",
-	"stat": "finala",
+	"stat": "final",
 	"features": [
 		"Allow folders in tests"
 	],
-	"fixes": [
-		"Fixing issues generated from StyleCI",
-		"Fixing issues setup view"
-	],
-	"sha": "69fa1914278f0232662633ab0302d39966c0a4a7"
+	"fixes": [],
+	"sha": "69fa26622d39966ab03014278c19633f0230a4a7"
 }
