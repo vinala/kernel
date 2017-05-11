@@ -61,7 +61,7 @@
 					    <label class="switch-label switch-label-violet" for="chechBox1"></label>
 					</div>
 				</div>
-				<div class="vnl-config-input-desc db-input-input-desc label-text-switch">Do you want to enable debugging</div>
+				<div class="vnl-config-input-desc db-input-input-desc label-text-switch">Do you want to enable debugging mode</div>
 			</div>
 
 			<div class="control_c_row">
@@ -72,7 +72,7 @@
 					    <label class="switch-label switch-label-violet" for="chechBox5"></label>
 					</div>
 				</div>
-				<div class="vnl-config-input-desc db-input-input-desc label-text-switch">You can change the error message and maintenance later in the configuration files</div>
+				<div class="vnl-config-input-desc db-input-input-desc label-text-switch">Do you want to enable maintenance mode</div>
 			</div>
 
 			<div style="margin-top:20px">
@@ -85,31 +85,31 @@
 
 	<div id="welcom" style="display:none">
 		<div class="text">
-			<?php 
+			<?php
                 echo trans('framework.welcome');
                 //
                 echo " <span id='dev_nom'>".config('app.owner').'</span>';
             ?>
-		</div>
-	</div>
+        </div>
+    </div>
 
-	<div class="final_link">
-		<div class="final_link_owner" id="bottom_owner" style="display:none">
-			<a id="fst_panel" class="final_link_owner_a" href="https://www.facebook.com/yussef.had">
-				By Youssef Had
-			</a>	
-		</div>
+    <div class="final_link">
+        <div class="final_link_owner" id="bottom_owner" style="display:none">
+            <a id="fst_panel" class="final_link_owner_a" href="https://www.facebook.com/yussef.had">
+                By Youssef Had
+            </a>    
+        </div>
 
-		<div class="final_link_docs" id="bottom_docs" style="display:none">
-			<a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/Docs">
-				Docs
-			</a>
-		</div>
-		
-		<div class="final_link_version" id="bottom_panel_2" style="display:none">
-			<a id="fst_panel" class="final_link_owner_a" href="https://github.com/vinala/vinala/blob/master/CHANGES.md">
-				<?php echo 'v'.App::getVersion()->full(); ?>
-			</a>
-		</div>	
-	</div>
+        <div class="final_link_docs" id="bottom_docs" style="display:none">
+            <a id="fst_panel" class="final_link_owner_a" href="https://gitlab.com/lighty/Docs">
+                Docs
+            </a>
+        </div>
+        
+        <div class="final_link_version" id="bottom_panel_2" style="display:none">
+            <a id="fst_panel" class="final_link_owner_a" href="https://github.com/vinala/vinala/blob/master/CHANGES.md">
+                <?php echo 'v'.App::getVersion()->full(); ?>
+            </a>
+        </div>  
+    </div>
 </body>
