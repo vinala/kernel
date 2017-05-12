@@ -42,15 +42,15 @@ class InfoCommand extends Commands
         if (!empty(config('app.owner'))) {
             $this->line('by '.config('app.owner'));
         }
-        $this->line("");
+        $this->line('');
         $this->line('***********');
         $this->line('Based on : ');
         $version = Application::getVersion()->console();
         $this->question('Vinala ', true);
         $this->line("Framework v$version");
-        $this->line("-------");
+        $this->line('-------');
         $this->line(Application::getVersion()->kernel());
-        $this->line("-------");
+        $this->line('-------');
         $this->write('created by Youssef Had (');
         $this->question('youssefhad2@gmail.com - www.facebook.com/yussef.had', true);
         $this->line(')');
