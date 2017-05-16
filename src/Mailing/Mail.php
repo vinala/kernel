@@ -1,20 +1,20 @@
 <?php
 
-namespace Vinala\Kernel\Mailing;
+namespace Vinala\Kernel\Mailing ;
 
 //use SomeClass;
 
 /**
- * The Mailing surface.
- *
- * @version 2.0
- *
- * @author Youssef Had
- *
- * @since v3.3.0
- */
+* The Mailing surface
+*
+* @version 2.0
+* @author Youssef Had
+* @package Vinala\Kernel\Mailing
+* @since v3.3.0
+*/
 class Mail
 {
+
     //--------------------------------------------------------
     // Properties
     //--------------------------------------------------------
@@ -25,7 +25,7 @@ class Mail
     // Constructor
     //--------------------------------------------------------
 
-    public function __construct()
+    function __construct()
     {
         //
     }
@@ -35,4 +35,5 @@ class Mail
     //--------------------------------------------------------
 
     //
+
 }
