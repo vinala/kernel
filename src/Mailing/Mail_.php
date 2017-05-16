@@ -8,7 +8,7 @@ use Vinala\Kernel\MVC\View\View;
 /**
  * Mail class.
  */
-class Mail_
+class Mail
 {
     private $transport = null;
     private $too = null;
