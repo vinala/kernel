@@ -72,11 +72,11 @@ class SMTP
     // Constructor
     //--------------------------------------------------------
 
-    public function __construct($host, $port, $secure, $username, $password, $sender_email, $sender_name)
+    public function __construct($host, $port, $encryption, $username, $password, $sender_email, $sender_name)
     {
         $this->host = $host;
         $this->port = $port;
-        $this->secure = $secure;
+        $this->encryption = $encryption;
         $this->username = $username;
         $this->password = $password;
         $this->sender_email = $sender_email;
@@ -87,5 +87,22 @@ class SMTP
     // Functions
     //--------------------------------------------------------
 
-    //
+    /**
+     * Init the SMTP class by getting gefualt values from Config surface
+     *
+     * @return Vinala\Kernel\Mailing
+     */
+    public static function getDefault()
+    {
+        return new SMTP(
+            config('mail.host'),
+            config('mail.port'),
+            config('mail.encryption'),
+            config('mail.username'),
+            config('mail.password'),
+            config('mail.password'),
+            config('mail.from')['adresse'],
+            config('mail.from')['name']
+            );
+    }
 }
