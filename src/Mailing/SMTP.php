@@ -2,7 +2,7 @@
 
 namespace Vinala\Kernel\Mailing;
 
-//use SomeClass;
+use Vinala\Kernel\Mailing\Exceptions\SmtpParameterNotFoundException;
 
 /**
  * The SMTP protocol class.
@@ -94,7 +94,7 @@ class SMTP
      */
     public static function getDefault()
     {
-        return new SMTP(
+        $smtp = new SMTP(
             config('mail.host'),
             config('mail.port'),
             config('mail.encryption'),
@@ -104,5 +104,27 @@ class SMTP
             config('mail.from')['adresse'],
             config('mail.from')['name']
             );
+
+        static::check($smtp);
+
+        return $smtp;
+    }
+
+    /**
+     * Check if SMTP configurated
+     *
+     * @return bool
+     */
+    private static function check($smtp)
+    {
+        exception_if(empty($smtp->host), SmtpParameterNotFoundException::class, 'host');
+        exception_if(empty($smtp->port), SmtpParameterNotFoundException::class, 'port');
+        exception_if(empty($smtp->encryption), SmtpParameterNotFoundException::class, 'encryption');
+        exception_if(empty($smtp->username), SmtpParameterNotFoundException::class, 'username');
+        exception_if(empty($smtp->password), SmtpParameterNotFoundException::class, 'password');
+        exception_if(empty($smtp->sender_email), SmtpParameterNotFoundException::class, 'sender email');
+        exception_if(empty($smtp->sender_name), SmtpParameterNotFoundException::class, 'sender name');
+
+        return true;
     }
 }
