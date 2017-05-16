@@ -88,13 +88,13 @@ class SMTP
     //--------------------------------------------------------
 
     /**
-     * Init the SMTP class by getting gefualt values from Config surface
+     * Init the SMTP class by getting gefualt values from Config surface.
      *
      * @return Vinala\Kernel\Mailing
      */
     public static function getDefault()
     {
-        $smtp = new SMTP(
+        $smtp = new self(
             config('mail.host'),
             config('mail.port'),
             config('mail.encryption'),
@@ -111,7 +111,7 @@ class SMTP
     }
 
     /**
-     * Check if SMTP configurated
+     * Check if SMTP configurated.
      *
      * @return bool
      */
