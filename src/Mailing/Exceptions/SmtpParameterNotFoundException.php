@@ -14,7 +14,8 @@ class SmtpParameterNotFoundException extends Exception
     // Constructor
     //--------------------------------------------------------
 
-function __construct($parameter)
-{
-    $this->message = "The SMTP $parameter not found in framework configuration";
+    function __construct($parameter)
+    {
+        $this->message = "The SMTP $parameter not found in framework configuration";
+    }
 }

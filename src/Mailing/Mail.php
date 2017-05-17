@@ -19,7 +19,12 @@ class Mail
     // Properties
     //--------------------------------------------------------
 
-    //
+    /**
+     * The SMTP params
+     *
+     * @var Vinala\Kernel\Mailing\SMTP
+     */
+    private static $smtp ;
 
     //--------------------------------------------------------
     // Constructor
