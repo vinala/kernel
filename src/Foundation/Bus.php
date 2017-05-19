@@ -961,6 +961,11 @@ class Bus
         $folder = static::$root.'Mailing'.'/';
 
         self::call($files, $folder);
+
+        $files = ['SmtpParameterNotFoundException'];
+        $folder = $folder.'Exceptions/';
+
+        self::call($files, $folder);
     }
 
     /**
