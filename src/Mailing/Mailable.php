@@ -26,6 +26,20 @@ class Mailable
      */
     public $_view;
 
+    /**
+     * The sender name
+     *
+     * @var string
+     */
+    private $_sender_name;
+
+    /**
+     * The sender email
+     *
+     * @var string
+     */
+    private $_sender_mail;
+
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
@@ -40,11 +54,18 @@ class Mailable
     //--------------------------------------------------------
 
     /**
+     * The mail builder function
+     *
+     * @return $this
+     */
+    abstract protected function build();
+
+    /**
      * Set the view
      *
      * @param string $name
      *
-     * @return Vinala\Kernel\Mailing\Mailable
+     * @return $this
      */
     public function view($name)
     {
@@ -53,10 +74,26 @@ class Mailable
         $vars = get_object_vars($this);
 
         foreach ($vars as $key => $value) {
-            if (! in_array($key, ['_view'])) {
+            if (! in_array($key, ['_view', '_sender_name', '_sender_mail'])) {
                 $this->_view->with($key, $value);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * Set the sender email and name
+     *
+     * @param string $mail
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function from($mail, $name)
+    {
+        $this->_sender_name = $name;
+        $this->_sender_mail = $mail;
 
         return $this;
     }
