@@ -3,6 +3,9 @@
 namespace Vinala\Kernel\Mailing ;
 
 use Vinala\Kernel\MVC\View\View;
+use Swift_SmtpTransport as Transport;
+use Swift_Mailer as Mailer;
+use Swift_Message as Message;
 
 /**
 * The Mailing surface
@@ -47,7 +50,33 @@ class Mail
      */
     public $type;
 
+    /**
+     * The SMTP transport
+     *
+     * @var Swift\SmtpTransport
+     */
+    private $transport;
 
+    /**
+     * The Swift mailer
+     *
+     * @var Swift\Mailer
+     */
+    private $mailer;
+
+    /**
+     * The Swift message
+     *
+     * @var Swift\Message
+     */
+    private $message;
+
+    /**
+     * The mail subject
+     *
+     * @var string
+     */
+    public $subject;
     
 
     //--------------------------------------------------------
@@ -59,6 +88,9 @@ class Mail
         $this->smtp = SMTP::getDefault();
 
         $this->view($view, $data);
+        $this->transport();
+        $this->mailer();
+        $this->subject();
     }
 
     //--------------------------------------------------------
@@ -77,13 +109,14 @@ class Mail
      */
     public static function send($view, $data, $closure)
     {
-        $mailer = new self($view, $data);
+        $mailer = new self();
 
         $closure($mailer);
         
-        $view = static::view($mailer->type, $view, $data);
-        $body = $view['body'];
-        $type = $view['type'];
+        $mailer->view($view, $data);
+        $mailer->transport();
+        
+
         return ;
     }
 
@@ -96,14 +129,67 @@ class Mail
      *
      * @return string
      */
-    private function view($type, $value, $data)
+    private function view($value, $data)
     {
-        if ($type == 'text') {
+        if ($this->type == 'text') {
             $this->view = $value;
             $this->type = 'text/plain';
-        } elseif ($type == 'html') {
+        } elseif ($this->type == 'html') {
             $this->view = View::make($value, $data)->get();
             $this->type = 'text/html';
         }
+    }
+
+    /**
+     * Set the SMTP transport
+     *
+     * @return Swift_SmtpTransport
+     */
+    private function transport()
+    {
+        $this->transport = Transport::newInstance($this->smtp->host, $this->smtp->port, $this->smtp->encryption)
+            ->setUsername($this->smtp->username)
+            ->setPassword($this->smtp->password);
+
+        return $this->transport;
+    }
+
+    /**
+     * Set the mail subject
+     *
+     * @return string
+     */
+    private function subject()
+    {
+        $this->subject = is_null($this->subject) ? config('mail.subject') : $this->subject;
+
+        return $this->subject;
+    }
+
+    /**
+     * Set the Swift mailer
+     *
+     * @return Swift\Mailer
+     */
+    private function mailer()
+    {
+        $this->mailer = Mailer::newInstance($this->transport);
+
+        return $this->mailer;
+    }
+
+    /**
+     * Set the Swift message
+     *
+     * @return Swift\Message
+     */
+    private function message()
+    {
+        $this->message = Message::newInstance($this->subject);
+
+        $this->message->setBody($this->body, $this->type);
+        $this->message->setFrom($this->smtp->sender_email, $this->smtp->sender_name);
+
+        return $this->message;
     }
 }
