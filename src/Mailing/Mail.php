@@ -32,15 +32,33 @@ class Mail
      * @var closure
      */
     private $closure ;
+
+    /**
+     * The mail view
+     *
+     * @var string
+     */
+    public $view ;
+
+    /**
+     * The mail type
+     *
+     * @var string
+     */
+    public $type;
+
+
     
 
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
 
-    function __construct()
+    function __construct($view, $data)
     {
         $this->smtp = SMTP::getDefault();
+
+        $this->view($view, $data);
     }
 
     //--------------------------------------------------------
@@ -59,9 +77,13 @@ class Mail
      */
     public static function send($view, $data, $closure)
     {
-        $mailer = new self();
+        $mailer = new self($view, $data);
 
         $closure($mailer);
+        
+        $view = static::view($mailer->type, $view, $data);
+        $body = $view['body'];
+        $type = $view['type'];
         return ;
     }
 
@@ -74,18 +96,14 @@ class Mail
      *
      * @return string
      */
-    private static function view($type, $name, $data)
+    private function view($type, $value, $data)
     {
         if ($type == 'text') {
-            return [
-                'body' => $view,
-                'type' => 'text/plain'
-            ];
+            $this->view = $value;
+            $this->type = 'text/plain';
         } elseif ($type == 'html') {
-            return [
-                'body' => View::make($view, $data)->get(),
-                'type' => 'text/html'
-            ];
+            $this->view = View::make($value, $data)->get();
+            $this->type = 'text/html';
         }
     }
 }
