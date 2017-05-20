@@ -1,40 +1,40 @@
 <?php
 
-namespace Vinala\Kernel\Mailing ;
+namespace Vinala\Kernel\Mailing;
 
 use Vinala\Kernel\MVC\View;
 
 /**
-* The Mailable class where users can send thier mails
-*
-* @version 1.0
-* @author Youssef Had
-* @package Vinala\Kernel\Mailing
-* @since v3.3.0
-*/
+ * The Mailable class where users can send thier mails.
+ *
+ * @version 1.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Mailable
 {
-
     //--------------------------------------------------------
     // Properties
     //--------------------------------------------------------
 
     /**
-     * The view used
+     * The view used.
      *
      * @var string
      */
     public $_view;
 
     /**
-     * The sender name
+     * The sender name.
      *
      * @var string
      */
     private $_sender_name;
 
     /**
-     * The sender email
+     * The sender email.
      *
      * @var string
      */
@@ -44,7 +44,7 @@ class Mailable
     // Constructor
     //--------------------------------------------------------
 
-    function __construct()
+    public function __construct()
     {
         //
     }
@@ -54,14 +54,14 @@ class Mailable
     //--------------------------------------------------------
 
     /**
-     * The mail builder function
+     * The mail builder function.
      *
      * @return $this
      */
     abstract protected function build();
 
     /**
-     * Set the view
+     * Set the view.
      *
      * @param string $name
      *
@@ -74,7 +74,7 @@ class Mailable
         $vars = get_object_vars($this);
 
         foreach ($vars as $key => $value) {
-            if (! in_array($key, ['_view', '_sender_name', '_sender_mail'])) {
+            if (!in_array($key, ['_view', '_sender_name', '_sender_mail'])) {
                 $this->_view->with($key, $value);
             }
         }
@@ -83,7 +83,7 @@ class Mailable
     }
 
     /**
-     * Set the sender email and name
+     * Set the sender email and name.
      *
      * @param string $mail
      * @param string $name

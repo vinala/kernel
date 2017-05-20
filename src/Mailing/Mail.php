@@ -1,89 +1,88 @@
 <?php
 
-namespace Vinala\Kernel\Mailing ;
+namespace Vinala\Kernel\Mailing;
 
-use Vinala\Kernel\MVC\View\View;
-use Swift_SmtpTransport as Transport;
 use Swift_Mailer as Mailer;
 use Swift_Message as Message;
+use Swift_SmtpTransport as Transport;
+use Vinala\Kernel\MVC\View\View;
 
 /**
-* The Mailing surface
-*
-* @version 2.0
-* @author Youssef Had
-* @package Vinala\Kernel\Mailing
-* @since v3.3.0
-*/
+ * The Mailing surface.
+ *
+ * @version 2.0
+ *
+ * @author Youssef Had
+ *
+ * @since v3.3.0
+ */
 class Mail
 {
-
     //--------------------------------------------------------
     // Properties
     //--------------------------------------------------------
 
     /**
-     * The SMTP params
+     * The SMTP params.
      *
      * @var Vinala\Kernel\Mailing\SMTP
      */
-    private $smtp ;
+    private $smtp;
 
     /**
-     * The mail Closure
+     * The mail Closure.
      *
      * @var closure
      */
-    private $closure ;
+    private $closure;
 
     /**
-     * The mail view
+     * The mail view.
      *
      * @var string
      */
-    public $view ;
+    public $view;
 
     /**
-     * The mail type
+     * The mail type.
      *
      * @var string
      */
     public $type;
 
     /**
-     * The SMTP transport
+     * The SMTP transport.
      *
      * @var Swift\SmtpTransport
      */
     private $transport;
 
     /**
-     * The Swift mailer
+     * The Swift mailer.
      *
      * @var Swift\Mailer
      */
     private $mailer;
 
     /**
-     * The Swift message
+     * The Swift message.
      *
      * @var Swift\Message
      */
     private $message;
 
     /**
-     * The mail subject
+     * The mail subject.
      *
      * @var string
      */
     public $subject;
-    
 
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
 
-    function __construct($view, $data)
+    public function __construct($view, $data)
     {
         $this->smtp = SMTP::getDefault();
 
@@ -97,12 +96,11 @@ class Mail
     // Functions
     //--------------------------------------------------------
 
-
     /**
-     * The send function
+     * The send function.
      *
-     * @param string $view
-     * @param array $data
+     * @param string  $view
+     * @param array   $data
      * @param closure $closure
      *
      * @return null
@@ -112,20 +110,17 @@ class Mail
         $mailer = new self();
 
         $closure($mailer);
-        
+
         $mailer->view($view, $data);
         $mailer->transport();
-        
-
-        return ;
     }
 
     /**
-     * Get the view to send
+     * Get the view to send.
      *
      * @param string $type
      * @param string $name
-     * @param array $data
+     * @param array  $data
      *
      * @return string
      */
@@ -141,7 +136,7 @@ class Mail
     }
 
     /**
-     * Set the SMTP transport
+     * Set the SMTP transport.
      *
      * @return Swift_SmtpTransport
      */
@@ -155,7 +150,7 @@ class Mail
     }
 
     /**
-     * Set the mail subject
+     * Set the mail subject.
      *
      * @return string
      */
@@ -167,7 +162,7 @@ class Mail
     }
 
     /**
-     * Set the Swift mailer
+     * Set the Swift mailer.
      *
      * @return Swift\Mailer
      */
@@ -179,7 +174,7 @@ class Mail
     }
 
     /**
-     * Set the Swift message
+     * Set the Swift message.
      *
      * @return Swift\Message
      */
@@ -194,7 +189,7 @@ class Mail
     }
 
     /**
-     * To add reciever adresses
+     * To add reciever adresses.
      *
      * @return Vinala\Kernel\Mailing\Mail
      */
@@ -203,11 +198,10 @@ class Mail
         $args = func_get_args();
 
         if (count($args) == 1) {
-            # code...
+            // code...
         } elseif (count($args) == 2) {
-            # code...
+            // code...
         }
-        
 
         return $this;
     }
