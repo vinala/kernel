@@ -8,7 +8,7 @@ use Vinala\Kernel\MVC\View\View;
 /**
  * Mail class.
  */
-class Mail
+class Mail_
 {
     private $transport = null;
     private $too = null;
@@ -119,13 +119,13 @@ class Mail
                 $name = '';
                 $filee = '';
             //
-            foreach ($value as $key2 => $value2) {
-                if ($key2 == 0) {
-                    $filee = $value2;
-                } elseif ($key2 == 1) {
-                    $name = $value2;
+                foreach ($value as $key2 => $value2) {
+                    if ($key2 == 0) {
+                        $filee = $value2;
+                    } elseif ($key2 == 1) {
+                        $name = $value2;
+                    }
                 }
-            }
                 if (empty($name)) {
                     $message->attach(\Swift_Attachment::fromPath($filee));
                 } else {

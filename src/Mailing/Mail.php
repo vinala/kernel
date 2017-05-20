@@ -192,4 +192,23 @@ class Mail
 
         return $this->message;
     }
+
+    /**
+     * To add reciever adresses
+     *
+     * @return Vinala\Kernel\Mailing\Mail
+     */
+    public function to()
+    {
+        $args = func_get_args();
+
+        if (count($args) == 1) {
+            # code...
+        } elseif (count($args) == 2) {
+            # code...
+        }
+        
+
+        return $this;
+    }
 }
