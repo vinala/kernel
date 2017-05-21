@@ -45,7 +45,7 @@ abstract class Mailable
      *
      * @var string
      */
-    private $subject;
+    private $_subject;
 
     /**
      * The sender name.
@@ -61,6 +61,7 @@ abstract class Mailable
      */
     private $_sender_mail;
 
+
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
@@ -73,6 +74,16 @@ abstract class Mailable
     //--------------------------------------------------------
     // Getters and setters
     //--------------------------------------------------------
+
+    /**
+     * Main getter of the class.
+     *
+     * @return string
+     */
+    public function get($var)
+    {
+        return $this->$var;
+    }
 
     /**
      * Getter of $_type.
@@ -119,7 +130,7 @@ abstract class Mailable
         $vars = get_object_vars($this);
 
         foreach ($vars as $key => $value) {
-            if (!in_array($key, ['_view', '_sender_name', '_sender_mail'])) {
+            if (!in_array($key, ['_view', '_text', '_type', '_subject', '_sender_name', '_sender_mail'])) {
                 $this->_view->with($key, $value);
             }
         }
