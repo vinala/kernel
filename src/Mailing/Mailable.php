@@ -73,7 +73,7 @@ abstract class Mailable
     //--------------------------------------------------------
     // Getters and setters
     //--------------------------------------------------------
-    
+
     /**
      * Getter of $_type.
      *
@@ -138,7 +138,7 @@ abstract class Mailable
      */
     public function text($text)
     {
-        $this->_text= $text;
+        $this->_text = $text;
 
         $this->_type = 'text/plain';
 
