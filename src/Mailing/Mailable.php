@@ -13,7 +13,7 @@ use Vinala\Kernel\MVC\View;
  *
  * @since v3.3.0
  */
-class Mailable
+abstract class Mailable
 {
     //--------------------------------------------------------
     // Properties
