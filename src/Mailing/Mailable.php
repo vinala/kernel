@@ -27,6 +27,20 @@ abstract class Mailable
     public $_view;
 
     /**
+     * The text used.
+     *
+     * @var string
+     */
+    public $_text;
+
+    /**
+     * The mail type.
+     *
+     * @var string
+     */
+    public $_type;
+
+    /**
      * The sender name.
      *
      * @var string
@@ -78,6 +92,24 @@ abstract class Mailable
                 $this->_view->with($key, $value);
             }
         }
+
+        $this->_type = 'text/html';
+
+        return $this;
+    }
+
+    /**
+     * Set the text to send.
+     *
+     * @param string $text
+     *
+     * @return $this
+     */
+    public function text($text)
+    {
+        $this->_text= $text;
+
+        $this->_type = 'text/plain';
 
         return $this;
     }
