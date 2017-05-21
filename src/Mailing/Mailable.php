@@ -38,7 +38,14 @@ abstract class Mailable
      *
      * @var string
      */
-    public $_type;
+    private $_type;
+
+    /**
+     * The subject of the mail.
+     *
+     * @var string
+     */
+    private $subject;
 
     /**
      * The sender name.
@@ -61,6 +68,30 @@ abstract class Mailable
     public function __construct()
     {
         //
+    }
+
+    //--------------------------------------------------------
+    // Getters and setters
+    //--------------------------------------------------------
+    
+    /**
+     * Getter of $_type.
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
+
+    /**
+     * Getter of $_subject.
+     *
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->_subject;
     }
 
     //--------------------------------------------------------
