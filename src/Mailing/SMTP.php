@@ -84,6 +84,20 @@ class SMTP
     }
 
     //--------------------------------------------------------
+    // Getters and Setters
+    //--------------------------------------------------------
+    
+    /**
+     * Getter of the class.
+     *
+     * @return string
+     */
+    public function get($var)
+    {
+        return $this->$var;
+    }
+
+    //--------------------------------------------------------
     // Functions
     //--------------------------------------------------------
 
@@ -105,7 +119,7 @@ class SMTP
             config('mail.from')['name']
             );
 
-        static::check($smtp);
+        // static::check($smtp);
 
         return $smtp;
     }
