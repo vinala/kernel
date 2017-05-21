@@ -957,7 +957,7 @@ class Bus
      */
     private static function mail()
     {
-        $files = ['Mail', 'Mailable'];
+        $files = ['Mail', 'Mailable', 'SMTP'];
         $folder = static::$root.'Mailing'.'/';
 
         self::call($files, $folder);
