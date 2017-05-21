@@ -962,7 +962,7 @@ class Bus
 
         self::call($files, $folder);
 
-        $files = ['SmtpParameterNotFoundException'];
+        $files = ['SmtpParameterNotFoundException', 'MailViewNotFoundException'];
         $folder = $folder.'Exceptions/';
 
         self::call($files, $folder);
