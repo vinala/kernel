@@ -61,7 +61,6 @@ abstract class Mailable
      */
     private $_sender_mail;
 
-
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
@@ -195,7 +194,6 @@ abstract class Mailable
      */
     public function attachment($path)
     {
-
         return $this;
     }
 }
