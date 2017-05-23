@@ -185,4 +185,17 @@ abstract class Mailable
 
         return $this;
     }
+
+    /**
+     * add attachments to the mail.
+     *
+     * @param string $path
+     *
+     * @return $this
+     */
+    public function attachment($path)
+    {
+
+        return $this;
+    }
 }
