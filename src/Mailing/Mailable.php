@@ -171,4 +171,18 @@ abstract class Mailable
 
         return $this;
     }
+
+    /**
+     * The subject of the mail.
+     *
+     * @param string $subject
+     *
+     * @return $this
+     */
+    public function subject($subject)
+    {
+        $this->_subject = $subject;
+
+        return $this;
+    }
 }
