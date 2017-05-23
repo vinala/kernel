@@ -6,6 +6,9 @@ use Swift_Mailer as Mailer;
 use Swift_Message as Message;
 use Swift_SmtpTransport as Transport;
 use Vinala\Kernel\MVC\View\View;
+use Vinala\Kernel\Mailing\Mailable;
+
+use Vinala\Kernel\Mailing\Exceptions\MailViewNotFoundException;
 
 /**
  * The Mailing surface.
@@ -44,11 +47,11 @@ class Mail
     public $view;
 
     /**
-     * The mail type.
+     * The mailable object
      *
-     * @var string
+     * @var Vinala\Kernel\Mailing\Mailable
      */
-    public $type;
+    private $mailable;
 
     /**
      * The SMTP transport.
@@ -82,11 +85,10 @@ class Mail
     // Constructor
     //--------------------------------------------------------
 
-    public function __construct($view, $data)
+    public function __construct()
     {
         $this->smtp = SMTP::getDefault();
 
-        $this->view($view, $data);
         $this->transport();
         $this->mailer();
         $this->subject();
@@ -105,7 +107,7 @@ class Mail
      *
      * @return null
      */
-    public static function send($view, $data, $closure)
+    public static function prepare($view, $data, $closure)
     {
         $mailer = new self();
 
@@ -124,14 +126,10 @@ class Mail
      *
      * @return string
      */
-    private function view($value, $data)
+    private function checkView()
     {
-        if ($this->type == 'text') {
-            $this->view = $value;
-            $this->type = 'text/plain';
-        } elseif ($this->type == 'html') {
-            $this->view = View::make($value, $data)->get();
-            $this->type = 'text/html';
+        if (is_null($this->mailable->get('_view'))) {
+            exception(MailViewNotFoundException::class);
         }
     }
 
@@ -142,9 +140,9 @@ class Mail
      */
     private function transport()
     {
-        $this->transport = Transport::newInstance($this->smtp->host, $this->smtp->port, $this->smtp->encryption)
-            ->setUsername($this->smtp->username)
-            ->setPassword($this->smtp->password);
+        $this->transport = Transport::newInstance($this->smtp->get('host'), $this->smtp->get('port'), $this->smtp->get('encryption'))
+            ->setUsername($this->smtp->get('username'))
+            ->setPassword($this->smtp->get('password'));
 
         return $this->transport;
     }
@@ -191,18 +189,32 @@ class Mail
     /**
      * To add reciever adresses.
      *
-     * @return Vinala\Kernel\Mailing\Mail
+     * @return $this
      */
-    public function to()
+    public static function to()
     {
         $args = func_get_args();
 
-        if (count($args) == 1) {
-            // code...
-        } elseif (count($args) == 2) {
-            // code...
-        }
+        $mail = new self();
 
-        return $this;
+        return $mail;
+    }
+
+    /**
+     * Set the mailable class to send.
+     *
+     * @param Vinala\Kernel\Mailing\Mailable
+     *
+     * @return bool
+     */
+    public function send(Mailable $mailable)
+    {
+        $this->mailable = $mailable;
+
+        dc($mailable);
+        $this->mailable->build();
+        dc($mailable);
+
+        $this->checkView();
     }
 }
