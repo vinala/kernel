@@ -75,11 +75,11 @@ class Mail
     private $message;
 
     /**
-     * The mail subject.
+     * The receivers of the mail
      *
-     * @var string
+     * @var array
      */
-    public $subject;
+    private $receivers;
 
     //--------------------------------------------------------
     // Constructor
@@ -91,7 +91,6 @@ class Mail
 
         $this->transport();
         $this->mailer();
-        $this->subject();
     }
 
     //--------------------------------------------------------
@@ -195,9 +194,36 @@ class Mail
     {
         $args = func_get_args();
 
+        $receivers = [];
+
+        foreach ($args as $arg) {
+            if (is_string($arg)) {
+                $receivers[] = $arg;
+            } elseif (is_array($arg)) {
+                foreach ($arg as $value) {
+                    $receivers[] = $value;
+                }
+            }
+        }
+
         $mail = new self();
+        $mail->setDestination($receivers);
 
         return $mail;
+    }
+
+    /**
+     * Set email destination.
+     *
+     * @param array $mails
+     *
+     * @return $this
+     */
+    protected function setDestination(array $mails)
+    {
+        $this->recievers = $mails;
+
+        return $this;
     }
 
     /**
