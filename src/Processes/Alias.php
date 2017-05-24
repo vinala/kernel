@@ -33,11 +33,13 @@ class Alias extends Process
 
             'user' => "\n\t/*\n\t|----------------------------------------------------------\n\t| User Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for your aliases, feel\n\t| free to register as many as \n\t| you wish as the aliases are 'lazy' loaded so \n\t| they don't hinder performance.\n\t|\n\t**/\n",
 
-            'exceptions' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Exceptions Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of exceptions class\n\t| classes\n\t|\n\t**/\n",
+            'exceptions' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Exceptions Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of exceptions classes\n\t|\n\t**/\n",
 
-            'controllers' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Controllers Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of controllers class\n\t| classes\n\t|\n\t**/\n",
+            'controllers' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Controllers Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of controllers classes\n\t|\n\t**/\n",
 
-            'models' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Models Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of models class\n\t| classes\n\t|\n\t**/\n",
+            'models' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Models Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of models classes\n\t|\n\t**/\n",
+
+            'mailables' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Mailables Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of mailables classes\n\t|\n\t**/\n",
         ];
     }
 
@@ -57,10 +59,9 @@ class Alias extends Process
         $content .= $docs['exceptions'].self::arrayFormat($params['exceptions'], 'exceptions');
         $content .= $docs['controllers'].self::arrayFormat($params['controllers'], 'controllers');
         $content .= $docs['models'].self::arrayFormat($params['models'], 'models');
+        $content .= $docs['mailables'].self::arrayFormat($params['mailables'], 'mailables');
 
         $content = self::fileFormat($content);
-
-        // d($content);
 
         return self::setFile($content);
     }
@@ -68,10 +69,9 @@ class Alias extends Process
     /**
      * Set the file.
      *
-     * @param
-     * @param
+     * @param string $content
      *
-     * @return
+     * @return bool
      */
     protected static function setFile($content)
     {
@@ -112,8 +112,12 @@ class Alias extends Process
     {
         $format = "\t'$name' => [\n";
 
-        foreach ($data as $key => $value) {
-            $format .= "\t\t'$key' => $value::class , \n";
+        if (count($data) > 0) {
+            foreach ($data as $key => $value) {
+                $format .= "\t\t'$key' => $value::class , \n";
+            }
+        } else {
+            $format .= "\t\t//\n";
         }
 
         $format .= "\t],\n\n";
