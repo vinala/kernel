@@ -196,7 +196,7 @@ abstract class Mailable
     /**
      * add attachments to the mail.
      *
-     * @param string $path
+     * @param array $files
      *
      * @return $this
      */
