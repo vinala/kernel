@@ -21,8 +21,8 @@ class Process
         $result = '';
 
         if (config('lumos.tracking')) {
-            $result .= '* @author '.config('app.owner')."\n";
-            $result .= '* creation time : '.DateTime::now().' ('.time().')'."\n";
+            $result .= ' * @author '.config('app.owner')."\n";
+            $result .= ' * creation time : '.DateTime::now().' ('.time().')'."\n";
         }
 
         return $result;
@@ -37,11 +37,11 @@ class Process
      */
     public static function docs($main)
     {
-        $result = "/**\n* ".$main."\n*\n";
+        $result = "/**\n * ".$main."\n *\n";
 
         $result .= self::track();
 
-        $result .= "**/\n";
+        $result .= " */\n";
 
         return $result;
     }
