@@ -61,6 +61,13 @@ abstract class Mailable
      */
     private $_sender_mail;
 
+    /**
+     * The attachments
+     *
+     * @var array
+     */
+    private $_attachments = [];
+
 
     //--------------------------------------------------------
     // Constructor
@@ -193,9 +200,18 @@ abstract class Mailable
      *
      * @return $this
      */
-    public function attachment($path)
+    public function attachments($files)
     {
-
+        foreach ($files as $file) {
+            if (is_string($file)) {
+                $this->_attachments[] = ['file' => $file];
+            } elseif (is_array($file)) {
+                foreach ($file as $key => $value) {
+                    $this->_attachments[] = ['name' => $key, 'file' => $value];
+                }
+            }
+        }
+        
         return $this;
     }
 }
