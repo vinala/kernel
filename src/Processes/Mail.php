@@ -53,7 +53,7 @@ class Mail extends Process
     protected static function set($name)
     {
         $txt = "<?php\n\n";
-        $txt .= "namespace App\mails;\n\n";
+        $txt .= "namespace App\Mails;\n\n";
         $txt .= "use Vinala\Kernel\Mailing\Mailable;\n\n";
         $txt .= self::docs("$name Mailable");
         $txt .= "class $name extends Mailable\n{\n\n";
