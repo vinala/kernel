@@ -127,9 +127,7 @@ class Mail
      */
     private function checkView()
     {
-        if (is_null($this->mailable->get('_view'))) {
-            exception(MailViewNotFoundException::class);
-        }
+        exception_if((is_null($this->mailable->get('_view')) && is_null($this->mailable->get('_text'))), MailViewNotFoundException::class);
     }
 
     /**
