@@ -23,16 +23,19 @@ class NewMailCommand extends Commands
 
     /**
      * Configure the command.
+     *
+     * @return void
      */
     public function set()
     {
-        // config('lumos.commands.new_link').
-        $this->key = 'make:mail {name : what\'s the name of the mailable class?}';
+        $this->key = config('lumos.commands.new_mail').' {name : what\'s the name of the mailable class?}';
         $this->description = 'New mailable class';
     }
 
     /**
      * Handle the command.
+     *
+     * @return void
      */
     public function handle()
     {
@@ -41,6 +44,8 @@ class NewMailCommand extends Commands
 
     /**
      * Execute the command.
+     *
+     * @return void
      */
     public function exec()
     {
@@ -52,6 +57,8 @@ class NewMailCommand extends Commands
 
     /**
      * Format the message to show.
+     *
+     * @return void
      */
     public function show($process, $file)
     {
