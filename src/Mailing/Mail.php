@@ -5,10 +5,8 @@ namespace Vinala\Kernel\Mailing;
 use Swift_Mailer as Mailer;
 use Swift_Message as Message;
 use Swift_SmtpTransport as Transport;
-use Vinala\Kernel\MVC\View\View;
-use Vinala\Kernel\Mailing\Mailable;
-
 use Vinala\Kernel\Mailing\Exceptions\MailViewNotFoundException;
+use Vinala\Kernel\MVC\View\View;
 
 /**
  * The Mailing surface.
@@ -47,7 +45,7 @@ class Mail
     public $view;
 
     /**
-     * The mailable object
+     * The mailable object.
      *
      * @var Vinala\Kernel\Mailing\Mailable
      */
@@ -75,7 +73,7 @@ class Mail
     private $message;
 
     /**
-     * The receivers of the mail
+     * The receivers of the mail.
      *
      * @var array
      */
