@@ -214,4 +214,23 @@ abstract class Mailable
         
         return $this;
     }
+
+    /**
+     * Add attachment to the mail.
+     *
+     * @param string $file
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function attachment($file, $name = null)
+    {
+        if (!is_null($name)) {
+            $this->_attachments[] = ['name' => $key, 'file' => $value];
+        } else {
+            $this->_attachments[] = ['file' => $value];
+        }
+
+        return $this;
+    }
 }
