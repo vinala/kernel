@@ -4,6 +4,7 @@ namespace Vinala\Kernel\Console\Commands;
 
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Mail;
+use Vinala\Kernel\Config\Alias;
 
 class NewMailCommand extends Commands
 {
@@ -28,7 +29,8 @@ class NewMailCommand extends Commands
      */
     public function set()
     {
-        $this->key = config('lumos.commands.new_mail').' {name : what\'s the name of the mailable class?}';
+        $this->key = config('lumos.commands.new_mail').' {name : what\'s the name of the mailable class?}'.
+        ' {--alias : if set , the mailable will be aliased}';
         $this->description = 'New mailable class';
     }
 
@@ -50,7 +52,13 @@ class NewMailCommand extends Commands
     public function exec()
     {
         $name = $this->argument('name');
+        $aliased = $this->option('alias');
+
         $process = Mail::create($name);
+        //
+        if ($aliased) {
+            Alias::update('mailables.'.$name, 'App\Mails\\'.$name);
+        }
         //
         $this->show($process, $name);
     }
