@@ -1,10 +1,10 @@
 {
-	"version": "3.3.27",
+	"version": "3.3.28",
 	"tag": "",
 	"stat": "final",
-	"features": [
-		"Allow folders in tests"
+	"features": [],
+	"fixes": [
+		"Fix setup documentation"
 	],
-	"fixes": [],
-	"sha": "69fa26622d39966ab03014278c19633f0230a4a7"
+	"sha": "1874ee371bfd1342179e36ac640d6aa0814639ff"
 }
