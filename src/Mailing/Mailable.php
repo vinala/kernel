@@ -75,6 +75,13 @@ abstract class Mailable
      */
     private $_cc = [];
 
+    /**
+     * The invisible carbon copy mails
+     *
+     * @var array
+     */
+    private $_cci = [];
+
 
     //--------------------------------------------------------
     // Constructor
@@ -256,6 +263,28 @@ abstract class Mailable
             } elseif (is_array($mail)) {
                 foreach ($mail as $submail) {
                     $this->_cc[] = $submail;
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add Invisble Carbon Copy to mailable.
+     *
+     * @return $this
+     */
+    public function cci()
+    {
+        $mails = func_get_args();
+
+        foreach ($mails as $mail) {
+            if (is_string($mail)) {
+                $this->_cci[] = $mail;
+            } elseif (is_array($mail)) {
+                foreach ($mail as $submail) {
+                    $this->_cci[] = $submail;
                 }
             }
         }
