@@ -68,6 +68,13 @@ abstract class Mailable
      */
     private $_attachments = [];
 
+    /**
+     * The carbon copy mails
+     *
+     * @var array
+     */
+    private $_cc = [];
+
 
     //--------------------------------------------------------
     // Constructor
@@ -196,12 +203,12 @@ abstract class Mailable
     /**
      * add attachments to the mail.
      *
-     * @param array $files
-     *
      * @return $this
      */
-    public function attachments($files)
+    public function attachments()
     {
+        $files = func_get_args();
+
         foreach ($files as $file) {
             if (is_string($file)) {
                 $this->_attachments[] = ['file' => $file];
@@ -229,6 +236,28 @@ abstract class Mailable
             $this->_attachments[] = ['name' => $key, 'file' => $value];
         } else {
             $this->_attachments[] = ['file' => $value];
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add Carbon Copy to mailable.
+     *
+     * @return $this
+     */
+    public function cc()
+    {
+        $mails = func_get_args();
+
+        foreach ($mails as $mail) {
+            if (is_string($mail)) {
+                $this->_cc[] = $mail;
+            } elseif (is_array($mail)) {
+                foreach ($mail as $submail) {
+                    $this->_cc[] = $submail;
+                }
+            }
         }
 
         return $this;
