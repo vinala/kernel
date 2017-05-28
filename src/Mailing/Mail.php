@@ -5,6 +5,7 @@ namespace Vinala\Kernel\Mailing;
 use Swift_Mailer as Mailer;
 use Swift_Message as Message;
 use Swift_SmtpTransport as Transport;
+use Swift_Attachment as Attachment;
 use Vinala\Kernel\Mailing\Exceptions\MailViewNotFoundException;
 use Vinala\Kernel\MVC\View\View;
 
@@ -233,10 +234,29 @@ class Mail
     {
         $this->mailable = $mailable;
 
-        dc($mailable);
         $this->mailable->build();
-        dc($mailable);
 
         $this->checkView();
+        $this->setAttachments();
+    }
+
+    /**
+     * Set the files on mail surface.
+     *
+     * @return void
+     */
+    private function setAttachments()
+    {
+        $attachments = $this->mailable->get('_attachments');
+
+        if (!is_null($attachments)) {
+            foreach ($attachments as $attachment) {
+                if (in_array('name')) {
+                    $this->message->attach(Attachment::fromPath($attachment['file'])->setFilename($attachment['name']));
+                } else {
+                    $this->message->attach(Attachment::fromPath($attachment['file']));
+                }
+            }
+        }
     }
 }
