@@ -114,7 +114,6 @@ class SMTP
             config('mail.encryption'),
             config('mail.username'),
             config('mail.password'),
-            config('mail.password'),
             config('mail.from')['adresse'],
             config('mail.from')['name']
             );
