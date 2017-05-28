@@ -2,10 +2,10 @@
 
 namespace Vinala\Kernel\Mailing;
 
+use Swift_Attachment as Attachment;
 use Swift_Mailer as Mailer;
 use Swift_Message as Message;
 use Swift_SmtpTransport as Transport;
-use Swift_Attachment as Attachment;
 use Vinala\Kernel\Mailing\Exceptions\MailViewNotFoundException;
 use Vinala\Kernel\MVC\View\View;
 
@@ -243,7 +243,7 @@ class Mail
         $this->setAttachments();
         $this->setCC();
         $this->setCCI();
-        
+
         return $this->mailer->send($this->message);
     }
 

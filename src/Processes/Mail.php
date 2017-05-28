@@ -80,12 +80,12 @@ class Mail extends Process
      */
     protected function folder($root)
     {
-        $path = $root."app/mails";
+        $path = $root.'app/mails';
 
         if (!File::isDirectory($path)) {
             File::makeDirectory($path);
         }
-        
+
         return $path;
     }
 }
