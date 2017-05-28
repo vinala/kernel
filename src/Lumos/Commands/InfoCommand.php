@@ -29,13 +29,13 @@ class InfoCommand extends Commands
     {
         $start = $this->option('start');
 
-        $this->show();
+        $this->show($start);
     }
 
     /**
      * Format the message to show.
      */
-    public function show()
+    public function show($start)
     {
         if (!$start) {
             $this->line('');
