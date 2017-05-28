@@ -38,7 +38,6 @@ class InfoCommand extends Commands
     public function show($start)
     {
         if (!$start) {
-            $this->line('');
             if (!empty(config('app.project'))) {
                 $this->line(config('app.project'));
             }
@@ -48,6 +47,8 @@ class InfoCommand extends Commands
             $this->line('');
             $this->line('***********');
             $this->line('Based on : ');
+        } else {
+            $this->line('');
         }
         
         $version = Application::getVersion()->console();
