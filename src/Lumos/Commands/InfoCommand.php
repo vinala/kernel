@@ -50,7 +50,7 @@ class InfoCommand extends Commands
         } else {
             $this->line('');
         }
-        
+
         $version = Application::getVersion()->console();
         $this->question('Vinala ', true);
         $this->line("Framework v$version");
