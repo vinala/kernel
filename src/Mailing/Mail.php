@@ -150,9 +150,7 @@ class Mail
      */
     private function subject()
     {
-        $this->subject = is_null($this->subject) ? config('mail.subject') : $this->subject;
-
-        return $this->subject;
+        return is_null($this->mailable->get('_subject')) ? config('mail.subject') : $this->mailable->get('_subject');
     }
 
     /**
@@ -174,10 +172,12 @@ class Mail
      */
     private function message()
     {
-        $this->message = Message::newInstance($this->subject);
+        $subject = $this->subject();
 
-        $this->message->setBody($this->body, $this->type);
-        $this->message->setFrom($this->smtp->sender_email, $this->smtp->sender_name);
+        $this->message = Message::newInstance();
+
+        $this->message->setBody($this->mailable->get('_view'), $this->mailable->get('_type'));
+        $this->message->setFrom([$this->smtp->get('sender_email')], $this->smtp->get('sender_name'));
 
         return $this->message;
     }
@@ -238,10 +238,12 @@ class Mail
 
         $this->checkView();
 
+        $this->message();
+
         $this->setAttachments();
         $this->setCC();
         $this->setCCI();
-
+        
         return $this->mailer->send($this->message);
     }
 
