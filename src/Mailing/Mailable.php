@@ -62,26 +62,25 @@ abstract class Mailable
     private $_sender_mail;
 
     /**
-     * The attachments
+     * The attachments.
      *
      * @var array
      */
     private $_attachments = [];
 
     /**
-     * The carbon copy mails
+     * The carbon copy mails.
      *
      * @var array
      */
     private $_cc = [];
 
     /**
-     * The invisible carbon copy mails
+     * The invisible carbon copy mails.
      *
      * @var array
      */
     private $_cci = [];
-
 
     //--------------------------------------------------------
     // Constructor
@@ -225,7 +224,7 @@ abstract class Mailable
                 }
             }
         }
-        
+
         return $this;
     }
 
