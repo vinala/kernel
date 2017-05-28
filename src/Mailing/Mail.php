@@ -241,6 +241,8 @@ class Mail
         $this->setAttachments();
         $this->setCC();
         $this->setCCI();
+
+        return $this->mailer->send($this->message);
     }
 
     /**
