@@ -237,7 +237,10 @@ class Mail
         $this->mailable->build();
 
         $this->checkView();
+
         $this->setAttachments();
+        $this->setCC();
+        $this->setCCI();
     }
 
     /**
@@ -256,6 +259,38 @@ class Mail
                 } else {
                     $this->message->attach(Attachment::fromPath($attachment['file']));
                 }
+            }
+        }
+    }
+
+    /**
+     * Set the CC mails.
+     *
+     * @return void
+     */
+    private function setCC()
+    {
+        $cc = $this->mailable->get('_cc');
+
+        if (!is_null($cc)) {
+            foreach ($cc as $mail) {
+                $this->message->setCC($mail);
+            }
+        }
+    }
+
+    /**
+     * Set the CCI mails.
+     *
+     * @return void
+     */
+    private function setCCI()
+    {
+        $cci = $this->mailable->get('_cci');
+
+        if (!is_null($cci)) {
+            foreach ($cci as $mail) {
+                $this->message->setBcc($mail);
             }
         }
     }
