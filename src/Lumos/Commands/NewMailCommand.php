@@ -2,9 +2,9 @@
 
 namespace Vinala\Kernel\Console\Commands;
 
+use Vinala\Kernel\Config\Alias;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Process\Mail;
-use Vinala\Kernel\Config\Alias;
 
 class NewMailCommand extends Commands
 {
