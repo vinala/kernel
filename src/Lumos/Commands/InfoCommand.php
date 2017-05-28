@@ -13,7 +13,7 @@ class InfoCommand extends Commands
      *
      * @var string
      */
-    protected $key = 'info {--start}';
+    protected $key = 'info';
 
     /**
      * The console command description.
@@ -27,8 +27,6 @@ class InfoCommand extends Commands
      */
     public function handle()
     {
-        $start = $this->option('start');
-
         $this->show();
     }
 
@@ -37,19 +35,16 @@ class InfoCommand extends Commands
      */
     public function show()
     {
-        if (!$start) {
-            $this->line('');
-            if (!empty(config('app.project'))) {
-                $this->line(config('app.project'));
-            }
-            if (!empty(config('app.owner'))) {
-                $this->line('by '.config('app.owner'));
-            }
-            $this->line('');
-            $this->line('***********');
-            $this->line('Based on : ');
+        $this->line('');
+        if (!empty(config('app.project'))) {
+            $this->line(config('app.project'));
         }
-        
+        if (!empty(config('app.owner'))) {
+            $this->line('by '.config('app.owner'));
+        }
+        $this->line('');
+        $this->line('***********');
+        $this->line('Based on : ');
         $version = Application::getVersion()->console();
         $this->question('Vinala ', true);
         $this->line("Framework v$version");
