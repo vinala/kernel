@@ -90,6 +90,7 @@ class Mail
 
         $this->transport();
         $this->mailer();
+        $this->message();
     }
 
     //--------------------------------------------------------
@@ -150,7 +151,9 @@ class Mail
      */
     private function subject()
     {
-        return is_null($this->mailable->get('_subject')) ? config('mail.subject') : $this->mailable->get('_subject');
+        $subject = is_null($this->mailable->get('_subject')) ? config('mail.subject') : $this->mailable->get('_subject');
+
+        $this->message->setSubject($subject);
     }
 
     /**
@@ -172,12 +175,7 @@ class Mail
      */
     private function message()
     {
-        $subject = $this->subject();
-
         $this->message = Message::newInstance();
-
-        $this->message->setBody($this->mailable->get('_view'), $this->mailable->get('_type'));
-        $this->message->setFrom([$this->smtp->get('sender_email')], $this->smtp->get('sender_name'));
 
         return $this->message;
     }
@@ -220,6 +218,8 @@ class Mail
     {
         $this->recievers = $mails;
 
+        $this->message->setTo($this->recievers);
+
         return $this;
     }
 
@@ -238,7 +238,11 @@ class Mail
 
         $this->checkView();
 
-        $this->message();
+        $this->subject();
+
+        $view = $this->mailable->get('_view');
+        $this->message->setBody($view->get(), $this->mailable->get('_type'));
+        $this->message->setFrom([$this->smtp->get('sender_email')], $this->smtp->get('sender_name'));
 
         $this->setAttachments();
         $this->setCC();
