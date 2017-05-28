@@ -170,7 +170,7 @@ abstract class Mailable
      */
     public function text($text)
     {
-        $this->_text = $text;
+        $this->_view = $text;
 
         $this->_type = 'text/plain';
 
