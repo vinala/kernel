@@ -61,6 +61,26 @@ abstract class Mailable
      */
     private $_sender_mail;
 
+    /**
+     * The attachments.
+     *
+     * @var array
+     */
+    private $_attachments = [];
+
+    /**
+     * The carbon copy mails.
+     *
+     * @var array
+     */
+    private $_cc = [];
+
+    /**
+     * The invisible carbon copy mails.
+     *
+     * @var array
+     */
+    private $_cci = [];
 
     //--------------------------------------------------------
     // Constructor
@@ -149,7 +169,7 @@ abstract class Mailable
      */
     public function text($text)
     {
-        $this->_text = $text;
+        $this->_view = $text;
 
         $this->_type = 'text/plain';
 
@@ -168,6 +188,105 @@ abstract class Mailable
     {
         $this->_sender_name = $name;
         $this->_sender_mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * The subject of the mail.
+     *
+     * @param string $subject
+     *
+     * @return $this
+     */
+    public function subject($subject)
+    {
+        $this->_subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * add attachments to the mail.
+     *
+     * @return $this
+     */
+    public function attachments()
+    {
+        $files = func_get_args();
+
+        foreach ($files as $file) {
+            if (is_string($file)) {
+                $this->_attachments[] = ['file' => $file];
+            } elseif (is_array($file)) {
+                foreach ($file as $key => $value) {
+                    $this->_attachments[] = ['name' => $key, 'file' => $value];
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add attachment to the mail.
+     *
+     * @param string $file
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function attachment($file, $name = null)
+    {
+        if (!is_null($name)) {
+            $this->_attachments[] = ['name' => $key, 'file' => $value];
+        } else {
+            $this->_attachments[] = ['file' => $value];
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add Carbon Copy to mailable.
+     *
+     * @return $this
+     */
+    public function cc()
+    {
+        $mails = func_get_args();
+
+        foreach ($mails as $mail) {
+            if (is_string($mail)) {
+                $this->_cc[] = $mail;
+            } elseif (is_array($mail)) {
+                foreach ($mail as $submail) {
+                    $this->_cc[] = $submail;
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Add Invisble Carbon Copy to mailable.
+     *
+     * @return $this
+     */
+    public function cci()
+    {
+        $mails = func_get_args();
+
+        foreach ($mails as $mail) {
+            if (is_string($mail)) {
+                $this->_cci[] = $mail;
+            } elseif (is_array($mail)) {
+                foreach ($mail as $submail) {
+                    $this->_cci[] = $submail;
+                }
+            }
+        }
 
         return $this;
     }

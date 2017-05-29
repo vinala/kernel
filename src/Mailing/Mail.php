@@ -2,13 +2,12 @@
 
 namespace Vinala\Kernel\Mailing;
 
+use Swift_Attachment as Attachment;
 use Swift_Mailer as Mailer;
 use Swift_Message as Message;
 use Swift_SmtpTransport as Transport;
-use Vinala\Kernel\MVC\View\View;
-use Vinala\Kernel\Mailing\Mailable;
-
 use Vinala\Kernel\Mailing\Exceptions\MailViewNotFoundException;
+use Vinala\Kernel\MVC\View\View;
 
 /**
  * The Mailing surface.
@@ -47,7 +46,7 @@ class Mail
     public $view;
 
     /**
-     * The mailable object
+     * The mailable object.
      *
      * @var Vinala\Kernel\Mailing\Mailable
      */
@@ -75,11 +74,11 @@ class Mail
     private $message;
 
     /**
-     * The mail subject.
+     * The receivers of the mail.
      *
-     * @var string
+     * @var array
      */
-    public $subject;
+    private $receivers;
 
     //--------------------------------------------------------
     // Constructor
@@ -91,7 +90,7 @@ class Mail
 
         $this->transport();
         $this->mailer();
-        $this->subject();
+        $this->message();
     }
 
     //--------------------------------------------------------
@@ -128,9 +127,7 @@ class Mail
      */
     private function checkView()
     {
-        if (is_null($this->mailable->get('_view'))) {
-            exception(MailViewNotFoundException::class);
-        }
+        exception_if((is_null($this->mailable->get('_view')) && is_null($this->mailable->get('_text'))), MailViewNotFoundException::class);
     }
 
     /**
@@ -154,9 +151,9 @@ class Mail
      */
     private function subject()
     {
-        $this->subject = is_null($this->subject) ? config('mail.subject') : $this->subject;
+        $subject = is_null($this->mailable->get('_subject')) ? config('mail.subject') : $this->mailable->get('_subject');
 
-        return $this->subject;
+        $this->message->setSubject($subject);
     }
 
     /**
@@ -178,10 +175,7 @@ class Mail
      */
     private function message()
     {
-        $this->message = Message::newInstance($this->subject);
-
-        $this->message->setBody($this->body, $this->type);
-        $this->message->setFrom($this->smtp->sender_email, $this->smtp->sender_name);
+        $this->message = Message::newInstance();
 
         return $this->message;
     }
@@ -195,9 +189,38 @@ class Mail
     {
         $args = func_get_args();
 
+        $receivers = [];
+
+        foreach ($args as $arg) {
+            if (is_string($arg)) {
+                $receivers[] = $arg;
+            } elseif (is_array($arg)) {
+                foreach ($arg as $value) {
+                    $receivers[] = $value;
+                }
+            }
+        }
+
         $mail = new self();
+        $mail->setDestination($receivers);
 
         return $mail;
+    }
+
+    /**
+     * Set email destination.
+     *
+     * @param array $mails
+     *
+     * @return $this
+     */
+    protected function setDestination(array $mails)
+    {
+        $this->recievers = $mails;
+
+        $this->message->setTo($this->recievers);
+
+        return $this;
     }
 
     /**
@@ -211,10 +234,72 @@ class Mail
     {
         $this->mailable = $mailable;
 
-        dc($mailable);
         $this->mailable->build();
-        dc($mailable);
 
         $this->checkView();
+
+        $this->subject();
+
+        $view = $this->mailable->get('_view');
+        $this->message->setBody($view->get(), $this->mailable->get('_type'));
+        $this->message->setFrom([$this->smtp->get('sender_email')], $this->smtp->get('sender_name'));
+
+        $this->setAttachments();
+        $this->setCC();
+        $this->setCCI();
+
+        return $this->mailer->send($this->message);
+    }
+
+    /**
+     * Set the files on mail surface.
+     *
+     * @return void
+     */
+    private function setAttachments()
+    {
+        $attachments = $this->mailable->get('_attachments');
+
+        if (!is_null($attachments)) {
+            foreach ($attachments as $attachment) {
+                if (in_array('name')) {
+                    $this->message->attach(Attachment::fromPath($attachment['file'])->setFilename($attachment['name']));
+                } else {
+                    $this->message->attach(Attachment::fromPath($attachment['file']));
+                }
+            }
+        }
+    }
+
+    /**
+     * Set the CC mails.
+     *
+     * @return void
+     */
+    private function setCC()
+    {
+        $cc = $this->mailable->get('_cc');
+
+        if (!is_null($cc)) {
+            foreach ($cc as $mail) {
+                $this->message->setCC($mail);
+            }
+        }
+    }
+
+    /**
+     * Set the CCI mails.
+     *
+     * @return void
+     */
+    private function setCCI()
+    {
+        $cci = $this->mailable->get('_cci');
+
+        if (!is_null($cci)) {
+            foreach ($cci as $mail) {
+                $this->message->setBcc($mail);
+            }
+        }
     }
 }

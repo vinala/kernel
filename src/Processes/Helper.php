@@ -35,8 +35,11 @@ class Helper extends Process
      */
     public static function set($name)
     {
-        $txt = "<?php\n\n/**\n* $name helper\n*\n* @param //\n* @return // \n**/\n";
-        $txt .= "function $name()\n{\n\t// do something \n}";
+        $txt = "<?php\n\n";
+        $txt .= "if (!function_exists('$name')) {\n";
+        $txt .= "\n\t/**\n\t * $name helper\n\t *\n\t * @param void\n\t *\n\t * @return void \n\t */\n";
+        $txt .= "\tfunction $name()\n\t{\n\t\t// do something \n\t}";
+        $txt .= "\n\n}";
 
         return $txt;
     }

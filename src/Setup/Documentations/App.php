@@ -16,7 +16,7 @@ class App
             'setup'         => "\t|  Default encodage when you using HTML::charset",
             ];
         //
-        return $doc[$index]."\n\t|\n\t**/";
+        return "\n".$doc[$index]."\n\t|\n\t**/";
     }
 
     protected static function appTitles($index)

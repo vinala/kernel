@@ -1114,7 +1114,7 @@ class Bus
      */
     private static function proccess()
     {
-        $files = ['Process', 'Command', 'Translator', 'Migrations', 'Links', 'Tag', 'Model', 'View', 'Controller', 'Seeds', 'Router', 'Exception', 'Events', 'Alias', 'Middleware', 'Helper', 'Tests'];
+        $files = ['Process', 'Command', 'Translator', 'Migrations', 'Links', 'Tag', 'Model', 'View', 'Controller', 'Seeds', 'Router', 'Exception', 'Events', 'Alias', 'Middleware', 'Helper', 'Tests', 'Mail'];
         $folder = static::$root.'Processes'.'/';
 
         self::call($files, $folder);

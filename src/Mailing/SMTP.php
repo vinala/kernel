@@ -86,7 +86,7 @@ class SMTP
     //--------------------------------------------------------
     // Getters and Setters
     //--------------------------------------------------------
-    
+
     /**
      * Getter of the class.
      *
@@ -113,7 +113,6 @@ class SMTP
             config('mail.port'),
             config('mail.encryption'),
             config('mail.username'),
-            config('mail.password'),
             config('mail.password'),
             config('mail.from')['adresse'],
             config('mail.from')['name']

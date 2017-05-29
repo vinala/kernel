@@ -15,6 +15,6 @@ class MailViewNotFoundException extends Exception
 
     public function __construct()
     {
-        $this->message = "The mailable view not found, add it build() function.";
+        $this->message = 'The mailable view not found, add it build() function.';
     }
 }

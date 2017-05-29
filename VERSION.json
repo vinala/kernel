@@ -1,10 +1,21 @@
 {
+<<<<<<< HEAD
 	"version": "3.3.29",
+=======
+	"version": "3.3.28",
+>>>>>>> e2888d3af12c53b892d7fc8edbf832c5e308dd74
 	"tag": "",
 	"stat": "final",
 	"features": [],
 	"fixes": [
+<<<<<<< HEAD
 		"Improve Mail Surface"
 	],
 	"sha": "0f9f617a6aedddbaee59e5b672a3e62557d43225"
 }
+=======
+		"Fix setup documentation"
+	],
+	"sha": "1874ee371bfd1342179e36ac640d6aa0814639ff"
+}
+>>>>>>> e2888d3af12c53b892d7fc8edbf832c5e308dd74
