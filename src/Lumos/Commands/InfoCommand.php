@@ -27,24 +27,30 @@ class InfoCommand extends Commands
      */
     public function handle()
     {
-        $this->show();
+        $start = $this->option('start');
+
+        $this->show($start);
     }
 
     /**
      * Format the message to show.
      */
-    public function show()
+    public function show($start)
     {
-        $this->line('');
-        if (!empty(config('app.project'))) {
-            $this->line(config('app.project'));
+        if (!$start) {
+            if (!empty(config('app.project'))) {
+                $this->line(config('app.project'));
+            }
+            if (!empty(config('app.owner'))) {
+                $this->line('by '.config('app.owner'));
+            }
+            $this->line('');
+            $this->line('***********');
+            $this->line('Based on : ');
+        } else {
+            $this->line('');
         }
-        if (!empty(config('app.owner'))) {
-            $this->line('by '.config('app.owner'));
-        }
-        $this->line('');
-        $this->line('***********');
-        $this->line('Based on : ');
+
         $version = Application::getVersion()->console();
         $this->question('Vinala ', true);
         $this->line("Framework v$version");
