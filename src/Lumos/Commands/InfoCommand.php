@@ -13,7 +13,7 @@ class InfoCommand extends Commands
      *
      * @var string
      */
-    protected $key = 'info';
+    protected $key = 'info {--start}';
 
     /**
      * The console command description.
