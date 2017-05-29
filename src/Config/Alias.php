@@ -77,6 +77,7 @@ class Alias
         self::$aliases['exceptions'] = config('alias.exceptions');
         self::$aliases['controllers'] = config('alias.controllers');
         self::$aliases['models'] = config('alias.models');
+        self::$aliases['mailables'] = config('alias.mailables');
         //
         return self::$aliases;
     }

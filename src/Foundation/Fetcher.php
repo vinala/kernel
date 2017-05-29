@@ -43,6 +43,7 @@ class Fetcher
         self::filtes();
         self::alias();
         Environment::ini();
+        self::mails();
         //
         self::routes($routes);
         self::commands();
@@ -198,5 +199,19 @@ class Fetcher
         }
         //
         Event::register();
+    }
+
+    /**
+     * Require files of Mail if exists.
+     *
+     * @return null
+     */
+    protected static function mails()
+    {
+        if (is_dir(root().'app/mails')) {
+            foreach (self::fetch('app/mails', false) as $file) {
+                need($file);
+            }
+        }
     }
 }
