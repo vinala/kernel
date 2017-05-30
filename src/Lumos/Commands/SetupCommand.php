@@ -26,9 +26,6 @@ class SetupCommand extends Commands
      */
     public function handle()
     {
-        $this->line("\nWelcome to Vinala Framework");
-        $this->line('by Youssef Had (www.facebook.com/yussef.had)');
-        //
         $key1 = md5(uniqid(rand(), true));
         $key2 = md5(uniqid(rand(), true));
         Response::setSecur_step($key1, $key2);
