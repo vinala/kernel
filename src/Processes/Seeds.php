@@ -41,7 +41,7 @@ class Seeds extends Process
         $txt = "<?php\n\nuse Vinala\Kernel\Database\Seeder;\n\n";
 
         $txt .= self::docs("$nom seeder");
-        $txt .= "*\n*/\nclass $nom extends Seeder\n{\n";
+        $txt .= "class $nom extends Seeder\n{\n";
 
         //datatable name
         $txt .= "\t/*\n\t* Name of DataTable\n\t*/\n\tpublic ".'$table = "'.$table.'" ;'."\n\n";
