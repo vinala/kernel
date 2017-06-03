@@ -24,6 +24,13 @@ class Query
     protected $table;
 
     /**
+     * Tables of data.
+     *
+     * @var array
+     */
+    protected $tables;
+
+    /**
      * columns query.
      *
      * @var array
@@ -75,13 +82,21 @@ class Query
      *
      * @param string
      */
-    public function __construct($table, $prefix = true)
+    public function __construct($tables, $prefix = true)
     {
+        
         if ($prefix && Config::get('database.prefixing')) {
-            $this->table = Config::get('database.prefixe').$table;
+            $prefix = config('database.prefixe');
+            // $this->table = Config::get('database.prefixe').$table;
         } else {
-            $this->table = $table;
+            $prefix = '';
         }
+
+        if (!is_array($table)) {
+            $tables = (array) $table;
+        }
+
+        $this->tables = clone $tables;
     }
 
     //--------------------------------------------------------
@@ -96,6 +111,7 @@ class Query
     private function reset()
     {
         $this->table = null;
+        $this->tables = null;
         $this->columns = '*';
         //
         $this->values =
@@ -172,7 +188,7 @@ class Query
      */
     public function query($type = 'object')
     {
-        $sql = 'select '.$this->columns.' from '.$this->table.' '.$this->where.' '.$this->order.' '.$this->group;
+        $sql = 'select '.$this->columns.' from '.$this->getTables($this->table).' '.$this->where.' '.$this->order.' '.$this->group;
 
         static::$sql = $sql;
         //
@@ -182,6 +198,30 @@ class Query
             throw new QueryException();
         }
     }
+
+    /**
+     * Get the tables names as string.
+     *
+     * @param array $tables
+     *
+     * @return string
+     */
+    private function getTables($tables)
+    {
+        $names = '';
+        $i = 0;
+
+        foreach ($tables as $table) {
+            $names .= $table;
+            $i++;
+            
+            if (count($tables) > $i) {
+                $names .= ',';
+            }
+        }
+        return $names;
+    }
+
 
     /**
      * Fetch data.
