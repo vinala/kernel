@@ -28,7 +28,7 @@ class Query
      *
      * @var array
      */
-    protected $tables;
+    protected $tables = [];
 
     /**
      * columns query.
@@ -92,11 +92,13 @@ class Query
             $prefix = '';
         }
 
-        if (!is_array($table)) {
-            $tables = (array) $table;
+        if (!is_array($tables)) {
+            $tables = (array) $tables;
         }
 
-        $this->tables = clone $tables;
+        foreach ($tables as $table) {
+            $this->tables[] = $prefix.$table;
+        }
     }
 
     //--------------------------------------------------------
@@ -188,8 +190,8 @@ class Query
      */
     public function query($type = 'object')
     {
-        $sql = 'select '.$this->columns.' from '.$this->getTables($this->table).' '.$this->where.' '.$this->order.' '.$this->group;
-
+        $sql = 'select '.$this->columns.' from '.$this->getTables($this->tables).' '.$this->where.' '.$this->order.' '.$this->group;
+        
         static::$sql = $sql;
         //
         if ($data = Database::read($sql)) {
@@ -295,14 +297,37 @@ class Query
      *
      * @return array
      */
-    public function where($column = null, $relation = null, $value = null)
+    public function where($column = null, $relation = null, $value = null, $link = false)
     {
         if (is_null($column) && is_null($relation) && is_null($value)) {
             $this->where = ' where 1 = 1 ';
         } else {
-            $this->where = " where $column $relation '$value' ";
+            if (!$link) {
+                $this->where = " where $column $relation '$value' ";
+            } else {
+                $this->where = " where $column $relation $value ";
+            }
         }
         //
+        return $this;
+    }
+
+    /**
+     * Set a link between tables.
+     *
+     * @param string $column1
+     * @param string $colmun2
+     *
+     * @return $this
+     */
+    public function link($column1, $colmun2)
+    {
+        if ($this->where != '') {
+            $this->where .= " and ( $column1 = $colmun2 ) ";
+        } else {
+            $this->where = " where ( $column1 = $colmun2 ) ";
+        }
+
         return $this;
     }
 
@@ -315,9 +340,14 @@ class Query
      *
      * @return array
      */
-    public function orWhere($column, $relation, $value)
+    public function orWhere($column, $relation, $value, $link = false)
     {
-        $this->where .= " or ( $column $relation '$value' )";
+        if (!$link) {
+            $this->where .= " or ( $column $relation '$value' )";
+        } else {
+            $this->where .= " or ( $column $relation $value )";
+        }
+        
         //
         return $this;
     }
@@ -331,9 +361,14 @@ class Query
      *
      * @return array
      */
-    public function andWhere($column, $relation, $value)
+    public function andWhere($column, $relation, $value, $link = false)
     {
-        $this->where .= " and ( $column $relation '$value' )";
+        if (!$link) {
+            $this->where .= " and ( $column $relation '$value' )";
+        } else {
+            $this->where .= " and ( $column $relation $value )";
+        }
+
         //
         return $this;
     }
