@@ -84,7 +84,6 @@ class Query
      */
     public function __construct($tables, $prefix = true)
     {
-        
         if ($prefix && Config::get('database.prefixing')) {
             $prefix = config('database.prefixe');
             // $this->table = Config::get('database.prefixe').$table;
@@ -191,7 +190,7 @@ class Query
     public function query($type = 'object')
     {
         $sql = 'select '.$this->columns.' from '.$this->getTables($this->tables).' '.$this->where.' '.$this->order.' '.$this->group;
-        
+
         static::$sql = $sql;
         //
         if ($data = Database::read($sql)) {
@@ -216,14 +215,14 @@ class Query
         foreach ($tables as $table) {
             $names .= $table;
             $i++;
-            
+
             if (count($tables) > $i) {
                 $names .= ',';
             }
         }
+
         return $names;
     }
-
 
     /**
      * Fetch data.
@@ -347,7 +346,7 @@ class Query
         } else {
             $this->where .= " or ( $column $relation $value )";
         }
-        
+
         //
         return $this;
     }
