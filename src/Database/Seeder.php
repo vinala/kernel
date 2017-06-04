@@ -69,11 +69,13 @@ class Seeder
         //
         if ($seeder->count <= 0) {
             foreach ($seeder->data() as $value) {
-                Collection::push($data, $value);
+                // Collection::push($data, $value);
+                array_push($data, $value);
             }
         } else {
             for ($i = 0; $i < $seeder->count; $i++) {
-                Collection::push($data, $seeder->data());
+                // Collection::push($data, $seeder->data());
+                array_push($data, $seeder->data());
             }
         }
         //
