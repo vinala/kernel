@@ -2,7 +2,6 @@
 
 namespace Vinala\Kernel\Database;
 
-use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\HyperText\Res;
 
