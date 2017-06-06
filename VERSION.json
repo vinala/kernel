@@ -1,10 +1,10 @@
 {
-	"version": "3.3.29",
+	"version": "3.3.30",
 	"tag": "",
 	"stat": "final",
 	"features": [],
 	"fixes": [
-		"Improve Mail Surface"
+		"Fixes in Seeds classes"
 	],
-	"sha": "0f9f617a6aedddbaee59e5b672a3e62557d43225"
+	"sha": "6d79fb8362c3f39d27d345efbd56635ee4bff1ac"
 }
