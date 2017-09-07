@@ -28,7 +28,7 @@ class listSchemaCommand extends Commands
     public function set()
     {
         $this->key = 'list:schema';
-       // $this->key = config('lumos.commands.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?}';
+        // $this->key = config('lumos.commands.new_seed').' {name : what\'s the name of the seed?} {tableName : what\'s the name of the datatable ?}';
         $this->description = 'List all schema';
     }
 
