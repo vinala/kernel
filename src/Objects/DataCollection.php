@@ -17,7 +17,7 @@ class DataCollection
     private $RowsPerPage;
     private $CurntPage;
 
- //
+    //
     //
     public function __construct($arr, $pagination = false, $nbrRows = 0, $RowsPerPage = 0, $page = 1)
     {
@@ -145,36 +145,35 @@ class DataCollection
         if ($pagination) {
             for ($i = $min; $i <= $max; $i++) {
                 if ($i == $this->CurntPage) {
-                    ?><li class="active"><?php 
+                    ?><li class="active"><?php
                 } else {
-                    ?><li><?php 
+                    ?><li><?php
                 }
 
-                    //
-                    //other gets
-                    if ($OtherGets && isset($_GET) && !empty($_GET)) {
-                        $Numgets = '?';
-                        $j = 0;
-                        foreach ($_GET as $key => $value) {
-                            if ($key != 'url' && $key != Config::get('view.pagination_param')) {
-                                if ($j > 0) {
-                                    $Numgets .= '&';
-                                }
-                                $Numgets .= $key.'='.$value;
-                                $j++;
+                //
+                //other gets
+                if ($OtherGets && isset($_GET) && !empty($_GET)) {
+                    $Numgets = '?';
+                    $j = 0;
+                    foreach ($_GET as $key => $value) {
+                        if ($key != 'url' && $key != Config::get('view.pagination_param')) {
+                            if ($j > 0) {
+                                $Numgets .= '&';
                             }
+                            $Numgets .= $key.'='.$value;
+                            $j++;
                         }
-                        if ($j > 0) {
-                            $Numgets .= '&';
-                        }
-                        $Numgets .= Config::get('view.pagination_param').'='.$i;
-                    } else {
-                        $Numgets = '?'.Config::get('view.pagination_param').'='.$i;
                     }
+                    if ($j > 0) {
+                        $Numgets .= '&';
+                    }
+                    $Numgets .= Config::get('view.pagination_param').'='.$i;
+                } else {
+                    $Numgets = '?'.Config::get('view.pagination_param').'='.$i;
+                }
 
-                    //
-                    echo "<a href='".$Numgets."'>".$i.'</a>'; ?></li><?php
-
+                //
+                echo "<a href='".$Numgets."'>".$i.'</a>'; ?></li><?php
             }
         }
         //

@@ -16,9 +16,9 @@ class MysqlDriver extends Driver
     const URL_FAILD_MODE_EXCEPTION = '1';
     const EXCEPTION_FAILD_MODE = '2';
 
-//--------------------------------------------------------
-// Conection functions
-//--------------------------------------------------------
+    //--------------------------------------------------------
+    // Conection functions
+    //--------------------------------------------------------
 
     /**
      * Connect to Mysql database server.
@@ -49,11 +49,11 @@ class MysqlDriver extends Driver
         return self::error();
     }
 
-//--------------------------------------------------------
-// Functions to export database
-//--------------------------------------------------------
-// the following functions is for purpose of exporting
-// data into folder database/backup
+    //--------------------------------------------------------
+    // Functions to export database
+    //--------------------------------------------------------
+    // the following functions is for purpose of exporting
+    // data into folder database/backup
 
     /**
      * Export the Database.

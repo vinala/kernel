@@ -31,7 +31,7 @@ class Model extends Process
     public static function set($class, $table)
     {
         $txt = "<?php\n\nnamespace App\Model;\n\nuse Vinala\Kernel\MVC\ORM;\n\n";
-        $txt .= self::docs("$name Model");
+        $txt .= self::docs("$class Model");
         $txt .= "class $class extends ORM\n{";
         $txt .= "\n\n\t/**\n\t* The name of the DataTable\n\t*\n\t* @param string\n\t*/";
         $txt .= "\n\tpublic ".'$_table'." = '$table';\n\n}";
