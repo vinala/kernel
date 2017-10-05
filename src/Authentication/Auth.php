@@ -104,7 +104,6 @@ class Auth
                 static::save_cookie();
             }
 
-
             return true;
         }
 
