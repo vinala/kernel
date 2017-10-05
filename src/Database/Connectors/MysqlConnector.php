@@ -40,6 +40,7 @@ class MysqlConnector
                     $config['password']
                 );
             //
+            $this->connector->exec("set names ".config('database.charset'));
             $this->connector->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             throw new ConnectorException();
