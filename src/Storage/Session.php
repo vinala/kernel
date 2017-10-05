@@ -246,6 +246,19 @@ class Session
         return true;
     }
 
+
+    /**
+     * Forget and remove a session variable.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public static function forget($name)
+    {
+        return static::remove($name);
+    }
+
     /**
      * Get All session surface variables.
      *
