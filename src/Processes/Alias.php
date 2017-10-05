@@ -40,6 +40,8 @@ class Alias extends Process
             'models' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Models Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of models classes\n\t|\n\t**/\n",
 
             'mailables' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Mailables Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of mailables classes\n\t|\n\t**/\n",
+
+            'querying' => "\n\t/*\n\t|----------------------------------------------------------\n\t| Querying Aliases\n\t|----------------------------------------------------------\n\t| this array is responsible for aliases of querying classes\n\t|\n\t**/\n",
         ];
     }
 
@@ -60,6 +62,7 @@ class Alias extends Process
         $content .= $docs['controllers'].self::arrayFormat($params['controllers'], 'controllers');
         $content .= $docs['models'].self::arrayFormat($params['models'], 'models');
         $content .= $docs['mailables'].self::arrayFormat($params['mailables'], 'mailables');
+        $content .= $docs['querying'].self::arrayFormat($params['querying'], 'querying');
 
         $content = self::fileFormat($content);
 
