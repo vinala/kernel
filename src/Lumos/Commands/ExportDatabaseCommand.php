@@ -27,7 +27,7 @@ class ExportDatabaseCommand extends Commands
      *
      * @var bool
      */
-    protected $database = false;
+    protected $database = true;
 
     /**
      * Configure the command.
