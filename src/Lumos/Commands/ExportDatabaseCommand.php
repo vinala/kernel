@@ -61,10 +61,13 @@ class ExportDatabaseCommand extends Commands
      */
     public function show($process)
     {
+        $this->title('Save database command :');
+        //
         if ($process) {
-            $this->info('The database saved');
+            $this->info("\nThe database saved");
+            $this->comment(" -> Path : database/backup\n");
         } else {
-            $this->error("The database wasn't saved");
+            $this->error("\nThe database wasn't saved\n");
         }
     }
 }
