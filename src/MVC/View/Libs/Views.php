@@ -126,12 +126,18 @@ class Views
             '.tpl.php',
         ];
 
-        $nest = !is_null($nest) ? $nest.'views/' : !is_null($this->nest) ? $this->nest : root().'resources/views/';
+        if(!is_null($nest)) {
+            $nest = $nest.'resources/views/';
+        } elseif(!is_null($this->nest)) {
+            $nest = $this->nest;
+        } else {
+            $nest = root().'resources/views/';
+        }
 
         $i = 0;
         foreach ($extensions as $extension) {
             $path = $nest.$file.$extension;
-
+            
             if (file_exists($path)) {
                 if ($i == 0) {
                     $view = ['path' => $path, 'engine' => 'none'];
