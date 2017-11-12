@@ -246,7 +246,6 @@ class Session
         return true;
     }
 
-
     /**
      * Forget and remove a session variable.
      *

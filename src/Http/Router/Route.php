@@ -512,7 +512,7 @@ class Route
      *
      * @return $this
      */
-    private function addResource(Route $route)
+    private function addResource(self $route)
     {
         $this->resources[$route->getName()] = $route;
 
