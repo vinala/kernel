@@ -99,8 +99,7 @@ class Auth
 
             static::save_session();
 
-            if($remember)
-            {
+            if ($remember) {
                 static::save_cookie();
             }
 
