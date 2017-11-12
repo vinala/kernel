@@ -1,10 +1,11 @@
 {
-	"version": "3.3.30",
+	"version": "3.3.32",
 	"tag": "",
 	"stat": "final",
 	"features": [],
 	"fixes": [
-		"Fixes in Seeds classes"
+		"Fixes in Views classes",
+		"Other Fixes"
 	],
-	"sha": "6d79fb8362c3f39d27d345efbd56635ee4bff1ac"
+	"sha": "6d79fb836fr2c3f39d27d345efbd56635ee4bffc"
 }
