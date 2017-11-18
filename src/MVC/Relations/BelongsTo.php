@@ -256,7 +256,8 @@ class BelongsTo
      */
     protected function getTable($model)
     {
-        return $model::$table;
+        $model = new $model;
+        return $model->_table;
     }
 
     /**
