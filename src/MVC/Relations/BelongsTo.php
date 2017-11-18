@@ -111,8 +111,7 @@ class BelongsTo
     protected function setCurrent($model)
     {
         $this->currentModel = get_class($model);
-        $theModel = $this->currentModel;
-        $this->currentTable = $theModel::$table;
+        $this->currentTable = $model->_table;
     }
 
     /**
