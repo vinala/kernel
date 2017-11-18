@@ -269,8 +269,8 @@ class BelongsTo
         $modelObject = new $model();
         $remoteObject = new $related();
         //
-        $tablemodel = $model::$table;
-        $tableremote = $related::$table;
+        $tablemodel = $modelObject->_table;
+        $tableremote = $remoteObject->_table;
         //
         if (is_null($local) && is_null($remote)) {
             $model = $tablemodel.'_id';
@@ -279,10 +279,10 @@ class BelongsTo
             $model = $remote;
         }
         //
-        if (array_key_exists($model, get_object_vars($remoteObject))) {
+        if (in_array(strtolower($model), $remoteObject->_columns)) {
             $this->relation = OneToOneRelation;
         }
-        if (array_key_exists($remote, get_object_vars($modelObject))) {
+        if (in_array(strtolower($remote), $modelObject->_columns)) {
             $this->relation = OneToManyRelation;
         }
         //
