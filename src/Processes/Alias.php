@@ -62,8 +62,8 @@ class Alias extends Process
         $content .= $docs['controllers'].self::arrayFormat($params['controllers'], 'controllers');
         $content .= $docs['models'].self::arrayFormat($params['models'], 'models');
         $content .= $docs['mailables'].self::arrayFormat($params['mailables'], 'mailables');
-        $content .= $docs['querying'].self::arrayFormat($params['querying'], 'querying');
-
+        if(array_has($params, 'querying')) $content .= $docs['querying'].self::arrayFormat($params['querying'], 'querying');
+        
         $content = self::fileFormat($content);
 
         return self::setFile($content);
