@@ -1037,4 +1037,41 @@ class ORM
         //
         return $collection;
     }
+
+    /**
+     * get data by where clause
+     *
+     * @param string $column
+     * @param string $relation
+     * @param string $value
+     *
+     * @return array
+     */
+    public static function where($column, $relation, $value)
+    {
+        $self = self::instance();
+        $key = $self->_keyName;
+        $data = \Query::from($self->_table)->select($key)->where($column, $relation, $value)->get();
+        $rows = [];
+
+        foreach ($data as $item) {
+           $rows[] = self::instance($item->$key);
+        }
+        
+        return $rows;
+    }
+
+    /**
+     * get instance of the called model
+     *
+     * @param int $key
+     *
+     * @return array
+     */
+    protected static function instance($key = null)
+    {
+        return instance(get_called_class(), $key);
+    }
+
+
 }
