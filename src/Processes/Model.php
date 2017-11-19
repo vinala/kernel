@@ -34,7 +34,8 @@ class Model extends Process
         $txt .= self::docs("$class Model");
         $txt .= "class $class extends ORM\n{";
         $txt .= "\n\n\t/**\n\t* The name of the DataTable\n\t*\n\t* @param string\n\t*/";
-        $txt .= "\n\tpublic ".'$_table'." = '$table';\n\n}";
+        // $txt .= "\n\tpublic ".'$_table'." = '$table';\n\n}";
+        $txt .= "\n\tpublic static ".'$table'." = '$table';\n\n}";
         //
         return $txt;
     }
