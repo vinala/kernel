@@ -111,7 +111,7 @@ class BelongsTo
     protected function setCurrent($model)
     {
         $this->currentModel = get_class($model);
-        $this->currentTable = $model->_table;
+        $this->currentTable = $this->getTable($model);
     }
 
     /**
@@ -252,13 +252,11 @@ class BelongsTo
     /**
      * get database table.
      *
-     * @param $model string
+     * @param string|ORM $model
      */
     protected function getTable($model)
     {
-        $model = new $model();
-
-        return $model->_table;
+        return $model::$table;
     }
 
     /**
@@ -271,8 +269,8 @@ class BelongsTo
         $modelObject = new $model();
         $remoteObject = new $related();
         //
-        $tablemodel = $modelObject->_table;
-        $tableremote = $remoteObject->_table;
+        $tablemodel = $this->getTable($modelObject);
+        $tableremote = $this->getTable($remoteObject);
         //
         if (is_null($local) && is_null($remote)) {
             $model = $tablemodel.'_id';

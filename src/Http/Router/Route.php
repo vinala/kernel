@@ -24,7 +24,7 @@ class Route
      *
      * @var string
      */
-    private $name;
+    public $name;
 
     /**
      * The url of the route.
@@ -299,6 +299,16 @@ class Route
         return $this->middleware;
     }
 
+    /**
+     * Get the resource of route.
+     *
+     * @return array|null
+     */
+    public function getResource()
+    {
+        return $this->resources;
+    }
+
     //--------------------------------------------------------
     // Static Functions
     //--------------------------------------------------------
@@ -371,6 +381,8 @@ class Route
     public static function target($url, $target)
     {
         $route = new self($url);
+
+        $route->setMethod('call');
 
         $segements = explode('@', $target);
 

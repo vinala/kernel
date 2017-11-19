@@ -129,8 +129,11 @@ class Form
         if (array_has($attributes, 'id')) {
             return $attributes['id'];
         }
-        if (in_array($name, self::$labels)) {
-            return $name;
+
+        if (!is_null(self::$labels)) {
+            if (in_array($name, self::$labels)) {
+                return $name;
+            }
         }
     }
 
@@ -321,6 +324,7 @@ class Form
         $options = self::setTextAreaSize($options);
 
         $options['id'] = self::getIdAttribute($name, $options);
+        $options['name'] = $name;
 
         unset($options['size']);
 

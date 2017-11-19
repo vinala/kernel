@@ -581,7 +581,7 @@ class Query
      */
     public function insert()
     {
-        $query = 'insert into '.$this->table.' ('.$this->columns.') values ('.$this->values.')';
+        $query = 'insert into '.$this->getTables($this->tables).' ('.$this->columns.') values ('.$this->values.')';
         //
         $this->reset();
         //
@@ -614,7 +614,7 @@ class Query
      */
     public function update()
     {
-        $query = 'update '.$this->table.' set ';
+        $query = 'update '.$this->getTables($this->tables).' set ';
         //
         for ($i = 0; $i < Collection::count($this->sets); $i++) {
             if ($i < Collection::count($this->sets) - 1) {
