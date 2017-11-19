@@ -245,11 +245,6 @@ class Session
 
         return true;
     }
-    // function same as remove for some part of framework that still use forget function
-    public static function forget($name)
-    {
-        return static::remove($name);
-    }
 
     /**
      * Forget and remove a session variable.
