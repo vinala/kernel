@@ -295,7 +295,7 @@ class Session
 
         $token = '';
 
-        if (static::existe($name)) {
+        if (static::exists($name)) {
             $token = static::get($name);
         } else {
             $token = Hash::token();
