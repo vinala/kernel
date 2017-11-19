@@ -301,9 +301,16 @@ class Routes
             } elseif ($route->getTarget()['method'] == 'insert') {
                 $params[] = new Request();
             }
+            self::treatment(call_user_func_array($route->getClosure(), $params));
+        } elseif ($route->getMethod() == 'call') {
+
+            $target = $route->getResource()[$route->name]->getTarget();
+
+            self::treatment(call_user_func_array([$target['controller'],$target['method']], $params));
+        } else {
+            self::treatment(call_user_func_array($route->getClosure(), $params));
         }
 
-        self::treatment(call_user_func_array($route->getClosure(), $params));
     }
 
     /**
