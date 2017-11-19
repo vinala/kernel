@@ -2,26 +2,26 @@
 
 namespace Vinala\Kernel\MVC;
 
+use InvalidArgumentException;
 use Vinala\Kernel\Collections\Collection as Table;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Database;
 use Vinala\Kernel\Database\Query;
 use Vinala\Kernel\Foundation\Exceptions\SurfaceDisabledException;
 use Vinala\Kernel\MVC\ORM\Collection;
-use Vinala\Kernel\MVC\ORM\CRUD;
 //
+use Vinala\Kernel\MVC\ORM\CRUD;
 use Vinala\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
 use Vinala\Kernel\MVC\ORM\Exception\ModelNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\TableNotFoundException;
-use Vinala\Kernel\Time\DateTime as Time;
 //
-use Vinala\Kernel\MVC\Relations\OneToOne;
-use Vinala\Kernel\MVC\Relations\OneToMany;
-use Vinala\Kernel\MVC\Relations\ManyToMany;
 use Vinala\Kernel\MVC\Relations\BelongsTo;
+use Vinala\Kernel\MVC\Relations\ManyToMany;
+use Vinala\Kernel\MVC\Relations\OneToMany;
+use Vinala\Kernel\MVC\Relations\OneToOne;
 //
-use InvalidArgumentException;
+use Vinala\Kernel\Time\DateTime as Time;
 
 /**
  * The Mapping Objet-Relationnel (ORM) class.
@@ -1041,7 +1041,7 @@ class ORM
     }
 
     /**
-     * get data by where clause
+     * get data by where clause.
      *
      * @param string $column
      * @param string $relation
@@ -1056,17 +1056,17 @@ class ORM
         $data = \Query::from($self->_table)->select($key)->where($column, $relation, $value)->get();
         $rows = [];
 
-        if( ! is_null($data)) {
+        if (!is_null($data)) {
             foreach ($data as $item) {
                 $rows[] = self::instance($item->$key);
             }
         }
-        
+
         return $rows;
     }
 
     /**
-     * get instance of the called model
+     * get instance of the called model.
      *
      * @param int $key
      *
@@ -1076,6 +1076,4 @@ class ORM
     {
         return instance(get_called_class(), $key);
     }
-
-
 }
