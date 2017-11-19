@@ -160,11 +160,10 @@ class ManyToMany
     {
         $intermediates = $this->intermediates($intermediates, $localColumn, $localValue);
         //
-        if(!is_null($intermediates)) {
+        if (!is_null($intermediates)) {
             return $this->all($intermediates, $remote, $remoteColumn);
         }
         //
-        return null;
     }
 
     /**
@@ -196,20 +195,17 @@ class ManyToMany
     {
         $object = $model::where($column, '=', $value);
 
-        if(!is_null($object))
-        {
-            if(count($object)>0) {
+        if (!is_null($object)) {
+            if (count($object) > 0) {
                 return $object[0];
             }
         }
-
-        return null;
     }
 
     /**
      * Get the table of the model.
      *
-     * @param string $model 
+     * @param string $model
      *
      * @return string
      */

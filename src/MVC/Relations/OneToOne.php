@@ -71,13 +71,11 @@ class OneToOne
     {
         $data = $model::where($column, '=', $value);
 
-        if(!is_null($data)) {
-            if(count($data) > 0) {
+        if (!is_null($data)) {
+            if (count($data) > 0) {
                 return $data[0];
             }
         }
-
-        return null;
     }
 
     /**
