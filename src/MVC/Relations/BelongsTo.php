@@ -212,7 +212,7 @@ class BelongsTo
      */
     protected function all($model, $column, $value)
     {
-        return $model::where("$column = '$value'");
+        return $model::where($column, '=', $value);
     }
 
     /**
@@ -224,15 +224,15 @@ class BelongsTo
      */
     protected function prepare($models)
     {
-        return !is_null($models->data) ?
-                    ((Collection::count($models->data) > 0)
-                        ? ((Collection::count($models->data) == 1)
-                            ? $models->data[0]
-                            : $models->data
-                        )
-                        : null
-                    )
-                    : null;
+        return !is_null($models) ?
+        ((Collection::count($models) > 0)
+            ? ((Collection::count($models) == 1)
+                ? $models[0]
+                : $models
+            )
+            : null
+        )
+        : null;
     }
 
     /**

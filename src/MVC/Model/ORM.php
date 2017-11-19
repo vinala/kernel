@@ -20,6 +20,8 @@ use Vinala\Kernel\MVC\Relations\OneToOne;
 use Vinala\Kernel\MVC\Relations\OneToMany;
 use Vinala\Kernel\MVC\Relations\ManyToMany;
 use Vinala\Kernel\MVC\Relations\BelongsTo;
+//
+use InvalidArgumentException;
 
 /**
  * The Mapping Objet-Relationnel (ORM) class.
@@ -1054,8 +1056,10 @@ class ORM
         $data = \Query::from($self->_table)->select($key)->where($column, $relation, $value)->get();
         $rows = [];
 
-        foreach ($data as $item) {
-           $rows[] = self::instance($item->$key);
+        if( ! is_null($data)) {
+            foreach ($data as $item) {
+                $rows[] = self::instance($item->$key);
+            }
         }
         
         return $rows;
