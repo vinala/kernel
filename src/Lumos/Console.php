@@ -88,7 +88,7 @@ class Console
     {
         self::setUserClasses();
         //
-        if( ! is_null(self::$userCommands)){
+        if (!is_null(self::$userCommands)) {
             foreach (self::$userCommands as $value) {
                 $app->add(new $value());
             }
