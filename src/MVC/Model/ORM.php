@@ -286,10 +286,10 @@ class ORM
     protected function getTable($data = null)
     {
         if (is_null($data)) {
-            $this->_prifixTable = (Config::get('database.prefixing') ? Config::get('database.prefixe') : '').$this->_table;
+            $this->_prifixTable = (Config::get('database.prefixing') ? Config::get('database.prefixe') : '').static::$table;
             //
             if (!$this->checkTable()) {
-                throw new TableNotFoundException($this->_table);
+                throw new TableNotFoundException(static::$table);
             }
             //
             return $this->_prifixTable;
@@ -449,7 +449,7 @@ class ORM
             if (Table::count($data) > 1) {
                 throw new ManyPrimaryKeysException();
             } elseif (Table::count($data) == 0) {
-                throw new PrimaryKeyNotFoundException($this->_table);
+                throw new PrimaryKeyNotFoundException(static::$table);
             }
             //
             $this->_keyName = $data[0]['Column_name'];
@@ -513,7 +513,7 @@ class ORM
      */
     protected function dig($key)
     {
-        return Query::from($this->_table)
+        return Query::from(static::$table)
             ->select('*')
             ->where($this->_keyName, '=', $key)
             ->get(Query::GET_ARRAY);
@@ -678,7 +678,7 @@ class ORM
      */
     private function insert($columns, $values)
     {
-        return Query::table($this->_table)
+        return Query::table(static::$table)
         ->column($columns)
         ->value($values)
         ->insert();
@@ -718,7 +718,7 @@ class ORM
      */
     private function update($columns, $values)
     {
-        $query = Query::table($this->_table);
+        $query = Query::table(static::$table);
         //
         for ($i = 0; $i < Table::count($columns); $i++) {
             $query = $query->set($columns[$i], $values[$i]);
@@ -741,7 +741,7 @@ class ORM
         if (!$this->_canKept) {
             $this->forceDelete();
         } else {
-            Query::table($this->_table)
+            Query::table(static::$table)
             ->set('deleted_at', Time::current())
             ->where($this->_keyName, '=', $this->_keyValue)
             ->update();
@@ -757,7 +757,7 @@ class ORM
     {
         $key = $this->_kept ? $this->_keptData[$this->_keyName] : $this->_keyValue;
         //
-        Query::table($this->_table)
+        Query::table(static::$table)
             ->where($this->_keyName, '=', $key)
             ->delete();
         //
@@ -788,7 +788,7 @@ class ORM
         if ($this->_kept) {
             $this->bring();
             //
-            Query::table($this->_table)
+            Query::table(static::$table)
             ->set('deleted_at', 'NULL', false)
             ->where($this->_keyName, '=', $this->_keyValue)
             ->update();
