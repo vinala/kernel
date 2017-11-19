@@ -286,6 +286,7 @@ class ORM
     protected function getTable($data = null)
     {
         if (is_null($data)) {
+            $this->_table = static::$table;
             $this->_prifixTable = (Config::get('database.prefixing') ? Config::get('database.prefixe') : '').static::$table;
             //
             if (!$this->checkTable()) {
@@ -295,6 +296,7 @@ class ORM
             return $this->_prifixTable;
         } else {
             $this->_prifixTable = $data['prifixTable'];
+            $this->_table = static::$table;
         }
     }
 
