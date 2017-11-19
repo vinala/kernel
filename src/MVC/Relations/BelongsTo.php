@@ -252,7 +252,7 @@ class BelongsTo
     /**
      * get database table.
      *
-     * @param string|ORM $model 
+     * @param string|ORM $model
      */
     protected function getTable($model)
     {
