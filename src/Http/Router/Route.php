@@ -381,7 +381,7 @@ class Route
     public static function target($url, $target)
     {
         $route = new self($url);
-        
+
         $route->setMethod('call');
 
         $segements = explode('@', $target);

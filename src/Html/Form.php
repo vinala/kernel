@@ -130,8 +130,7 @@ class Form
             return $attributes['id'];
         }
 
-        if( ! is_null(self::$labels))
-        {
+        if (!is_null(self::$labels)) {
             if (in_array($name, self::$labels)) {
                 return $name;
             }
