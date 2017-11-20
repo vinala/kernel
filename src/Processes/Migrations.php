@@ -174,7 +174,7 @@ class Migrations extends Process
         $link = $r[$ind];
         //
 
-            include_once $link;
+        include_once $link;
 
         if (down()) {
             if (Schema::existe(Config::get('database.migration'))) {
@@ -232,7 +232,7 @@ class Migrations extends Process
             $temp2 = explode('_', $temp1[1]);
             $temp3 = explode('.', $temp2[1]);
             $ex = $temp3[0];
-        //
+            //
 
             if ($ex == $_POST['exec_cos_migrate_select']) {
                 $r2[] = $ex;
@@ -279,7 +279,7 @@ class Migrations extends Process
             $temp2 = explode('_', $temp1[1]);
             $temp3 = explode('.', $temp2[1]);
             $ex = $temp3[0];
-        //
+            //
             if ($ex == $_POST['exec_cos_migrate_select']) {
                 $r2[] = $ex;
                 $r3[] = $temp2[0];

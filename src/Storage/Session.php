@@ -247,6 +247,18 @@ class Session
     }
 
     /**
+     * Forget and remove a session variable.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public static function forget($name)
+    {
+        return static::remove($name);
+    }
+
+    /**
      * Get All session surface variables.
      *
      * @return array
@@ -283,7 +295,7 @@ class Session
 
         $token = '';
 
-        if (static::existe($name)) {
+        if (static::exists($name)) {
             $token = static::get($name);
         } else {
             $token = Hash::token();

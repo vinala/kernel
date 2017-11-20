@@ -126,7 +126,13 @@ class Views
             '.tpl.php',
         ];
 
-        $nest = !is_null($nest) ? $nest.'views/' : !is_null($this->nest) ? $this->nest : root().'resources/views/';
+        if (!is_null($nest)) {
+            $nest = $nest.'resources/views/';
+        } elseif (!is_null($this->nest)) {
+            $nest = $this->nest;
+        } else {
+            $nest = root().'resources/views/';
+        }
 
         $i = 0;
         foreach ($extensions as $extension) {
@@ -174,7 +180,7 @@ class Views
      *
      * @return bool
      */
-    public function show(Views $_vinala_view = null)
+    public function show(self $_vinala_view = null)
     {
         if (is_null($_vinala_view)) {
             $_vinala_view = $this;

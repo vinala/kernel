@@ -111,8 +111,7 @@ class BelongsTo
     protected function setCurrent($model)
     {
         $this->currentModel = get_class($model);
-        $theModel = $this->currentModel;
-        $this->currentTable = $theModel::$table;
+        $this->currentTable = $this->getTable($model);
     }
 
     /**
@@ -213,7 +212,7 @@ class BelongsTo
      */
     protected function all($model, $column, $value)
     {
-        return $model::where("$column = '$value'");
+        return $model::where($column, '=', $value);
     }
 
     /**
@@ -225,15 +224,15 @@ class BelongsTo
      */
     protected function prepare($models)
     {
-        return !is_null($models->data) ?
-                    ((Collection::count($models->data) > 0)
-                        ? ((Collection::count($models->data) == 1)
-                            ? $models->data[0]
-                            : $models->data
-                        )
-                        : null
-                    )
-                    : null;
+        return !is_null($models) ?
+        ((Collection::count($models) > 0)
+            ? ((Collection::count($models) == 1)
+                ? $models[0]
+                : $models
+            )
+            : null
+        )
+        : null;
     }
 
     /**
@@ -253,7 +252,7 @@ class BelongsTo
     /**
      * get database table.
      *
-     * @param $model string
+     * @param string|ORM $model
      */
     protected function getTable($model)
     {
@@ -270,8 +269,8 @@ class BelongsTo
         $modelObject = new $model();
         $remoteObject = new $related();
         //
-        $tablemodel = $model::$table;
-        $tableremote = $related::$table;
+        $tablemodel = $this->getTable($modelObject);
+        $tableremote = $this->getTable($remoteObject);
         //
         if (is_null($local) && is_null($remote)) {
             $model = $tablemodel.'_id';
@@ -280,10 +279,10 @@ class BelongsTo
             $model = $remote;
         }
         //
-        if (array_key_exists($model, get_object_vars($remoteObject))) {
+        if (in_array(strtolower($model), $remoteObject->_columns)) {
             $this->relation = OneToOneRelation;
         }
-        if (array_key_exists($remote, get_object_vars($modelObject))) {
+        if (in_array(strtolower($remote), $modelObject->_columns)) {
             $this->relation = OneToManyRelation;
         }
         //

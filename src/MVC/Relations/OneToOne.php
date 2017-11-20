@@ -69,7 +69,13 @@ class OneToOne
      */
     protected function first($model, $column, $value)
     {
-        return (new $model())->get($column, '=', $value);
+        $data = $model::where($column, '=', $value);
+
+        if (!is_null($data)) {
+            if (count($data) > 0) {
+                return $data[0];
+            }
+        }
     }
 
     /**

@@ -107,7 +107,7 @@ class MysqlExporter
     {
         $database = Config::get('database.database');
 
-        return "\n\n-- CREATE DATABASE $database;\n-- USE $database;";
+        return "\n\n DROP DATABASE $database;\n\n CREATE DATABASE $database;\n USE $database;";
     }
 
     /**
@@ -127,7 +127,7 @@ class MysqlExporter
             //
             $content = (!isset($content) ? '' : $content).self::stucture($table);
             //
-            for ($i = 0, $st_counter = 0; $i < $fields; $i++, $st_counter = 0) {
+            for ($i = 0, $st_counter = 0; $i < 1; $i++, $st_counter = 0) {
                 foreach ($data as $row) {
                     if ($st_counter % 100 == 0 || $st_counter == 0) {
                         $content .= "\n-- Table Data\nINSERT INTO ".$table.' VALUES';

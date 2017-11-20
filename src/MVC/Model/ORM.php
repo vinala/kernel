@@ -2,18 +2,25 @@
 
 namespace Vinala\Kernel\MVC;
 
+use InvalidArgumentException;
 use Vinala\Kernel\Collections\Collection as Table;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Database;
 use Vinala\Kernel\Database\Query;
 use Vinala\Kernel\Foundation\Exceptions\SurfaceDisabledException;
 use Vinala\Kernel\MVC\ORM\Collection;
-use Vinala\Kernel\MVC\ORM\CRUD;
 //
+use Vinala\Kernel\MVC\ORM\CRUD;
 use Vinala\Kernel\MVC\ORM\Exception\ManyPrimaryKeysException;
 use Vinala\Kernel\MVC\ORM\Exception\ModelNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\PrimaryKeyNotFoundException;
 use Vinala\Kernel\MVC\ORM\Exception\TableNotFoundException;
+//
+use Vinala\Kernel\MVC\Relations\BelongsTo;
+use Vinala\Kernel\MVC\Relations\ManyToMany;
+use Vinala\Kernel\MVC\Relations\OneToMany;
+use Vinala\Kernel\MVC\Relations\OneToOne;
+//
 use Vinala\Kernel\Time\DateTime as Time;
 
 /**
@@ -279,15 +286,17 @@ class ORM
     protected function getTable($data = null)
     {
         if (is_null($data)) {
-            $this->_prifixTable = (Config::get('database.prefixing') ? Config::get('database.prefixe') : '').$this->_table;
+            $this->_table = static::$table;
+            $this->_prifixTable = (Config::get('database.prefixing') ? Config::get('database.prefixe') : '').static::$table;
             //
             if (!$this->checkTable()) {
-                throw new TableNotFoundException($this->_table);
+                throw new TableNotFoundException(static::$table);
             }
             //
             return $this->_prifixTable;
         } else {
             $this->_prifixTable = $data['prifixTable'];
+            $this->_table = static::$table;
         }
     }
 
@@ -442,7 +451,7 @@ class ORM
             if (Table::count($data) > 1) {
                 throw new ManyPrimaryKeysException();
             } elseif (Table::count($data) == 0) {
-                throw new PrimaryKeyNotFoundException($this->_table);
+                throw new PrimaryKeyNotFoundException(static::$table);
             }
             //
             $this->_keyName = $data[0]['Column_name'];
@@ -506,7 +515,7 @@ class ORM
      */
     protected function dig($key)
     {
-        return Query::from($this->_table)
+        return Query::from(static::$table)
             ->select('*')
             ->where($this->_keyName, '=', $key)
             ->get(Query::GET_ARRAY);
@@ -671,7 +680,7 @@ class ORM
      */
     private function insert($columns, $values)
     {
-        return Query::table($this->_table)
+        return Query::table(static::$table)
         ->column($columns)
         ->value($values)
         ->insert();
@@ -711,7 +720,7 @@ class ORM
      */
     private function update($columns, $values)
     {
-        $query = Query::table($this->_table);
+        $query = Query::table(static::$table);
         //
         for ($i = 0; $i < Table::count($columns); $i++) {
             $query = $query->set($columns[$i], $values[$i]);
@@ -734,7 +743,7 @@ class ORM
         if (!$this->_canKept) {
             $this->forceDelete();
         } else {
-            Query::table($this->_table)
+            Query::table(static::$table)
             ->set('deleted_at', Time::current())
             ->where($this->_keyName, '=', $this->_keyValue)
             ->update();
@@ -750,7 +759,7 @@ class ORM
     {
         $key = $this->_kept ? $this->_keptData[$this->_keyName] : $this->_keyValue;
         //
-        Query::table($this->_table)
+        Query::table(static::$table)
             ->where($this->_keyName, '=', $key)
             ->delete();
         //
@@ -781,7 +790,7 @@ class ORM
         if ($this->_kept) {
             $this->bring();
             //
-            Query::table($this->_table)
+            Query::table(static::$table)
             ->set('deleted_at', 'NULL', false)
             ->where($this->_keyName, '=', $this->_keyValue)
             ->update();
@@ -1031,5 +1040,42 @@ class ORM
         }
         //
         return $collection;
+    }
+
+    /**
+     * get data by where clause.
+     *
+     * @param string $column
+     * @param string $relation
+     * @param string $value
+     *
+     * @return array
+     */
+    public static function where($column, $relation, $value)
+    {
+        $self = self::instance();
+        $key = $self->_keyName;
+        $data = \Query::from($self->_table)->select($key)->where($column, $relation, $value)->get();
+        $rows = [];
+
+        if (!is_null($data)) {
+            foreach ($data as $item) {
+                $rows[] = self::instance($item->$key);
+            }
+        }
+
+        return $rows;
+    }
+
+    /**
+     * get instance of the called model.
+     *
+     * @param int $key
+     *
+     * @return array
+     */
+    protected static function instance($key = null)
+    {
+        return instance(get_called_class(), $key);
     }
 }
