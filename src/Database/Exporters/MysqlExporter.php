@@ -107,7 +107,7 @@ class MysqlExporter
     {
         $database = Config::get('database.database');
 
-        return "\n\n-- CREATE DATABASE $database;\n-- USE $database;";
+        return "\n\n DROP DATABASE $database;\n\n CREATE DATABASE $database;\n USE $database;";
     }
 
     /**

@@ -1,11 +1,10 @@
 {
-	"version": "3.3.32",
+	"version": "3.3.33",
 	"tag": "",
 	"stat": "final",
 	"features": [],
 	"fixes": [
-		"Fixes in Views classes",
-		"Other Fixes"
+		"Repairing release for various bugs"
 	],
-	"sha": "6d79fb836fr2c3f39d27d345efbd56635ee4bffc"
+	"sha": "a24c0a6c3ff35596baf2fb75c8b0eb2749de9d1f"
 }

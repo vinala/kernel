@@ -27,9 +27,7 @@ class OneToMany
         $relationVal = $this->relationValue($related, $model, $local);
         $relationColumn = $this->relationColumn($related, $model, $remote);
         //
-        $mod = $this->all($related, $relationColumn, $relationVal);
-        //
-        return $this->prepare($mod, $related);
+        return $this->all($related, $relationColumn, $relationVal);
     }
 
     /**
@@ -77,19 +75,7 @@ class OneToMany
      */
     protected function all($model, $column, $value)
     {
-        return $model::where("$column = '$value'");
-    }
-
-    /**
-     * preparing the data for the hasone relation.
-     *
-     * @param $model : data of the raltion
-     * @param $remote : the model wanted to be related to the
-     *			current model
-     */
-    protected function prepare($model, $remote)
-    {
-        return !empty($model) ? isset($model->data) ? $model->data : null : null;
+        return $model::where($column, '=', $value);
     }
 
     /**

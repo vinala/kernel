@@ -23,8 +23,9 @@ class ManyToMany
      */
     public function ini($related, $model, $intermediate = null, $local = null, $remote = null)
     {
-        $relatedTable = $related::$table;
-        $modelTable = $this->getStaticTable($model);
+        $relatedTable = $this->getTable($related);
+        $modelTable = $this->getTable($model);
+        //
         $intermediate = is_null($intermediate) ? $this->getIntermediate($modelTable, $relatedTable) : $intermediate;
         //
         $this->checkModels($related, $intermediate, get_class($model));
@@ -146,7 +147,7 @@ class ManyToMany
      */
     protected function intermediates($model, $column, $value)
     {
-        return $model::where("$column = '$value'");
+        return $model::where($column, '=', $value);
     }
 
     /**
@@ -159,9 +160,10 @@ class ManyToMany
     {
         $intermediates = $this->intermediates($intermediates, $localColumn, $localValue);
         //
-        $data = !is_null($intermediates->data) ? $this->all($intermediates, $remote, $remoteColumn) : null;
+        if (!is_null($intermediates)) {
+            return $this->all($intermediates, $remote, $remoteColumn);
+        }
         //
-        return $data;
     }
 
     /**
@@ -175,7 +177,7 @@ class ManyToMany
     {
         $data = [];
         //
-        foreach ($intermediates->data as $intermediate) {
+        foreach ($intermediates as $intermediate) {
             $data[] = $this->one($model, $column, $intermediate->$column);
         }
         //
@@ -191,8 +193,24 @@ class ManyToMany
      */
     protected function one($model, $column, $value)
     {
-        $object = $model::where("$column = '$value'");
+        $object = $model::where($column, '=', $value);
 
-        return !empty($object) ? $object->data[0] : null;
+        if (!is_null($object)) {
+            if (count($object) > 0) {
+                return $object[0];
+            }
+        }
+    }
+
+    /**
+     * Get the table of the model.
+     *
+     * @param string $model
+     *
+     * @return string
+     */
+    protected function getTable($model)
+    {
+        return $model::$table;
     }
 }
