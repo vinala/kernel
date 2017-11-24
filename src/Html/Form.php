@@ -197,7 +197,12 @@ class Form
      */
     protected static function exclure(&$options, $args = ['type', 'value', 'name'])
     {
-        return array_except($options, $args);
+        foreach ($options as $key => $option) {
+            if(array_has($args, $key))
+            {
+                unset($options[$key]);
+            }
+        }
     }
 
     /**
@@ -442,7 +447,7 @@ class Form
      */
     public static function radio($name, $checked = false, $options = [])
     {
-        self::exclure($options);
+        self::exclure($options,['value']);
 
         return self::checked('radio', $name, $checked, $options);
     }
