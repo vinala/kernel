@@ -567,8 +567,10 @@ class Bus
 
         self::call($files, $folder);
 
-        //Initiate the validation surface
-        Validator::ini();
+        $files = ['LanguageFileNotFoundException', 'ValidationRuleNotFoundException'];
+        $folder = static::$root.'Validation/Exceptions/';
+
+        self::call($files, $folder);
     }
 
     /**

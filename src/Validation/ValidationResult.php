@@ -67,6 +67,19 @@ class ValidationResult
     }
 
     /**
+     * Check if validation success.
+     *
+     * @return bool
+     */
+    public function success()
+    {
+        dc($this->validator);
+        $this->success = $this->validator->validate();
+
+        return $this->success;
+    }
+
+    /**
      * Get first validation error if exists.
      *
      * @return string
