@@ -15,7 +15,7 @@ class ValidationRuleNotFoundException extends Exception
 
     public function __construct($name)
     {
-        $this->message = "Rule '" . $name . "' has not been registered in validations rules.";
+        $this->message = "Rule '".$name."' has not been registered in validations rules.";
 
         $this->view = config('error.regular');
     }

@@ -66,16 +66,13 @@ class _Validator
     public static function make(array $data, array $rules)
     {
         self::$validator = new V($data);
-        
 
         foreach ($rules as $rule => $columns) {
-
-            if(is_string($columns)) {
+            if (is_string($columns)) {
                 $columns = self::separte($columns);
             } else {
                 $columns = $columns;
             }
-            
 
             $value = self::getValue($rule);
 

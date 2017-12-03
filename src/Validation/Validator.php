@@ -1,6 +1,6 @@
 <?php
 
-namespace Vinala\Kernel\Validation ;
+namespace Vinala\Kernel\Validation;
 
 use Respect\Validation\Validator as BaseValidator;
 
