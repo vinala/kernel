@@ -2,19 +2,15 @@
 
 namespace Vinala\Kernel\Validation ;
 
-use Vinala\Kernel\Filesystem\File;
-
-use Vinala\Kernel\Validation\Exception\LanguageFileNotFoundException;
-use Vinala\Kernel\Validation\Exception\ValidationRuleNotFoundException;
-use InvalidArgumentException as IAE;
+use Respect\Validation\Validator as BaseValidator;
 
 /**
-* The Validation surface
+* Validation Surface
 *
 * @version 2.0
 * @author Youssef Had
 * @package Vinala\Kernel\Validation
-* @since v3.3.2
+* @since v3.4.0
 */
 class Validator 
 {
@@ -24,229 +20,106 @@ class Validator
    //--------------------------------------------------------
 
    /**
-    * All data of validator
+    * The object of the validation
     *
-    * @var array
+    * @var mixed
     */
-   protected $data = [];
+   public $object = null;
 
    /**
-    * Fields of validation data
+    * Type of the object
     *
-    * @var array
+    * @var string
     */
-   protected $fields = [];
+   public $type = 'label';
 
    /**
-    * Translator file
+    * Base validator
     *
-    * @var array
+    * @var string
     */
-   protected $lang;
-
-   /**
-    * All rules of instance validation
-    *
-    * @var array
-    */
-   protected $rules = [];
-
-
+   public $validator = null;
 
    //--------------------------------------------------------
    // Constructor
    //--------------------------------------------------------
 
-   function __construct($data = array(), $file = null)
+   function __construct($object = null , $type = 'label')
    {
-      //set data
-      $this->data($data);
-
-      
-
-      //set the language file
-      $this->lang($file);
+      $this->object = $object;
+      $this->type = $type;
+      $this->validator = new BaseValidator;
    }
 
    //--------------------------------------------------------
-   // Setters and Getters
+   // Getters ans Setters 
    //--------------------------------------------------------
+   
 
-   /**
-    * Set data of validator.
-    *
-    * @param array $data
-    * @param 
-    *
-    * @return null
-    */
-   public function data($data)
+   public function __call($name,$args)
    {
-      $this->data = $data;
-
-      //set fields of data
-      $this->fields();
+      if(!($name == 'validate' || $name == 'check' || $name == 'error'  || $name == 'not')) {
+         $this->validator = call_user_func_array([$this->validator ,$name], $args);
+         return $this->validator;
+      } 
    }
+
 
    //--------------------------------------------------------
    // Functions
    //--------------------------------------------------------
 
    /**
-    * Set fields.
+    * use a value to validate.
+    *
+    * @param int|string
+    * @param 
+    *
+    * @return Validator
+    */
+   public function label($object)
+   {
+      $this->object = $object;
+   }
+
+   /**
+    * validate the value.
     *
     * @param 
     * @param 
     *
-    * @return array
-    */
-   protected function fields()
-   {
-      foreach ($this->data as $key => $value) {
-         $this->fields[] = $key;
-      }
-
-      return $this->fields;
-   }
-
-   /**
-    * Set lang file.
-    *
-    * @param string $file
-    * @param 
-    *
-    * @return string
-    */
-   public function lang($file)
-   {
-      $lang = config('lang.default');
-
-      $file = $file ?: 'validation';
-
-      $this->lang = $file;
-      $file = $this->path().'resources/translator/'.$lang.'/'.$file.'.php';
-      
-      if(!File::exists($file)) {
-         throw new LanguageFileNotFoundException('/'.$lang.'/'.$this->lang);
-      }      
-   }
-
-   /**
-    * Get main path of the app.
-    *
     * @return 
-    */
-   protected function path()
-   {
-      $path = dirname(__DIR__);
-
-      for ($i=0; $i < 4; $i++) { 
-         $path = dirname($path);
-      }
-      
-      return $path.'/';
-   }
-
-   /**
-    * Set the rules of validation.
-    *
-    * @param array $rules
-    *
-    * @return 
-    */
-   public function rule( $rule, $fields, $value = null)
-   {
-      if($this->exists($rule)) {
-         $_rule = [
-            'rule' => ucfirst($rule),
-            'fields' => $fields,
-            'value' => $value,
-         ];
-
-         $this->rules[$rule] = $_rule;
-      }
-   }
-
-   /**
-    * Check if rule exists.
-    *
-    * @param string $name
-    * @param 
-    *
-    * @return bool
-    */
-   protected function exists($name)
-   {
-      $ruleMethod = 'validate' . ucfirst($name);
-      if (!method_exists($this, $ruleMethod)) {
-         throw new ValidationRuleNotFoundException($name);
-      }
-      
-      return true;
-   }
-
-   /**
-    * The equals validation.
-    *
-    * @param array $fields
-    * @param string $value
-    *
-    * @return 
-    */
-   public function validateEquals($fields ,$value)
-   {
-      if(count($fields) < 2 ) {
-         throw new IAE("Fields of validation is not enough, must at least 2 fields");
-      }
-
-      $value = $this->data[array_values($fields)[0]];
-
-      for ($i=1; $i < count($fields); $i++) { 
-         if($this->data[$fields[$i]] == $value)
-         {
-            $value = $this->data[$fields[$i]];
-         }
-         else return false;
-      }
-
-      return true;
-   }
-
-   /**
-    * The required validation.
-    *
-    * @param array $fields
-    * @param string $value
-    *
-    * @return 
-    */
-   public function validateRequired($fields ,$value)
-   { 
-      for ($i=0; $i < count($fields); $i++) { 
-         if(is_null($this->data[$fields[$i]]))
-         {
-            return false;
-         } elseif(empty($this->data[$fields[$i]])) {
-            return false;
-         }
-      }
-
-      return true;
-   }
-
-   /**
-    * Validate the current validation.
-    *
-    * @return bool
     */
    public function validate()
    {
-      $res = array();
-      dc($this);
-      foreach ($this->rules as $key => $value) {
-         $res[$key] = call_user_func_array([$this, 'validate'.$value['rule']], [$value['fields'], $value['value']]);
+      return $this->validator->validate($this->object);
+   }
+
+   /**
+    * negate any rule.
+    *
+    * @param BaseValidator $arg
+    *
+    * @return BaseValidator
+    */
+   public function not($arg)
+   {
+      $this->validator = $this->validator::not($arg);
+      return $this->validator;
+   }
+
+   /**
+    * Get the message error.
+    *
+    * @return string
+    */
+   public function error()
+   {
+      try {
+         $this->validator->check($this->object);
+      } catch(\Respect\Validation\Exceptions\ValidationException $e) {
+         return $e->getMessage();
       }
-      dc($res);
    }
 
 }
