@@ -58,7 +58,7 @@ class Validator
 
    public function __call($name,$args)
    {
-      if(!($name == 'validate' || $name == 'check' || $name == 'error'  || $name == 'not')) {
+      if(!in_array($name , ['validate','check','error','not'])) {
          $this->validator = call_user_func_array([$this->validator ,$name], $args);
          return $this->validator;
       } 
