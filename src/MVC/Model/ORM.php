@@ -701,9 +701,9 @@ class ORM
         }
         //
         foreach ($this->_columns as $value) {
-            if ($value != $this->_keyName && isset($this->$value) && !empty($this->$value)) {
+            if ($value != $this->_keyName) {
                 $columns[] = $value;
-                $values[] = $this->$value;
+                $values[] = empty($this->$value) ? null : $this->$value;
             }
         }
         //
@@ -723,7 +723,7 @@ class ORM
         $query = Query::table(static::$table);
         //
         for ($i = 0; $i < Table::count($columns); $i++) {
-            $query = $query->set($columns[$i], $values[$i]);
+            $query = !empty($values[$i]) ? $query->set($columns[$i], $values[$i]) : $query->set($columns[$i], 'null', false);
         }
         //
         $query->where($this->_keyName, '=', $this->_keyValue)
