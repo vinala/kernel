@@ -6,7 +6,8 @@ use Vinala\Kernel\Collections\Collection;
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Connector\MysqlConnector;
 use Vinala\Kernel\Database\Database;
-use Vinala\Kernel\Database\Exporters\MysqlExporter;
+use Vinala\Kernel\Database\InOut\Mysql\Exporter;
+use Vinala\Kernel\Database\InOut\Mysql\Importer;
 
 /**
  * Mysql Database Class.
@@ -57,10 +58,26 @@ class MysqlDriver extends Driver
 
     /**
      * Export the Database.
+     * 
+     * @param string $name
+     *
+     * @return bool
      */
-    public static function export()
+    public static function export($name)
     {
-        return MysqlExporter::export();
+        return Exporter::export($name);
+    }
+
+    /**
+     * Import the Database.
+     * 
+     * @param string $name
+     *
+     * @return bool
+     */
+    public static function import($name)
+    {
+        return Importer::import($name);
     }
 
     /**
