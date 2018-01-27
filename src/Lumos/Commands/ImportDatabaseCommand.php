@@ -6,7 +6,7 @@ use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Console\Command\Commands;
 use Vinala\Kernel\Database\Database;
 
-class ExportDatabaseCommand extends Commands
+class ImportDatabaseCommand extends Commands
 {
     /**
      * The key of the console command.
@@ -34,8 +34,8 @@ class ExportDatabaseCommand extends Commands
      */
     public function set()
     {
-        $this->key = config('lumos.commands.export_database').' {file? : what\'s the name of the file to export?}';
-        $this->description = 'Save database in current time';
+        $this->key = config('lumos.commands.import_database').' {file? : what\'s the name of the file to import?}';
+        $this->description = 'Import the database backup folder';
     }
 
     /**
@@ -51,10 +51,13 @@ class ExportDatabaseCommand extends Commands
      */
     public function exec()
     {
-        $name = $this->argument("file");
-        $process = Database::export($name);
-        //
-        $this->show($process);
+      $name = $this->argument("file");
+      
+      $process = Database::import($name);
+      
+      //
+      $this->show($process);
+        
     }
 
     /**
@@ -62,13 +65,13 @@ class ExportDatabaseCommand extends Commands
      */
     public function show($process)
     {
-        $this->title('Export database command :');
+        $this->title('Import database command :');
         //
         if ($process) {
-            $this->info("\nThe database saved");
+            $this->info("\nThe database imported successfully");
             $this->comment(" -> Path : database/backup\n");
         } else {
-            $this->error("\nThe database wasn't saved\n");
+            $this->error("\nThe database wasn't imported\n");
         }
     }
 }
