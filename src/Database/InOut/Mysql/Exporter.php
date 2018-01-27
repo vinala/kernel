@@ -1,6 +1,6 @@
 <?php
 
-namespace Vinala\Kernel\Database\Exporters;
+namespace Vinala\Kernel\Database\InOut\Mysql;
 
 use Vinala\Kernel\Config\Config;
 use Vinala\Kernel\Database\Drivers\MysqlDriver as Driver;
@@ -11,7 +11,7 @@ use Vinala\Kernel\Time\DateTime as Time;
 /**
  * database export class.
  */
-class MysqlExporter
+class Exporter
 {
     /**
      * Get SQL query of table stucture.
@@ -88,12 +88,9 @@ class MysqlExporter
      *
      * @return Filesystem
      */
-    public static function save($time, $query)
+    public static function save($file, $query)
     {
-        $database = Config::get('database.database');
-        //
-        $name = $database.'_'.$time.'.sql';
-        $path = Application::$root."database/backup/$name";
+        $path = Application::$root."database/backup/$file";
         //
         return (new Filesystem())->put($path, $query);
     }
@@ -107,7 +104,7 @@ class MysqlExporter
     {
         $database = Config::get('database.database');
 
-        return "\n\n DROP DATABASE $database;\n\n CREATE DATABASE $database;\n USE $database;";
+        return "\n\n DROP DATABASE IF EXISTS $database;\n\n CREATE DATABASE $database;\n USE $database;";
     }
 
     /**
@@ -135,13 +132,16 @@ class MysqlExporter
                     //
                     $content .= "\n(";
                     //
-                    // die($i);
-                    //
                     for ($j = 0; $j < $fields; $j++) {
                         $row[$j] = str_replace("\n", '\\n', addslashes($row[$j]));
                         //
                         if (isset($row[$j])) {
-                            $content .= '"'.$row[$j].'"';
+                            if( ! empty($row[$j]))
+                            {
+                                $content .= '"'.$row[$j].'"';
+                            } else {
+                                $content .= 'NULL';
+                            }
                         }
                         //
                         else {
@@ -191,23 +191,21 @@ class MysqlExporter
      *
      * @return bool
      */
-    public static function export()
+    public static function export($name)
     {
-        $file = false;
         $now = time();
         //
         $tables = self::tables();
-        // die("yy");
         //
         $query = self::time($now).self::info();
         $query .= self::database();
         $query .= self::fetch($tables);
         //
-        $file = $file ? $file : $now.'.sql';
+        $file = ($name ?: config('database.database').'_'.$now).'.sql';
         //
         self::file($file);
         //
-        self::save($now, $query);
+        self::save($file, $query);
         //
         return true;
     }
