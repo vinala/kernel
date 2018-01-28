@@ -34,7 +34,7 @@ class ImportDatabaseCommand extends Commands
      */
     public function set()
     {
-        $this->key = config('lumos.commands.import_database','import:database').' {file? : what\'s the name of the file to import?}';
+        $this->key = config('lumos.commands.import_database', 'import:database').' {file? : what\'s the name of the file to import?}';
         $this->description = 'Import the database backup folder';
     }
 
@@ -51,13 +51,12 @@ class ImportDatabaseCommand extends Commands
      */
     public function exec()
     {
-      $name = $this->argument("file");
-      
-      $process = Database::import($name);
-      
-      //
-      $this->show($process);
-        
+        $name = $this->argument('file');
+
+        $process = Database::import($name);
+
+        //
+        $this->show($process);
     }
 
     /**

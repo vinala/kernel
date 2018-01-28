@@ -86,7 +86,7 @@ class Query
     {
         if ($prefix && Config::get('database.prefixing')) {
             $prefix = config('database.prefixe');
-            // $this->table = Config::get('database.prefixe').$table;
+        // $this->table = Config::get('database.prefixe').$table;
         } else {
             $prefix = '';
         }
@@ -561,7 +561,7 @@ class Query
         //
         $i = false;
         foreach ($values as $value) {
-            $value = str_replace("'" , "''" , $value);
+            $value = str_replace("'", "''", $value);
             if (!$i) {
                 $target .= "'$value'";
             } else {
@@ -603,7 +603,7 @@ class Query
      */
     public function set($column, $value, $quote = true)
     {
-        $value = str_replace("'" , "''" , $value);
+        $value = str_replace("'", "''", $value);
         $this->sets[] = $quote ? " $column = '$value'" : " $column = $value";
 
         return $this;

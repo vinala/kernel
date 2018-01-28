@@ -51,7 +51,7 @@ class ExportDatabaseCommand extends Commands
      */
     public function exec()
     {
-        $name = $this->argument("file");
+        $name = $this->argument('file');
         $process = Database::export($name);
         //
         $this->show($process);
