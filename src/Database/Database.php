@@ -203,10 +203,28 @@ class Database
 
     /**
      * Export the Database.
+     *
+     *
+     * @param string $name
+     *
+     * @return bool
      */
-    public static function export()
+    public static function export($name)
     {
-        return self::$driver->export();
+        return self::$driver->export($name);
+    }
+
+    /**
+     * Import the Database.
+     *
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public static function import($name)
+    {
+        return self::$driver->import($name);
     }
 
     /**

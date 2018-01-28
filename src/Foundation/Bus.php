@@ -681,7 +681,7 @@ class Bus
      *
      * @return null
      */
-    private static function database()
+    public static function database()
     {
         $path = static::$root.'Database/';
 
@@ -698,8 +698,8 @@ class Bus
         // Calling exporters
         //--------------------------------------------------------
 
-        $files = ['MysqlExporter'];
-        $folder = $path.'Exporters'.'/';
+        $files = ['Exporter', 'Importer'];
+        $folder = $path.'InOut/Mysql/';
 
         self::call($files, $folder);
 

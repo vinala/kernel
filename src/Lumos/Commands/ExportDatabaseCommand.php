@@ -34,7 +34,7 @@ class ExportDatabaseCommand extends Commands
      */
     public function set()
     {
-        $this->key = config('lumos.commands.export_database');
+        $this->key = config('lumos.commands.export_database').' {file? : what\'s the name of the file to export?}';
         $this->description = 'Save database in current time';
     }
 
@@ -51,7 +51,8 @@ class ExportDatabaseCommand extends Commands
      */
     public function exec()
     {
-        $process = Database::export();
+        $name = $this->argument('file');
+        $process = Database::export($name);
         //
         $this->show($process);
     }
@@ -61,7 +62,7 @@ class ExportDatabaseCommand extends Commands
      */
     public function show($process)
     {
-        $this->title('Save database command :');
+        $this->title('Export database command :');
         //
         if ($process) {
             $this->info("\nThe database saved");
