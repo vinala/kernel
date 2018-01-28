@@ -26,7 +26,7 @@ class Request
      *
      * @return array
      */
-    protected function getData()
+    public function getData()
     {
         $data = $_REQUEST;
         unset($data['_framework_url_']);

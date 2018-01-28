@@ -124,7 +124,7 @@ class Exporter
             //
             $content = (!isset($content) ? '' : $content).self::stucture($table);
             //
-            for ($i = 0, $st_counter = 0; $i < 1; $i++, $st_counter = 0) {
+            for ($i = 0, $st_counter = 0; $i < $fields; $i++, $st_counter = 0) {
                 foreach ($data as $row) {
                     if ($st_counter % 100 == 0 || $st_counter == 0) {
                         $content .= "\n-- Table Data\nINSERT INTO ".$table.' VALUES';
@@ -136,8 +136,7 @@ class Exporter
                         $row[$j] = str_replace("\n", '\\n', addslashes($row[$j]));
                         //
                         if (isset($row[$j])) {
-                            if( ! empty($row[$j]))
-                            {
+                            if ( ! empty($row[$j])) {
                                 $content .= '"'.$row[$j].'"';
                             } else {
                                 $content .= 'NULL';
