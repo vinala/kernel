@@ -203,7 +203,7 @@ class Database
 
     /**
      * Export the Database.
-     * 
+     *
      *
      * @param string $name
      *
@@ -216,7 +216,7 @@ class Database
 
     /**
      * Import the Database.
-     * 
+     *
      *
      * @param string $name
      *

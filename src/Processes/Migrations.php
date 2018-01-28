@@ -56,7 +56,7 @@ class Migrations extends Process
                 $i++;
             }
             $link = $r[$ind];
-            //
+        //
         } else {
             $link = $root."database/schema/$file.php";
             $segemnts = explode('_', $file);

@@ -58,7 +58,7 @@ class MysqlDriver extends Driver
 
     /**
      * Export the Database.
-     * 
+     *
      * @param string $name
      *
      * @return bool
@@ -70,7 +70,7 @@ class MysqlDriver extends Driver
 
     /**
      * Import the Database.
-     * 
+     *
      * @param string $name
      *
      * @return bool

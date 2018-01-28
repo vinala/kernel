@@ -136,7 +136,7 @@ class Exporter
                         $row[$j] = str_replace("\n", '\\n', addslashes($row[$j]));
                         //
                         if (isset($row[$j])) {
-                            if ( ! empty($row[$j])) {
+                            if (!empty($row[$j])) {
                                 $content .= '"'.$row[$j].'"';
                             } else {
                                 $content .= 'NULL';
