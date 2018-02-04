@@ -124,47 +124,49 @@ class Exporter
             //
             $content = (!isset($content) ? '' : $content).self::stucture($table);
             //
-            for ($i = 0, $st_counter = 0; $i < 1; $i++, $st_counter = 0) {
-                foreach ($data as $row) {
-                    if ($st_counter % 100 == 0 || $st_counter == 0) {
-                        $content .= "\n-- Table Data\nINSERT INTO ".$table.' VALUES';
-                    }
+
+
+            $st_counter = 0;
+            foreach ($data as $row) {
+                if ($st_counter % 100 == 0 || $st_counter == 0) {
+                    $content .= "\n-- Table Data\nINSERT INTO ".$table.' VALUES';
+                }
+                //
+                $content .= "\n(";
+                //
+                for ($j = 0; $j < $fields; $j++) {
+                    $row[$j] = str_replace("\n", '\\n', addslashes($row[$j]));
                     //
-                    $content .= "\n(";
-                    //
-                    for ($j = 0; $j < $fields; $j++) {
-                        $row[$j] = str_replace("\n", '\\n', addslashes($row[$j]));
-                        //
-                        if (isset($row[$j])) {
-                            if (!empty($row[$j])) {
-                                $content .= '"'.$row[$j].'"';
-                            } else {
-                                $content .= 'NULL';
-                            }
+                    if (isset($row[$j])) {
+                        if (!empty($row[$j])) {
+                            $content .= '"'.$row[$j].'"';
+                        } else {
+                            $content .= 'NULL';
                         }
-                        //
-                        else {
-                            $content .= '""';
-                        }
-                        //
-                        if ($j < ($fields - 1)) {
-                            $content .= ',';
-                        }
-                    }
-                    //
-                    $content .= ')';
-                    //
-                    if ((($st_counter + 1) % 100 == 0 && $st_counter != 0) || $st_counter + 1 == $rows) {
-                        $content .= ';';
                     }
                     //
                     else {
-                        $content .= ',';
+                        $content .= '""';
                     }
                     //
-                    $st_counter = $st_counter + 1;
+                    if ($j < ($fields - 1)) {
+                        $content .= ',';
+                    }
                 }
+                //
+                $content .= ')';
+                //
+                if ((($st_counter + 1) % 100 == 0 && $st_counter != 0) || $st_counter + 1 == $rows) {
+                    $content .= ';';
+                }
+                //
+                else {
+                    $content .= ',';
+                }
+                //
+                $st_counter = $st_counter + 1;
             }
+
             $content .= "\n\n\n";
         }
 

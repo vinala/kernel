@@ -644,7 +644,7 @@ class Query
      */
     public function delete()
     {
-        $query = 'delete from '.getTables($this->tables).' ';
+        $query = 'delete from '.$this->getTables($this->tables).' ';
         //
         $query .= ' '.$this->where;
         //
