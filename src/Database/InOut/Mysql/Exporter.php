@@ -125,7 +125,6 @@ class Exporter
             $content = (!isset($content) ? '' : $content).self::stucture($table);
             //
 
-
             $st_counter = 0;
             foreach ($data as $row) {
                 if ($st_counter % 100 == 0 || $st_counter == 0) {
