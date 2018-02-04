@@ -124,7 +124,7 @@ class Exporter
             //
             $content = (!isset($content) ? '' : $content).self::stucture($table);
             //
-            
+
             $st_counter = 0;
             foreach ($data as $row) {
                 if ($st_counter % 100 == 0 || $st_counter == 0) {
@@ -137,7 +137,7 @@ class Exporter
                     $row[$j] = str_replace("\n", '\\n', addslashes($row[$j]));
                     //
                     if (isset($row[$j])) {
-                        if ( ! empty($row[$j])) {
+                        if (!empty($row[$j])) {
                             $content .= '"'.$row[$j].'"';
                         } else {
                             $content .= 'NULL';
@@ -165,7 +165,7 @@ class Exporter
                 //
                 $st_counter = $st_counter + 1;
             }
-                
+
             $content .= "\n\n\n";
         }
 
