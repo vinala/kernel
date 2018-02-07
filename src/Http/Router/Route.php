@@ -340,10 +340,22 @@ class Route
      *
      * @return $this
      */
-    public static function view($url, $callback)
+    public static function view($url, $view, $data = null)
     {
-        
-        return ;
+        $callback = function () use ($view, $data ) {
+            $view = view($view);
+
+            if(!is_null($data))
+            {
+                foreach ($data as $key => $value) {
+                    $view = $view->with($key, $value);
+                }
+            }
+
+            return $view;
+        };
+
+        static::get($url, $callback);
     }
 
     /**
