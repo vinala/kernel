@@ -304,6 +304,22 @@ if (!function_exists('resource')) {
     }
 }
 
+if (!function_exists('show')) {
+    /**
+     * shortcut for view routing.
+     *
+     * @param string $uri
+     * @param string $view
+     * @param array  $data
+     *
+     * @return mixed
+     */
+    function show($uri, $view, $data = null)
+    {
+        return Route::view($uri, $view, $data);
+    }
+}
+
 if (!function_exists('pass')) {
     /**
      * shortcut for Middleware::next().
