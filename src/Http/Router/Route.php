@@ -333,6 +333,20 @@ class Route
     }
 
     /**
+     * Show view in route call.
+     *
+     * @param $url
+     * @param $view
+     *
+     * @return $this
+     */
+    public static function view($url, $callback)
+    {
+        
+        return ;
+    }
+
+    /**
      * To add HTTP post request.
      *
      * @param string  $url
