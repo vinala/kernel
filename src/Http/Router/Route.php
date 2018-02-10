@@ -342,11 +342,10 @@ class Route
      */
     public static function view($url, $view, $data = null)
     {
-        $callback = function () use ($view, $data ) {
+        $callback = function () use ($view, $data) {
             $view = view($view);
 
-            if(!is_null($data))
-            {
+            if (!is_null($data)) {
                 foreach ($data as $key => $value) {
                     $view = $view->with($key, $value);
                 }
