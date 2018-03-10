@@ -333,6 +333,31 @@ class Route
     }
 
     /**
+     * Show view in route call.
+     *
+     * @param $url
+     * @param $view
+     *
+     * @return $this
+     */
+    public static function view($url, $view, $data = null)
+    {
+        $callback = function () use ($view, $data) {
+            $view = view($view);
+
+            if (!is_null($data)) {
+                foreach ($data as $key => $value) {
+                    $view = $view->with($key, $value);
+                }
+            }
+
+            return $view;
+        };
+
+        static::get($url, $callback);
+    }
+
+    /**
      * To add HTTP post request.
      *
      * @param string  $url
