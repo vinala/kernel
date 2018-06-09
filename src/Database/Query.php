@@ -73,6 +73,13 @@ class Query
      */
     protected static $sql = null;
 
+    /**
+     * All the query excuted from the last request
+     *
+     * @var array
+     */
+    protected static $register = [];
+
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
@@ -134,6 +141,16 @@ class Query
     }
 
     /**
+     * Get the register of sql requests.
+     *
+     * @return array
+     */
+    public static function register()
+    {
+        return static::$register;
+    }
+
+    /**
      * Set the query table.
      *
      * @param string
@@ -191,7 +208,7 @@ class Query
     {
         $sql = 'select '.$this->columns.' from '.$this->getTables($this->tables).' '.$this->where.' '.$this->order.' '.$this->group;
 
-        static::$sql = $sql;
+        static::$sql = static::$register[] = $sql;
         //
         if ($data = Database::read($sql)) {
             return self::fetch($data, $type);
