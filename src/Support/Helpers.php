@@ -246,7 +246,7 @@ if (!function_exists('get')) {
      * shortcut for get routing.
      *
      * @param string   $uri
-     * @param callback $callback
+     * @param callable $callback
      *
      * @return mixed
      */
