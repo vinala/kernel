@@ -165,4 +165,16 @@ class Driver
 
         return $item;
     }
+
+    /**
+     * Clear the entire cache data.
+     *
+     *
+     * @return null
+     */
+    public function clear()
+    {
+        $this->adapter->clear();
+        // $this->adapter->purge();
+    }
 }

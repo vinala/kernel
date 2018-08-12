@@ -126,4 +126,17 @@ class Cache
     {
         return self::driver()->prolong($name, $lifetime);
     }
+
+     /**
+     * Extend lifetime of cache item.
+     *
+     * @param string $name
+     * @param int    $lifetime
+     *
+     * @return null
+     */
+    public static function clear()
+    {
+        return self::driver()->clear();
+    }
 }
