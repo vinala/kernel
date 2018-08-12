@@ -108,7 +108,7 @@ class Assets
         } else {
             if ($nest) {
                 $file = str_replace('.', '/', $file);
-                $path = 'assets/js/'.$file.'.js';
+                $path = path().'assets/js/'.$file.'.js';
             } else {
                 $path = $file;
             }
