@@ -74,7 +74,7 @@ class Query
     protected static $sql = null;
 
     /**
-     * All the query excuted from the last request
+     * All the query excuted from the last request.
      *
      * @var array
      */
