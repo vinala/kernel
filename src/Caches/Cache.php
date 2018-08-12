@@ -127,7 +127,7 @@ class Cache
         return self::driver()->prolong($name, $lifetime);
     }
 
-     /**
+    /**
      * Extend lifetime of cache item.
      *
      * @param string $name
