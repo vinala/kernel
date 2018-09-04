@@ -11,5 +11,5 @@ This repository contains the core code of the Vinala framework
 
 
 [![Owner](https://img.shields.io/badge/created%20by-Youssef%20Had-blue.svg)](https://www.facebook.com/yussef.had)
-[![Owner](https://img.shields.io/badge/copyright-2014--2017-red.svg)](https://github.com/vinala/kernel)
+[![Owner](https://img.shields.io/badge/copyright-2014--2018-red.svg)](https://github.com/vinala/kernel)
 [![Owner](https://img.shields.io/badge/launched-10%2F10%2F2014-ff2f6c.svg)](https://github.com/vinala/kernel)
