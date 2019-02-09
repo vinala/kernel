@@ -24,6 +24,13 @@ class Query
     protected $table;
 
     /**
+     * Prefix of table.
+     *
+     * @var bool
+     */
+    protected $prefix;
+
+    /**
      * Tables of data.
      *
      * @var array
@@ -78,6 +85,13 @@ class Query
      */
     protected static $sql = null;
 
+    /**
+     * The all SQL query used in surface.
+     *
+     * @var string
+     */
+    protected static $register = [];
+
     //--------------------------------------------------------
     // Constructor
     //--------------------------------------------------------
@@ -89,9 +103,9 @@ class Query
      */
     public function __construct($tables, $prefix = true)
     {
+        $this->prefix = $prefix;
         if ($prefix && Config::get('database.prefixing')) {
             $prefix = config('database.prefixe');
-        // $this->table = Config::get('database.prefixe').$table;
         } else {
             $prefix = '';
         }
@@ -136,6 +150,34 @@ class Query
     public static function last()
     {
         return static::$sql;
+    }
+
+    /**
+     * Get the last query used.
+     *
+     * @return string
+     */
+    public static function register()
+    {
+        return static::$register;
+    }
+
+    /**
+     * Get table name.
+     *
+     * @param string $table
+     *
+     * @return string
+     */
+    private function tableName($table)
+    {
+        if ($this->prefix && config('database.prefixing')) {
+            $prefix = config('database.prefixe');
+        } else {
+            $prefix = '';
+        }
+
+        return $prefix.$table;
     }
 
     /**
@@ -195,8 +237,9 @@ class Query
     public function query($type = 'object')
     {
         $sql = 'select '.$this->columns.' from '.$this->getTables($this->tables).' '.$this->join.' '.$this->where.' '.$this->order.' '.$this->group;
-
+        //
         static::$sql = $sql;
+        static::$register[] = $sql;
         //
         if ($data = Database::read($sql)) {
             return self::fetch($data, $type);
@@ -299,7 +342,7 @@ class Query
      * @param string $relation
      * @param string $value
      *
-     * @return Query
+     * @return array
      */
     public function where($column = null, $relation = null, $value = null, $link = false)
     {
@@ -388,7 +431,11 @@ class Query
      */
     private function groupWhere($begin, $between, $conditions)
     {
-        $query = (Strings::trim($begin) == 'or') ? ' or ( ' : (Strings::trim($begin) == 'and') ? ' and ( ' : ' ( ';
+        
+        $query = ' or (';
+        if(Strings::trim($begin) == 'and') {
+            $query = ' and (';
+        }
         //
         for ($i = 1; $i < Collection::count($conditions); $i++) {
             $query .= $conditions[$i];
@@ -518,7 +565,7 @@ class Query
      */
     public function rightJoin($table, $column1, $colmun2)
     {
-        $this->join .= ' right join '.$table.' on '.$column1.' = '.$colmun2.' ';
+        $this->join .= ' right join '.$this->tableName($table).' on '.$column1.' = '.$colmun2.' ';
         return $this;
     }
 
@@ -533,7 +580,7 @@ class Query
      */
     public function leftJoin($table, $column1, $colmun2)
     {
-        $this->join .= ' left join '.$table.' on '.$column1.' = '.$colmun2.' ';
+        $this->join .= ' left join '.$this->tableName($table).' on '.$column1.' = '.$colmun2.' ';
         return $this;
     }
 
@@ -548,7 +595,7 @@ class Query
      */
     public function innerJoin($table, $column1, $colmun2)
     {
-        $this->join .= ' inner join '.$table.' on '.$column1.' = '.$colmun2.' ';
+        $this->join .= ' inner join '.$this->tableName($table).' on '.$column1.' = '.$colmun2.' ';
         return $this;
     }
 
@@ -657,7 +704,7 @@ class Query
      */
     public function set($column, $value, $quote = true)
     {
-        $value = str_replace("'", "''", $value);
+        $value = str_replace("'" , "''" , $value);
         $this->sets[] = $quote ? " $column = '$value'" : " $column = $value";
 
         return $this;
