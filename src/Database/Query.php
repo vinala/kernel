@@ -57,6 +57,11 @@ class Query
     protected $where = '';
 
     /**
+     * join query.
+     */
+    protected $join = '';
+
+    /**
      * order of data.
      */
     protected $order = '';
@@ -189,7 +194,7 @@ class Query
      */
     public function query($type = 'object')
     {
-        $sql = 'select '.$this->columns.' from '.$this->getTables($this->tables).' '.$this->where.' '.$this->order.' '.$this->group;
+        $sql = 'select '.$this->columns.' from '.$this->getTables($this->tables).' '.$this->join.' '.$this->where.' '.$this->order.' '.$this->group;
 
         static::$sql = $sql;
         //
@@ -294,7 +299,7 @@ class Query
      * @param string $relation
      * @param string $value
      *
-     * @return array
+     * @return Query
      */
     public function where($column = null, $relation = null, $value = null, $link = false)
     {
@@ -495,6 +500,70 @@ class Query
         //
         $this->group = $group;
         //
+        return $this;
+    }
+
+    //--------------------------------------------------------
+    // Joins 
+    //--------------------------------------------------------
+    
+    /**
+     * Set a right join.
+     *
+     * @param string $table
+     * @param string $column1
+     * @param string $column2
+     *
+     * @return Query
+     */
+    public function rightJoin($table, $column1, $colmun2)
+    {
+        $this->join .= ' right join '.$table.' on '.$column1.' = '.$colmun2.' ';
+        return $this;
+    }
+
+    /**
+     * Set a left join.
+     *
+     * @param string $table
+     * @param string $column1
+     * @param string $column2
+     *
+     * @return Query
+     */
+    public function leftJoin($table, $column1, $colmun2)
+    {
+        $this->join .= ' left join '.$table.' on '.$column1.' = '.$colmun2.' ';
+        return $this;
+    }
+
+    /**
+     * Set an inner join.
+     *
+     * @param string $table
+     * @param string $column1
+     * @param string $column2
+     *
+     * @return Query
+     */
+    public function innerJoin($table, $column1, $colmun2)
+    {
+        $this->join .= ' inner join '.$table.' on '.$column1.' = '.$colmun2.' ';
+        return $this;
+    }
+
+    /**
+     * Set an inner join.
+     *
+     * @param string $table
+     * @param string $column1
+     * @param string $column2
+     *
+     * @return Query
+     */
+    public function innerJoin($table, $column1, $colmun2)
+    {
+        $this->join .= ' inner join '.$table.' on '.$column1.' = '.$colmun2.' ';
         return $this;
     }
 
