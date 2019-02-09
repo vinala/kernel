@@ -552,21 +552,6 @@ class Query
         return $this;
     }
 
-    /**
-     * Set an inner join.
-     *
-     * @param string $table
-     * @param string $column1
-     * @param string $column2
-     *
-     * @return Query
-     */
-    public function innerJoin($table, $column1, $colmun2)
-    {
-        $this->join .= ' inner join '.$table.' on '.$column1.' = '.$colmun2.' ';
-        return $this;
-    }
-
     //--------------------------------------------------------
     // Insert functions
     //--------------------------------------------------------
