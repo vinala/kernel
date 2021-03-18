@@ -27,11 +27,11 @@ class MysqlConnector
      *
      * @return PDO
      */
-    public function __construct($host = null, $database = null, $user = null, $password = null)
+    public function __construct($host = null, $database = null, $user = null, $password = null, $port = null)
     {
-        $config = $this->config($host, $database, $user, $password);
+        $config = $this->config($host, $database, $user, $password, $port);
         //
-        $dsn = 'mysql:host='.$config['host'].';dbname='.$config['database'];
+        $dsn = 'mysql:host='.$config['host'].';port='.$config['port'].';dbname='.$config['database'];
         //
         try {
             $this->connector = new PDO(
@@ -68,7 +68,7 @@ class MysqlConnector
      *
      * @return
      */
-    protected function config($host, $database, $user, $password)
+    protected function config($host, $database, $user, $password, $port)
     {
         //if(Config::get("database.host")=="" && Config::get("database.username")=="" && Config::get("database.password")=="" && Config::get("database.database")=="") throw new DatabaseArgumentsException();
         return [
@@ -76,6 +76,7 @@ class MysqlConnector
             'database' => $database ? $database : Config::get('database.database'),
             'user'     => $user ? $user : Config::get('database.username'),
             'password' => $password ? $password : Config::get('database.password'),
+            'port'     => $port ? $port : Config::get('database.port'),
         ];
     }
 
